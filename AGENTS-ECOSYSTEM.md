@@ -1,11 +1,12 @@
 # AGENTS-ECOSYSTEM.md — smtp.eth Governance Framework
 
 ```yaml
-version: "2.1.0"
+version: "2.2.0"
 last_updated: "2025-12-13"
 maintainer: "smtp.eth"
 scope: "ecosystem-wide"
 repository: "github.com/fuzzywigg/agents-governance"
+goose_protocol: true
 ```
 
 > **This document establishes governance principles for all AI agents operating within the smtp.eth ecosystem.**
@@ -20,7 +21,7 @@ repository: "github.com/fuzzywigg/agents-governance"
 3. [Autonomy Framework](#3-autonomy-framework)
 4. [Security & Trust Boundaries](#4-security--trust-boundaries)
 5. [Financial Controls](#5-financial-controls)
-6. [Multi-Agent Coordination](#6-multi-agent-coordination)
+6. [Multi-Agent Coordination (Goose Protocol)](#6-multi-agent-coordination-goose-protocol) ← **ENHANCED**
 7. [Data Governance](#7-data-governance)
 8. [Family & Multi-User Model](#8-family--multi-user-model)
 9. [Hardware & Infrastructure](#9-hardware--infrastructure)
@@ -66,13 +67,13 @@ agents:
 
 ### 2.1 Project Portfolio
 
-| Project | Purpose | Status | AGENTS.md |
-|---------|---------|--------|-----------|
-| fuzzywigg-ai | Core agent orchestration | Active | ✅ |
-| nft2.me | NFT minting platform | Active | Pending |
-| owl-visuals | Visual generation | Planned | Pending |
-| health-agents | Health data management | Planned | Pending |
-| home-node | Sovereign infrastructure | Sprint 16 | Pending |
+| Project | Purpose | Status | AGENTS.md | Goose |
+|---------|---------|--------|-----------|-------|
+| fuzzywigg-ai | Core agent orchestration | Active | ✅ v1.1.0 | ✅ |
+| nft2.me | NFT minting platform | Active | Pending | Planned |
+| owl-visuals | Visual generation | Planned | Pending | Planned |
+| health-agents | Health data management | Planned | Pending | Planned |
+| home-node | Sovereign infrastructure | Sprint 16 | Pending | Planned |
 
 ### 2.2 Technology Stack
 
@@ -82,7 +83,8 @@ agents:
 │  (Dashboard, Mobile Companion, CLI, Integrations)   │
 ├─────────────────────────────────────────────────────┤
 │                  Orchestration Layer                 │
-│    (fuzzywigg-ai: Flows, Governance, MCP Router)    │
+│         (Goose Protocol + fuzzywigg-ai)             │
+│    [Recipes] [Scratchpad] [MCP Router] [Governance] │
 ├─────────────────────────────────────────────────────┤
 │                    LLM Gateway                       │
 │     (LiteLLM: Claude, ChatGPT, Gemini, Ollama)     │
@@ -265,49 +267,253 @@ budgets:
 
 ---
 
-## 6. Multi-Agent Coordination
+## 6. Multi-Agent Coordination (Goose Protocol)
 
-### 6.1 MCP (Model Context Protocol)
+> **Goose** is Block's open-source AI agent framework, donated to the Linux Foundation.
+> The smtp.eth ecosystem adopts Goose patterns for standardized inter-agent coordination.
 
-The ecosystem uses MCP for inter-agent communication:
+### 6.1 Architecture Overview
 
-```yaml
-mcp_servers:
-  home:
-    - raspberry_pi_smart_home
-    - arduino_garage
-    - nest_hub
-    
-  cloud:
-    - anthropic_claude
-    - openai_chatgpt
-    - zapier_automation
-    
-  device:
-    - mobile_local
-    - ollama_local
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     Goose Orchestrator                       │
+│  (Ecosystem-wide coordination across all smtp.eth projects) │
+├─────────────────────────────────────────────────────────────┤
+│                                                              │
+│  ┌────────────────┐   ┌────────────────┐   ┌──────────────┐ │
+│  │ fuzzywigg-ai   │   │  health-agents │   │  home-node   │ │
+│  │  recipes/      │   │   recipes/     │   │  recipes/    │ │
+│  └───────┬────────┘   └───────┬────────┘   └──────┬───────┘ │
+│          │                    │                   │         │
+│          ▼                    ▼                   ▼         │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │           Ecosystem Scratchpad (Shared State)        │   │
+│  │   github.com/fuzzywigg/agents-governance/scratchpad  │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                              │
+├─────────────────────────────────────────────────────────────┤
+│                  MCP Server Network                          │
+│  [WalletMCP] [CalendarMCP] [SmartHomeMCP] [HealthMCP]       │
+│  [OllamaMCP] [ContractMCP] [NotificationMCP] [AuditMCP]     │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### 6.2 Distributed Locking
+### 6.2 Goose Recipe Standard
+
+All recipes across the ecosystem follow this format:
+
+```yaml
+# Standard Goose Recipe Format for smtp.eth ecosystem
+name: descriptive_recipe_name
+recipe:
+  version: 1.0.0
+  title: Human-Readable Title
+  
+  settings:
+    goose_provider: "anthropic"           # or "openai", "ollama"
+    goose_model: "claude-sonnet-4"        # or specific model
+    autonomy_level: 1                     # Maps to Section 3.1
+    network_zone: "home"                  # Maps to Section 2.3
+  
+  instructions: |
+    High-level context for the orchestrating agent.
+    References AGENTS-ECOSYSTEM.md governance rules.
+  
+  prompt: |
+    Specific numbered steps to execute.
+    Must update scratchpad at each checkpoint.
+  
+  extensions:
+    - type: builtin
+      name: developer
+      timeout: 300
+    - type: mcp
+      name: service_name
+      uri: http://localhost:PORT
+      network_zone: home  # MUST specify zone
+```
+
+### 6.3 The Scratchpad Pattern
+
+The **scratchpad** is the ecosystem-wide state machine for inter-agent coordination.
+
+**Hierarchy:**
+```
+agents-governance/
+└── scratchpad/
+    ├── ecosystem.txt      # Cross-project coordination
+    └── incidents.txt      # Active incidents
+
+fuzzywigg-ai/
+└── agentic_flows/
+    └── scratchpad.txt     # Repo-specific tasks
+
+health-agents/
+└── scratchpad.txt         # Repo-specific tasks
+```
+
+**Format:**
+```markdown
+# Scratchpad - [Scope] State
+# Last updated: ISO-8601 timestamp
+
+## Active Tasks
+
+### [TASK-XXX] Title - Scheduled Time
+- [x] AgentA: Completed step
+  - [x] Substep with note (value ✓)
+- [ ] AgentB: Pending step
+  - [ ] Substep ← BLOCKED (reason)
+- [ ] AgentC: Future step
+
+## Completed (Archive after 7 days)
+```
+
+**Rules:**
+1. Each agent owns its section (identified by name)
+2. Progress tracked as `[x]` complete, `[ ]` pending
+3. **APPEND-ONLY**: Never delete, only mark complete
+4. Markers: `← BLOCKED`, `← FAILED`, `← TIMEOUT`, `← APPROVAL`
+5. Archive completed tasks weekly
+
+### 6.4 MCP Server Registry
+
+All MCP servers in the ecosystem must be registered:
+
+| Server | Zone | Purpose | Owner | Status |
+|--------|------|---------|-------|--------|
+| WalletMCP | home | Web3 transactions | fuzzywigg-ai | 🔄 Planned |
+| CalendarMCP | cloud | Google Calendar | Zapier | ✅ Active |
+| SmartHomeMCP | home | IoT control | home-node | 🔄 In Progress |
+| HealthMCP | home | Health data (PHI) | health-agents | 📋 Planned |
+| OllamaMCP | home | Local LLM | fuzzywigg-ai | ✅ Active |
+| ContractMCP | home | Smart contracts | fuzzywigg-ai | 🔄 Planned |
+| NotificationMCP | cloud | Push/email | Zapier | ✅ Active |
+| AuditMCP | home | Blockchain logging | fuzzywigg-ai | 🔄 Planned |
+
+**Adding New MCP Servers:**
+1. Define in project's `.fuzzywigg/config.yaml`
+2. Register in this table (PR to agents-governance)
+3. Document tools in server README
+4. Add to allowlist after security review
+
+### 6.5 Sub-Recipe Composition
+
+Complex workflows span multiple projects via sub-recipes:
+
+```yaml
+# Ecosystem-level orchestration example
+name: weekly_family_summary
+recipe:
+  version: 1.0.0
+  title: Weekly Family Dashboard Update
+  
+  sub_recipes:
+    # Health data from health-agents
+    - name: collect_health
+      project: health-agents
+      path: ./recipes/weekly_health.yaml
+      timeout: 120
+    
+    # Smart home metrics from home-node
+    - name: collect_home_metrics
+      project: home-node
+      path: ./recipes/weekly_metrics.yaml
+      timeout: 60
+    
+    # Calendar summary from fuzzywigg-ai
+    - name: calendar_summary
+      project: fuzzywigg-ai
+      path: ./agentic_flows/recipes/calendar_summary.yaml
+      timeout: 60
+    
+    # Generate unified report
+    - name: generate_dashboard
+      project: fuzzywigg-ai
+      path: ./agentic_flows/recipes/dashboard_update.yaml
+      timeout: 90
+      depends_on: [collect_health, collect_home_metrics, calendar_summary]
+```
+
+### 6.6 Cross-Project Coordination Protocol
+
+When agents from different projects need to coordinate:
+
+1. **Initiating project** creates task in `agents-governance/scratchpad/ecosystem.txt`
+2. **Target project** agent reads ecosystem scratchpad
+3. **Target agent** executes and updates its repo-specific scratchpad
+4. **Target agent** reports completion to ecosystem scratchpad
+5. **Initiating project** reads result and continues
+
+**Example:**
+```markdown
+# agents-governance/scratchpad/ecosystem.txt
+
+### [ECO-001] Cross-Project Health Report - 2025-12-15
+- [x] fuzzywigg-ai/OrchestratorAgent: Initiated
+- [ ] health-agents/CollectorAgent: Gather metrics
+  - [ ] Awaiting response ← PENDING
+- [ ] fuzzywigg-ai/ReportAgent: Generate unified report
+```
+
+### 6.7 MCP Security Requirements
+
+All MCP servers must comply with:
+
+```yaml
+mcp_security:
+  authentication:
+    required: true
+    methods: ["bearer_token", "mtls"]
+    
+  authorization:
+    tool_allowlist: true  # Only declared tools can be called
+    rate_limiting: true
+    
+  network:
+    zone_binding: true    # Server must declare zone
+    phi_guard_for_cloud: true
+    
+  audit:
+    log_all_calls: true
+    include_timestamps: true
+    redact_sensitive: true
+```
+
+### 6.8 Distributed Locking
 
 ```yaml
 locking:
   enabled: true
   default_duration: 300 seconds
+  
   resources:
     calendar: "single_writer"
     smart_home: "multi_reader_single_writer"
     wallet: "exclusive"
+    scratchpad: "append_only"  # No locks needed
+    
+  conflict_resolution:
+    timeout: "release_and_notify"
+    concurrent_edit: "last_write_wins_with_audit"
+    budget_contention: "fifo_queue"
 ```
 
-### 6.3 Conflict Resolution
+### 6.9 Recipe Governance Rules
 
-| Conflict Type | Resolution |
-|---------------|------------|
-| Resource lock timeout | Release lock, notify owner |
-| Concurrent edits | Last-write-wins + audit trail |
-| Budget contention | FIFO queue, advisory mode |
-| Agent disagreement | Escalate to human |
+| Autonomy Level | Recipe Restrictions |
+|----------------|---------------------|
+| L0 (Advisory) | All recipes require human approval per step |
+| L1 (Bounded) | Only pre-approved recipes can auto-execute |
+| L2 (Supervised) | Recipes execute within budget, escalate violations |
+| L3 (Autonomous) | Future: proven recipes only, kill switch monitored |
+
+**Recipe Approval Process:**
+1. Submit recipe PR to project repo
+2. Security review (credentials, network access)
+3. Test in Advisory mode (L0)
+4. Graduate to Bounded (L1) after 5 successful runs
+5. Graduate to Supervised (L2) after 20 successful runs
 
 ---
 
@@ -331,6 +537,8 @@ locking:
 - Credit cards → `[CREDIT_CARD]`
 - IP addresses → `[IPV4]`
 
+**Goose Recipe Requirement:** Any recipe with `network_zone: cloud` MUST have `phi_guard: true` in settings.
+
 ### 7.3 Data Residency
 
 ```yaml
@@ -345,6 +553,10 @@ residency:
     - type: "blockchain_audit"
       allowed: true
       condition: "hashed_identifiers"
+      
+    - type: "goose_scratchpad"
+      allowed: "home_only"
+      condition: "never_sync_to_cloud"
 ```
 
 ### 7.4 Retention
@@ -355,6 +567,7 @@ residency:
 | Session context | End of session | Immediate |
 | Conversation history | 90 days | On request |
 | Financial records | 7 years | Per regulations |
+| Scratchpad archives | 90 days | Automated |
 
 ---
 
@@ -370,6 +583,8 @@ residency:
 | Thermostat | ✅ | ✅ | — | — |
 | Security cameras | ✅ | 👁️ View | — | — |
 | Purchases | ✅ | ✅ | ≤$50 | ≤$50 |
+| Goose Recipes | ✅ Create | ✅ Create | Run only | Run only |
+| Scratchpad | ✅ Full | ✅ Full | Read only | Read only |
 
 ### 8.2 Delegation Rules
 
@@ -379,9 +594,13 @@ delegation:
     to: kid1.smtp.eth
     actions:
       - purchase_request
+      - run_recipe  # NEW: Can run pre-approved recipes
     constraints:
       max_amount: 50 USD
       requires_parent_approval: true
+      recipe_allowlist:
+        - "smart_lights_bedroom"
+        - "homework_timer"
       
   - from: smtp.eth
     to: wife.smtp.eth
@@ -400,8 +619,9 @@ New family member onboarding:
 2. Assign permission tier
 3. Configure device access
 4. Set spending limits
-5. Verify understanding of governance
-6. Enable audit logging
+5. **Assign recipe permissions** (new)
+6. Verify understanding of governance
+7. Enable audit logging
 
 ---
 
@@ -421,12 +641,15 @@ home_node:
   pre_installed:
     - Docker
     - Ollama (local LLM)
+    - Goose CLI
     - Fuzzywigg agent stack
+    - MCP server runtime
     
   first_boot:
     - WiFi setup wizard
     - Wallet connect (MetaMask/WalletConnect)
     - Family member enrollment
+    - Goose recipe sync
 ```
 
 ### 9.2 Device Hierarchy
@@ -435,8 +658,10 @@ home_node:
 smtp.eth (Owner)
     │
     ├── Home Node (Primary)
+    │   ├── Goose Orchestrator
     │   ├── Raspberry Pi MCP Server
     │   ├── Arduino Garage Controller
+    │   ├── Local Scratchpad
     │   └── NAS Storage
     │
     ├── Cloud (Fallback)
@@ -446,7 +671,8 @@ smtp.eth (Owner)
     │
     └── Mobile (On-the-go)
         ├── Tauri Companion App
-        └── Local Ollama (when available)
+        ├── Local Ollama (when available)
+        └── Recipe trigger UI
 ```
 
 ### 9.3 Resilience
@@ -457,6 +683,7 @@ smtp.eth (Owner)
 | Cloud API down | Cloud | Home node + Ollama | Reduced capability |
 | Power outage | Home node | Cloud only | Graceful |
 | All systems down | — | SMS alerts only | Emergency only |
+| Goose orchestrator down | Local recipes | Manual execution | Advisory mode |
 
 ---
 
@@ -472,6 +699,8 @@ Every action logged with:
 - Output hash
 - Governance decision
 - Chain/zone
+- **Recipe ID** (if via Goose)
+- **Scratchpad task ID** (if coordinated)
 
 ### 10.2 Blockchain Logging
 
@@ -481,6 +710,11 @@ audit_logging:
   min_severity: "medium"  # medium, high, critical
   chain: "polygon"
   contract: "0x..."  # Audit log contract
+  
+  goose_specific:
+    log_recipe_executions: true
+    log_scratchpad_updates: true
+    log_mcp_calls: true
 ```
 
 ### 10.3 Compliance Targets
@@ -491,6 +725,7 @@ audit_logging:
 | GDPR | ✅ Designed in | Active |
 | HIPAA | ⚠️ Best effort | N/A (personal use) |
 | FedRAMP | 📋 Planned | Q4 2026 |
+| Goose Protocol | ✅ Compliant | Active |
 
 ### 10.4 Incident Response
 
@@ -501,6 +736,11 @@ audit_logging:
 - SEV-4: Minor issue → Next sprint
 
 **Postmortem Required:** SEV-1 and SEV-2 incidents
+
+**Goose-Specific Incidents:**
+- Recipe failure cascade → SEV-2
+- Scratchpad corruption → SEV-2
+- MCP server compromise → SEV-1
 
 ---
 
@@ -537,45 +777,49 @@ audit_logging:
 
 | Version | Date | Summary |
 |---------|------|---------|
+| 2.2.0 | 2025-12-13 | Added Goose Protocol integration (Section 6 major update) |
 | 2.1.0 | 2025-12-13 | Initial ecosystem governance document |
 | 2.0.0 | 2025-12-13 | Separated from repo-specific AGENTS.md |
 
 ### 12.3 Review Schedule
 
-- **Quarterly**: Budget limits, permission matrix
-- **Semi-annual**: Trust hierarchy, compliance status
-- **Annual**: Full document review, roadmap alignment
+- **Quarterly**: Budget limits, permission matrix, MCP server registry
+- **Semi-annual**: Trust hierarchy, compliance status, recipe approvals
+- **Annual**: Full document review, roadmap alignment, Goose protocol updates
 
 ---
 
-## Appendix A: Related Documents
+## Appendix A: Goose Protocol Resources
 
-| Document | Location | Purpose |
-|----------|----------|---------|
-| AGENTS.md (fuzzywigg-ai) | [fuzzywigg-ai repo](https://github.com/fuzzywigg/fuzzywigg-ai/AGENTS.md) | Repo-specific rules |
-| ROADMAP.md | fuzzywigg-ai/docs/planning/ | Sprint backlog |
-| config.yaml | fuzzywigg-ai/.fuzzywigg/ | MCP configuration |
-| postmortems/ | Per-repo | Incident documentation |
+- [Goose Documentation](https://block.github.io/goose/) — Official Goose docs
+- [MCP Specification](https://modelcontextprotocol.io/) — Model Context Protocol
+- [Linux Foundation Announcement](https://www.linuxfoundation.org/) — Goose donation
+- [fuzzywigg-ai Recipes](https://github.com/fuzzywigg/fuzzywigg-ai/tree/main/agentic_flows/recipes) — Example recipes
 
-## Appendix B: Glossary
+## Appendix B: Quick Commands
 
-| Term | Definition |
-|------|------------|
-| MCP | Model Context Protocol - inter-agent communication standard |
-| PHI | Protected Health Information |
-| PII | Personally Identifiable Information |
-| ENS | Ethereum Name Service |
-| Kill Switch | Emergency stop mechanism blocking all agent actions |
-| Home Node | Self-hosted infrastructure running agent stack |
+```bash
+# Validate all recipes in a project
+python scripts/validate_recipes.py
 
-## Appendix C: Contact
+# Check ecosystem scratchpad
+cat agents-governance/scratchpad/ecosystem.txt
 
-- **Primary**: smtp.eth
-- **GitHub**: [fuzzywigg](https://github.com/fuzzywigg)
-- **Governance Repo**: [agents-governance](https://github.com/fuzzywigg/agents-governance)
+# Run a recipe (Goose CLI)
+goose run ./agentic_flows/recipes/my_recipe.yaml
+
+# Check MCP server status
+curl http://localhost:3000/health
+
+# Activate kill switch
+touch .kill_switch
+
+# Check kill switch status
+ls -la .kill_switch 2>/dev/null && echo "ACTIVE" || echo "inactive"
+```
 
 ---
 
 **End of Document**
 
-*This document governs the smtp.eth ecosystem. Individual projects should maintain their own AGENTS.md that references this document and adds project-specific rules.*
+*This is the canonical ecosystem governance document. Individual projects reference this and add repo-specific rules in their own AGENTS.md files.*

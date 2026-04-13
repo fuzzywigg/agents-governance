@@ -1,0 +1,15 @@
+# CODEOWNERS
+# These owners will be requested for review on any PR touching these files.
+# Syntax: path/pattern @owner
+
+# Ecosystem governance docs — Andrew approval required for all changes
+AGENTS-ECOSYSTEM.md @fuzzywigg
+templates/ @fuzzywigg
+LICENSE @fuzzywigg
+
+# Agent-editable docs — PR review encouraged but not strictly gated
+AGENTS.md @fuzzywigg
+CLAUDE.md @fuzzywigg
+CONTRIBUTING.md @fuzzywigg
+SECURITY.md @fuzzywigg
+docs/ @fuzzywigg

@@ -1,0 +1,27 @@
+# Scratchpad — Ecosystem State
+# Last updated: 2026-04-13T02:06:26Z
+# Scope: agents-governance repo hydration
+# Rules: APPEND-ONLY — never delete, only mark complete
+
+## Active Tasks
+
+### [ECO-001] agents-governance Repo Hydration — 2026-04-13
+- [x] copilot: Discovery — explore repo, read all files, audit git state
+- [x] copilot: Create CLAUDE.md
+- [x] copilot: Create AGENTS.md
+- [x] copilot: Create LICENSE (MIT)
+- [x] copilot: Create CONTRIBUTING.md
+- [x] copilot: Create SECURITY.md
+- [x] copilot: Create scratchpad/ecosystem.txt (this file)
+- [x] copilot: Create scratchpad/incidents.txt
+- [x] copilot: Create docs/agent-hydration.md
+- [x] copilot: Create .github/ISSUE_TEMPLATE/ files
+- [x] copilot: Create .github/pull_request_template.md
+- [x] copilot: Create GitHub issues (Phase 1–3)
+- [x] copilot: Create roadmap issue
+- [ ] claude-cowork: Sync findings to Notion Master Index ← PENDING HITL (Notion credentials)
+- [ ] smtp.eth: Review and approve AGENTS-ECOSYSTEM.md amendments (if any) ← PENDING HUMAN
+
+## Completed (Archive after 7 days)
+
+_None yet._

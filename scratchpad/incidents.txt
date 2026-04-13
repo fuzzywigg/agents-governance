@@ -1,0 +1,12 @@
+# Scratchpad — Active Incidents
+# Last updated: 2026-04-13T02:06:26Z
+# Scope: ecosystem-wide
+# Rules: APPEND-ONLY — never delete, only mark resolved
+
+## Active Incidents
+
+_No active incidents._
+
+## Resolved Incidents
+
+_None yet._

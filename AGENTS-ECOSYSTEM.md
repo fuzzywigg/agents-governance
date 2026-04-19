@@ -30,6 +30,9 @@ template_source: "github.com/fuzzywigg/project-template"
 10. [Compliance & Audit](#10-compliance--audit)
 11. [Domain Portfolio](#11-domain-portfolio)
 12. [Amendment Process](#12-amendment-process)
+
+Appendices:
+
 - [Appendix A: Goose Protocol Resources](#appendix-a-goose-protocol-resources)
 - [Appendix B: Caveman Context Compression (Optional)](#appendix-b-caveman-context-compression-optional)
 - [Appendix C: Quick Commands](#appendix-c-quick-commands)
@@ -137,7 +140,9 @@ No active development. Agents should NOT refactor or fork these unless explicitl
 
 ### 2.1.1 Universal AGENTS.md Template (v1.0)
 
-The **canonical AGENTS.md template** for new repositories now lives at [`fuzzywigg/project-template`](https://github.com/fuzzywigg/project-template). It supersedes `templates/AGENTS-REPO.md` in this repo (which remains for legacy reference).
+The **canonical AGENTS.md template** for new repositories now lives at
+[`fuzzywigg/project-template`](https://github.com/fuzzywigg/project-template).
+It supersedes `templates/AGENTS-REPO.md` in this repo (which remains for legacy reference).
 
 The v1.0 template defines:
 
@@ -876,22 +881,29 @@ audit_logging:
 
 ## Appendix B: Caveman Context Compression (Optional)
 
-For repos with large governance files (`AGENTS.md`, `AGENTS-ECOSYSTEM.md`, long scratchpads), a context compression script is available at:
+For repos with large governance files (`AGENTS.md`, `AGENTS-ECOSYSTEM.md`, long
+scratchpads), a context compression script is available at:
 
-```
+```text
 project-template:scripts/compress-context.py
 ```
 
-Known as **"caveman compression"** — an optional optimization that reduces governance-file token usage by **~40%** by stripping markdown decoration, collapsing whitespace, and abbreviating recurring scaffolding while preserving all semantic content.
+Known as **"caveman compression"** — an optional optimization that reduces
+governance-file token usage by **~40%** by stripping markdown decoration,
+collapsing whitespace, and abbreviating recurring scaffolding while preserving
+all semantic content.
 
 **When to use:**
+
 - AGENTS.md exceeds ~8K tokens
 - Repo loads multiple governance files into context per agent turn
 - Cost or latency on large-context models is a concern
 
 **When NOT to use:**
+
 - Files are already small (overhead exceeds savings)
-- Human readability of the source is the primary goal (this is an output-time transform; keep the readable original in git)
+- Human readability of the source is the primary goal (this is an output-time
+  transform; keep the readable original in git)
 
 **Status:** optional but recommended for Tier A repos with heavy AGENTS.md surface area. See `project-template/scripts/compress-context.py` for usage.
 

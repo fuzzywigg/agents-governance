@@ -20,6 +20,7 @@ This repository contains the source-of-truth governance framework for all AI age
 2. Choose the appropriate flavor branch for your stack (Python, Next.js, Cloudflare Worker, MCP server, etc.)
 3. Customize the placeholders in the bundled `AGENTS.md` (v1.0 — includes 4 execution modes, implementation-plan requirement, agent routing convention, Tier-1 / Tier-2 governance structure)
 4. Reference this repo from your `AGENTS.md` header:
+
    ```yaml
    parent_governance: "github.com/fuzzywigg/agents-governance"
    ```
@@ -47,13 +48,18 @@ The full 22-repo ecosystem is mapped in [AGENTS-ECOSYSTEM.md §2.1](AGENTS-ECOSY
 
 ## Optional: Caveman Context Compression
 
-Tier A repos with large `AGENTS.md` files can use the optional compression script in `project-template/scripts/compress-context.py` to reduce governance-file token usage by **~40%**. See [Appendix B](AGENTS-ECOSYSTEM.md#appendix-b-caveman-context-compression-optional) for details.
+Tier A repos with large `AGENTS.md` files can use the optional compression
+script in `project-template/scripts/compress-context.py` to reduce
+governance-file token usage by **~40%**. See
+[Appendix B](AGENTS-ECOSYSTEM.md#appendix-b-caveman-context-compression-optional)
+for details.
 
 ## Philosophy
 
 **Local-first. Privacy-preserving. Self-custodied.**
 
 This governance framework ensures AI agents:
+
 - Respect human authority (kill switch, approval tiers)
 - Protect sensitive data (PHI guard, zone-based routing)
 - Operate within defined boundaries (budgets, policies)

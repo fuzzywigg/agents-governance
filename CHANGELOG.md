@@ -9,6 +9,25 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+---
+
+## [2.3.0] — 2026-04-19
+
+### Added
+- AGENTS-ECOSYSTEM.md §2.1 expanded to full 22-repo, 4-tier portfolio (Tier A Active, Tier B Governance, Tier C Infrastructure, Tier D Dormant) plus a Tier Summary
+- AGENTS-ECOSYSTEM.md §2.1.1: reference to `fuzzywigg/project-template` as the canonical AGENTS.md v1.0 template (4 execution modes, implementation-plan requirement, agent routing convention, Tier-1/Tier-2 governance structure, 7 flavor branches)
+- Appendix B: Caveman context compression — optional `project-template/scripts/compress-context.py` for ~40% governance-file token reduction
+- README.md: ecosystem snapshot table, project-template usage flow, compression note
+
+### Changed
+- AGENTS-ECOSYSTEM.md front matter: version bumped to 2.3.0, `last_updated` 2026-04-19, added `ecosystem_size` and `template_source` keys
+- Domain Portfolio table extended to include `meromhouse.org`, `g0p.us`, `g0p.ai` with tier annotations
+- README.md version stamp bumped to 2.3.0
+
+---
+
+## [Pre-2.3.0 Unreleased]
+
 ### Added
 - `CLAUDE.md` — Copilot surface rules and critical file registry
 - `AGENTS.md` — Repo-specific governance instance (using own template)

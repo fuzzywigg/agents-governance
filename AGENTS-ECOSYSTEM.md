@@ -156,7 +156,7 @@ The v1.0 template defines:
 
 ### 2.2 Technology Stack
 
-```
+```text
 ┌─────────────────────────────────────────────────────┐
 │                    Applications                      │
 │  (Dashboard, Mobile Companion, CLI, Integrations)   │
@@ -200,7 +200,7 @@ The v1.0 template defines:
 
 ### 3.2 Escalation Matrix
 
-```
+```text
 Action Request
      │
      ▼
@@ -233,12 +233,14 @@ Action Request
 ### 3.3 Kill Switch Protocol
 
 **Triggers:**
+
 - Cost exceeds 10x allocated budget
 - Critical governance violation flagged
 - Manual activation by smtp.eth
 - Security breach detected
 
 **Behavior:**
+
 - File-based lock (`.kill_switch` in repo root)
 - ALL agent actions blocked
 - Human must physically remove file
@@ -353,7 +355,7 @@ budgets:
 
 ### 6.1 Architecture Overview
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                     Goose Orchestrator                       │
 │  (Ecosystem-wide coordination across all smtp.eth projects) │
@@ -417,7 +419,8 @@ recipe:
 The **scratchpad** is the ecosystem-wide state machine for inter-agent coordination.
 
 **Hierarchy:**
-```
+
+```text
 agents-governance/
 └── scratchpad/
     ├── ecosystem.txt      # Cross-project coordination
@@ -432,6 +435,7 @@ health-agents/
 ```
 
 **Format:**
+
 ```markdown
 # Scratchpad - [Scope] State
 # Last updated: ISO-8601 timestamp
@@ -449,6 +453,7 @@ health-agents/
 ```
 
 **Rules:**
+
 1. Each agent owns its section (identified by name)
 2. Progress tracked as `[x]` complete, `[ ]` pending
 3. **APPEND-ONLY**: Never delete, only mark complete
@@ -471,6 +476,7 @@ All MCP servers in the ecosystem must be registered:
 | AuditMCP | home | Blockchain logging | fuzzywigg-ai | 🔄 Planned |
 
 **Adding New MCP Servers:**
+
 1. Define in project's `.fuzzywigg/config.yaml`
 2. Register in this table (PR to agents-governance)
 3. Document tools in server README
@@ -525,6 +531,7 @@ When agents from different projects need to coordinate:
 5. **Initiating project** reads result and continues
 
 **Example:**
+
 ```markdown
 # agents-governance/scratchpad/ecosystem.txt
 
@@ -588,6 +595,7 @@ locking:
 | L3 (Autonomous) | Future: proven recipes only, kill switch monitored |
 
 **Recipe Approval Process:**
+
 1. Submit recipe PR to project repo
 2. Security review (credentials, network access)
 3. Test in Advisory mode (L0)
@@ -610,6 +618,7 @@ locking:
 ### 7.2 PHI/PII Protection
 
 **Always Redact Before Cloud Transmission:**
+
 - Email addresses → `[EMAIL]`
 - Phone numbers → `[PHONE]`
 - SSN → `[SSN]`
@@ -694,6 +703,7 @@ delegation:
 ### 8.3 Onboarding Flow
 
 New family member onboarding:
+
 1. Create sub-identity ENS (e.g., `newmember.smtp.eth`)
 2. Assign permission tier
 3. Configure device access
@@ -708,7 +718,7 @@ New family member onboarding:
 
 ### 9.1 Home Node Vision
 
-**Target: Sprint 16 (Dec 2025)**
+Target: Sprint 16 (Dec 2025)
 
 ```yaml
 home_node:
@@ -733,7 +743,7 @@ home_node:
 
 ### 9.2 Device Hierarchy
 
-```
+```text
 smtp.eth (Owner)
     │
     ├── Home Node (Primary)
@@ -771,6 +781,7 @@ smtp.eth (Owner)
 ### 10.1 Audit Trail
 
 Every action logged with:
+
 - Timestamp (UTC)
 - Actor (identity)
 - Action type
@@ -809,6 +820,7 @@ audit_logging:
 ### 10.4 Incident Response
 
 **Severity Levels:**
+
 - SEV-1: Kill switch activated, breach, fund loss → Immediate
 - SEV-2: Production down, critical failure → < 1 hour
 - SEV-3: Degraded performance → < 24 hours
@@ -817,6 +829,7 @@ audit_logging:
 **Postmortem Required:** SEV-1 and SEV-2 incidents
 
 **Goose-Specific Incidents:**
+
 - Recipe failure cascade → SEV-2
 - Scratchpad corruption → SEV-2
 - MCP server compromise → SEV-1
@@ -933,6 +946,6 @@ ls -la .kill_switch 2>/dev/null && echo "ACTIVE" || echo "inactive"
 
 ---
 
-**End of Document**
+End of Document
 
 *This is the canonical ecosystem governance document. Individual projects reference this and add repo-specific rules in their own AGENTS.md files.*

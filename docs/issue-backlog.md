@@ -28,6 +28,7 @@ note: "Issues below are ready to be created in GitHub. Agent surface: copilot ca
 ### [P1-3] [copilot] Add GitHub issue templates and PR template
 
 **Status:** ✅ RESOLVED — Created during hydration on 2026-04-13:
+
 - `.github/ISSUE_TEMPLATE/governance-gap.md`
 - `.github/ISSUE_TEMPLATE/documentation-error.md`
 - `.github/ISSUE_TEMPLATE/feature-request.md`
@@ -40,6 +41,7 @@ note: "Issues below are ready to be created in GitHub. Agent surface: copilot ca
 ### [P2-1] [copilot] Add CI/CD: markdown lint and broken link checking
 
 **Status:** ✅ RESOLVED — Created during hydration on 2026-04-13:
+
 - `.github/workflows/markdown-lint.yml`
 - `.github/workflows/link-check.yml`
 - `.markdownlint.json`
@@ -65,11 +67,13 @@ note: "Issues below are ready to be created in GitHub. Agent surface: copilot ca
 **Problem:** `README.md` lists `nft2.me` as "Pending" and `owl-visuals` as "Planned" in the "Projects Using This Governance" table. Neither has an active AGENTS.md. The table is aspirational, not factual.
 
 **Proposed Solution:**
+
 1. Update README table to distinguish between repos with active AGENTS.md vs. planned ones
 2. Open tracking issues in each downstream repo to adopt the template
 3. Add `fuzzywigg-ai` AGENTS.md link to README (it's listed as Active with ✅)
 
 **Acceptance Criteria:**
+
 - [ ] README table accurately reflects which repos have an active AGENTS.md
 - [ ] fuzzywigg-ai AGENTS.md URL linked
 - [ ] nft2.me and owl-visuals have tracking issues opened
@@ -85,12 +89,14 @@ note: "Issues below are ready to be created in GitHub. Agent surface: copilot ca
 **Problem:** `main` branch has no protection rules. Any agent with push access could directly commit to `main`, bypassing the PR + review requirement stated in AGENTS-ECOSYSTEM.md §12.1.
 
 **Proposed Solution:**
+
 - Require PRs before merging to `main`
 - Require at least 1 approval
 - Dismiss stale approvals on new commits
 - Block force pushes
 
 **Acceptance Criteria:**
+
 - [ ] Direct pushes to `main` are blocked
 - [ ] PRs require at least 1 review
 - [ ] Branch protection visible in GitHub Settings > Branches
@@ -108,11 +114,13 @@ note: "Issues below are ready to be created in GitHub. Agent surface: copilot ca
 **Problem:** Per the hydration protocol, Notion is the truth for policies/decisions. This repo has no Notion page under the Master Index. Cross-system alignment is incomplete.
 
 **Proposed Solution:**
+
 1. claude-cowork searches Notion workspace for existing agents-governance page
 2. If absent: creates page under Active Sprint Work with metadata header
 3. Links to GitHub hydration report, roadmap issue, and CHANGELOG
 
 **Acceptance Criteria:**
+
 - [ ] Notion page exists for agents-governance under Master Index
 - [ ] Page links to GitHub (not duplicates content)
 - [ ] Page includes metadata header per governance standard
@@ -131,14 +139,18 @@ note: "Issues below are ready to be created in GitHub. Agent surface: copilot ca
 
 **Status:** 🔜 PENDING — Low priority.
 
-**Problem:** `AGENTS-ECOSYSTEM.md` Appendix B references `python scripts/validate_recipes.py` but the `scripts/` directory and this script do not exist. Any agent following Appendix B instructions will encounter a file-not-found error.
+**Problem:** `AGENTS-ECOSYSTEM.md` Appendix B references `python scripts/validate_recipes.py` but the
+`scripts/` directory and this script do not exist. Any agent following Appendix B instructions will
+encounter a file-not-found error.
 
 **Proposed Solution:**
+
 1. Create `scripts/validate_recipes.py` as a stub that validates Goose recipe YAML format
 2. Validate: `name`, `recipe.version`, `recipe.settings.autonomy_level`, `recipe.settings.network_zone` fields
 3. Add usage to Appendix B in AGENTS-ECOSYSTEM.md
 
 **Acceptance Criteria:**
+
 - [ ] `python scripts/validate_recipes.py` exits 0 for valid YAML, non-zero for invalid
 - [ ] Script validates all required Goose recipe fields per §6.2
 - [ ] Appendix B command in AGENTS-ECOSYSTEM.md points to correct path

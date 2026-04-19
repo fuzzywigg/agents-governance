@@ -85,4 +85,4 @@ MIT
 
 ---
 
-*Maintained by smtp.eth*
+Maintained by smtp.eth

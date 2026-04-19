@@ -30,6 +30,7 @@ autonomy_level: 1
 ### Autonomy Level
 
 This project operates at **Level 1** autonomy (Bounded):
+
 - [x] L1 Bounded: Auto-approve within policy
 - [ ] L0 Advisory: Human confirms every action
 - [ ] L2 Supervised: Auto-approve within policy + budget
@@ -40,13 +41,16 @@ This project operates at **Level 1** autonomy (Bounded):
 
 ### 2.1 Governance Document Integrity
 
-`AGENTS-ECOSYSTEM.md` and `templates/AGENTS-REPO.md` are the canonical governance artifacts. No agent may modify these without an explicit Andrew-approved PR. Rationale: downstream projects depend on these documents as their source of truth.
+`AGENTS-ECOSYSTEM.md` and `templates/AGENTS-REPO.md` are the canonical governance artifacts.
+No agent may modify these without an explicit Andrew-approved PR.
+Rationale: downstream projects depend on these documents as their source of truth.
 
 ### 2.2 Scratchpad Protocol
 
 The `scratchpad/` directory implements ecosystem-wide inter-agent coordination state per [AGENTS-ECOSYSTEM.md §6.3](./AGENTS-ECOSYSTEM.md).
 
 Rules:
+
 - **APPEND-ONLY** — never delete or rewrite entries
 - Mark completed steps with `[x]`
 - Add timestamps in ISO-8601 format
@@ -81,6 +85,7 @@ npx markdown-link-check README.md AGENTS-ECOSYSTEM.md
 ## 4. Deployment
 
 This repository is not deployed. It is referenced by downstream repos via:
+
 ```yaml
 parent_governance: "github.com/fuzzywigg/agents-governance"
 ```
@@ -92,6 +97,7 @@ parent_governance: "github.com/fuzzywigg/agents-governance"
 Follow ecosystem incident protocol from [AGENTS-ECOSYSTEM.md §10.4](./AGENTS-ECOSYSTEM.md).
 
 Severity levels:
+
 - SEV-1: Governance document corrupted or deleted
 - SEV-2: Scratchpad state lost
 - SEV-3: Broken links or template errors
@@ -115,6 +121,6 @@ Severity levels:
 
 ---
 
-**End of Document**
+End of Document
 
 *See [AGENTS-ECOSYSTEM.md](./AGENTS-ECOSYSTEM.md) for ecosystem-wide rules.*

@@ -25,6 +25,7 @@ parent_governance: "github.com/fuzzywigg/agents-governance"
 ### Autonomy Level
 
 This project operates at **Level [0/1/2]** autonomy:
+
 - [ ] L0 Advisory: Human confirms every action
 - [ ] L1 Bounded: Auto-approve within policy
 - [ ] L2 Supervised: Auto-approve within policy + budget
@@ -72,6 +73,7 @@ This project operates at **Level [0/1/2]** autonomy:
 Follow ecosystem incident protocol from [AGENTS-ECOSYSTEM.md](https://github.com/fuzzywigg/agents-governance).
 
 Severity levels:
+
 - SEV-1: Immediate response
 - SEV-2: < 1 hour
 - SEV-3: < 24 hours
@@ -94,6 +96,6 @@ Severity levels:
 
 ---
 
-**End of Document**
+End of Document
 
 *See [agents-governance](https://github.com/fuzzywigg/agents-governance) for ecosystem rules.*

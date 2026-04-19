@@ -39,6 +39,7 @@ Thank you for your interest in improving the smtp.eth governance framework.
 ## Issue Reporting
 
 Use the provided issue templates when reporting:
+
 - Governance gaps or outdated policy
 - Documentation errors
 - Feature requests for governance enhancements

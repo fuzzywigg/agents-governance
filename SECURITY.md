@@ -7,10 +7,12 @@ If you discover a security vulnerability in the governance framework (e.g., a po
 **Do not open a public issue.**
 
 Contact smtp.eth directly:
+
 - GitHub: [@fuzzywigg](https://github.com/fuzzywigg)
 - ENS: smtp.eth
 
 Please include:
+
 1. Description of the vulnerability
 2. Affected file(s) and section(s)
 3. Potential impact

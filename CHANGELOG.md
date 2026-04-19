@@ -41,6 +41,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [Pre-2.3.0 Unreleased]
 
 ### Added
+
 - `CLAUDE.md` — Copilot surface rules and critical file registry
 - `AGENTS.md` — Repo-specific governance instance (using own template)
 - `LICENSE` — MIT license file (previously only stated in README)
@@ -61,6 +62,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [2.2.0] — 2025-12-13
 
 ### Added
+
 - Enhanced Section 6: Multi-Agent Coordination (Goose Protocol)
 - Ecosystem-wide architecture diagram
 - MCP Server Registry table
@@ -76,6 +78,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [2.1.0] — 2025-12-13
 
 ### Added
+
 - Initial ecosystem governance document (`AGENTS-ECOSYSTEM.md`)
 - Repository-specific template (`templates/AGENTS-REPO.md`)
 - README with usage documentation
@@ -85,4 +88,5 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [2.0.0] — 2025-12-13
 
 ### Changed
+
 - Separated ecosystem governance from repo-specific AGENTS.md

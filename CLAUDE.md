@@ -12,6 +12,7 @@ parent_governance: "github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md"
 ## Purpose
 
 This is the **canonical governance repository** for the smtp.eth AI ecosystem. It contains:
+
 - `AGENTS-ECOSYSTEM.md` — Ecosystem-wide governance (source of truth)
 - `templates/AGENTS-REPO.md` — Template for per-project AGENTS.md files
 - `AGENTS.md` — This repo's own governance instance
@@ -20,12 +21,14 @@ This is the **canonical governance repository** for the smtp.eth AI ecosystem. I
 ## Agent Operating Rules (This Repo)
 
 ### What agents may do autonomously (L1 Bounded)
+
 - Edit `AGENTS.md`, `CLAUDE.md`, `README.md`, and files in `docs/` and `scratchpad/`
 - Create or update `.github/ISSUE_TEMPLATE/` and `.github/pull_request_template.md`
 - Append to `scratchpad/ecosystem.txt` and `scratchpad/incidents.txt`
 - Create new issues and PRs
 
 ### What requires Andrew approval (structural changes)
+
 - Any change to `AGENTS-ECOSYSTEM.md`
 - Any change to `templates/AGENTS-REPO.md`
 - Adding or removing files at repo root
@@ -33,6 +36,7 @@ This is the **canonical governance repository** for the smtp.eth AI ecosystem. I
 - Changing branch protection rules
 
 ### Kill Switch
+
 If `.kill_switch` exists in repo root, ALL agent writes are blocked.
 
 ```bash

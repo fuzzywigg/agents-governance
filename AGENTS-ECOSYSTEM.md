@@ -7,7 +7,7 @@ maintainer: "smtp.eth"
 scope: "ecosystem-wide"
 repository: "github.com/fuzzywigg/agents-governance"
 goose_protocol: true
-ecosystem_size: "22 repos + 1 gist"
+ecosystem_size: "23 repos + 1 gist"
 template_source: "github.com/fuzzywigg/project-template"
 ```
 
@@ -75,7 +75,7 @@ agents:
 
 ### 2.1 Project Portfolio
 
-The smtp.eth ecosystem currently contains **22 repositories + 1 gist**, organized into four tiers by strategic role. Each tier has different governance expectations and agent autonomy defaults.
+The smtp.eth ecosystem currently contains **23 repositories + 1 gist**, organized into four tiers by strategic role. Each tier has different governance expectations and agent autonomy defaults.
 
 #### Tier A — Active Development, Strategic (8 repos)
 
@@ -115,7 +115,7 @@ Supporting infrastructure, websites, and CLI tooling. L1 autonomy by default.
 | fuzzywigg.com | Static site |
 | meromhouse.org | Static site |
 
-#### Tier D — Dormant / Reference Only (6 repos)
+#### Tier D — Dormant / Reference Only (7 repos)
 
 No active development. Agents should NOT refactor or fork these unless explicitly directed.
 
@@ -136,7 +136,7 @@ No active development. Agents should NOT refactor or fork these unless explicitl
 | A — Active Strategic | 8 | L1 Bounded | Full agent loop with PR review |
 | B — Governance | 3 + 1 gist | L0 Advisory | Andrew approval on structural change |
 | C — Infrastructure | 5 | L1 Bounded | Auto-merge low-risk PRs allowed |
-| D — Dormant | 6 | L0 Advisory | Read-only by default; no refactors |
+| D — Dormant | 7 | L0 Advisory | Read-only by default; no refactors |
 
 ### 2.1.1 Universal AGENTS.md Template (v1.0)
 
@@ -872,7 +872,7 @@ audit_logging:
 
 | Version | Date | Summary |
 |---------|------|---------|
-| 2.3.0 | 2026-04-19 | Expanded §2.1 to full 22-repo / 4-tier portfolio; added §2.1.1 referencing project-template AGENTS.md v1.0; added Appendix B for caveman compression |
+| 2.3.0 | 2026-04-19 | Expanded §2.1 to full 23-repo / 4-tier portfolio; added §2.1.1 referencing project-template AGENTS.md v1.0; added Appendix B for caveman compression |
 | 2.2.0 | 2025-12-13 | Added Goose Protocol integration (Section 6 major update) |
 | 2.1.0 | 2025-12-13 | Initial ecosystem governance document |
 | 2.0.0 | 2025-12-13 | Separated from repo-specific AGENTS.md |
@@ -898,7 +898,7 @@ For repos with large governance files (`AGENTS.md`, `AGENTS-ECOSYSTEM.md`, long
 scratchpads), a context compression script is available at:
 
 ```text
-project-template:scripts/compress-context.py
+project-template/scripts/compress-context.py
 ```
 
 Known as **"caveman compression"** — an optional optimization that reduces

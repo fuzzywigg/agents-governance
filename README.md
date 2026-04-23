@@ -2,7 +2,7 @@
 
 **Canonical AI governance documents for the smtp.eth ecosystem.**
 
-This repository contains the source-of-truth governance framework for all AI agents operating across smtp.eth's **22 repositories + 1 gist** of personal digital sovereignty infrastructure.
+This repository contains the source-of-truth governance framework for all AI agents operating across smtp.eth's **23 repositories + 1 gist** of personal digital sovereignty infrastructure.
 
 ## Documents
 
@@ -37,14 +37,14 @@ For the full ecosystem rules (autonomy levels, kill switch, MCP security, financ
 
 ## Ecosystem Snapshot
 
-The full 22-repo ecosystem is mapped in [AGENTS-ECOSYSTEM.md §2.1](AGENTS-ECOSYSTEM.md#21-project-portfolio). Summary:
+The full 23-repo ecosystem is mapped in [AGENTS-ECOSYSTEM.md §2.1](AGENTS-ECOSYSTEM.md#21-project-portfolio). Summary:
 
 | Tier | Count | Description |
 |------|-------|-------------|
 | **A — Active Strategic** | 8 | Primary value-creation surfaces (PikoClaw, agents, claw-mcp, etc.) |
 | **B — Governance & Standards** | 3 + 1 gist | Source-of-truth docs (this repo, agents-standard, ai vision repo, Agent OS gist) |
 | **C — Infrastructure & Utilities** | 5 | Sites and CLI tooling (praetor, godaddy-toolkit, fuzzywigg-ai, fuzzywigg.com, meromhouse.org) |
-| **D — Dormant / Reference Only** | 6 | Read-only; do not refactor (g0p.us, nft2.me, g0p.ai, menu_planner, math-pentathlon, Backlink, g0p-agents) |
+| **D — Dormant / Reference Only** | 7 | Read-only; do not refactor (g0p.us, nft2.me, g0p.ai, menu_planner, math-pentathlon, Backlink, g0p-agents) |
 
 ## Optional: Caveman Context Compression
 

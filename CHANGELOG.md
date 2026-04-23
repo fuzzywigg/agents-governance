@@ -15,7 +15,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-- AGENTS-ECOSYSTEM.md §2.1 expanded to full 22-repo, 4-tier portfolio
+- AGENTS-ECOSYSTEM.md §2.1 expanded to full 23-repo, 4-tier portfolio
   (Tier A Active, Tier B Governance, Tier C Infrastructure, Tier D Dormant)
   plus a Tier Summary
 - AGENTS-ECOSYSTEM.md §2.1.1: reference to `fuzzywigg/project-template` as the

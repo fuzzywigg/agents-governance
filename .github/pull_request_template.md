@@ -15,7 +15,7 @@ Edit policy: Agent-editable; structural changes require Andrew approval
 ## Changes
 
 <!-- Bullet list of files changed and what changed in each -->
-- 
+-
 
 ## Acceptance Criteria
 
@@ -38,4 +38,4 @@ Edit policy: Agent-editable; structural changes require Andrew approval
 ## HITL Items
 
 <!-- Any decisions deferred to Andrew: -->
-- 
+-

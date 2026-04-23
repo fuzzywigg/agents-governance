@@ -1,12 +1,14 @@
 # AGENTS-ECOSYSTEM.md — smtp.eth Governance Framework
 
 ```yaml
-version: "2.2.0"
-last_updated: "2025-12-13"
+version: "2.3.0"
+last_updated: "2026-04-19"
 maintainer: "smtp.eth"
 scope: "ecosystem-wide"
 repository: "github.com/fuzzywigg/agents-governance"
 goose_protocol: true
+ecosystem_size: "23 repos + 1 gist"
+template_source: "github.com/fuzzywigg/project-template"
 ```
 
 > **This document establishes governance principles for all AI agents operating within the smtp.eth ecosystem.**
@@ -28,6 +30,12 @@ goose_protocol: true
 10. [Compliance & Audit](#10-compliance--audit)
 11. [Domain Portfolio](#11-domain-portfolio)
 12. [Amendment Process](#12-amendment-process)
+
+Appendices:
+
+- [Appendix A: Goose Protocol Resources](#appendix-a-goose-protocol-resources)
+- [Appendix B: Caveman Context Compression (Optional)](#appendix-b-caveman-context-compression-optional)
+- [Appendix C: Quick Commands](#appendix-c-quick-commands)
 
 ---
 
@@ -67,17 +75,88 @@ agents:
 
 ### 2.1 Project Portfolio
 
-| Project | Purpose | Status | AGENTS.md | Goose |
-|---------|---------|--------|-----------|-------|
-| fuzzywigg-ai | Core agent orchestration | Active | ✅ v1.1.0 | ✅ |
-| nft2.me | NFT minting platform | Active | Pending | Planned |
-| owl-visuals | Visual generation | Planned | Pending | Planned |
-| health-agents | Health data management | Planned | Pending | Planned |
-| home-node | Sovereign infrastructure | Sprint 16 | Pending | Planned |
+The smtp.eth ecosystem currently contains **23 repositories + 1 gist**, organized into four tiers by strategic role. Each tier has different governance expectations and agent autonomy defaults.
+
+#### Tier A — Active Development, Strategic (8 repos)
+
+Primary value-creation surfaces. Receive the most agent attention; require AGENTS.md compliance; tracked in ecosystem scratchpad.
+
+| Repo | Language | Stage | Pipeline Role |
+|------|----------|-------|---------------|
+| PikoClaw | Python + Next.js | GREEN | Frontend + API, primary Panathenea demo |
+| Q_Willow_HCL | Python | Pre-alpha | Quantum swarm, potential second demo |
+| agents | Python + Solidity | Working v3.x | Agent orchestration brain |
+| QFZZ | Python | GREEN | Discord control |
+| claw-mcp | Python | GREEN | MCP tooling |
+| project-template | TypeScript | Active | Project factory (7 flavor branches) |
+| matrix-workers | TypeScript | Beta | CF primitives reference (fork-only) |
+| openclaw_geryon | Python | RED (security) | Agent executor (needs remediation) |
+
+#### Tier B — Governance & Standards (3 repos + 1 gist)
+
+Source-of-truth documents. Structural changes require Andrew approval (see §12).
+
+| Repo | Purpose |
+|------|---------|
+| agents-governance | Fork-this-repo governance templates (THIS REPO) |
+| agents-standard | Public agent behavior protocols |
+| ai | Vision repo (dormant, L1-L4 concepts) |
+| Gist `8dc0d7482f...` | Agent OS Google Workspace operational spec |
+
+#### Tier C — Infrastructure & Utilities (5 repos)
+
+Supporting infrastructure, websites, and CLI tooling. L1 autonomy by default.
+
+| Repo | Purpose |
+|------|---------|
+| praetor | TypeScript scaffold |
+| godaddy-toolkit | Python CLI for DNS management |
+| fuzzywigg-ai | Next.js portfolio site |
+| fuzzywigg.com | Static site |
+| meromhouse.org | Static site |
+
+#### Tier D — Dormant / Reference Only (7 repos)
+
+No active development. Agents should NOT refactor or fork these unless explicitly directed.
+
+| Repo | Purpose |
+|------|---------|
+| g0p.us | Static HTML |
+| nft2.me | Static HTML |
+| g0p.ai | Static HTML (wrong default branch) |
+| menu_planner | Personal Python tool |
+| math-pentathlon | Educational |
+| Backlink | DJ_GPT orchestration |
+| g0p-agents | Reference data only — do NOT fork or refactor |
+
+#### Tier Summary
+
+| Tier | Count | Default Autonomy | Agent Behavior |
+|------|-------|------------------|----------------|
+| A — Active Strategic | 8 | L1 Bounded | Full agent loop with PR review |
+| B — Governance | 3 + 1 gist | L0 Advisory | Andrew approval on structural change |
+| C — Infrastructure | 5 | L1 Bounded | Auto-merge low-risk PRs allowed |
+| D — Dormant | 7 | L0 Advisory | Read-only by default; no refactors |
+
+### 2.1.1 Universal AGENTS.md Template (v1.0)
+
+The **canonical AGENTS.md template** for new repositories now lives at
+[`fuzzywigg/project-template`](https://github.com/fuzzywigg/project-template).
+It supersedes `templates/AGENTS-REPO.md` in this repo (which remains for legacy reference).
+
+The v1.0 template defines:
+
+- **4 execution modes** — Advisory, Generative, Transformative, Operational
+- **Implementation plan requirement** — every non-trivial PR ships a plan-of-record
+- **Agent routing convention** — issue label prefix standard (e.g. `agent:copilot`, `agent:geryon`, `agent:claude-cowork`) so the right surface picks up the work
+- **Tier-1 / Tier-2 governance structure** — Tier-1 = mandatory ecosystem rules, Tier-2 = repo-specific overrides
+- **7 flavor branches** in `project-template` for common stack choices (Python, Next.js, Cloudflare Worker, MCP server, etc.)
+
+**Recommended for new repos:** clone `project-template`, choose the appropriate flavor branch, customize the `AGENTS.md` placeholders, and link `parent_governance` back to this repo.
 
 ### 2.2 Technology Stack
 
-```
+```text
 ┌─────────────────────────────────────────────────────┐
 │                    Applications                      │
 │  (Dashboard, Mobile Companion, CLI, Integrations)   │
@@ -121,7 +200,7 @@ agents:
 
 ### 3.2 Escalation Matrix
 
-```
+```text
 Action Request
      │
      ▼
@@ -154,12 +233,14 @@ Action Request
 ### 3.3 Kill Switch Protocol
 
 **Triggers:**
+
 - Cost exceeds 10x allocated budget
 - Critical governance violation flagged
 - Manual activation by smtp.eth
 - Security breach detected
 
 **Behavior:**
+
 - File-based lock (`.kill_switch` in repo root)
 - ALL agent actions blocked
 - Human must physically remove file
@@ -274,7 +355,7 @@ budgets:
 
 ### 6.1 Architecture Overview
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                     Goose Orchestrator                       │
 │  (Ecosystem-wide coordination across all smtp.eth projects) │
@@ -338,7 +419,8 @@ recipe:
 The **scratchpad** is the ecosystem-wide state machine for inter-agent coordination.
 
 **Hierarchy:**
-```
+
+```text
 agents-governance/
 └── scratchpad/
     ├── ecosystem.txt      # Cross-project coordination
@@ -353,6 +435,7 @@ health-agents/
 ```
 
 **Format:**
+
 ```markdown
 # Scratchpad - [Scope] State
 # Last updated: ISO-8601 timestamp
@@ -370,6 +453,7 @@ health-agents/
 ```
 
 **Rules:**
+
 1. Each agent owns its section (identified by name)
 2. Progress tracked as `[x]` complete, `[ ]` pending
 3. **APPEND-ONLY**: Never delete, only mark complete
@@ -392,6 +476,7 @@ All MCP servers in the ecosystem must be registered:
 | AuditMCP | home | Blockchain logging | fuzzywigg-ai | 🔄 Planned |
 
 **Adding New MCP Servers:**
+
 1. Define in project's `.fuzzywigg/config.yaml`
 2. Register in this table (PR to agents-governance)
 3. Document tools in server README
@@ -446,6 +531,7 @@ When agents from different projects need to coordinate:
 5. **Initiating project** reads result and continues
 
 **Example:**
+
 ```markdown
 # agents-governance/scratchpad/ecosystem.txt
 
@@ -509,6 +595,7 @@ locking:
 | L3 (Autonomous) | Future: proven recipes only, kill switch monitored |
 
 **Recipe Approval Process:**
+
 1. Submit recipe PR to project repo
 2. Security review (credentials, network access)
 3. Test in Advisory mode (L0)
@@ -531,6 +618,7 @@ locking:
 ### 7.2 PHI/PII Protection
 
 **Always Redact Before Cloud Transmission:**
+
 - Email addresses → `[EMAIL]`
 - Phone numbers → `[PHONE]`
 - SSN → `[SSN]`
@@ -615,6 +703,7 @@ delegation:
 ### 8.3 Onboarding Flow
 
 New family member onboarding:
+
 1. Create sub-identity ENS (e.g., `newmember.smtp.eth`)
 2. Assign permission tier
 3. Configure device access
@@ -629,7 +718,7 @@ New family member onboarding:
 
 ### 9.1 Home Node Vision
 
-**Target: Sprint 16 (Dec 2025)**
+Target: Sprint 16 (Dec 2025)
 
 ```yaml
 home_node:
@@ -654,7 +743,7 @@ home_node:
 
 ### 9.2 Device Hierarchy
 
-```
+```text
 smtp.eth (Owner)
     │
     ├── Home Node (Primary)
@@ -692,6 +781,7 @@ smtp.eth (Owner)
 ### 10.1 Audit Trail
 
 Every action logged with:
+
 - Timestamp (UTC)
 - Actor (identity)
 - Action type
@@ -730,6 +820,7 @@ audit_logging:
 ### 10.4 Incident Response
 
 **Severity Levels:**
+
 - SEV-1: Kill switch activated, breach, fund loss → Immediate
 - SEV-2: Production down, critical failure → < 1 hour
 - SEV-3: Degraded performance → < 24 hours
@@ -738,6 +829,7 @@ audit_logging:
 **Postmortem Required:** SEV-1 and SEV-2 incidents
 
 **Goose-Specific Incidents:**
+
 - Recipe failure cascade → SEV-2
 - Scratchpad corruption → SEV-2
 - MCP server compromise → SEV-1
@@ -751,8 +843,11 @@ audit_logging:
 | Domain | Purpose | Registrar | Renewal |
 |--------|---------|-----------|---------|
 | smtp.eth | Primary identity | ENS | Perpetual |
-| nft2.me | NFT platform | — | Annual |
-| fuzzywigg.com | Brand/marketing | — | Annual |
+| nft2.me | NFT platform (Tier D) | — | Annual |
+| fuzzywigg.com | Brand/marketing (Tier C) | — | Annual |
+| meromhouse.org | Static site (Tier C) | — | Annual |
+| g0p.us | Static (Tier D) | — | Annual |
+| g0p.ai | Static (Tier D) | — | Annual |
 
 ### 11.2 Domain Security
 
@@ -777,6 +872,7 @@ audit_logging:
 
 | Version | Date | Summary |
 |---------|------|---------|
+| 2.3.0 | 2026-04-19 | Expanded §2.1 to full 23-repo / 4-tier portfolio; added §2.1.1 referencing project-template AGENTS.md v1.0; added Appendix B for caveman compression |
 | 2.2.0 | 2025-12-13 | Added Goose Protocol integration (Section 6 major update) |
 | 2.1.0 | 2025-12-13 | Initial ecosystem governance document |
 | 2.0.0 | 2025-12-13 | Separated from repo-specific AGENTS.md |
@@ -796,7 +892,37 @@ audit_logging:
 - [Linux Foundation Announcement](https://www.linuxfoundation.org/) — Goose donation
 - [fuzzywigg-ai Recipes](https://github.com/fuzzywigg/fuzzywigg-ai/tree/main/agentic_flows/recipes) — Example recipes
 
-## Appendix B: Quick Commands
+## Appendix B: Caveman Context Compression (Optional)
+
+For repos with large governance files (`AGENTS.md`, `AGENTS-ECOSYSTEM.md`, long
+scratchpads), a context compression script is available at:
+
+```text
+project-template/scripts/compress-context.py
+```
+
+Known as **"caveman compression"** — an optional optimization that reduces
+governance-file token usage by **~40%** by stripping markdown decoration,
+collapsing whitespace, and abbreviating recurring scaffolding while preserving
+all semantic content.
+
+**When to use:**
+
+- AGENTS.md exceeds ~8K tokens
+- Repo loads multiple governance files into context per agent turn
+- Cost or latency on large-context models is a concern
+
+**When NOT to use:**
+
+- Files are already small (overhead exceeds savings)
+- Human readability of the source is the primary goal (this is an output-time
+  transform; keep the readable original in git)
+
+**Status:** optional but recommended for Tier A repos with heavy AGENTS.md surface area. See `project-template/scripts/compress-context.py` for usage.
+
+---
+
+## Appendix C: Quick Commands
 
 ```bash
 # Validate all recipes in a project
@@ -820,6 +946,6 @@ ls -la .kill_switch 2>/dev/null && echo "ACTIVE" || echo "inactive"
 
 ---
 
-**End of Document**
+End of Document
 
 *This is the canonical ecosystem governance document. Individual projects reference this and add repo-specific rules in their own AGENTS.md files.*

@@ -86,3 +86,26 @@ MIT
 ---
 
 Maintained by smtp.eth
+
+---
+
+## Quick Start
+
+```bash
+# Clone the governance repo
+git clone https://github.com/fuzzywigg/agents-governance.git
+cd agents-governance
+
+# View the main governance document
+cat AGENTS-ECOSYSTEM.md
+```
+
+## Installation
+
+No installation required — this is a documentation repository. Reference the governance documents directly or fork the `project-template` repo to bootstrap a new project.
+
+## License
+
+<!-- TODO: Confirm and add license. See https://choosealicense.com/ -->
+> ⚠️ License not yet specified. Please add a LICENSE file.
+

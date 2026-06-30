@@ -1,0 +1,4 @@
+# modelcontextprotocol.io returns 308 redirect — valid site, lychee false-positive
+https://modelcontextprotocol.io/
+# linuxfoundation.org returns 103 early hints — valid site
+https://www.linuxfoundation.org/

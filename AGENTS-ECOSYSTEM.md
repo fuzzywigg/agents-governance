@@ -141,7 +141,7 @@ No active development. Agents should NOT refactor or fork these unless explicitl
 ### 2.1.1 Universal AGENTS.md Template (v1.0)
 
 The **canonical AGENTS.md template** for new repositories now lives at
-[`fuzzywigg/project-template`](https://github.com/fuzzywigg/project-template).
+`fuzzywigg/project-template` *(private)*.
 It supersedes `templates/AGENTS-REPO.md` in this repo (which remains for legacy reference).
 
 The v1.0 template defines:
@@ -890,7 +890,7 @@ audit_logging:
 - [Goose Documentation](https://block.github.io/goose/) — Official Goose docs
 - [MCP Specification](https://modelcontextprotocol.io/) — Model Context Protocol
 - [Linux Foundation Announcement](https://www.linuxfoundation.org/) — Goose donation
-- [fuzzywigg-ai Recipes](https://github.com/fuzzywigg/fuzzywigg-ai/tree/main/agentic_flows/recipes) — Example recipes
+- `fuzzywigg-ai/agentic_flows/recipes` *(private)* — example recipes
 
 ## Appendix B: Caveman Context Compression (Optional)
 

@@ -10,19 +10,20 @@ This repository contains the source-of-truth governance framework for all AI age
 |----------|---------|
 | [AGENTS-ECOSYSTEM.md](AGENTS-ECOSYSTEM.md) | Ecosystem-wide governance: identity, trust, finances, multi-user, compliance, full repo tier map |
 | [templates/AGENTS-REPO.md](templates/AGENTS-REPO.md) | Legacy per-project template (kept for historical reference) |
-| [`fuzzywigg/project-template`](https://github.com/fuzzywigg/project-template) | **Canonical AGENTS.md template (v1.0)** + 7 flavor branches — recommended starting point for new repos |
+| `fuzzywigg/project-template` *(private)* | **Canonical AGENTS.md template (v1.0)** + 7 flavor branches — recommended starting point for new repos |
 
 ## Quick Start
 
 ```bash
-# New project: clone the canonical template
-git clone -b main https://github.com/fuzzywigg/project-template my-project
+# New project: clone the private canonical template
+git clone -b main <project-template-url> my-project
 cd my-project
 # Pick a flavor branch: python | nextjs | cloudflare-worker | mcp-server | ...
 git checkout flavor/nextjs   # example
 ```
 
 Then add to your project's `AGENTS.md` header:
+
 ```yaml
 parent_governance: "github.com/fuzzywigg/agents-governance"
 ```
@@ -33,18 +34,19 @@ No package to install. This repo is a governance document source.
 
 - **Reference** it from your project's `AGENTS.md` via `parent_governance`.
 - **Clone** it locally if you want to propose amendments or run markdown lint locally:
-  ```bash
-  git clone https://github.com/fuzzywigg/agents-governance
-  cd agents-governance
-  npm install -g markdownlint-cli2   # optional, for local lint
-  markdownlint-cli2 "**/*.md"
-  ```
+
+```bash
+git clone https://github.com/fuzzywigg/agents-governance
+cd agents-governance
+npm install -g markdownlint-cli2   # optional, for local lint
+markdownlint-cli2 "**/*.md"
+```
 
 ## Usage
 
 ### For New Projects (Recommended)
 
-1. Clone or fork [`fuzzywigg/project-template`](https://github.com/fuzzywigg/project-template)
+1. Clone or fork the private `fuzzywigg/project-template` repository.
 2. Choose the appropriate flavor branch for your stack (Python, Next.js, Cloudflare Worker, MCP server, etc.)
 3. Customize the placeholders in the bundled `AGENTS.md` (v1.0 — includes 4 execution modes, implementation-plan requirement, agent routing convention, Tier-1 / Tier-2 governance structure)
 4. Reference this repo from your `AGENTS.md` header:

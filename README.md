@@ -12,6 +12,34 @@ This repository contains the source-of-truth governance framework for all AI age
 | [templates/AGENTS-REPO.md](templates/AGENTS-REPO.md) | Legacy per-project template (kept for historical reference) |
 | [`fuzzywigg/project-template`](https://github.com/fuzzywigg/project-template) | **Canonical AGENTS.md template (v1.0)** + 7 flavor branches — recommended starting point for new repos |
 
+## Quick Start
+
+```bash
+# New project: clone the canonical template
+git clone -b main https://github.com/fuzzywigg/project-template my-project
+cd my-project
+# Pick a flavor branch: python | nextjs | cloudflare-worker | mcp-server | ...
+git checkout flavor/nextjs   # example
+```
+
+Then add to your project's `AGENTS.md` header:
+```yaml
+parent_governance: "github.com/fuzzywigg/agents-governance"
+```
+
+## Installation
+
+No package to install. This repo is a governance document source.
+
+- **Reference** it from your project's `AGENTS.md` via `parent_governance`.
+- **Clone** it locally if you want to propose amendments or run markdown lint locally:
+  ```bash
+  git clone https://github.com/fuzzywigg/agents-governance
+  cd agents-governance
+  npm install -g markdownlint-cli2   # optional, for local lint
+  markdownlint-cli2 "**/*.md"
+  ```
+
 ## Usage
 
 ### For New Projects (Recommended)
@@ -81,7 +109,7 @@ Current: **2.3.0** (2026-04-19)
 
 ## License
 
-MIT
+[MIT](LICENSE) — governance documents are freely reusable. Attribution appreciated.
 
 ---
 

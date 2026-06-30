@@ -1,5 +1,9 @@
 # agents-governance
 
+[![Link Check](https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml/badge.svg)](https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)
+[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml/badge.svg)](https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)
+[![License](https://img.shields.io/github/license/fuzzywigg/agents-governance)](LICENSE)
+
 **Canonical AI governance documents for the smtp.eth ecosystem.**
 
 This repository contains the source-of-truth governance framework for all AI agents operating across smtp.eth's **23 repositories + 1 gist** of personal digital sovereignty infrastructure.

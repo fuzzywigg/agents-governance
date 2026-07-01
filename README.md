@@ -1,12 +1,30 @@
+```
+   █████╗  ██████╗ ███████╗███╗   ██╗████████╗███████╗
+  ██╔══██╗██╔════╝ ██╔════╝████╗  ██║╚══██╔══╝██╔════╝
+  ███████║██║  ███╗█████╗  ██╔██╗ ██║   ██║   ███████╗
+  ██╔══██║██║   ██║██╔══╝  ██║╚██╗██║   ██║   ╚════██║
+  ██║  ██║╚██████╔╝███████╗██║ ╚████║   ██║   ███████║
+  ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝
+   ██████╗  ██████╗ ██╗   ██╗███████╗██████╗ ███╗   ██╗
+  ██╔════╝ ██╔═══██╗██║   ██║██╔════╝██╔══██╗████╗  ██║
+  ██║  ███╗██║   ██║██║   ██║█████╗  ██████╔╝██╔██╗ ██║
+  ██║   ██║██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗██║╚██╗██║
+  ╚██████╔╝╚██████╔╝ ╚████╔╝ ███████╗██║  ██║██║ ╚████║
+   ╚═════╝  ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝
+                  A N C E
+```
+
 # agents-governance
 
 [![Link Check](https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml/badge.svg)](https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)
 [![Markdown Lint](https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml/badge.svg)](https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)
 [![License](https://img.shields.io/github/license/fuzzywigg/agents-governance)](LICENSE)
 
-**Canonical AI governance documents for the smtp.eth ecosystem.**
+**Canonical AI governance for the smtp.eth / fuzzywigg ecosystem.**
 
 This repository contains the source-of-truth governance framework for all AI agents operating across smtp.eth's **23 repositories + 1 gist** of personal digital sovereignty infrastructure.
+
+---
 
 ## Documents
 
@@ -15,6 +33,8 @@ This repository contains the source-of-truth governance framework for all AI age
 | [AGENTS-ECOSYSTEM.md](AGENTS-ECOSYSTEM.md) | Ecosystem-wide governance: identity, trust, finances, multi-user, compliance, full repo tier map |
 | [templates/AGENTS-REPO.md](templates/AGENTS-REPO.md) | Legacy per-project template (kept for historical reference) |
 | `fuzzywigg/project-template` *(private)* | **Canonical AGENTS.md template (v1.0)** + 7 flavor branches — recommended starting point for new repos |
+
+---
 
 ## Quick Start
 
@@ -32,6 +52,8 @@ Then add to your project's `AGENTS.md` header:
 parent_governance: "github.com/fuzzywigg/agents-governance"
 ```
 
+---
+
 ## Installation
 
 No package to install. This repo is a governance document source.
@@ -45,6 +67,8 @@ cd agents-governance
 npm install -g markdownlint-cli2   # optional, for local lint
 markdownlint-cli2 "**/*.md"
 ```
+
+---
 
 ## Usage
 
@@ -69,6 +93,8 @@ parent_governance: "github.com/fuzzywigg/agents-governance"
 
 For the full ecosystem rules (autonomy levels, kill switch, MCP security, financial controls), see [AGENTS-ECOSYSTEM.md](AGENTS-ECOSYSTEM.md).
 
+---
+
 ## Ecosystem Snapshot
 
 The full 23-repo ecosystem is mapped in [AGENTS-ECOSYSTEM.md §2.1](AGENTS-ECOSYSTEM.md#21-project-portfolio). Summary:
@@ -80,6 +106,18 @@ The full 23-repo ecosystem is mapped in [AGENTS-ECOSYSTEM.md §2.1](AGENTS-ECOSY
 | **C — Infrastructure & Utilities** | 5 | Sites and CLI tooling (praetor, godaddy-toolkit, fuzzywigg-ai, fuzzywigg.com, meromhouse.org) |
 | **D — Dormant / Reference Only** | 7 | Read-only; do not refactor (g0p.us, nft2.me, g0p.ai, menu_planner, math-pentathlon, Backlink, g0p-agents) |
 
+---
+
+## Related Repositories
+
+| Repo | Description |
+|------|-------------|
+| [fuzzywigg/agents-standard](https://github.com/fuzzywigg/agents-standard) | Agent behavior standards and protocol specs |
+| [fuzzywigg/claw-mcp](https://github.com/fuzzywigg/claw-mcp) | Self-hosted GitHub MCP server (36 tools, stdio transport) |
+| `fuzzywigg/project-template` *(private)* | Canonical AGENTS.md template + stack flavor branches |
+
+---
+
 ## Optional: Caveman Context Compression
 
 Tier A repos with large `AGENTS.md` files can use the optional compression
@@ -87,6 +125,8 @@ script in `project-template/scripts/compress-context.py` to reduce
 governance-file token usage by **~40%**. See
 [Appendix B](AGENTS-ECOSYSTEM.md#appendix-b-caveman-context-compression-optional)
 for details.
+
+---
 
 ## Philosophy
 
@@ -100,6 +140,8 @@ This governance framework ensures AI agents:
 - Maintain audit trails (blockchain logging)
 - Support multi-user families (delegation, permissions)
 
+---
+
 ## Contributing
 
 1. Fork this repository
@@ -108,6 +150,8 @@ This governance framework ensures AI agents:
 4. smtp.eth reviews and merges
 
 Structural changes to `AGENTS-ECOSYSTEM.md` and `templates/` require Andrew approval. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+---
 
 ## Version
 
@@ -119,4 +163,6 @@ Current: **2.3.0** (2026-04-19)
 
 ---
 
-Maintained by smtp.eth
+*Part of the [fuzzywigg ecosystem](https://github.com/fuzzywigg). Maintained by smtp.eth.*
+
+*— Geryon 🦀 | From the deep.*

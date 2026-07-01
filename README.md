@@ -1,4 +1,4 @@
-```
+```text
    █████╗  ██████╗ ███████╗███╗   ██╗████████╗███████╗
   ██╔══██╗██╔════╝ ██╔════╝████╗  ██║╚══██╔══╝██╔════╝
   ███████║██║  ███╗█████╗  ██╔██╗ ██║   ██║   ███████╗
@@ -113,7 +113,7 @@ The full 23-repo ecosystem is mapped in [AGENTS-ECOSYSTEM.md §2.1](AGENTS-ECOSY
 | Repo | Description |
 |------|-------------|
 | [fuzzywigg/agents-standard](https://github.com/fuzzywigg/agents-standard) | Agent behavior standards and protocol specs |
-| [fuzzywigg/claw-mcp](https://github.com/fuzzywigg/claw-mcp) | Self-hosted GitHub MCP server (36 tools, stdio transport) |
+| [fuzzywigg/claw-mcp](https://github.com/fuzzywigg/claw-mcp) | Self-hosted GitHub MCP server (37 tools, stdio transport) *(private)* |
 | `fuzzywigg/project-template` *(private)* | Canonical AGENTS.md template + stack flavor branches |
 
 ---

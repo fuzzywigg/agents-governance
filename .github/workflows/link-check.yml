@@ -20,5 +20,8 @@ jobs:
       - name: Check links
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --verbose --no-progress --exclude-loopback "**/*.md"
+          # GITHUB_TOKEN allows lychee to authenticate private GitHub repos
+          # without it, private repos return 404 and fail the check
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --verbose --no-progress --exclude-loopback --github-token ${{ secrets.GITHUB_TOKEN }} "**/*.md"
           fail: true

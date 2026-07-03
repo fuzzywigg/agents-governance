@@ -1,0 +1,47 @@
+name: Standard Addition
+description: New guidance, control, or standard to add
+title: "[Standard]: "
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: standard
+    attributes:
+      label: OWASP Agentic Standard
+      options: [OWA-AG1, OWA-AG2, OWA-AG3, OWA-AG4, OWA-AG5, OWA-AG6, OWA-AG7, OWA-AG8, OWA-AG9, OWA-AG10, Cross-cutting, New]
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options: [Critical, High, Medium, Low]
+    validations:
+      required: true
+  - type: dropdown
+    id: effort
+    attributes:
+      label: Effort
+      options: [XS, S, M, L, XL]
+    validations:
+      required: true
+  - type: dropdown
+    id: status
+    attributes:
+      label: Status
+      options: [Backlog, Ready, "In Progress", Blocked]
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What should be added or changed?
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Why is this needed? (threat model, incident, or gap)
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria

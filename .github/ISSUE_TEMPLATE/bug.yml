@@ -1,0 +1,40 @@
+name: Bug / Gap
+description: A gap, error, or inconsistency in the governance standard
+title: "[Gap]: "
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: standard
+    attributes:
+      label: OWASP Agentic Standard
+      options: [OWA-AG1, OWA-AG2, OWA-AG3, OWA-AG4, OWA-AG5, OWA-AG6, OWA-AG7, OWA-AG8, OWA-AG9, OWA-AG10, Cross-cutting]
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options: [Critical, High, Medium, Low]
+    validations:
+      required: true
+  - type: dropdown
+    id: effort
+    attributes:
+      label: Effort
+      options: [XS, S, M, L, XL]
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the gap or error
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact if unaddressed
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed fix or addition

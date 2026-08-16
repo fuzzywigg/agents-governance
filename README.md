@@ -22,7 +22,7 @@
 
 **Canonical AI governance for the smtp.eth / fuzzywigg ecosystem.**
 
-This repository contains the source-of-truth governance framework for all AI agents operating across smtp.eth's **23 repositories + 1 gist** of personal digital sovereignty infrastructure.
+This repository contains the source-of-truth governance framework for all AI agents operating across smtp.eth's **50 live (non-archived) repositories** across fuzzywigg (47) + nft2-me (3), counted 2026-08-16 via authenticated GitHub API. Many gists exist; do not treat a single Agent OS gist as the inventory.
 
 ---
 
@@ -97,7 +97,7 @@ For the full ecosystem rules (autonomy levels, kill switch, MCP security, financ
 
 ## Ecosystem Snapshot
 
-The full 23-repo ecosystem is mapped in [AGENTS-ECOSYSTEM.md §2.1](AGENTS-ECOSYSTEM.md#21-project-portfolio). Summary:
+A historical 23-repo snapshot (tiers below) is mapped in [AGENTS-ECOSYSTEM.md §2.1](AGENTS-ECOSYSTEM.md#21-project-portfolio). Summary:
 
 | Tier | Count | Description |
 |------|-------|-------------|

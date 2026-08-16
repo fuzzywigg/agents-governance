@@ -103,8 +103,8 @@ A historical 23-repo snapshot (tiers below) is mapped in [AGENTS-ECOSYSTEM.md §
 |------|-------|-------------|
 | **A — Active Strategic** | 8 | Primary value-creation surfaces (PikoClaw, agents, claw-mcp, etc.) |
 | **B — Governance & Standards** | 3 + 1 gist | Source-of-truth docs (this repo, agents-standard, ai vision repo, Agent OS gist) |
-| **C — Infrastructure & Utilities** | 5 | Sites and CLI tooling (praetor, godaddy-toolkit, fuzzywigg-ai, fuzzywigg.com, meromhouse.org) |
-| **D — Dormant / Reference Only** | 7 | Read-only; do not refactor (g0p.us, nft2.me, g0p.ai, menu_planner, math-pentathlon, Backlink, g0p-agents) |
+| **C — Infrastructure & Utilities** | 4 | Sites and CLI tooling (praetor, godaddy-toolkit, fuzzywigg-ai, meromhouse.org) |
+| **D — Dormant / Reference Only** | 8 | Read-only; do not refactor (g0p.us, nft2.me, g0p.ai, menu_planner, math-pentathlon, Backlink, g0p-agents, fuzzywigg.com — archived 301 pointer to www.fuzzywigg.ai) |
 
 ---
 

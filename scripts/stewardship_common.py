@@ -1,18 +1,22 @@
 #!/usr/bin/env python3
 """Shared helpers for stewardship doc gates (no invent-product surface).
 
-Fail-closed pins (live path after #46):
-- SECRET_PATTERNS: ghp_/gho_/ghu_/ghs_/ghr_, github_pat_, PRIVATE KEY,
-  sk-/rk-, api_key/secret/password/token, aws_secret_access_key, xox*,
-  npm_, AIza
+Fail-closed pins (live path after #61; deepen after #46):
+- SECRET_PATTERNS: ghp_/gho_/ghu_/ghs_/ghr_, github_pat_, PRIVATE KEY
+  (RSA/OPENSSH/EC), sk-/rk-, api_key/secret/password|passwd|token,
+  aws_secret_access_key, xox*, npm_, AIza; (?i) on prose key patterns
 - SECRET_URL_HINTS: token=/access_token=/api_key=/apikey=/client_secret=
-  plus ghp_/gho_/github_pat_ prefixes (URL-ish query + token prefixes)
+  plus ghp_/gho_/github_pat_ prefixes (URL-ish query + token prefixes);
+  endswith('=') + https?:// + re.escape for URL-ish query matches
 - FORBIDDEN_BADGE_HINTS: invent-product / social chrome (coverage, codecov,
   coveralls, downloads, discord, twitter, x.com, stars, forks, followers,
   npm/, pypi/, producthunt, buymeacoffee, opencollective)
-- DANGEROUS_LINK_SCHEMES: javascript:/data:/vbscript:/file:
-- strip_fenced_code via FENCED_BLOCK_RE (``` or ~~~); has_dangerous_scheme;
-  scan_secrets; markdown_files; load_workflow_text; fail
+- DANGEROUS_LINK_SCHEMES: javascript:/data:/vbscript:/file:;
+  has_dangerous_scheme via startswith(scheme)
+- strip_fenced_code via FENCED_BLOCK_RE.sub (``` or ~~~); scan_secrets
+  labels via relative_to(ROOT); markdown_files via ROOT.glob;
+  load_workflow_text under .github/workflows; fail via errors.append;
+  ROOT via parents[1]
 """
 
 from __future__ import annotations

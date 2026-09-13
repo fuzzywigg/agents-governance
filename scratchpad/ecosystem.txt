@@ -331,3 +331,5 @@ _None yet._
 2026-09-13T23:20:00Z
 
 2026-09-13T23:35:00Z cursor: PR #61 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-043 TOKENMAXX wiki-outline second-pass pins
+
+[2026-09-13T23:52:33Z] [cursor] TOKENMAXX deepen stewardship_common second-pass pins after #61 — tests/CI only; draft PR

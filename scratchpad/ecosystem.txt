@@ -307,3 +307,4 @@ _None yet._
 - Scope: EXISTING relative-link integrity / run_stewardship wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-relative-link-pins-fd4d
 2026-09-13T23:02:43Z
+2026-09-13T23:05:35Z cursor: PR #58 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-041 TOKENMAXX relative-link gate pins

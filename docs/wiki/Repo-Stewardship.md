@@ -31,7 +31,9 @@ link-check GITHUB_TOKEN + actionlint 1.7.7 three-path targets after #27, plus
 cancel-in-progress / `**/*.md` / fourth-badge refusal deepen after #28, plus
 `cancel-in-progress: true` / `.github/agents` exclude / markdown-lint `**/*.md` /
 lycheeignore `http://*` / actionlint callout deepen after #29, plus Python 3.12
-pin / Home invent+secrets / existing-path deepen after #30).
+pin / Home invent+secrets / existing-path deepen after #30, plus lychee
+`--verbose`/`--no-progress` + stewardship `actions/checkout` / wiki L0+secret
+deepen after #31).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

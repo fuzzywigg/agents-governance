@@ -11,6 +11,18 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship fixtures after #31: expand self-tests to 345 cases
+  (was 289) covering lychee `--verbose` / `--no-progress`, stewardship
+  `actions/checkout`, cancel-in-progress:true on markdown-lint, pull_request_target
+  / unpinned setup-python, badge coveralls/buymeacoffee/opencollective/npm/pypi/
+  followers/x.com/forks + apikey/client_secret/gho_ + wrong license slug +
+  missing stewardship workflow + badge-doc License label, relative .git skip /
+  VBSCRIPT / nested %2e escape / underscore slug / docs nested fragment, wiki
+  L0/secret/surface/governance/public / Home→Autonomy / followers+x.com chrome /
+  PUBLISH Home row / file: / run_stewardship_checks.sh, schema CLAUDE surface+
+  repo keys / backlog owner / empty purpose+scope / autonomy 0 / publish closes /
+  closes without #, common hint registry + gho_ / apikey scan, plus markdown
+  **/*.md / exclude-loopback / Python 3.12 / stewardship schedule still-needles
 - TOKENMAXX stewardship fixtures after #30: expand self-tests to 289 cases
   (was 233) covering stewardship Python `3.12` / `python-version` pin,
   cancel-in-progress:true on link-check, setup-python @master/@latest float,

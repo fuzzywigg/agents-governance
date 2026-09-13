@@ -219,6 +219,11 @@ def check_workflow_hardening(errors: list[str]) -> None:
         fail("link-check.yml must set fail: true so broken links fail the job", errors)
     if "--exclude-loopback" not in link and "exclude-loopback" not in link:
         fail("link-check.yml must exclude loopback targets", errors)
+    # Live link-check contract: quiet CI logs + verbose failure detail (after #31).
+    if "--no-progress" not in link:
+        fail("link-check.yml must set lychee --no-progress", errors)
+    if "--verbose" not in link:
+        fail("link-check.yml must set lychee --verbose", errors)
     # Private-repo / rate-limit auth for lychee (existing path from # link-check harden).
     if "GITHUB_TOKEN" not in link:
         fail(
@@ -246,6 +251,12 @@ def check_workflow_hardening(errors: list[str]) -> None:
         fail("stewardship-checks.yml must run scripts/run_stewardship_checks.sh", errors)
     if "test_stewardship_gates.py" not in stew:
         fail("stewardship-checks.yml must run scripts/test_stewardship_gates.py", errors)
+    # Fail-closed: stewardship must checkout the tree before running gates (live path).
+    if "actions/checkout" not in stew:
+        fail(
+            "stewardship-checks.yml must checkout the repository (actions/checkout)",
+            errors,
+        )
     if "setup-python" not in stew.lower() and "actions/setup-python" not in stew:
         fail("stewardship-checks.yml must set up Python for gate scripts", errors)
     # Fail-closed: pin the Python minor used by gate scripts (live path after #30).

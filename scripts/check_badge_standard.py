@@ -1002,7 +1002,7 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
 
 
 def check_stewardship_common_contract(errors: list[str]) -> None:
-    """Fail-close live stewardship_common wiring (after #46; not schema-pin spam)."""
+    """Fail-close live stewardship_common wiring (after #65; deepen after #46)."""
     if not COMMON_GATE.is_file():
         fail("Missing scripts/stewardship_common.py (shared gate helpers)", errors)
         return
@@ -1131,6 +1131,189 @@ def check_stewardship_common_contract(errors: list[str]) -> None:
     if "live secret scan covers ci tokens" not in text.lower():
         fail(
             "stewardship_common.py must pin live secret scan covers CI tokens",
+            errors,
+        )
+    # Fail-closed after #65: second-pass helper / constant / needle pins
+    # (stewardship_common slice only; not badge / wiki / relative / schema / CI spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    root_pin = "Path(__file__).resolve().parents" + "[1]"
+    if root_pin not in text:
+        fail(
+            "stewardship_common.py must set ROOT via Path(__file__).resolve().parents[1]",
+            errors,
+        )
+    fence_dotall = "re.DOT" + "ALL"
+    if fence_dotall not in text:
+        fail(
+            "stewardship_common.py FENCED_BLOCK_RE must use re.DOTALL",
+            errors,
+        )
+    fence_pat = r"(?:```|~~~).*?(?:```|~~~)"
+    if fence_pat not in text:
+        fail(
+            "stewardship_common.py FENCED_BLOCK_RE must match ```|~~~ fence pattern",
+            errors,
+        )
+    strip_doc = "Remove fenced code blocks so example links do not fail " + "integrity gates."
+    if strip_doc not in text:
+        fail(
+            "stewardship_common.py strip_fenced_code must keep integrity gates doc pin",
+            errors,
+        )
+    danger_doc = "Return the matched dangerous scheme prefix, or " + "None."
+    if danger_doc not in text:
+        fail(
+            "stewardship_common.py has_dangerous_scheme must keep scheme prefix doc pin",
+            errors,
+        )
+    scan_doc = "Append errors if path content matches forbidden secret-like " + "patterns."
+    if scan_doc not in text:
+        fail(
+            "stewardship_common.py scan_secrets must keep secret-like patterns doc pin",
+            errors,
+        )
+    md_doc = "Collect markdown paths under ROOT for the given relative " + "globs."
+    if md_doc not in text:
+        fail(
+            "stewardship_common.py markdown_files must keep relative globs doc pin",
+            errors,
+        )
+    pattern_needle = "matches forbidden secret-like " + "pattern"
+    if pattern_needle not in text:
+        fail(
+            "stewardship_common.py scan_secrets must emit " + pattern_needle + " needle",
+            errors,
+        )
+    url_hint_needle = "secret-like URL " + "hint"
+    if url_hint_needle not in text:
+        fail(
+            "stewardship_common.py scan_secrets must emit " + url_hint_needle + " needle",
+            errors,
+        )
+    token_hint_needle = "secret-like token " + "hint"
+    if token_hint_needle not in text:
+        fail(
+            "stewardship_common.py scan_secrets must emit " + token_hint_needle + " needle",
+            errors,
+        )
+    if "relative_to" not in text:
+        fail(
+            "stewardship_common.py scan_secrets must use relative_to for labels",
+            errors,
+        )
+    strip_lower = "strip()" + ".lower()"
+    if strip_lower not in text and "strip().lower()" not in text:
+        fail(
+            "stewardship_common.py has_dangerous_scheme must strip().lower() targets",
+            errors,
+        )
+    if "startswith" not in text:
+        fail(
+            "stewardship_common.py has_dangerous_scheme must startswith scheme prefixes",
+            errors,
+        )
+    append_pin = "errors.append" + "(msg)"
+    if append_pin not in text:
+        fail(
+            "stewardship_common.py fail() must errors.append(msg)",
+            errors,
+        )
+    passwd_pin = "password|passwd|" + "token"
+    if passwd_pin not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin password|passwd|token",
+            errors,
+        )
+    if "OPENSSH" not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin OPENSSH private keys",
+            errors,
+        )
+    # Live pattern uses: (?:RSA |OPENSSH |EC )?
+    openssh_ec = "OPENSSH |" + "EC"
+    if openssh_ec not in text and "OPENSSH|EC" not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin OPENSSH|EC private keys",
+            errors,
+        )
+    public_docs = "Public docs must not ship " + "secrets"
+    if public_docs not in text:
+        fail(
+            "stewardship_common.py must keep Public docs must not ship secrets pin",
+            errors,
+        )
+    invent_surface = "no invent-product " + "surface"
+    if invent_surface not in text:
+        fail(
+            "stewardship_common.py must keep no invent-product surface pin",
+            errors,
+        )
+    social_chrome = "Invent-product / social " + "chrome"
+    if social_chrome not in text:
+        fail(
+            "stewardship_common.py must keep Invent-product / social chrome pin",
+            errors,
+        )
+    link_schemes = "Link schemes that must never " + "appear"
+    if link_schemes not in text:
+        fail(
+            "stewardship_common.py must keep Link schemes that must never appear pin",
+            errors,
+        )
+    if "is_file()" not in text:
+        fail(
+            "stewardship_common.py markdown_files must filter with is_file()",
+            errors,
+        )
+    if "sorted(" not in text:
+        fail(
+            "stewardship_common.py markdown_files must sorted() results",
+            errors,
+        )
+    workflows_pin = '"workflows"'
+    if workflows_pin not in text and "'workflows'" not in text:
+        fail(
+            "stewardship_common.py load_workflow_text must pin workflows path segment",
+            errors,
+        )
+    if "return None" not in text:
+        fail(
+            "stewardship_common.py load_workflow_text must return None when missing",
+            errors,
+        )
+    schemes_eq = (
+        'DANGEROUS_LINK_SCHEMES = (\n'
+        '    "javascript:",\n'
+        '    "data:",\n'
+        '    "vbscript:",\n'
+        '    "file:",\n'
+        ")"
+    )
+    schemes_eq_sq = schemes_eq.replace('"', "'")
+    if schemes_eq not in text and schemes_eq_sq not in text:
+        fail(
+            "stewardship_common.py must set DANGEROUS_LINK_SCHEMES = "
+            '(javascript:/data:/vbscript:/file:)',
+            errors,
+        )
+    url_hints_head = 'SECRET_URL_HINTS = (\n    "token=",'
+    url_hints_head_sq = "SECRET_URL_HINTS = (\n    'token=',"
+    if url_hints_head not in text and url_hints_head_sq not in text:
+        fail(
+            'stewardship_common.py must set SECRET_URL_HINTS starting with "token="',
+            errors,
+        )
+    contract_fn = "check_stewardship_common_" + "contract"
+    # Self-pin: this contract helper name must remain reachable from main.
+    self_text = BADGE_GATE.read_text(encoding="utf-8")
+    if f"def {contract_fn}(" not in self_text:
+        fail(
+            "check_badge_standard.py must provide " + contract_fn + "()",
+            errors,
+        )
+    if contract_fn + "(" not in self_text.replace(f"def {contract_fn}(", "", 1):
+        fail(
+            "check_badge_standard.py main must call " + contract_fn + "()",
             errors,
         )
 

@@ -11,6 +11,16 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki-outline second-pass pins after #59: expand self-tests to 1396
+  cases (was 1324) fail-closing live wiki-outline integrity — `OPERATOR_ONLY` /
+  docs/wiki / `_reject_invent_badge_chrome` / autonomy+governance+public+kill+
+  secret+surface+routing+`run_stewardship_checks.sh`+badge topic pins /
+  `](Home.md)` backlink / Unexpected+Missing+FAILED needles / angle+image RE /
+  Do-not-push / README blob / badge-standard hint / stars+forks+followers /
+  invent-chrome needle / Home.md table row, plus wiki-outline gate contract
+  pins in `check_badge_standard.py` — wiki-outline second-pass slice only
+  (not relative / schema-scalar / badge-standard / common / CI workflow pin /
+  fixture-reject spam); no invent-product; no fourth badge
 - TOKENMAXX relative-link second-pass pins after #55: expand self-tests to 1324
   cases (was 1253) fail-closing live relative-link integrity — `MD_LINK_RE` /
   `SKIP_PARTS` / `SKIP_PREFIXES` / `SKIP_FILES` / `_MAX_UNQUOTE_PASSES = 4` /

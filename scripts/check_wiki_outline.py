@@ -1,5 +1,17 @@
 #!/usr/bin/env python3
-"""Enforce docs/wiki/PUBLISH.md page set and acceptance checks (executable gate)."""
+"""Enforce docs/wiki/PUBLISH.md page set and acceptance checks (executable gate).
+
+Fail-closed pins (live path after #59; deepen after #43):
+- WIKI under docs/wiki; PUBLISHABLE_PAGES (6) + OPERATOR_ONLY PUBLISH.md
+- PAGE_TOPIC_HINTS: L0–L3/autonomy, kill/secret/credential, surface/routing/
+  copilot, governance/public, run_stewardship_checks.sh/badge
+- README_LINK_HINTS / BADGE_STANDARD_HINTS / STEWARDSHIP_CI_HINTS
+- _reject_invent_badge_chrome (stars/forks/followers social special-case)
+- strip_fenced_code before link scan; angle-bracket strip; image+link RE
+- Reject http:// / protocol-relative // / dangerous schemes; scan_secrets
+- Home invent+secrets Out of scope + kill-switch; non-Home ](Home.md) backlink
+- PUBLISH.md pages table must include | `Home.md` | (and siblings)
+"""
 
 from __future__ import annotations
 

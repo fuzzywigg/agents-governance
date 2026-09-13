@@ -17,6 +17,8 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   separators, ASCII control chars, whitespace-only fragments), wired into
   `stewardship-checks.yml`; AGENTS.md + badge gate needles require the new
   relative self-test. No invent-product, no fourth badge, no mega-fixture climb.
+  CI green on draft PR #42 (lint + link-check + stewardship/actionlint +
+  relative self-tests).
 - TOKENMAXX stewardship fixtures after #38: expand self-tests to 774 cases
   (was 712) covering `.markdownlint.json` `MD033`/`MD041`/`MD060`: false,
   markdownlint-cli2-action `@v24`, stewardship `actions/setup-python@v5` +

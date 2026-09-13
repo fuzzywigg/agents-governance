@@ -11,6 +11,13 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki-outline gate pins after #43: expand self-tests to 974 cases
+  (was 903) fail-closing live wiki outline integrity — PUBLISHABLE_PAGES
+  L0–L3 / credential / copilot topic hints, `strip_fenced_code` before link
+  scan, protocol-relative `//` reject, Home kill-switch callout, plus
+  wiki-outline gate contract pins in `check_badge_standard.py` — wiki-outline
+  gate contract slice only (not relative-link / CI workflow pin /
+  badge-wiki-schema fixture-reject spam); no invent-product; no fourth badge
 - TOKENMAXX relative-link gate pins after #41: expand self-tests to 903 cases
   (was 836) fail-closing live relative-link integrity — `OWASP-AGENTIC.md` /
   `.github/agents` / `node_modules` / `.git` skips, `strip_fenced_code`,

@@ -76,7 +76,10 @@ weekly crons + `ubuntu-latest` + `pip --quiet` + `shell: bash` +
 actionlint `-color` deepen after #39,
 plus relative-link gate contract pins after #41: OWASP/agents/node_modules
 skip, `fully_unquote`, empty `path#` fragments, query-string reject,
-`run_stewardship_checks.sh` order badge→wiki→schema→relative).
+`run_stewardship_checks.sh` order badge→wiki→schema→relative,
+plus wiki-outline gate contract pins after #43: PUBLISHABLE_PAGES L0–L3 /
+credential / copilot topic hints, `strip_fenced_code`, protocol-relative
+`//` reject, Home kill-switch callout).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

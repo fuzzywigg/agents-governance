@@ -254,3 +254,12 @@ _None yet._
 2026-09-13T21:16:48Z
 
 2026-09-13T21:20:00Z cursor: PR #43 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-036 TOKENMAXX relative-link gate pins
+
+### [ECO-037] TOKENMAXX deepen wiki-outline gate pins after #43 — 2026-09-13T21:30:00Z
+- [x] cursor: Read live tree post-#43 (903 cases; relative-link pins saturated)
+- [x] cursor: Fail-close wiki-outline gate — PUBLISHABLE_PAGES L0–L3 / credential / copilot, strip_fenced_code, protocol-relative // reject, Home kill-switch callout
+- [x] cursor: Expand self-tests 903 → 974 (wiki-outline gate contract slice; not relative-link / CI workflow pin / fixture-reject spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING wiki-outline integrity / topic-hint / fence-strip wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-wiki-outline-pins-7745
+2026-09-13T21:30:00Z

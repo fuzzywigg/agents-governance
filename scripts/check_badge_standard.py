@@ -29,6 +29,7 @@ LYCHEEIGNORE = ROOT / ".lycheeignore"
 MARKDOWNLINT_CONFIG = ROOT / ".markdownlint.json"
 WORKFLOWS = ROOT / ".github" / "workflows"
 RELATIVE_LINK_GATE = ROOT / "scripts" / "check_relative_links.py"
+WIKI_OUTLINE_GATE = ROOT / "scripts" / "check_wiki_outline.py"
 RUN_STEWARDSHIP = ROOT / "scripts" / "run_stewardship_checks.sh"
 
 REQUIRED_ORDER = ("Link Check", "Markdown Lint", "License")
@@ -670,6 +671,139 @@ def check_contributing_and_agents(errors: list[str]) -> None:
         fail("Missing AGENTS.md", errors)
 
 
+def check_wiki_outline_gate_contract(errors: list[str]) -> None:
+    """Fail-close live wiki-outline gate wiring (after #43; not relative-pin spam)."""
+    if not WIKI_OUTLINE_GATE.is_file():
+        fail("Missing scripts/check_wiki_outline.py (wiki-outline gate)", errors)
+        return
+    text = WIKI_OUTLINE_GATE.read_text(encoding="utf-8")
+    # Publishable page set must stay aligned with docs/wiki/PUBLISH.md.
+    for page in (
+        "Home.md",
+        "Overview.md",
+        "Autonomy-Levels.md",
+        "Repo-Stewardship.md",
+        "Agent-Routing.md",
+        "Security-Boundaries.md",
+    ):
+        if page not in text:
+            fail(
+                f"check_wiki_outline.py must list publishable page {page}",
+                errors,
+            )
+    if "PUBLISH.md" not in text:
+        fail(
+            "check_wiki_outline.py must treat PUBLISH.md as operator-only",
+            errors,
+        )
+    if "PUBLISHABLE_PAGES" not in text:
+        fail(
+            "check_wiki_outline.py must declare PUBLISHABLE_PAGES",
+            errors,
+        )
+    if "PAGE_TOPIC_HINTS" not in text:
+        fail(
+            "check_wiki_outline.py must declare PAGE_TOPIC_HINTS",
+            errors,
+        )
+    # Fail-closed after #43: live Autonomy-Levels covers L0–L3.
+    for level in ("L0", "L1", "L2", "L3"):
+        if f'"{level}"' not in text and f"'{level}'" not in text:
+            fail(
+                f"check_wiki_outline.py PAGE_TOPIC_HINTS must pin {level}",
+                errors,
+            )
+    if '"credential"' not in text and "'credential'" not in text:
+        fail(
+            "check_wiki_outline.py PAGE_TOPIC_HINTS must pin credential "
+            "on Security-Boundaries",
+            errors,
+        )
+    if '"copilot"' not in text and "'copilot'" not in text:
+        fail(
+            "check_wiki_outline.py PAGE_TOPIC_HINTS must pin copilot "
+            "on Agent-Routing",
+            errors,
+        )
+    if "strip_fenced_code" not in text:
+        fail(
+            "check_wiki_outline.py must strip fenced code before link scan",
+            errors,
+        )
+    if "has_dangerous_scheme" not in text:
+        fail(
+            "check_wiki_outline.py must reject dangerous link schemes",
+            errors,
+        )
+    if "protocol-relative" not in text.lower():
+        fail(
+            "check_wiki_outline.py must reject protocol-relative // links",
+            errors,
+        )
+    if '"//"' not in text and "'//'" not in text:
+        fail(
+            "check_wiki_outline.py must match protocol-relative // prefix",
+            errors,
+        )
+    if "http://" not in text:
+        fail(
+            "check_wiki_outline.py must reject insecure http:// links",
+            errors,
+        )
+    if "FORBIDDEN_BADGE_HINTS" not in text:
+        fail(
+            "check_wiki_outline.py must reject invent-product badge chrome "
+            "via FORBIDDEN_BADGE_HINTS",
+            errors,
+        )
+    if "STEWARDSHIP_CI_HINTS" not in text:
+        fail(
+            "check_wiki_outline.py must pin STEWARDSHIP_CI_HINTS",
+            errors,
+        )
+    for needle in ("markdown-lint", "link-check", "stewardship-checks"):
+        if needle not in text:
+            fail(
+                f"check_wiki_outline.py STEWARDSHIP_CI_HINTS must include {needle}",
+                errors,
+            )
+    if "actionlint" not in text.lower():
+        fail(
+            "check_wiki_outline.py must require actionlint on Repo-Stewardship",
+            errors,
+        )
+    if "invent" not in text.lower():
+        fail(
+            "check_wiki_outline.py must retain invent-product Home/stewardship pins",
+            errors,
+        )
+    if "kill-switch" not in text.lower():
+        fail(
+            "check_wiki_outline.py must require Home kill-switch callout",
+            errors,
+        )
+    if "scan_secrets" not in text:
+        fail(
+            "check_wiki_outline.py must scan wiki pages via scan_secrets",
+            errors,
+        )
+    if "README_LINK_HINTS" not in text:
+        fail(
+            "check_wiki_outline.py must require Home README_LINK_HINTS",
+            errors,
+        )
+    if "BADGE_STANDARD_HINTS" not in text:
+        fail(
+            "check_wiki_outline.py must require Home BADGE_STANDARD_HINTS",
+            errors,
+        )
+    if "out of scope" not in text.lower():
+        fail(
+            "check_wiki_outline.py must require Home Out of scope section",
+            errors,
+        )
+
+
 def check_relative_link_gate_contract(errors: list[str]) -> None:
     """Fail-close live relative-link gate wiring (after #41; not workflow-pin spam)."""
     if not RELATIVE_LINK_GATE.is_file():
@@ -864,6 +998,7 @@ def main() -> int:
     check_workflow_hardening(errors)
     check_actionlint_style(errors)
     check_relative_link_gate_contract(errors)
+    check_wiki_outline_gate_contract(errors)
     if BADGE_STANDARD.is_file():
         check_badge_standard_doc(errors)
         scan_secrets(BADGE_STANDARD, errors)

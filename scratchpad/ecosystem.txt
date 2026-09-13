@@ -75,3 +75,5 @@ _None yet._
 - Scope: strengthen EXISTING lint/link/badge/self-test gates only; no invent-product; no AGENTS-ECOSYSTEM/templates edits; no secrets; no history rewrite
 - Branch: cursor/tokenmaxx-stewardship-gates-dc52
 2026-09-13T17:13:45Z
+
+2026-09-13T17:20:00Z cursor: PR #25 CI green (lint + link-check + stewardship) ← complete ECO-020 TOKENMAXX burn

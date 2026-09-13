@@ -25,3 +25,12 @@
 ## Completed (Archive after 7 days)
 
 _None yet._
+
+### [ECO-016] Publish public wiki and README badge standard — 2026-09-13T14:11:22Z
+- [x] cursor: Read issue #16 + live tree (README already had CI/license badges)
+- [x] cursor: Add docs/badge-standard.md
+- [x] cursor: Add docs/wiki outline + PUBLISH.md
+- [x] cursor: Link README Documents → badge standard + wiki Home
+- [ ] smtp.eth: Initialize GitHub Wiki once if .wiki.git missing, then run PUBLISH.md ← HITL if needed
+- Closes / advances: #16
+2026-09-13T14:12:50Z

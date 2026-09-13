@@ -22,7 +22,10 @@
 
 **Canonical AI governance for the smtp.eth / fuzzywigg ecosystem.**
 
-This repository contains the source-of-truth governance framework for all AI agents operating across smtp.eth's **50 live (non-archived) repositories** across fuzzywigg (47) + nft2-me (3), counted 2026-08-16 via authenticated GitHub API. Many gists exist; do not treat a single Agent OS gist as the inventory.
+This repository contains the source-of-truth governance framework for all AI agents
+operating across smtp.eth's **50 live (non-archived) repositories** across fuzzywigg (47) +
+nft2-me (3), counted 2026-08-16 via authenticated GitHub API. Many gists exist; do not treat
+a single Agent OS gist as the inventory.
 
 ---
 
@@ -32,7 +35,15 @@ This repository contains the source-of-truth governance framework for all AI age
 |----------|---------|
 | [AGENTS-ECOSYSTEM.md](AGENTS-ECOSYSTEM.md) | Ecosystem-wide governance: identity, trust, finances, multi-user, compliance, full repo tier map |
 | [templates/AGENTS-REPO.md](templates/AGENTS-REPO.md) | Legacy per-project template (kept for historical reference) |
+| [docs/badge-standard.md](docs/badge-standard.md) | README badge standard for public governance repos (Link Check, Markdown Lint, License) |
+| [docs/wiki/Home.md](docs/wiki/Home.md) | Public wiki outline (Overview, Autonomy, Stewardship, Routing, Security) |
 | `fuzzywigg/project-template` *(private)* | **Canonical AGENTS.md template (v1.0)** + 7 flavor branches — recommended starting point for new repos |
+
+### Public wiki
+
+Narrative pages live in-repo under [`docs/wiki/`](docs/wiki/Home.md) and publish to the
+GitHub Wiki via [`docs/wiki/PUBLISH.md`](docs/wiki/PUBLISH.md). The wiki Home links back
+here; policy truth stays in the documents above.
 
 ---
 
@@ -104,7 +115,7 @@ A historical 23-repo snapshot (tiers below) is mapped in [AGENTS-ECOSYSTEM.md §
 | **A — Active Strategic** | 8 | Primary value-creation surfaces (PikoClaw, agents, claw-mcp, etc.) |
 | **B — Governance & Standards** | 3 + 1 gist | Source-of-truth docs (this repo, agents-standard, ai vision repo, Agent OS gist) |
 | **C — Infrastructure & Utilities** | 4 | Sites and CLI tooling (praetor, godaddy-toolkit, fuzzywigg-ai, meromhouse.org) |
-| **D — Dormant / Reference Only** | 8 | Read-only; do not refactor (g0p.us, nft2.me, g0p.ai, menu_planner, math-pentathlon, Backlink, g0p-agents, fuzzywigg.com — archived 301 pointer to www.fuzzywigg.ai) |
+| **D — Dormant / Reference Only** | 8 | Read-only; do not refactor (g0p.us, nft2.me, g0p.ai, menu_planner, math-pentathlon, Backlink, g0p-agents, fuzzywigg.com — archived 301 pointer to [www.fuzzywigg.ai](https://www.fuzzywigg.ai/)) |
 
 ---
 
@@ -113,7 +124,7 @@ A historical 23-repo snapshot (tiers below) is mapped in [AGENTS-ECOSYSTEM.md §
 | Repo | Description |
 |------|-------------|
 | [fuzzywigg/agents-standard](https://github.com/fuzzywigg/agents-standard) | Agent behavior standards and protocol specs |
-| [fuzzywigg/claw-mcp](https://github.com/fuzzywigg/claw-mcp) | Self-hosted GitHub MCP server (37 tools, stdio transport) *(private)* |
+| `fuzzywigg/claw-mcp` *(private)* | Self-hosted GitHub MCP server (37 tools, stdio transport) |
 | `fuzzywigg/project-template` *(private)* | Canonical AGENTS.md template + stack flavor branches |
 
 ---

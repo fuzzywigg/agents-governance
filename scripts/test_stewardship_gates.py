@@ -55,6 +55,12 @@ _MAX_UNQUOTE_PASSES=4 / should_skip / iter_markdown / headings_in /
 check_file / mailto+tel allow / NUL / angle brackets / image links /
 escapes+broken+missing needles / rglob fail-closed (not schema-scalar /
 badge / wiki / common / CI workflow pin spam).
+Deepened after #61: stewardship_common second-pass — ROOT parents[1] /
+password|passwd|token / RSA+OPENSSH+EC / SECRET_URL_HINTS ghp_+gho_+github_pat_ /
+FENCED_BLOCK_RE (?:```|~~~) / errors.append / FENCED_BLOCK_RE.sub / startswith /
+relative_to(ROOT) / ROOT.glob / .github+workflows / is_file / secret-like
+pattern+URL+token needles / https?:// / docstring pins (not badge / wiki /
+schema / relative / CI workflow pin spam).
 Deepened after #59: wiki-outline second-pass — OPERATOR_ONLY / docs/wiki /
 _reject_invent_badge_chrome / autonomy+governance+public+kill+secret+
 surface+routing+run_stewardship_checks.sh+badge topic pins / ](Home.md)
@@ -21328,6 +21334,970 @@ def test_wiki_passes_good_fixture_still_after_59() -> None:
         assert_pass_script(scripts / "check_wiki_outline.py", tmp_path)
 
 
+# --- TOKENMAXX deepen after #61: stewardship_common second-pass helper/path pins ---
+
+
+def test_common_gate_requires_root_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace("ROOT", "REPO_ROOT")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "ROOT",
+        )
+
+
+def test_common_gate_requires_parents1_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        # Keep ROOT resolving to repo root; scrub all parents[1] pin spellings.
+        text = path.read_text(encoding="utf-8").replace(
+            "Path(__file__).resolve().parents[1]",
+            "Path(__file__).resolve().parent.parent",
+        ).replace("parents[1]", "parents[0]")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "parents[1]",
+        )
+
+
+def test_common_gate_requires_password_passwd_token_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "password|passwd|token", "password|passwd|secret"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "password|passwd|token",
+        )
+
+
+def test_common_gate_requires_rsa_key_variant_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace("RSA ", "RSAKEY ")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "RSA",
+        )
+
+
+def test_common_gate_requires_openssh_key_variant_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace("OPENSSH ", "SSH ")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "OPENSSH",
+        )
+
+
+def test_common_gate_requires_ec_key_variant_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace("EC ", "ECDSA ")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "EC",
+        )
+
+
+def test_common_gate_requires_url_hint_ghp_prefix_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        # Only rewrite SECRET_URL_HINTS tuple entry; leave SECRET_PATTERNS ghp_ intact.
+        text = path.read_text(encoding="utf-8")
+        text = text.replace(
+            'SECRET_URL_HINTS = (\n    "token=",\n    "access_token=",\n    "api_key=",\n'
+            '    "apikey=",\n    "client_secret=",\n    "ghp_",\n    "gho_",\n'
+            '    "github_pat_",\n)',
+            'SECRET_URL_HINTS = (\n    "token=",\n    "access_token=",\n    "api_key=",\n'
+            '    "apikey=",\n    "client_secret=",\n    "gho_",\n'
+            '    "github_pat_",\n)',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "ghp_",
+        )
+
+
+def test_common_gate_requires_url_hint_gho_prefix_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8")
+        text = text.replace(
+            'SECRET_URL_HINTS = (\n    "token=",\n    "access_token=",\n    "api_key=",\n'
+            '    "apikey=",\n    "client_secret=",\n    "ghp_",\n    "gho_",\n'
+            '    "github_pat_",\n)',
+            'SECRET_URL_HINTS = (\n    "token=",\n    "access_token=",\n    "api_key=",\n'
+            '    "apikey=",\n    "client_secret=",\n    "ghp_",\n'
+            '    "github_pat_",\n)',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "gho_",
+        )
+
+
+def test_common_gate_requires_url_hint_github_pat_prefix_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8")
+        text = text.replace(
+            'SECRET_URL_HINTS = (\n    "token=",\n    "access_token=",\n    "api_key=",\n'
+            '    "apikey=",\n    "client_secret=",\n    "ghp_",\n    "gho_",\n'
+            '    "github_pat_",\n)',
+            'SECRET_URL_HINTS = (\n    "token=",\n    "access_token=",\n    "api_key=",\n'
+            '    "apikey=",\n    "client_secret=",\n    "ghp_",\n    "gho_",\n)',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "github_pat_",
+        )
+
+
+def test_common_gate_requires_fenced_alternation_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(r"(?:```|~~~)", r"(?:```)")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "(?:```|~~~)",
+        )
+
+
+def test_common_gate_requires_errors_append_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        raw = path.read_text(encoding="utf-8")
+        # Keep fail() functional without the errors.append substring.
+        raw = raw.replace("errors.append", "errors._append_missing")
+        raw = raw.replace(
+            "    errors._append_missing(msg)",
+            "    errors.__iadd__([msg])",
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "errors.append",
+        )
+
+
+def test_common_gate_requires_fenced_sub_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "FENCED_BLOCK_RE.sub", "FENCED_BLOCK_RE.replace"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "FENCED_BLOCK_RE.sub",
+        )
+
+
+def test_common_gate_requires_startswith_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace("startswith", "begins_with")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "startswith",
+        )
+
+
+def test_common_gate_requires_relative_to_root_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "relative_to(ROOT)", "relative_to(path.parent)"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "relative_to(ROOT)",
+        )
+
+
+def test_common_gate_requires_root_glob_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace("ROOT.glob", "ROOT.rglob")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "ROOT.glob",
+        )
+
+
+def test_common_gate_requires_github_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace('".github"', '".githooks"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            ".github",
+        )
+
+
+def test_common_gate_requires_workflows_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace('"workflows"', '"actions"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "workflows",
+        )
+
+
+def test_common_gate_requires_is_file_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace("is_file()", "exists()")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "is_file()",
+        )
+
+
+def test_common_gate_requires_secret_pattern_needle_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "matches forbidden secret-like pattern",
+            "matches forbidden credential-like pattern",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "matches forbidden secret-like pattern",
+        )
+
+
+def test_common_gate_requires_url_hint_needle_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "contains secret-like URL hint",
+            "contains secret-like query hint",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "contains secret-like URL hint",
+        )
+
+
+def test_common_gate_requires_token_hint_needle_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "contains secret-like token hint",
+            "contains secret-like prefix hint",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "contains secret-like token hint",
+        )
+
+
+def test_common_gate_requires_remove_fenced_doc_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "Remove fenced code blocks",
+            "Strip fenced code blocks",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Remove fenced code blocks",
+        )
+
+
+def test_common_gate_requires_dangerous_scheme_doc_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "Return the matched dangerous scheme",
+            "Return the matched unsafe scheme",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Return the matched dangerous scheme",
+        )
+
+
+def test_common_gate_requires_collect_markdown_doc_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "Collect markdown paths under ROOT",
+            "Gather markdown paths under ROOT",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Collect markdown paths",
+        )
+
+
+def test_common_gate_requires_no_invent_surface_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "no invent-product surface",
+            "no product surface",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "no invent-product surface",
+        )
+
+
+def test_common_gate_requires_shared_helpers_doc_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "Shared helpers for stewardship doc gates",
+            "Shared utilities for stewardship doc gates",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Shared helpers for stewardship doc gates",
+        )
+
+
+def test_common_gate_requires_https_urlish_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace("https?://", "https://")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "https?://",
+        )
+
+
+def test_common_gate_requires_example_links_pin_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "example links do not fail integrity gates",
+            "sample links do not fail integrity gates",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "example links",
+        )
+
+
+def test_common_scan_secrets_password_after_61() -> None:
+    from stewardship_common import scan_secrets  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        sample = tmp_path / "doc.md"
+        sample.write_text('password = "hunter2hunter2"\n', encoding="utf-8")
+        errors: list[str] = []
+        # Temporarily point ROOT-relative label via label=
+        scan_secrets(sample, errors, label="doc.md")
+        if not any("secret-like pattern" in e for e in errors):
+            raise AssertionError(f"expected password pattern reject, got {errors}")
+
+
+def test_common_scan_secrets_passwd_after_61() -> None:
+    from stewardship_common import scan_secrets  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        sample = tmp_path / "doc.md"
+        sample.write_text('passwd = "hunter2hunter2"\n', encoding="utf-8")
+        errors: list[str] = []
+        scan_secrets(sample, errors, label="doc.md")
+        if not any("secret-like pattern" in e for e in errors):
+            raise AssertionError(f"expected passwd pattern reject, got {errors}")
+
+
+def test_common_scan_secrets_rsa_private_key_after_61() -> None:
+    from stewardship_common import scan_secrets  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        sample = tmp_path / "doc.md"
+        sample.write_text("-----BEGIN RSA PRIVATE KEY-----\n", encoding="utf-8")
+        errors: list[str] = []
+        scan_secrets(sample, errors, label="doc.md")
+        if not any("secret-like pattern" in e for e in errors):
+            raise AssertionError(f"expected RSA key reject, got {errors}")
+
+
+def test_common_scan_secrets_openssh_private_key_after_61() -> None:
+    from stewardship_common import scan_secrets  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        sample = tmp_path / "doc.md"
+        sample.write_text("-----BEGIN OPENSSH PRIVATE KEY-----\n", encoding="utf-8")
+        errors: list[str] = []
+        scan_secrets(sample, errors, label="doc.md")
+        if not any("secret-like pattern" in e for e in errors):
+            raise AssertionError(f"expected OPENSSH key reject, got {errors}")
+
+
+def test_common_scan_secrets_ec_private_key_after_61() -> None:
+    from stewardship_common import scan_secrets  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        sample = tmp_path / "doc.md"
+        sample.write_text("-----BEGIN EC PRIVATE KEY-----\n", encoding="utf-8")
+        errors: list[str] = []
+        scan_secrets(sample, errors, label="doc.md")
+        if not any("secret-like pattern" in e for e in errors):
+            raise AssertionError(f"expected EC key reject, got {errors}")
+
+
+def test_common_scan_secrets_token_prefix_hint_after_61() -> None:
+    from stewardship_common import scan_secrets  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        sample = tmp_path / "doc.md"
+        # Short ghp_ so SECRET_PATTERNS length gate may miss; URL-hint prefix still flags.
+        sample.write_text("see ghp_short\n", encoding="utf-8")
+        errors: list[str] = []
+        scan_secrets(sample, errors, label="doc.md")
+        if not any("secret-like token hint" in e for e in errors):
+            raise AssertionError(f"expected ghp_ token hint reject, got {errors}")
+
+
+def test_common_scan_secrets_url_token_eq_after_61() -> None:
+    from stewardship_common import scan_secrets  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        sample = tmp_path / "doc.md"
+        sample.write_text("https://example.com/x?token=abc\n", encoding="utf-8")
+        errors: list[str] = []
+        scan_secrets(sample, errors, label="doc.md")
+        if not any("secret-like URL hint" in e for e in errors):
+            raise AssertionError(f"expected token= URL hint reject, got {errors}")
+
+
+def test_common_scan_secrets_http_url_apikey_after_61() -> None:
+    from stewardship_common import scan_secrets  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        sample = tmp_path / "doc.md"
+        sample.write_text("http://example.com/x?apikey=abc\n", encoding="utf-8")
+        errors: list[str] = []
+        scan_secrets(sample, errors, label="doc.md")
+        if not any("secret-like URL hint" in e for e in errors):
+            raise AssertionError(f"expected http apikey URL hint reject, got {errors}")
+
+
+def test_common_has_dangerous_javascript_after_61() -> None:
+    from stewardship_common import has_dangerous_scheme  # noqa: E402
+
+    if has_dangerous_scheme("javascript:alert(1)") != "javascript:":
+        raise AssertionError("expected javascript: scheme")
+
+
+def test_common_has_dangerous_data_after_61() -> None:
+    from stewardship_common import has_dangerous_scheme  # noqa: E402
+
+    if has_dangerous_scheme("data:text/html,hi") != "data:":
+        raise AssertionError("expected data: scheme")
+
+
+def test_common_has_dangerous_vbscript_after_61() -> None:
+    from stewardship_common import has_dangerous_scheme  # noqa: E402
+
+    if has_dangerous_scheme("VBScript:msg") != "vbscript:":
+        raise AssertionError("expected vbscript: scheme casefold")
+
+
+def test_common_has_dangerous_file_after_61() -> None:
+    from stewardship_common import has_dangerous_scheme  # noqa: E402
+
+    if has_dangerous_scheme("file:///etc/passwd") != "file:":
+        raise AssertionError("expected file: scheme")
+
+
+def test_common_has_dangerous_safe_https_after_61() -> None:
+    from stewardship_common import has_dangerous_scheme  # noqa: E402
+
+    if has_dangerous_scheme("https://example.com") is not None:
+        raise AssertionError("https must be safe")
+
+
+def test_common_strip_fenced_backtick_after_61() -> None:
+    from stewardship_common import strip_fenced_code  # noqa: E402
+
+    out = strip_fenced_code("before\n```md\n[x](javascript:1)\n```\nafter\n")
+    if "javascript" in out or "before" not in out or "after" not in out:
+        raise AssertionError(f"unexpected strip result: {out!r}")
+
+
+def test_common_strip_fenced_tilde_after_61() -> None:
+    from stewardship_common import strip_fenced_code  # noqa: E402
+
+    out = strip_fenced_code("before\n~~~\n[x](data:1)\n~~~\nafter\n")
+    if "data:" in out or "before" not in out or "after" not in out:
+        raise AssertionError(f"unexpected tilde strip result: {out!r}")
+
+
+def test_common_fail_appends_after_61() -> None:
+    from stewardship_common import fail  # noqa: E402
+
+    errors: list[str] = []
+    fail("pin", errors)
+    if errors != ["pin"]:
+        raise AssertionError(f"fail must append, got {errors}")
+
+
+def test_common_markdown_files_readme_after_61() -> None:
+    from stewardship_common import markdown_files  # noqa: E402
+
+    files = markdown_files("README.md")
+    if not any(p.name == "README.md" for p in files):
+        raise AssertionError("markdown_files must find README.md")
+
+
+def test_common_load_workflow_stewardship_after_61() -> None:
+    from stewardship_common import load_workflow_text  # noqa: E402
+
+    text = load_workflow_text("stewardship-checks.yml")
+    if text is None or "Stewardship Checks" not in text:
+        raise AssertionError("load_workflow_text must load stewardship-checks.yml")
+
+
+def test_common_load_workflow_missing_after_61() -> None:
+    from stewardship_common import load_workflow_text  # noqa: E402
+
+    if load_workflow_text("does-not-exist.yml") is not None:
+        raise AssertionError("missing workflow must return None")
+
+
+def test_common_forbidden_hints_producthunt_after_61() -> None:
+    from stewardship_common import FORBIDDEN_BADGE_HINTS  # noqa: E402
+
+    if "producthunt" not in FORBIDDEN_BADGE_HINTS:
+        raise AssertionError("producthunt must remain forbidden")
+
+
+def test_common_forbidden_hints_buymeacoffee_after_61() -> None:
+    from stewardship_common import FORBIDDEN_BADGE_HINTS  # noqa: E402
+
+    if "buymeacoffee" not in FORBIDDEN_BADGE_HINTS:
+        raise AssertionError("buymeacoffee must remain forbidden")
+
+
+def test_common_secret_url_hints_client_secret_after_61() -> None:
+    from stewardship_common import SECRET_URL_HINTS  # noqa: E402
+
+    if "client_secret=" not in SECRET_URL_HINTS:
+        raise AssertionError("client_secret= must remain in SECRET_URL_HINTS")
+
+
+def test_common_dangerous_schemes_tuple_after_61() -> None:
+    from stewardship_common import DANGEROUS_LINK_SCHEMES  # noqa: E402
+
+    for scheme in ("javascript:", "data:", "vbscript:", "file:"):
+        if scheme not in DANGEROUS_LINK_SCHEMES:
+            raise AssertionError(f"missing scheme {scheme}")
+
+
+def test_common_gate_requires_secret_patterns_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace("SECRET_PATTERNS", "SECRET_REGEXES")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "SECRET_PATTERNS",
+        )
+
+
+def test_common_gate_requires_forbidden_hints_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "FORBIDDEN_BADGE_HINTS", "FORBIDDEN_BADGE_HINTS_X"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "FORBIDDEN_BADGE_HINTS",
+        )
+
+
+def test_common_gate_requires_dangerous_schemes_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "DANGEROUS_LINK_SCHEMES", "BAD_LINK_SCHEMES"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "DANGEROUS_LINK_SCHEMES",
+        )
+
+
+def test_common_gate_requires_fenced_block_re_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace("FENCED_BLOCK_RE", "FENCE_RE")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "FENCED_BLOCK_RE",
+        )
+
+
+def test_common_gate_requires_scan_secrets_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        # Do not rename imported symbol (breaks badge import); scrub URL-ish pin.
+        text = path.read_text(encoding="utf-8").replace(
+            "URL-ish secret hints", "URL-shaped secret hints"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "URL-ish secret hints",
+        )
+
+
+def test_common_gate_requires_strip_fenced_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "def strip_fenced_code(", "def strip_fenced_code_x("
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "strip_fenced_code()",
+        )
+
+
+def test_common_gate_requires_has_dangerous_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "def has_dangerous_scheme(", "def has_dangerous_scheme_x("
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "has_dangerous_scheme()",
+        )
+
+
+def test_common_gate_requires_markdown_files_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "def markdown_files(", "def markdown_files_x("
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "markdown_files()",
+        )
+
+
+def test_common_gate_requires_load_workflow_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        # Do not rename imported symbol (breaks badge import); scrub docstring pin.
+        text = path.read_text(encoding="utf-8").replace(
+            "Load .github/workflows/", "Load github/workflows/"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "workflows load pin",
+        )
+
+
+def test_common_gate_requires_fail_helper_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "Gate fail-closed helper", "Gate soft-fail helper"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Gate fail-closed helper",
+        )
+
+
+def test_common_gate_requires_endswith_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace("endswith", "ends_with")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "endswith",
+        )
+
+
+def test_common_gate_requires_invent_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8")
+        # Scrub invent wording without leaving invent* substrings.
+        text = text.replace("invent-product", "product-chrome").replace(
+            "invent", "craft"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "invent",
+        )
+
+
+def test_common_gate_requires_live_secret_scan_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "live secret scan covers CI tokens",
+            "live secret scan covers cloud tokens",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "live secret scan covers CI tokens",
+        )
+
+
+def test_common_secret_patterns_aiza_still_after_61() -> None:
+    from stewardship_common import SECRET_PATTERNS  # noqa: E402
+
+    blob = "\n".join(p.pattern for p in SECRET_PATTERNS)
+    if "AIza" not in blob:
+        raise AssertionError("AIza must remain in SECRET_PATTERNS")
+
+
+def test_common_secret_patterns_npm_still_after_61() -> None:
+    from stewardship_common import SECRET_PATTERNS  # noqa: E402
+
+    blob = "\n".join(p.pattern for p in SECRET_PATTERNS)
+    if "npm_" not in blob:
+        raise AssertionError("npm_ must remain in SECRET_PATTERNS")
+
+
+def test_common_secret_url_hints_ghp_still_after_61() -> None:
+    from stewardship_common import SECRET_URL_HINTS  # noqa: E402
+
+    if "ghp_" not in SECRET_URL_HINTS:
+        raise AssertionError("ghp_ must remain in SECRET_URL_HINTS")
+
+
+def test_common_forbidden_hints_opencollective_still_after_61() -> None:
+    from stewardship_common import FORBIDDEN_BADGE_HINTS  # noqa: E402
+
+    if "opencollective" not in FORBIDDEN_BADGE_HINTS:
+        raise AssertionError("opencollective must remain forbidden")
+
+
+def test_common_strip_fenced_preserves_prose_after_61() -> None:
+    from stewardship_common import strip_fenced_code  # noqa: E402
+
+    out = strip_fenced_code("keep me\n```\nsecret\n```\nalso keep\n")
+    if "keep me" not in out or "also keep" not in out or "secret" in out:
+        raise AssertionError(f"unexpected prose strip: {out!r}")
+
+
+
+
+def test_common_scan_secrets_client_secret_url_after_61() -> None:
+    from stewardship_common import scan_secrets  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        sample = tmp_path / "doc.md"
+        sample.write_text(
+            "https://example.com/oauth?client_secret=abc123\n", encoding="utf-8"
+        )
+        errors: list[str] = []
+        scan_secrets(sample, errors, label="doc.md")
+        if not any("secret-like URL hint" in e for e in errors):
+            raise AssertionError(f"expected client_secret URL hint reject, got {errors}")
+
+
+def test_common_scan_secrets_access_token_url_after_61() -> None:
+    from stewardship_common import scan_secrets  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        sample = tmp_path / "doc.md"
+        sample.write_text(
+            "https://example.com/x?access_token=abc123\n", encoding="utf-8"
+        )
+        errors: list[str] = []
+        scan_secrets(sample, errors, label="doc.md")
+        if not any("secret-like URL hint" in e for e in errors):
+            raise AssertionError(f"expected access_token URL hint reject, got {errors}")
+
+
+def test_common_has_dangerous_whitespace_prefix_after_61() -> None:
+    from stewardship_common import has_dangerous_scheme  # noqa: E402
+
+    if has_dangerous_scheme("  javascript:alert(1)") != "javascript:":
+        raise AssertionError("expected stripped javascript: scheme")
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -22758,6 +23728,79 @@ def main() -> int:
         test_wiki_gate_requires_kill_switch_still_after_59,
         test_wiki_gate_requires_scan_secrets_still_after_59,
         test_wiki_passes_good_fixture_still_after_59,
+        # TOKENMAXX deepen after #61 (+72 stewardship_common second-pass)
+        test_common_gate_requires_root_after_61,
+        test_common_gate_requires_parents1_after_61,
+        test_common_gate_requires_password_passwd_token_after_61,
+        test_common_gate_requires_rsa_key_variant_after_61,
+        test_common_gate_requires_openssh_key_variant_after_61,
+        test_common_gate_requires_ec_key_variant_after_61,
+        test_common_gate_requires_url_hint_ghp_prefix_after_61,
+        test_common_gate_requires_url_hint_gho_prefix_after_61,
+        test_common_gate_requires_url_hint_github_pat_prefix_after_61,
+        test_common_gate_requires_fenced_alternation_after_61,
+        test_common_gate_requires_errors_append_after_61,
+        test_common_gate_requires_fenced_sub_after_61,
+        test_common_gate_requires_startswith_after_61,
+        test_common_gate_requires_relative_to_root_after_61,
+        test_common_gate_requires_root_glob_after_61,
+        test_common_gate_requires_github_path_after_61,
+        test_common_gate_requires_workflows_path_after_61,
+        test_common_gate_requires_is_file_after_61,
+        test_common_gate_requires_secret_pattern_needle_after_61,
+        test_common_gate_requires_url_hint_needle_after_61,
+        test_common_gate_requires_token_hint_needle_after_61,
+        test_common_gate_requires_remove_fenced_doc_after_61,
+        test_common_gate_requires_dangerous_scheme_doc_after_61,
+        test_common_gate_requires_collect_markdown_doc_after_61,
+        test_common_gate_requires_no_invent_surface_after_61,
+        test_common_gate_requires_shared_helpers_doc_after_61,
+        test_common_gate_requires_https_urlish_after_61,
+        test_common_gate_requires_example_links_pin_after_61,
+        test_common_scan_secrets_password_after_61,
+        test_common_scan_secrets_passwd_after_61,
+        test_common_scan_secrets_rsa_private_key_after_61,
+        test_common_scan_secrets_openssh_private_key_after_61,
+        test_common_scan_secrets_ec_private_key_after_61,
+        test_common_scan_secrets_token_prefix_hint_after_61,
+        test_common_scan_secrets_url_token_eq_after_61,
+        test_common_scan_secrets_http_url_apikey_after_61,
+        test_common_has_dangerous_javascript_after_61,
+        test_common_has_dangerous_data_after_61,
+        test_common_has_dangerous_vbscript_after_61,
+        test_common_has_dangerous_file_after_61,
+        test_common_has_dangerous_safe_https_after_61,
+        test_common_strip_fenced_backtick_after_61,
+        test_common_strip_fenced_tilde_after_61,
+        test_common_fail_appends_after_61,
+        test_common_markdown_files_readme_after_61,
+        test_common_load_workflow_stewardship_after_61,
+        test_common_load_workflow_missing_after_61,
+        test_common_forbidden_hints_producthunt_after_61,
+        test_common_forbidden_hints_buymeacoffee_after_61,
+        test_common_secret_url_hints_client_secret_after_61,
+        test_common_dangerous_schemes_tuple_after_61,
+        test_common_gate_requires_secret_patterns_still_after_61,
+        test_common_gate_requires_forbidden_hints_still_after_61,
+        test_common_gate_requires_dangerous_schemes_still_after_61,
+        test_common_gate_requires_fenced_block_re_still_after_61,
+        test_common_gate_requires_scan_secrets_still_after_61,
+        test_common_gate_requires_strip_fenced_still_after_61,
+        test_common_gate_requires_has_dangerous_still_after_61,
+        test_common_gate_requires_markdown_files_still_after_61,
+        test_common_gate_requires_load_workflow_still_after_61,
+        test_common_gate_requires_fail_helper_still_after_61,
+        test_common_gate_requires_endswith_still_after_61,
+        test_common_gate_requires_invent_still_after_61,
+        test_common_gate_requires_live_secret_scan_still_after_61,
+        test_common_secret_patterns_aiza_still_after_61,
+        test_common_secret_patterns_npm_still_after_61,
+        test_common_secret_url_hints_ghp_still_after_61,
+        test_common_forbidden_hints_opencollective_still_after_61,
+        test_common_strip_fenced_preserves_prose_after_61,
+        test_common_scan_secrets_client_secret_url_after_61,
+        test_common_scan_secrets_access_token_url_after_61,
+        test_common_has_dangerous_whitespace_prefix_after_61,
 
     ]
     try:

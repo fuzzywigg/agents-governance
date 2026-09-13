@@ -823,7 +823,7 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
 
 
 def check_stewardship_common_contract(errors: list[str]) -> None:
-    """Fail-close live stewardship_common wiring (after #46; not schema-pin spam)."""
+    """Fail-close live stewardship_common wiring (after #61; deepen after #46)."""
     if not COMMON_GATE.is_file():
         fail("Missing scripts/stewardship_common.py (shared gate helpers)", errors)
         return
@@ -952,6 +952,129 @@ def check_stewardship_common_contract(errors: list[str]) -> None:
     if "live secret scan covers ci tokens" not in text.lower():
         fail(
             "stewardship_common.py must pin live secret scan covers CI tokens",
+            errors,
+        )
+    # Fail-closed after #61: second-pass helper / path / needle pins
+    # (common slice only; not badge / wiki / schema / relative / CI spam).
+    if "ROOT" not in text:
+        fail("stewardship_common.py must declare ROOT", errors)
+    if "parents[1]" not in text:
+        fail(
+            "stewardship_common.py ROOT must resolve via parents[1]",
+            errors,
+        )
+    if "password|passwd|token" not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin password|passwd|token",
+            errors,
+        )
+    for key_variant in ("RSA ", "OPENSSH ", "EC "):
+        if key_variant not in text:
+            fail(
+                f"stewardship_common.py PRIVATE KEY pattern must pin {key_variant.strip()}",
+                errors,
+            )
+    # SECRET_URL_HINTS token prefixes (quoted) beyond = query params.
+    for hint in ("ghp_", "gho_", "github_pat_"):
+        if f'"{hint}"' not in text and f"'{hint}'" not in text:
+            fail(
+                f"stewardship_common.py SECRET_URL_HINTS must pin prefix {hint}",
+                errors,
+            )
+    if r"(?:```|~~~)" not in text and "(?:```|~~~)" not in text:
+        fail(
+            "stewardship_common.py FENCED_BLOCK_RE must use (?:```|~~~) alternation",
+            errors,
+        )
+    if "errors.append" not in text:
+        fail(
+            "stewardship_common.py fail() must append via errors.append",
+            errors,
+        )
+    if "FENCED_BLOCK_RE.sub" not in text:
+        fail(
+            "stewardship_common.py strip_fenced_code must call FENCED_BLOCK_RE.sub",
+            errors,
+        )
+    if "startswith" not in text:
+        fail(
+            "stewardship_common.py has_dangerous_scheme must use startswith",
+            errors,
+        )
+    if "relative_to(ROOT)" not in text and "relative_to(ROOT )" not in text:
+        fail(
+            "stewardship_common.py scan_secrets must label via relative_to(ROOT)",
+            errors,
+        )
+    if "ROOT.glob" not in text:
+        fail(
+            "stewardship_common.py markdown_files must collect via ROOT.glob",
+            errors,
+        )
+    if '".github"' not in text and "'.github'" not in text:
+        fail(
+            "stewardship_common.py load_workflow_text must join .github path",
+            errors,
+        )
+    if '"workflows"' not in text and "'workflows'" not in text:
+        fail(
+            "stewardship_common.py load_workflow_text must join workflows path",
+            errors,
+        )
+    if "is_file()" not in text:
+        fail(
+            "stewardship_common.py must guard paths with is_file()",
+            errors,
+        )
+    if "matches forbidden secret-like pattern" not in text:
+        fail(
+            "stewardship_common.py must emit matches forbidden secret-like pattern",
+            errors,
+        )
+    if "contains secret-like URL hint" not in text:
+        fail(
+            "stewardship_common.py must emit contains secret-like URL hint",
+            errors,
+        )
+    if "contains secret-like token hint" not in text:
+        fail(
+            "stewardship_common.py must emit contains secret-like token hint",
+            errors,
+        )
+    if "Remove fenced code blocks" not in text:
+        fail(
+            "stewardship_common.py strip_fenced_code must keep Remove fenced code blocks pin",
+            errors,
+        )
+    if "Return the matched dangerous scheme" not in text:
+        fail(
+            "stewardship_common.py has_dangerous_scheme must keep Return the matched "
+            "dangerous scheme pin",
+            errors,
+        )
+    if "Collect markdown paths under ROOT" not in text:
+        fail(
+            "stewardship_common.py markdown_files must keep Collect markdown paths pin",
+            errors,
+        )
+    if "no invent-product surface" not in text:
+        fail(
+            "stewardship_common.py must retain no invent-product surface pin",
+            errors,
+        )
+    if "Shared helpers for stewardship doc gates" not in text:
+        fail(
+            "stewardship_common.py must retain Shared helpers for stewardship doc gates pin",
+            errors,
+        )
+    if "https?://" not in text:
+        fail(
+            "stewardship_common.py scan_secrets must match https?:// URL-ish hints",
+            errors,
+        )
+    if "example links do not fail integrity gates" not in text:
+        fail(
+            "stewardship_common.py strip_fenced_code must keep example links pin",
             errors,
         )
 

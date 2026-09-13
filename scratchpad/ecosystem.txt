@@ -331,3 +331,14 @@ _None yet._
 2026-09-13T23:20:00Z
 
 2026-09-13T23:35:00Z cursor: PR #61 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-043 TOKENMAXX wiki-outline second-pass pins
+
+### [ECO-044] TOKENMAXX deepen stewardship_common second-pass pins after #61 — 2026-09-13T23:45:00Z
+- [x] cursor: Read live tree post-#61 (1396 cases; wiki-outline second-pass saturated; badge siblings #64/#65 in flight)
+- [x] cursor: Fail-close stewardship_common second-pass — ROOT parents[1] / password|passwd|token / RSA+OPENSSH+EC / SECRET_URL_HINTS ghp_+gho_+github_pat_ / FENCED_BLOCK_RE (?:```|~~~) / errors.append / FENCED_BLOCK_RE.sub / startswith / relative_to(ROOT) / ROOT.glob / .github+workflows / is_file / secret-like needles / https?:// / docstring pins
+- [x] cursor: Expand self-tests 1396 → 1468 (common second-pass slice; not badge / wiki / schema / relative / CI workflow pin spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING stewardship_common integrity / helper+path pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-common-second-pass-1ff8
+2026-09-13T23:45:00Z
+
+2026-09-13T23:50:00Z cursor: ECO-044 docs/CHANGELOG use "GitHub token prefixes" wording (avoid token-hint substrings in scanned docs)

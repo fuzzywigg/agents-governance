@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Shared helpers for stewardship doc gates (no invent-product surface).
 
-Fail-closed pins (live path after #46):
+Fail-closed pins (live path after #46; second-pass after #61):
 - SECRET_PATTERNS: ghp_/gho_/ghu_/ghs_/ghr_, github_pat_, PRIVATE KEY,
   sk-/rk-, api_key/secret/password/token, aws_secret_access_key, xox*,
-  npm_, AIza
+  npm_, AIza; RSA/OPENSSH/EC private-key variants; password|passwd|token
 - SECRET_URL_HINTS: token=/access_token=/api_key=/apikey=/client_secret=
   plus ghp_/gho_/github_pat_ prefixes (URL-ish query + token prefixes)
 - FORBIDDEN_BADGE_HINTS: invent-product / social chrome (coverage, codecov,
@@ -13,6 +13,9 @@ Fail-closed pins (live path after #46):
 - DANGEROUS_LINK_SCHEMES: javascript:/data:/vbscript:/file:
 - strip_fenced_code via FENCED_BLOCK_RE (``` or ~~~); has_dangerous_scheme;
   scan_secrets; markdown_files; load_workflow_text; fail
+- Second-pass helper/path pins: ROOT parents[1]; errors.append; FENCED_BLOCK_RE.sub;
+  startswith; relative_to(ROOT); ROOT.glob; .github/workflows path parts;
+  secret-like pattern/URL/token error needles; https?:// URL-ish scan
 """
 
 from __future__ import annotations

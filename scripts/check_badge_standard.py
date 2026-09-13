@@ -112,6 +112,12 @@ def check_workflows_and_license(errors: list[str]) -> None:
                 ".markdownlint.json must configure MD013 (line length) for docs lint",
                 errors,
             )
+        # Fail-closed: MD013 must set line_length (live path after #33).
+        if "line_length" not in md_cfg:
+            fail(
+                ".markdownlint.json MD013 must set line_length for docs lint",
+                errors,
+            )
 
 
 def check_lycheeignore(errors: list[str]) -> None:
@@ -207,6 +213,12 @@ def check_workflow_hardening(errors: list[str]) -> None:
     # Live path after #32: lychee runs via lychee-action (not a bare CLI invent).
     if "lychee-action" not in link.lower():
         fail("link-check.yml must invoke lychee-action on the existing path", errors)
+    # Fail-closed after #33: org-qualified lycheeverse/lychee-action (existing path).
+    if "lycheeverse/lychee-action" not in link.lower():
+        fail(
+            "link-check.yml must invoke lycheeverse/lychee-action on the existing path",
+            errors,
+        )
     # Fail-closed: link-check must checkout before lychee (symmetric with stewardship).
     if "actions/checkout" not in link:
         fail(
@@ -251,6 +263,12 @@ def check_workflow_hardening(errors: list[str]) -> None:
     lint = load_workflow_text("markdown-lint.yml") or ""
     if "markdownlint" not in lint.lower():
         fail("markdown-lint.yml must invoke markdownlint", errors)
+    # Fail-closed after #33: live path uses markdownlint-cli2-action (not a bare invent).
+    if "markdownlint-cli2-action" not in lint.lower():
+        fail(
+            "markdown-lint.yml must invoke markdownlint-cli2-action on the existing path",
+            errors,
+        )
     # Fail-closed: markdown-lint must checkout before lint (symmetric with stewardship).
     if "actions/checkout" not in lint:
         fail(
@@ -295,6 +313,12 @@ def check_workflow_hardening(errors: list[str]) -> None:
         )
     if "pyyaml" not in stew.lower():
         fail("stewardship-checks.yml must install PyYAML for schema parsing", errors)
+    # Fail-closed after #33: live path installs PyYAML via pip (existing install step).
+    if "pip install" not in stew.lower() and "pip3 install" not in stew.lower():
+        fail(
+            "stewardship-checks.yml must pip install PyYAML for schema parsing",
+            errors,
+        )
     if "actionlint" not in stew.lower():
         fail(
             "stewardship-checks.yml must run actionlint on existing workflow paths",

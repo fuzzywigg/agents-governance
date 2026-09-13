@@ -55,6 +55,12 @@ _MAX_UNQUOTE_PASSES=4 / should_skip / iter_markdown / headings_in /
 check_file / mailto+tel allow / NUL / angle brackets / image links /
 escapes+broken+missing needles / rglob fail-closed (not schema-scalar /
 badge / wiki / common / CI workflow pin spam).
+Deepened after #59: actionlint-style gate contract pins — top-level
+name: / jobs.*.runs-on / jobs.*.steps / timeout-minutes / no
+pull_request_target / no write-all / no contents: write / no id-token: write /
+@-pin float set main|master|latest / docker:// skip / unpinned reject
+(not relative-link second-pass / schema-scalar / badge / wiki / common /
+CI workflow pin spam).
 """
 
 from __future__ import annotations
@@ -20254,6 +20260,580 @@ def test_relative_links_reject_nul_still_after_55() -> None:
         )
 
 
+
+# --- TOKENMAXX deepen after #59: actionlint-style gate contract / fail-closed pins ---
+
+
+def _mutate_badge_gate(tmp_path: Path, old: str, new: str) -> Path:
+    scripts = _seed_badge_tree(tmp_path, _good_readme())
+    path = tmp_path / "scripts" / "check_badge_standard.py"
+    path.write_text(path.read_text(encoding="utf-8").replace(old, new), encoding="utf-8")
+    return scripts
+
+
+def test_actionlint_style_gate_requires_fn_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(tmp_path, "def check_actionlint_style(", "def check_actionlint_ok(")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "check_actionlint_style()")
+
+
+def test_actionlint_style_gate_requires_static_doc_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(
+            tmp_path, "Static actionlint-like checks", "Static actionlint soft checks"
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py", tmp_path, "Static actionlint-like checks"
+        )
+
+
+def test_actionlint_style_gate_requires_live_pins_doc_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(
+            tmp_path, "Live fail-closed pins after #59", "Live fail-closed pins after #00"
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py", tmp_path, "Live fail-closed pins after #59"
+        )
+
+
+def test_actionlint_style_gate_requires_load_workflow_text_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(tmp_path, "load_workflow_text", "load_workflow_body")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "load_workflow_text")
+
+
+def test_actionlint_style_gate_requires_top_level_name_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(tmp_path, "top-level name:", "top-level title:")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "top-level name:")
+
+
+def test_actionlint_style_gate_requires_jobs_runs_on_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(tmp_path, "jobs.*.runs-on", "jobs.*.runner")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "jobs.*.runs-on")
+
+
+def test_actionlint_style_gate_requires_jobs_steps_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(tmp_path, "jobs.*.steps", "jobs.*.tasks")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "jobs.*.steps")
+
+
+def test_actionlint_style_gate_requires_timeout_minutes_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(tmp_path, "timeout-minutes:", "timeout-seconds:")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "timeout-minutes:")
+
+
+def test_actionlint_style_gate_requires_prt_reject_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(tmp_path, "pull_request_target", "pull_request_tgt")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "pull_request_target")
+
+
+def test_actionlint_style_gate_requires_harden_wording_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(tmp_path, "actionlint harden", "actionlint soft")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "actionlint harden")
+
+
+def test_actionlint_style_gate_requires_write_all_reject_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(tmp_path, "write-all", "write_all")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "write-all")
+
+
+def test_actionlint_style_gate_requires_contents_write_reject_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(tmp_path, "contents: write", "contents: writ")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "contents: write")
+
+
+def test_actionlint_style_gate_requires_id_token_write_reject_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(tmp_path, "id-token: write", "id-token: writ")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "id-token: write")
+
+
+def test_actionlint_style_gate_requires_docker_skip_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(tmp_path, "docker://", "oci://")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "docker://")
+
+
+def test_actionlint_style_gate_requires_unpinned_reject_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(tmp_path, "unpinned action uses", "floating action uses")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "unpinned action uses")
+
+
+def test_actionlint_style_gate_requires_float_main_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(
+            tmp_path, '{"main", "master", "latest"}', '{"trunk", "master", "latest"}'
+        )
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "float @main")
+
+
+def test_actionlint_style_gate_requires_float_master_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(
+            tmp_path, '{"main", "master", "latest"}', '{"main", "trunk", "latest"}'
+        )
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "float @master")
+
+
+def test_actionlint_style_gate_requires_float_latest_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(
+            tmp_path, '{"main", "master", "latest"}', '{"main", "master", "tip"}'
+        )
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "float @latest")
+
+
+def test_actionlint_style_gate_requires_float_set_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(
+            tmp_path, '{"main", "master", "latest"}', '{"main", "master"}'
+        )
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "float set")
+
+
+def test_actionlint_style_gate_requires_main_call_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _mutate_badge_gate(
+            tmp_path, "check_actionlint_style(errors)", "check_actionlint_ok(errors)"
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py", tmp_path, "check_actionlint_style(errors)"
+        )
+
+
+def test_actionlint_style_rejects_id_token_write_link_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        wf = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = wf.read_text(encoding="utf-8").replace(
+            "contents: read", "contents: read\n      id-token: write"
+        )
+        wf.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "id-token: write")
+
+
+def test_actionlint_style_rejects_id_token_write_markdown_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        wf = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = wf.read_text(encoding="utf-8").replace(
+            "contents: read", "contents: read\n      id-token: write"
+        )
+        wf.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "id-token: write")
+
+
+def test_actionlint_style_rejects_id_token_write_stewardship_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        wf = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = wf.read_text(encoding="utf-8").replace(
+            "contents: read", "contents: read\n      id-token: write"
+        )
+        wf.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "id-token: write")
+
+
+def test_actionlint_style_rejects_missing_name_link_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        wf = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = wf.read_text(encoding="utf-8").replace("name: Link Check", "title: Link Check")
+        wf.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "top-level name:")
+
+
+def test_actionlint_style_rejects_missing_runs_on_markdown_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        wf = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = wf.read_text(encoding="utf-8").replace("runs-on:", "runner:")
+        wf.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "runs-on")
+
+
+def test_actionlint_style_rejects_missing_steps_stewardship_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        wf = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = wf.read_text(encoding="utf-8").replace("steps:", "tasks:")
+        wf.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "steps")
+
+
+def test_actionlint_style_rejects_missing_timeout_link_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        wf = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = wf.read_text(encoding="utf-8").replace("timeout-minutes:", "timeout-seconds:")
+        wf.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "timeout-minutes")
+
+
+def test_actionlint_style_rejects_prt_markdown_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        wf = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = wf.read_text(encoding="utf-8").replace("pull_request:", "pull_request_target:")
+        wf.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "pull_request_target")
+
+
+def test_actionlint_style_rejects_write_all_stewardship_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        wf = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = wf.read_text(encoding="utf-8").replace(
+            "permissions:\n  contents: read",
+            "permissions: write-all",
+        )
+        wf.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "write-all")
+
+
+def test_actionlint_style_rejects_contents_write_link_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        wf = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = wf.read_text(encoding="utf-8").replace("contents: read", "contents: write")
+        wf.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "contents: write")
+
+
+def test_actionlint_style_rejects_unpinned_checkout_markdown_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        wf = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = wf.read_text(encoding="utf-8").replace("actions/checkout@v7", "actions/checkout")
+        wf.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "unpinned")
+
+
+def test_actionlint_style_rejects_float_main_stewardship_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        wf = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = wf.read_text(encoding="utf-8").replace(
+            "actions/checkout@v7", "actions/checkout@main"
+        )
+        wf.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "@main")
+
+
+def test_actionlint_style_rejects_float_latest_link_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        wf = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = wf.read_text(encoding="utf-8").replace(
+            "lycheeverse/lychee-action@v2", "lycheeverse/lychee-action@latest"
+        )
+        wf.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "@latest")
+
+
+def test_actionlint_style_rejects_float_master_markdown_after_59() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        wf = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = wf.read_text(encoding="utf-8").replace(
+            "DavidAnson/markdownlint-cli2-action@v24",
+            "DavidAnson/markdownlint-cli2-action@master",
+        )
+        wf.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "@master")
+
+
+def test_actionlint_style_gate_contract_fn_still_after_59() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+
+    importlib.reload(cbs)
+    if not callable(getattr(cbs, "check_actionlint_style_gate_contract", None)):
+        raise AssertionError("check_actionlint_style_gate_contract missing")
+
+
+def test_actionlint_style_fn_still_after_59() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+
+    importlib.reload(cbs)
+    if not callable(getattr(cbs, "check_actionlint_style", None)):
+        raise AssertionError("check_actionlint_style missing")
+
+
+def test_actionlint_style_gate_contract_errors_empty_live_still_after_59() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+
+    importlib.reload(cbs)
+    errors: list[str] = []
+    cbs.check_actionlint_style_gate_contract(errors)
+    if errors:
+        raise AssertionError(f"live actionlint-style gate contract failed: {errors}")
+
+
+def test_actionlint_style_behavioral_errors_empty_live_still_after_59() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+
+    importlib.reload(cbs)
+    errors: list[str] = []
+    cbs.check_actionlint_style(errors)
+    if errors:
+        raise AssertionError(f"live actionlint-style failed: {errors}")
+
+
+def test_actionlint_style_docstring_static_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "Static actionlint-like checks" not in text:
+        raise AssertionError("missing Static actionlint-like checks docstring pin")
+
+
+def test_actionlint_style_docstring_live_pins_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "Live fail-closed pins after #59" not in text:
+        raise AssertionError("missing Live fail-closed pins after #59 docstring pin")
+
+
+def test_actionlint_style_module_doc_pins_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "Fail-closed actionlint-style pins" not in text:
+        raise AssertionError("missing module actionlint-style pins header")
+
+
+def test_actionlint_style_id_token_needle_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "id-token: write" not in text:
+        raise AssertionError("missing id-token: write reject needle")
+
+
+def test_actionlint_style_docker_skip_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "docker://" not in text:
+        raise AssertionError("missing docker:// skip needle")
+
+
+def test_actionlint_style_unpinned_needle_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "unpinned action uses" not in text:
+        raise AssertionError("missing unpinned action uses needle")
+
+
+def test_actionlint_style_float_set_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if '{"main", "master", "latest"}' not in text:
+        raise AssertionError("missing float set pin")
+
+
+def test_actionlint_style_prt_needle_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "pull_request_target" not in text:
+        raise AssertionError("missing pull_request_target needle")
+
+
+def test_actionlint_style_write_all_needle_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "write-all" not in text:
+        raise AssertionError("missing write-all needle")
+
+
+def test_actionlint_style_contents_write_needle_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "contents: write" not in text:
+        raise AssertionError("missing contents: write needle")
+
+
+def test_actionlint_style_runs_on_needle_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "jobs.*.runs-on" not in text:
+        raise AssertionError("missing jobs.*.runs-on needle")
+
+
+def test_actionlint_style_steps_needle_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "jobs.*.steps" not in text:
+        raise AssertionError("missing jobs.*.steps needle")
+
+
+def test_actionlint_style_timeout_needle_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "timeout-minutes:" not in text:
+        raise AssertionError("missing timeout-minutes: needle")
+
+
+def test_actionlint_style_harden_wording_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "actionlint harden" not in text:
+        raise AssertionError("missing actionlint harden wording")
+
+
+def test_actionlint_style_main_calls_style_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "check_actionlint_style(errors)" not in text:
+        raise AssertionError("main must call check_actionlint_style(errors)")
+
+
+def test_actionlint_style_main_calls_contract_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "check_actionlint_style_gate_contract(errors)" not in text:
+        raise AssertionError("main must call check_actionlint_style_gate_contract(errors)")
+
+
+def test_actionlint_style_contract_before_behavioral_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    main_i = text.find("def main()")
+    c_main = text.find("check_actionlint_style_gate_contract(errors)", main_i)
+    b_main = text.find("    check_actionlint_style(errors)", main_i)
+    if c_main < 0 or b_main < 0 or not (c_main < b_main):
+        raise AssertionError(
+            "main must call actionlint-style contract before behavioral check"
+        )
+
+
+def test_actionlint_style_load_workflow_text_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    start = text.find("def check_actionlint_style(")
+    end = text.find("\ndef check_workflow_hardening(", start)
+    body = text[start:end]
+    if "load_workflow_text(" not in body:
+        raise AssertionError("check_actionlint_style must call load_workflow_text")
+
+
+def test_actionlint_style_required_workflows_loop_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    start = text.find("def check_actionlint_style(")
+    end = text.find("\ndef check_workflow_hardening(", start)
+    body = text[start:end]
+    if "REQUIRED_WORKFLOWS" not in body:
+        raise AssertionError("check_actionlint_style must iterate REQUIRED_WORKFLOWS")
+
+
+def test_actionlint_style_source_has_contract_section_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "def check_actionlint_style_gate_contract(" not in text:
+        raise AssertionError("missing check_actionlint_style_gate_contract section")
+
+
+def test_actionlint_style_contract_mentions_not_relative_spam_still_after_59() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    start = text.find("def check_actionlint_style_gate_contract(")
+    end = text.find("\ndef check_stewardship_common_contract(", start)
+    body = text[start:end]
+    if "not relative-link spam" not in body:
+        raise AssertionError("actionlint-style contract must say not relative-link spam")
+
+
+def test_actionlint_style_link_workflow_live_name_still_after_59() -> None:
+    text = (ROOT / ".github" / "workflows" / "link-check.yml").read_text(encoding="utf-8")
+    if not text.lstrip().startswith("name:"):
+        raise AssertionError("link-check.yml must start with name:")
+
+
+def test_actionlint_style_markdown_workflow_live_runs_on_still_after_59() -> None:
+    text = (ROOT / ".github" / "workflows" / "markdown-lint.yml").read_text(encoding="utf-8")
+    if "runs-on:" not in text:
+        raise AssertionError("markdown-lint.yml missing runs-on:")
+
+
+def test_actionlint_style_stewardship_workflow_live_steps_still_after_59() -> None:
+    text = (ROOT / ".github" / "workflows" / "stewardship-checks.yml").read_text(
+        encoding="utf-8"
+    )
+    if "steps:" not in text:
+        raise AssertionError("stewardship-checks.yml missing steps:")
+
+
+def test_actionlint_style_all_workflows_no_prt_still_after_59() -> None:
+    for name in ("link-check.yml", "markdown-lint.yml", "stewardship-checks.yml"):
+        text = (ROOT / ".github" / "workflows" / name).read_text(encoding="utf-8")
+        if "pull_request_target:" in text:
+            raise AssertionError(f"{name} must not use pull_request_target")
+
+
+def test_actionlint_style_all_workflows_no_id_token_write_still_after_59() -> None:
+    for name in ("link-check.yml", "markdown-lint.yml", "stewardship-checks.yml"):
+        text = (ROOT / ".github" / "workflows" / name).read_text(encoding="utf-8")
+        if "id-token: write" in text:
+            raise AssertionError(f"{name} must not set id-token: write")
+
+
+def test_actionlint_style_all_workflows_no_write_all_still_after_59() -> None:
+    for name in ("link-check.yml", "markdown-lint.yml", "stewardship-checks.yml"):
+        text = (ROOT / ".github" / "workflows" / name).read_text(encoding="utf-8")
+        if "write-all" in text:
+            raise AssertionError(f"{name} must not set write-all")
+
+
+def test_actionlint_style_all_workflows_pinned_uses_still_after_59() -> None:
+    import re as _re
+
+    for name in ("link-check.yml", "markdown-lint.yml", "stewardship-checks.yml"):
+        text = (ROOT / ".github" / "workflows" / name).read_text(encoding="utf-8")
+        for match in _re.finditer(r"(?m)^\s*-\s*uses:\s*([^\s#]+)", text):
+            uses = match.group(1).strip()
+            if uses.startswith("docker://"):
+                continue
+            if "@" not in uses:
+                raise AssertionError(f"{name} unpinned uses: {uses}")
+            ref = uses.rsplit("@", 1)[-1]
+            if ref in {"main", "master", "latest"}:
+                raise AssertionError(f"{name} float uses: {uses}")
+
+
+def test_actionlint_style_selftest_doc_mentions_after_59_still() -> None:
+    text = (SCRIPTS / "test_stewardship_gates.py").read_text(encoding="utf-8")
+    if "Deepened after #59: actionlint-style" not in text:
+        raise AssertionError("self-test docstring must mention Deepened after #59")
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -21610,6 +22190,75 @@ def main() -> int:
         test_relative_links_skip_node_modules_still_after_55,
         test_relative_links_accept_valid_fragment_still_after_55,
         test_relative_links_reject_nul_still_after_55,
+
+        # TOKENMAXX deepen after #59 (+67 actionlint-style gate pins)
+        test_actionlint_style_gate_requires_fn_after_59,
+        test_actionlint_style_gate_requires_static_doc_after_59,
+        test_actionlint_style_gate_requires_live_pins_doc_after_59,
+        test_actionlint_style_gate_requires_load_workflow_text_after_59,
+        test_actionlint_style_gate_requires_top_level_name_after_59,
+        test_actionlint_style_gate_requires_jobs_runs_on_after_59,
+        test_actionlint_style_gate_requires_jobs_steps_after_59,
+        test_actionlint_style_gate_requires_timeout_minutes_after_59,
+        test_actionlint_style_gate_requires_prt_reject_after_59,
+        test_actionlint_style_gate_requires_harden_wording_after_59,
+        test_actionlint_style_gate_requires_write_all_reject_after_59,
+        test_actionlint_style_gate_requires_contents_write_reject_after_59,
+        test_actionlint_style_gate_requires_id_token_write_reject_after_59,
+        test_actionlint_style_gate_requires_docker_skip_after_59,
+        test_actionlint_style_gate_requires_unpinned_reject_after_59,
+        test_actionlint_style_gate_requires_float_main_after_59,
+        test_actionlint_style_gate_requires_float_master_after_59,
+        test_actionlint_style_gate_requires_float_latest_after_59,
+        test_actionlint_style_gate_requires_float_set_after_59,
+        test_actionlint_style_gate_requires_main_call_after_59,
+        test_actionlint_style_rejects_id_token_write_link_after_59,
+        test_actionlint_style_rejects_id_token_write_markdown_after_59,
+        test_actionlint_style_rejects_id_token_write_stewardship_after_59,
+        test_actionlint_style_rejects_missing_name_link_after_59,
+        test_actionlint_style_rejects_missing_runs_on_markdown_after_59,
+        test_actionlint_style_rejects_missing_steps_stewardship_after_59,
+        test_actionlint_style_rejects_missing_timeout_link_after_59,
+        test_actionlint_style_rejects_prt_markdown_after_59,
+        test_actionlint_style_rejects_write_all_stewardship_after_59,
+        test_actionlint_style_rejects_contents_write_link_after_59,
+        test_actionlint_style_rejects_unpinned_checkout_markdown_after_59,
+        test_actionlint_style_rejects_float_main_stewardship_after_59,
+        test_actionlint_style_rejects_float_latest_link_after_59,
+        test_actionlint_style_rejects_float_master_markdown_after_59,
+        test_actionlint_style_gate_contract_fn_still_after_59,
+        test_actionlint_style_fn_still_after_59,
+        test_actionlint_style_gate_contract_errors_empty_live_still_after_59,
+        test_actionlint_style_behavioral_errors_empty_live_still_after_59,
+        test_actionlint_style_docstring_static_still_after_59,
+        test_actionlint_style_docstring_live_pins_still_after_59,
+        test_actionlint_style_module_doc_pins_still_after_59,
+        test_actionlint_style_id_token_needle_still_after_59,
+        test_actionlint_style_docker_skip_still_after_59,
+        test_actionlint_style_unpinned_needle_still_after_59,
+        test_actionlint_style_float_set_still_after_59,
+        test_actionlint_style_prt_needle_still_after_59,
+        test_actionlint_style_write_all_needle_still_after_59,
+        test_actionlint_style_contents_write_needle_still_after_59,
+        test_actionlint_style_runs_on_needle_still_after_59,
+        test_actionlint_style_steps_needle_still_after_59,
+        test_actionlint_style_timeout_needle_still_after_59,
+        test_actionlint_style_harden_wording_still_after_59,
+        test_actionlint_style_main_calls_style_still_after_59,
+        test_actionlint_style_main_calls_contract_still_after_59,
+        test_actionlint_style_contract_before_behavioral_still_after_59,
+        test_actionlint_style_load_workflow_text_still_after_59,
+        test_actionlint_style_required_workflows_loop_still_after_59,
+        test_actionlint_style_source_has_contract_section_still_after_59,
+        test_actionlint_style_contract_mentions_not_relative_spam_still_after_59,
+        test_actionlint_style_link_workflow_live_name_still_after_59,
+        test_actionlint_style_markdown_workflow_live_runs_on_still_after_59,
+        test_actionlint_style_stewardship_workflow_live_steps_still_after_59,
+        test_actionlint_style_all_workflows_no_prt_still_after_59,
+        test_actionlint_style_all_workflows_no_id_token_write_still_after_59,
+        test_actionlint_style_all_workflows_no_write_all_still_after_59,
+        test_actionlint_style_all_workflows_pinned_uses_still_after_59,
+        test_actionlint_style_selftest_doc_mentions_after_59_still,
 
     ]
     try:

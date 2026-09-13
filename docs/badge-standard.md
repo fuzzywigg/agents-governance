@@ -52,7 +52,8 @@ TOKENMAXX suite covers badge/lycheeignore/actionlint/markdown-link/wiki/schema,
 including GITHUB_TOKEN + actionlint 1.7.7 three-path needles after #27, plus
 cancel-in-progress / `**/*.md` / fourth-badge refusal deepen after #28, plus
 `cancel-in-progress: true` / link-check `.github/agents` / markdown-lint
-`**/*.md` / lycheeignore `http://*` / Repo-Stewardship actionlint deepen after #29).
+`**/*.md` / lycheeignore `http://*` / Repo-Stewardship actionlint deepen after #29,
+plus Python 3.12 pin / Home invent+secrets / existing-path deepen after #30).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

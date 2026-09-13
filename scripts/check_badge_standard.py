@@ -248,6 +248,17 @@ def check_workflow_hardening(errors: list[str]) -> None:
         fail("stewardship-checks.yml must run scripts/test_stewardship_gates.py", errors)
     if "setup-python" not in stew.lower() and "actions/setup-python" not in stew:
         fail("stewardship-checks.yml must set up Python for gate scripts", errors)
+    # Fail-closed: pin the Python minor used by gate scripts (live path after #30).
+    if "python-version" not in stew:
+        fail(
+            "stewardship-checks.yml must set python-version for gate scripts",
+            errors,
+        )
+    if "3.12" not in stew:
+        fail(
+            "stewardship-checks.yml must pin Python 3.12 for gate scripts",
+            errors,
+        )
     if "pyyaml" not in stew.lower():
         fail("stewardship-checks.yml must install PyYAML for schema parsing", errors)
     if "actionlint" not in stew.lower():

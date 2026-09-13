@@ -11,6 +11,19 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship fixtures after #30: expand self-tests to 289 cases
+  (was 233) covering stewardship Python `3.12` / `python-version` pin,
+  cancel-in-progress:true on link-check, setup-python @master/@latest float,
+  stewardship contents:write / timeout / markdown-lint dispatch, lycheeignore
+  bare `*`, link-check `**/*.md` not txt, badge discord/producthunt/api_key/
+  access_token/http-license/license-first/stars + badge-doc snippets + missing
+  link-check workflow, relative node_modules skip / uppercase schemes / nested
+  escape / numbered slug / mailto+https / parent relative, wiki Home invent+
+  secrets / L1 / kill / downloads / Security link / PUBLISH Overview / data:
+  / badge topic / twitter, schema CLAUDE owner/autonomy / backlog DRAFT /
+  empty scope / missing closes/purpose / autonomy drift+float / semver
+  prerelease, common commerce hints / sk- / casefold / token= / file:, plus
+  markdown-lint OWASP + stewardship timeout + write-all needles
 - TOKENMAXX stewardship fixtures after #29: expand self-tests to 233 cases
   (was 182) covering `cancel-in-progress: true`, link-check `.github/agents`
   exclude, markdown-lint `**/*.md` glob, lycheeignore `http://*`, actionlint
@@ -72,6 +85,9 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
+- Badge/stewardship gates after #30: require stewardship-checks Python
+  `python-version` + `3.12` pin; wiki Home must retain invent-product **and**
+  secrets out-of-scope wording (not either/or)
 - Badge/stewardship gates after #29: require concurrency `cancel-in-progress: true`
   (value, not just key); link-check exclude-path must target `.github/agents`;
   markdown-lint must scan `**/*.md`; lycheeignore rejects `http://*` as well as

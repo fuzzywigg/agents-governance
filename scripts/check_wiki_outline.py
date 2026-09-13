@@ -128,8 +128,18 @@ def main() -> int:
             stem = page.removesuffix(".md")
             if f"]({page})" not in home_text and f"]({stem})" not in home_text:
                 fail(f"Home.md must link to publishable page {page}", errors)
-        if "invent" not in home_text.lower() and "secrets" not in home_text.lower():
-            fail("Home.md must retain out-of-scope wording for secrets / invent-product", errors)
+        # Fail-closed: Out of scope must call out invent-product AND secrets
+        # (not either/or) so quiet stewardship stays explicit on the wiki Home.
+        if "invent" not in home_text.lower():
+            fail(
+                "Home.md must retain invent-product out-of-scope wording",
+                errors,
+            )
+        if "secret" not in home_text.lower():
+            fail(
+                "Home.md must retain secrets out-of-scope wording",
+                errors,
+            )
         if "out of scope" not in home_text.lower():
             fail("Home.md must retain an Out of scope section", errors)
 

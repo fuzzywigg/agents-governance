@@ -342,3 +342,5 @@ _None yet._
 2026-09-13T23:45:00Z
 
 2026-09-13T23:50:00Z cursor: ECO-044 docs/CHANGELOG use "GitHub token prefixes" wording (avoid token-hint substrings in scanned docs)
+
+2026-09-13T23:49:00Z cursor: PR #70 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-044 TOKENMAXX stewardship_common second-pass pins

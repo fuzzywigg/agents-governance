@@ -64,3 +64,5 @@ _None yet._
 - Scope: strengthen EXISTING stewardship gates only; no invent-product badges; no AGENTS-ECOSYSTEM/templates edits
 - Branch: cursor/harden-stewardship-gates-c626
 2026-09-13T16:50:00Z
+
+2026-09-13T16:58:00Z cursor: PR #24 CI green (lint + link-check + stewardship) ← complete ECO-019 harden gates

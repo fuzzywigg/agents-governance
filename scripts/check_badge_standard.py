@@ -142,6 +142,12 @@ def check_workflows_and_license(errors: list[str]) -> None:
                 ".markdownlint.json MD024 must set siblings_only: true for docs lint",
                 errors,
             )
+        # Fail-closed after #37: live config enables markdownlint default rule set.
+        if not re.search(r'"default"\s*:\s*true\b', md_cfg):
+            fail(
+                ".markdownlint.json must set default: true for docs lint",
+                errors,
+            )
 
 
 def check_lycheeignore(errors: list[str]) -> None:
@@ -276,10 +282,28 @@ def check_workflow_hardening(errors: list[str]) -> None:
         )
     if "--max-concurrency" not in link:
         fail("link-check.yml must cap lychee --max-concurrency", errors)
+    # Fail-closed after #37: live lychee concurrency pin is 8.
+    if not re.search(r"--max-concurrency\s+8\b", link):
+        fail(
+            "link-check.yml must pin lychee --max-concurrency 8",
+            errors,
+        )
     if "--timeout" not in link:
         fail("link-check.yml must set lychee --timeout", errors)
+    # Fail-closed after #37: live lychee timeout pin is 20.
+    if not re.search(r"--timeout\s+20\b", link):
+        fail(
+            "link-check.yml must pin lychee --timeout 20",
+            errors,
+        )
     if "--max-retries" not in link:
         fail("link-check.yml must set lychee --max-retries", errors)
+    # Fail-closed after #37: live lychee max-retries pin is 3.
+    if not re.search(r"--max-retries\s+3\b", link):
+        fail(
+            "link-check.yml must pin lychee --max-retries 3",
+            errors,
+        )
     if "fail: true" not in link and "fail:true" not in link:
         fail("link-check.yml must set fail: true so broken links fail the job", errors)
     if "--exclude-loopback" not in link and "exclude-loopback" not in link:
@@ -390,6 +414,18 @@ def check_workflow_hardening(errors: list[str]) -> None:
     if "raw.githubusercontent.com" not in stew.lower():
         fail(
             "stewardship-checks.yml must download actionlint from raw.githubusercontent.com",
+            errors,
+        )
+    # Fail-closed after #37: live download URL pins /v1.7.7/ path (not floating tip).
+    if "/v1.7.7/" not in stew:
+        fail(
+            "stewardship-checks.yml must pin actionlint download path /v1.7.7/",
+            errors,
+        )
+    # Fail-closed after #37: live run uses get_actionlint.outputs.executable.
+    if "get_actionlint.outputs.executable" not in stew:
+        fail(
+            "stewardship-checks.yml must run actionlint via get_actionlint.outputs.executable",
             errors,
         )
     if "actionlint" not in stew.lower():

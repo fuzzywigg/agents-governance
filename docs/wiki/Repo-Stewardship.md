@@ -41,7 +41,10 @@ plus `DavidAnson/markdownlint-cli2-action` + `--github-token` + MD024 /
 plus MD024 `siblings_only` + `rhysd/actionlint` + `curl` download +
 lychee-action `with: token:` deepen after #35,
 plus MD013 `line_length: 200` + MD024 `siblings_only: true` +
-`raw.githubusercontent.com` + curl `-fsSL` deepen after #36).
+`raw.githubusercontent.com` + curl `-fsSL` deepen after #36,
+plus markdownlint `default: true` + `get_actionlint.outputs.executable` +
+actionlint `/v1.7.7/` path + lychee `--max-concurrency 8` / `--timeout 20` /
+`--max-retries 3` deepen after #37).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

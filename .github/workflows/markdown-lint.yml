@@ -20,4 +20,5 @@ jobs:
           globs: |
             **/*.md
             !.github/agents/**
+            !OWASP-AGENTIC.md
           config: ".markdownlint.json"

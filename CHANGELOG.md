@@ -9,6 +9,22 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- `docs/badge-standard.md` — required README badge row for public governance repos
+  (Link Check, Markdown Lint, License)
+- `docs/wiki/` — public wiki outline (Home, Overview, Autonomy Levels, Repo
+  Stewardship, Agent Routing, Security Boundaries) plus `PUBLISH.md` path to
+  GitHub Wiki (#16)
+- README Documents table links to badge standard and wiki Home
+
+### Changed
+
+- README: private `claw-mcp` listed without a public URL (avoids Link Check 404)
+- `.markdownlint.json`: disable MD060 (false positives on compact tables after
+  markdownlint v0.41)
+- Markdown Lint workflow: exclude long-form `OWASP-AGENTIC.md` from lint globs
+
 ---
 
 ## [2.3.0] — 2026-04-19

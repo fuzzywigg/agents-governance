@@ -21,6 +21,8 @@ from stewardship_common import ROOT, fail, scan_secrets  # noqa: E402
 # First fenced ```yaml block after the H1 is the document metadata schema.
 FENCED_YAML_RE = re.compile(r"^```yaml\n(.*?)\n```", re.MULTILINE | re.DOTALL)
 ISO_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}")
+SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
+ISSUE_REF_RE = re.compile(r"#\d+")
 
 # Minimal key schemas taken from the live stewardship docs (do not invent fields).
 DOC_SCHEMAS: dict[str, set[str]] = {
@@ -188,6 +190,24 @@ def main() -> int:
             policy = str(data["edit_policy"]).lower()
             if "invent" not in policy and rel == "docs/badge-standard.md":
                 fail(f"{rel}: edit_policy must retain no-invent-product wording", errors)
+
+        if rel == "AGENTS.md" and "version" in data:
+            ver = str(data["version"])
+            if not SEMVER_RE.match(ver):
+                fail(f"{rel}: version must be semver X.Y.Z (got {ver!r})", errors)
+
+        if rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"} and "closes" in data:
+            closes = str(data["closes"])
+            if not ISSUE_REF_RE.search(closes):
+                fail(f"{rel}: closes must reference an issue like #N (got {closes!r})", errors)
+
+        # Required keys must not be empty strings / None after parse.
+        for key in required_keys:
+            if key not in data:
+                continue
+            value = data[key]
+            if value is None or (isinstance(value, str) and not value.strip()):
+                fail(f"{rel}: metadata {key} must be non-empty", errors)
 
         scan_secrets(path, errors)
 

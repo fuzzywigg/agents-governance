@@ -11,6 +11,11 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship gate burn after #24: 50 negative/positive self-test
+  fixtures (was 14) covering http badges, dangerous link schemes, percent-
+  encoded path escape, tilde fences, wiki invent chrome / http / secrets,
+  schema semver / closes / empty values, workflow_dispatch / fail:true /
+  schedule / concurrency / PyYAML wiring
 - Stewardship gate hardening after #23: expanded negative self-tests, workflow
   `timeout-minutes` / `workflow_dispatch` / markdown-lint weekly schedule, lychee
   `--max-retries`, fenced-code-aware relative links, schema date/surface/tier
@@ -32,6 +37,16 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
+- Badge workflow hardening: require `workflow_dispatch` + weekly `schedule` on
+  all three CI workflows; lychee `fail: true` + `--exclude-loopback`;
+  markdown-lint `.markdownlint.json` + `.github/agents` exclusion; stewardship
+  setup-python + PyYAML install needles
+- Relative links: reject `javascript:` / `data:` / `vbscript:` / `file:`,
+  insecure `http://`, protocol-relative `//`, percent-encoded `..` escapes;
+  strip `~~~` fences as well as ` ``` `
+- Wiki outline: reject invent-product badge chrome, insecure http, dangerous
+  schemes on publishable pages
+- Schema: AGENTS semver, `closes` issue refs, non-empty required metadata
 - README: private `claw-mcp` listed without a public URL (avoids Link Check 404)
 - `.markdownlint.json`: disable MD060 (false positives on compact tables after
   markdownlint v0.41)

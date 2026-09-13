@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 
@@ -10,7 +11,13 @@ _SCRIPTS = Path(__file__).resolve().parent
 if str(_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS))
 
-from stewardship_common import FORBIDDEN_BADGE_HINTS, ROOT, fail, scan_secrets  # noqa: E402
+from stewardship_common import (  # noqa: E402
+    FORBIDDEN_BADGE_HINTS,
+    ROOT,
+    fail,
+    has_dangerous_scheme,
+    scan_secrets,
+)
 
 WIKI = ROOT / "docs" / "wiki"
 
@@ -154,6 +161,14 @@ def main() -> int:
             if topic.lower() not in text.lower():
                 fail(f"{name} must retain topic hint '{topic}'", errors)
         _reject_invent_badge_chrome(name, text, errors)
+        # Public wiki: no insecure http:// or dangerous schemes outside fences.
+        for match in re.finditer(r"!?\[([^\]]*)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)", text):
+            target = match.group(2).strip().strip("<>")
+            dangerous = has_dangerous_scheme(target)
+            if dangerous:
+                fail(f"{name}: dangerous link scheme '{dangerous}'", errors)
+            if target.lower().startswith("http://"):
+                fail(f"{name}: insecure http:// link (use https://)", errors)
         scan_secrets(path, errors)
 
     if publish.is_file():

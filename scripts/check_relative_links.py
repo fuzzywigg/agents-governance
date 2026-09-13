@@ -6,12 +6,18 @@ from __future__ import annotations
 import re
 import sys
 from pathlib import Path
+from urllib.parse import unquote
 
 _SCRIPTS = Path(__file__).resolve().parent
 if str(_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS))
 
-from stewardship_common import ROOT, fail, strip_fenced_code  # noqa: E402
+from stewardship_common import (  # noqa: E402
+    ROOT,
+    fail,
+    has_dangerous_scheme,
+    strip_fenced_code,
+)
 
 # Match CI markdown-lint / link-check exclusions where applicable.
 SKIP_PARTS = {".git", "node_modules"}
@@ -65,14 +71,39 @@ def check_file(path: Path, errors: list[str]) -> None:
     # Ignore example targets inside fenced code (canonical snippets, publish scripts).
     text = strip_fenced_code(path.read_text(encoding="utf-8"))
     for match in MD_LINK_RE.finditer(text):
-        raw = match.group(2).strip()
+        raw = match.group(2).strip().strip("<>")
         if not raw or raw in {"#"}:
             fail(f"{path.relative_to(ROOT)}: empty relative link target", errors)
             continue
+
+        dangerous = has_dangerous_scheme(raw)
+        if dangerous:
+            fail(
+                f"{path.relative_to(ROOT)}: dangerous link scheme '{dangerous}' → {raw}",
+                errors,
+            )
+            continue
+
         if raw.startswith(("http://", "https://", "mailto:", "tel:")):
+            if raw.lower().startswith("http://"):
+                fail(
+                    f"{path.relative_to(ROOT)}: insecure http:// link (use https://) → {raw}",
+                    errors,
+                )
             continue
         if raw.startswith("//"):
+            fail(
+                f"{path.relative_to(ROOT)}: protocol-relative link not allowed → {raw}",
+                errors,
+            )
             continue
+
+        # Percent-encoded path traversal (e.g. %2e%2e/..) must not escape the repo.
+        decoded = unquote(raw)
+        if "\0" in decoded:
+            fail(f"{path.relative_to(ROOT)}: NUL in link target → {raw}", errors)
+            continue
+
         # Ignore pure fragment self-links without a path (same-file anchors).
         if raw.startswith("#"):
             dest = path
@@ -88,7 +119,10 @@ def check_file(path: Path, errors: list[str]) -> None:
                     )
             continue
 
-        target, frag = (raw.split("#", 1) + [""])[:2] if "#" in raw else (raw, "")
+        check_target = decoded if decoded != raw else raw
+        target, frag = (
+            (check_target.split("#", 1) + [""])[:2] if "#" in check_target else (check_target, "")
+        )
         if not target:
             dest = path
         else:

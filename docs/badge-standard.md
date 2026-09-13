@@ -89,7 +89,9 @@ SECRET_URL_HINTS / FORBIDDEN_BADGE_HINTS / DANGEROUS_LINK_SCHEMES /
 plus badge-standard gate contract pins after #48: REQUIRED_ORDER /
 MAX_BADGES = 3 / EXPECTED_REPO / REQUIRED_WORKFLOWS / badge.svg + shields
 license / contiguous row / invent-product / fourth-badge refusal /
-Stewardship product badge reject).
+Stewardship product badge reject,
+plus stewardship-schema scalar / `STRING_KEYS` / empty-yaml / bool-int
+rejects and live badge scope / PUBLISH purpose / closes `#16` pins after #53).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

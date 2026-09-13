@@ -243,3 +243,12 @@ _None yet._
 2026-09-13T20:58:18Z
 
 2026-09-13T21:03:49Z cursor: PR #41 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-035 TOKENMAXX CI workflow pins
+
+### [ECO-036] TOKENMAXX deepen wiki-outline gate slice after #41 — 2026-09-13T21:20:00Z
+- [x] cursor: Read live tree post-#41 (836 fixtures + CI workflow pins)
+- [x] cursor: Harden wiki outline L2/L3/kill_switch + SECURITY.md/credential + copilot/geryon + AGENTS-ECOSYSTEM/scratchpad + Home ecosystem/Out of scope/smtp.eth + PUBLISH .wiki.git/docs/wiki/MEMORY + protocol-relative/H1/empty
+- [x] cursor: Add dedicated test_wiki_outline.py (164 cases + live tree); wire stewardship-checks.yml
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING wiki-outline gate only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-wiki-outline-gates-d7b2
+2026-09-13T21:20:00Z

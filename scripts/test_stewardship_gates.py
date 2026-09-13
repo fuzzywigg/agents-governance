@@ -156,6 +156,7 @@ jobs:
       - run: pip install --quiet pyyaml
       - run: bash scripts/run_stewardship_checks.sh
       - run: python3 scripts/test_stewardship_gates.py
+      - run: python3 scripts/test_wiki_outline.py
       - name: Download actionlint
         id: get_actionlint
         run: bash <(curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/v1.7.7/scripts/download-actionlint.bash) 1.7.7
@@ -247,6 +248,7 @@ def _seed_badge_tree(tmp: Path, readme: str) -> Path:
         "## 3. Testing Requirements\n\n"
         "bash scripts/run_stewardship_checks.sh\n"
         "python3 scripts/test_stewardship_gates.py\n"
+        "python3 scripts/test_wiki_outline.py\n"
         "CI: markdown-lint.yml, link-check.yml, stewardship-checks.yml\n",
     )
     _write(tmp / "README.md", readme)
@@ -316,36 +318,50 @@ def _seed_wiki_tree(tmp: Path, *, extra_pages: tuple[str, ...] = (), mutate=None
         "Home.md": (
             "# Home\n\n"
             "[README](https://github.com/fuzzywigg/agents-governance/blob/main/README.md)\n"
+            "[AGENTS-ECOSYSTEM](https://github.com/fuzzywigg/agents-governance/"
+            "blob/main/AGENTS-ECOSYSTEM.md)\n"
             "[Badge](../badge-standard.md)\n"
             "[Overview](Overview.md)\n"
             "[Autonomy-Levels](Autonomy-Levels.md)\n"
             "[Repo-Stewardship](Repo-Stewardship.md)\n"
             "[Agent-Routing](Agent-Routing.md)\n"
             "[Security-Boundaries](Security-Boundaries.md)\n\n"
-            "## Out of scope\n\nSecrets and invent product frameworks.\n"
+            "## Out of scope\n\nSecrets and invent product frameworks.\n\n"
+            "Maintained by smtp.eth.\n"
         ),
         "PUBLISH.md": (
             "# PUBLISH\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
             "purpose: x\ncloses: \"#16\"\n```\n\n"
+            "In-repo source under docs/wiki; remote agents-governance.wiki.git.\n\n"
             "| `Home.md` | Home |\n| `Overview.md` | Overview |\n"
             "| `Autonomy-Levels.md` | Autonomy-Levels |\n"
             "| `Repo-Stewardship.md` | Repo-Stewardship |\n"
             "| `Agent-Routing.md` | Agent-Routing |\n"
             "| `Security-Boundaries.md` | Security-Boundaries |\n\n"
             "Do **not** push `PUBLISH.md`.\n"
-            "Link Check and Markdown Lint. No secrets.\n"
+            "Link Check and Markdown Lint. No secrets. No MEMORY dumps.\n"
         ),
         "Repo-Stewardship.md": (
             "# Repo\n\n[← Home](Home.md)\n\n"
             "markdown-lint link-check stewardship-checks\n"
             "run_stewardship_checks.sh relative links badge\n"
+            "test_stewardship_gates.py\n"
             "actionlint on existing workflow paths\n"
+            "AGENTS-ECOSYSTEM approval boundary\n"
             "no invent product\n"
         ),
-        "Autonomy-Levels.md": "# A\n\n[Home](Home.md)\n\nL0 L1 autonomy\n",
-        "Security-Boundaries.md": "# S\n\n[Home](Home.md)\n\nkill switch secret\n",
-        "Agent-Routing.md": "# R\n\n[Home](Home.md)\n\nsurface routing\n",
-        "Overview.md": "# O\n\n[Home](Home.md)\n\ngovernance public\n",
+        "Autonomy-Levels.md": (
+            "# A\n\n[Home](Home.md)\n\nL0 L1 L2 L3 autonomy .kill_switch\n"
+        ),
+        "Security-Boundaries.md": (
+            "# S\n\n[Home](Home.md)\n\nkill switch secret credential SECURITY.md\n"
+        ),
+        "Agent-Routing.md": (
+            "# R\n\n[Home](Home.md)\n\nsurface routing copilot geryon\n"
+        ),
+        "Overview.md": (
+            "# O\n\n[Home](Home.md)\n\ngovernance public AGENTS-ECOSYSTEM scratchpad\n"
+        ),
     }
     for name in extra_pages:
         pages[name] = f"# {name}\n\n[Home](Home.md)\n"

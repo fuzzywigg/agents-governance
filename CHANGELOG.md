@@ -11,6 +11,15 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki-outline gate slice after #41: dedicated
+  `scripts/test_wiki_outline.py` (164 cases + live tree) fail-closing L2/L3/
+  kill_switch + SECURITY.md/credential + copilot/geryon + AGENTS-ECOSYSTEM/
+  scratchpad + test_stewardship_gates.py topic pins, Home ecosystem link /
+  `## Out of scope` / smtp.eth, PUBLISH `.wiki.git` + docs/wiki + MEMORY,
+  protocol-relative links, ATX H1 / empty-page pins, fenced scheme strip,
+  invent-chrome on PUBLISH; wired into stewardship-checks.yml — wiki-outline
+  slice only (not CI-pin / stewardship fixture-reject spam); no invent-product;
+  no fourth badge
 - TOKENMAXX CI workflow pins after #39: expand self-tests to 836 cases
   (was 774) fail-closing live `actions/checkout@v7` on all three workflows,
   `lycheeverse/lychee-action@v2`, job `timeout-minutes` 20/10/15, weekly

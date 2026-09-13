@@ -73,7 +73,11 @@ plus MD033/MD041/MD060 `false` + `markdownlint-cli2-action@v24` +
 `actions/setup-python@v5` + `id: get_actionlint` deepen after #38,
 plus `actions/checkout@v7` + `lychee-action@v2` + job timeouts 20/10/15 +
 weekly crons + `ubuntu-latest` + `pip --quiet` + `shell: bash` +
-actionlint `-color` deepen after #39).
+actionlint `-color` deepen after #39,
+plus dedicated wiki-outline self-tests (`test_wiki_outline.py`) with L2/L3/
+kill_switch + SECURITY.md/credential + copilot/geryon + AGENTS-ECOSYSTEM/
+scratchpad + Home ecosystem/`## Out of scope`/smtp.eth + PUBLISH `.wiki.git`/
+docs/wiki/MEMORY + protocol-relative/H1/empty deepen after #41).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

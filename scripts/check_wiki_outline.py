@@ -17,6 +17,7 @@ from stewardship_common import (  # noqa: E402
     fail,
     has_dangerous_scheme,
     scan_secrets,
+    strip_fenced_code,
 )
 
 WIKI = ROOT / "docs" / "wiki"
@@ -42,6 +43,11 @@ BADGE_STANDARD_HINTS = (
     "docs/badge-standard.md",
     "https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge-standard.md",
 )
+# Fail-closed after wiki-outline deepen: Home must keep ecosystem policy pointer.
+ECOSYSTEM_LINK_HINTS = (
+    "AGENTS-ECOSYSTEM.md",
+    "agents-governance/blob/main/AGENTS-ECOSYSTEM.md",
+)
 
 # Public acceptance: stewardship CI called out on Repo-Stewardship.
 STEWARDSHIP_CI_HINTS = (
@@ -51,13 +57,48 @@ STEWARDSHIP_CI_HINTS = (
 )
 
 # Topic anchors expected on key publishable pages (no invent-product content).
+# Deepened after #41: L2/L3/kill_switch, SECURITY.md/credential, copilot/geryon,
+# AGENTS-ECOSYSTEM/scratchpad, test_stewardship_gates.py — all already live.
 PAGE_TOPIC_HINTS: dict[str, tuple[str, ...]] = {
-    "Autonomy-Levels.md": ("L0", "L1", "autonomy"),
-    "Security-Boundaries.md": ("kill", "secret"),
-    "Agent-Routing.md": ("surface", "routing"),
-    "Overview.md": ("governance", "public"),
-    "Repo-Stewardship.md": ("run_stewardship_checks.sh", "badge"),
+    "Autonomy-Levels.md": ("L0", "L1", "L2", "L3", "autonomy", "kill_switch"),
+    "Security-Boundaries.md": ("kill", "secret", "credential", "SECURITY.md"),
+    "Agent-Routing.md": ("surface", "routing", "copilot", "geryon"),
+    "Overview.md": ("governance", "public", "AGENTS-ECOSYSTEM", "scratchpad"),
+    "Repo-Stewardship.md": (
+        "run_stewardship_checks.sh",
+        "badge",
+        "test_stewardship_gates.py",
+    ),
 }
+
+MD_LINK_RE = re.compile(r"!?\[([^\]]*)\]\(\s*([^)\s]*)(?:\s+\"[^\"]*\")?\s*\)")
+ATX_H1_RE = re.compile(r"(?m)^#\s+\S")
+OUT_OF_SCOPE_HEADING_RE = re.compile(r"(?im)^##\s+Out of scope\s*$")
+
+
+def has_atx_h1(text: str) -> bool:
+    """True if page has a non-empty ATX H1 (# Title)."""
+    return ATX_H1_RE.search(text) is not None
+
+
+def page_is_empty(text: str) -> bool:
+    """True if page has no non-whitespace content."""
+    return not text.strip()
+
+
+def has_out_of_scope_heading(text: str) -> bool:
+    """True if Home retains an explicit ## Out of scope heading."""
+    return OUT_OF_SCOPE_HEADING_RE.search(text) is not None
+
+
+def iter_markdown_link_targets(text: str) -> list[str]:
+    """Return markdown link/image targets (fences should be stripped by caller)."""
+    return [m.group(2).strip().strip("<>") for m in MD_LINK_RE.finditer(text)]
+
+
+def is_protocol_relative(target: str) -> bool:
+    """True for //host protocol-relative links."""
+    return target.startswith("//")
 
 
 def _reject_invent_badge_chrome(name: str, text: str, errors: list[str]) -> None:
@@ -70,6 +111,20 @@ def _reject_invent_badge_chrome(name: str, text: str, errors: list[str]) -> None
             continue
         if hint in lowered and ("shields.io" in lowered or "badge" in lowered or "[![" in text):
             fail(f"{name}: invent-product / social badge chrome hint '{hint}'", errors)
+
+
+def _check_link_schemes(name: str, text: str, errors: list[str]) -> None:
+    """Reject dangerous / insecure / protocol-relative markdown link targets."""
+    # Ignore fenced examples (publish scripts, yaml snippets).
+    body = strip_fenced_code(text)
+    for target in iter_markdown_link_targets(body):
+        dangerous = has_dangerous_scheme(target)
+        if dangerous:
+            fail(f"{name}: dangerous link scheme '{dangerous}'", errors)
+        if target.lower().startswith("http://"):
+            fail(f"{name}: insecure http:// link (use https://)", errors)
+        if is_protocol_relative(target):
+            fail(f"{name}: protocol-relative link not allowed", errors)
 
 
 def main() -> int:
@@ -98,6 +153,10 @@ def main() -> int:
 
     if publish.is_file():
         publish_text = publish.read_text(encoding="utf-8")
+        if page_is_empty(publish_text):
+            fail(f"{OPERATOR_ONLY} must not be empty", errors)
+        if not has_atx_h1(publish_text):
+            fail(f"{OPERATOR_ONLY} must start with an ATX H1 heading", errors)
         for name in PUBLISHABLE_PAGES:
             stem = name.removesuffix(".md")
             if f"`{name}`" not in publish_text and stem not in publish_text:
@@ -114,14 +173,29 @@ def main() -> int:
             fail("PUBLISH.md acceptance checks must mention Markdown Lint", errors)
         if "No secrets" not in publish_text and "secrets" not in publish_text.lower():
             fail("PUBLISH.md acceptance checks must mention secrets prohibition", errors)
+        # Fail-closed after wiki-outline deepen: operator path must keep wiki remote + source.
+        if ".wiki.git" not in publish_text.lower() and "wiki.git" not in publish_text.lower():
+            fail("PUBLISH.md must mention the .wiki.git publish remote", errors)
+        if "docs/wiki" not in publish_text:
+            fail("PUBLISH.md must retain docs/wiki as the in-repo source path", errors)
+        if "MEMORY" not in publish_text and "memory" not in publish_text.lower():
+            fail("PUBLISH.md acceptance checks must mention MEMORY prohibition", errors)
+        _check_link_schemes(OPERATOR_ONLY, publish_text, errors)
+        _reject_invent_badge_chrome(OPERATOR_ONLY, publish_text, errors)
 
     home = WIKI / "Home.md"
     if home.is_file():
         home_text = home.read_text(encoding="utf-8")
+        if page_is_empty(home_text):
+            fail("Home.md must not be empty", errors)
+        if not has_atx_h1(home_text):
+            fail("Home.md must start with an ATX H1 heading", errors)
         if not any(hint in home_text for hint in README_LINK_HINTS):
             fail("Home.md must link back to the repository README", errors)
         if not any(hint in home_text for hint in BADGE_STANDARD_HINTS):
             fail("Home.md must link to the badge standard", errors)
+        if not any(hint in home_text for hint in ECOSYSTEM_LINK_HINTS):
+            fail("Home.md must link to AGENTS-ECOSYSTEM.md (ecosystem policy)", errors)
         for page in PUBLISHABLE_PAGES:
             if page == "Home.md":
                 continue
@@ -142,6 +216,10 @@ def main() -> int:
             )
         if "out of scope" not in home_text.lower():
             fail("Home.md must retain an Out of scope section", errors)
+        if not has_out_of_scope_heading(home_text):
+            fail("Home.md must retain an explicit ## Out of scope heading", errors)
+        if "smtp.eth" not in home_text.lower():
+            fail("Home.md must retain smtp.eth maintainer attribution", errors)
 
     stewardship = WIKI / "Repo-Stewardship.md"
     if stewardship.is_file():
@@ -165,26 +243,29 @@ def main() -> int:
                 "Repo-Stewardship.md must mention actionlint on existing workflow paths",
                 errors,
             )
+        if "AGENTS-ECOSYSTEM" not in ste_text:
+            fail(
+                "Repo-Stewardship.md must mention AGENTS-ECOSYSTEM approval boundary",
+                errors,
+            )
 
     for name in PUBLISHABLE_PAGES:
         path = WIKI / name
         if not path.is_file():
             continue
         text = path.read_text(encoding="utf-8")
+        if page_is_empty(text):
+            fail(f"{name} must not be empty", errors)
+            continue
+        if not has_atx_h1(text):
+            fail(f"{name} must start with an ATX H1 heading", errors)
         if name != "Home.md" and "](Home.md)" not in text:
             fail(f"{name} must link back to Home.md", errors)
         for topic in PAGE_TOPIC_HINTS.get(name, ()):
             if topic.lower() not in text.lower():
                 fail(f"{name} must retain topic hint '{topic}'", errors)
         _reject_invent_badge_chrome(name, text, errors)
-        # Public wiki: no insecure http:// or dangerous schemes outside fences.
-        for match in re.finditer(r"!?\[([^\]]*)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)", text):
-            target = match.group(2).strip().strip("<>")
-            dangerous = has_dangerous_scheme(target)
-            if dangerous:
-                fail(f"{name}: dangerous link scheme '{dangerous}'", errors)
-            if target.lower().startswith("http://"):
-                fail(f"{name}: insecure http:// link (use https://)", errors)
+        _check_link_schemes(name, text, errors)
         scan_secrets(path, errors)
 
     if publish.is_file():

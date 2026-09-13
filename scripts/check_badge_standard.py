@@ -437,6 +437,12 @@ def check_workflow_hardening(errors: list[str]) -> None:
         fail("stewardship-checks.yml must run scripts/run_stewardship_checks.sh", errors)
     if "test_stewardship_gates.py" not in stew:
         fail("stewardship-checks.yml must run scripts/test_stewardship_gates.py", errors)
+    # Fail-closed after wiki-outline slice deepen: dedicated wiki self-tests stay wired.
+    if "test_wiki_outline.py" not in stew:
+        fail(
+            "stewardship-checks.yml must run scripts/test_wiki_outline.py",
+            errors,
+        )
     # Fail-closed: stewardship must checkout the tree before running gates (live path).
     if "actions/checkout" not in stew:
         fail(
@@ -656,6 +662,7 @@ def check_contributing_and_agents(errors: list[str]) -> None:
         for needle in (
             "run_stewardship_checks.sh",
             "test_stewardship_gates.py",
+            "test_wiki_outline.py",
             "markdown-lint.yml",
             "link-check.yml",
             "stewardship-checks.yml",

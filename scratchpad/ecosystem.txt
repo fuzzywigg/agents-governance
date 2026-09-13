@@ -274,3 +274,5 @@ _None yet._
 2026-09-13T21:57:29Z
 
 2026-09-13T21:39:35Z cursor: PR #45 merged (wiki-outline gate pins) ← complete ECO-037 TOKENMAXX wiki-outline gate pins
+
+2026-09-13T22:05:00Z cursor: PR #47 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-038 TOKENMAXX schema gate pins

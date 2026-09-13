@@ -34,6 +34,13 @@ DOC_SCHEMAS: dict[str, set[str]] = {
         "purpose",
         "closes",
     },
+    "docs/issue-backlog.md": {
+        "status",
+        "tier",
+        "created",
+        "owner",
+        "edit_policy",
+    },
     "AGENTS.md": {
         "version",
         "last_updated",
@@ -49,6 +56,33 @@ DOC_SCHEMAS: dict[str, set[str]] = {
         "autonomy_level",
         "last_updated",
         "parent_governance",
+    },
+}
+
+# Value constraints already implied by live docs (fail closed on drift).
+EXPECTED_VALUES: dict[str, dict[str, object]] = {
+    "AGENTS.md": {
+        "parent_governance": "github.com/fuzzywigg/agents-governance",
+        "autonomy_level": 1,
+        "maintainer": "smtp.eth",
+        "scope": "repository-specific",
+    },
+    "CLAUDE.md": {
+        "repo": "agents-governance",
+        "owner": "fuzzywigg (smtp.eth)",
+        "autonomy_level": 1,
+        "parent_governance": "github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md",
+    },
+    "docs/badge-standard.md": {
+        "status": "ACTIVE",
+        "tier": 1,
+    },
+    "docs/wiki/PUBLISH.md": {
+        "status": "ACTIVE",
+    },
+    "docs/issue-backlog.md": {
+        "status": "ACTIVE",
+        "tier": 1,
     },
 }
 
@@ -114,9 +148,15 @@ def main() -> int:
             errors.append(f"{rel}: missing metadata keys: {', '.join(missing)}")
         status = data.get("status")
         if "status" in required_keys and status is not None and str(status).upper() != "ACTIVE":
-            # badge-standard / PUBLISH declare ACTIVE; fail closed if drifted
+            # badge-standard / PUBLISH / backlog declare ACTIVE; fail closed if drifted
             if rel.startswith("docs/"):
                 errors.append(f"{rel}: status must be ACTIVE for active stewardship docs")
+
+        expected = EXPECTED_VALUES.get(rel, {})
+        for key, want in expected.items():
+            got = data.get(key)
+            if got != want:
+                errors.append(f"{rel}: metadata {key}={got!r} (expected {want!r})")
 
     if errors:
         print("Stewardship schema check FAILED:", file=sys.stderr)

@@ -21,6 +21,10 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   `scripts/check_stewardship_schema.py`, `scripts/run_stewardship_checks.sh` —
   executable gates for badge/wiki/schema stewardship standards
 - `.github/workflows/stewardship-checks.yml` — CI job for stewardship scripts
+- `scripts/check_relative_links.py` — offline relative markdown link + heading
+  fragment integrity (complements lychee)
+- `scripts/stewardship_common.py` — shared secret-pattern helpers for public docs
+- `scripts/test_stewardship_gates.py` — negative/positive self-tests for gates
 
 ### Changed
 
@@ -32,6 +36,13 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   cover config/workflow files
 - `AGENTS.md` §3 Testing Requirements: document markdownlint-cli2, lychee, and
   stewardship scripts (replace stale npx link-check notes)
+- Strengthened stewardship gates: README↔badge-standard consistency, repo slug
+  checks, wiki CI callouts, metadata value constraints, secret URL hints
+- Link Check: concurrency group, `--max-concurrency 8`, `--timeout 20`, exclude
+  `.github/agents`
+- Stewardship Checks: run via `run_stewardship_checks.sh`, weekly schedule,
+  self-tests step; Markdown Lint concurrency group
+- README / CONTRIBUTING / wiki Repo-Stewardship: document local stewardship runner
 
 ---
 

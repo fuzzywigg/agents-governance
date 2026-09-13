@@ -70,13 +70,14 @@ parent_governance: "github.com/fuzzywigg/agents-governance"
 No package to install. This repo is a governance document source.
 
 - **Reference** it from your project's `AGENTS.md` via `parent_governance`.
-- **Clone** it locally if you want to propose amendments or run markdown lint locally:
+- **Clone** it locally if you want to propose amendments or run docs quality gates:
 
 ```bash
 git clone https://github.com/fuzzywigg/agents-governance
 cd agents-governance
 npm install -g markdownlint-cli2   # optional, for local lint
-markdownlint-cli2 "**/*.md"
+markdownlint-cli2 "**/*.md" "!.github/agents/**" "!OWASP-AGENTIC.md"
+bash scripts/run_stewardship_checks.sh   # badge / wiki / schema / relative links
 ```
 
 ---

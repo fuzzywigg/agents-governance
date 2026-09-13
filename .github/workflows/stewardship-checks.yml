@@ -8,11 +8,20 @@ on:
       - "AGENTS.md"
       - "CLAUDE.md"
       - "LICENSE"
-      - "docs/badge-standard.md"
-      - "docs/wiki/**"
+      - "CONTRIBUTING.md"
+      - "docs/**"
       - "scripts/**"
       - ".github/workflows/**"
+      - ".lycheeignore"
+      - ".markdownlint.json"
   pull_request:
+  schedule:
+    # Weekly drift catch for badge/wiki/schema/relative-link gates
+    - cron: "15 6 * * 1"
+
+concurrency:
+  group: stewardship-checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   stewardship:
@@ -27,9 +36,7 @@ jobs:
           python-version: "3.12"
       - name: Install PyYAML (schema parser)
         run: pip install --quiet pyyaml
-      - name: Badge standard
-        run: python3 scripts/check_badge_standard.py
-      - name: Wiki outline
-        run: python3 scripts/check_wiki_outline.py
-      - name: Stewardship metadata schema
-        run: python3 scripts/check_stewardship_schema.py
+      - name: Stewardship gates (badge / wiki / schema / relative links)
+        run: bash scripts/run_stewardship_checks.sh
+      - name: Stewardship gate self-tests
+        run: python3 scripts/test_stewardship_gates.py

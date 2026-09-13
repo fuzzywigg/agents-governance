@@ -12,6 +12,19 @@ exposing private project machinery.
 - Prefer reversible docs/stewardship PRs; no invent-product work.
 - Never delete scratchpad history; append and mark `[x]` when done.
 
+## Docs quality CI
+
+Public front-door trust rests on three workflows (status badges cover Link Check and
+Markdown Lint only — stewardship stays in CI/docs, not as a product badge):
+
+| Workflow | What it enforces |
+|----------|------------------|
+| `markdown-lint.yml` | Markdownlint on docs |
+| `link-check.yml` | External + markdown link integrity (lychee) |
+| `stewardship-checks.yml` | Badge row, wiki outline, metadata schemas, relative links |
+
+Locally: `bash scripts/run_stewardship_checks.sh`.
+
 ## What agents may edit (this repo, L1)
 
 - `AGENTS.md`, `CLAUDE.md`, `README.md`

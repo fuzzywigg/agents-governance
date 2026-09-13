@@ -45,8 +45,13 @@ Copy into the repository root `README.md`. The License badge target may also be 
 ## This repository
 
 `README.md` already follows this standard (Link Check, Markdown Lint, License).
+Executable enforcement lives in `scripts/check_badge_standard.py` (run via
+`bash scripts/run_stewardship_checks.sh` or `.github/workflows/stewardship-checks.yml`).
+A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
+stewardship stays in CI/docs, not as invent-product chrome.
 
 ## Related
 
 - Public wiki outline: [wiki/Home.md](./wiki/Home.md)
 - Wiki publish path: [wiki/PUBLISH.md](./wiki/PUBLISH.md)
+- Testing commands: [AGENTS.md §3](../AGENTS.md#3-testing-requirements)

@@ -77,3 +77,11 @@ _None yet._
 2026-09-13T17:13:45Z
 
 2026-09-13T17:20:00Z cursor: PR #25 CI green (lint + link-check + stewardship) ← complete ECO-020 TOKENMAXX burn
+
+### [ECO-021] Harden link-check against shields.io flake after #25 — 2026-09-13T17:22:00Z
+- [x] cursor: Confirm failure was img.shields.io RST (run 34771227142), not broken URL
+- [x] cursor: Exclude img.shields.io in .lycheeignore; keep fail: true
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING link-check only; no invent-product; no AGENTS-ECOSYSTEM/templates edits
+- Branch: cursor/harden-link-check-shields-785c
+2026-09-13T17:22:00Z

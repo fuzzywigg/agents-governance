@@ -31,6 +31,7 @@ WORKFLOWS = ROOT / ".github" / "workflows"
 RELATIVE_LINK_GATE = ROOT / "scripts" / "check_relative_links.py"
 WIKI_OUTLINE_GATE = ROOT / "scripts" / "check_wiki_outline.py"
 SCHEMA_GATE = ROOT / "scripts" / "check_stewardship_schema.py"
+COMMON_GATE = ROOT / "scripts" / "stewardship_common.py"
 RUN_STEWARDSHIP = ROOT / "scripts" / "run_stewardship_checks.sh"
 
 REQUIRED_ORDER = ("Link Check", "Markdown Lint", "License")
@@ -672,6 +673,140 @@ def check_contributing_and_agents(errors: list[str]) -> None:
         fail("Missing AGENTS.md", errors)
 
 
+def check_stewardship_common_contract(errors: list[str]) -> None:
+    """Fail-close live stewardship_common wiring (after #46; not schema-pin spam)."""
+    if not COMMON_GATE.is_file():
+        fail("Missing scripts/stewardship_common.py (shared gate helpers)", errors)
+        return
+    text = COMMON_GATE.read_text(encoding="utf-8")
+    if "SECRET_PATTERNS" not in text:
+        fail("stewardship_common.py must declare SECRET_PATTERNS", errors)
+    if "SECRET_URL_HINTS" not in text:
+        fail("stewardship_common.py must declare SECRET_URL_HINTS", errors)
+    if "FORBIDDEN_BADGE_HINTS" not in text:
+        fail("stewardship_common.py must declare FORBIDDEN_BADGE_HINTS", errors)
+    if "DANGEROUS_LINK_SCHEMES" not in text:
+        fail("stewardship_common.py must declare DANGEROUS_LINK_SCHEMES", errors)
+    if "FENCED_BLOCK_RE" not in text:
+        fail("stewardship_common.py must declare FENCED_BLOCK_RE", errors)
+    for fn in (
+        "fail",
+        "strip_fenced_code",
+        "has_dangerous_scheme",
+        "scan_secrets",
+        "markdown_files",
+        "load_workflow_text",
+    ):
+        if f"def {fn}(" not in text:
+            fail(
+                f"stewardship_common.py must provide {fn}()",
+                errors,
+            )
+    # Fail-closed after #46: imported helpers keep distinctive doc pins.
+    if "Gate fail-closed helper" not in text:
+        fail(
+            "stewardship_common.py fail() must keep Gate fail-closed helper pin",
+            errors,
+        )
+    if "Load .github/workflows/" not in text:
+        fail(
+            "stewardship_common.py load_workflow_text must keep workflows load pin",
+            errors,
+        )
+    # Live secret pattern needles (CI tokens / private keys / cloud keys).
+    for needle in (
+        "ghp_",
+        "gho_",
+        "ghu_",
+        "ghs_",
+        "ghr_",
+        "github_pat_",
+        "PRIVATE KEY",
+        "sk-",
+        "rk-",
+        "api[_-]?key",
+        "aws_secret_access_key",
+        "xox",
+        "npm_",
+        "AIza",
+    ):
+        if needle not in text:
+            fail(
+                f"stewardship_common.py SECRET_PATTERNS must pin {needle}",
+                errors,
+            )
+    # Live SECRET_URL_HINTS (query params + token prefixes).
+    for hint in (
+        "token=",
+        "access_token=",
+        "api_key=",
+        "apikey=",
+        "client_secret=",
+    ):
+        if f'"{hint}"' not in text and f"'{hint}'" not in text:
+            fail(
+                f"stewardship_common.py SECRET_URL_HINTS must pin {hint}",
+                errors,
+            )
+    # Live invent-product / social badge chrome rejects.
+    for hint in (
+        "coverage",
+        "codecov",
+        "coveralls",
+        "downloads",
+        "discord",
+        "twitter",
+        "x.com",
+        "stars",
+        "forks",
+        "followers",
+        "npm/",
+        "pypi/",
+        "producthunt",
+        "buymeacoffee",
+        "opencollective",
+    ):
+        if f'"{hint}"' not in text and f"'{hint}'" not in text:
+            fail(
+                f"stewardship_common.py FORBIDDEN_BADGE_HINTS must pin {hint}",
+                errors,
+            )
+    # Live dangerous markdown link schemes.
+    for scheme in ("javascript:", "data:", "vbscript:", "file:"):
+        if f'"{scheme}"' not in text and f"'{scheme}'" not in text:
+            fail(
+                f"stewardship_common.py DANGEROUS_LINK_SCHEMES must pin {scheme}",
+                errors,
+            )
+    if "```" not in text or "~~~" not in text:
+        fail(
+            "stewardship_common.py FENCED_BLOCK_RE must match ``` and ~~~ fences",
+            errors,
+        )
+    # scan_secrets treats hints ending with '=' as URL-ish query params.
+    if "endswith" not in text:
+        fail(
+            "stewardship_common.py scan_secrets must treat '=' hints as URL-ish",
+            errors,
+        )
+    if "URL-ish secret hints" not in text:
+        fail(
+            "stewardship_common.py scan_secrets must keep URL-ish secret hints pin",
+            errors,
+        )
+    if "invent" not in text.lower():
+        fail(
+            "stewardship_common.py must retain invent-product / no-invent wording",
+            errors,
+        )
+    # Fail-closed after #46: module docstring must name live secret scan cover.
+    if "live secret scan covers ci tokens" not in text.lower():
+        fail(
+            "stewardship_common.py must pin live secret scan covers CI tokens",
+            errors,
+        )
+
+
 def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
     """Fail-close live stewardship-schema gate wiring (after #45; not wiki-pin spam)."""
     if not SCHEMA_GATE.is_file():
@@ -1124,6 +1259,7 @@ def main() -> int:
     check_relative_link_gate_contract(errors)
     check_wiki_outline_gate_contract(errors)
     check_stewardship_schema_gate_contract(errors)
+    check_stewardship_common_contract(errors)
     if BADGE_STANDARD.is_file():
         check_badge_standard_doc(errors)
         scan_secrets(BADGE_STANDARD, errors)

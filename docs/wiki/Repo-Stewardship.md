@@ -58,7 +58,10 @@ credential / copilot topic hints, `strip_fenced_code`, protocol-relative
 `//` reject, Home kill-switch callout,
 plus stewardship-schema gate contract pins after #45: DOC_SCHEMAS /
 EXPECTED_VALUES / SEMVER / ISO-8601 / closes `#N` / invent edit_policy /
-issue-backlog owner `copilot` / `scan_secrets`).
+issue-backlog owner `copilot` / `scan_secrets`,
+plus stewardship_common contract pins after #46: SECRET_PATTERNS /
+SECRET_URL_HINTS / FORBIDDEN_BADGE_HINTS / DANGEROUS_LINK_SCHEMES /
+`strip_fenced_code` / `scan_secrets` / invent-product wording).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

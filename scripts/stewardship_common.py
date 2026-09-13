@@ -1,5 +1,19 @@
 #!/usr/bin/env python3
-"""Shared helpers for stewardship doc gates (no invent-product surface)."""
+"""Shared helpers for stewardship doc gates (no invent-product surface).
+
+Fail-closed pins (live path after #46):
+- SECRET_PATTERNS: ghp_/gho_/ghu_/ghs_/ghr_, github_pat_, PRIVATE KEY,
+  sk-/rk-, api_key/secret/password/token, aws_secret_access_key, xox*,
+  npm_, AIza
+- SECRET_URL_HINTS: token=/access_token=/api_key=/apikey=/client_secret=
+  plus ghp_/gho_/github_pat_ prefixes (URL-ish query + token prefixes)
+- FORBIDDEN_BADGE_HINTS: invent-product / social chrome (coverage, codecov,
+  coveralls, downloads, discord, twitter, x.com, stars, forks, followers,
+  npm/, pypi/, producthunt, buymeacoffee, opencollective)
+- DANGEROUS_LINK_SCHEMES: javascript:/data:/vbscript:/file:
+- strip_fenced_code via FENCED_BLOCK_RE (``` or ~~~); has_dangerous_scheme;
+  scan_secrets; markdown_files; load_workflow_text; fail
+"""
 
 from __future__ import annotations
 
@@ -9,6 +23,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 # Public docs must not ship secrets / private MEMORY dumps.
+# Fail-closed after #46: live secret scan covers CI tokens + private keys.
 SECRET_PATTERNS: tuple[re.Pattern[str], ...] = (
     re.compile(r"-----BEGIN (?:RSA |OPENSSH |EC )?PRIVATE KEY-----"),
     re.compile(r"\b(ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9]{20,}\b"),
@@ -66,6 +81,7 @@ FENCED_BLOCK_RE = re.compile(r"(?:```|~~~).*?(?:```|~~~)", re.DOTALL)
 
 
 def fail(msg: str, errors: list[str]) -> None:
+    """Gate fail-closed helper: append msg to errors."""
     errors.append(msg)
 
 
@@ -109,6 +125,7 @@ def markdown_files(*globs: str) -> list[Path]:
 
 
 def load_workflow_text(name: str) -> str | None:
+    """Load .github/workflows/<name> text for CI pin checks."""
     path = ROOT / ".github" / "workflows" / name
     if not path.is_file():
         return None

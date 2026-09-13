@@ -49,7 +49,10 @@ plus MD033/MD041/MD060 `false` + `markdownlint-cli2-action@v24` +
 `actions/setup-python@v5` + `id: get_actionlint` deepen after #38,
 plus `actions/checkout@v7` + `lychee-action@v2` + job timeouts 20/10/15 +
 weekly crons + `ubuntu-latest` + `pip --quiet` + `shell: bash` +
-actionlint `-color` deepen after #39).
+actionlint `-color` deepen after #39,
+plus relative-link gate contract pins after #41: OWASP/agents/node_modules
+skip, `fully_unquote`, empty `path#` fragments, query-string reject,
+`run_stewardship_checks.sh` order badge→wiki→schema→relative).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

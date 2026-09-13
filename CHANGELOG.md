@@ -11,6 +11,15 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX relative-link gate pins after #41: expand self-tests to 903 cases
+  (was 836) fail-closing live relative-link integrity — `OWASP-AGENTIC.md` /
+  `.github/agents` / `node_modules` / `.git` skips, `strip_fenced_code`,
+  `fully_unquote` nested percent-decode, empty `path#` fragments, query-string
+  reject on relative targets, protocol-relative / http:// / dangerous-scheme
+  still-needles, `run_stewardship_checks.sh` invokes badge→wiki→schema→relative
+  in order, AGENTS.md relative mention — relative-link gate contract slice
+  only (not CI workflow pin / badge-wiki-schema fixture-reject spam); no
+  invent-product; no fourth badge
 - TOKENMAXX CI workflow pins after #39: expand self-tests to 836 cases
   (was 774) fail-closing live `actions/checkout@v7` on all three workflows,
   `lycheeverse/lychee-action@v2`, job `timeout-minutes` 20/10/15, weekly

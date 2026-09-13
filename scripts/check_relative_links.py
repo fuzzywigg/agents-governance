@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Offline relative markdown link integrity (complements lychee external checks)."""
+"""Offline relative markdown link integrity (complements lychee external checks).
+
+Fail-closed pins (live path after #41):
+- Skip OWASP-AGENTIC.md / .github/agents / .git / node_modules (align lint/lychee)
+- Strip fenced code before link scan; percent-decode until stable (traversal)
+- Reject empty targets, bare `#`, empty `path#` fragments, query strings on
+  relative paths, protocol-relative `//`, insecure http://, dangerous schemes
+"""
 
 from __future__ import annotations
 
@@ -35,6 +42,9 @@ MD_LINK_RE = re.compile(r"!?\[([^\]]*)\]\(\s*([^)\s]*)(?:\s+\"[^\"]*\")?\s*\)")
 # ATX headings for fragment checks (GitHub-ish slug approximation).
 ATX_HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$", re.MULTILINE)
 
+# Cap nested percent-decoding so %252e-style traversal cannot escape quietly.
+_MAX_UNQUOTE_PASSES = 4
+
 
 def should_skip(path: Path) -> bool:
     rel = path.relative_to(ROOT).as_posix()
@@ -43,6 +53,17 @@ def should_skip(path: Path) -> bool:
     if any(part in SKIP_PARTS for part in path.parts):
         return True
     return any(rel.startswith(prefix.replace("\\", "/")) for prefix in SKIP_PREFIXES)
+
+
+def fully_unquote(raw: str) -> str:
+    """Percent-decode until stable (capped) so nested %2e traversal fail-closes."""
+    decoded = raw
+    for _ in range(_MAX_UNQUOTE_PASSES):
+        nxt = unquote(decoded)
+        if nxt == decoded:
+            break
+        decoded = nxt
+    return decoded
 
 
 def github_slug(heading: str) -> str:
@@ -99,8 +120,8 @@ def check_file(path: Path, errors: list[str]) -> None:
             )
             continue
 
-        # Percent-encoded path traversal (e.g. %2e%2e/..) must not escape the repo.
-        decoded = unquote(raw)
+        # Percent-encoded path traversal (e.g. %2e%2e/.. / %252e) must not escape.
+        decoded = fully_unquote(raw)
         if "\0" in decoded:
             fail(f"{path.relative_to(ROOT)}: NUL in link target → {raw}", errors)
             continue
@@ -109,21 +130,39 @@ def check_file(path: Path, errors: list[str]) -> None:
         if raw.startswith("#"):
             dest = path
             frag = raw[1:]
-            if frag:
-                slugs = headings_in(dest)
-                normalized = frag.strip().lower()
-                if normalized not in slugs and github_slug(frag) not in slugs:
-                    fail(
-                        f"{path.relative_to(ROOT)}: missing heading #{frag} in "
-                        f"{dest.relative_to(ROOT)}",
-                        errors,
-                    )
+            if not frag.strip():
+                fail(f"{path.relative_to(ROOT)}: empty relative link target", errors)
+                continue
+            slugs = headings_in(dest)
+            normalized = frag.strip().lower()
+            if normalized not in slugs and github_slug(frag) not in slugs:
+                fail(
+                    f"{path.relative_to(ROOT)}: missing heading #{frag} in "
+                    f"{dest.relative_to(ROOT)}",
+                    errors,
+                )
             continue
 
         check_target = decoded if decoded != raw else raw
+        has_hash = "#" in check_target
         target, frag = (
-            (check_target.split("#", 1) + [""])[:2] if "#" in check_target else (check_target, "")
+            (check_target.split("#", 1) + [""])[:2] if has_hash else (check_target, "")
         )
+        # Fail-closed after #41: empty fragment on path# (e.g. README.md#) is not a
+        # valid same-file / cross-file anchor — symmetric with bare `#`.
+        if has_hash and not frag.strip():
+            fail(
+                f"{path.relative_to(ROOT)}: empty fragment in relative link → {raw}",
+                errors,
+            )
+            continue
+        # Relative paths must not carry query strings (offline resolve is path-only).
+        if "?" in target:
+            fail(
+                f"{path.relative_to(ROOT)}: relative link must not include query string → {raw}",
+                errors,
+            )
+            continue
         if not target:
             dest = path
         else:

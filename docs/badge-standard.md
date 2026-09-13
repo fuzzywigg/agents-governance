@@ -91,7 +91,11 @@ MAX_BADGES = 3 / EXPECTED_REPO / REQUIRED_WORKFLOWS / badge.svg + shields
 license / contiguous row / invent-product / fourth-badge refusal /
 Stewardship product badge reject,
 plus stewardship-schema scalar / `STRING_KEYS` / empty-yaml / bool-int
-rejects and live badge scope / PUBLISH purpose / closes `#16` pins after #53).
+rejects and live badge scope / PUBLISH purpose / closes `#16` pins after #53,
+plus relative-link second-pass after #55: `MD_LINK_RE` / `SKIP_*` /
+`_MAX_UNQUOTE_PASSES = 4` / `should_skip` / `iter_markdown` / `headings_in` /
+`check_file` / mailto+tel allow / NUL / angle brackets / image links /
+escapes+broken+missing needles / rglob fail-closed).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

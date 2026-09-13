@@ -82,7 +82,11 @@ credential / copilot topic hints, `strip_fenced_code`, protocol-relative
 `//` reject, Home kill-switch callout,
 plus stewardship-schema gate contract pins after #45: DOC_SCHEMAS /
 EXPECTED_VALUES / SEMVER / ISO-8601 / closes `#N` / invent edit_policy /
-issue-backlog owner `copilot` / `scan_secrets`).
+issue-backlog owner `copilot` / `scan_secrets`,
+plus badge-standard gate contract pins after #46: `REQUIRED_ORDER` /
+`MAX_BADGES=3` / `EXPECTED_REPO` / `BADGE_LINE_RE` / contiguous row /
+shields license / `FORBIDDEN_BADGE_HINTS` + `SECRET_URL_HINTS` /
+`stewardship_common` deny-list).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

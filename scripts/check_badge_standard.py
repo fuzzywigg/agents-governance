@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
-"""Enforce docs/badge-standard.md against README.md (executable gate)."""
+"""Enforce docs/badge-standard.md against README.md (executable gate).
+
+Fail-closed pins (live path after #46):
+- REQUIRED_ORDER is Link Check → Markdown Lint → License (exactly MAX_BADGES=3)
+- EXPECTED_REPO is fuzzywigg/agents-governance on GitHub/shields badge URLs
+- Badge images https-only; Link Check / Markdown Lint absolute workflow URLs
+- License image pins img.shields.io/github/license/<owner>/<repo>; link → LICENSE
+- Contiguous row under H1; FORBIDDEN_BADGE_HINTS + SECRET_URL_HINTS deny invent/secrets
+- No Stewardship product/status badge; docs refuse a fourth stewardship-checks badge
+- stewardship_common FORBIDDEN_BADGE_HINTS / SECRET_URL_HINTS remain the shared deny-list
+"""
 
 from __future__ import annotations
 
@@ -18,6 +28,7 @@ from stewardship_common import (  # noqa: E402
     fail,
     load_workflow_text,
     scan_secrets,
+    verify_badge_standard_source_contract,
 )
 
 README = ROOT / "README.md"
@@ -32,7 +43,9 @@ RELATIVE_LINK_GATE = ROOT / "scripts" / "check_relative_links.py"
 WIKI_OUTLINE_GATE = ROOT / "scripts" / "check_wiki_outline.py"
 SCHEMA_GATE = ROOT / "scripts" / "check_stewardship_schema.py"
 RUN_STEWARDSHIP = ROOT / "scripts" / "run_stewardship_checks.sh"
+COMMON_HELPERS = ROOT / "scripts" / "stewardship_common.py"
 
+# Fail-closed after #46: live badge row is exactly three labels in this order.
 REQUIRED_ORDER = ("Link Check", "Markdown Lint", "License")
 MAX_BADGES = 3
 EXPECTED_REPO = "fuzzywigg/agents-governance"
@@ -672,6 +685,68 @@ def check_contributing_and_agents(errors: list[str]) -> None:
         fail("Missing AGENTS.md", errors)
 
 
+def check_badge_standard_gate_contract(errors: list[str]) -> None:
+    """Fail-close live badge-standard gate wiring (after #46; not schema-pin spam)."""
+    # Source pins live in stewardship_common so mutations of this file fail closed.
+    verify_badge_standard_source_contract(errors)
+
+    if not COMMON_HELPERS.is_file():
+        fail("Missing scripts/stewardship_common.py (shared deny-list)", errors)
+        return
+    common = COMMON_HELPERS.read_text(encoding="utf-8")
+    if "FORBIDDEN_BADGE_HINTS" not in common:
+        fail(
+            "stewardship_common.py must declare FORBIDDEN_BADGE_HINTS",
+            errors,
+        )
+    for hint in (
+        "coverage",
+        "codecov",
+        "coveralls",
+        "downloads",
+        "discord",
+        "twitter",
+        "x.com",
+        "stars",
+        "forks",
+        "followers",
+        "npm/",
+        "pypi/",
+        "producthunt",
+        "buymeacoffee",
+        "opencollective",
+    ):
+        if f'"{hint}"' not in common and f"'{hint}'" not in common:
+            fail(
+                f"stewardship_common.py FORBIDDEN_BADGE_HINTS must pin {hint}",
+                errors,
+            )
+    if "SECRET_URL_HINTS" not in common:
+        fail("stewardship_common.py must declare SECRET_URL_HINTS", errors)
+    for hint in ("token=", "access_token=", "api_key=", "ghp_", "github_pat_"):
+        if f'"{hint}"' not in common and f"'{hint}'" not in common:
+            fail(
+                f"stewardship_common.py SECRET_URL_HINTS must pin {hint}",
+                errors,
+            )
+    if "SECRET_PATTERNS" not in common:
+        fail("stewardship_common.py must declare SECRET_PATTERNS", errors)
+    if "DANGEROUS_LINK_SCHEMES" not in common:
+        fail("stewardship_common.py must declare DANGEROUS_LINK_SCHEMES", errors)
+    if "scan_secrets" not in common:
+        fail("stewardship_common.py must provide scan_secrets", errors)
+    if "strip_fenced_code" not in common:
+        fail("stewardship_common.py must provide strip_fenced_code", errors)
+    if "has_dangerous_scheme" not in common:
+        fail("stewardship_common.py must provide has_dangerous_scheme", errors)
+    if "verify_badge_standard_source_contract" not in common:
+        fail(
+            "stewardship_common.py must provide "
+            "verify_badge_standard_source_contract",
+            errors,
+        )
+
+
 def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
     """Fail-close live stewardship-schema gate wiring (after #45; not wiki-pin spam)."""
     if not SCHEMA_GATE.is_file():
@@ -1121,9 +1196,17 @@ def main() -> int:
     check_lycheeignore(errors)
     check_workflow_hardening(errors)
     check_actionlint_style(errors)
+    check_badge_standard_gate_contract(errors)
     check_relative_link_gate_contract(errors)
     check_wiki_outline_gate_contract(errors)
     check_stewardship_schema_gate_contract(errors)
+    # Fail closed on gate-contract pins before README/doc scans (avoids NameError
+    # masking contract failures when seeded mutations rename helpers).
+    if errors:
+        print("Badge standard check FAILED:", file=sys.stderr)
+        for err in errors:
+            print(f"  - {err}", file=sys.stderr)
+        return 1
     if BADGE_STANDARD.is_file():
         check_badge_standard_doc(errors)
         scan_secrets(BADGE_STANDARD, errors)

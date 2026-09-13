@@ -34,6 +34,9 @@ gate order badge→wiki→schema→relative (not CI workflow pin / fixture-rejec
 Deepened after #43: wiki-outline gate contract pins — PUBLISHABLE_PAGES L0–L3 /
 credential / copilot topic hints, strip_fenced_code, protocol-relative // reject,
 Home kill-switch callout (not relative-link / CI workflow pin spam).
+Deepened after #45: schema gate contract pins — DOC_SCHEMAS / EXPECTED_VALUES
+live ownership/purpose/closes/scope, STRING_KEYS, reject_non_scalar, empty yaml,
+bool pretending to be autonomy/tier ints (not wiki/relative / CI workflow pin spam).
 """
 
 from __future__ import annotations
@@ -241,6 +244,7 @@ def _seed_badge_tree(tmp: Path, readme: str) -> Path:
         "check_badge_standard.py",
         "check_relative_links.py",
         "check_wiki_outline.py",
+        "check_stewardship_schema.py",
     )
     _minimal_workflows(tmp)
     _write(tmp / "LICENSE", "MIT\n")
@@ -307,7 +311,8 @@ def _seed_schema_tree(
         badge
         or (
             "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
-            "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+            "owner: copilot\nscope: \"public governance front-door repos\"\n"
+            "edit_policy: \"do not invent product badges\"\n"
             "closes: \"#16\"\n```\n"
         ),
     )
@@ -315,7 +320,8 @@ def _seed_schema_tree(
         tmp / "docs" / "wiki" / "PUBLISH.md",
         publish
         or (
-            "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\npurpose: x\n"
+            "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
+            "purpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\n"
             "closes: \"#16\"\n```\n"
         ),
     )
@@ -324,7 +330,7 @@ def _seed_schema_tree(
         backlog
         or (
             "# I\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
-            "owner: x\nedit_policy: x\n```\n"
+            "owner: copilot\nedit_policy: x\n```\n"
         ),
     )
     return scripts
@@ -348,7 +354,7 @@ def _seed_wiki_tree(tmp: Path, *, extra_pages: tuple[str, ...] = (), mutate=None
         ),
         "PUBLISH.md": (
             "# PUBLISH\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
-            "purpose: x\ncloses: \"#16\"\n```\n\n"
+            "purpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\ncloses: \"#16\"\n```\n\n"
             "| `Home.md` | Home |\n| `Overview.md` | Overview |\n"
             "| `Autonomy-Levels.md` | Autonomy-Levels |\n"
             "| `Repo-Stewardship.md` | Repo-Stewardship |\n"
@@ -943,7 +949,7 @@ def test_schema_rejects_inactive_status() -> None:
             tmp_path,
             badge=(
                 "# B\n\n```yaml\nstatus: DRAFT\ntier: 1\ncreated: \"2026-09-13\"\n"
-                "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
                 "closes: \"#16\"\n```\n"
             ),
         )
@@ -997,7 +1003,7 @@ def test_schema_rejects_bad_tier() -> None:
             tmp_path,
             badge=(
                 "# B\n\n```yaml\nstatus: ACTIVE\ntier: 0\ncreated: \"2026-09-13\"\n"
-                "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
                 "closes: \"#16\"\n```\n"
             ),
         )
@@ -1033,7 +1039,7 @@ def test_schema_rejects_edit_policy_without_invent() -> None:
             tmp_path,
             badge=(
                 "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
-                "owner: copilot\nscope: x\nedit_policy: \"agents may edit freely\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"agents may edit freely\"\n"
                 "closes: \"#16\"\n```\n"
             ),
         )
@@ -1087,7 +1093,7 @@ def test_schema_rejects_closes_without_issue() -> None:
             tmp_path,
             badge=(
                 "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
-                "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
                 "closes: \"soon\"\n```\n"
             ),
         )
@@ -2284,7 +2290,7 @@ def test_wiki_rejects_missing_publish_do_not_push() -> None:
         def mutate(pages: dict[str, str]) -> None:
             pages["PUBLISH.md"] = (
                 "# PUBLISH\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
-                "purpose: x\ncloses: \"#16\"\n```\n\n"
+                "purpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\ncloses: \"#16\"\n```\n\n"
                 "| `Home.md` | Home |\n| `Overview.md` | Overview |\n"
                 "| `Autonomy-Levels.md` | Autonomy-Levels |\n"
                 "| `Repo-Stewardship.md` | Repo-Stewardship |\n"
@@ -2383,7 +2389,7 @@ def test_schema_rejects_wrong_badge_owner() -> None:
             tmp_path,
             badge=(
                 "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
-                "owner: geryon\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+                "owner: geryon\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
                 "closes: \"#16\"\n```\n"
             ),
         )
@@ -2946,7 +2952,7 @@ def test_schema_rejects_inactive_publish_status() -> None:
         scripts = _seed_schema_tree(
             tmp_path,
             publish=(
-                "# P\n\n```yaml\nstatus: DRAFT\ncreated: \"2026-09-13\"\npurpose: x\n"
+                "# P\n\n```yaml\nstatus: DRAFT\ncreated: \"2026-09-13\"\npurpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\n"
                 "closes: \"#16\"\n```\n"
             ),
         )
@@ -2964,7 +2970,7 @@ def test_schema_rejects_backlog_wrong_tier() -> None:
             tmp_path,
             backlog=(
                 "# I\n\n```yaml\nstatus: ACTIVE\ntier: 9\ncreated: \"2026-09-13\"\n"
-                "owner: x\nedit_policy: x\n```\n"
+                "owner: copilot\nedit_policy: x\n```\n"
             ),
         )
         assert_fail_script(
@@ -3725,7 +3731,7 @@ def test_schema_rejects_wrong_badge_status() -> None:
             tmp_path,
             badge=(
                 "# B\n\n```yaml\nstatus: DRAFT\ntier: 1\ncreated: \"2026-09-13\"\n"
-                "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
                 "closes: \"#16\"\n```\n"
             ),
         )
@@ -3743,7 +3749,7 @@ def test_schema_rejects_wrong_badge_tier() -> None:
             tmp_path,
             badge=(
                 "# B\n\n```yaml\nstatus: ACTIVE\ntier: 2\ncreated: \"2026-09-13\"\n"
-                "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
                 "closes: \"#16\"\n```\n"
             ),
         )
@@ -3760,7 +3766,7 @@ def test_schema_rejects_publish_closes_without_issue() -> None:
         scripts = _seed_schema_tree(
             tmp_path,
             publish=(
-                "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\npurpose: x\n"
+                "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\npurpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\n"
                 "closes: \"soon\"\n```\n"
             ),
         )
@@ -3796,7 +3802,7 @@ def test_schema_rejects_tier_as_string() -> None:
             tmp_path,
             backlog=(
                 "# I\n\n```yaml\nstatus: ACTIVE\ntier: \"1\"\ncreated: \"2026-09-13\"\n"
-                "owner: x\nedit_policy: x\n```\n"
+                "owner: copilot\nedit_policy: x\n```\n"
             ),
         )
         assert_fail_script(
@@ -3848,7 +3854,7 @@ def test_schema_rejects_bad_badge_created_date() -> None:
             tmp_path,
             badge=(
                 "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"09/13/2026\"\n"
-                "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
                 "closes: \"#16\"\n```\n"
             ),
         )
@@ -4606,7 +4612,7 @@ def test_schema_rejects_inactive_backlog_status() -> None:
             tmp_path,
             backlog=(
                 "# I\n\n```yaml\nstatus: DRAFT\ntier: 1\ncreated: \"2026-09-13\"\n"
-                "owner: x\nedit_policy: x\n```\n"
+                "owner: copilot\nedit_policy: x\n```\n"
             ),
         )
         assert_fail_script(
@@ -4641,7 +4647,7 @@ def test_schema_rejects_missing_badge_closes_key() -> None:
             tmp_path,
             badge=(
                 "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
-                "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n```\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n```\n"
             ),
         )
         assert_fail_script(
@@ -5461,7 +5467,7 @@ def test_wiki_rejects_missing_publish_home_row() -> None:
         def mutate(pages: dict[str, str]) -> None:
             pages["PUBLISH.md"] = (
                 "# PUBLISH\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
-                "purpose: x\ncloses: \"#16\"\n```\n\n"
+                "purpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\ncloses: \"#16\"\n```\n\n"
                 "| `Overview.md` | Overview |\n"
                 "| `Autonomy-Levels.md` | Autonomy-Levels |\n"
                 "| `Repo-Stewardship.md` | Repo-Stewardship |\n"
@@ -5591,7 +5597,7 @@ def test_schema_rejects_missing_publish_closes_key() -> None:
         scripts = _seed_schema_tree(
             tmp_path,
             publish=(
-                "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\npurpose: x\n```\n"
+                "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\npurpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\n```\n"
             ),
         )
         assert_fail_script(
@@ -5626,7 +5632,7 @@ def test_schema_rejects_badge_closes_without_hash() -> None:
             tmp_path,
             badge=(
                 "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
-                "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
                 "closes: \"16\"\n```\n"
             ),
         )
@@ -6288,7 +6294,7 @@ def test_wiki_rejects_missing_publish_autonomy_row() -> None:
         def mutate(pages: dict[str, str]) -> None:
             pages["PUBLISH.md"] = (
                 "# PUBLISH\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
-                "purpose: x\ncloses: \"#16\"\n```\n\n"
+                "purpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\ncloses: \"#16\"\n```\n\n"
                 "| `Home.md` | Home |\n"
                 "| `Overview.md` | Overview |\n"
                 "| `Repo-Stewardship.md` | Repo-Stewardship |\n"
@@ -6313,7 +6319,7 @@ def test_wiki_rejects_missing_publish_security_row() -> None:
         def mutate(pages: dict[str, str]) -> None:
             pages["PUBLISH.md"] = (
                 "# PUBLISH\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
-                "purpose: x\ncloses: \"#16\"\n```\n\n"
+                "purpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\ncloses: \"#16\"\n```\n\n"
                 "| `Home.md` | Home |\n"
                 "| `Overview.md` | Overview |\n"
                 "| `Autonomy-Levels.md` | Autonomy-Levels |\n"
@@ -6338,7 +6344,7 @@ def test_wiki_rejects_missing_publish_routing_row() -> None:
         def mutate(pages: dict[str, str]) -> None:
             pages["PUBLISH.md"] = (
                 "# PUBLISH\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
-                "purpose: x\ncloses: \"#16\"\n```\n\n"
+                "purpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\ncloses: \"#16\"\n```\n\n"
                 "| `Home.md` | Home |\n"
                 "| `Overview.md` | Overview |\n"
                 "| `Autonomy-Levels.md` | Autonomy-Levels |\n"
@@ -6401,7 +6407,7 @@ def test_schema_rejects_empty_badge_edit_policy() -> None:
             tmp_path,
             badge=(
                 "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
-                "owner: copilot\nscope: x\nedit_policy: \"\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"\"\n"
                 "closes: \"#16\"\n```\n"
             ),
         )
@@ -6455,7 +6461,7 @@ def test_schema_rejects_missing_backlog_edit_policy_key() -> None:
             tmp_path,
             backlog=(
                 "# I\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
-                "owner: x\n```\n"
+                "owner: copilot\n```\n"
             ),
         )
         assert_fail_script(
@@ -6472,7 +6478,7 @@ def test_schema_rejects_tier_zero() -> None:
             tmp_path,
             badge=(
                 "# B\n\n```yaml\nstatus: ACTIVE\ntier: 0\ncreated: \"2026-09-13\"\n"
-                "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
                 "closes: \"#16\"\n```\n"
             ),
         )
@@ -6489,7 +6495,7 @@ def test_schema_rejects_empty_publish_created() -> None:
         scripts = _seed_schema_tree(
             tmp_path,
             publish=(
-                "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"\"\npurpose: x\n"
+                "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"\"\npurpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\n"
                 "closes: \"#16\"\n```\n"
             ),
         )
@@ -6507,7 +6513,7 @@ def test_schema_rejects_wrong_badge_owner_still() -> None:
             tmp_path,
             badge=(
                 "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
-                "owner: geryon\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+                "owner: geryon\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
                 "closes: \"#16\"\n```\n"
             ),
         )
@@ -7295,7 +7301,7 @@ def test_wiki_rejects_missing_publish_stewardship_row() -> None:
         def mutate(pages: dict[str, str]) -> None:
             pages["PUBLISH.md"] = (
                 "# PUBLISH\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
-                "purpose: x\ncloses: \"#16\"\n```\n\n"
+                "purpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\ncloses: \"#16\"\n```\n\n"
                 "| `Home.md` | Home |\n"
                 "| `Overview.md` | Overview |\n"
                 "| `Autonomy-Levels.md` | Autonomy-Levels |\n"
@@ -7341,7 +7347,7 @@ def test_schema_rejects_empty_badge_closes() -> None:
             tmp_path,
             badge=(
                 "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
-                "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
                 "closes: \"\"\n```\n"
             ),
         )
@@ -7448,7 +7454,7 @@ def test_schema_rejects_tier_negative() -> None:
             tmp_path,
             badge=(
                 "# B\n\n```yaml\nstatus: ACTIVE\ntier: -1\ncreated: \"2026-09-13\"\n"
-                "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
                 "closes: \"#16\"\n```\n"
             ),
         )
@@ -7683,7 +7689,7 @@ def test_schema_rejects_tier_zero_still() -> None:
             tmp_path,
             badge=(
                 "# B\n\n```yaml\nstatus: ACTIVE\ntier: 0\ncreated: \"2026-09-13\"\n"
-                "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
                 "closes: \"#16\"\n```\n"
             ),
         )
@@ -8332,7 +8338,7 @@ def test_schema_rejects_empty_badge_owner() -> None:
         tmp_path = Path(tmp)
         badge = (
             "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
-            "owner: \"\"\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+            "owner: \"\"\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
             "closes: \"#16\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, badge=badge)
@@ -8411,7 +8417,7 @@ def test_schema_rejects_wrong_badge_status_draft() -> None:
         tmp_path = Path(tmp)
         badge = (
             "# B\n\n```yaml\nstatus: DRAFT\ntier: 1\ncreated: \"2026-09-13\"\n"
-            "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+            "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
             "closes: \"#16\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, badge=badge)
@@ -8459,7 +8465,7 @@ def test_schema_rejects_closes_without_hash_still() -> None:
         tmp_path = Path(tmp)
         badge = (
             "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
-            "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+            "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
             "closes: \"issue sixteen\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, badge=badge)
@@ -8658,7 +8664,7 @@ def test_schema_rejects_tier_zero_still_after_34() -> None:
         tmp_path = Path(tmp)
         badge = (
             "# B\n\n```yaml\nstatus: ACTIVE\ntier: 0\ncreated: \"2026-09-13\"\n"
-            "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+            "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
             "closes: \"#16\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, badge=badge)
@@ -9358,7 +9364,7 @@ def test_schema_rejects_empty_publish_closes() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         publish = (
-            "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\npurpose: x\n"
+            "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\npurpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\n"
             "closes: \"\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, publish=publish)
@@ -9373,7 +9379,7 @@ def test_schema_rejects_wrong_publish_status_draft() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         publish = (
-            "# P\n\n```yaml\nstatus: DRAFT\ncreated: \"2026-09-13\"\npurpose: x\n"
+            "# P\n\n```yaml\nstatus: DRAFT\ncreated: \"2026-09-13\"\npurpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\n"
             "closes: \"#16\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, publish=publish)
@@ -9619,7 +9625,7 @@ def test_schema_rejects_tier_zero_still_after_35() -> None:
         tmp_path = Path(tmp)
         badge = (
             "# B\n\n```yaml\nstatus: ACTIVE\ntier: 0\ncreated: \"2026-09-13\"\n"
-            "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+            "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
             "closes: \"#16\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, badge=badge)
@@ -10271,7 +10277,7 @@ def test_schema_rejects_empty_badge_edit_policy_after_36() -> None:
         tmp_path = Path(tmp)
         badge = (
             "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
-            "owner: copilot\nscope: x\nedit_policy: \"\"\ncloses: \"#16\"\n```\n"
+            "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"\"\ncloses: \"#16\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, badge=badge)
         assert_fail_script(
@@ -10333,7 +10339,7 @@ def test_schema_rejects_empty_publish_created_after_36() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         publish = (
-            "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"\"\npurpose: x\n"
+            "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"\"\npurpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\n"
             "closes: \"#16\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, publish=publish)
@@ -10349,7 +10355,7 @@ def test_schema_rejects_wrong_badge_status_draft_after_36() -> None:
         tmp_path = Path(tmp)
         badge = (
             "# B\n\n```yaml\nstatus: DRAFT\ntier: 1\ncreated: \"2026-09-13\"\n"
-            "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+            "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
             "closes: \"#16\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, badge=badge)
@@ -10397,7 +10403,7 @@ def test_schema_rejects_closes_without_hash_still_after_36() -> None:
         tmp_path = Path(tmp)
         badge = (
             "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
-            "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+            "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
             "closes: \"issue 16\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, badge=badge)
@@ -10602,7 +10608,7 @@ def test_schema_rejects_tier_zero_still_after_36() -> None:
         tmp_path = Path(tmp)
         badge = (
             "# B\n\n```yaml\nstatus: ACTIVE\ntier: 0\ncreated: \"2026-09-13\"\n"
-            "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+            "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
             "closes: \"#16\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, badge=badge)
@@ -11338,7 +11344,7 @@ def test_schema_rejects_empty_publish_closes_after_37() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         publish = (
-            "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\npurpose: x\n"
+            "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\npurpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\n"
             "closes: \"\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, publish=publish)
@@ -11353,7 +11359,7 @@ def test_schema_rejects_wrong_publish_status_draft_after_37() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         publish = (
-            "# P\n\n```yaml\nstatus: DRAFT\ncreated: \"2026-09-13\"\npurpose: x\n"
+            "# P\n\n```yaml\nstatus: DRAFT\ncreated: \"2026-09-13\"\npurpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\n"
             "closes: \"#16\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, publish=publish)
@@ -11593,7 +11599,7 @@ def test_schema_rejects_tier_zero_still_after_37() -> None:
         tmp_path = Path(tmp)
         badge = (
             "# B\n\n```yaml\nstatus: ACTIVE\ntier: 0\ncreated: \"2026-09-13\"\n"
-            "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+            "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
             "closes: \"#16\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, badge=badge)
@@ -12263,7 +12269,7 @@ def test_schema_rejects_empty_badge_edit_policy_after_38() -> None:
         tmp_path = Path(tmp)
         badge = (
             "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
-            "owner: copilot\nscope: x\nedit_policy: \"\"\ncloses: \"#16\"\n```\n"
+            "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"\"\ncloses: \"#16\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, badge=badge)
         assert_fail_script(
@@ -12325,7 +12331,7 @@ def test_schema_rejects_empty_publish_created_after_38() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         publish = (
-            "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"\"\npurpose: x\n"
+            "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"\"\npurpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\n"
             "closes: \"#16\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, publish=publish)
@@ -12341,7 +12347,7 @@ def test_schema_rejects_wrong_badge_status_draft_after_38() -> None:
         tmp_path = Path(tmp)
         badge = (
             "# B\n\n```yaml\nstatus: DRAFT\ntier: 1\ncreated: \"2026-09-13\"\n"
-            "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+            "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
             "closes: \"#16\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, badge=badge)
@@ -12389,7 +12395,7 @@ def test_schema_rejects_closes_without_hash_still_after_38() -> None:
         tmp_path = Path(tmp)
         badge = (
             "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
-            "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+            "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
             "closes: \"issue 16\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, badge=badge)
@@ -12576,7 +12582,7 @@ def test_schema_rejects_tier_zero_still_after_38() -> None:
         tmp_path = Path(tmp)
         badge = (
             "# B\n\n```yaml\nstatus: ACTIVE\ntier: 0\ncreated: \"2026-09-13\"\n"
-            "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+            "owner: copilot\nscope: \"public governance front-door repos\"\nedit_policy: \"do not invent product badges\"\n"
             "closes: \"#16\"\n```\n"
         )
         scripts = _seed_schema_tree(tmp_path, badge=badge)
@@ -15465,6 +15471,1069 @@ def test_wiki_rejects_secret_pattern_still_after_43() -> None:
         )
 
 
+
+# --- TOKENMAXX deepen after #45: schema gate contract / fail-closed pins ---
+
+def test_schema_gate_file_must_exist_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        (tmp_path / "scripts" / "check_stewardship_schema.py").unlink()
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "check_stewardship_schema.py",
+        )
+
+def test_schema_gate_requires_doc_schemas_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('DOC_SCHEMAS', 'DOC_KEYS')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'DOC_SCHEMAS',
+        )
+
+def test_schema_gate_requires_expected_values_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('EXPECTED_VALUES', 'PINNED_VALUES')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'EXPECTED_VALUES',
+        )
+
+def test_schema_gate_requires_fenced_yaml_re_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('FENCED_YAML_RE', 'YAML_FENCE_RE')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'FENCED_YAML_RE',
+        )
+
+def test_schema_gate_requires_iso_date_re_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('ISO_DATE_RE', 'DATE_RE')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ISO_DATE_RE',
+        )
+
+def test_schema_gate_requires_semver_re_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('SEMVER_RE', 'VERSION_RE')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'SEMVER_RE',
+        )
+
+def test_schema_gate_requires_issue_ref_re_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('ISSUE_REF_RE', 'ISSUE_RE')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ISSUE_REF_RE',
+        )
+
+def test_schema_gate_requires_string_keys_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('STRING_KEYS', 'STR_KEYS')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'STRING_KEYS',
+        )
+
+def test_schema_gate_requires_reject_non_scalar_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('reject_non_scalar', 'reject_nested')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'reject_non_scalar',
+        )
+
+def test_schema_gate_requires_scan_secrets_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('scan_secrets', 'scan_tokens')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'scan_secrets',
+        )
+
+def test_schema_gate_requires_date_keys_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('DATE_KEYS', 'DATE_FIELDS')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'DATE_KEYS',
+        )
+
+def test_schema_gate_requires_autonomy_level_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('autonomy_level', 'autonomy_tier')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'autonomy_level',
+        )
+
+def test_schema_gate_requires_invent_pin_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('"invent"', '"innovate"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "invent",
+        )
+
+def test_schema_gate_requires_repository_specific_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('repository-specific', 'repo-local')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'repository-specific',
+        )
+
+def test_schema_gate_requires_smtp_eth_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('smtp.eth', 'owner.eth')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'smtp.eth',
+        )
+
+def test_schema_gate_requires_copilot_surface_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('copilot', 'cursor')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'copilot',
+        )
+
+def test_schema_gate_requires_ecosystem_md_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('AGENTS-ECOSYSTEM.md', 'AGENTS-ECO.md')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'AGENTS-ECOSYSTEM.md',
+        )
+
+def test_schema_gate_requires_front_door_scope_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('public governance front-door repos', 'public governance repos')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'public governance front-door repos',
+        )
+
+def test_schema_gate_requires_reversible_purpose_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('Reversible publish path for docs/wiki', 'Publish path for docs/wiki')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Reversible publish path for docs/wiki',
+        )
+
+def test_schema_gate_requires_closes_16_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('"#16"', '"#99"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '"#16"',
+        )
+
+def test_schema_gate_requires_parent_governance_pin_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('github.com/fuzzywigg/agents-governance', 'github.com/example/other')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'github.com/fuzzywigg/agents-governance',
+        )
+
+def test_schema_gate_requires_fuzzywigg_owner_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('fuzzywigg (smtp.eth)', 'fuzzywigg')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'fuzzywigg (smtp.eth)',
+        )
+
+def test_schema_gate_requires_agents_governance_repo_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'repo": "agents-governance"',
+            'repo": "agents-gov"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'repo": "agents-governance"',
+        )
+
+def test_schema_gate_requires_badge_standard_doc_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('docs/badge-standard.md', 'docs/badge-POLICY.md')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'docs/badge-standard.md',
+        )
+
+def test_schema_gate_requires_publish_doc_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('docs/wiki/PUBLISH.md', 'docs/wiki/OPERATOR.md')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'docs/wiki/PUBLISH.md',
+        )
+
+def test_schema_gate_requires_backlog_doc_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('docs/issue-backlog.md', 'docs/issue-queue.md')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'docs/issue-backlog.md',
+        )
+
+def test_schema_gate_requires_agents_doc_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('"AGENTS.md"', '"AGENTS-X.md"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'AGENTS.md',
+        )
+
+def test_schema_gate_requires_claude_doc_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('"CLAUDE.md"', '"CLAUDE-X.md"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'CLAUDE.md',
+        )
+
+def test_schema_gate_requires_empty_yaml_needle_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "empty yaml metadata block", "blank metadata block"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "empty yaml",
+        )
+
+def test_schema_gate_requires_bool_int_reject_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        text = text.replace("isinstance(level, bool)", "isinstance(level, float)")
+        text = text.replace("isinstance(tier, bool)", "isinstance(tier, float)")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "bool",
+        )
+
+def test_schema_rejects_bool_autonomy_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: true\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "autonomy_level",
+        )
+
+def test_schema_rejects_bool_tier_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: true\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "tier",
+        )
+
+def test_schema_rejects_nested_scope_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope:\n  nested: yes\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "scalar",
+        )
+
+def test_schema_rejects_list_owner_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner:\n  - copilot\n"
+                "scope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "scalar",
+        )
+
+def test_schema_rejects_empty_yaml_block_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents="# AGENTS\n\n```yaml\n\n```\n",
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "empty yaml",
+        )
+
+def test_schema_rejects_null_maintainer_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: null\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "non-empty",
+        )
+
+def test_schema_rejects_tilde_null_purpose_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=(
+                "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
+                "purpose: ~\ncloses: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "non-empty",
+        )
+
+def test_schema_rejects_int_scope_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: 42\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "must be a string",
+        )
+
+def test_schema_rejects_wrong_badge_scope_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"other repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "expected",
+        )
+
+def test_schema_rejects_wrong_publish_purpose_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=(
+                "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
+                "purpose: \"Something else\"\ncloses: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "expected",
+        )
+
+def test_schema_rejects_wrong_backlog_owner_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=(
+                "# I\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: geryon\nedit_policy: x\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "expected",
+        )
+
+def test_schema_rejects_wrong_badge_closes_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#99\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "expected",
+        )
+
+def test_schema_rejects_wrong_publish_closes_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=(
+                "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
+                "purpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\n"
+                "closes: \"#42\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "expected",
+        )
+
+def test_schema_rejects_yes_autonomy_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=(
+                "# CLAUDE\n\n```yaml\nrepo: agents-governance\n"
+                "owner: \"fuzzywigg (smtp.eth)\"\nsurface: copilot\n"
+                "autonomy_level: yes\nlast_updated: \"2026-04-13\"\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "autonomy_level",
+        )
+
+def test_schema_rejects_nested_purpose_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=(
+                "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
+                "purpose:\n  text: reversible\ncloses: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "scalar",
+        )
+
+def test_schema_rejects_list_closes_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=(
+                "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
+                "purpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\n"
+                "closes:\n  - \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "scalar",
+        )
+
+def test_schema_rejects_bool_status_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: true\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "must be a string",
+        )
+
+def test_schema_passes_good_fixture_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(tmp_path)
+        assert_pass_script(scripts / "check_stewardship_schema.py", tmp_path)
+
+def test_schema_rejects_wrong_value_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 0\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'expected',
+        )
+
+def test_schema_rejects_inactive_status_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: DRAFT\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'ACTIVE',
+        )
+
+def test_schema_rejects_missing_key_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'missing',
+        )
+
+def test_schema_rejects_bad_semver_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'semver',
+        )
+
+def test_schema_rejects_edit_policy_without_invent_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"agents may edit freely\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'invent',
+        )
+
+def test_schema_rejects_wrong_surface_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=(
+                "# CLAUDE\n\n```yaml\nrepo: agents-governance\n"
+                "owner: \"fuzzywigg (smtp.eth)\"\nsurface: geryon\n"
+                "autonomy_level: 1\nlast_updated: \"2026-04-13\"\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'expected',
+        )
+
+def test_schema_rejects_closes_without_issue_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"sixteen\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'closes',
+        )
+
+def test_schema_rejects_bad_iso_date_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"04-13-2026\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'ISO-8601',
+        )
+
+def test_schema_rejects_tier_zero_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 0\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'tier',
+        )
+
+def test_schema_rejects_wrong_maintainer_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: other\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'expected',
+        )
+
+def test_schema_rejects_wrong_claude_parent_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=(
+                "# CLAUDE\n\n```yaml\nrepo: agents-governance\n"
+                "owner: \"fuzzywigg (smtp.eth)\"\nsurface: copilot\n"
+                "autonomy_level: 1\nlast_updated: \"2026-04-13\"\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'expected',
+        )
+
+def test_schema_rejects_float_autonomy_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1.5\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'autonomy_level',
+        )
+
+def test_schema_rejects_autonomy_as_string_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: \"1\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'autonomy_level',
+        )
+
+def test_schema_rejects_tier_as_string_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: \"1\"\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'tier',
+        )
+
+def test_schema_rejects_wrong_agents_scope_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: ecosystem-wide\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'expected',
+        )
+
+def test_schema_rejects_wrong_claude_repo_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=(
+                "# CLAUDE\n\n```yaml\nrepo: other-repo\n"
+                "owner: \"fuzzywigg (smtp.eth)\"\nsurface: copilot\n"
+                "autonomy_level: 1\nlast_updated: \"2026-04-13\"\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'expected',
+        )
+
+def test_schema_rejects_empty_badge_edit_policy_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"\"\ncloses: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'non-empty',
+        )
+
+def test_schema_rejects_secret_in_doc_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(tmp_path)
+        path = tmp_path / "AGENTS.md"
+        path.write_text(
+            path.read_text(encoding="utf-8")
+            + "\nghp_abcdefghijklmnopqrstuvwxyz0123456789\n",
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "secret",
+        )
+
+def test_schema_rejects_missing_yaml_block_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(tmp_path, agents="# AGENTS\n\nNo yaml here.\n")
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "yaml",
+        )
+
+def test_schema_rejects_missing_file_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(tmp_path)
+        (tmp_path / "CLAUDE.md").unlink()
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "missing",
+        )
+
+def test_schema_rejects_non_mapping_yaml_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents="# AGENTS\n\n```yaml\n- just\n- a\n- list\n```\n",
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "mapping",
+        )
+
+def test_schema_rejects_unparseable_yaml_still_after_45() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents="# AGENTS\n\n```yaml\nversion: [unterminated\n```\n",
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "AGENTS.md",
+        )
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -16464,6 +17533,78 @@ def main() -> int:
         test_wiki_rejects_missing_run_script_still_after_43,
         test_wiki_rejects_missing_home_badge_link_still_after_43,
         test_wiki_rejects_secret_pattern_still_after_43,
+
+        # TOKENMAXX deepen after #45 (+70)
+        test_schema_gate_file_must_exist_after_45,
+        test_schema_gate_requires_doc_schemas_after_45,
+        test_schema_gate_requires_expected_values_after_45,
+        test_schema_gate_requires_fenced_yaml_re_after_45,
+        test_schema_gate_requires_iso_date_re_after_45,
+        test_schema_gate_requires_semver_re_after_45,
+        test_schema_gate_requires_issue_ref_re_after_45,
+        test_schema_gate_requires_string_keys_after_45,
+        test_schema_gate_requires_reject_non_scalar_after_45,
+        test_schema_gate_requires_scan_secrets_after_45,
+        test_schema_gate_requires_date_keys_after_45,
+        test_schema_gate_requires_autonomy_level_after_45,
+        test_schema_gate_requires_invent_pin_after_45,
+        test_schema_gate_requires_repository_specific_after_45,
+        test_schema_gate_requires_smtp_eth_after_45,
+        test_schema_gate_requires_copilot_surface_after_45,
+        test_schema_gate_requires_ecosystem_md_after_45,
+        test_schema_gate_requires_front_door_scope_after_45,
+        test_schema_gate_requires_reversible_purpose_after_45,
+        test_schema_gate_requires_closes_16_after_45,
+        test_schema_gate_requires_parent_governance_pin_after_45,
+        test_schema_gate_requires_fuzzywigg_owner_after_45,
+        test_schema_gate_requires_agents_governance_repo_after_45,
+        test_schema_gate_requires_badge_standard_doc_after_45,
+        test_schema_gate_requires_publish_doc_after_45,
+        test_schema_gate_requires_backlog_doc_after_45,
+        test_schema_gate_requires_agents_doc_after_45,
+        test_schema_gate_requires_claude_doc_after_45,
+        test_schema_gate_requires_empty_yaml_needle_after_45,
+        test_schema_gate_requires_bool_int_reject_after_45,
+        test_schema_rejects_bool_autonomy_after_45,
+        test_schema_rejects_bool_tier_after_45,
+        test_schema_rejects_nested_scope_after_45,
+        test_schema_rejects_list_owner_after_45,
+        test_schema_rejects_empty_yaml_block_after_45,
+        test_schema_rejects_null_maintainer_after_45,
+        test_schema_rejects_tilde_null_purpose_after_45,
+        test_schema_rejects_int_scope_after_45,
+        test_schema_rejects_wrong_badge_scope_after_45,
+        test_schema_rejects_wrong_publish_purpose_after_45,
+        test_schema_rejects_wrong_backlog_owner_after_45,
+        test_schema_rejects_wrong_badge_closes_after_45,
+        test_schema_rejects_wrong_publish_closes_after_45,
+        test_schema_rejects_yes_autonomy_after_45,
+        test_schema_rejects_nested_purpose_after_45,
+        test_schema_rejects_list_closes_after_45,
+        test_schema_rejects_bool_status_after_45,
+        test_schema_passes_good_fixture_still_after_45,
+        test_schema_rejects_wrong_value_still_after_45,
+        test_schema_rejects_inactive_status_still_after_45,
+        test_schema_rejects_missing_key_still_after_45,
+        test_schema_rejects_bad_semver_still_after_45,
+        test_schema_rejects_edit_policy_without_invent_still_after_45,
+        test_schema_rejects_wrong_surface_still_after_45,
+        test_schema_rejects_closes_without_issue_still_after_45,
+        test_schema_rejects_bad_iso_date_still_after_45,
+        test_schema_rejects_tier_zero_still_after_45,
+        test_schema_rejects_wrong_maintainer_still_after_45,
+        test_schema_rejects_wrong_claude_parent_still_after_45,
+        test_schema_rejects_float_autonomy_still_after_45,
+        test_schema_rejects_autonomy_as_string_still_after_45,
+        test_schema_rejects_tier_as_string_still_after_45,
+        test_schema_rejects_wrong_agents_scope_still_after_45,
+        test_schema_rejects_wrong_claude_repo_still_after_45,
+        test_schema_rejects_empty_badge_edit_policy_still_after_45,
+        test_schema_rejects_secret_in_doc_still_after_45,
+        test_schema_rejects_missing_yaml_block_still_after_45,
+        test_schema_rejects_missing_file_still_after_45,
+        test_schema_rejects_non_mapping_yaml_still_after_45,
+        test_schema_rejects_unparseable_yaml_still_after_45,
 
     ]
     try:

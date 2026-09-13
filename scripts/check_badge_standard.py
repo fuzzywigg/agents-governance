@@ -30,6 +30,7 @@ MARKDOWNLINT_CONFIG = ROOT / ".markdownlint.json"
 WORKFLOWS = ROOT / ".github" / "workflows"
 RELATIVE_LINK_GATE = ROOT / "scripts" / "check_relative_links.py"
 WIKI_OUTLINE_GATE = ROOT / "scripts" / "check_wiki_outline.py"
+SCHEMA_GATE = ROOT / "scripts" / "check_stewardship_schema.py"
 RUN_STEWARDSHIP = ROOT / "scripts" / "run_stewardship_checks.sh"
 
 REQUIRED_ORDER = ("Link Check", "Markdown Lint", "License")
@@ -804,6 +805,90 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
         )
 
 
+def check_schema_gate_contract(errors: list[str]) -> None:
+    """Fail-close live stewardship schema gate wiring (after #45; not wiki/relative spam)."""
+    if not SCHEMA_GATE.is_file():
+        fail("Missing scripts/check_stewardship_schema.py (schema gate)", errors)
+        return
+    text = SCHEMA_GATE.read_text(encoding="utf-8")
+    if "DOC_SCHEMAS" not in text:
+        fail("check_stewardship_schema.py must declare DOC_SCHEMAS", errors)
+    if "EXPECTED_VALUES" not in text:
+        fail("check_stewardship_schema.py must declare EXPECTED_VALUES", errors)
+    if "FENCED_YAML_RE" not in text:
+        fail("check_stewardship_schema.py must declare FENCED_YAML_RE", errors)
+    if "ISO_DATE_RE" not in text:
+        fail("check_stewardship_schema.py must declare ISO_DATE_RE", errors)
+    if "SEMVER_RE" not in text:
+        fail("check_stewardship_schema.py must declare SEMVER_RE", errors)
+    if "ISSUE_REF_RE" not in text:
+        fail("check_stewardship_schema.py must declare ISSUE_REF_RE", errors)
+    if "STRING_KEYS" not in text:
+        fail("check_stewardship_schema.py must declare STRING_KEYS", errors)
+    if "reject_non_scalar" not in text:
+        fail(
+            "check_stewardship_schema.py must reject nested/list metadata via reject_non_scalar",
+            errors,
+        )
+    if "empty yaml metadata block" not in text:
+        fail(
+            "check_stewardship_schema.py must reject empty yaml metadata blocks",
+            errors,
+        )
+    if "isinstance(level, bool)" not in text and "isinstance(tier, bool)" not in text:
+        fail(
+            "check_stewardship_schema.py must reject bool pretending to be "
+            "autonomy_level / tier ints",
+            errors,
+        )
+    if "scan_secrets" not in text:
+        fail("check_stewardship_schema.py must scan metadata docs via scan_secrets", errors)
+    # Live DOC_SCHEMAS paths (wire existing tree only — do not invent docs).
+    for needle in (
+        "docs/badge-standard.md",
+        "docs/wiki/PUBLISH.md",
+        "docs/issue-backlog.md",
+        "AGENTS.md",
+        "CLAUDE.md",
+    ):
+        if needle not in text:
+            fail(
+                f"check_stewardship_schema.py DOC_SCHEMAS must include {needle}",
+                errors,
+            )
+    # Live EXPECTED_VALUES pins already present on those docs.
+    for needle in (
+        "github.com/fuzzywigg/agents-governance",
+        "repository-specific",
+        "smtp.eth",
+        'repo": "agents-governance"',
+        "fuzzywigg (smtp.eth)",
+        "copilot",
+        "AGENTS-ECOSYSTEM.md",
+        "public governance front-door repos",
+        "Reversible publish path for docs/wiki",
+        '"#16"',
+    ):
+        if needle not in text:
+            fail(
+                f"check_stewardship_schema.py EXPECTED_VALUES must pin {needle}",
+                errors,
+            )
+    # invent-product edit_policy pin (quoted "invent" token; inventX must not count).
+    if '"invent"' not in text and "'invent'" not in text:
+        fail(
+            "check_stewardship_schema.py must retain invent-product edit_policy pin",
+            errors,
+        )
+    if "autonomy_level" not in text:
+        fail(
+            "check_stewardship_schema.py must validate autonomy_level",
+            errors,
+        )
+    if "DATE_KEYS" not in text:
+        fail("check_stewardship_schema.py must declare DATE_KEYS", errors)
+
+
 def check_relative_link_gate_contract(errors: list[str]) -> None:
     """Fail-close live relative-link gate wiring (after #41; not workflow-pin spam)."""
     if not RELATIVE_LINK_GATE.is_file():
@@ -999,6 +1084,7 @@ def main() -> int:
     check_actionlint_style(errors)
     check_relative_link_gate_contract(errors)
     check_wiki_outline_gate_contract(errors)
+    check_schema_gate_contract(errors)
     if BADGE_STANDARD.is_file():
         check_badge_standard_doc(errors)
         scan_secrets(BADGE_STANDARD, errors)

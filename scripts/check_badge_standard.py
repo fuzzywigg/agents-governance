@@ -7,13 +7,20 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+_SCRIPTS = Path(__file__).resolve().parent
+if str(_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS))
+
+from stewardship_common import ROOT, SECRET_URL_HINTS, fail, scan_secrets  # noqa: E402
+
 README = ROOT / "README.md"
 LICENSE = ROOT / "LICENSE"
+BADGE_STANDARD = ROOT / "docs" / "badge-standard.md"
 WORKFLOWS = ROOT / ".github" / "workflows"
 
 REQUIRED_ORDER = ("Link Check", "Markdown Lint", "License")
 MAX_BADGES = 3
+EXPECTED_REPO = "fuzzywigg/agents-governance"
 
 # Status-only badges. Coverage / social / downloads are invent-product noise.
 FORBIDDEN_BADGE_HINTS = (
@@ -29,25 +36,23 @@ FORBIDDEN_BADGE_HINTS = (
     "followers",
     "npm/",
     "pypi/",
-)
-
-SECRET_URL_HINTS = (
-    "token=",
-    "access_token=",
-    "api_key=",
-    "apikey=",
-    "ghp_",
-    "gho_",
-    "github_pat_",
+    "producthunt",
+    "buymeacoffee",
+    "opencollective",
 )
 
 BADGE_LINE_RE = re.compile(
     r"^\[!\[(?P<label>[^\]]+)\]\((?P<img>[^)]+)\)\]\((?P<link>[^)]+)\)\s*$"
 )
-
-
-def fail(msg: str, errors: list[str]) -> None:
-    errors.append(msg)
+REPO_FROM_GITHUB_RE = re.compile(
+    r"https://github\.com/(?P<owner>[^/]+)/(?P<repo>[^/\s?#]+)",
+    re.IGNORECASE,
+)
+REPO_FROM_SHIELDS_RE = re.compile(
+    r"https://img\.shields\.io/github/(?:license|actions)/"
+    r"(?P<owner>[^/]+)/(?P<repo>[^/\s?#]+)",
+    re.IGNORECASE,
+)
 
 
 def extract_badge_row(text: str) -> tuple[list[re.Match[str]], list[str]]:
@@ -69,12 +74,17 @@ def extract_badge_row(text: str) -> tuple[list[re.Match[str]], list[str]]:
             break
         badges.append(match)
         i += 1
-        while i < len(lines) and lines[i].strip() == "":
-            # allow blank lines between badge lines? standard says a row —
-            # tolerate single blanks but stop at non-badge content
-            if i + 1 < len(lines) and BADGE_LINE_RE.match(lines[i + 1]):
-                i += 1
-                continue
+        # Strict row: no blank lines between badges.
+        if i < len(lines) and lines[i].strip() == "":
+            # Peek: if next non-empty is a badge, that is a soft row split — reject.
+            j = i
+            while j < len(lines) and lines[j].strip() == "":
+                j += 1
+            if j < len(lines) and BADGE_LINE_RE.match(lines[j]):
+                fail(
+                    "Badge row must be contiguous (no blank lines between badge lines)",
+                    errors,
+                )
             break
     if not badges:
         fail(
@@ -86,12 +96,44 @@ def extract_badge_row(text: str) -> tuple[list[re.Match[str]], list[str]]:
 
 
 def check_workflows_and_license(errors: list[str]) -> None:
-    for name in ("link-check.yml", "markdown-lint.yml"):
+    for name in ("link-check.yml", "markdown-lint.yml", "stewardship-checks.yml"):
         path = WORKFLOWS / name
         if not path.is_file():
-            fail(f"Missing workflow required by badge standard: {path.relative_to(ROOT)}", errors)
+            fail(f"Missing workflow required by stewardship CI: {path.relative_to(ROOT)}", errors)
     if not LICENSE.is_file():
         fail("Missing LICENSE (required for License badge)", errors)
+    if not BADGE_STANDARD.is_file():
+        fail("Missing docs/badge-standard.md", errors)
+
+
+def check_badge_standard_doc(errors: list[str]) -> None:
+    """Ensure docs/badge-standard.md still documents the same required order."""
+    text = BADGE_STANDARD.read_text(encoding="utf-8")
+    for label in REQUIRED_ORDER:
+        if f"| {label} |" not in text and f"| {label}" not in text:
+            # table cells may vary; also accept bold/plain mentions in Required badges
+            if label not in text:
+                fail(f"docs/badge-standard.md must document required badge '{label}'", errors)
+    # Canonical snippet must reference the three workflow/license targets.
+    if "link-check.yml/badge.svg" not in text:
+        fail("docs/badge-standard.md canonical snippet missing link-check badge.svg", errors)
+    if "markdown-lint.yml/badge.svg" not in text:
+        fail("docs/badge-standard.md canonical snippet missing markdown-lint badge.svg", errors)
+    if "img.shields.io/github/license/" not in text:
+        fail("docs/badge-standard.md canonical snippet missing shields license image", errors)
+    if "do not invent product badges" not in text.lower() and "invent product" not in text.lower():
+        fail("docs/badge-standard.md must retain no-invent-product edit policy wording", errors)
+
+
+def check_readme_consistency(text: str, errors: list[str]) -> None:
+    if "docs/badge-standard.md" not in text and "./docs/badge-standard.md" not in text:
+        fail("README.md Documents section must link to docs/badge-standard.md", errors)
+    # Installation / local gates should mention stewardship runner (docs consistency).
+    if "run_stewardship_checks.sh" not in text and "scripts/run_stewardship_checks" not in text:
+        fail(
+            "README.md must document bash scripts/run_stewardship_checks.sh for local gates",
+            errors,
+        )
 
 
 def check_badges(badges: list[re.Match[str]], errors: list[str]) -> None:
@@ -122,6 +164,16 @@ def check_badges(badges: list[re.Match[str]], errors: list[str]) -> None:
             if hint in blob:
                 fail(f"Secret-like token in badge URL for {label}", errors)
 
+        for url in (img, link):
+            repo_match = REPO_FROM_GITHUB_RE.search(url) or REPO_FROM_SHIELDS_RE.search(url)
+            if repo_match:
+                found = f"{repo_match.group('owner')}/{repo_match.group('repo')}"
+                if found.lower() != EXPECTED_REPO.lower():
+                    fail(
+                        f"Badge URL repo slug must be {EXPECTED_REPO}; found {found} in {label}",
+                        errors,
+                    )
+
         if label == "Link Check":
             if "actions/workflows/link-check.yml/badge.svg" not in img:
                 fail("Link Check image must use link-check.yml/badge.svg", errors)
@@ -149,6 +201,11 @@ def main() -> int:
 
     text = README.read_text(encoding="utf-8")
     check_workflows_and_license(errors)
+    if BADGE_STANDARD.is_file():
+        check_badge_standard_doc(errors)
+        scan_secrets(BADGE_STANDARD, errors)
+    check_readme_consistency(text, errors)
+    scan_secrets(README, errors)
     badges, row_errors = extract_badge_row(text)
     errors.extend(row_errors)
     if badges:

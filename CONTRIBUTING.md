@@ -36,6 +36,20 @@ Thank you for your interest in improving the smtp.eth governance framework.
 4. Reference any related issues in the PR description
 5. Wait for review — smtp.eth is the final approver for structural changes
 
+## Docs quality checks
+
+Before requesting review on docs/stewardship PRs, run the same gates CI uses
+(see [AGENTS.md §3](./AGENTS.md#3-testing-requirements)):
+
+```bash
+npx markdownlint-cli2 "**/*.md" "!.github/agents/**" "!OWASP-AGENTIC.md"
+bash scripts/run_stewardship_checks.sh
+```
+
+Do not add invent-product badges, coverage/social shields, or secrets to public docs.
+README badge row must stay Link Check → Markdown Lint → License per
+[docs/badge-standard.md](./docs/badge-standard.md).
+
 ## Issue Reporting
 
 Use the provided issue templates when reporting:

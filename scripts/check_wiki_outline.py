@@ -3,11 +3,15 @@
 
 from __future__ import annotations
 
-import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+_SCRIPTS = Path(__file__).resolve().parent
+if str(_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS))
+
+from stewardship_common import ROOT, fail, scan_secrets  # noqa: E402
+
 WIKI = ROOT / "docs" / "wiki"
 
 # Keep in sync with docs/wiki/PUBLISH.md "Pages to publish"
@@ -32,19 +36,12 @@ BADGE_STANDARD_HINTS = (
     "https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge-standard.md",
 )
 
-# Public wiki must not ship secrets / private MEMORY dumps (PUBLISH acceptance).
-SECRET_PATTERNS = (
-    re.compile(r"-----BEGIN (?:RSA |OPENSSH |EC )?PRIVATE KEY-----"),
-    re.compile(r"\b(ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9]{20,}\b"),
-    re.compile(r"\bgithub_pat_[A-Za-z0-9_]{20,}\b"),
-    re.compile(r"\b(sk|rk)-[A-Za-z0-9]{20,}\b"),
-    re.compile(r"(?i)api[_-]?key\s*[:=]\s*['\"]?[A-Za-z0-9_\-]{16,}"),
-    re.compile(r"(?i)secret\s*[:=]\s*['\"]?[A-Za-z0-9_\-]{16,}"),
+# Public acceptance: stewardship CI called out on Repo-Stewardship.
+STEWARDSHIP_CI_HINTS = (
+    "markdown-lint",
+    "link-check",
+    "stewardship-checks",
 )
-
-
-def fail(msg: str, errors: list[str]) -> None:
-    errors.append(msg)
 
 
 def main() -> int:
@@ -79,6 +76,10 @@ def main() -> int:
                 fail(f"PUBLISH.md must list source file {name}", errors)
         if "Do **not** push `PUBLISH.md`" not in publish_text and "Do not push `PUBLISH.md`" not in publish_text:
             fail("PUBLISH.md must state that PUBLISH.md is not pushed to the wiki", errors)
+        if "Link Check" not in publish_text and "link-check" not in publish_text.lower():
+            fail("PUBLISH.md acceptance checks must mention Link Check", errors)
+        if "Markdown Lint" not in publish_text and "markdown" not in publish_text.lower():
+            fail("PUBLISH.md acceptance checks must mention Markdown Lint", errors)
 
     home = WIKI / "Home.md"
     if home.is_file():
@@ -93,6 +94,19 @@ def main() -> int:
             stem = page.removesuffix(".md")
             if f"]({page})" not in home_text and f"]({stem})" not in home_text:
                 fail(f"Home.md must link to publishable page {page}", errors)
+        if "invent" not in home_text.lower() and "secrets" not in home_text.lower():
+            fail("Home.md must retain out-of-scope wording for secrets / invent-product", errors)
+
+    stewardship = WIKI / "Repo-Stewardship.md"
+    if stewardship.is_file():
+        ste_text = stewardship.read_text(encoding="utf-8")
+        missing_ci = [h for h in STEWARDSHIP_CI_HINTS if h not in ste_text]
+        if missing_ci:
+            fail(
+                "Repo-Stewardship.md must mention stewardship CI workflows: "
+                + ", ".join(missing_ci),
+                errors,
+            )
 
     for name in PUBLISHABLE_PAGES:
         path = WIKI / name
@@ -101,14 +115,10 @@ def main() -> int:
         text = path.read_text(encoding="utf-8")
         if name != "Home.md" and "](Home.md)" not in text:
             fail(f"{name} must link back to Home.md", errors)
-        for pattern in SECRET_PATTERNS:
-            if pattern.search(text):
-                fail(f"{name} matches forbidden secret-like pattern: {pattern.pattern}", errors)
+        scan_secrets(path, errors)
 
     if publish.is_file():
-        for pattern in SECRET_PATTERNS:
-            if pattern.search(publish.read_text(encoding="utf-8")):
-                fail(f"PUBLISH.md matches forbidden secret-like pattern: {pattern.pattern}", errors)
+        scan_secrets(publish, errors)
 
     if errors:
         print("Wiki outline check FAILED:", file=sys.stderr)

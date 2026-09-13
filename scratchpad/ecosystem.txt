@@ -44,3 +44,13 @@ _None yet._
 2026-09-13T15:45:00Z
 
 2026-09-13T15:55:00Z cursor: PR #22 CI green (lint + link-check + stewardship) ← complete ECO-017 executable gates
+
+### [ECO-018] Strengthen stewardship CI/docs checks — 2026-09-13T16:36:01Z
+- [x] cursor: Relative-link gate + shared secret helpers
+- [x] cursor: Strengthen badge/wiki/schema checks (README consistency, CI callouts, metadata values)
+- [x] cursor: Harden markdown-lint / link-check / stewardship-checks workflows
+- [x] cursor: Docs: README, CONTRIBUTING, AGENTS.md, badge-standard, wiki Repo-Stewardship, CHANGELOG
+- [ ] cursor: Green PR with CI
+- Scope: lint + link + badge/README consistency only; no invent-product; no secrets
+- Branch: cursor/strengthen-stewardship-ci-549f
+2026-09-13T16:36:01Z

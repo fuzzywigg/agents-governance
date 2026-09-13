@@ -71,17 +71,20 @@ If `.kill_switch` exists at repo root, all agent writes are blocked until smtp.e
 ## 3. Testing Requirements
 
 This is a documentation-only repository. Executable gates enforce docs quality and
-stewardship standards (badge row, wiki outline, metadata schemas).
+stewardship standards (badge row, wiki outline, metadata schemas, relative links).
 
 ```bash
 # Markdown lint (matches CI: DavidAnson/markdownlint-cli2-action)
 npx markdownlint-cli2 "**/*.md" "!.github/agents/**" "!OWASP-AGENTIC.md"
 
 # Broken links (matches CI: lychee)
-# lychee --verbose --no-progress --exclude-loopback "**/*.md"
+# lychee --verbose --no-progress --exclude-loopback --max-concurrency 8 \
+#   --timeout 20 "**/*.md" --exclude-path .github/agents
 
-# Stewardship standards (badge / wiki / schema) — no invent-product badges
+# Stewardship standards (badge / wiki / schema / relative links) —
+# no invent-product badges, no secrets in public docs
 bash scripts/run_stewardship_checks.sh
+python3 scripts/test_stewardship_gates.py
 ```
 
 CI workflows: `markdown-lint.yml`, `link-check.yml`, `stewardship-checks.yml`.

@@ -11,6 +11,22 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship fixtures after #37: expand self-tests to 712 cases
+  (was 650) covering `.markdownlint.json` `default: true`, stewardship
+  `get_actionlint.outputs.executable` + actionlint download path `/v1.7.7/`,
+  lychee `--max-concurrency 8` / `--timeout 20` / `--max-retries 3`,
+  pull_request_target on stewardship, contents:write/write-all on markdown-
+  lint/link-check, checkout@latest float, cancel-in-progress:false on
+  link-check, missing concurrency/timeout, badge codecov/downloads/
+  followers/pypi/apikey/http-image/four-badge/fourth-refusal still, relative
+  HTTPS/VbScript/File / ampersand slug / sibling broken / angle tel / bare
+  `#` / nested %2e escape, wiki Home→Overview / discord/twitter/stars/forks
+  chrome / JAVASCRIPT / PUBLISH Autonomy-Levels / CI+badge topic still, schema
+  empty scope / missing maintainer+repo / empty closes / DRAFT publish /
+  autonomy -1 / wrong scope / semver prerelease, common github_pat_/xoxb-/RSA
+  key / buymeacoffee+opencollective hints / xoxb scan / vbscript casefold,
+  plus DavidAnson/--github-token/line_length:200/raw.githubusercontent/
+  coveralls/http / tier 0 still-needles
 - TOKENMAXX stewardship fixtures after #36: expand self-tests to 650 cases
   (was 588) covering `.markdownlint.json` MD013 `line_length: 200` + MD024
   `siblings_only: true`, stewardship `raw.githubusercontent.com` + curl `-fsSL`,

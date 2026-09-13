@@ -59,7 +59,9 @@ commerce+coveralls badge hints / wiki L0+secret+surface deepen after #31,
 plus link/markdown `actions/checkout` + `lychee-action` + MD013 /
 twitter+codecov+downloads / HTTP:// casefold deepen after #32,
 plus `lycheeverse/lychee-action` + `markdownlint-cli2-action` + MD013
-`line_length` + `pip install` PyYAML deepen after #33).
+`line_length` + `pip install` PyYAML deepen after #33,
+plus `DavidAnson/markdownlint-cli2-action` + `--github-token` + MD024 +
+`download-actionlint.bash` deepen after #34).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

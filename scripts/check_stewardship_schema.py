@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """Validate YAML metadata blocks on stewardship docs already described in-repo.
 
-Fail-closed pins (live path after #45):
+Fail-closed pins (live path after #46):
 - DOC_SCHEMAS covers badge-standard / PUBLISH / issue-backlog / AGENTS / CLAUDE
 - EXPECTED_VALUES pin ACTIVE / tier / owner / surface / parent_governance /
-  maintainer / scope already present on live YAML front matter
+  maintainer / scope / purpose / closes already present on live YAML front matter
+- Reject empty YAML metadata blocks, nested/list values, YAML null, bools
+  pretending to be autonomy_level / tier ints (bool is a subclass of int)
+- STRING_KEYS keep live string fields typed as strings (not invent fields)
 - Semver X.Y.Z on AGENTS version; ISO-8601 on DATE_KEYS; closes #N issue refs
 - Badge edit_policy retains invent-product wording; scan_secrets on every schema doc
 - issue-backlog owner pinned to copilot (live metadata; not invent-product)
@@ -34,7 +37,7 @@ SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
 ISSUE_REF_RE = re.compile(r"#\d+")
 
 # Minimal key schemas taken from the live stewardship docs (do not invent fields).
-# Fail-closed after #45: five live stewardship docs only (no invent-product paths).
+# Fail-closed after #46: five live stewardship docs only (no invent-product paths).
 DOC_SCHEMAS: dict[str, set[str]] = {
     "docs/badge-standard.md": {
         "status",
@@ -95,9 +98,14 @@ EXPECTED_VALUES: dict[str, dict[str, object]] = {
         "status": "ACTIVE",
         "tier": 1,
         "owner": "copilot",
+        # Live front-door scope + closes pin (after #46; wire existing docs only).
+        "scope": "public governance front-door repos",
+        "closes": "#16",
     },
     "docs/wiki/PUBLISH.md": {
         "status": "ACTIVE",
+        "purpose": "Reversible publish path for docs/wiki → GitHub Wiki",
+        "closes": "#16",
     },
     "docs/issue-backlog.md": {
         "status": "ACTIVE",
@@ -108,6 +116,25 @@ EXPECTED_VALUES: dict[str, dict[str, object]] = {
 }
 
 DATE_KEYS = ("created", "last_updated")
+
+# Keys that must remain scalar strings in live stewardship metadata (not invent fields).
+STRING_KEYS = frozenset(
+    {
+        "status",
+        "owner",
+        "scope",
+        "edit_policy",
+        "closes",
+        "purpose",
+        "version",
+        "maintainer",
+        "parent_governance",
+        "repo",
+        "surface",
+        "created",
+        "last_updated",
+    }
+)
 
 
 def parse_simple_yaml(text: str) -> dict[str, object]:
@@ -130,6 +157,8 @@ def parse_simple_yaml(text: str) -> dict[str, object]:
             value = value[1:-1]
         elif value.lower() in {"true", "false"}:
             value = value.lower() == "true"
+        elif value.lower() in {"null", "~"}:
+            value = None
         elif re.fullmatch(r"-?\d+", value):
             value = int(value)
         data[key] = value
@@ -139,9 +168,13 @@ def parse_simple_yaml(text: str) -> dict[str, object]:
 def load_yaml(text: str) -> dict[str, object]:
     if yaml is not None:
         loaded = yaml.safe_load(text)
+        if loaded is None:
+            raise ValueError("empty yaml metadata block")
         if not isinstance(loaded, dict):
             raise ValueError("metadata YAML must be a mapping")
         return loaded
+    if not text.strip():
+        raise ValueError("empty yaml metadata block")
     return parse_simple_yaml(text)
 
 
@@ -153,6 +186,17 @@ def first_yaml_block(path: Path) -> str:
     return match.group(1)
 
 
+def reject_non_scalar(rel: str, key: str, value: object, errors: list[str]) -> bool:
+    """Fail-closed: stewardship metadata values must be scalars (no nested/list)."""
+    if isinstance(value, (dict, list)):
+        fail(
+            f"{rel}: metadata {key} must be a scalar (got nested/list {type(value).__name__})",
+            errors,
+        )
+        return True
+    return False
+
+
 def main() -> int:
     errors: list[str] = []
     for rel, required_keys in DOC_SCHEMAS.items():
@@ -162,6 +206,8 @@ def main() -> int:
             continue
         try:
             block = first_yaml_block(path)
+            if not block.strip():
+                raise ValueError("empty yaml metadata block")
             data = load_yaml(block)
         except Exception as exc:  # noqa: BLE001 — gate must report any parse failure
             fail(f"{rel}: {exc}", errors)
@@ -169,6 +215,22 @@ def main() -> int:
         missing = sorted(required_keys - set(data))
         if missing:
             fail(f"{rel}: missing metadata keys: {', '.join(missing)}", errors)
+
+        # Required keys: scalar / non-empty / string-typed before expected-value pins.
+        for key in required_keys:
+            if key not in data:
+                continue
+            value = data[key]
+            if reject_non_scalar(rel, key, value, errors):
+                continue
+            if value is None or (isinstance(value, str) and not value.strip()):
+                fail(f"{rel}: metadata {key} must be non-empty", errors)
+                continue
+            if key in STRING_KEYS and not isinstance(value, str):
+                fail(
+                    f"{rel}: metadata {key} must be a string (got {type(value).__name__})",
+                    errors,
+                )
 
         status = data.get("status")
         if "status" in required_keys and status is not None and str(status).upper() != "ACTIVE":
@@ -183,12 +245,14 @@ def main() -> int:
 
         if "autonomy_level" in data:
             level = data["autonomy_level"]
-            if not isinstance(level, int) or level not in (0, 1, 2, 3):
+            # bool is a subclass of int — reject YAML yes/true pretending to be a level.
+            if isinstance(level, bool) or not isinstance(level, int) or level not in (0, 1, 2, 3):
                 fail(f"{rel}: autonomy_level must be int in 0..3 (got {level!r})", errors)
 
         if "tier" in data:
             tier = data["tier"]
-            if not isinstance(tier, int) or tier < 1:
+            # bool is a subclass of int — reject YAML true pretending to be tier 1.
+            if isinstance(tier, bool) or not isinstance(tier, int) or tier < 1:
                 fail(f"{rel}: tier must be a positive int (got {tier!r})", errors)
 
         for date_key in DATE_KEYS:
@@ -212,14 +276,6 @@ def main() -> int:
             closes = str(data["closes"])
             if not ISSUE_REF_RE.search(closes):
                 fail(f"{rel}: closes must reference an issue like #N (got {closes!r})", errors)
-
-        # Required keys must not be empty strings / None after parse.
-        for key in required_keys:
-            if key not in data:
-                continue
-            value = data[key]
-            if value is None or (isinstance(value, str) and not value.strip()):
-                fail(f"{rel}: metadata {key} must be non-empty", errors)
 
         scan_secrets(path, errors)
 

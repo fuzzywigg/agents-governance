@@ -276,3 +276,12 @@ _None yet._
 2026-09-13T21:50:50Z
 
 2026-09-13T21:53:48Z cursor: PR #46 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-038 TOKENMAXX stewardship-schema gate pins
+
+### [ECO-039] TOKENMAXX deepen stewardship-schema scalar / live pins after #46 — 2026-09-13T22:09:32Z
+- [x] cursor: Read live tree post-#46 (1045 cases; schema contract pins from #46 saturated on DOC_SCHEMAS / backlog owner)
+- [x] cursor: Fail-close schema gate — STRING_KEYS / reject_non_scalar / empty yaml / bool-int autonomy+tier; pin live badge scope + PUBLISH purpose + closes #16
+- [x] cursor: Expand self-tests 1045 → 1116 (schema scalar / live-pin slice; not wiki-outline / relative-link / CI workflow pin spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING stewardship-schema integrity / scalar+STRING_KEYS+live EXPECTED_VALUES only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-schema-gate-pins-eacc
+2026-09-13T22:09:32Z

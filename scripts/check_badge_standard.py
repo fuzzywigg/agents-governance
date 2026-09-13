@@ -673,7 +673,7 @@ def check_contributing_and_agents(errors: list[str]) -> None:
 
 
 def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
-    """Fail-close live stewardship-schema gate wiring (after #45; not wiki-pin spam)."""
+    """Fail-close live stewardship-schema gate wiring (after #46; not wiki-pin spam)."""
     if not SCHEMA_GATE.is_file():
         fail("Missing scripts/check_stewardship_schema.py (schema gate)", errors)
         return
@@ -732,6 +732,24 @@ def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
         )
     if "DATE_KEYS" not in text:
         fail("check_stewardship_schema.py must declare DATE_KEYS", errors)
+    if "STRING_KEYS" not in text:
+        fail("check_stewardship_schema.py must declare STRING_KEYS", errors)
+    if "reject_non_scalar" not in text:
+        fail(
+            "check_stewardship_schema.py must reject nested/list metadata via reject_non_scalar",
+            errors,
+        )
+    if "empty yaml metadata block" not in text:
+        fail(
+            "check_stewardship_schema.py must reject empty yaml metadata blocks",
+            errors,
+        )
+    if "isinstance(level, bool)" not in text and "isinstance(tier, bool)" not in text:
+        fail(
+            "check_stewardship_schema.py must reject bool pretending to be "
+            "autonomy_level / tier ints",
+            errors,
+        )
     if "parse_simple_yaml" not in text:
         fail(
             "check_stewardship_schema.py must provide parse_simple_yaml fallback",
@@ -791,6 +809,46 @@ def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
     if "live backlog owner is copilot" not in text.lower():
         fail(
             "check_stewardship_schema.py must pin issue-backlog owner copilot",
+            errors,
+        )
+    # Fail-closed after #46: live badge scope / PUBLISH purpose / closes #16 pins.
+    if "public governance front-door repos" not in text:
+        fail(
+            "check_stewardship_schema.py EXPECTED_VALUES must pin "
+            "public governance front-door repos",
+            errors,
+        )
+    if "Reversible publish path for docs/wiki" not in text:
+        fail(
+            "check_stewardship_schema.py EXPECTED_VALUES must pin "
+            "Reversible publish path for docs/wiki",
+            errors,
+        )
+    if '"#16"' not in text and "'#16'" not in text:
+        fail(
+            "check_stewardship_schema.py EXPECTED_VALUES must pin closes #16",
+            errors,
+        )
+    if "AGENTS-ECOSYSTEM.md" not in text:
+        fail(
+            "check_stewardship_schema.py EXPECTED_VALUES must pin AGENTS-ECOSYSTEM.md",
+            errors,
+        )
+    if "github.com/fuzzywigg/agents-governance" not in text:
+        fail(
+            "check_stewardship_schema.py EXPECTED_VALUES must pin "
+            "github.com/fuzzywigg/agents-governance",
+            errors,
+        )
+    if "fuzzywigg (smtp.eth)" not in text:
+        fail(
+            "check_stewardship_schema.py EXPECTED_VALUES must pin fuzzywigg (smtp.eth)",
+            errors,
+        )
+    if 'repo": "agents-governance"' not in text and "repo': 'agents-governance'" not in text:
+        fail(
+            "check_stewardship_schema.py EXPECTED_VALUES must pin "
+            'repo": "agents-governance"',
             errors,
         )
 

@@ -14,6 +14,8 @@ Deepened after #32: link/markdown actions/checkout + lychee-action + MD013
 + twitter/codecov/downloads/github_pat + wiki discord/js + schema edit_policy.
 Deepened after #33: lycheeverse/lychee-action / markdownlint-cli2-action /
 MD013 line_length / pip install PyYAML / deepen edges.
+Deepened after #34: DavidAnson/markdownlint-cli2-action / --github-token /
+MD024 / download-actionlint.bash / deepen edges.
 """
 
 from __future__ import annotations
@@ -141,6 +143,7 @@ jobs:
       - run: pip install pyyaml
       - run: bash scripts/run_stewardship_checks.sh
       - run: python3 scripts/test_stewardship_gates.py
+      - run: bash download-actionlint.bash 1.7.7
       - run: echo actionlint 1.7.7 .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml
 """
     (wf / "link-check.yml").write_text(link, encoding="utf-8")
@@ -152,7 +155,8 @@ jobs:
     )
     _write(
         tmp / ".markdownlint.json",
-        '{\n  "default": true,\n  "MD013": { "line_length": 200 }\n}\n',
+        '{\n  "default": true,\n  "MD013": { "line_length": 200 },\n'
+        '  "MD024": { "siblings_only": true }\n}\n',
     )
 
 
@@ -7658,6 +7662,981 @@ def test_common_dangerous_schemes_vbscript_still() -> None:
         raise AssertionError("VBSCRIPT: scheme should be dangerous")
 
 
+
+# --- TOKENMAXX deepen after #34: DavidAnson / --github-token / MD024 / edges ---
+
+
+def test_markdown_lint_requires_davidanson_action() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace(
+            "DavidAnson/markdownlint-cli2-action",
+            "OtherOrg/markdownlint-cli2-action",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "DavidAnson/markdownlint-cli2-action",
+        )
+
+
+def test_link_check_requires_github_token_flag() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace("--github-token", "--other-token")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "--github-token",
+        )
+
+
+def test_markdownlint_json_requires_md024() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        path.write_text(
+            '{\n  "default": true,\n  "MD013": { "line_length": 200 }\n}\n',
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "MD024",
+        )
+
+
+def test_stewardship_requires_download_actionlint_bash() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace(
+            "download-actionlint.bash",
+            "fetch-actionlint.sh",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "download-actionlint.bash",
+        )
+
+
+def test_actionlint_rejects_pull_request_target_on_stewardship() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace(
+            "pull_request:",
+            "pull_request_target:",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "pull_request_target",
+        )
+
+
+def test_actionlint_rejects_contents_write_on_markdown_lint() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace(
+            "contents: read",
+            "contents: write",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "contents: write",
+        )
+
+
+def test_actionlint_rejects_write_all_on_markdown_lint() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = "permissions: write-all\n" + path.read_text(encoding="utf-8")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "write-all",
+        )
+
+
+def test_actionlint_rejects_float_main_on_checkout_markdown() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace(
+            "actions/checkout@v4", "actions/checkout@main"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "must not float",
+        )
+
+
+def test_workflow_requires_cancel_in_progress_true_not_false_on_link_check() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace(
+            "cancel-in-progress: true",
+            "cancel-in-progress: false",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "cancel-in-progress: true",
+        )
+
+
+def test_workflow_rejects_missing_schedule_on_stewardship() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace("schedule:", "schedule_off:")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "schedule",
+        )
+
+
+def test_workflow_rejects_missing_workflow_dispatch_on_link_check() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace(
+            "workflow_dispatch:", "workflow_dispatch_off:"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "workflow_dispatch",
+        )
+
+
+def test_badge_rejects_followers_hint_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = (
+            "# agents-governance\n\n"
+            "[![Link Check](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/link-check.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+            "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/markdown-lint.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+            "[![License](https://img.shields.io/github/license/fuzzywigg/agents-governance?"
+            "label=followers)]"
+            "(LICENSE)\n\n"
+            "See [docs/badge-standard.md](docs/badge-standard.md).\n"
+            "Run `bash scripts/run_stewardship_checks.sh`.\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Forbidden invent-product",
+        )
+
+
+def test_badge_rejects_forks_hint_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = (
+            "# agents-governance\n\n"
+            "[![Link Check](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/link-check.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+            "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/markdown-lint.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+            "[![License](https://img.shields.io/github/license/fuzzywigg/agents-governance?"
+            "label=forks)]"
+            "(LICENSE)\n\n"
+            "See [docs/badge-standard.md](docs/badge-standard.md).\n"
+            "Run `bash scripts/run_stewardship_checks.sh`.\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Forbidden invent-product",
+        )
+
+
+def test_badge_rejects_npm_hint_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = (
+            "# agents-governance\n\n"
+            "[![Link Check](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/link-check.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+            "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/markdown-lint.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+            "[![License](https://img.shields.io/npm/v/fake)]"
+            "(LICENSE)\n\n"
+            "See [docs/badge-standard.md](docs/badge-standard.md).\n"
+            "Run `bash scripts/run_stewardship_checks.sh`.\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Forbidden invent-product",
+        )
+
+
+def test_badge_rejects_pypi_hint_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = (
+            "# agents-governance\n\n"
+            "[![Link Check](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/link-check.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+            "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/markdown-lint.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+            "[![License](https://img.shields.io/pypi/v/fake)]"
+            "(LICENSE)\n\n"
+            "See [docs/badge-standard.md](docs/badge-standard.md).\n"
+            "Run `bash scripts/run_stewardship_checks.sh`.\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Forbidden invent-product",
+        )
+
+
+def test_badge_rejects_apikey_query_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = (
+            "# agents-governance\n\n"
+            "[![Link Check](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/link-check.yml/badge.svg?api_key=abc)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+            "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/markdown-lint.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+            "[![License](https://img.shields.io/github/license/fuzzywigg/agents-governance)]"
+            "(LICENSE)\n\n"
+            "See [docs/badge-standard.md](docs/badge-standard.md).\n"
+            "Run `bash scripts/run_stewardship_checks.sh`.\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Secret-like token",
+        )
+
+
+def test_badge_rejects_link_check_http_image() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = (
+            "# agents-governance\n\n"
+            "[![Link Check](http://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/link-check.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+            "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/markdown-lint.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+            "[![License](https://img.shields.io/github/license/fuzzywigg/agents-governance)]"
+            "(LICENSE)\n\n"
+            "See [docs/badge-standard.md](docs/badge-standard.md).\n"
+            "Run `bash scripts/run_stewardship_checks.sh`.\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "must be https://",
+        )
+
+
+def test_badge_rejects_blank_line_between_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = (
+            "# agents-governance\n\n"
+            "[![Link Check](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/link-check.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+            "\n"
+            "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/markdown-lint.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+            "[![License](https://img.shields.io/github/license/fuzzywigg/agents-governance)]"
+            "(LICENSE)\n\n"
+            "See [docs/badge-standard.md](docs/badge-standard.md).\n"
+            "Run `bash scripts/run_stewardship_checks.sh`.\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "contiguous",
+        )
+
+
+def test_badge_doc_rejects_missing_three_max_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "docs" / "badge-standard.md"
+        text = path.read_text(encoding="utf-8")
+        text = text.replace("Three badges max", "Many badges ok").replace(
+            "badges max", "badges plenty"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "three-badge",
+        )
+
+
+def test_relative_links_accept_tel_uppercase() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](TEL:+15551212)\n")
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+
+def test_relative_links_reject_javascript_mixed_case_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](JavaScript:alert(1))\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "dangerous link scheme",
+        )
+
+
+def test_relative_links_reject_data_uppercase() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](DATA:text/plain,hi)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "dangerous link scheme",
+        )
+
+
+def test_relative_links_github_slug_asterisk() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    from check_relative_links import github_slug  # noqa: E402
+
+    # Asterisk stripped: "Note* one" → "note-one"
+    if github_slug("Note* one") != "note-one":
+        raise AssertionError(f"github_slug Note* one -> {github_slug('Note* one')!r}")
+
+
+def test_relative_links_accept_asterisk_heading_fragment() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# Title\n\n## Note* one\n\nSee [x](#note-one).\n")
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+
+def test_relative_links_reject_broken_nested_docs() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "docs" / "sub" / "a.md", "# A\n\n[x](../gone.md)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "broken relative link",
+        )
+
+
+def test_relative_links_accept_angle_bracket_https() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](<https://example.com>)\n")
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+
+def test_relative_links_reject_empty_parens_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x]()\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "empty relative link",
+        )
+
+
+def test_relative_links_reject_percent_traversal_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "docs" / "a.md", "# A\n\n[x](%2e%2e/%2e%2e/etc/passwd)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "escapes repo",
+        )
+
+
+def test_wiki_rejects_missing_home_to_security() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Home.md"] = (
+                "# Home\n\n"
+                "[README](https://github.com/fuzzywigg/agents-governance/blob/main/README.md)\n"
+                "[Badge](../badge-standard.md)\n"
+                "[Overview](Overview.md)\n"
+                "[Autonomy-Levels](Autonomy-Levels.md)\n"
+                "[Repo-Stewardship](Repo-Stewardship.md)\n"
+                "[Agent-Routing](Agent-Routing.md)\n\n"
+                "## Out of scope\n\nSecrets and invent product frameworks.\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "Security-Boundaries.md",
+        )
+
+
+def test_wiki_rejects_buymeacoffee_badge_chrome() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Overview.md"] = (
+                "# O\n\n[Home](Home.md)\n\ngovernance public\n"
+                "badge buymeacoffee chrome\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "invent-product",
+        )
+
+
+def test_wiki_rejects_opencollective_badge_chrome() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Overview.md"] = (
+                "# O\n\n[Home](Home.md)\n\ngovernance public\n"
+                "badge opencollective chrome\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "invent-product",
+        )
+
+
+def test_wiki_rejects_codecov_badge_chrome() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Overview.md"] = (
+                "# O\n\n[Home](Home.md)\n\ngovernance public\n"
+                "badge codecov chrome\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "invent-product",
+        )
+
+
+def test_wiki_rejects_downloads_badge_chrome() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Overview.md"] = (
+                "# O\n\n[Home](Home.md)\n\ngovernance public\n"
+                "badge downloads chrome\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "invent-product",
+        )
+
+
+def test_wiki_rejects_file_uppercase() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Overview.md"] = (
+                "# O\n\n[Home](Home.md)\n\ngovernance public\n"
+                "[x](FILE:///etc/passwd)\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "dangerous link scheme",
+        )
+
+
+def test_wiki_rejects_missing_publish_overview_row() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace(
+                "| `Overview.md` |", "| Overview missing |"
+            ).replace("`Overview.md`", "Overview")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "Overview.md",
+        )
+
+
+def test_wiki_rejects_missing_actionlint_hint_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Repo-Stewardship.md"] = pages["Repo-Stewardship.md"].replace(
+                "actionlint", "workflow-lint"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "actionlint",
+        )
+
+
+def test_wiki_rejects_missing_invent_on_stewardship_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Repo-Stewardship.md"] = pages["Repo-Stewardship.md"].replace(
+                "invent", "productize"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "invent",
+        )
+
+
+def test_schema_rejects_empty_badge_owner() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        badge = (
+            "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+            "owner: \"\"\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+            "closes: \"#16\"\n```\n"
+        )
+        scripts = _seed_schema_tree(tmp_path, badge=badge)
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "non-empty",
+        )
+
+
+def test_schema_rejects_empty_agents_scope() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        agents = (
+            "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+            "maintainer: smtp.eth\nscope: \"\"\n"
+            "parent_governance: github.com/fuzzywigg/agents-governance\nautonomy_level: 1\n```\n"
+        )
+        scripts = _seed_schema_tree(tmp_path, agents=agents)
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "non-empty",
+        )
+
+
+def test_schema_rejects_missing_agents_version_key() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        agents = (
+            "# AGENTS\n\n```yaml\nlast_updated: \"2026-04-13\"\n"
+            "maintainer: smtp.eth\nscope: repository-specific\n"
+            "parent_governance: github.com/fuzzywigg/agents-governance\nautonomy_level: 1\n```\n"
+        )
+        scripts = _seed_schema_tree(tmp_path, agents=agents)
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "missing metadata keys",
+        )
+
+
+def test_schema_rejects_missing_claude_surface_key() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        claude = (
+            "# CLAUDE\n\n```yaml\nrepo: agents-governance\nowner: \"fuzzywigg (smtp.eth)\"\n"
+            "autonomy_level: 1\nlast_updated: \"2026-04-13\"\n"
+            "parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md\n```\n"
+        )
+        scripts = _seed_schema_tree(tmp_path, claude=claude)
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "missing metadata keys",
+        )
+
+
+def test_schema_rejects_empty_publish_purpose() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        publish = (
+            "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\npurpose: \"\"\n"
+            "closes: \"#16\"\n```\n"
+        )
+        scripts = _seed_schema_tree(tmp_path, publish=publish)
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "non-empty",
+        )
+
+
+def test_schema_rejects_wrong_badge_status_draft() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        badge = (
+            "# B\n\n```yaml\nstatus: DRAFT\ntier: 1\ncreated: \"2026-09-13\"\n"
+            "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+            "closes: \"#16\"\n```\n"
+        )
+        scripts = _seed_schema_tree(tmp_path, badge=badge)
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "ACTIVE",
+        )
+
+
+def test_schema_rejects_autonomy_four_oob() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        agents = (
+            "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+            "maintainer: smtp.eth\nscope: repository-specific\n"
+            "parent_governance: github.com/fuzzywigg/agents-governance\nautonomy_level: 4\n```\n"
+        )
+        scripts = _seed_schema_tree(tmp_path, agents=agents)
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "0..3",
+        )
+
+
+def test_schema_rejects_wrong_claude_repo_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        claude = (
+            "# CLAUDE\n\n```yaml\nrepo: other-repo\nowner: \"fuzzywigg (smtp.eth)\"\n"
+            "surface: copilot\nautonomy_level: 1\nlast_updated: \"2026-04-13\"\n"
+            "parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md\n```\n"
+        )
+        scripts = _seed_schema_tree(tmp_path, claude=claude)
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "expected",
+        )
+
+
+def test_schema_rejects_closes_without_hash_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        badge = (
+            "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+            "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+            "closes: \"issue sixteen\"\n```\n"
+        )
+        scripts = _seed_schema_tree(tmp_path, badge=badge)
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "closes must reference",
+        )
+
+
+def test_common_secret_patterns_ghr() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    from stewardship_common import SECRET_PATTERNS  # noqa: E402
+
+    sample = "ghr_" + ("a" * 36)
+    if not any(p.search(sample) for p in SECRET_PATTERNS):
+        raise AssertionError("ghr_ sample should match SECRET_PATTERNS")
+
+
+def test_common_secret_patterns_gho() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    from stewardship_common import SECRET_PATTERNS  # noqa: E402
+
+    sample = "gho_" + ("a" * 36)
+    if not any(p.search(sample) for p in SECRET_PATTERNS):
+        raise AssertionError("gho_ sample should match SECRET_PATTERNS")
+
+
+def test_common_secret_patterns_sk_token() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    from stewardship_common import SECRET_PATTERNS  # noqa: E402
+
+    sample = "sk-" + ("a" * 36)
+    if not any(p.search(sample) for p in SECRET_PATTERNS):
+        raise AssertionError("sk- sample should match SECRET_PATTERNS")
+
+
+def test_common_secret_patterns_ec_key() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    from stewardship_common import SECRET_PATTERNS  # noqa: E402
+
+    sample = "-----BEGIN EC PRIVATE KEY-----\n"
+    if not any(p.search(sample) for p in SECRET_PATTERNS):
+        raise AssertionError("EC PRIVATE KEY sample should match SECRET_PATTERNS")
+
+
+def test_common_forbidden_badge_hints_followers_forks() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    from stewardship_common import FORBIDDEN_BADGE_HINTS  # noqa: E402
+
+    for hint in ("followers", "forks", "discord", "stars"):
+        if hint not in FORBIDDEN_BADGE_HINTS:
+            raise AssertionError(f"FORBIDDEN_BADGE_HINTS missing {hint!r}")
+
+
+def test_common_scan_secrets_aiza() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    from stewardship_common import scan_secrets  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / "doc.md"
+        path.write_text("key AIza" + ("a" * 35) + "\n", encoding="utf-8")
+        errors: list[str] = []
+        scan_secrets(path, errors, label="fixture.md")
+        if not errors:
+            raise AssertionError("AIza should fail scan_secrets")
+
+
+def test_common_has_dangerous_scheme_javascript_still() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    from stewardship_common import has_dangerous_scheme  # noqa: E402
+
+    if has_dangerous_scheme("JAVASCRIPT:alert(1)") != "javascript:":
+        raise AssertionError("JAVASCRIPT: scheme should be dangerous (casefold)")
+
+
+def test_markdown_lint_requires_cli2_action_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace(
+            "markdownlint-cli2-action", "markdownlint-cli-action"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "markdownlint-cli2-action",
+        )
+
+
+def test_link_check_requires_lycheeverse_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace(
+            "lycheeverse/lychee-action", "other/lychee-action"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "lycheeverse/lychee-action",
+        )
+
+
+def test_markdownlint_json_requires_line_length_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        path.write_text(
+            '{\n  "default": true,\n  "MD013": true,\n  "MD024": true\n}\n',
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "line_length",
+        )
+
+
+def test_stewardship_requires_pip_install_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace("pip install", "npm install")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "pip install",
+        )
+
+
+def test_badge_rejects_twitter_hint_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = (
+            "# agents-governance\n\n"
+            "[![Link Check](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/link-check.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+            "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/markdown-lint.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+            "[![License](https://img.shields.io/github/license/fuzzywigg/agents-governance?"
+            "label=twitter)]"
+            "(LICENSE)\n\n"
+            "See [docs/badge-standard.md](docs/badge-standard.md).\n"
+            "Run `bash scripts/run_stewardship_checks.sh`.\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Forbidden invent-product",
+        )
+
+
+def test_relative_links_reject_http_mixed_case_still() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](Http://example.com)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "insecure http://",
+        )
+
+
+def test_wiki_rejects_data_scheme_still_after_34() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Overview.md"] = (
+                "# O\n\n[Home](Home.md)\n\ngovernance public\n"
+                "[x](data:text/plain,hi)\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "dangerous link scheme",
+        )
+
+
+def test_schema_rejects_tier_zero_still_after_34() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        badge = (
+            "# B\n\n```yaml\nstatus: ACTIVE\ntier: 0\ncreated: \"2026-09-13\"\n"
+            "owner: copilot\nscope: x\nedit_policy: \"do not invent product badges\"\n"
+            "closes: \"#16\"\n```\n"
+        )
+        scripts = _seed_schema_tree(tmp_path, badge=badge)
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "positive int",
+        )
+
+
+def test_common_dangerous_schemes_data_still() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    from stewardship_common import DANGEROUS_LINK_SCHEMES  # noqa: E402
+
+    if "data:" not in DANGEROUS_LINK_SCHEMES:
+        raise AssertionError("DANGEROUS_LINK_SCHEMES missing data:")
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -8136,6 +9115,69 @@ def main() -> int:
         test_wiki_rejects_javascript_scheme_still,
         test_schema_rejects_tier_zero_still,
         test_common_dangerous_schemes_vbscript_still,
+        # TOKENMAXX deepen after #34 (+62)
+        test_markdown_lint_requires_davidanson_action,
+        test_link_check_requires_github_token_flag,
+        test_markdownlint_json_requires_md024,
+        test_stewardship_requires_download_actionlint_bash,
+        test_actionlint_rejects_pull_request_target_on_stewardship,
+        test_actionlint_rejects_contents_write_on_markdown_lint,
+        test_actionlint_rejects_write_all_on_markdown_lint,
+        test_actionlint_rejects_float_main_on_checkout_markdown,
+        test_workflow_requires_cancel_in_progress_true_not_false_on_link_check,
+        test_workflow_rejects_missing_schedule_on_stewardship,
+        test_workflow_rejects_missing_workflow_dispatch_on_link_check,
+        test_badge_rejects_followers_hint_still,
+        test_badge_rejects_forks_hint_still,
+        test_badge_rejects_npm_hint_still,
+        test_badge_rejects_pypi_hint_still,
+        test_badge_rejects_apikey_query_still,
+        test_badge_rejects_link_check_http_image,
+        test_badge_rejects_blank_line_between_still,
+        test_badge_doc_rejects_missing_three_max_still,
+        test_relative_links_accept_tel_uppercase,
+        test_relative_links_reject_javascript_mixed_case_still,
+        test_relative_links_reject_data_uppercase,
+        test_relative_links_github_slug_asterisk,
+        test_relative_links_accept_asterisk_heading_fragment,
+        test_relative_links_reject_broken_nested_docs,
+        test_relative_links_accept_angle_bracket_https,
+        test_relative_links_reject_empty_parens_still,
+        test_relative_links_reject_percent_traversal_still,
+        test_wiki_rejects_missing_home_to_security,
+        test_wiki_rejects_buymeacoffee_badge_chrome,
+        test_wiki_rejects_opencollective_badge_chrome,
+        test_wiki_rejects_codecov_badge_chrome,
+        test_wiki_rejects_downloads_badge_chrome,
+        test_wiki_rejects_file_uppercase,
+        test_wiki_rejects_missing_publish_overview_row,
+        test_wiki_rejects_missing_actionlint_hint_still,
+        test_wiki_rejects_missing_invent_on_stewardship_still,
+        test_schema_rejects_empty_badge_owner,
+        test_schema_rejects_empty_agents_scope,
+        test_schema_rejects_missing_agents_version_key,
+        test_schema_rejects_missing_claude_surface_key,
+        test_schema_rejects_empty_publish_purpose,
+        test_schema_rejects_wrong_badge_status_draft,
+        test_schema_rejects_autonomy_four_oob,
+        test_schema_rejects_wrong_claude_repo_still,
+        test_schema_rejects_closes_without_hash_still,
+        test_common_secret_patterns_ghr,
+        test_common_secret_patterns_gho,
+        test_common_secret_patterns_sk_token,
+        test_common_secret_patterns_ec_key,
+        test_common_forbidden_badge_hints_followers_forks,
+        test_common_scan_secrets_aiza,
+        test_common_has_dangerous_scheme_javascript_still,
+        test_markdown_lint_requires_cli2_action_still,
+        test_link_check_requires_lycheeverse_still,
+        test_markdownlint_json_requires_line_length_still,
+        test_stewardship_requires_pip_install_still,
+        test_badge_rejects_twitter_hint_still,
+        test_relative_links_reject_http_mixed_case_still,
+        test_wiki_rejects_data_scheme_still_after_34,
+        test_schema_rejects_tier_zero_still_after_34,
+        test_common_dangerous_schemes_data_still,
     ]
     try:
         for script in GATE_SCRIPTS:

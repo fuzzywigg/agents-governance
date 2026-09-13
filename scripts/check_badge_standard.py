@@ -118,6 +118,12 @@ def check_workflows_and_license(errors: list[str]) -> None:
                 ".markdownlint.json MD013 must set line_length for docs lint",
                 errors,
             )
+        # Fail-closed after #34: live config pins MD024 siblings_only (heading dupes).
+        if "MD024" not in md_cfg:
+            fail(
+                ".markdownlint.json must configure MD024 (siblings_only) for docs lint",
+                errors,
+            )
 
 
 def check_lycheeignore(errors: list[str]) -> None:
@@ -219,6 +225,12 @@ def check_workflow_hardening(errors: list[str]) -> None:
             "link-check.yml must invoke lycheeverse/lychee-action on the existing path",
             errors,
         )
+    # Fail-closed after #34: live lychee args pass --github-token (auth path).
+    if "--github-token" not in link:
+        fail(
+            "link-check.yml must pass lychee --github-token on the existing path",
+            errors,
+        )
     # Fail-closed: link-check must checkout before lychee (symmetric with stewardship).
     if "actions/checkout" not in link:
         fail(
@@ -269,6 +281,13 @@ def check_workflow_hardening(errors: list[str]) -> None:
             "markdown-lint.yml must invoke markdownlint-cli2-action on the existing path",
             errors,
         )
+    # Fail-closed after #34: org-qualified DavidAnson/markdownlint-cli2-action.
+    if "davidanson/markdownlint-cli2-action" not in lint.lower():
+        fail(
+            "markdown-lint.yml must invoke DavidAnson/markdownlint-cli2-action "
+            "on the existing path",
+            errors,
+        )
     # Fail-closed: markdown-lint must checkout before lint (symmetric with stewardship).
     if "actions/checkout" not in lint:
         fail(
@@ -317,6 +336,12 @@ def check_workflow_hardening(errors: list[str]) -> None:
     if "pip install" not in stew.lower() and "pip3 install" not in stew.lower():
         fail(
             "stewardship-checks.yml must pip install PyYAML for schema parsing",
+            errors,
+        )
+    # Fail-closed after #34: actionlint comes from rhysd download script (existing path).
+    if "download-actionlint.bash" not in stew.lower():
+        fail(
+            "stewardship-checks.yml must download actionlint via download-actionlint.bash",
             errors,
         )
     if "actionlint" not in stew.lower():

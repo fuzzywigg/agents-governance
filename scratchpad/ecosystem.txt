@@ -248,7 +248,7 @@ _None yet._
 - [x] cursor: Read live tree post-#41 (836 cases; CI workflow pins saturated)
 - [x] cursor: Fail-close relative-link gate — OWASP/agents/node_modules/.git skips, fully_unquote, empty path# fragments, query-string reject, run_stewardship order badge→wiki→schema→relative, AGENTS relative mention
 - [x] cursor: Expand self-tests 836 → 903 (relative-link gate contract slice; not CI workflow pin / fixture-reject spam)
-- [ ] cursor: Green PR with CI
+- [x] cursor: Green PR with CI
 - Scope: EXISTING relative-link integrity / run_stewardship wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-relative-link-pins-0faa
 2026-09-13T21:16:48Z
@@ -318,3 +318,5 @@ _None yet._
 - Scope: EXISTING relative-link integrity / run_stewardship wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-relative-link-pins-be52
 2026-09-13T22:59:38Z
+
+2026-09-13T23:15:00Z cursor: PR #60 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-042 TOKENMAXX relative-link second-pass gate pins

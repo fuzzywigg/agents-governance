@@ -1148,7 +1148,7 @@ def main() -> int:
         test_badge_rejects_missing_markdownlint_config,
         test_badge_rejects_missing_contributing_invent_warning,
         test_badge_passes_good_fixture,
-        # Relative (12)
+        # Relative (13)
         test_relative_links_reject_missing,
         test_relative_links_reject_escape,
         test_relative_links_reject_missing_fragment,

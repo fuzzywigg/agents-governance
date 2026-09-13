@@ -85,7 +85,14 @@ lycheeignore+markdownlint paths / contract+main fns /
 unexpected+forbidden+secret+FAILED+OK needles / endswith+/./LICENSE /
 `load_workflow_text` / invent-product doc / intentionally / quiet
 stewardship / selftest+relative AGENTS pins / img https startswith /
-http link reject).
+http link reject,
+plus stewardship_common second-pass after #65: ROOT `parents[1]` /
+`FENCED_BLOCK_RE` DOTALL / helper doc pins / scan_secrets needles /
+`relative_to` / `strip().lower()` / `startswith` / `errors.append` /
+`password|passwd|token` / OPENSSH+EC / Public docs / invent-product
+surface / social chrome / Link schemes / `is_file`+`sorted` /
+workflows path / `return None` / exact `DANGEROUS_LINK_SCHEMES` +
+`SECRET_URL_HINTS` head).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

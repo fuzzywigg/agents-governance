@@ -9,6 +9,9 @@ Fail-closed pins (live path after #48):
 - Badge images https-only; link-check.yml/badge.svg + markdown-lint.yml/badge.svg
 - License via img.shields.io/github/license/; contiguous row; no invent-product
 - Quiet stewardship: no Stewardship product/status badge; no fourth badge
+Deepened after #61: CI workflow second-pass — push + branches ["**"] +
+concurrency github.workflow/github.ref + path filters + job ids +
+check_ci_workflow_gate_contract (not actionlint-style pin spam)
 """
 
 from __future__ import annotations
@@ -241,7 +244,12 @@ def check_actionlint_style(errors: list[str]) -> None:
 
 
 def check_workflow_hardening(errors: list[str]) -> None:
-    """Harden existing lint/link/stewardship workflows (triggers, perms, concurrency)."""
+    """Harden existing lint/link/stewardship workflows (triggers, perms, concurrency).
+
+    Fail-closed after #39 supply-chain/job pins; second-pass after #61: push +
+    branches ["**"] + concurrency github.workflow/github.ref + path filters +
+    live job ids (not actionlint-style / badge / wiki / schema / relative spam).
+    """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
         if text is None:
@@ -270,6 +278,18 @@ def check_workflow_hardening(errors: list[str]) -> None:
             fail(f"{name} jobs must set timeout-minutes", errors)
         if "schedule:" not in text:
             fail(f"{name} must include a weekly schedule drift catch", errors)
+        # Fail-closed after #61: live CI second-pass — push + branch glob +
+        # concurrency group keys already on all three workflows.
+        if "push:" not in text:
+            fail(f"{name} must run on push", errors)
+        if "branches:" not in text:
+            fail(f"{name} push must declare branches:", errors)
+        if '["**"]' not in text and "['**']" not in text and '"**"' not in text:
+            fail(f'{name} push branches must include "**"', errors)
+        if "github.ref" not in text:
+            fail(f"{name} concurrency group must include github.ref", errors)
+        if "github.workflow" not in text:
+            fail(f"{name} concurrency group must include github.workflow", errors)
 
     link = load_workflow_text("link-check.yml") or ""
     if "lychee" not in link.lower():
@@ -604,6 +624,171 @@ def check_workflow_hardening(errors: list[str]) -> None:
         fail(
             "link-check.yml must reference .lycheeignore (paths filter or args) "
             "so shields CDN excludes stay wired",
+            errors,
+        )
+
+    # Fail-closed after #61: CI workflow second-pass — live path filters, concurrency
+    # group prefixes, and job ids (distinct from actionlint-style pin spam).
+    if "link-check-${{" not in link and "group: link-check-" not in link:
+        fail(
+            "link-check.yml concurrency group must use link-check- prefix",
+            errors,
+        )
+    if ".github/workflows/link-check.yml" not in link:
+        fail(
+            "link-check.yml push paths must include .github/workflows/link-check.yml",
+            errors,
+        )
+    if not re.search(r"(?m)^  link-check:\s*$", link):
+        fail(
+            "link-check.yml must declare job id link-check:",
+            errors,
+        )
+
+    if "markdown-lint-${{" not in lint and "group: markdown-lint-" not in lint:
+        fail(
+            "markdown-lint.yml concurrency group must use markdown-lint- prefix",
+            errors,
+        )
+    if ".github/workflows/markdown-lint.yml" not in lint:
+        fail(
+            "markdown-lint.yml push paths must include .github/workflows/markdown-lint.yml",
+            errors,
+        )
+    if not re.search(r"(?m)^  lint:\s*$", lint):
+        fail(
+            "markdown-lint.yml must declare job id lint:",
+            errors,
+        )
+
+    if (
+        "stewardship-checks-${{" not in stew
+        and "group: stewardship-checks-" not in stew
+    ):
+        fail(
+            "stewardship-checks.yml concurrency group must use "
+            "stewardship-checks- prefix",
+            errors,
+        )
+    if "docs/**" not in stew:
+        fail("stewardship-checks.yml push paths must include docs/**", errors)
+    if "scripts/**" not in stew:
+        fail("stewardship-checks.yml push paths must include scripts/**", errors)
+    if ".github/workflows/**" not in stew:
+        fail(
+            "stewardship-checks.yml push paths must include .github/workflows/**",
+            errors,
+        )
+    if "README.md" not in stew:
+        fail(
+            "stewardship-checks.yml push paths must include README.md",
+            errors,
+        )
+    if "AGENTS.md" not in stew:
+        fail(
+            "stewardship-checks.yml push paths must include AGENTS.md",
+            errors,
+        )
+    if "CLAUDE.md" not in stew:
+        fail(
+            "stewardship-checks.yml push paths must include CLAUDE.md",
+            errors,
+        )
+    if "LICENSE" not in stew:
+        fail(
+            "stewardship-checks.yml push paths must include LICENSE",
+            errors,
+        )
+    if "CONTRIBUTING.md" not in stew:
+        fail(
+            "stewardship-checks.yml push paths must include CONTRIBUTING.md",
+            errors,
+        )
+    if not re.search(r"(?m)^  stewardship:\s*$", stew):
+        fail(
+            "stewardship-checks.yml must declare job id stewardship:",
+            errors,
+        )
+
+
+def check_ci_workflow_gate_contract(errors: list[str]) -> None:
+    """Fail-close CI workflow second-pass wiring in check_badge_standard.py (after #61).
+
+    Pins live push/branches/concurrency/path/job needles inside
+    check_workflow_hardening — not actionlint-style / badge / wiki / schema /
+    relative / common pin spam.
+    """
+    text = BADGE_GATE.read_text(encoding="utf-8")
+    # Split so this contract's own string literal cannot satisfy the pin.
+    harden_def = "def check_workflow_" + "hardening("
+    if harden_def not in text:
+        fail(
+            "check_badge_standard.py must provide check_workflow_hardening()",
+            errors,
+        )
+        return
+    # Restrict pins to the hardening body so this contract's own literals cannot
+    # satisfy the needles (split concatenations resist self-mutation too).
+    start = text.index(harden_def)
+    next_def = text.find("\ndef ", start + len(harden_def))
+    body = text[start : next_def if next_def != -1 else len(text)]
+
+    pins = (
+        ("must run on " + "push", "push trigger"),
+        ("push must declare " + "branches:", "branches: declaration"),
+        ('push branches must include "' + '**"', 'branches ["**"] glob'),
+        (
+            "concurrency group must include " + "github.ref",
+            "github.ref concurrency key",
+        ),
+        (
+            "concurrency group must include " + "github.workflow",
+            "github.workflow concurrency key",
+        ),
+        ("link-check-" + " prefix", "link-check concurrency prefix"),
+        (
+            "push paths must include .github/workflows/" + "link-check.yml",
+            "link-check self path filter",
+        ),
+        ("job id " + "link-check:", "link-check job id"),
+        ("markdown-lint-" + " prefix", "markdown-lint concurrency prefix"),
+        (
+            "push paths must include .github/workflows/" + "markdown-lint.yml",
+            "markdown-lint self path filter",
+        ),
+        ("job id " + "lint:", "markdown-lint job id"),
+        ("stewardship-checks-" + " prefix", "stewardship concurrency prefix"),
+        ("push paths must include docs/" + "**", "docs/** path"),
+        ("push paths must include scripts/" + "**", "scripts/** path"),
+        (
+            "push paths must include .github/workflows/" + "**",
+            "workflows/** path",
+        ),
+        ("job id " + "stewardship:", "stewardship job id"),
+    )
+    for needle, label in pins:
+        if needle not in body:
+            fail(
+                "check_workflow_hardening must pin CI second-pass "
+                f"{label} after #61",
+                errors,
+            )
+    for path_needle in (
+        "README" + ".md",
+        "AGENTS" + ".md",
+        "CLAUDE" + ".md",
+        "LIC" + "ENSE",
+        "CONTRIBUTING" + ".md",
+    ):
+        if ("must include " + path_needle) not in body:
+            fail(
+                "check_workflow_hardening must pin stewardship path "
+                f"{path_needle} after #61",
+                errors,
+            )
+    if ("second-pass after #" + "61") not in body:
+        fail(
+            "check_workflow_hardening must note CI second-pass after #61",
             errors,
         )
 
@@ -1678,6 +1863,9 @@ def main() -> int:
     # Fail-closed after #48: self-contract first so helper renames fail closed
     # (report pin drift) instead of NameError mid-run.
     check_badge_standard_gate_contract(errors)
+    # CI second-pass contract before live workflow hardening so source-pin
+    # mutations fail closed on contract needles (after #61).
+    check_ci_workflow_gate_contract(errors)
     if errors:
         print("Badge standard check FAILED:", file=sys.stderr)
         for err in errors:

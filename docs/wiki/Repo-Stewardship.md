@@ -77,7 +77,10 @@ plus wiki-outline second-pass after #59: `OPERATOR_ONLY` / docs/wiki /
 surface+routing+`run_stewardship_checks.sh`+badge topic pins / `](Home.md)`
 backlink / Unexpected+Missing+FAILED needles / angle+image RE /
 Do-not-push / README blob / badge-standard hint / social special-case
-pins / invent-chrome needle / Home.md table row).
+pins / invent-chrome needle / Home.md table row,
+plus CI workflow second-pass after #61: push + `branches: ["**"]` +
+concurrency `github.workflow` / `github.ref` + path filters + job ids
+`link-check` / `lint` / `stewardship` + `check_ci_workflow_gate_contract`).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

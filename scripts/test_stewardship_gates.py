@@ -62,6 +62,10 @@ backlink / Unexpected+Missing+FAILED needles / angle+image RE /
 Do-not-push / README blob / badge-standard hint / stars+forks+followers /
 invent-chrome needle / Home.md table row (not relative / schema / badge /
 common / CI workflow pin spam).
+Deepened after #61: CI workflow second-pass — push + branches ["**"] +
+concurrency github.workflow/github.ref + path filters + job ids
+link-check/lint/stewardship + check_ci_workflow_gate_contract (not
+actionlint-style / badge / wiki / schema / relative / common pin spam).
 """
 
 from __future__ import annotations
@@ -120,9 +124,11 @@ def _minimal_workflows(tmp: Path) -> None:
     link = """name: Link Check
 on:
   push:
+    branches: ["**"]
     paths:
       - "**/*.md"
       - ".lycheeignore"
+      - ".github/workflows/link-check.yml"
   pull_request:
   schedule:
     - cron: "0 6 * * 1"
@@ -130,7 +136,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: link-check-test
+  group: link-check-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   link-check:
@@ -149,6 +155,12 @@ jobs:
 """
     lint = """name: Markdown Lint
 on:
+  push:
+    branches: ["**"]
+    paths:
+      - "**/*.md"
+      - ".markdownlint.json"
+      - ".github/workflows/markdown-lint.yml"
   pull_request:
   schedule:
     - cron: "30 6 * * 1"
@@ -156,7 +168,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: markdown-lint-test
+  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   lint:
@@ -169,6 +181,19 @@ jobs:
 """
     stew = """name: Stewardship Checks
 on:
+  push:
+    branches: ["**"]
+    paths:
+      - "README.md"
+      - "AGENTS.md"
+      - "CLAUDE.md"
+      - "LICENSE"
+      - "CONTRIBUTING.md"
+      - "docs/**"
+      - "scripts/**"
+      - ".github/workflows/**"
+      - ".lycheeignore"
+      - ".markdownlint.json"
   pull_request:
   schedule:
     - cron: "15 6 * * 1"
@@ -176,7 +201,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: stewardship-test
+  group: stewardship-checks-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   stewardship:
@@ -21328,6 +21353,1057 @@ def test_wiki_passes_good_fixture_still_after_59() -> None:
         assert_pass_script(scripts / "check_wiki_outline.py", tmp_path)
 
 
+# --- TOKENMAXX deepen after #61: CI workflow second-pass pins ---
+
+
+def test_link_check_requires_push_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace('push:', 'push_disabled:')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'must run on push',
+        )
+
+
+def test_markdown_lint_requires_push_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace('push:', 'push_disabled:')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'must run on push',
+        )
+
+
+def test_stewardship_requires_push_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('push:', 'push_disabled:')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'must run on push',
+        )
+
+
+def test_link_check_requires_branches_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace('branches:', 'branch_list:')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'branches:',
+        )
+
+
+def test_markdown_lint_requires_branches_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace('branches:', 'branch_list:')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'branches:',
+        )
+
+
+def test_stewardship_requires_branches_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('branches:', 'branch_list:')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'branches:',
+        )
+
+
+def test_link_check_requires_branch_glob_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace('["**"]', '["main"]')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '"**"',
+        )
+
+
+def test_markdown_lint_requires_branch_glob_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace('["**"]', '["main"]')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '"**"',
+        )
+
+
+def test_stewardship_requires_branch_glob_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('["**"]', '["main"]')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '"**"',
+        )
+
+
+def test_link_check_requires_github_ref_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace('github.ref', 'github.sha')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'github.ref',
+        )
+
+
+def test_markdown_lint_requires_github_ref_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace('github.ref', 'github.sha')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'github.ref',
+        )
+
+
+def test_stewardship_requires_github_ref_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('github.ref', 'github.sha')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'github.ref',
+        )
+
+
+def test_link_check_requires_github_workflow_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace('github.workflow', 'github.job')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'github.workflow',
+        )
+
+
+def test_markdown_lint_requires_github_workflow_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace('github.workflow', 'github.job')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'github.workflow',
+        )
+
+
+def test_stewardship_requires_github_workflow_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('github.workflow', 'github.job')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'github.workflow',
+        )
+
+
+def test_link_check_requires_group_prefix_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace('group: link-check-', 'group: linkcheck-')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check- prefix',
+        )
+
+
+def test_markdown_lint_requires_group_prefix_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace('group: markdown-lint-', 'group: md-lint-')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'markdown-lint- prefix',
+        )
+
+
+def test_stewardship_requires_group_prefix_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('group: stewardship-checks-', 'group: stew-checks-')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship-checks- prefix',
+        )
+
+
+def test_link_check_requires_self_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace('.github/workflows/link-check.yml', '.github/workflows/linkcheck.yml')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '.github/workflows/link-check.yml',
+        )
+
+
+def test_markdown_lint_requires_self_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace('.github/workflows/markdown-lint.yml', '.github/workflows/markdownlint.yml')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '.github/workflows/markdown-lint.yml',
+        )
+
+
+def test_stewardship_requires_docs_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('docs/**', 'documentation/**')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'docs/**',
+        )
+
+
+def test_stewardship_requires_scripts_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('scripts/**', 'script/**')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'scripts/**',
+        )
+
+
+def test_stewardship_requires_workflows_glob_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('.github/workflows/**', '.github/workflow/**')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '.github/workflows/**',
+        )
+
+
+def test_stewardship_requires_readme_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('"README.md"', '"READ_ME.md"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'README.md',
+        )
+
+
+def test_stewardship_requires_agents_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('"AGENTS.md"', '"AGENT.md"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'AGENTS.md',
+        )
+
+
+def test_stewardship_requires_claude_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('"CLAUDE.md"', '"CLAUD.md"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'CLAUDE.md',
+        )
+
+
+def test_stewardship_requires_license_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('"LICENSE"', '"LICENCE"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'LICENSE',
+        )
+
+
+def test_stewardship_requires_contributing_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('"CONTRIBUTING.md"', '"CONTRIBUTE.md"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'CONTRIBUTING.md',
+        )
+
+
+def test_link_check_requires_job_id_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace('  link-check:', '  linkcheck:')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'job id link-check:',
+        )
+
+
+def test_markdown_lint_requires_job_id_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace('  lint:', '  markdown_lint:')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'job id lint:',
+        )
+
+
+def test_stewardship_requires_job_id_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('  stewardship:', '  steward:')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'job id stewardship:',
+        )
+
+
+def test_link_check_requires_lycheeignore_path_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace('.lycheeignore', '.lychee-ignore')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '.lycheeignore',
+        )
+
+
+def test_markdown_lint_requires_markdownlint_json_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace('.markdownlint.json', '.markdownlint.yaml')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '.markdownlint.json',
+        )
+
+
+def test_link_check_requires_md_glob_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace('**/*.md', '**/*.markdown')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '**/*.md',
+        )
+
+
+def test_markdown_lint_requires_md_glob_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace('**/*.md', '**/*.markdown')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '**/*.md',
+        )
+
+
+def test_link_check_requires_cancel_true_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace('cancel-in-progress: true', 'cancel-in-progress: false')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'cancel-in-progress: true',
+        )
+
+
+def test_markdown_lint_requires_cancel_true_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace('cancel-in-progress: true', 'cancel-in-progress: false')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'cancel-in-progress: true',
+        )
+
+
+def test_stewardship_requires_cancel_true_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('cancel-in-progress: true', 'cancel-in-progress: false')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'cancel-in-progress: true',
+        )
+
+
+def test_link_check_requires_workflow_dispatch_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace('workflow_dispatch:', 'workflow_call:')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'workflow_dispatch',
+        )
+
+
+def test_markdown_lint_requires_pull_request_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace('pull_request:', 'pull_request_review:')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'pull_request',
+        )
+
+
+def test_stewardship_requires_schedule_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('schedule:', 'scheduled:')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'schedule',
+        )
+
+
+def test_link_check_requires_contents_read_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace('contents: read', 'contents: none')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'contents: read',
+        )
+
+
+def test_stewardship_requires_checkout_v7_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('actions/checkout@v7', 'actions/checkout@v4')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'checkout@v7',
+        )
+
+
+def test_link_check_requires_ubuntu_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace('ubuntu-latest', 'ubuntu-22.04')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ubuntu-latest',
+        )
+
+
+def test_ci_contract_requires_push_pin_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'must run on push', 'must execute on push', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'push trigger',
+        )
+
+
+def test_ci_contract_requires_branches_pin_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'push must declare branches:', 'push must declare branch_list:', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'branches: declaration',
+        )
+
+
+def test_ci_contract_requires_glob_pin_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'push branches must include "**"', 'push branches must include "main"', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'branches ["**"] glob',
+        )
+
+
+def test_ci_contract_requires_github_ref_pin_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'concurrency group must include github.ref', 'concurrency group must include github.sha', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'github.ref concurrency key',
+        )
+
+
+def test_ci_contract_requires_github_workflow_pin_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'concurrency group must include github.workflow', 'concurrency group must include github.job', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'github.workflow concurrency key',
+        )
+
+
+def test_ci_contract_requires_link_prefix_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'link-check- prefix', 'linkcheck- prefix', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check concurrency prefix',
+        )
+
+
+def test_ci_contract_requires_link_self_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'push paths must include .github/workflows/link-check.yml', 'push paths must include .github/workflows/linkcheck.yml', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check self path filter',
+        )
+
+
+def test_ci_contract_requires_link_job_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'job id link-check:', 'job id linkcheck:', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check job id',
+        )
+
+
+def test_ci_contract_requires_md_prefix_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'markdown-lint- prefix', 'md-lint- prefix', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'markdown-lint concurrency prefix',
+        )
+
+
+def test_ci_contract_requires_md_self_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'push paths must include .github/workflows/markdown-lint.yml', 'push paths must include .github/workflows/markdownlint.yml', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'markdown-lint self path filter',
+        )
+
+
+def test_ci_contract_requires_lint_job_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'job id lint:', 'job id markdown:', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'markdown-lint job id',
+        )
+
+
+def test_ci_contract_requires_stew_prefix_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'stewardship-checks- prefix', 'stew-checks- prefix', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship concurrency prefix',
+        )
+
+
+def test_ci_contract_requires_docs_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'push paths must include docs/**', 'push paths must include documentation/**', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'docs/** path',
+        )
+
+
+def test_ci_contract_requires_scripts_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'push paths must include scripts/**', 'push paths must include script/**', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'scripts/** path',
+        )
+
+
+def test_ci_contract_requires_wf_glob_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'push paths must include .github/workflows/**', 'push paths must include .github/workflow/**', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'workflows/** path',
+        )
+
+
+def test_ci_contract_requires_stew_job_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'job id stewardship:', 'job id steward:', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship job id',
+        )
+
+
+def test_ci_contract_requires_readme_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'must include README.md', 'must include READ_ME.md', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'README.md',
+        )
+
+
+def test_ci_contract_requires_agents_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'must include AGENTS.md', 'must include AGENT.md', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'AGENTS.md',
+        )
+
+
+def test_ci_contract_requires_claude_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'must include CLAUDE.md', 'must include CLAUD.md', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'CLAUDE.md',
+        )
+
+
+def test_ci_contract_requires_license_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'must include LICENSE', 'must include LICENCE', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'LICENSE',
+        )
+
+
+def test_ci_contract_requires_contributing_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'must include CONTRIBUTING.md', 'must include CONTRIBUTE.md', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'CONTRIBUTING.md',
+        )
+
+
+def test_ci_contract_requires_after_61_note() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "second-pass after #61",
+            "second-pass after #60",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "after #61",
+        )
+
+
+def test_ci_contract_requires_hardening_def_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'def check_workflow_hardening(', 'def check_workflow_hard_x(', 1
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'check_workflow_hardening()',
+        )
+
+
+def test_ci_passes_good_fixture_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+
+def test_markdown_lint_requires_contents_read_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace('contents: read', 'contents: write')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'contents: read',
+        )
+
+
+def test_stewardship_requires_permissions_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('permissions:', 'permission:')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'permissions',
+        )
+
+
+def test_link_check_requires_concurrency_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace('concurrency:', 'concurrent:')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'concurrency',
+        )
+
+
+def test_stewardship_requires_ubuntu_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace('ubuntu-latest', 'ubuntu-22.04')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ubuntu-latest',
+        )
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -22758,6 +23834,79 @@ def main() -> int:
         test_wiki_gate_requires_kill_switch_still_after_59,
         test_wiki_gate_requires_scan_secrets_still_after_59,
         test_wiki_passes_good_fixture_still_after_59,
+        # TOKENMAXX deepen after #61 (+72 CI workflow second-pass)
+        test_link_check_requires_push_after_61,
+        test_markdown_lint_requires_push_after_61,
+        test_stewardship_requires_push_after_61,
+        test_link_check_requires_branches_after_61,
+        test_markdown_lint_requires_branches_after_61,
+        test_stewardship_requires_branches_after_61,
+        test_link_check_requires_branch_glob_after_61,
+        test_markdown_lint_requires_branch_glob_after_61,
+        test_stewardship_requires_branch_glob_after_61,
+        test_link_check_requires_github_ref_after_61,
+        test_markdown_lint_requires_github_ref_after_61,
+        test_stewardship_requires_github_ref_after_61,
+        test_link_check_requires_github_workflow_after_61,
+        test_markdown_lint_requires_github_workflow_after_61,
+        test_stewardship_requires_github_workflow_after_61,
+        test_link_check_requires_group_prefix_after_61,
+        test_markdown_lint_requires_group_prefix_after_61,
+        test_stewardship_requires_group_prefix_after_61,
+        test_link_check_requires_self_path_after_61,
+        test_markdown_lint_requires_self_path_after_61,
+        test_stewardship_requires_docs_path_after_61,
+        test_stewardship_requires_scripts_path_after_61,
+        test_stewardship_requires_workflows_glob_after_61,
+        test_stewardship_requires_readme_path_after_61,
+        test_stewardship_requires_agents_path_after_61,
+        test_stewardship_requires_claude_path_after_61,
+        test_stewardship_requires_license_path_after_61,
+        test_stewardship_requires_contributing_path_after_61,
+        test_link_check_requires_job_id_after_61,
+        test_markdown_lint_requires_job_id_after_61,
+        test_stewardship_requires_job_id_after_61,
+        test_link_check_requires_lycheeignore_path_still_after_61,
+        test_markdown_lint_requires_markdownlint_json_still_after_61,
+        test_link_check_requires_md_glob_still_after_61,
+        test_markdown_lint_requires_md_glob_still_after_61,
+        test_link_check_requires_cancel_true_still_after_61,
+        test_markdown_lint_requires_cancel_true_still_after_61,
+        test_stewardship_requires_cancel_true_still_after_61,
+        test_link_check_requires_workflow_dispatch_still_after_61,
+        test_markdown_lint_requires_pull_request_still_after_61,
+        test_stewardship_requires_schedule_still_after_61,
+        test_link_check_requires_contents_read_still_after_61,
+        test_stewardship_requires_checkout_v7_still_after_61,
+        test_link_check_requires_ubuntu_still_after_61,
+        test_ci_contract_requires_push_pin_after_61,
+        test_ci_contract_requires_branches_pin_after_61,
+        test_ci_contract_requires_glob_pin_after_61,
+        test_ci_contract_requires_github_ref_pin_after_61,
+        test_ci_contract_requires_github_workflow_pin_after_61,
+        test_ci_contract_requires_link_prefix_after_61,
+        test_ci_contract_requires_link_self_path_after_61,
+        test_ci_contract_requires_link_job_after_61,
+        test_ci_contract_requires_md_prefix_after_61,
+        test_ci_contract_requires_md_self_path_after_61,
+        test_ci_contract_requires_lint_job_after_61,
+        test_ci_contract_requires_stew_prefix_after_61,
+        test_ci_contract_requires_docs_path_after_61,
+        test_ci_contract_requires_scripts_path_after_61,
+        test_ci_contract_requires_wf_glob_after_61,
+        test_ci_contract_requires_stew_job_after_61,
+        test_ci_contract_requires_readme_path_after_61,
+        test_ci_contract_requires_agents_path_after_61,
+        test_ci_contract_requires_claude_path_after_61,
+        test_ci_contract_requires_license_path_after_61,
+        test_ci_contract_requires_contributing_path_after_61,
+        test_ci_contract_requires_after_61_note,
+        test_ci_contract_requires_hardening_def_after_61,
+        test_ci_passes_good_fixture_still_after_61,
+        test_markdown_lint_requires_contents_read_still_after_61,
+        test_stewardship_requires_permissions_still_after_61,
+        test_link_check_requires_concurrency_still_after_61,
+        test_stewardship_requires_ubuntu_still_after_61,
 
     ]
     try:

@@ -11,6 +11,15 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX CI workflow second-pass pins after #61: expand self-tests to 1468
+  cases (was 1396) fail-closing live CI workflow integrity — push +
+  `branches: ["**"]` + concurrency `github.workflow` / `github.ref` + path
+  filters (self-workflow / `docs/**` / `scripts/**` / `.github/workflows/**` /
+  README+AGENTS+CLAUDE+LICENSE+CONTRIBUTING) + job ids
+  `link-check` / `lint` / `stewardship` + `check_ci_workflow_gate_contract` —
+  CI workflow second-pass slice only (not actionlint-style / badge-standard /
+  wiki-outline / schema-scalar / relative-link / common pin spam); no
+  invent-product; no fourth badge
 - TOKENMAXX wiki-outline second-pass pins after #59: expand self-tests to 1396
   cases (was 1324) fail-closing live wiki-outline integrity — `OPERATOR_ONLY` /
   docs/wiki / `_reject_invent_badge_chrome` / autonomy+governance+public+kill+

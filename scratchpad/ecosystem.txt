@@ -292,7 +292,9 @@ _None yet._
 - [x] cursor: Read live tree post-#48 (1114 cases; stewardship_common pins saturated)
 - [x] cursor: Fail-close badge-standard gate — REQUIRED_ORDER / MAX_BADGES=3 / EXPECTED_REPO / REQUIRED_WORKFLOWS / badge.svg + shields license / contiguous / invent / fourth refusal / Stewardship product reject
 - [x] cursor: Expand self-tests 1114 → 1182 (badge-standard gate contract slice; not common / schema / wiki / relative / CI workflow pin / fixture-reject spam)
-- [ ] cursor: Green PR with CI
+- [x] cursor: Green PR with CI
 - Scope: EXISTING badge-standard integrity / front-door pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-badge-gate-pins-7868
 2026-09-13T22:17:25Z
+
+2026-09-13T22:20:43Z cursor: PR #53 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-040 TOKENMAXX badge-standard gate pins

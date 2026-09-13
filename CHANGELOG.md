@@ -11,6 +11,18 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX badge-standard second-pass pins after #61: expand self-tests to 1468
+  cases (was 1396) fail-closing live badge-standard integrity —
+  `REQUIRED_ORDER`+`EXPECTED_REPO` exact assigns / README+LICENSE+
+  badge-standard+CONTRIBUTING+AGENTS+lycheeignore+markdownlint paths /
+  contract+main fns / `actions/workflows/*.yml/badge.svg` /
+  exactly+order+contiguous+H1+unexpected+forbidden+secret+FAILED+OK needles /
+  endswith+/./LICENSE / `load_workflow_text` / invent-product doc /
+  intentionally / quiet stewardship / selftest+relative AGENTS pins /
+  img https startswith / http link reject, plus badge-standard gate contract
+  pins in `check_badge_standard.py` — badge-standard second-pass slice only
+  (not wiki / relative / schema / common / CI workflow pin / fixture-reject
+  spam); no invent-product; no fourth badge
 - TOKENMAXX wiki-outline second-pass pins after #59: expand self-tests to 1396
   cases (was 1324) fail-closing live wiki-outline integrity — `OPERATOR_ONLY` /
   docs/wiki / `_reject_invent_badge_chrome` / autonomy+governance+public+kill+

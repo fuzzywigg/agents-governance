@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Enforce docs/badge-standard.md against README.md (executable gate).
 
-Fail-closed pins (live path after #48):
+Fail-closed pins (live path after #48; second-pass after #61):
 - REQUIRED_ORDER: Link Check → Markdown Lint → License (exactly MAX_BADGES = 3)
 - EXPECTED_REPO: fuzzywigg/agents-governance
 - REQUIRED_WORKFLOWS: link-check.yml / markdown-lint.yml / stewardship-checks.yml
@@ -9,6 +9,8 @@ Fail-closed pins (live path after #48):
 - Badge images https-only; link-check.yml/badge.svg + markdown-lint.yml/badge.svg
 - License via img.shields.io/github/license/; contiguous row; no invent-product
 - Quiet stewardship: no Stewardship product/status badge; no fourth badge
+- Second-pass: path constants / exact REQUIRED_ORDER+EXPECTED_REPO assigns /
+  actions/workflows/*.yml/badge.svg / fail needles / LICENSE link / FAILED+OK
 """
 
 from __future__ import annotations
@@ -685,7 +687,7 @@ def check_contributing_and_agents(errors: list[str]) -> None:
 
 
 def check_badge_standard_gate_contract(errors: list[str]) -> None:
-    """Fail-close live badge-standard gate wiring (after #48; not common-pin spam)."""
+    """Fail-close live badge-standard gate wiring (after #61; deepen after #48)."""
     if not BADGE_GATE.is_file():
         fail("Missing scripts/check_badge_standard.py (badge-standard gate)", errors)
         return
@@ -820,6 +822,183 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
         fail("check_badge_standard.py must use " + secret_pin, errors)
     if scan_pin not in text:
         fail("check_badge_standard.py must scan docs via " + scan_pin, errors)
+    # Fail-closed after #61: second-pass helper / constant / needle pins
+    # (badge-standard slice only; not wiki / relative / schema / common / CI spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    order_eq = (
+        "REQUIRED_ORDER = ("
+        '"Link Check", "Markdown Lint", "License")'
+    )
+    if order_eq not in text and order_eq.replace('"', "'") not in text:
+        fail(
+            "check_badge_standard.py must set REQUIRED_ORDER = "
+            '("Link Check", "Markdown Lint", "License")',
+            errors,
+        )
+    repo_eq = 'EXPECTED_REPO = "fuzzywigg/' + 'agents-governance"'
+    if repo_eq not in text:
+        fail(
+            "check_badge_standard.py must set EXPECTED_REPO = "
+            '"fuzzywigg/agents-governance"',
+            errors,
+        )
+    for path_needle in (
+        "README" + ".md",
+        "LIC" + "ENSE",
+        "badge-standard" + ".md",
+        "CONTRIBUTING" + ".md",
+        "AGENTS" + ".md",
+        ".lychee" + "ignore",
+        ".markdownlint" + ".json",
+    ):
+        quoted = f'"{path_needle}"'
+        if quoted not in text and f"'{path_needle}'" not in text:
+            if path_needle == "LICENSE" and (
+                ' / "LICENSE"' in text or " / 'LICENSE'" in text
+            ):
+                continue
+            fail(
+                "check_badge_standard.py must pin path " + path_needle,
+                errors,
+            )
+    contract_fn = "check_badge_standard_" + "gate_contract"
+    if f"def {contract_fn}(" not in text:
+        fail(
+            "check_badge_standard.py must provide " + contract_fn + "()",
+            errors,
+        )
+    if "def " + "main(" not in text:
+        fail(
+            "check_badge_standard.py must provide main()",
+            errors,
+        )
+    full_link_svg = "actions/workflows/link-check.yml/" + "badge.svg"
+    full_md_svg = "actions/workflows/markdown-lint.yml/" + "badge.svg"
+    if full_link_svg not in text:
+        fail(
+            "check_badge_standard.py must pin " + full_link_svg,
+            errors,
+        )
+    if full_md_svg not in text:
+        fail(
+            "check_badge_standard.py must pin " + full_md_svg,
+            errors,
+        )
+    exactly_pin = "Badge row must have " + "exactly"
+    if exactly_pin not in text:
+        fail(
+            "check_badge_standard.py must emit " + exactly_pin + " needle",
+            errors,
+        )
+    order_needle = "Badge labels must be " + "in order"
+    if order_needle not in text:
+        fail(
+            "check_badge_standard.py must emit " + order_needle + " needle",
+            errors,
+        )
+    contig_needle = "Badge row must be " + "contiguous"
+    if contig_needle not in text:
+        fail(
+            "check_badge_standard.py must emit " + contig_needle + " needle",
+            errors,
+        )
+    h1_needle = "missing " + "H1"
+    if h1_needle not in text:
+        fail(
+            "check_badge_standard.py must emit " + h1_needle + " needle",
+            errors,
+        )
+    unexpected_needle = "Unexpected badge " + "label"
+    if unexpected_needle not in text:
+        fail(
+            "check_badge_standard.py must emit " + unexpected_needle + " needle",
+            errors,
+        )
+    forbidden_needle = "Forbidden invent-product / social badge " + "hint"
+    if forbidden_needle not in text:
+        fail(
+            "check_badge_standard.py must emit " + forbidden_needle + " needle",
+            errors,
+        )
+    secret_needle = "Secret-like token in badge " + "URL"
+    if secret_needle not in text:
+        fail(
+            "check_badge_standard.py must emit " + secret_needle + " needle",
+            errors,
+        )
+    failed_banner = "Badge standard check " + "FAILED"
+    if failed_banner not in text:
+        fail(
+            "check_badge_standard.py must print " + failed_banner,
+            errors,
+        )
+    ok_match = "OK: README badge row matches docs/" + "badge-standard.md"
+    if ok_match not in text:
+        fail(
+            "check_badge_standard.py must keep " + ok_match + " success needle",
+            errors,
+        )
+    endswith_lic = 'endswith("/' + 'LICENSE")'
+    if endswith_lic not in text:
+        fail(
+            "check_badge_standard.py must accept License badge link endswith /LICENSE",
+            errors,
+        )
+    dot_lic = '"./' + 'LICENSE"'
+    if dot_lic not in text:
+        fail(
+            "check_badge_standard.py must accept relative ./LICENSE License badge link",
+            errors,
+        )
+    load_wf = "load_workflow_" + "text"
+    if load_wf not in text:
+        fail(
+            "check_badge_standard.py must use " + load_wf + " for workflow pins",
+            errors,
+        )
+    invent_doc = "do not invent product " + "badges"
+    if invent_doc not in text.lower():
+        fail(
+            "check_badge_standard.py must retain " + invent_doc + " doc wording pin",
+            errors,
+        )
+    intent_pin = "intent" + "ionally"
+    if intent_pin not in text.lower():
+        fail(
+            "check_badge_standard.py must retain " + intent_pin
+            + " fourth-badge refusal wording",
+            errors,
+        )
+    quiet_pin = "quiet " + "stewardship"
+    if quiet_pin not in text.lower():
+        fail(
+            "check_badge_standard.py must retain " + quiet_pin + " wording",
+            errors,
+        )
+    selftest_pin = "test_stewardship_" + "gates.py"
+    if selftest_pin not in text:
+        fail(
+            "check_badge_standard.py AGENTS.md pins must require " + selftest_pin,
+            errors,
+        )
+    relative_pin = '"' + "rel" + "ative" + '"'
+    if relative_pin not in text:
+        fail(
+            "check_badge_standard.py AGENTS.md pins must require relative mention",
+            errors,
+        )
+    https_start = 'img.startswith("https:' + '//")'
+    if https_start not in text:
+        fail(
+            "check_badge_standard.py must require img.startswith(https://)",
+            errors,
+        )
+    http_link_reject = 'link.startswith("http:' + '//")'
+    if http_link_reject not in text:
+        fail(
+            "check_badge_standard.py must reject link.startswith(http://)",
+            errors,
+        )
 
 
 def check_stewardship_common_contract(errors: list[str]) -> None:

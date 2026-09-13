@@ -1002,7 +1002,7 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
 
 
 def check_stewardship_common_contract(errors: list[str]) -> None:
-    """Fail-close live stewardship_common wiring (after #46; not schema-pin spam)."""
+    """Fail-close live stewardship_common wiring (after #65; deepen after #46; not schema-pin spam)."""
     if not COMMON_GATE.is_file():
         fail("Missing scripts/stewardship_common.py (shared gate helpers)", errors)
         return
@@ -1131,6 +1131,161 @@ def check_stewardship_common_contract(errors: list[str]) -> None:
     if "live secret scan covers ci tokens" not in text.lower():
         fail(
             "stewardship_common.py must pin live secret scan covers CI tokens",
+            errors,
+        )
+    # Fail-closed after #65: second-pass helper / constant / needle pins
+    # (stewardship_common slice only; not badge / wiki / relative / schema /
+    # actionlint / CI workflow pin spam).
+    if "parents[1]" not in text:
+        fail(
+            "stewardship_common.py ROOT must resolve via parents[1]",
+            errors,
+        )
+    if "ROOT parents[1]" not in text:
+        fail(
+            "stewardship_common.py docstring must pin ROOT parents[1]",
+            errors,
+        )
+    for key_kind in ("RSA ", "OPENSSH ", "EC "):
+        if key_kind not in text:
+            fail(
+                "stewardship_common.py PRIVATE KEY pattern must pin "
+                + key_kind.strip(),
+                errors,
+            )
+    if "passwd" not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin passwd",
+            errors,
+        )
+    if r"secret\s*[:=]" not in text and r"secret\s*[:=]" not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin secret:= assign",
+            errors,
+        )
+    for url_prefix in ("ghp_", "gho_", "github_pat_"):
+        quoted = f'"{url_prefix}"'
+        if quoted not in text and f"'{url_prefix}'" not in text:
+            fail(
+                "stewardship_common.py SECRET_URL_HINTS must pin " + url_prefix,
+                errors,
+            )
+    if "DOTALL" not in text:
+        fail(
+            "stewardship_common.py FENCED_BLOCK_RE must use re.DOTALL",
+            errors,
+        )
+    if "FENCED_BLOCK_RE.sub" not in text:
+        fail(
+            "stewardship_common.py strip_fenced_code must call FENCED_BLOCK_RE.sub",
+            errors,
+        )
+    if "errors.append(msg)" not in text:
+        fail(
+            "stewardship_common.py fail() must errors.append(msg)",
+            errors,
+        )
+    if "strip().lower()" not in text:
+        fail(
+            "stewardship_common.py has_dangerous_scheme must strip().lower()",
+            errors,
+        )
+    if "startswith(scheme)" not in text:
+        fail(
+            "stewardship_common.py has_dangerous_scheme must startswith(scheme)",
+            errors,
+        )
+    if "relative_to(ROOT)" not in text:
+        fail(
+            "stewardship_common.py scan_secrets must relative_to(ROOT)",
+            errors,
+        )
+    if "re.escape(hint)" not in text:
+        fail(
+            "stewardship_common.py scan_secrets must re.escape(hint)",
+            errors,
+        )
+    if "https?://" not in text:
+        fail(
+            "stewardship_common.py scan_secrets must match https?:// URL-ish",
+            errors,
+        )
+    if "matches forbidden secret-like pattern" not in text:
+        fail(
+            "stewardship_common.py must emit matches forbidden secret-like pattern",
+            errors,
+        )
+    if "secret-like URL hint" not in text:
+        fail(
+            "stewardship_common.py must emit secret-like URL hint",
+            errors,
+        )
+    if "secret-like token hint" not in text:
+        fail(
+            "stewardship_common.py must emit secret-like token hint",
+            errors,
+        )
+    if "ROOT.glob" not in text:
+        fail(
+            "stewardship_common.py markdown_files must ROOT.glob",
+            errors,
+        )
+    if "sorted(" not in text:
+        fail(
+            "stewardship_common.py markdown_files must sorted()",
+            errors,
+        )
+    if "is_file()" not in text:
+        fail(
+            "stewardship_common.py markdown_files / load_workflow must is_file()",
+            errors,
+        )
+    if '".github"' not in text and "'.github'" not in text:
+        fail(
+            "stewardship_common.py load_workflow_text must path under .github/",
+            errors,
+        )
+    if '"workflows"' not in text and "'workflows'" not in text:
+        fail(
+            "stewardship_common.py load_workflow_text must path under workflows/",
+            errors,
+        )
+    if "Shared helpers for stewardship" not in text:
+        fail(
+            "stewardship_common.py must keep Shared helpers for stewardship docstring",
+            errors,
+        )
+    if "no invent-product surface" not in text:
+        fail(
+            "stewardship_common.py must keep no invent-product surface docstring",
+            errors,
+        )
+    if "Remove fenced code blocks" not in text:
+        fail(
+            "stewardship_common.py strip_fenced_code must keep Remove fenced "
+            "code blocks pin",
+            errors,
+        )
+    if "matched dangerous scheme" not in text.lower():
+        fail(
+            "stewardship_common.py has_dangerous_scheme must keep matched "
+            "dangerous scheme pin",
+            errors,
+        )
+    if "Collect markdown paths" not in text:
+        fail(
+            "stewardship_common.py markdown_files must keep Collect markdown "
+            "paths pin",
+            errors,
+        )
+    if "xox[baprs]" not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin xox[baprs]",
+            errors,
+        )
+    if "Second-pass" not in text and "second-pass" not in text.lower():
+        fail(
+            "stewardship_common.py module docstring must name second-pass pins",
             errors,
         )
 

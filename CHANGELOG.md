@@ -11,6 +11,17 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship_common second-pass pins after #65: expand self-tests to
+  1540 cases (was 1468) fail-closing live shared-helper integrity —
+  `parents[1]` / RSA|OPENSSH|EC / passwd+`secret:=` / URL-hint token prefixes /
+  `DOTALL` / `FENCED_BLOCK_RE.sub` / `errors.append(msg)` / `strip().lower()` /
+  `startswith(scheme)` / `relative_to(ROOT)` / `re.escape(hint)` / `https?://` /
+  forbidden-pattern+URL+token needles / `ROOT.glob`+sorted+`is_file` /
+  `.github/workflows` / helper docstrings / Slack `xox*` family, plus
+  stewardship_common contract pins in `check_badge_standard.py` —
+  stewardship_common second-pass slice only (not badge / wiki / relative /
+  schema / actionlint / CI workflow pin / fixture-reject spam); no
+  invent-product; no fourth badge
 - TOKENMAXX badge-standard second-pass pins after #61: expand self-tests to 1468
   cases (was 1396) fail-closing live badge-standard integrity —
   `REQUIRED_ORDER`+`EXPECTED_REPO` exact assigns / README+LICENSE+

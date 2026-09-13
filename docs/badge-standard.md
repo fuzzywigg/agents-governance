@@ -109,7 +109,13 @@ lycheeignore+markdownlint paths / contract+main fns /
 unexpected+forbidden+secret+FAILED+OK needles / endswith+/./LICENSE /
 `load_workflow_text` / invent-product doc / intentionally / quiet
 stewardship / selftest+relative AGENTS pins / img https startswith /
-http link reject).
+http link reject,
+plus stewardship_common second-pass after #65: `parents[1]` / RSA|OPENSSH|EC /
+passwd+`secret:=` / URL-hint token prefixes / `DOTALL` /
+`FENCED_BLOCK_RE.sub` / `errors.append(msg)` / `strip().lower()` /
+`startswith(scheme)` / `relative_to(ROOT)` / `re.escape(hint)` / `https?://` /
+forbidden-pattern+URL+token needles / `ROOT.glob`+sorted+`is_file` /
+`.github/workflows` / helper docstrings / Slack `xox*` family).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

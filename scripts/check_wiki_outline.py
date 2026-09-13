@@ -149,6 +149,12 @@ def main() -> int:
             fail("Repo-Stewardship.md must mention relative-link gate coverage", errors)
         if "invent" not in ste_text.lower():
             fail("Repo-Stewardship.md must retain no-invent-product stewardship wording", errors)
+        # Existing CI path: stewardship runs actionlint on the three workflows.
+        if "actionlint" not in ste_text.lower():
+            fail(
+                "Repo-Stewardship.md must mention actionlint on existing workflow paths",
+                errors,
+            )
 
     for name in PUBLISHABLE_PAGES:
         path = WIKI / name

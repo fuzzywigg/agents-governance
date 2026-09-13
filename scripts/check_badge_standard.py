@@ -119,8 +119,12 @@ def check_lycheeignore(errors: list[str]) -> None:
             errors,
         )
     # Do not quietly drop fail-closed posture by ignoring everything.
-    if text.strip() == "*" or "https://*" in text:
-        fail(".lycheeignore must not exclude all https targets", errors)
+    if text.strip() == "*" or "https://*" in text or "http://*" in text:
+        fail(
+            ".lycheeignore must not exclude all http(s) targets "
+            "(https://* / http://* / bare *)",
+            errors,
+        )
 
 
 def check_actionlint_style(errors: list[str]) -> None:
@@ -178,6 +182,12 @@ def check_workflow_hardening(errors: list[str]) -> None:
                 "(supersede stale runs on the same ref)",
                 errors,
             )
+        # Fail-closed: cancel-in-progress must be true (not false / empty).
+        if not re.search(r"(?m)^\s*cancel-in-progress:\s*true\s*$", text):
+            fail(
+                f"{name} concurrency must set cancel-in-progress: true",
+                errors,
+            )
         if "timeout-minutes:" not in text:
             fail(f"{name} jobs must set timeout-minutes", errors)
         if "schedule:" not in text:
@@ -193,6 +203,12 @@ def check_workflow_hardening(errors: list[str]) -> None:
         )
     if "--exclude-path" not in link and "exclude-path" not in link:
         fail("link-check.yml must exclude .github/agents (or equivalent path)", errors)
+    if ".github/agents" not in link:
+        fail(
+            "link-check.yml exclude-path must target .github/agents "
+            "(agent prompt files stay out of lychee)",
+            errors,
+        )
     if "--max-concurrency" not in link:
         fail("link-check.yml must cap lychee --max-concurrency", errors)
     if "--timeout" not in link:
@@ -213,6 +229,11 @@ def check_workflow_hardening(errors: list[str]) -> None:
     lint = load_workflow_text("markdown-lint.yml") or ""
     if "markdownlint" not in lint.lower():
         fail("markdown-lint.yml must invoke markdownlint", errors)
+    if '"**/*.md"' not in lint and "'**/*.md'" not in lint and "**/*.md" not in lint:
+        fail(
+            "markdown-lint.yml must scan **/*.md markdown sources (globs or paths)",
+            errors,
+        )
     if "OWASP-AGENTIC.md" not in lint:
         fail("markdown-lint.yml must exclude OWASP-AGENTIC.md", errors)
     if ".markdownlint.json" not in lint:

@@ -17,6 +17,8 @@ SECRET_PATTERNS: tuple[re.Pattern[str], ...] = (
     re.compile(r"(?i)api[_-]?key\s*[:=]\s*['\"]?[A-Za-z0-9_\-]{16,}"),
     re.compile(r"(?i)secret\s*[:=]\s*['\"]?[A-Za-z0-9_\-]{16,}"),
     re.compile(r"(?i)(?:password|passwd|token)\s*[:=]\s*['\"][^'\"]{8,}['\"]"),
+    re.compile(r"(?i)aws_secret_access_key\s*[:=]\s*['\"]?[A-Za-z0-9/+=]{20,}"),
+    re.compile(r"\bxox[baprs]-[A-Za-z0-9-]{10,}\b"),
 )
 
 SECRET_URL_HINTS = (
@@ -30,9 +32,35 @@ SECRET_URL_HINTS = (
     "github_pat_",
 )
 
+# Invent-product / social chrome that must never appear as README badges.
+FORBIDDEN_BADGE_HINTS = (
+    "coverage",
+    "codecov",
+    "coveralls",
+    "downloads",
+    "discord",
+    "twitter",
+    "x.com",
+    "stars",
+    "forks",
+    "followers",
+    "npm/",
+    "pypi/",
+    "producthunt",
+    "buymeacoffee",
+    "opencollective",
+)
+
+FENCED_BLOCK_RE = re.compile(r"```.*?```", re.DOTALL)
+
 
 def fail(msg: str, errors: list[str]) -> None:
     errors.append(msg)
+
+
+def strip_fenced_code(text: str) -> str:
+    """Remove fenced code blocks so example links do not fail integrity gates."""
+    return FENCED_BLOCK_RE.sub("", text)
 
 
 def scan_secrets(path: Path, errors: list[str], *, label: str | None = None) -> None:
@@ -46,12 +74,8 @@ def scan_secrets(path: Path, errors: list[str], *, label: str | None = None) -> 
     for hint in SECRET_URL_HINTS:
         # Only flag URL-ish secret hints (query params / token prefixes), not prose.
         if hint.endswith("="):
-            if re.search(rf"[?&]{re.escape(hint)}", lowered) or f"{hint}" in lowered and (
-                "http://" in lowered or "https://" in lowered
-            ):
-                # Require the hint to appear inside a URL-looking substring.
-                if re.search(rf"https?://[^\s)]*{re.escape(hint)}", lowered):
-                    fail(f"{name} contains secret-like URL hint '{hint}'", errors)
+            if re.search(rf"https?://[^\s)]*{re.escape(hint)}", lowered):
+                fail(f"{name} contains secret-like URL hint '{hint}'", errors)
         elif hint in text:
             fail(f"{name} contains secret-like token hint '{hint}'", errors)
 
@@ -62,3 +86,10 @@ def markdown_files(*globs: str) -> list[Path]:
     for pattern in globs:
         found.update(ROOT.glob(pattern))
     return sorted(p for p in found if p.is_file())
+
+
+def load_workflow_text(name: str) -> str | None:
+    path = ROOT / ".github" / "workflows" / name
+    if not path.is_file():
+        return None
+    return path.read_text(encoding="utf-8")

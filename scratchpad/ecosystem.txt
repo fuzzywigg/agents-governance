@@ -56,3 +56,13 @@ _None yet._
 2026-09-13T16:36:01Z
 
 2026-09-13T16:40:32Z cursor: PR #23 CI green (lint + link-check + stewardship) ← complete ECO-018 strengthen gates
+
+### [ECO-019] TOKENMAXX harden stewardship CI after #23 — 2026-09-13T16:50:00Z
+- [x] cursor: Expand self-tests (badge invent/order/slug/secret/contiguous; relative escape/fragment/fence; wiki unexpected; schema value/status; workflow timeout)
+- [x] cursor: Harden badge/wiki/schema/relative + CI workflows (timeouts, schedule, retries, workflow_dispatch)
+- [ ] cursor: Green PR with CI
+- Scope: strengthen EXISTING stewardship gates only; no invent-product badges; no AGENTS-ECOSYSTEM/templates edits
+- Branch: cursor/harden-stewardship-gates-c626
+2026-09-13T16:50:00Z
+
+2026-09-13T16:58:00Z cursor: PR #24 CI green (lint + link-check + stewardship) ← complete ECO-019 harden gates

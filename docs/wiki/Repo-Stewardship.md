@@ -21,9 +21,10 @@ Markdown Lint only — stewardship stays in CI/docs, not as a product badge):
 |----------|------------------|
 | `markdown-lint.yml` | Markdownlint on docs |
 | `link-check.yml` | External + markdown link integrity (lychee) |
-| `stewardship-checks.yml` | Badge row, wiki outline, metadata schemas, relative links |
+| `stewardship-checks.yml` | Badge row, wiki outline, metadata schemas, relative links + self-tests |
 
-Locally: `bash scripts/run_stewardship_checks.sh`.
+Locally: `bash scripts/run_stewardship_checks.sh` then
+`python3 scripts/test_stewardship_gates.py` (negative fixture self-tests).
 
 ## What agents may edit (this repo, L1)
 

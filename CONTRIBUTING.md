@@ -44,6 +44,7 @@ Before requesting review on docs/stewardship PRs, run the same gates CI uses
 ```bash
 npx markdownlint-cli2 "**/*.md" "!.github/agents/**" "!OWASP-AGENTIC.md"
 bash scripts/run_stewardship_checks.sh
+python3 scripts/test_stewardship_gates.py
 ```
 
 Do not add invent-product badges, coverage/social shields, or secrets to public docs.

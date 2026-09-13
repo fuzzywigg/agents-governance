@@ -11,6 +11,10 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- Stewardship gate hardening after #23: expanded negative self-tests, workflow
+  `timeout-minutes` / `workflow_dispatch` / markdown-lint weekly schedule, lychee
+  `--max-retries`, fenced-code-aware relative links, schema date/surface/tier
+  constraints, CONTRIBUTING + AGENTS self-test callouts
 - `docs/badge-standard.md` — required README badge row for public governance repos
   (Link Check, Markdown Lint, License)
 - `docs/wiki/` — public wiki outline (Home, Overview, Autonomy Levels, Repo
@@ -38,11 +42,15 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   stewardship scripts (replace stale npx link-check notes)
 - Strengthened stewardship gates: README↔badge-standard consistency, repo slug
   checks, wiki CI callouts, metadata value constraints, secret URL hints
-- Link Check: concurrency group, `--max-concurrency 8`, `--timeout 20`, exclude
-  `.github/agents`
+- Link Check: concurrency group, `--max-concurrency 8`, `--timeout 20`,
+  `--max-retries 3`, exclude `.github/agents`; job `timeout-minutes` +
+  `workflow_dispatch`
 - Stewardship Checks: run via `run_stewardship_checks.sh`, weekly schedule,
-  self-tests step; Markdown Lint concurrency group
-- README / CONTRIBUTING / wiki Repo-Stewardship: document local stewardship runner
+  self-tests step; job `timeout-minutes` + `workflow_dispatch`
+- Markdown Lint: concurrency group, weekly schedule, `timeout-minutes`,
+  `workflow_dispatch`
+- README / CONTRIBUTING / wiki Repo-Stewardship: document local stewardship
+  runner + self-tests
 
 ---
 

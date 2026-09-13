@@ -79,7 +79,7 @@ npx markdownlint-cli2 "**/*.md" "!.github/agents/**" "!OWASP-AGENTIC.md"
 
 # Broken links (matches CI: lychee)
 # lychee --verbose --no-progress --exclude-loopback --max-concurrency 8 \
-#   --timeout 20 "**/*.md" --exclude-path .github/agents
+#   --timeout 20 --max-retries 3 "**/*.md" --exclude-path .github/agents
 
 # Stewardship standards (badge / wiki / schema / relative links) —
 # no invent-product badges, no secrets in public docs

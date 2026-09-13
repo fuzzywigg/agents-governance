@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
-"""Validate YAML metadata blocks on stewardship docs already described in-repo."""
+"""Validate YAML metadata blocks on stewardship docs already described in-repo.
+
+Fail-closed pins (live path after #45):
+- DOC_SCHEMAS covers badge-standard / PUBLISH / issue-backlog / AGENTS / CLAUDE
+- EXPECTED_VALUES pin ACTIVE / tier / owner / surface / parent_governance /
+  maintainer / scope already present on live YAML front matter
+- Semver X.Y.Z on AGENTS version; ISO-8601 on DATE_KEYS; closes #N issue refs
+- Badge edit_policy retains invent-product wording; scan_secrets on every schema doc
+- issue-backlog owner pinned to copilot (live metadata; not invent-product)
+"""
 
 from __future__ import annotations
 
@@ -25,6 +34,7 @@ SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
 ISSUE_REF_RE = re.compile(r"#\d+")
 
 # Minimal key schemas taken from the live stewardship docs (do not invent fields).
+# Fail-closed after #45: five live stewardship docs only (no invent-product paths).
 DOC_SCHEMAS: dict[str, set[str]] = {
     "docs/badge-standard.md": {
         "status",
@@ -92,6 +102,8 @@ EXPECTED_VALUES: dict[str, dict[str, object]] = {
     "docs/issue-backlog.md": {
         "status": "ACTIVE",
         "tier": 1,
+        # Fail-closed after #45: live backlog owner is copilot (not invent-product).
+        "owner": "copilot",
     },
 }
 

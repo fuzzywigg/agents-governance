@@ -79,7 +79,10 @@ skip, `fully_unquote`, empty `path#` fragments, query-string reject,
 `run_stewardship_checks.sh` order badge→wiki→schema→relative,
 plus wiki-outline gate contract pins after #43: PUBLISHABLE_PAGES L0–L3 /
 credential / copilot topic hints, `strip_fenced_code`, protocol-relative
-`//` reject, Home kill-switch callout).
+`//` reject, Home kill-switch callout,
+plus stewardship-schema gate contract pins after #45: DOC_SCHEMAS /
+EXPECTED_VALUES / SEMVER / ISO-8601 / closes `#N` / invent edit_policy /
+issue-backlog owner `copilot` / `scan_secrets`).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

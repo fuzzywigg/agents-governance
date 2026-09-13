@@ -263,3 +263,16 @@ _None yet._
 - Scope: EXISTING wiki-outline integrity / topic-hint / fence-strip wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-wiki-outline-pins-7745
 2026-09-13T21:30:00Z
+
+2026-09-13T21:50:50Z cursor: PR #45 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-037 TOKENMAXX wiki-outline gate pins
+
+### [ECO-038] TOKENMAXX deepen stewardship-schema gate pins after #45 — 2026-09-13T21:50:50Z
+- [x] cursor: Read live tree post-#45 (974 cases; wiki-outline pins saturated)
+- [x] cursor: Fail-close schema gate — DOC_SCHEMAS / EXPECTED_VALUES / SEMVER / ISO-8601 / closes #N / invent edit_policy / issue-backlog owner copilot / scan_secrets
+- [x] cursor: Expand self-tests 974 → 1045 (schema gate contract slice; not wiki-outline / relative-link / CI workflow pin / fixture-reject spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING stewardship-schema integrity / metadata pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-schema-gate-pins-959b
+2026-09-13T21:50:50Z
+
+2026-09-13T21:53:48Z cursor: PR #46 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-038 TOKENMAXX stewardship-schema gate pins

@@ -307,3 +307,5 @@ _None yet._
 - Scope: EXISTING stewardship-schema integrity / scalar+STRING_KEYS+live EXPECTED_VALUES only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-schema-scalar-pins-aeb4
 2026-09-13T22:50:08Z
+
+2026-09-13T22:55:00Z cursor: PR #55 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-041 TOKENMAXX stewardship-schema scalar pins

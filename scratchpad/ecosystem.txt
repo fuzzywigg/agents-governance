@@ -285,3 +285,5 @@ _None yet._
 - Scope: EXISTING stewardship_common integrity / shared-helper pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-common-gate-pins-f264
 2026-09-13T22:02:06Z
+
+2026-09-13T22:05:00Z cursor: PR #48 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-039 TOKENMAXX stewardship_common gate pins

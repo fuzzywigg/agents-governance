@@ -336,7 +336,9 @@ _None yet._
 - [x] cursor: Read live tree post-#61 (1396 cases; wiki-outline second-pass saturated; #58/#62/#63 closed)
 - [x] cursor: Fail-close CI workflow second-pass — push + branches ["**"] + concurrency github.workflow/github.ref + path filters + job ids link-check/lint/stewardship + check_ci_workflow_gate_contract
 - [x] cursor: Expand self-tests 1396 → 1468 (CI workflow second-pass slice; not actionlint-style / badge / wiki / schema-scalar / relative / common pin spam)
-- [ ] cursor: Green PR with CI
+- [x] cursor: Green PR with CI
 - Scope: EXISTING CI workflow integrity / hardening+contract pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-ci-workflow-pins-fd4d
 2026-09-13T23:54:58Z
+
+2026-09-13T23:57:48Z cursor: PR #74 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-044 TOKENMAXX CI workflow second-pass pins

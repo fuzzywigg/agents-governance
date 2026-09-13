@@ -97,6 +97,33 @@ EXPECTED_VALUES: dict[str, dict[str, object]] = {
 
 DATE_KEYS = ("created", "last_updated")
 
+# Flat stewardship metadata: these keys must be strings when present (live docs).
+STRING_KEYS = frozenset(
+    {
+        "version",
+        "last_updated",
+        "maintainer",
+        "scope",
+        "parent_governance",
+        "repo",
+        "owner",
+        "surface",
+        "status",
+        "created",
+        "edit_policy",
+        "closes",
+        "purpose",
+    }
+)
+
+# Integer metadata keys must be real ints — not bool (YAML yes/true) or float.
+INT_KEYS = frozenset({"autonomy_level", "tier"})
+
+
+def is_plain_int(value: object) -> bool:
+    """True for int but not bool (bool is an int subclass in Python)."""
+    return isinstance(value, int) and not isinstance(value, bool)
+
 
 def parse_simple_yaml(text: str) -> dict[str, object]:
     """Tiny YAML subset parser (key: value / key: \"value\") when PyYAML is absent."""
@@ -112,12 +139,17 @@ def parse_simple_yaml(text: str) -> dict[str, object]:
         value = value.strip()
         if not key:
             raise ValueError(f"empty key in YAML line: {raw!r}")
+        # Nested / multi-line mappings are out of scope for the stdlib subset.
+        if value == "" or value in {"|", ">", "|-", ">-"}:
+            raise ValueError(f"nested or empty YAML value not supported: {raw!r}")
         if (value.startswith('"') and value.endswith('"')) or (
             value.startswith("'") and value.endswith("'")
         ):
             value = value[1:-1]
         elif value.lower() in {"true", "false"}:
             value = value.lower() == "true"
+        elif value.lower() in {"null", "~"}:
+            value = None
         elif re.fullmatch(r"-?\d+", value):
             value = int(value)
         data[key] = value
@@ -125,6 +157,8 @@ def parse_simple_yaml(text: str) -> dict[str, object]:
 
 
 def load_yaml(text: str) -> dict[str, object]:
+    if not text.strip():
+        raise ValueError("metadata YAML block is empty")
     if yaml is not None:
         loaded = yaml.safe_load(text)
         if not isinstance(loaded, dict):
@@ -139,6 +173,30 @@ def first_yaml_block(path: Path) -> str:
     if not match:
         raise ValueError("no fenced ```yaml metadata block found")
     return match.group(1)
+
+
+def _reject_nested_or_wrong_types(
+    rel: str, data: dict[str, object], errors: list[str]
+) -> None:
+    """Fail closed on nested structures and bool/float pretending to be ints/strings."""
+    for key, value in data.items():
+        if isinstance(value, (dict, list)):
+            fail(
+                f"{rel}: metadata {key} must be a scalar (got {type(value).__name__})",
+                errors,
+            )
+            continue
+        if key in STRING_KEYS and value is not None and not isinstance(value, str):
+            fail(
+                f"{rel}: metadata {key} must be a string (got {type(value).__name__})",
+                errors,
+            )
+        if key in INT_KEYS and value is not None and not is_plain_int(value):
+            fail(
+                f"{rel}: metadata {key} must be a plain int "
+                f"(not bool/float/str; got {value!r})",
+                errors,
+            )
 
 
 def main() -> int:
@@ -158,6 +216,8 @@ def main() -> int:
         if missing:
             fail(f"{rel}: missing metadata keys: {', '.join(missing)}", errors)
 
+        _reject_nested_or_wrong_types(rel, data, errors)
+
         status = data.get("status")
         if "status" in required_keys and status is not None and str(status).upper() != "ACTIVE":
             if rel.startswith("docs/"):
@@ -171,12 +231,13 @@ def main() -> int:
 
         if "autonomy_level" in data:
             level = data["autonomy_level"]
-            if not isinstance(level, int) or level not in (0, 1, 2, 3):
+            # Bool is an int subclass — reject via is_plain_int (TOKENMAXX schema harden).
+            if not is_plain_int(level) or level not in (0, 1, 2, 3):
                 fail(f"{rel}: autonomy_level must be int in 0..3 (got {level!r})", errors)
 
         if "tier" in data:
             tier = data["tier"]
-            if not isinstance(tier, int) or tier < 1:
+            if not is_plain_int(tier) or tier < 1:
                 fail(f"{rel}: tier must be a positive int (got {tier!r})", errors)
 
         for date_key in DATE_KEYS:

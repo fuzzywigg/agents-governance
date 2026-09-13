@@ -219,3 +219,12 @@ _None yet._
 2026-09-13T20:25:00Z
 
 2026-09-13T20:28:00Z cursor: PR #38 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-033 TOKENMAXX deepen
+
+### [ECO-034] TOKENMAXX deepen schema-gate slice after #38 — 2026-09-13T20:41:00Z
+- [x] cursor: Read live tree post-#38 (712 mega-fixtures; schema gate under-hardened)
+- [x] cursor: Harden check_stewardship_schema.py (bool-vs-int / string scalars / nested / empty YAML)
+- [x] cursor: Add dedicated scripts/test_stewardship_schema.py (162 cases) + CI wire
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING schema metadata gate / schema self-tests only; different slice from mega stewardship fixtures; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-schema-gates-388f
+2026-09-13T20:41:00Z

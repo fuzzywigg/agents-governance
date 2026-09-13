@@ -11,6 +11,11 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX schema-gate slice after #38: dedicated `scripts/test_stewardship_schema.py`
+  (162 cases) + fail-closed hardenings in `check_stewardship_schema.py`
+  (bool-vs-int / string scalars / nested reject / empty YAML / null~), wired into
+  `stewardship-checks.yml`; AGENTS.md + badge gate needles require the new
+  schema self-test. No invent-product, no fourth badge, no mega-fixture climb.
 - TOKENMAXX stewardship fixtures after #37: expand self-tests to 712 cases
   (was 650) covering `.markdownlint.json` `default: true`, stewardship
   `get_actionlint.outputs.executable` + actionlint download path `/v1.7.7/`,

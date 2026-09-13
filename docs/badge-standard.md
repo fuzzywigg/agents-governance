@@ -69,6 +69,9 @@ plus MD013 `line_length: 200` + MD024 `siblings_only: true` +
 plus markdownlint `default: true` + `get_actionlint.outputs.executable` +
 actionlint `/v1.7.7/` path + lychee `--max-concurrency 8` / `--timeout 20` /
 `--max-retries 3` deepen after #37).
+Dedicated schema-slice self-tests live in `scripts/test_stewardship_schema.py`
+(bool-vs-int / string scalar / nested reject / empty YAML edges; wired in
+`stewardship-checks.yml` after #38).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

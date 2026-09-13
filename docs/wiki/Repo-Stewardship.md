@@ -45,6 +45,8 @@ plus MD013 `line_length: 200` + MD024 `siblings_only: true` +
 plus markdownlint `default: true` + `get_actionlint.outputs.executable` +
 actionlint `/v1.7.7/` path + lychee `--max-concurrency 8` / `--timeout 20` /
 `--max-retries 3` deepen after #37).
+Dedicated schema self-tests: `python3 scripts/test_stewardship_schema.py`
+(TOKENMAXX schema-slice after #38 — bool/string/nested/empty YAML hardenings).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

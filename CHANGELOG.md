@@ -11,6 +11,15 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX actionlint-style gate pins after #53: expand self-tests to 1249
+  cases (was 1182) fail-closing live actionlint-style integrity — top-level
+  `name:` / `jobs.*.runs-on` / `jobs.*.steps` / `timeout-minutes` / no
+  `pull_request_target` / no `permissions: write-all` / no `contents: write` /
+  no `id-token: write` / `@`-pin float set `main|master|latest` / `docker://`
+  skip / unpinned reject, plus actionlint-style gate contract pins in
+  `check_badge_standard.py` — actionlint-style gate contract slice only (not
+  badge / common / schema / wiki-outline / relative-link / CI workflow pin /
+  fixture-reject spam); no invent-product; no fourth badge
 - TOKENMAXX badge-standard gate pins after #48: expand self-tests to 1182
   cases (was 1114) fail-closing live badge-standard integrity — REQUIRED_ORDER
   Link Check → Markdown Lint → License / MAX_BADGES = 3 / EXPECTED_REPO /

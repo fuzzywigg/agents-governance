@@ -9,6 +9,12 @@ Fail-closed pins (live path after #48):
 - Badge images https-only; link-check.yml/badge.svg + markdown-lint.yml/badge.svg
 - License via img.shields.io/github/license/; contiguous row; no invent-product
 - Quiet stewardship: no Stewardship product/status badge; no fourth badge
+
+Fail-closed actionlint-style pins (live path after #53):
+- top-level name: / jobs.*.runs-on / jobs.*.steps / timeout-minutes
+- no pull_request_target / no permissions: write-all / no contents: write
+- no id-token: write / actions must be @-pinned (not main|master|latest)
+- docker:// uses skipped; unpinned uses rejected
 """
 
 from __future__ import annotations
@@ -206,7 +212,14 @@ def check_lycheeignore(errors: list[str]) -> None:
 
 
 def check_actionlint_style(errors: list[str]) -> None:
-    """Static actionlint-like checks on existing workflow paths only."""
+    """Static actionlint-like checks on existing workflow paths only.
+
+    Live fail-closed pins after #53 (not badge-row / common-pin spam):
+    top-level name: / jobs.*.runs-on / jobs.*.steps / timeout-minutes;
+    reject pull_request_target / permissions: write-all / contents: write /
+    id-token: write; @-pin actions (not main|master|latest); skip docker://;
+    reject unpinned action uses.
+    """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
         if text is None:
@@ -224,6 +237,9 @@ def check_actionlint_style(errors: list[str]) -> None:
         # Prefer least privilege: contents: read already required; reject write on contents.
         if re.search(r"(?m)^\s*contents:\s*write\s*$", text):
             fail(f"{name}: contents: write is forbidden on stewardship workflows", errors)
+        # Fail-closed after #53: OIDC write not needed for docs CI paths.
+        if re.search(r"(?m)^\s*id-token:\s*write\s*$", text):
+            fail(f"{name}: id-token: write is forbidden on stewardship workflows", errors)
         # Pin GitHub Actions majors (actionlint / supply-chain hygiene).
         for match in re.finditer(r"(?m)^\s*-\s*uses:\s*([^\s#]+)", text):
             uses = match.group(1).strip()
@@ -822,6 +838,147 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
         fail("check_badge_standard.py must scan docs via " + scan_pin, errors)
 
 
+def check_actionlint_style_gate_contract(errors: list[str]) -> None:
+    """Fail-close live actionlint-style gate wiring (after #53; not badge-pin spam)."""
+    if not BADGE_GATE.is_file():
+        fail("Missing scripts/check_badge_standard.py (actionlint-style host)", errors)
+        return
+    text = BADGE_GATE.read_text(encoding="utf-8")
+    # Split pin literals so self-mutation of contiguous names cannot neutralize checks.
+    fn_pin = "check_actionlint_" + "style"
+    if f"def {fn_pin}(" not in text:
+        fail(
+            "check_badge_standard.py must provide " + fn_pin + "()",
+            errors,
+        )
+    doc_pin = "Static actionlint-like " + "checks"
+    if doc_pin not in text:
+        fail(
+            "check_actionlint_style must keep " + doc_pin + " docstring pin",
+            errors,
+        )
+    live_pin = "Live fail-closed pins after " + "#53"
+    if live_pin not in text:
+        fail(
+            "check_actionlint_style must keep " + live_pin + " docstring pin",
+            errors,
+        )
+    load_pin = "load_workflow_" + "text"
+    if load_pin not in text:
+        fail(
+            "check_actionlint_style must use " + load_pin + " for workflow bodies",
+            errors,
+        )
+    # Structural needles (split to resist self-mutation of fail messages).
+    name_pin = "top-level " + "name:"
+    if name_pin not in text:
+        fail(
+            "check_actionlint_style must require " + name_pin,
+            errors,
+        )
+    runs_pin = "jobs.*." + "runs-on"
+    if runs_pin not in text:
+        fail(
+            "check_actionlint_style must require " + runs_pin,
+            errors,
+        )
+    steps_pin = "jobs.*." + "steps"
+    if steps_pin not in text:
+        fail(
+            "check_actionlint_style must require " + steps_pin,
+            errors,
+        )
+    timeout_pin = "timeout-" + "minutes:"
+    if timeout_pin not in text:
+        fail(
+            "check_actionlint_style must require " + timeout_pin,
+            errors,
+        )
+    prt_pin = "pull_request_" + "target"
+    if prt_pin not in text:
+        fail(
+            "check_actionlint_style must reject " + prt_pin,
+            errors,
+        )
+    harden_pin = "actionlint " + "harden"
+    if harden_pin not in text:
+        fail(
+            "check_actionlint_style must keep " + harden_pin + " wording",
+            errors,
+        )
+    write_all_pin = "write-" + "all"
+    if write_all_pin not in text:
+        fail(
+            "check_actionlint_style must reject permissions: " + write_all_pin,
+            errors,
+        )
+    contents_write_pin = "contents: " + "write"
+    if contents_write_pin not in text:
+        fail(
+            "check_actionlint_style must reject " + contents_write_pin,
+            errors,
+        )
+    id_token_pin = "id-token: " + "write"
+    if id_token_pin not in text:
+        fail(
+            "check_actionlint_style must reject " + id_token_pin,
+            errors,
+        )
+    docker_pin = "docker:" + "//"
+    if docker_pin not in text:
+        fail(
+            "check_actionlint_style must skip " + docker_pin + " uses",
+            errors,
+        )
+    unpinned_pin = "unpinned action " + "uses"
+    if unpinned_pin not in text:
+        fail(
+            "check_actionlint_style must reject " + unpinned_pin,
+            errors,
+        )
+    # Float-ref set must stay exactly main/master/latest.
+    # Neighbor-pair pins (split) so mutating the contiguous set literal fails closed
+    # without being neutralized by rewriting the contract's own expected string.
+    # Alt single-quote forms are also split so the needle is not contiguous in this file.
+    main_master = '"main"' + ', "master"'
+    main_master_alt = "'main'" + ", 'master'"
+    master_mid = ', "master", ' + '"latest"'
+    master_mid_alt = ", 'master', " + "'latest'"
+    master_latest = '"master"' + ', "latest"'
+    master_latest_alt = "'master'" + ", 'latest'"
+    if main_master not in text and main_master_alt not in text:
+        fail(
+            "check_actionlint_style must reject float @main",
+            errors,
+        )
+    if master_mid not in text and master_mid_alt not in text:
+        fail(
+            "check_actionlint_style must reject float @master",
+            errors,
+        )
+    if master_latest not in text and master_latest_alt not in text:
+        fail(
+            "check_actionlint_style must reject float @latest",
+            errors,
+        )
+    float_set_pin = '{"main", ' + '"master", ' + '"latest"}'
+    # Split alt set so single-quote neighbor needles are not contiguous in this file.
+    float_set_pin_alt = "{'main', " + "'master', " + "'latest'}"
+    if float_set_pin not in text and float_set_pin_alt not in text:
+        fail(
+            "check_actionlint_style must pin float set "
+            "{main, master, latest}",
+            errors,
+        )
+    # main() must still invoke the style checker (behavioral + contract).
+    call_pin = fn_pin + "(errors)"
+    if call_pin not in text:
+        fail(
+            "main must call " + call_pin,
+            errors,
+        )
+
+
 def check_stewardship_common_contract(errors: list[str]) -> None:
     """Fail-close live stewardship_common wiring (after #46; not schema-pin spam)."""
     if not COMMON_GATE.is_file():
@@ -1399,6 +1556,9 @@ def main() -> int:
     # Fail-closed after #48: self-contract first so helper renames fail closed
     # (report pin drift) instead of NameError mid-run.
     check_badge_standard_gate_contract(errors)
+    # Fail-closed after #53: actionlint-style contract early (same self-host file)
+    # so style-helper renames / needle drift fail closed before NameError.
+    check_actionlint_style_gate_contract(errors)
     if errors:
         print("Badge standard check FAILED:", file=sys.stderr)
         for err in errors:

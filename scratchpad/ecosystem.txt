@@ -42,3 +42,5 @@ _None yet._
 - [ ] cursor: Green PR with CI
 - Advances: stewardship docs standards (badges/wiki) via executable checks
 2026-09-13T15:45:00Z
+
+2026-09-13T15:55:00Z cursor: PR #22 CI green (lint + link-check + stewardship) ← complete ECO-017 executable gates

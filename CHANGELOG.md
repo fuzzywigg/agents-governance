@@ -17,6 +17,10 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   Stewardship, Agent Routing, Security Boundaries) plus `PUBLISH.md` path to
   GitHub Wiki (#16)
 - README Documents table links to badge standard and wiki Home
+- `scripts/check_badge_standard.py`, `scripts/check_wiki_outline.py`,
+  `scripts/check_stewardship_schema.py`, `scripts/run_stewardship_checks.sh` —
+  executable gates for badge/wiki/schema stewardship standards
+- `.github/workflows/stewardship-checks.yml` — CI job for stewardship scripts
 
 ### Changed
 
@@ -24,6 +28,10 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - `.markdownlint.json`: disable MD060 (false positives on compact tables after
   markdownlint v0.41)
 - Markdown Lint workflow: exclude long-form `OWASP-AGENTIC.md` from lint globs
+- Markdown Lint + Link Check: always run on pull_request; push path filters also
+  cover config/workflow files
+- `AGENTS.md` §3 Testing Requirements: document markdownlint-cli2, lychee, and
+  stewardship scripts (replace stale npx link-check notes)
 
 ---
 

@@ -1271,7 +1271,7 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
 
 
 def check_relative_link_gate_contract(errors: list[str]) -> None:
-    """Fail-close live relative-link gate wiring (after #41; not workflow-pin spam)."""
+    """Fail-close live relative-link gate wiring (after #55; deepen after #41)."""
     if not RELATIVE_LINK_GATE.is_file():
         fail("Missing scripts/check_relative_links.py (relative-link gate)", errors)
         return
@@ -1346,6 +1346,114 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
     if "http://" not in text:
         fail(
             "check_relative_links.py must reject insecure http:// links",
+            errors,
+        )
+    # Fail-closed after #55: second-pass helper / constant / allowlist pins
+    # (relative-link slice only; not schema-scalar / badge / wiki / CI spam).
+    if "MD_LINK_RE" not in text:
+        fail(
+            "check_relative_links.py must declare MD_LINK_RE for link/image scan",
+            errors,
+        )
+    if "SKIP_PARTS" not in text:
+        fail(
+            "check_relative_links.py must declare SKIP_PARTS",
+            errors,
+        )
+    if "SKIP_PREFIXES" not in text:
+        fail(
+            "check_relative_links.py must declare SKIP_PREFIXES",
+            errors,
+        )
+    if "SKIP_FILES" not in text:
+        fail(
+            "check_relative_links.py must declare SKIP_FILES",
+            errors,
+        )
+    if "_MAX_UNQUOTE_PASSES" not in text:
+        fail(
+            "check_relative_links.py must cap nested decode via _MAX_UNQUOTE_PASSES",
+            errors,
+        )
+    if "_MAX_UNQUOTE_PASSES = 4" not in text and "_MAX_UNQUOTE_PASSES=4" not in text:
+        fail(
+            "check_relative_links.py must set _MAX_UNQUOTE_PASSES = 4",
+            errors,
+        )
+    if "should_skip" not in text:
+        fail(
+            "check_relative_links.py must expose should_skip helper",
+            errors,
+        )
+    if "iter_markdown" not in text:
+        fail(
+            "check_relative_links.py must expose iter_markdown helper",
+            errors,
+        )
+    if "headings_in" not in text:
+        fail(
+            "check_relative_links.py must expose headings_in helper",
+            errors,
+        )
+    if "def check_file" not in text:
+        fail(
+            "check_relative_links.py must expose check_file helper",
+            errors,
+        )
+    if "mailto:" not in text:
+        fail(
+            "check_relative_links.py must allow mailto: targets",
+            errors,
+        )
+    if "tel:" not in text:
+        fail(
+            "check_relative_links.py must allow tel: targets",
+            errors,
+        )
+    # Require the human-readable NUL fail needle (not only the "\0" literal).
+    if "NUL" not in text:
+        fail(
+            "check_relative_links.py must reject NUL in link targets",
+            errors,
+        )
+    if r'"\0"' not in text and r"'\0'" not in text:
+        fail(
+            "check_relative_links.py must scan for NUL byte via \\0 literal",
+            errors,
+        )
+    if 'strip("<>")' not in text and "strip('<>')" not in text:
+        fail(
+            "check_relative_links.py must strip angle brackets from targets",
+            errors,
+        )
+    if r"!?\[" not in text and "!?[" not in text:
+        fail(
+            "check_relative_links.py MD_LINK_RE must match image links",
+            errors,
+        )
+    if "escapes repo" not in text:
+        fail(
+            "check_relative_links.py must reject relative links that escape repo",
+            errors,
+        )
+    if "broken relative link" not in text:
+        fail(
+            "check_relative_links.py must reject broken relative link targets",
+            errors,
+        )
+    if "missing heading" not in text:
+        fail(
+            "check_relative_links.py must reject missing heading fragments",
+            errors,
+        )
+    if "rglob" not in text:
+        fail(
+            "check_relative_links.py must rglob markdown files under ROOT",
+            errors,
+        )
+    if "no markdown files found" not in text:
+        fail(
+            "check_relative_links.py must fail closed when no markdown files found",
             errors,
         )
 

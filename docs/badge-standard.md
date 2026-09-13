@@ -47,6 +47,7 @@ Copy into the repository root `README.md`. The License badge target may also be 
 `README.md` already follows this standard (Link Check, Markdown Lint, License).
 Executable enforcement lives in `scripts/check_badge_standard.py` (run via
 `bash scripts/run_stewardship_checks.sh` or `.github/workflows/stewardship-checks.yml`).
+Negative fixtures live in `scripts/test_stewardship_gates.py` (CI fail-closed).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 

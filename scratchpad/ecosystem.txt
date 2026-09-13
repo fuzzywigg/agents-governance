@@ -66,3 +66,12 @@ _None yet._
 2026-09-13T16:50:00Z
 
 2026-09-13T16:58:00Z cursor: PR #24 CI green (lint + link-check + stewardship) ← complete ECO-019 harden gates
+
+### [ECO-020] TOKENMAXX heavy stewardship gate burn after #24 — 2026-09-13T17:13:45Z
+- [x] cursor: Read live tree post-#24 (14 self-tests + hardened gates)
+- [x] cursor: Strengthen badge/wiki/schema/relative/common gates (dispatch/fail/schemes/semver)
+- [x] cursor: Expand self-tests to 50 negative/positive edge fixtures
+- [ ] cursor: Green PR with CI
+- Scope: strengthen EXISTING lint/link/badge/self-test gates only; no invent-product; no AGENTS-ECOSYSTEM/templates edits; no secrets; no history rewrite
+- Branch: cursor/tokenmaxx-stewardship-gates-dc52
+2026-09-13T17:13:45Z

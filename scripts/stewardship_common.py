@@ -19,6 +19,8 @@ SECRET_PATTERNS: tuple[re.Pattern[str], ...] = (
     re.compile(r"(?i)(?:password|passwd|token)\s*[:=]\s*['\"][^'\"]{8,}['\"]"),
     re.compile(r"(?i)aws_secret_access_key\s*[:=]\s*['\"]?[A-Za-z0-9/+=]{20,}"),
     re.compile(r"\bxox[baprs]-[A-Za-z0-9-]{10,}\b"),
+    re.compile(r"\bnpm_[A-Za-z0-9]{20,}\b"),
+    re.compile(r"\bAIza[0-9A-Za-z\-_]{20,}\b"),
 )
 
 SECRET_URL_HINTS = (
@@ -51,7 +53,16 @@ FORBIDDEN_BADGE_HINTS = (
     "opencollective",
 )
 
-FENCED_BLOCK_RE = re.compile(r"```.*?```", re.DOTALL)
+# Link schemes that must never appear as markdown targets in public docs.
+DANGEROUS_LINK_SCHEMES = (
+    "javascript:",
+    "data:",
+    "vbscript:",
+    "file:",
+)
+
+# Fenced code: ``` or ~~~, optional language tag.
+FENCED_BLOCK_RE = re.compile(r"(?:```|~~~).*?(?:```|~~~)", re.DOTALL)
 
 
 def fail(msg: str, errors: list[str]) -> None:
@@ -61,6 +72,15 @@ def fail(msg: str, errors: list[str]) -> None:
 def strip_fenced_code(text: str) -> str:
     """Remove fenced code blocks so example links do not fail integrity gates."""
     return FENCED_BLOCK_RE.sub("", text)
+
+
+def has_dangerous_scheme(target: str) -> str | None:
+    """Return the matched dangerous scheme prefix, or None."""
+    lowered = target.strip().lower()
+    for scheme in DANGEROUS_LINK_SCHEMES:
+        if lowered.startswith(scheme):
+            return scheme
+    return None
 
 
 def scan_secrets(path: Path, errors: list[str], *, label: str | None = None) -> None:

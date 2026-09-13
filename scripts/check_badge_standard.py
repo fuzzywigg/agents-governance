@@ -108,12 +108,16 @@ def check_workflow_hardening(errors: list[str]) -> None:
             continue
         if "pull_request:" not in text:
             fail(f"{name} must run on pull_request", errors)
+        if "workflow_dispatch:" not in text:
+            fail(f"{name} must allow workflow_dispatch (manual re-run)", errors)
         if "permissions:" not in text or "contents: read" not in text:
             fail(f"{name} must set permissions.contents: read", errors)
         if "concurrency:" not in text:
             fail(f"{name} must declare a concurrency group", errors)
         if "timeout-minutes:" not in text:
             fail(f"{name} jobs must set timeout-minutes", errors)
+        if "schedule:" not in text:
+            fail(f"{name} must include a weekly schedule drift catch", errors)
 
     link = load_workflow_text("link-check.yml") or ""
     if "lychee" not in link.lower():
@@ -126,22 +130,30 @@ def check_workflow_hardening(errors: list[str]) -> None:
         fail("link-check.yml must set lychee --timeout", errors)
     if "--max-retries" not in link:
         fail("link-check.yml must set lychee --max-retries", errors)
+    if "fail: true" not in link and "fail:true" not in link:
+        fail("link-check.yml must set fail: true so broken links fail the job", errors)
+    if "--exclude-loopback" not in link and "exclude-loopback" not in link:
+        fail("link-check.yml must exclude loopback targets", errors)
 
     lint = load_workflow_text("markdown-lint.yml") or ""
     if "markdownlint" not in lint.lower():
         fail("markdown-lint.yml must invoke markdownlint", errors)
     if "OWASP-AGENTIC.md" not in lint:
         fail("markdown-lint.yml must exclude OWASP-AGENTIC.md", errors)
-    if "schedule:" not in lint:
-        fail("markdown-lint.yml must include a weekly schedule drift catch", errors)
+    if ".markdownlint.json" not in lint:
+        fail("markdown-lint.yml must use .markdownlint.json config", errors)
+    if ".github/agents" not in lint:
+        fail("markdown-lint.yml must exclude .github/agents/**", errors)
 
     stew = load_workflow_text("stewardship-checks.yml") or ""
     if "run_stewardship_checks.sh" not in stew:
         fail("stewardship-checks.yml must run scripts/run_stewardship_checks.sh", errors)
     if "test_stewardship_gates.py" not in stew:
         fail("stewardship-checks.yml must run scripts/test_stewardship_gates.py", errors)
-    if "schedule:" not in stew:
-        fail("stewardship-checks.yml must include a weekly schedule drift catch", errors)
+    if "setup-python" not in stew.lower() and "actions/setup-python" not in stew:
+        fail("stewardship-checks.yml must set up Python for gate scripts", errors)
+    if "pyyaml" not in stew.lower():
+        fail("stewardship-checks.yml must install PyYAML for schema parsing", errors)
 
 
 def check_badge_standard_doc(errors: list[str]) -> None:
@@ -218,15 +230,9 @@ def check_badges(badges: list[re.Match[str]], errors: list[str]) -> None:
             f"(Link Check, Markdown Lint, License); found {len(badges)}",
             errors,
         )
-    elif len(badges) > MAX_BADGES:
-        fail(
-            f"Badge row has {len(badges)} badges; standard allows at most {MAX_BADGES} "
-            "unless smtp.eth adds an explicit fourth",
-            errors,
-        )
 
     labels = [m.group("label") for m in badges]
-    if labels[: len(REQUIRED_ORDER)] != list(REQUIRED_ORDER):
+    if labels != list(REQUIRED_ORDER):
         fail(
             f"Badge labels must be in order {list(REQUIRED_ORDER)}; found {labels}",
             errors,
@@ -240,7 +246,7 @@ def check_badges(badges: list[re.Match[str]], errors: list[str]) -> None:
 
         if not img.startswith("https://"):
             fail(f"Badge image for {label} must be https://", errors)
-        if link.startswith(("http://", "https://")) and not link.startswith("https://"):
+        if link.startswith("http://"):
             fail(f"Badge link for {label} must use https:// when absolute", errors)
 
         for hint in FORBIDDEN_BADGE_HINTS:
@@ -265,18 +271,29 @@ def check_badges(badges: list[re.Match[str]], errors: list[str]) -> None:
                 fail("Link Check image must use link-check.yml/badge.svg", errors)
             if "actions/workflows/link-check.yml" not in link:
                 fail("Link Check link must target link-check.yml workflow", errors)
+            if not link.startswith("https://"):
+                fail("Link Check badge link must be an absolute https:// workflow URL", errors)
         elif label == "Markdown Lint":
             if "actions/workflows/markdown-lint.yml/badge.svg" not in img:
                 fail("Markdown Lint image must use markdown-lint.yml/badge.svg", errors)
             if "actions/workflows/markdown-lint.yml" not in link:
                 fail("Markdown Lint link must target markdown-lint.yml workflow", errors)
+            if not link.startswith("https://"):
+                fail("Markdown Lint badge link must be an absolute https:// workflow URL", errors)
         elif label == "License":
             shields_ok = "img.shields.io/github/license/" in img
             if not shields_ok:
                 fail("License image must use img.shields.io/github/license/<owner>/<repo>", errors)
+            if EXPECTED_REPO not in img:
+                fail(
+                    f"License shields image must include repo slug {EXPECTED_REPO}",
+                    errors,
+                )
             license_link_ok = link.endswith("/LICENSE") or link in {"LICENSE", "./LICENSE"}
             if not license_link_ok:
                 fail("License badge link must point at LICENSE (relative or blob URL)", errors)
+        else:
+            fail(f"Unexpected badge label {label!r} (only {list(REQUIRED_ORDER)} allowed)", errors)
 
 
 def main() -> int:

@@ -325,7 +325,9 @@ _None yet._
 - [x] cursor: Read live tree post-#59 (1324 cases; relative-link second-pass saturated; #60 closed CONFLICTING; #57 superseded)
 - [x] cursor: Fail-close actionlint-style — top-level name: / jobs.*.runs-on / jobs.*.steps / timeout-minutes / no pull_request_target / no write-all / no contents: write / no id-token: write / @-pin float set main|master|latest / docker:// skip / unpinned reject
 - [x] cursor: Expand self-tests 1324 → 1395 (actionlint-style gate contract slice; not relative / schema-scalar / badge / wiki / common / CI workflow pin spam)
-- [ ] cursor: Green PR with CI
+- [x] cursor: Green PR with CI
 - Scope: EXISTING actionlint-style integrity / static workflow-path pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-actionlint-style-pins-be52
 2026-09-13T23:16:12Z
+
+2026-09-13T23:30:00Z cursor: PR #63 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-043 TOKENMAXX actionlint-style gate pins

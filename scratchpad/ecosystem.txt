@@ -296,3 +296,5 @@ _None yet._
 - Scope: EXISTING badge-standard integrity / row pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-badge-standard-pins-408c
 2026-09-13T22:15:01Z
+
+2026-09-13T22:20:00Z cursor: PR #52 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-040 TOKENMAXX badge-standard gate pins

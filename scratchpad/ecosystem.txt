@@ -54,3 +54,5 @@ _None yet._
 - Scope: lint + link + badge/README consistency only; no invent-product; no secrets
 - Branch: cursor/strengthen-stewardship-ci-549f
 2026-09-13T16:36:01Z
+
+2026-09-13T16:40:32Z cursor: PR #23 CI green (lint + link-check + stewardship) ← complete ECO-018 strengthen gates

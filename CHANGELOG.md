@@ -11,6 +11,20 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship fixtures after #33: expand self-tests to 464 cases
+  (was 404) covering `lycheeverse/lychee-action`, `markdownlint-cli2-action`,
+  `.markdownlint.json` MD013 `line_length`, stewardship `pip install` PyYAML,
+  pull_request_target on markdown-lint, contents:write/write-all on link-check,
+  checkout@latest float, cancel-in-progress:false on stewardship, missing
+  concurrency/timeout needles, badge coverage/stars/token/http-license/four-badge
+  and fourth-refusal still, relative HTTPS/MAILTO uppercase / File: / tilde slug /
+  parent missing / angle mailto / protocol-relative, wiki Home→Repo-Stewardship /
+  coveralls/producthunt/npm/pypi chrome / HTTP:// / vbscript / PUBLISH
+  stewardship row / relative hint still, schema empty closes/version /
+  missing autonomy+parent / empty last_updated / whitespace scope / tier -1 /
+  wrong maintainer, common ghs_/ghu_/rk-/aws/OPENSSH / coveralls+producthunt
+  hints / npm scan / FILE: casefold, plus lychee-action/MD013/checkout/PyYAML/
+  discord/HTTP:// / javascript / tier 0 / VBSCRIPT still-needles
 - TOKENMAXX stewardship fixtures after #32: expand self-tests to 404 cases
   (was 345) covering link-check/markdown-lint `actions/checkout`, `lychee-action`,
   `.markdownlint.json` MD013, pull_request_target on link-check, contents:write on

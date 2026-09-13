@@ -11,6 +11,15 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-schema scalar / live pins after #53: expand self-tests
+  to 1253 cases (was 1182) fail-closing live schema integrity — `STRING_KEYS` /
+  `reject_non_scalar` / empty yaml metadata / bool pretending to be
+  autonomy_level or tier ints, plus live EXPECTED_VALUES for badge
+  `scope` / `closes #16` and PUBLISH `purpose` / `closes #16`, plus
+  stewardship-schema gate contract pins in `check_badge_standard.py` —
+  schema gate scalar / live-pin slice only (not badge-standard / common /
+  wiki-outline / relative-link / CI workflow pin / fixture-reject spam); no
+  invent-product; no fourth badge
 - TOKENMAXX badge-standard gate pins after #48: expand self-tests to 1182
   cases (was 1114) fail-closing live badge-standard integrity — REQUIRED_ORDER
   Link Check → Markdown Lint → License / MAX_BADGES = 3 / EXPECTED_REPO /

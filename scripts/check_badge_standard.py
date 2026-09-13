@@ -30,6 +30,7 @@ MARKDOWNLINT_CONFIG = ROOT / ".markdownlint.json"
 WORKFLOWS = ROOT / ".github" / "workflows"
 RELATIVE_LINK_GATE = ROOT / "scripts" / "check_relative_links.py"
 WIKI_OUTLINE_GATE = ROOT / "scripts" / "check_wiki_outline.py"
+SCHEMA_GATE = ROOT / "scripts" / "check_stewardship_schema.py"
 RUN_STEWARDSHIP = ROOT / "scripts" / "run_stewardship_checks.sh"
 
 REQUIRED_ORDER = ("Link Check", "Markdown Lint", "License")
@@ -671,6 +672,129 @@ def check_contributing_and_agents(errors: list[str]) -> None:
         fail("Missing AGENTS.md", errors)
 
 
+def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
+    """Fail-close live stewardship-schema gate wiring (after #45; not wiki-pin spam)."""
+    if not SCHEMA_GATE.is_file():
+        fail("Missing scripts/check_stewardship_schema.py (schema gate)", errors)
+        return
+    text = SCHEMA_GATE.read_text(encoding="utf-8")
+    if "DOC_SCHEMAS" not in text:
+        fail("check_stewardship_schema.py must declare DOC_SCHEMAS", errors)
+    if "EXPECTED_VALUES" not in text:
+        fail("check_stewardship_schema.py must declare EXPECTED_VALUES", errors)
+    # Live stewardship docs covered by schema gate (no invent-product paths).
+    for rel in (
+        "docs/badge-standard.md",
+        "docs/wiki/PUBLISH.md",
+        "docs/issue-backlog.md",
+        "AGENTS.md",
+        "CLAUDE.md",
+    ):
+        if rel not in text:
+            fail(
+                f"check_stewardship_schema.py DOC_SCHEMAS must cover {rel}",
+                errors,
+            )
+    for key in (
+        "status",
+        "tier",
+        "created",
+        "owner",
+        "scope",
+        "edit_policy",
+        "closes",
+        "version",
+        "last_updated",
+        "maintainer",
+        "parent_governance",
+        "autonomy_level",
+        "repo",
+        "surface",
+        "purpose",
+    ):
+        if f'"{key}"' not in text and f"'{key}'" not in text:
+            fail(
+                f"check_stewardship_schema.py must pin metadata key {key}",
+                errors,
+            )
+    if "SEMVER_RE" not in text:
+        fail("check_stewardship_schema.py must declare SEMVER_RE", errors)
+    if "ISO_DATE_RE" not in text:
+        fail("check_stewardship_schema.py must declare ISO_DATE_RE", errors)
+    if "ISSUE_REF_RE" not in text:
+        fail("check_stewardship_schema.py must declare ISSUE_REF_RE", errors)
+    if "FENCED_YAML_RE" not in text:
+        fail("check_stewardship_schema.py must declare FENCED_YAML_RE", errors)
+    if "```yaml" not in text:
+        fail(
+            "check_stewardship_schema.py must require fenced ```yaml metadata",
+            errors,
+        )
+    if "DATE_KEYS" not in text:
+        fail("check_stewardship_schema.py must declare DATE_KEYS", errors)
+    if "parse_simple_yaml" not in text:
+        fail(
+            "check_stewardship_schema.py must provide parse_simple_yaml fallback",
+            errors,
+        )
+    if "load_yaml" not in text:
+        fail("check_stewardship_schema.py must provide load_yaml", errors)
+    if "first_yaml_block" not in text:
+        fail("check_stewardship_schema.py must provide first_yaml_block", errors)
+    if "safe_load" not in text:
+        fail(
+            "check_stewardship_schema.py must use yaml.safe_load when PyYAML present",
+            errors,
+        )
+    if "must be a mapping" not in text:
+        fail(
+            "check_stewardship_schema.py load_yaml must keep "
+            "'must be a mapping' reject",
+            errors,
+        )
+    if "scan_secrets" not in text:
+        fail(
+            "check_stewardship_schema.py must scan schema docs via scan_secrets",
+            errors,
+        )
+    if "invent" not in text.lower():
+        fail(
+            "check_stewardship_schema.py must retain invent-product edit_policy pin",
+            errors,
+        )
+    if "smtp.eth" not in text:
+        fail(
+            "check_stewardship_schema.py EXPECTED_VALUES must pin smtp.eth maintainer",
+            errors,
+        )
+    if "repository-specific" not in text:
+        fail(
+            "check_stewardship_schema.py EXPECTED_VALUES must pin repository-specific",
+            errors,
+        )
+    if "copilot" not in text:
+        fail(
+            "check_stewardship_schema.py EXPECTED_VALUES must pin copilot surface/owner",
+            errors,
+        )
+    if "ACTIVE" not in text:
+        fail(
+            "check_stewardship_schema.py must require ACTIVE status on docs/",
+            errors,
+        )
+    if "0..3" not in text:
+        fail(
+            "check_stewardship_schema.py must constrain autonomy_level to 0..3",
+            errors,
+        )
+    # Fail-closed after #45: live issue-backlog owner is copilot.
+    if "live backlog owner is copilot" not in text.lower():
+        fail(
+            "check_stewardship_schema.py must pin issue-backlog owner copilot",
+            errors,
+        )
+
+
 def check_wiki_outline_gate_contract(errors: list[str]) -> None:
     """Fail-close live wiki-outline gate wiring (after #43; not relative-pin spam)."""
     if not WIKI_OUTLINE_GATE.is_file():
@@ -999,6 +1123,7 @@ def main() -> int:
     check_actionlint_style(errors)
     check_relative_link_gate_contract(errors)
     check_wiki_outline_gate_contract(errors)
+    check_stewardship_schema_gate_contract(errors)
     if BADGE_STANDARD.is_file():
         check_badge_standard_doc(errors)
         scan_secrets(BADGE_STANDARD, errors)

@@ -85,3 +85,5 @@ _None yet._
 - Scope: EXISTING link-check only; no invent-product; no AGENTS-ECOSYSTEM/templates edits
 - Branch: cursor/harden-link-check-shields-785c
 2026-09-13T17:22:00Z
+
+2026-09-13T17:25:00Z cursor: PR #26 CI green (lint + link-check + stewardship) ← complete ECO-021 link-check shields harden

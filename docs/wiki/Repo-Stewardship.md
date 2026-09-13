@@ -27,7 +27,8 @@ Locally: `bash scripts/run_stewardship_checks.sh` then
 `python3 scripts/test_stewardship_gates.py` (heavy negative/positive fixtures:
 badge order/http/secrets/lycheeignore shields, relative schemes/escapes/fragments,
 wiki invent chrome, schema value/date/semver, workflow/actionlint hardening needles,
-link-check GITHUB_TOKEN + actionlint 1.7.7 three-path targets after #27).
+link-check GITHUB_TOKEN + actionlint 1.7.7 three-path targets after #27, plus
+cancel-in-progress / `**/*.md` / fourth-badge refusal deepen after #28).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

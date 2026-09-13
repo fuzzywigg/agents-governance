@@ -172,6 +172,12 @@ def check_workflow_hardening(errors: list[str]) -> None:
             fail(f"{name} must set permissions.contents: read", errors)
         if "concurrency:" not in text:
             fail(f"{name} must declare a concurrency group", errors)
+        if "cancel-in-progress:" not in text:
+            fail(
+                f"{name} concurrency must set cancel-in-progress "
+                "(supersede stale runs on the same ref)",
+                errors,
+            )
         if "timeout-minutes:" not in text:
             fail(f"{name} jobs must set timeout-minutes", errors)
         if "schedule:" not in text:
@@ -180,6 +186,11 @@ def check_workflow_hardening(errors: list[str]) -> None:
     link = load_workflow_text("link-check.yml") or ""
     if "lychee" not in link.lower():
         fail("link-check.yml must invoke lychee", errors)
+    if '"**/*.md"' not in link and "'**/*.md'" not in link and "**/*.md" not in link:
+        fail(
+            "link-check.yml must scan **/*.md markdown sources (paths or lychee args)",
+            errors,
+        )
     if "--exclude-path" not in link and "exclude-path" not in link:
         fail("link-check.yml must exclude .github/agents (or equivalent path)", errors)
     if "--max-concurrency" not in link:
@@ -267,9 +278,15 @@ def check_badge_standard_doc(errors: list[str]) -> None:
         # Accept "Three badges max" prose from Rules section.
         if "badges max" not in lowered:
             fail("docs/badge-standard.md must state three-badge max / keep-the-row-thin rule", errors)
-    if "stewardship-checks" in text and "badge" in lowered and "fourth" not in lowered:
-        # Soft: if stewardship-checks mentioned, fourth-badge refusal should be explicit.
-        if "intentionally" not in lowered and "not** added" not in lowered and "not added" not in lowered:
+    if "stewardship-checks" in text and "badge" in lowered:
+        # Fail-closed: stewardship-checks mention must refuse a fourth badge explicitly.
+        has_fourth = "fourth" in lowered
+        has_refusal = (
+            "intentionally" in lowered
+            or "not** added" in lowered
+            or "not added" in lowered
+        )
+        if not has_fourth or not has_refusal:
             fail(
                 "docs/badge-standard.md mentioning stewardship-checks must refuse a fourth badge",
                 errors,

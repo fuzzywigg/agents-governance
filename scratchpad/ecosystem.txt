@@ -109,3 +109,12 @@ _None yet._
 2026-09-13T17:58:16Z
 
 2026-09-13T18:05:00Z cursor: PR #28 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-023 TOKENMAXX deepen
+
+### [ECO-024] TOKENMAXX deepen stewardship fixtures after #28 — 2026-09-13T18:10:19Z
+- [x] cursor: Read live tree post-#28 (134 fixtures + actionlint v1.7.7)
+- [x] cursor: Deepen cancel-in-progress / **/*.md / fourth-badge refusal needles
+- [x] cursor: Expand fixtures 134 → 182 (badge/wiki/schema/relative/actionlint/common)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING stewardship fixtures / actionlint / link-check edges only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-stewardship-fixtures-8639
+2026-09-13T18:10:19Z

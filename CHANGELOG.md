@@ -11,6 +11,20 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship fixtures after #36: expand self-tests to 650 cases
+  (was 588) covering `.markdownlint.json` MD013 `line_length: 200` + MD024
+  `siblings_only: true`, stewardship `raw.githubusercontent.com` + curl `-fsSL`,
+  pull_request_target on markdown-lint, contents:write/write-all on link-check/
+  stewardship, checkout@main float, cancel-in-progress:false on stewardship,
+  missing schedule/workflow_dispatch, badge coverage/stars/discord/npm/token/
+  http-image/four-badge/three-max, relative HtTpS/Javascript/Data / hash slug /
+  parent broken / angle MailTo / empty parens / protocol-relative, wiki
+  Home→Routing / coveralls/producthunt/npm/pypi chrome / DATA: / PUBLISH
+  Security-Boundaries / actionlint+relative still, schema empty edit_policy/
+  maintainer/created / missing parent+autonomy / DRAFT badge / autonomy 2 /
+  wrong CLAUDE parent / closes without #, common ghs_/ghu_/rk-/aws /
+  coverage+stars hints / ghs scan / FILE: casefold, plus cli2/lycheeverse/
+  siblings_only/rhysd/twitter/http / tier 0 / data: still-needles
 - TOKENMAXX stewardship fixtures after #35: expand self-tests to 588 cases
   (was 526) covering `.markdownlint.json` MD024 `siblings_only`, stewardship
   `rhysd/actionlint` + `curl` download, lychee-action `with: token:`,

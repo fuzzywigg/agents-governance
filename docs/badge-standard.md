@@ -63,7 +63,9 @@ plus `lycheeverse/lychee-action` + `markdownlint-cli2-action` + MD013
 plus `DavidAnson/markdownlint-cli2-action` + `--github-token` + MD024 +
 `download-actionlint.bash` deepen after #34,
 plus MD024 `siblings_only` + `rhysd/actionlint` + `curl` download +
-lychee-action `with: token:` deepen after #35).
+lychee-action `with: token:` deepen after #35,
+plus MD013 `line_length: 200` + MD024 `siblings_only: true` +
+`raw.githubusercontent.com` + curl `-fsSL` deepen after #36).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

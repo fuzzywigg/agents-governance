@@ -34,3 +34,11 @@ _None yet._
 - [ ] smtp.eth: Initialize GitHub Wiki once if .wiki.git missing, then run PUBLISH.md ← HITL if needed
 - Closes / advances: #16
 2026-09-13T14:12:50Z
+
+### [ECO-017] Executable stewardship CI gates — 2026-09-13T15:45:00Z
+- [x] cursor: Read live tree (badge-standard + wiki + existing lint/link workflows)
+- [x] cursor: Add scripts/check_badge_standard.py, check_wiki_outline.py, check_stewardship_schema.py
+- [x] cursor: Wire stewardship-checks.yml; strengthen PR triggers on lint/link
+- [ ] cursor: Green PR with CI
+- Advances: stewardship docs standards (badges/wiki) via executable checks
+2026-09-13T15:45:00Z

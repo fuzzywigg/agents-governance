@@ -70,15 +70,21 @@ If `.kill_switch` exists at repo root, all agent writes are blocked until smtp.e
 
 ## 3. Testing Requirements
 
-This is a documentation-only repository. There is no application code to test.
+This is a documentation-only repository. Executable gates enforce docs quality and
+stewardship standards (badge row, wiki outline, metadata schemas).
 
 ```bash
-# Lint markdown (when markdownlint-cli is installed)
-npx markdownlint-cli "**/*.md" --ignore node_modules
+# Markdown lint (matches CI: DavidAnson/markdownlint-cli2-action)
+npx markdownlint-cli2 "**/*.md" "!.github/agents/**" "!OWASP-AGENTIC.md"
 
-# Check for broken links (when markdown-link-check is installed)
-npx markdown-link-check README.md AGENTS-ECOSYSTEM.md
+# Broken links (matches CI: lychee)
+# lychee --verbose --no-progress --exclude-loopback "**/*.md"
+
+# Stewardship standards (badge / wiki / schema) — no invent-product badges
+bash scripts/run_stewardship_checks.sh
 ```
+
+CI workflows: `markdown-lint.yml`, `link-check.yml`, `stewardship-checks.yml`.
 
 ---
 

@@ -1,0 +1,35 @@
+name: Stewardship Checks
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "README.md"
+      - "AGENTS.md"
+      - "CLAUDE.md"
+      - "LICENSE"
+      - "docs/badge-standard.md"
+      - "docs/wiki/**"
+      - "scripts/**"
+      - ".github/workflows/**"
+  pull_request:
+
+jobs:
+  stewardship:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install PyYAML (schema parser)
+        run: pip install --quiet pyyaml
+      - name: Badge standard
+        run: python3 scripts/check_badge_standard.py
+      - name: Wiki outline
+        run: python3 scripts/check_wiki_outline.py
+      - name: Stewardship metadata schema
+        run: python3 scripts/check_stewardship_schema.py

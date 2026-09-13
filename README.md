@@ -78,6 +78,7 @@ cd agents-governance
 npm install -g markdownlint-cli2   # optional, for local lint
 markdownlint-cli2 "**/*.md" "!.github/agents/**" "!OWASP-AGENTIC.md"
 bash scripts/run_stewardship_checks.sh   # badge / wiki / schema / relative links
+python3 scripts/test_stewardship_gates.py  # negative fixture self-tests
 ```
 
 ---

@@ -11,13 +11,17 @@ _SCRIPTS = Path(__file__).resolve().parent
 if str(_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS))
 
-from stewardship_common import ROOT, fail  # noqa: E402
+from stewardship_common import ROOT, fail, strip_fenced_code  # noqa: E402
 
 # Match CI markdown-lint / link-check exclusions where applicable.
 SKIP_PARTS = {".git", "node_modules"}
 SKIP_PREFIXES = (
     str(Path(".github") / "agents"),
 )
+# Align with markdown-lint exclusion for the long-form OWASP mapping.
+SKIP_FILES = {
+    "OWASP-AGENTIC.md",
+}
 
 # Captures markdown links and images: [text](target) / ![alt](target)
 MD_LINK_RE = re.compile(r"!?\[([^\]]*)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
@@ -27,6 +31,8 @@ ATX_HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$", re.MULTILINE)
 
 def should_skip(path: Path) -> bool:
     rel = path.relative_to(ROOT).as_posix()
+    if path.name in SKIP_FILES:
+        return True
     if any(part in SKIP_PARTS for part in path.parts):
         return True
     return any(rel.startswith(prefix.replace("\\", "/")) for prefix in SKIP_PREFIXES)
@@ -56,12 +62,30 @@ def iter_markdown() -> list[Path]:
 
 
 def check_file(path: Path, errors: list[str]) -> None:
-    text = path.read_text(encoding="utf-8")
+    # Ignore example targets inside fenced code (canonical snippets, publish scripts).
+    text = strip_fenced_code(path.read_text(encoding="utf-8"))
     for match in MD_LINK_RE.finditer(text):
         raw = match.group(2).strip()
+        if not raw or raw in {"#"}:
+            fail(f"{path.relative_to(ROOT)}: empty relative link target", errors)
+            continue
         if raw.startswith(("http://", "https://", "mailto:", "tel:")):
             continue
         if raw.startswith("//"):
+            continue
+        # Ignore pure fragment self-links without a path (same-file anchors).
+        if raw.startswith("#"):
+            dest = path
+            frag = raw[1:]
+            if frag:
+                slugs = headings_in(dest)
+                normalized = frag.strip().lower()
+                if normalized not in slugs and github_slug(frag) not in slugs:
+                    fail(
+                        f"{path.relative_to(ROOT)}: missing heading #{frag} in "
+                        f"{dest.relative_to(ROOT)}",
+                        errors,
+                    )
             continue
 
         target, frag = (raw.split("#", 1) + [""])[:2] if "#" in raw else (raw, "")

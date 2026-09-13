@@ -10,7 +10,7 @@ _SCRIPTS = Path(__file__).resolve().parent
 if str(_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS))
 
-from stewardship_common import ROOT, fail, scan_secrets  # noqa: E402
+from stewardship_common import FORBIDDEN_BADGE_HINTS, ROOT, fail, scan_secrets  # noqa: E402
 
 WIKI = ROOT / "docs" / "wiki"
 
@@ -43,6 +43,27 @@ STEWARDSHIP_CI_HINTS = (
     "stewardship-checks",
 )
 
+# Topic anchors expected on key publishable pages (no invent-product content).
+PAGE_TOPIC_HINTS: dict[str, tuple[str, ...]] = {
+    "Autonomy-Levels.md": ("L0", "L1", "autonomy"),
+    "Security-Boundaries.md": ("kill", "secret"),
+    "Agent-Routing.md": ("surface", "routing"),
+    "Overview.md": ("governance", "public"),
+    "Repo-Stewardship.md": ("run_stewardship_checks.sh", "badge"),
+}
+
+
+def _reject_invent_badge_chrome(name: str, text: str, errors: list[str]) -> None:
+    lowered = text.lower()
+    for hint in FORBIDDEN_BADGE_HINTS:
+        # Only flag shield/badge-ish usage, not prose words like "stars" in narrative.
+        if hint in ("stars", "forks", "followers", "downloads", "discord", "twitter", "x.com"):
+            if f"badge" in lowered and hint in lowered:
+                fail(f"{name}: invent-product / social badge chrome hint '{hint}'", errors)
+            continue
+        if hint in lowered and ("shields.io" in lowered or "badge" in lowered or "[![" in text):
+            fail(f"{name}: invent-product / social badge chrome hint '{hint}'", errors)
+
 
 def main() -> int:
     errors: list[str] = []
@@ -74,12 +95,18 @@ def main() -> int:
             stem = name.removesuffix(".md")
             if f"`{name}`" not in publish_text and stem not in publish_text:
                 fail(f"PUBLISH.md must list source file {name}", errors)
+            # Table row should name the source file in backticks.
+            if f"| `{name}` |" not in publish_text and f"| `{name}`|" not in publish_text:
+                if f"`{name}`" not in publish_text:
+                    fail(f"PUBLISH.md pages table must include `{name}`", errors)
         if "Do **not** push `PUBLISH.md`" not in publish_text and "Do not push `PUBLISH.md`" not in publish_text:
             fail("PUBLISH.md must state that PUBLISH.md is not pushed to the wiki", errors)
         if "Link Check" not in publish_text and "link-check" not in publish_text.lower():
             fail("PUBLISH.md acceptance checks must mention Link Check", errors)
         if "Markdown Lint" not in publish_text and "markdown" not in publish_text.lower():
             fail("PUBLISH.md acceptance checks must mention Markdown Lint", errors)
+        if "No secrets" not in publish_text and "secrets" not in publish_text.lower():
+            fail("PUBLISH.md acceptance checks must mention secrets prohibition", errors)
 
     home = WIKI / "Home.md"
     if home.is_file():
@@ -96,6 +123,8 @@ def main() -> int:
                 fail(f"Home.md must link to publishable page {page}", errors)
         if "invent" not in home_text.lower() and "secrets" not in home_text.lower():
             fail("Home.md must retain out-of-scope wording for secrets / invent-product", errors)
+        if "out of scope" not in home_text.lower():
+            fail("Home.md must retain an Out of scope section", errors)
 
     stewardship = WIKI / "Repo-Stewardship.md"
     if stewardship.is_file():
@@ -107,6 +136,12 @@ def main() -> int:
                 + ", ".join(missing_ci),
                 errors,
             )
+        if "run_stewardship_checks.sh" not in ste_text:
+            fail("Repo-Stewardship.md must document bash scripts/run_stewardship_checks.sh", errors)
+        if "relative" not in ste_text.lower() and "check_relative_links" not in ste_text:
+            fail("Repo-Stewardship.md must mention relative-link gate coverage", errors)
+        if "invent" not in ste_text.lower():
+            fail("Repo-Stewardship.md must retain no-invent-product stewardship wording", errors)
 
     for name in PUBLISHABLE_PAGES:
         path = WIKI / name
@@ -115,6 +150,10 @@ def main() -> int:
         text = path.read_text(encoding="utf-8")
         if name != "Home.md" and "](Home.md)" not in text:
             fail(f"{name} must link back to Home.md", errors)
+        for topic in PAGE_TOPIC_HINTS.get(name, ()):
+            if topic.lower() not in text.lower():
+                fail(f"{name} must retain topic hint '{topic}'", errors)
+        _reject_invent_badge_chrome(name, text, errors)
         scan_secrets(path, errors)
 
     if publish.is_file():

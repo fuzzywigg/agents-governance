@@ -11,34 +11,29 @@ _SCRIPTS = Path(__file__).resolve().parent
 if str(_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS))
 
-from stewardship_common import ROOT, SECRET_URL_HINTS, fail, scan_secrets  # noqa: E402
+from stewardship_common import (  # noqa: E402
+    FORBIDDEN_BADGE_HINTS,
+    ROOT,
+    SECRET_URL_HINTS,
+    fail,
+    load_workflow_text,
+    scan_secrets,
+)
 
 README = ROOT / "README.md"
 LICENSE = ROOT / "LICENSE"
 BADGE_STANDARD = ROOT / "docs" / "badge-standard.md"
+CONTRIBUTING = ROOT / "CONTRIBUTING.md"
+AGENTS = ROOT / "AGENTS.md"
 WORKFLOWS = ROOT / ".github" / "workflows"
 
 REQUIRED_ORDER = ("Link Check", "Markdown Lint", "License")
 MAX_BADGES = 3
 EXPECTED_REPO = "fuzzywigg/agents-governance"
-
-# Status-only badges. Coverage / social / downloads are invent-product noise.
-FORBIDDEN_BADGE_HINTS = (
-    "coverage",
-    "codecov",
-    "coveralls",
-    "downloads",
-    "discord",
-    "twitter",
-    "x.com",
-    "stars",
-    "forks",
-    "followers",
-    "npm/",
-    "pypi/",
-    "producthunt",
-    "buymeacoffee",
-    "opencollective",
+REQUIRED_WORKFLOWS = (
+    "link-check.yml",
+    "markdown-lint.yml",
+    "stewardship-checks.yml",
 )
 
 BADGE_LINE_RE = re.compile(
@@ -76,7 +71,6 @@ def extract_badge_row(text: str) -> tuple[list[re.Match[str]], list[str]]:
         i += 1
         # Strict row: no blank lines between badges.
         if i < len(lines) and lines[i].strip() == "":
-            # Peek: if next non-empty is a badge, that is a soft row split — reject.
             j = i
             while j < len(lines) and lines[j].strip() == "":
                 j += 1
@@ -96,7 +90,7 @@ def extract_badge_row(text: str) -> tuple[list[re.Match[str]], list[str]]:
 
 
 def check_workflows_and_license(errors: list[str]) -> None:
-    for name in ("link-check.yml", "markdown-lint.yml", "stewardship-checks.yml"):
+    for name in REQUIRED_WORKFLOWS:
         path = WORKFLOWS / name
         if not path.is_file():
             fail(f"Missing workflow required by stewardship CI: {path.relative_to(ROOT)}", errors)
@@ -106,38 +100,125 @@ def check_workflows_and_license(errors: list[str]) -> None:
         fail("Missing docs/badge-standard.md", errors)
 
 
+def check_workflow_hardening(errors: list[str]) -> None:
+    """Harden existing lint/link/stewardship workflows (triggers, perms, concurrency)."""
+    for name in REQUIRED_WORKFLOWS:
+        text = load_workflow_text(name)
+        if text is None:
+            continue
+        if "pull_request:" not in text:
+            fail(f"{name} must run on pull_request", errors)
+        if "permissions:" not in text or "contents: read" not in text:
+            fail(f"{name} must set permissions.contents: read", errors)
+        if "concurrency:" not in text:
+            fail(f"{name} must declare a concurrency group", errors)
+        if "timeout-minutes:" not in text:
+            fail(f"{name} jobs must set timeout-minutes", errors)
+
+    link = load_workflow_text("link-check.yml") or ""
+    if "lychee" not in link.lower():
+        fail("link-check.yml must invoke lychee", errors)
+    if "--exclude-path" not in link and "exclude-path" not in link:
+        fail("link-check.yml must exclude .github/agents (or equivalent path)", errors)
+    if "--max-concurrency" not in link:
+        fail("link-check.yml must cap lychee --max-concurrency", errors)
+    if "--timeout" not in link:
+        fail("link-check.yml must set lychee --timeout", errors)
+    if "--max-retries" not in link:
+        fail("link-check.yml must set lychee --max-retries", errors)
+
+    lint = load_workflow_text("markdown-lint.yml") or ""
+    if "markdownlint" not in lint.lower():
+        fail("markdown-lint.yml must invoke markdownlint", errors)
+    if "OWASP-AGENTIC.md" not in lint:
+        fail("markdown-lint.yml must exclude OWASP-AGENTIC.md", errors)
+    if "schedule:" not in lint:
+        fail("markdown-lint.yml must include a weekly schedule drift catch", errors)
+
+    stew = load_workflow_text("stewardship-checks.yml") or ""
+    if "run_stewardship_checks.sh" not in stew:
+        fail("stewardship-checks.yml must run scripts/run_stewardship_checks.sh", errors)
+    if "test_stewardship_gates.py" not in stew:
+        fail("stewardship-checks.yml must run scripts/test_stewardship_gates.py", errors)
+    if "schedule:" not in stew:
+        fail("stewardship-checks.yml must include a weekly schedule drift catch", errors)
+
+
 def check_badge_standard_doc(errors: list[str]) -> None:
     """Ensure docs/badge-standard.md still documents the same required order."""
     text = BADGE_STANDARD.read_text(encoding="utf-8")
     for label in REQUIRED_ORDER:
         if f"| {label} |" not in text and f"| {label}" not in text:
-            # table cells may vary; also accept bold/plain mentions in Required badges
             if label not in text:
                 fail(f"docs/badge-standard.md must document required badge '{label}'", errors)
-    # Canonical snippet must reference the three workflow/license targets.
     if "link-check.yml/badge.svg" not in text:
         fail("docs/badge-standard.md canonical snippet missing link-check badge.svg", errors)
     if "markdown-lint.yml/badge.svg" not in text:
         fail("docs/badge-standard.md canonical snippet missing markdown-lint badge.svg", errors)
     if "img.shields.io/github/license/" not in text:
         fail("docs/badge-standard.md canonical snippet missing shields license image", errors)
-    if "do not invent product badges" not in text.lower() and "invent product" not in text.lower():
+    lowered = text.lower()
+    if "do not invent product badges" not in lowered and "invent product" not in lowered:
         fail("docs/badge-standard.md must retain no-invent-product edit policy wording", errors)
+    if "three badges" not in lowered and "3 badges" not in lowered and "three badges max" not in lowered:
+        # Accept "Three badges max" prose from Rules section.
+        if "badges max" not in lowered:
+            fail("docs/badge-standard.md must state three-badge max / keep-the-row-thin rule", errors)
+    if "stewardship-checks" in text and "badge" in lowered and "fourth" not in lowered:
+        # Soft: if stewardship-checks mentioned, fourth-badge refusal should be explicit.
+        if "intentionally" not in lowered and "not** added" not in lowered and "not added" not in lowered:
+            fail(
+                "docs/badge-standard.md mentioning stewardship-checks must refuse a fourth badge",
+                errors,
+            )
 
 
 def check_readme_consistency(text: str, errors: list[str]) -> None:
     if "docs/badge-standard.md" not in text and "./docs/badge-standard.md" not in text:
         fail("README.md Documents section must link to docs/badge-standard.md", errors)
-    # Installation / local gates should mention stewardship runner (docs consistency).
     if "run_stewardship_checks.sh" not in text and "scripts/run_stewardship_checks" not in text:
         fail(
             "README.md must document bash scripts/run_stewardship_checks.sh for local gates",
             errors,
         )
+    # No quiet stewardship marketed as a fourth README badge.
+    if re.search(r"\[!\[.*[Ss]tewardship", text):
+        fail("README.md must not add a Stewardship product/status badge", errors)
+
+
+def check_contributing_and_agents(errors: list[str]) -> None:
+    if CONTRIBUTING.is_file():
+        text = CONTRIBUTING.read_text(encoding="utf-8")
+        if "run_stewardship_checks.sh" not in text:
+            fail("CONTRIBUTING.md must document scripts/run_stewardship_checks.sh", errors)
+        if "invent" not in text.lower():
+            fail("CONTRIBUTING.md must warn against invent-product badges", errors)
+        scan_secrets(CONTRIBUTING, errors)
+    else:
+        fail("Missing CONTRIBUTING.md", errors)
+
+    if AGENTS.is_file():
+        text = AGENTS.read_text(encoding="utf-8")
+        for needle in (
+            "run_stewardship_checks.sh",
+            "test_stewardship_gates.py",
+            "markdown-lint.yml",
+            "link-check.yml",
+            "stewardship-checks.yml",
+        ):
+            if needle not in text:
+                fail(f"AGENTS.md §3 / testing must mention {needle}", errors)
+        scan_secrets(AGENTS, errors)
 
 
 def check_badges(badges: list[re.Match[str]], errors: list[str]) -> None:
-    if len(badges) > MAX_BADGES:
+    if len(badges) != MAX_BADGES:
+        fail(
+            f"Badge row must have exactly {MAX_BADGES} badges "
+            f"(Link Check, Markdown Lint, License); found {len(badges)}",
+            errors,
+        )
+    elif len(badges) > MAX_BADGES:
         fail(
             f"Badge row has {len(badges)} badges; standard allows at most {MAX_BADGES} "
             "unless smtp.eth adds an explicit fourth",
@@ -156,6 +237,11 @@ def check_badges(badges: list[re.Match[str]], errors: list[str]) -> None:
         img = match.group("img")
         link = match.group("link")
         blob = f"{label}|{img}|{link}".lower()
+
+        if not img.startswith("https://"):
+            fail(f"Badge image for {label} must be https://", errors)
+        if link.startswith(("http://", "https://")) and not link.startswith("https://"):
+            fail(f"Badge link for {label} must use https:// when absolute", errors)
 
         for hint in FORBIDDEN_BADGE_HINTS:
             if hint in blob:
@@ -201,10 +287,12 @@ def main() -> int:
 
     text = README.read_text(encoding="utf-8")
     check_workflows_and_license(errors)
+    check_workflow_hardening(errors)
     if BADGE_STANDARD.is_file():
         check_badge_standard_doc(errors)
         scan_secrets(BADGE_STANDARD, errors)
     check_readme_consistency(text, errors)
+    check_contributing_and_agents(errors)
     scan_secrets(README, errors)
     badges, row_errors = extract_badge_row(text)
     errors.extend(row_errors)

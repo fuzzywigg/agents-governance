@@ -11,6 +11,7 @@ on:
   schedule:
     # Run weekly to catch externally broken links
     - cron: "0 6 * * 1"
+  workflow_dispatch:
 
 concurrency:
   group: link-check-${{ github.workflow }}-${{ github.ref }}
@@ -19,6 +20,7 @@ concurrency:
 jobs:
   link-check:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     permissions:
       contents: read
     steps:
@@ -35,6 +37,7 @@ jobs:
             --exclude-loopback
             --max-concurrency 8
             --timeout 20
+            --max-retries 3
             --github-token ${{ secrets.GITHUB_TOKEN }}
             --exclude-path .github/agents
             "**/*.md"

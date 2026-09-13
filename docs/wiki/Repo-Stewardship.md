@@ -49,7 +49,7 @@ plus MD033/MD041/MD060 `false` + `markdownlint-cli2-action@v24` +
 `actions/setup-python@v5` + `id: get_actionlint` deepen after #38).
 Dedicated relative-link self-tests: `python3 scripts/test_relative_links.py`
 (TOKENMAXX relative-link slice after #39 — empty mailto/tel, backslash,
-control-char, whitespace-fragment hardenings).
+control-char, whitespace-fragment hardenings; CI green on draft PR #42).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

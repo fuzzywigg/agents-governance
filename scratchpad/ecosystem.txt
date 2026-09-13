@@ -232,3 +232,12 @@ _None yet._
 2026-09-13T20:32:00Z
 
 2026-09-13T20:40:00Z cursor: PR #39 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-034 TOKENMAXX deepen
+
+### [ECO-035] TOKENMAXX deepen CI workflow pins after #39 — 2026-09-13T20:58:18Z
+- [x] cursor: Read live tree post-#39 (774 fixtures + actionlint v1.7.7)
+- [x] cursor: Fail-close checkout@v7 / lychee-action@v2 / timeouts 20/10/15 / crons / ubuntu-latest / pip --quiet / shell: bash / actionlint -color
+- [x] cursor: Expand self-tests 774 → 836 (CI workflow pin slice; not fixture-reject spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING CI workflow / actionlint / link-check / markdown-lint pins only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-ci-workflow-pins-2331
+2026-09-13T20:58:18Z

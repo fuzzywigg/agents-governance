@@ -285,6 +285,36 @@ def check_workflow_hardening(errors: list[str]) -> None:
             "link-check.yml must checkout the repository (actions/checkout)",
             errors,
         )
+    # Fail-closed after #39: live link-check checkout pin is @v7.
+    if not re.search(r"(?i)actions/checkout@v7\b", link):
+        fail(
+            "link-check.yml must pin actions/checkout@v7",
+            errors,
+        )
+    # Fail-closed after #39: live lychee-action major pin is @v2.
+    if not re.search(r"(?i)lycheeverse/lychee-action@v2\b", link):
+        fail(
+            "link-check.yml must pin lycheeverse/lychee-action@v2",
+            errors,
+        )
+    # Fail-closed after #39: live link-check job timeout pin is 20.
+    if not re.search(r"(?m)^\s*timeout-minutes:\s*20\s*$", link):
+        fail(
+            "link-check.yml must pin timeout-minutes: 20",
+            errors,
+        )
+    # Fail-closed after #39: live weekly cron is 0 6 * * 1 (Monday 06:00 UTC).
+    if 'cron: "0 6 * * 1"' not in link and "cron: '0 6 * * 1'" not in link:
+        fail(
+            'link-check.yml must pin weekly cron: "0 6 * * 1"',
+            errors,
+        )
+    # Fail-closed after #39: live runner is ubuntu-latest.
+    if "ubuntu-latest" not in link:
+        fail(
+            "link-check.yml must run on ubuntu-latest",
+            errors,
+        )
     if '"**/*.md"' not in link and "'**/*.md'" not in link and "**/*.md" not in link:
         fail(
             "link-check.yml must scan **/*.md markdown sources (paths or lychee args)",
@@ -366,6 +396,30 @@ def check_workflow_hardening(errors: list[str]) -> None:
             "markdown-lint.yml must checkout the repository (actions/checkout)",
             errors,
         )
+    # Fail-closed after #39: live markdown-lint checkout pin is @v7.
+    if not re.search(r"(?i)actions/checkout@v7\b", lint):
+        fail(
+            "markdown-lint.yml must pin actions/checkout@v7",
+            errors,
+        )
+    # Fail-closed after #39: live markdown-lint job timeout pin is 10.
+    if not re.search(r"(?m)^\s*timeout-minutes:\s*10\s*$", lint):
+        fail(
+            "markdown-lint.yml must pin timeout-minutes: 10",
+            errors,
+        )
+    # Fail-closed after #39: live weekly cron is 30 6 * * 1 (Monday 06:30 UTC).
+    if 'cron: "30 6 * * 1"' not in lint and "cron: '30 6 * * 1'" not in lint:
+        fail(
+            'markdown-lint.yml must pin weekly cron: "30 6 * * 1"',
+            errors,
+        )
+    # Fail-closed after #39: live runner is ubuntu-latest.
+    if "ubuntu-latest" not in lint:
+        fail(
+            "markdown-lint.yml must run on ubuntu-latest",
+            errors,
+        )
     if '"**/*.md"' not in lint and "'**/*.md'" not in lint and "**/*.md" not in lint:
         fail(
             "markdown-lint.yml must scan **/*.md markdown sources (globs or paths)",
@@ -387,6 +441,30 @@ def check_workflow_hardening(errors: list[str]) -> None:
     if "actions/checkout" not in stew:
         fail(
             "stewardship-checks.yml must checkout the repository (actions/checkout)",
+            errors,
+        )
+    # Fail-closed after #39: live stewardship checkout pin is @v7.
+    if not re.search(r"(?i)actions/checkout@v7\b", stew):
+        fail(
+            "stewardship-checks.yml must pin actions/checkout@v7",
+            errors,
+        )
+    # Fail-closed after #39: live stewardship job timeout pin is 15.
+    if not re.search(r"(?m)^\s*timeout-minutes:\s*15\s*$", stew):
+        fail(
+            "stewardship-checks.yml must pin timeout-minutes: 15",
+            errors,
+        )
+    # Fail-closed after #39: live weekly cron is 15 6 * * 1 (Monday 06:15 UTC).
+    if 'cron: "15 6 * * 1"' not in stew and "cron: '15 6 * * 1'" not in stew:
+        fail(
+            'stewardship-checks.yml must pin weekly cron: "15 6 * * 1"',
+            errors,
+        )
+    # Fail-closed after #39: live runner is ubuntu-latest.
+    if "ubuntu-latest" not in stew:
+        fail(
+            "stewardship-checks.yml must run on ubuntu-latest",
             errors,
         )
     if "setup-python" not in stew.lower() and "actions/setup-python" not in stew:
@@ -414,6 +492,12 @@ def check_workflow_hardening(errors: list[str]) -> None:
     if "pip install" not in stew.lower() and "pip3 install" not in stew.lower():
         fail(
             "stewardship-checks.yml must pip install PyYAML for schema parsing",
+            errors,
+        )
+    # Fail-closed after #39: live pip install uses --quiet (CI noise control).
+    if "--quiet" not in stew.lower() and " -q " not in stew.lower():
+        fail(
+            "stewardship-checks.yml must pip install --quiet PyYAML",
             errors,
         )
     # Fail-closed after #34: actionlint comes from rhysd download script (existing path).
@@ -464,9 +548,24 @@ def check_workflow_hardening(errors: list[str]) -> None:
             "stewardship-checks.yml must set id: get_actionlint on the download step",
             errors,
         )
+    # Fail-closed after #39: live download step pins shell: bash.
+    if not re.search(r"(?m)^\s*shell:\s*bash\s*$", stew):
+        fail(
+            "stewardship-checks.yml must set shell: bash on the actionlint download step",
+            errors,
+        )
     if "actionlint" not in stew.lower():
         fail(
             "stewardship-checks.yml must run actionlint on existing workflow paths",
+            errors,
+        )
+    # Fail-closed after #39: live actionlint run passes -color (CI log readability).
+    if not re.search(
+        r"get_actionlint\.outputs\.executable[^\\n]*-color\b",
+        stew,
+    ):
+        fail(
+            "stewardship-checks.yml must run actionlint with -color",
             errors,
         )
     # Pin actionlint major.minor.patch in the download / run step (supply-chain).

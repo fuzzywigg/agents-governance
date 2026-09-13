@@ -70,7 +70,10 @@ plus markdownlint `default: true` + `get_actionlint.outputs.executable` +
 actionlint `/v1.7.7/` path + lychee `--max-concurrency 8` / `--timeout 20` /
 `--max-retries 3` deepen after #37,
 plus MD033/MD041/MD060 `false` + `markdownlint-cli2-action@v24` +
-`actions/setup-python@v5` + `id: get_actionlint` deepen after #38).
+`actions/setup-python@v5` + `id: get_actionlint` deepen after #38,
+plus `actions/checkout@v7` + `lychee-action@v2` + job timeouts 20/10/15 +
+weekly crons + `ubuntu-latest` + `pip --quiet` + `shell: bash` +
+actionlint `-color` deepen after #39).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

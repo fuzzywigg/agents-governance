@@ -11,6 +11,20 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX CI workflow pins after #39: expand self-tests to 836 cases
+  (was 774) fail-closing live `actions/checkout@v7` on all three workflows,
+  `lycheeverse/lychee-action@v2`, job `timeout-minutes` 20/10/15, weekly
+  crons `0 6` / `30 6` / `15 6`, `ubuntu-latest`, stewardship `pip --quiet`
+  and `shell: bash` and actionlint `-color`, plus actionlint float/unpinned/
+  write-all/contents:write/pull_request_target edges, workflow cancel/
+  schedule/dispatch/concurrency/permissions, link-check fail/loopback/
+  github-token/token/concurrency/timeout/retries, markdown-lint cli2@v24/
+  DavidAnson/config/OWASP/agents excludes, markdownlint MD033/MD041/MD060/
+  line_length:200/default:true still, stewardship setup-python@v5 /
+  get_actionlint id+outputs /v1.7.7/ / 3.12 / rhysd / curl -fsSL /
+  raw.githubusercontent still, lycheeignore https://*/http://*/shields
+  still — CI workflow pin slice only (not badge/wiki/schema/relative
+  fixture-reject spam); no invent-product; no fourth badge
 - TOKENMAXX stewardship fixtures after #38: expand self-tests to 774 cases
   (was 712) covering `.markdownlint.json` `MD033`/`MD041`/`MD060`: false,
   markdownlint-cli2-action `@v24`, stewardship `actions/setup-python@v5` +

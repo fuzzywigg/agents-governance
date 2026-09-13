@@ -1002,7 +1002,7 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
 
 
 def check_stewardship_common_contract(errors: list[str]) -> None:
-    """Fail-close live stewardship_common wiring (after #46; not schema-pin spam)."""
+    """Fail-close live stewardship_common wiring (after #65; deepen after #46)."""
     if not COMMON_GATE.is_file():
         fail("Missing scripts/stewardship_common.py (shared gate helpers)", errors)
         return
@@ -1131,6 +1131,161 @@ def check_stewardship_common_contract(errors: list[str]) -> None:
     if "live secret scan covers ci tokens" not in text.lower():
         fail(
             "stewardship_common.py must pin live secret scan covers CI tokens",
+            errors,
+        )
+    # Fail-closed after #65: second-pass helper / constant / needle pins
+    # (stewardship_common slice only; not badge / wiki / relative / schema / CI spam).
+    root_eq = "ROOT = Path(__file__).resolve().parents[1]"
+    if root_eq not in text:
+        fail(
+            "stewardship_common.py must set ROOT = Path(__file__).resolve().parents[1]",
+            errors,
+        )
+    schemes_eq = (
+        "DANGEROUS_LINK_SCHEMES = (\n"
+        '    "javascript:",\n'
+        '    "data:",\n'
+        '    "vbscript:",\n'
+        '    "file:",\n'
+        ")"
+    )
+    if schemes_eq not in text and schemes_eq.replace('"', "'") not in text:
+        fail(
+            "stewardship_common.py must set DANGEROUS_LINK_SCHEMES = "
+            '("javascript:", "data:", "vbscript:", "file:")',
+            errors,
+        )
+    fence_eq = (
+        'FENCED_BLOCK_RE = re.compile(r"(?:```|~~~).*?(?:```|~~~)", re.DOTALL)'
+    )
+    if fence_eq not in text:
+        fail(
+            "stewardship_common.py must set FENCED_BLOCK_RE = re.compile("
+            'r"(?:```|~~~).*?(?:```|~~~)", re.DOTALL)',
+            errors,
+        )
+    patterns_type = "SECRET_PATTERNS: tuple[re.Pattern[str], ...]"
+    if patterns_type not in text:
+        fail(
+            "stewardship_common.py must type SECRET_PATTERNS as "
+            "tuple[re.Pattern[str], ...]",
+            errors,
+        )
+    # SECRET_URL_HINTS token-prefix entries (beyond first-pass '=' hints).
+    for hint in ("ghp_", "gho_", "github_pat_"):
+        quoted = f'"{hint}"'
+        if quoted not in text and f"'{hint}'" not in text:
+            fail(
+                f"stewardship_common.py SECRET_URL_HINTS must pin {hint}",
+                errors,
+            )
+    # Extra SECRET_PATTERNS needles beyond first-pass ghp_/sk-/npm_ set.
+    for needle in (
+        "password|passwd|token",
+        r"secret\s*[:=]",
+        "RSA ",
+        "OPENSSH ",
+        "EC ",
+    ):
+        if needle not in text:
+            fail(
+                f"stewardship_common.py SECRET_PATTERNS must pin {needle}",
+                errors,
+            )
+    # Exact helper signatures (fail-closed rename resistance).
+    for sig in (
+        "def fail(msg: str, errors: list[str]) -> None:",
+        "def strip_fenced_code(text: str) -> str:",
+        "def has_dangerous_scheme(target: str) -> str | None:",
+        "def scan_secrets(path: Path, errors: list[str], *, label: str | None = None) -> None:",
+        "def markdown_files(*globs: str) -> list[Path]:",
+        "def load_workflow_text(name: str) -> str | None:",
+    ):
+        if sig not in text:
+            fail(
+                f"stewardship_common.py must keep signature {sig}",
+                errors,
+            )
+    # Behavior needles inside helpers.
+    if "errors.append" not in text:
+        fail(
+            "stewardship_common.py fail() must use errors.append",
+            errors,
+        )
+    if "FENCED_BLOCK_RE.sub" not in text:
+        fail(
+            "stewardship_common.py strip_fenced_code must use FENCED_BLOCK_RE.sub",
+            errors,
+        )
+    if "lowered.startswith" not in text:
+        fail(
+            "stewardship_common.py has_dangerous_scheme must use lowered.startswith",
+            errors,
+        )
+    if "relative_to(ROOT)" not in text:
+        fail(
+            "stewardship_common.py scan_secrets must use relative_to(ROOT)",
+            errors,
+        )
+    if 'encoding="utf-8"' not in text and "encoding='utf-8'" not in text:
+        fail(
+            'stewardship_common.py must read text with encoding="utf-8"',
+            errors,
+        )
+    if "https?://" not in text:
+        fail(
+            "stewardship_common.py scan_secrets must match https?:// URL-ish hints",
+            errors,
+        )
+    if "ROOT.glob" not in text:
+        fail(
+            "stewardship_common.py markdown_files must use ROOT.glob",
+            errors,
+        )
+    if "found.update" not in text:
+        fail(
+            "stewardship_common.py markdown_files must use found.update",
+            errors,
+        )
+    if '".github"' not in text and "'.github'" not in text:
+        fail(
+            'stewardship_common.py load_workflow_text must pin ".github"',
+            errors,
+        )
+    if '"workflows"' not in text and "'workflows'" not in text:
+        fail(
+            'stewardship_common.py load_workflow_text must pin "workflows"',
+            errors,
+        )
+    if "is_file()" not in text:
+        fail(
+            "stewardship_common.py load_workflow_text must check is_file()",
+            errors,
+        )
+    if "label or str" not in text:
+        fail(
+            "stewardship_common.py scan_secrets must keep label or str pin",
+            errors,
+        )
+    if "no invent-product surface" not in text.lower():
+        fail(
+            "stewardship_common.py must pin no invent-product surface",
+            errors,
+        )
+    if "Fail-closed ROOT pin: parents[1]" not in text:
+        fail(
+            "stewardship_common.py must pin Fail-closed ROOT pin: parents[1]",
+            errors,
+        )
+    if "Fail-closed helper pins: errors.append / relative_to(ROOT) / lowered.startswith" not in text:
+        fail(
+            "stewardship_common.py must pin Fail-closed helper pins: "
+            "errors.append / relative_to(ROOT) / lowered.startswith",
+            errors,
+        )
+    if "second-pass after #65" not in text:
+        fail(
+            "stewardship_common.py must pin second-pass after #65",
             errors,
         )
 

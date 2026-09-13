@@ -1,18 +1,26 @@
 #!/usr/bin/env python3
 """Shared helpers for stewardship doc gates (no invent-product surface).
 
-Fail-closed pins (live path after #46):
+Fail-closed pins (live path after #46; second-pass after #65):
 - SECRET_PATTERNS: ghp_/gho_/ghu_/ghs_/ghr_, github_pat_, PRIVATE KEY,
   sk-/rk-, api_key/secret/password/token, aws_secret_access_key, xox*,
-  npm_, AIza
+  npm_, AIza — typed tuple[re.Pattern[str], ...]
 - SECRET_URL_HINTS: token=/access_token=/api_key=/apikey=/client_secret=
   plus ghp_/gho_/github_pat_ prefixes (URL-ish query + token prefixes)
 - FORBIDDEN_BADGE_HINTS: invent-product / social chrome (coverage, codecov,
   coveralls, downloads, discord, twitter, x.com, stars, forks, followers,
   npm/, pypi/, producthunt, buymeacoffee, opencollective)
-- DANGEROUS_LINK_SCHEMES: javascript:/data:/vbscript:/file:
-- strip_fenced_code via FENCED_BLOCK_RE (``` or ~~~); has_dangerous_scheme;
-  scan_secrets; markdown_files; load_workflow_text; fail
+- DANGEROUS_LINK_SCHEMES exact assign: javascript:/data:/vbscript:/file:
+- ROOT = Path(__file__).resolve().parents[1]
+- FENCED_BLOCK_RE = re.compile(r"(?:```|~~~).*?(?:```|~~~)", re.DOTALL)
+- strip_fenced_code via FENCED_BLOCK_RE.sub; has_dangerous_scheme via
+  lowered.startswith; scan_secrets (label / relative_to / utf-8 /
+  https?:// URL-ish); markdown_files (ROOT.glob / found.update);
+  load_workflow_text (.github/workflows + is_file); fail (errors.append)
+
+Fail-closed after #46: live secret scan covers CI tokens + private keys.
+Fail-closed ROOT pin: parents[1] (repo root).
+Fail-closed helper pins: errors.append / relative_to(ROOT) / lowered.startswith.
 """
 
 from __future__ import annotations

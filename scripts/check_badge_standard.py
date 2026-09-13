@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
-"""Enforce docs/badge-standard.md against README.md (executable gate)."""
+"""Enforce docs/badge-standard.md against README.md (executable gate).
+
+Fail-closed pins (live path after #48):
+- REQUIRED_ORDER: Link Check → Markdown Lint → License (exactly MAX_BADGES = 3)
+- EXPECTED_REPO: fuzzywigg/agents-governance
+- REQUIRED_WORKFLOWS: link-check.yml / markdown-lint.yml / stewardship-checks.yml
+- live badge row is Link Check → Markdown Lint → License
+- Badge images https-only; link-check.yml/badge.svg + markdown-lint.yml/badge.svg
+- License via img.shields.io/github/license/; contiguous row; no invent-product
+- Quiet stewardship: no Stewardship product/status badge; no fourth badge
+"""
 
 from __future__ import annotations
 
@@ -33,6 +43,7 @@ WIKI_OUTLINE_GATE = ROOT / "scripts" / "check_wiki_outline.py"
 SCHEMA_GATE = ROOT / "scripts" / "check_stewardship_schema.py"
 COMMON_GATE = ROOT / "scripts" / "stewardship_common.py"
 RUN_STEWARDSHIP = ROOT / "scripts" / "run_stewardship_checks.sh"
+BADGE_GATE = Path(__file__).resolve()
 
 REQUIRED_ORDER = ("Link Check", "Markdown Lint", "License")
 MAX_BADGES = 3
@@ -673,6 +684,144 @@ def check_contributing_and_agents(errors: list[str]) -> None:
         fail("Missing AGENTS.md", errors)
 
 
+def check_badge_standard_gate_contract(errors: list[str]) -> None:
+    """Fail-close live badge-standard gate wiring (after #48; not common-pin spam)."""
+    if not BADGE_GATE.is_file():
+        fail("Missing scripts/check_badge_standard.py (badge-standard gate)", errors)
+        return
+    text = BADGE_GATE.read_text(encoding="utf-8")
+    # Split pin literals so self-mutation of contiguous names cannot neutralize checks
+    # or rewrite fail-message needles that self-tests assert on.
+    order_pin = "REQUIRED_" + "ORDER"
+    max_pin = "MAX_" + "BADGES"
+    repo_const_pin = "EXPECTED_" + "REPO"
+    workflows_pin = "REQUIRED_" + "WORKFLOWS"
+    badge_re_pin = "BADGE_" + "LINE_RE"
+    gh_re_pin = "REPO_FROM_" + "GITHUB_RE"
+    shields_re_pin = "REPO_FROM_" + "SHIELDS_RE"
+    if order_pin not in text:
+        fail("check_badge_standard.py must declare " + order_pin, errors)
+    if max_pin not in text:
+        fail("check_badge_standard.py must declare " + max_pin, errors)
+    if repo_const_pin not in text:
+        fail("check_badge_standard.py must declare " + repo_const_pin, errors)
+    if workflows_pin not in text:
+        fail("check_badge_standard.py must declare " + workflows_pin, errors)
+    if badge_re_pin not in text:
+        fail("check_badge_standard.py must declare " + badge_re_pin, errors)
+    if gh_re_pin not in text:
+        fail("check_badge_standard.py must declare " + gh_re_pin, errors)
+    if shields_re_pin not in text:
+        fail("check_badge_standard.py must declare " + shields_re_pin, errors)
+    # Live required badge labels (order is the public front-door contract).
+    for label in (
+        "Link " + "Check",
+        "Markdown " + "Lint",
+        "Lic" + "ense",
+    ):
+        if f'"{label}"' not in text and f"'{label}'" not in text:
+            fail(
+                "check_badge_standard.py " + order_pin + " must pin " + label,
+                errors,
+            )
+    max_eq = max_pin + " = 3"
+    # Require spaced form only (nospace MAX_BADGES=3 in prose is not the live pin).
+    if max_eq not in text:
+        fail(
+            "check_badge_standard.py must pin " + max_eq + " (three badges max)",
+            errors,
+        )
+    repo_slug = "fuzzywigg/" + "agents-governance"
+    if repo_slug not in text:
+        fail(
+            "check_badge_standard.py " + repo_const_pin + " must pin " + repo_slug,
+            errors,
+        )
+    for wf in (
+        "link-check" + ".yml",
+        "markdown-lint" + ".yml",
+        "stewardship-checks" + ".yml",
+    ):
+        if wf not in text:
+            fail(
+                "check_badge_standard.py " + workflows_pin + " must pin " + wf,
+                errors,
+            )
+    for fn in (
+        "extract_badge_row",
+        "check_badges",
+        "check_badge_standard_doc",
+        "check_readme_consistency",
+        "check_contributing_and_agents",
+        "check_lycheeignore",
+        "check_actionlint_style",
+        "check_workflow_hardening",
+        "check_workflows_and_license",
+    ):
+        if f"def {fn}(" not in text:
+            fail(
+                "check_badge_standard.py must provide " + fn + "()",
+                errors,
+            )
+    # Live badge image / link needles (split to resist self-mutation).
+    link_svg = "link-check.yml/" + "badge.svg"
+    md_svg = "markdown-lint.yml/" + "badge.svg"
+    shields = "img.shields.io/github/" + "license/"
+    if link_svg not in text:
+        fail("check_badge_standard.py must pin " + link_svg, errors)
+    if md_svg not in text:
+        fail("check_badge_standard.py must pin " + md_svg, errors)
+    if shields not in text:
+        fail("check_badge_standard.py must pin " + shields, errors)
+    contiguous_pin = "contigu" + "ous"
+    if contiguous_pin not in text.lower():
+        fail(
+            "check_badge_standard.py must keep " + contiguous_pin + " badge-row pin",
+            errors,
+        )
+    https_pin = "https:" + "//"
+    if https_pin not in text:
+        fail(
+            "check_badge_standard.py must require " + https_pin + " badge images",
+            errors,
+        )
+    invent_pin = "inv" + "ent"
+    if invent_pin not in text.lower():
+        fail(
+            "check_badge_standard.py must retain " + invent_pin + "-product wording",
+            errors,
+        )
+    fourth_pin = "four" + "th"
+    if fourth_pin not in text.lower():
+        fail(
+            "check_badge_standard.py must retain " + fourth_pin + "-badge refusal pin",
+            errors,
+        )
+    stew_reject = "Stewardship product/" + "status badge"
+    if stew_reject.lower() not in text.lower():
+        fail(
+            "check_badge_standard.py must reject " + stew_reject,
+            errors,
+        )
+    # Fail-closed after #48: module docstring must name live badge row order.
+    live_row = "live badge row is " + "Link Check"
+    if live_row.lower() not in text.lower():
+        fail(
+            "check_badge_standard.py must pin " + live_row
+            + " → Markdown Lint → License",
+            errors,
+        )
+    forbidden_pin = "FORBIDDEN_" + "BADGE_HINTS"
+    secret_pin = "SECRET_" + "URL_HINTS"
+    scan_pin = "scan_" + "secrets"
+    if forbidden_pin not in text:
+        fail("check_badge_standard.py must use " + forbidden_pin, errors)
+    if secret_pin not in text:
+        fail("check_badge_standard.py must use " + secret_pin, errors)
+    if scan_pin not in text:
+        fail("check_badge_standard.py must scan docs via " + scan_pin, errors)
+
+
 def check_stewardship_common_contract(errors: list[str]) -> None:
     """Fail-close live stewardship_common wiring (after #46; not schema-pin spam)."""
     if not COMMON_GATE.is_file():
@@ -1247,6 +1396,15 @@ def check_badges(badges: list[re.Match[str]], errors: list[str]) -> None:
 
 def main() -> int:
     errors: list[str] = []
+    # Fail-closed after #48: self-contract first so helper renames fail closed
+    # (report pin drift) instead of NameError mid-run.
+    check_badge_standard_gate_contract(errors)
+    if errors:
+        print("Badge standard check FAILED:", file=sys.stderr)
+        for err in errors:
+            print(f"  - {err}", file=sys.stderr)
+        return 1
+
     if not README.is_file():
         print("FAIL: README.md missing", file=sys.stderr)
         return 1

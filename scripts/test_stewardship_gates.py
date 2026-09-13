@@ -42,6 +42,11 @@ Deepened after #46: stewardship_common contract pins — SECRET_PATTERNS /
 SECRET_URL_HINTS / FORBIDDEN_BADGE_HINTS / DANGEROUS_LINK_SCHEMES /
 strip_fenced_code / scan_secrets / invent-product (not schema / wiki /
 relative-link / CI workflow pin spam).
+Deepened after #48: badge-standard gate contract pins — REQUIRED_ORDER /
+MAX_BADGES=3 / EXPECTED_REPO / REQUIRED_WORKFLOWS / badge.svg + shields
+license / contiguous row / invent-product / fourth-badge refusal /
+Stewardship product badge reject (not common / schema / wiki / relative /
+CI workflow pin spam).
 """
 
 from __future__ import annotations
@@ -17372,6 +17377,747 @@ def test_common_secret_url_hints_complete_still_after_46() -> None:
             raise AssertionError(f"SECRET_URL_HINTS missing {hint}")
 
 
+
+# --- TOKENMAXX deepen after #48: badge-standard gate contract / fail-closed pins ---
+
+def test_badge_gate_requires_required_order_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('REQUIRED_ORDER', 'REQUIRED_LABELS')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'REQUIRED_ORDER',
+        )
+
+def test_badge_gate_requires_max_badges_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('MAX_BADGES', 'MAX_BADGE_COUNT')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'MAX_BADGES',
+        )
+
+def test_badge_gate_requires_expected_repo_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('EXPECTED_REPO', 'EXPECTED_SLUG')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'EXPECTED_REPO',
+        )
+
+def test_badge_gate_requires_required_workflows_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('REQUIRED_WORKFLOWS', 'REQUIRED_WF')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'REQUIRED_WORKFLOWS',
+        )
+
+def test_badge_gate_requires_badge_line_re_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('BADGE_LINE_RE', 'BADGE_RE')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'BADGE_LINE_RE',
+        )
+
+def test_badge_gate_requires_repo_from_github_re_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('REPO_FROM_GITHUB_RE', 'REPO_GH_RE')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'REPO_FROM_GITHUB_RE',
+        )
+
+def test_badge_gate_requires_repo_from_shields_re_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('REPO_FROM_SHIELDS_RE', 'REPO_SH_RE')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'REPO_FROM_SHIELDS_RE',
+        )
+
+def test_badge_gate_requires_label_link_check_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('"Link Check"', '"Link Checks"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Link Check',
+        )
+
+def test_badge_gate_requires_label_markdown_lint_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('"Markdown Lint"', '"Markdown Lints"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Markdown Lint',
+        )
+
+def test_badge_gate_requires_label_license_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('"License"', '"Licenses"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'License',
+        )
+
+def test_badge_gate_requires_max_badges_eq_3_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('MAX_BADGES = 3', 'MAX_BADGES = 4')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'MAX_BADGES = 3',
+        )
+
+def test_badge_gate_requires_repo_slug_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('fuzzywigg/agents-governance', 'fuzzywigg/agents-gov')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'fuzzywigg/agents-governance',
+        )
+
+def test_badge_gate_requires_wf_link_check_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('link-check.yml', 'link-checks.yml')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check.yml',
+        )
+
+def test_badge_gate_requires_wf_markdown_lint_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('markdown-lint.yml', 'markdown-lints.yml')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'markdown-lint.yml',
+        )
+
+def test_badge_gate_requires_wf_stewardship_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('stewardship-checks.yml', 'stewardship-check.yml')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship-checks.yml',
+        )
+
+def test_badge_gate_requires_fn_extract_badge_row_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('def extract_badge_row(', 'def extract_badge_rows(')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'extract_badge_row()',
+        )
+
+def test_badge_gate_requires_fn_check_badges_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('def check_badges(', 'def check_badge_row(')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'check_badges()',
+        )
+
+def test_badge_gate_requires_fn_check_badge_doc_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('def check_badge_standard_doc(', 'def check_badge_doc(')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'check_badge_standard_doc()',
+        )
+
+def test_badge_gate_requires_fn_readme_consistency_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('def check_readme_consistency(', 'def check_readme_ok(')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'check_readme_consistency()',
+        )
+
+def test_badge_gate_requires_fn_contributing_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('def check_contributing_and_agents(', 'def check_contrib_agents(')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'check_contributing_and_agents()',
+        )
+
+def test_badge_gate_requires_fn_lycheeignore_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('def check_lycheeignore(', 'def check_lychee_ignore(')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'check_lycheeignore()',
+        )
+
+def test_badge_gate_requires_fn_actionlint_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('def check_actionlint_style(', 'def check_actionlint_ok(')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'check_actionlint_style()',
+        )
+
+def test_badge_gate_requires_fn_workflow_hardening_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('def check_workflow_hardening(', 'def check_workflow_hard(')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'check_workflow_hardening()',
+        )
+
+def test_badge_gate_requires_fn_workflows_license_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('def check_workflows_and_license(', 'def check_workflows_license(')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'check_workflows_and_license()',
+        )
+
+def test_badge_gate_requires_link_check_badge_svg_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('link-check.yml/badge.svg', 'link-check.yml/badge.png')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check.yml/badge.svg',
+        )
+
+def test_badge_gate_requires_markdown_lint_badge_svg_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('markdown-lint.yml/badge.svg', 'markdown-lint.yml/badge.png')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'markdown-lint.yml/badge.svg',
+        )
+
+def test_badge_gate_requires_shields_license_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('img.shields.io/github/license/', 'img.shields.io/github/licence/')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'img.shields.io/github/license/',
+        )
+
+def test_badge_gate_requires_contiguous_pin_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('contiguous', 'adjacent')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'contiguous',
+        )
+
+def test_badge_gate_requires_fourth_refusal_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace("fourth", "quaternary")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "fourth",
+        )
+
+def test_badge_gate_requires_stewardship_product_reject_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('Stewardship product/status badge', 'Stewardship status badge')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Stewardship product/status badge',
+        )
+
+def test_badge_gate_requires_live_badge_row_pin_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('live badge row is Link Check', 'live badge row is CI Check')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'live badge row is Link Check',
+        )
+
+def test_badge_gate_requires_forbidden_hints_import_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "FORBIDDEN_BADGE_HINTS", "FORBIDDEN_BADGE_HINTS_X"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "FORBIDDEN_BADGE_HINTS",
+        )
+
+def test_badge_gate_requires_secret_url_hints_import_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('SECRET_URL_HINTS', 'SECRET_URL_HINTS_X')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'SECRET_URL_HINTS',
+        )
+
+def test_badge_gate_requires_scan_secrets_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "scan_secrets", "scan_secrets_x"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "scan_secrets",
+        )
+
+def test_badge_gate_requires_invent_wording_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        for old in ("invent-product", "Invent-product", "invent"):
+            text = text.replace(old, "feature")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "invent-product",
+        )
+
+def test_badge_gate_requires_https_images_after_48() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace("https://", "http://")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "https://",
+        )
+
+def test_badge_gate_required_order_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    if cbs.REQUIRED_ORDER != ("Link Check", "Markdown Lint", "License"):
+        raise AssertionError(f"REQUIRED_ORDER drifted: {cbs.REQUIRED_ORDER}")
+
+def test_badge_gate_max_badges_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    if cbs.MAX_BADGES != 3:
+        raise AssertionError(f"MAX_BADGES drifted: {cbs.MAX_BADGES}")
+
+def test_badge_gate_expected_repo_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    if cbs.EXPECTED_REPO != "fuzzywigg/agents-governance":
+        raise AssertionError(f"EXPECTED_REPO drifted: {cbs.EXPECTED_REPO}")
+
+def test_badge_gate_required_workflows_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    expected = ("link-check.yml", "markdown-lint.yml", "stewardship-checks.yml")
+    if cbs.REQUIRED_WORKFLOWS != expected:
+        raise AssertionError(f"REQUIRED_WORKFLOWS drifted: {cbs.REQUIRED_WORKFLOWS}")
+
+def test_badge_gate_contract_fn_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    if not callable(getattr(cbs, "check_badge_standard_gate_contract", None)):
+        raise AssertionError("check_badge_standard_gate_contract missing")
+
+def test_badge_gate_extract_row_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    readme = "# Title\n\n[![Link Check](https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml/badge.svg)](https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+    badges, errors = cbs.extract_badge_row(readme)
+    if len(badges) != 1 or errors:
+        raise AssertionError(f"extract_badge_row failed: {len(badges)} {errors}")
+
+def test_badge_gate_check_badges_order_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    text = (
+        "# Title\n\n"
+        "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml/badge.svg)]"
+        "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+        "[![Link Check](https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml/badge.svg)]"
+        "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+        "[![License](https://img.shields.io/github/license/fuzzywigg/agents-governance)](LICENSE)\n"
+    )
+    badges, _ = cbs.extract_badge_row(text)
+    errors: list[str] = []
+    cbs.check_badges(badges, errors)
+    if not any("order" in e.lower() for e in errors):
+        raise AssertionError(f"check_badges missed order reject: {errors}")
+
+def test_badge_gate_check_badges_https_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    text = (
+        "# Title\n\n"
+        "[![Link Check](http://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml/badge.svg)]"
+        "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+        "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml/badge.svg)]"
+        "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+        "[![License](https://img.shields.io/github/license/fuzzywigg/agents-governance)](LICENSE)\n"
+    )
+    badges, _ = cbs.extract_badge_row(text)
+    errors: list[str] = []
+    cbs.check_badges(badges, errors)
+    if not any("https://" in e for e in errors):
+        raise AssertionError(f"check_badges missed http image: {errors}")
+
+def test_badge_gate_doc_fourth_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    errors: list[str] = []
+    cbs.check_badge_standard_gate_contract(errors)
+    if errors:
+        raise AssertionError(f"live badge gate contract failed: {errors}")
+
+def test_badge_gate_badge_line_re_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    line = "[![Link Check](https://example.com/a.svg)](https://example.com/a)"
+    if not cbs.BADGE_LINE_RE.match(line):
+        raise AssertionError("BADGE_LINE_RE missed valid badge line")
+
+def test_badge_gate_repo_github_re_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    m = cbs.REPO_FROM_GITHUB_RE.search(
+        "https://github.com/fuzzywigg/agents-governance/actions"
+    )
+    if not m or f"{m.group('owner')}/{m.group('repo')}" != "fuzzywigg/agents-governance":
+        raise AssertionError("REPO_FROM_GITHUB_RE missed slug")
+
+def test_badge_gate_repo_shields_re_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    m = cbs.REPO_FROM_SHIELDS_RE.search(
+        "https://img.shields.io/github/license/fuzzywigg/agents-governance"
+    )
+    if not m or f"{m.group('owner')}/{m.group('repo')}" != "fuzzywigg/agents-governance":
+        raise AssertionError("REPO_FROM_SHIELDS_RE missed slug")
+
+def test_badge_gate_main_calls_contract_still_after_48() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "check_badge_standard_gate_contract(errors)" not in text:
+        raise AssertionError("main must call check_badge_standard_gate_contract")
+
+def test_badge_gate_docstring_pin_still_after_48() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "live badge row is Link Check" not in text:
+        raise AssertionError("module docstring missing live badge row pin")
+
+def test_badge_gate_three_max_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    if len(cbs.REQUIRED_ORDER) != cbs.MAX_BADGES:
+        raise AssertionError("REQUIRED_ORDER length must equal MAX_BADGES")
+
+def test_badge_gate_contract_errors_empty_live_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    errors: list[str] = []
+    cbs.check_badge_standard_gate_contract(errors)
+    if errors:
+        raise AssertionError(f"unexpected contract errors: {errors}")
+
+def test_badge_gate_no_fourth_in_order_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    if "Stewardship" in cbs.REQUIRED_ORDER:
+        raise AssertionError("REQUIRED_ORDER must not include Stewardship badge")
+
+def test_badge_gate_license_last_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    if cbs.REQUIRED_ORDER[-1] != "License":
+        raise AssertionError("License must be last in REQUIRED_ORDER")
+
+def test_badge_gate_link_check_first_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    if cbs.REQUIRED_ORDER[0] != "Link Check":
+        raise AssertionError("Link Check must be first in REQUIRED_ORDER")
+
+def test_badge_gate_markdown_lint_middle_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    if cbs.REQUIRED_ORDER[1] != "Markdown Lint":
+        raise AssertionError("Markdown Lint must be middle in REQUIRED_ORDER")
+
+def test_badge_gate_badge_gate_path_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    if cbs.BADGE_GATE.name != "check_badge_standard.py":
+        raise AssertionError(f"BADGE_GATE drifted: {cbs.BADGE_GATE}")
+
+def test_badge_gate_forbidden_hints_wired_still_after_48() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "for hint in FORBIDDEN_BADGE_HINTS" not in text:
+        raise AssertionError("check_badges must iterate FORBIDDEN_BADGE_HINTS")
+
+def test_badge_gate_secret_hints_wired_still_after_48() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "for hint in SECRET_URL_HINTS" not in text:
+        raise AssertionError("check_badges must iterate SECRET_URL_HINTS")
+
+def test_badge_gate_passes_live_contract_still_after_48() -> None:
+    assert_pass_live("check_badge_standard.py")
+
+def test_badge_gate_doc_mentions_three_still_after_48() -> None:
+    text = (ROOT / "docs" / "badge-standard.md").read_text(encoding="utf-8")
+    lowered = text.lower()
+    if "three badges" not in lowered and "badges max" not in lowered:
+        raise AssertionError("badge-standard.md missing three-badge max prose")
+
+def test_badge_gate_readme_has_three_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    text = (ROOT / "README.md").read_text(encoding="utf-8")
+    badges, errors = cbs.extract_badge_row(text)
+    if errors or len(badges) != 3:
+        raise AssertionError(f"live README badge row broken: {len(badges)} {errors}")
+
+def test_badge_gate_check_badges_live_still_after_48() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    text = (ROOT / "README.md").read_text(encoding="utf-8")
+    badges, _ = cbs.extract_badge_row(text)
+    errors: list[str] = []
+    cbs.check_badges(badges, errors)
+    if errors:
+        raise AssertionError(f"live check_badges failed: {errors}")
+
+def test_badge_gate_contributing_invent_still_after_48() -> None:
+    text = (ROOT / "CONTRIBUTING.md").read_text(encoding="utf-8")
+    if "invent" not in text.lower():
+        raise AssertionError("CONTRIBUTING.md missing invent-product warning")
+
+def test_badge_gate_agents_selftest_still_after_48() -> None:
+    text = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+    if "test_stewardship_gates.py" not in text:
+        raise AssertionError("AGENTS.md missing self-test needle")
+
+def test_badge_gate_lycheeignore_shields_still_after_48() -> None:
+    text = (ROOT / ".lycheeignore").read_text(encoding="utf-8")
+    if "img.shields.io" not in text and r"img\.shields\.io" not in text:
+        raise AssertionError(".lycheeignore missing shields exclude")
+
+def test_badge_gate_source_has_contract_section_still_after_48() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "after #48; not common-pin spam" not in text:
+        raise AssertionError("badge gate contract docstring missing #48 pin")
+
+def test_badge_gate_quiet_stewardship_doc_still_after_48() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "Quiet stewardship" not in text:
+        raise AssertionError("module docstring missing Quiet stewardship pin")
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -18515,6 +19261,75 @@ def main() -> int:
         test_common_markdown_files_readme_still_after_46,
         test_common_fail_appends_still_after_46,
         test_common_secret_url_hints_complete_still_after_46,
+        # TOKENMAXX deepen after #48 (+68 badge-standard gate pins)
+        test_badge_gate_requires_required_order_after_48,
+        test_badge_gate_requires_max_badges_after_48,
+        test_badge_gate_requires_expected_repo_after_48,
+        test_badge_gate_requires_required_workflows_after_48,
+        test_badge_gate_requires_badge_line_re_after_48,
+        test_badge_gate_requires_repo_from_github_re_after_48,
+        test_badge_gate_requires_repo_from_shields_re_after_48,
+        test_badge_gate_requires_label_link_check_after_48,
+        test_badge_gate_requires_label_markdown_lint_after_48,
+        test_badge_gate_requires_label_license_after_48,
+        test_badge_gate_requires_max_badges_eq_3_after_48,
+        test_badge_gate_requires_repo_slug_after_48,
+        test_badge_gate_requires_wf_link_check_after_48,
+        test_badge_gate_requires_wf_markdown_lint_after_48,
+        test_badge_gate_requires_wf_stewardship_after_48,
+        test_badge_gate_requires_fn_extract_badge_row_after_48,
+        test_badge_gate_requires_fn_check_badges_after_48,
+        test_badge_gate_requires_fn_check_badge_doc_after_48,
+        test_badge_gate_requires_fn_readme_consistency_after_48,
+        test_badge_gate_requires_fn_contributing_after_48,
+        test_badge_gate_requires_fn_lycheeignore_after_48,
+        test_badge_gate_requires_fn_actionlint_after_48,
+        test_badge_gate_requires_fn_workflow_hardening_after_48,
+        test_badge_gate_requires_fn_workflows_license_after_48,
+        test_badge_gate_requires_link_check_badge_svg_after_48,
+        test_badge_gate_requires_markdown_lint_badge_svg_after_48,
+        test_badge_gate_requires_shields_license_after_48,
+        test_badge_gate_requires_contiguous_pin_after_48,
+        test_badge_gate_requires_fourth_refusal_after_48,
+        test_badge_gate_requires_stewardship_product_reject_after_48,
+        test_badge_gate_requires_live_badge_row_pin_after_48,
+        test_badge_gate_requires_forbidden_hints_import_after_48,
+        test_badge_gate_requires_secret_url_hints_import_after_48,
+        test_badge_gate_requires_scan_secrets_after_48,
+        test_badge_gate_requires_invent_wording_after_48,
+        test_badge_gate_requires_https_images_after_48,
+        test_badge_gate_required_order_still_after_48,
+        test_badge_gate_max_badges_still_after_48,
+        test_badge_gate_expected_repo_still_after_48,
+        test_badge_gate_required_workflows_still_after_48,
+        test_badge_gate_contract_fn_still_after_48,
+        test_badge_gate_extract_row_still_after_48,
+        test_badge_gate_check_badges_order_still_after_48,
+        test_badge_gate_check_badges_https_still_after_48,
+        test_badge_gate_doc_fourth_still_after_48,
+        test_badge_gate_badge_line_re_still_after_48,
+        test_badge_gate_repo_github_re_still_after_48,
+        test_badge_gate_repo_shields_re_still_after_48,
+        test_badge_gate_main_calls_contract_still_after_48,
+        test_badge_gate_docstring_pin_still_after_48,
+        test_badge_gate_three_max_still_after_48,
+        test_badge_gate_contract_errors_empty_live_still_after_48,
+        test_badge_gate_no_fourth_in_order_still_after_48,
+        test_badge_gate_license_last_still_after_48,
+        test_badge_gate_link_check_first_still_after_48,
+        test_badge_gate_markdown_lint_middle_still_after_48,
+        test_badge_gate_badge_gate_path_still_after_48,
+        test_badge_gate_forbidden_hints_wired_still_after_48,
+        test_badge_gate_secret_hints_wired_still_after_48,
+        test_badge_gate_passes_live_contract_still_after_48,
+        test_badge_gate_doc_mentions_three_still_after_48,
+        test_badge_gate_readme_has_three_still_after_48,
+        test_badge_gate_check_badges_live_still_after_48,
+        test_badge_gate_contributing_invent_still_after_48,
+        test_badge_gate_agents_selftest_still_after_48,
+        test_badge_gate_lycheeignore_shields_still_after_48,
+        test_badge_gate_source_has_contract_section_still_after_48,
+        test_badge_gate_quiet_stewardship_doc_still_after_48,
 
     ]
     try:

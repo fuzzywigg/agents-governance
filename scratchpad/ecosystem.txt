@@ -285,3 +285,5 @@ _None yet._
 - Scope: EXISTING badge-standard / stewardship_common deny-list pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-badge-standard-pins-0ece
 2026-09-13T22:01:23Z
+
+2026-09-13T22:12:08Z cursor: PR #50 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-039 TOKENMAXX badge-standard gate pins

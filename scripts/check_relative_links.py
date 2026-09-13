@@ -85,7 +85,7 @@ def check_file(path: Path, errors: list[str]) -> None:
             )
             continue
 
-        if raw.startswith(("http://", "https://", "mailto:", "tel:")):
+        if raw.lower().startswith(("http://", "https://", "mailto:", "tel:")):
             if raw.lower().startswith("http://"):
                 fail(
                     f"{path.relative_to(ROOT)}: insecure http:// link (use https://) → {raw}",

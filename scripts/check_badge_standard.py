@@ -1271,7 +1271,10 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
 
 
 def check_relative_link_gate_contract(errors: list[str]) -> None:
-    """Fail-close live relative-link gate wiring (after #41; not workflow-pin spam)."""
+    """Fail-close live relative-link gate wiring (after #41; not workflow-pin spam).
+
+    Second-pass deepen after #55; not schema-scalar / common / wiki / CI spam.
+    """
     if not RELATIVE_LINK_GATE.is_file():
         fail("Missing scripts/check_relative_links.py (relative-link gate)", errors)
         return
@@ -1348,6 +1351,101 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
             "check_relative_links.py must reject insecure http:// links",
             errors,
         )
+    # Fail-closed after #55: second-pass live relative-link wiring pins.
+    # Split const names so global rename cannot neutralize contiguous checks.
+    skip_parts = "SKIP_" + "PARTS"
+    skip_prefixes = "SKIP_" + "PREFIXES"
+    skip_files = "SKIP_" + "FILES"
+    md_link_re = "MD_" + "LINK_RE"
+    max_unquote = "_MAX_" + "UNQUOTE_PASSES"
+    for const_pin in (
+        skip_parts,
+        skip_prefixes,
+        skip_files,
+        md_link_re,
+        max_unquote,
+    ):
+        if const_pin not in text:
+            fail(
+                "check_relative_links.py must declare " + const_pin,
+                errors,
+            )
+    max_eq = max_unquote + " = 4"
+    if max_eq not in text:
+        fail(
+            "check_relative_links.py must pin " + max_eq + " (nested %252e cap)",
+            errors,
+        )
+    if "should_skip" not in text:
+        fail(
+            "check_relative_links.py must provide should_skip",
+            errors,
+        )
+    if "iter_markdown" not in text:
+        fail(
+            "check_relative_links.py must provide iter_markdown",
+            errors,
+        )
+    if "headings_in" not in text:
+        fail(
+            "check_relative_links.py must provide headings_in",
+            errors,
+        )
+    if "mailto:" not in text:
+        fail(
+            "check_relative_links.py must allow mailto: absolute targets",
+            errors,
+        )
+    if "tel:" not in text:
+        fail(
+            "check_relative_links.py must allow tel: absolute targets",
+            errors,
+        )
+    if "NUL" not in text:
+        fail(
+            "check_relative_links.py must reject NUL in link targets",
+            errors,
+        )
+    if "escapes repo" not in text.lower():
+        fail(
+            "check_relative_links.py must reject relative links that escape repo",
+            errors,
+        )
+    if "broken relative link" not in text.lower():
+        fail(
+            "check_relative_links.py must reject broken relative link targets",
+            errors,
+        )
+    if "missing heading" not in text.lower():
+        fail(
+            "check_relative_links.py must reject missing heading fragments",
+            errors,
+        )
+    if "%252e" not in text.lower() and "%2e" not in text.lower():
+        fail(
+            "check_relative_links.py must document nested %252e / %2e traversal",
+            errors,
+        )
+    if 'strip("<>")' not in text and "strip('<>')" not in text:
+        fail(
+            'check_relative_links.py must strip("<>") angle-bracket link targets',
+            errors,
+        )
+    if "empty relative link target" not in text.lower():
+        fail(
+            "check_relative_links.py must reject empty relative link target",
+            errors,
+        )
+    if "protocol-relative" not in text.lower():
+        fail(
+            "check_relative_links.py must name protocol-relative // reject",
+            errors,
+        )
+    if "no markdown files found" not in text.lower():
+        fail(
+            "check_relative_links.py must fail closed when no markdown files found",
+            errors,
+        )
 
     if not RUN_STEWARDSHIP.is_file():
         fail("Missing scripts/run_stewardship_checks.sh", errors)
@@ -1375,6 +1473,12 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
             fail(
                 "run_stewardship_checks.sh must run gates in order: "
                 "badge → wiki → schema → relative",
+                errors,
+            )
+        # Fail-closed after #55: live runner keeps bash strict mode.
+        if "set -euo pipefail" not in run_text:
+            fail(
+                "run_stewardship_checks.sh must pin set -euo pipefail",
                 errors,
             )
 

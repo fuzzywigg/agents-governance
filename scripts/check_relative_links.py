@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 """Offline relative markdown link integrity (complements lychee external checks).
 
-Fail-closed pins (live path after #41):
+Fail-closed pins (live path after #55 second-pass):
 - Skip OWASP-AGENTIC.md / .github/agents / .git / node_modules (align lint/lychee)
-- Strip fenced code before link scan; percent-decode until stable (traversal)
+  via SKIP_FILES / SKIP_PREFIXES / SKIP_PARTS + should_skip / iter_markdown
+- Strip fenced code before link scan; fully_unquote nested percent-decode
+  capped at _MAX_UNQUOTE_PASSES = 4 (blocks %252e-style traversal)
+- MD_LINK_RE captures links + images; ATX_HEADING_RE + headings_in + github_slug
 - Reject empty targets, bare `#`, empty `path#` fragments, query strings on
-  relative paths, protocol-relative `//`, insecure http://, dangerous schemes
+  relative paths, protocol-relative `//`, insecure http://, dangerous schemes,
+  NUL bytes, escapes-repo / broken relative link / missing heading
+- Allow mailto: / tel: / https:// absolute targets (offline path is relative-only)
 """
 
 from __future__ import annotations

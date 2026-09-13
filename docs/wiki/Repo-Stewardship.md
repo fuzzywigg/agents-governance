@@ -67,7 +67,13 @@ MAX_BADGES = 3 / EXPECTED_REPO / REQUIRED_WORKFLOWS / badge.svg + shields
 license / contiguous row / invent-product / fourth-badge refusal /
 Stewardship product badge reject,
 plus stewardship-schema scalar / `STRING_KEYS` / empty-yaml / bool-int
-rejects and live badge scope / PUBLISH purpose / closes `#16` pins after #53).
+rejects and live badge scope / PUBLISH purpose / closes `#16` pins after #53,
+plus relative-link second-pass gate pins after #55: `SKIP_PARTS` /
+`SKIP_PREFIXES` / `SKIP_FILES` / `MD_LINK_RE` / `_MAX_UNQUOTE_PASSES = 4` /
+`should_skip` / `iter_markdown` / `headings_in` / mailto+tel / NUL /
+escapes-repo / broken relative / missing heading / `%252e` / angle-bracket
+strip / empty-target / protocol-relative name / no-markdown-found /
+`set -euo pipefail`).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

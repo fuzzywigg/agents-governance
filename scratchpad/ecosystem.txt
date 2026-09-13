@@ -309,3 +309,12 @@ _None yet._
 2026-09-13T22:50:08Z
 
 2026-09-13T22:55:00Z cursor: PR #55 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-041 TOKENMAXX stewardship-schema scalar pins
+
+### [ECO-042] TOKENMAXX deepen relative-link second-pass gate pins after #55 — 2026-09-13T22:59:38Z
+- [x] cursor: Read live tree post-#55 (1253 cases; schema scalar saturated; closed conflicting #56 common/wiki)
+- [x] cursor: Fail-close relative-link second-pass — SKIP_PARTS/PREFIXES/FILES / MD_LINK_RE / _MAX_UNQUOTE_PASSES=4 / should_skip / iter_markdown / headings_in / mailto+tel / NUL / escapes-repo / broken / missing heading / %252e / angle-bracket / empty-target / protocol-relative name / no-markdown-found / set -euo pipefail
+- [x] cursor: Expand self-tests 1253 → 1324 (relative-link second-pass; not schema-scalar / common / wiki / badge / CI workflow pin spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING relative-link integrity / run_stewardship wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-relative-link-pins-be52
+2026-09-13T22:59:38Z

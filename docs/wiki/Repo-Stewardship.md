@@ -33,7 +33,8 @@ cancel-in-progress / `**/*.md` / fourth-badge refusal deepen after #28, plus
 lycheeignore `http://*` / actionlint callout deepen after #29, plus Python 3.12
 pin / Home invent+secrets / existing-path deepen after #30, plus lychee
 `--verbose`/`--no-progress` + stewardship `actions/checkout` / wiki L0+secret
-deepen after #31).
+deepen after #31, plus link/markdown `actions/checkout` + `lychee-action` +
+MD013 / HTTP:// casefold deepen after #32).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

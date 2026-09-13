@@ -104,6 +104,14 @@ def check_workflows_and_license(errors: list[str]) -> None:
         fail("Missing .lycheeignore (lychee link-check excludes)", errors)
     if not MARKDOWNLINT_CONFIG.is_file():
         fail("Missing .markdownlint.json (markdown-lint config)", errors)
+    else:
+        # Live markdown-lint config pins MD013 line length (docs stay scannable).
+        md_cfg = MARKDOWNLINT_CONFIG.read_text(encoding="utf-8")
+        if "MD013" not in md_cfg:
+            fail(
+                ".markdownlint.json must configure MD013 (line length) for docs lint",
+                errors,
+            )
 
 
 def check_lycheeignore(errors: list[str]) -> None:
@@ -196,6 +204,15 @@ def check_workflow_hardening(errors: list[str]) -> None:
     link = load_workflow_text("link-check.yml") or ""
     if "lychee" not in link.lower():
         fail("link-check.yml must invoke lychee", errors)
+    # Live path after #32: lychee runs via lychee-action (not a bare CLI invent).
+    if "lychee-action" not in link.lower():
+        fail("link-check.yml must invoke lychee-action on the existing path", errors)
+    # Fail-closed: link-check must checkout before lychee (symmetric with stewardship).
+    if "actions/checkout" not in link:
+        fail(
+            "link-check.yml must checkout the repository (actions/checkout)",
+            errors,
+        )
     if '"**/*.md"' not in link and "'**/*.md'" not in link and "**/*.md" not in link:
         fail(
             "link-check.yml must scan **/*.md markdown sources (paths or lychee args)",
@@ -234,6 +251,12 @@ def check_workflow_hardening(errors: list[str]) -> None:
     lint = load_workflow_text("markdown-lint.yml") or ""
     if "markdownlint" not in lint.lower():
         fail("markdown-lint.yml must invoke markdownlint", errors)
+    # Fail-closed: markdown-lint must checkout before lint (symmetric with stewardship).
+    if "actions/checkout" not in lint:
+        fail(
+            "markdown-lint.yml must checkout the repository (actions/checkout)",
+            errors,
+        )
     if '"**/*.md"' not in lint and "'**/*.md'" not in lint and "**/*.md" not in lint:
         fail(
             "markdown-lint.yml must scan **/*.md markdown sources (globs or paths)",
@@ -372,6 +395,8 @@ def check_contributing_and_agents(errors: list[str]) -> None:
             if needle not in text:
                 fail(f"AGENTS.md §3 / testing must mention {needle}", errors)
         scan_secrets(AGENTS, errors)
+    else:
+        fail("Missing AGENTS.md", errors)
 
 
 def check_badges(badges: list[re.Match[str]], errors: list[str]) -> None:

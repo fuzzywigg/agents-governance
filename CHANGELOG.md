@@ -11,6 +11,18 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship fixtures after #32: expand self-tests to 404 cases
+  (was 345) covering link-check/markdown-lint `actions/checkout`, `lychee-action`,
+  `.markdownlint.json` MD013, pull_request_target on link-check, contents:write on
+  markdown-lint, write-all on stewardship, cancel-in-progress:false reject, badge
+  twitter/codecov/downloads/github_pat/ghp/producthunt + Markdown-Lint-first order +
+  missing AGENTS.md + three-badges-max doc still, relative JavaScript/DATA mixed-case /
+  tel+title / colon slug / nested image / LICENSE from docs / HTTP:// casefold, wiki
+  Home→Overview / discord+buymeacoffee+opencollective chrome / javascript: / PUBLISH
+  Autonomy+Security+Routing rows / actionlint+data still, schema empty edit_policy/
+  CLAUDE owner / missing version+edit_policy+last_updated / tier 0 / empty created /
+  autonomy 3 vs expected 1, common npm_/AIza/xoxb/github_pat/twitter+codecov hints +
+  javascript+data schemes, plus verbose/no-progress/checkout/config/lycheeignore still
 - TOKENMAXX stewardship fixtures after #31: expand self-tests to 345 cases
   (was 289) covering lychee `--verbose` / `--no-progress`, stewardship
   `actions/checkout`, cancel-in-progress:true on markdown-lint, pull_request_target

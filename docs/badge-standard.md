@@ -101,7 +101,13 @@ plus wiki-outline second-pass after #59: `OPERATOR_ONLY` / docs/wiki /
 surface+routing+`run_stewardship_checks.sh`+badge topic pins / `](Home.md)`
 backlink / Unexpected+Missing+FAILED needles / angle+image RE /
 Do-not-push / README blob / badge-standard hint / social special-case
-pins / invent-chrome needle / Home.md table row).
+pins / invent-chrome needle / Home.md table row,
+plus badge-standard second-pass after #61: README/docs/CONTRIBUTING/AGENTS/
+LICENSE/`.lycheeignore`/`.markdownlint.json`/`.github/workflows` path pins /
+H1+contiguous needles / full `actions/workflows/*/badge.svg` /
+`(?P<label|img|link)` / `license|actions` / invent+three+intentionally /
+FAILED+OK banners / gate-contract wiring / lycheeignore `img.shields.io`+
+`https://*` / AGENTS self-test needle).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

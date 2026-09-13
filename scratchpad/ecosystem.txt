@@ -331,3 +331,12 @@ _None yet._
 2026-09-13T23:20:00Z
 
 2026-09-13T23:35:00Z cursor: PR #61 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-043 TOKENMAXX wiki-outline second-pass pins
+
+### [ECO-044] TOKENMAXX deepen badge-standard second-pass pins after #61 — 2026-09-13T23:35:29Z
+- [x] cursor: Read live tree post-#61 (1396 cases; wiki-outline second-pass saturated; #62 closed CONFLICTING actionlint; deepen different slice)
+- [x] cursor: Fail-close badge-standard second-pass — README/docs/CONTRIBUTING/AGENTS/LICENSE/.lycheeignore/.markdownlint.json/.github/workflows path pins / H1+contiguous / full actions/workflows/*/badge.svg / (?P<label|img|link) / license|actions / invent+three+intentionally / FAILED+OK / gate-contract wiring / lycheeignore img.shields.io+https://* / AGENTS self-test needle
+- [x] cursor: Expand self-tests 1396 → 1468 (badge-standard second-pass slice; not wiki / relative / schema / common / actionlint / CI workflow pin spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING badge-standard integrity / path+helper+needle pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-badge-second-pass-pins-6f06
+2026-09-13T23:35:29Z

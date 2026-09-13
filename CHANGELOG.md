@@ -11,6 +11,16 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship fixtures after #28: expand self-tests to 182 cases
+  (was 134) covering cancel-in-progress / `**/*.md` link-check glob, actionlint
+  timeout + docker:// pin skip, badge-standard/CONTRIBUTING missing-file,
+  license image path/slug, README secret, AGENTS workflow needles, badge-doc
+  invent/three-max/fourth-refusal, lycheeignore `https://*`, relative
+  angle-bracket/LICENSE/ampersand-slug/whitespace, wiki PUBLISH Link
+  Check/Markdown Lint/secrets + Overview/Security topics + stars chrome +
+  missing wiki dir, schema scope/parent/repo/publish/backlog/autonomy-string/
+  date/YAML parse, extended secret/forbidden-hint helpers, markdown-lint
+  config + actionlint path needles, stewardship workflow_dispatch
 - TOKENMAXX stewardship fixtures after #27: expand self-tests to 134 cases
   (was 89) covering actionlint write-all/@master/@latest/name/steps, link-check
   GITHUB_TOKEN / lychee / exclude-path / concurrency / timeout needles,
@@ -51,6 +61,9 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
+- Badge/stewardship gates after #28: require concurrency `cancel-in-progress` on
+  all three workflows; link-check must scan `**/*.md`; badge-standard doc that
+  mentions stewardship-checks must refuse a fourth badge explicitly
 - Badge/stewardship gates after #27: require link-check `GITHUB_TOKEN`, stewardship
   actionlint pin `1.7.7`, and actionlint targets for all three existing workflow
   filenames (link-check / markdown-lint / stewardship-checks)

@@ -118,6 +118,12 @@ def check_workflows_and_license(errors: list[str]) -> None:
                 ".markdownlint.json MD013 must set line_length for docs lint",
                 errors,
             )
+        # Fail-closed after #36: live MD013 line_length pin is 200 (docs stay scannable).
+        if not re.search(r'"line_length"\s*:\s*200\b', md_cfg):
+            fail(
+                ".markdownlint.json MD013 must pin line_length: 200 for docs lint",
+                errors,
+            )
         # Fail-closed after #34: live config pins MD024 siblings_only (heading dupes).
         if "MD024" not in md_cfg:
             fail(
@@ -128,6 +134,12 @@ def check_workflows_and_license(errors: list[str]) -> None:
         if "siblings_only" not in md_cfg:
             fail(
                 ".markdownlint.json MD024 must set siblings_only for docs lint",
+                errors,
+            )
+        # Fail-closed after #36: MD024 siblings_only must be true (not false / bare).
+        if not re.search(r'"siblings_only"\s*:\s*true\b', md_cfg):
+            fail(
+                ".markdownlint.json MD024 must set siblings_only: true for docs lint",
                 errors,
             )
 
@@ -366,6 +378,18 @@ def check_workflow_hardening(errors: list[str]) -> None:
     if "curl" not in stew.lower():
         fail(
             "stewardship-checks.yml must curl the actionlint download script",
+            errors,
+        )
+    # Fail-closed after #36: live curl uses -fsSL (fail/silent/show-error/location).
+    if "fssl" not in stew.lower():
+        fail(
+            "stewardship-checks.yml must curl -fsSL the actionlint download script",
+            errors,
+        )
+    # Fail-closed after #36: live download host is raw.githubusercontent.com.
+    if "raw.githubusercontent.com" not in stew.lower():
+        fail(
+            "stewardship-checks.yml must download actionlint from raw.githubusercontent.com",
             errors,
         )
     if "actionlint" not in stew.lower():

@@ -95,7 +95,13 @@ rejects and live badge scope / PUBLISH purpose / closes `#16` pins after #53,
 plus relative-link second-pass after #55: `MD_LINK_RE` / `SKIP_*` /
 `_MAX_UNQUOTE_PASSES = 4` / `should_skip` / `iter_markdown` / `headings_in` /
 `check_file` / mailto+tel allow / NUL / angle brackets / image links /
-escapes+broken+missing needles / rglob fail-closed).
+escapes+broken+missing needles / rglob fail-closed,
+plus wiki-outline second-pass after #59: `OPERATOR_ONLY` / docs/wiki /
+`_reject_invent_badge_chrome` / autonomy+governance+public+kill+secret+
+surface+routing+`run_stewardship_checks.sh`+badge topic pins / `](Home.md)`
+backlink / Unexpected+Missing+FAILED needles / angle+image RE /
+Do-not-push / README blob / badge-standard hint / social special-case
+pins / invent-chrome needle / Home.md table row).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

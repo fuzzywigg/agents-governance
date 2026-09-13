@@ -1138,7 +1138,7 @@ def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
 
 
 def check_wiki_outline_gate_contract(errors: list[str]) -> None:
-    """Fail-close live wiki-outline gate wiring (after #43; not relative-pin spam)."""
+    """Fail-close live wiki-outline gate wiring (after #59; deepen after #43)."""
     if not WIKI_OUTLINE_GATE.is_file():
         fail("Missing scripts/check_wiki_outline.py (wiki-outline gate)", errors)
         return
@@ -1266,6 +1266,119 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
     if "out of scope" not in text.lower():
         fail(
             "check_wiki_outline.py must require Home Out of scope section",
+            errors,
+        )
+    # Fail-closed after #59: second-pass helper / constant / needle pins
+    # (wiki-outline slice only; not relative / schema / badge / common / CI spam).
+    if "OPERATOR_ONLY" not in text:
+        fail(
+            "check_wiki_outline.py must declare OPERATOR_ONLY",
+            errors,
+        )
+    if 'OPERATOR_ONLY = "PUBLISH.md"' not in text and "OPERATOR_ONLY = 'PUBLISH.md'" not in text:
+        fail(
+            "check_wiki_outline.py must set OPERATOR_ONLY = \"PUBLISH.md\"",
+            errors,
+        )
+    if '"docs"' not in text and "'docs'" not in text:
+        fail(
+            "check_wiki_outline.py WIKI must live under docs/",
+            errors,
+        )
+    if '"wiki"' not in text and "'wiki'" not in text:
+        fail(
+            "check_wiki_outline.py WIKI must live under docs/wiki",
+            errors,
+        )
+    if "_reject_invent_badge_chrome" not in text:
+        fail(
+            "check_wiki_outline.py must expose _reject_invent_badge_chrome helper",
+            errors,
+        )
+    # Topic hint needles beyond L0–L3 / credential / copilot (first-pass).
+    for topic in (
+        "autonomy",
+        "governance",
+        "public",
+        "kill",
+        "secret",
+        "surface",
+        "routing",
+        "run_stewardship_checks.sh",
+        "badge",
+    ):
+        if f'"{topic}"' not in text and f"'{topic}'" not in text:
+            fail(
+                f"check_wiki_outline.py PAGE_TOPIC_HINTS must pin {topic}",
+                errors,
+            )
+    if "](Home.md)" not in text:
+        fail(
+            "check_wiki_outline.py must require non-Home ](Home.md) backlinks",
+            errors,
+        )
+    if "Unexpected markdown" not in text:
+        fail(
+            "check_wiki_outline.py must reject Unexpected markdown under docs/wiki/",
+            errors,
+        )
+    if "Missing required wiki" not in text:
+        fail(
+            "check_wiki_outline.py must fail Missing required wiki source page",
+            errors,
+        )
+    if "Wiki outline check FAILED" not in text:
+        fail(
+            "check_wiki_outline.py must print Wiki outline check FAILED",
+            errors,
+        )
+    if "docs/wiki matches PUBLISH.md" not in text:
+        fail(
+            "check_wiki_outline.py must OK when docs/wiki matches PUBLISH.md",
+            errors,
+        )
+    if 'strip("<>")' not in text and "strip('<>')" not in text:
+        fail(
+            "check_wiki_outline.py must strip angle brackets from targets",
+            errors,
+        )
+    if r"!?\[" not in text and "!?[" not in text:
+        fail(
+            "check_wiki_outline.py link scan must match image links",
+            errors,
+        )
+    if "Do **not** push" not in text and "Do not push" not in text:
+        fail(
+            "check_wiki_outline.py must require Do not push PUBLISH.md wording",
+            errors,
+        )
+    readme_blob = (
+        "https://github.com/fuzzywigg/agents-governance/blob/main/README.md"
+    )
+    if readme_blob not in text:
+        fail(
+            "check_wiki_outline.py README_LINK_HINTS must pin README blob URL",
+            errors,
+        )
+    if "../badge-standard.md" not in text:
+        fail(
+            "check_wiki_outline.py BADGE_STANDARD_HINTS must pin ../badge-standard.md",
+            errors,
+        )
+    for social in ("stars", "forks", "followers"):
+        if f'"{social}"' not in text and f"'{social}'" not in text:
+            fail(
+                f"check_wiki_outline.py invent-chrome special-case must pin {social}",
+                errors,
+            )
+    if "invent-product / social badge chrome" not in text:
+        fail(
+            "check_wiki_outline.py must emit invent-product / social badge chrome needle",
+            errors,
+        )
+    if "| `Home.md` |" not in text and "|`Home.md`|" not in text:
+        fail(
+            "check_wiki_outline.py must require PUBLISH.md table row for Home.md",
             errors,
         )
 

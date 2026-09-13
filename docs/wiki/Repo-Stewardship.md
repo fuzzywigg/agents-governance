@@ -37,7 +37,9 @@ deepen after #31, plus link/markdown `actions/checkout` + `lychee-action` +
 MD013 / HTTP:// casefold deepen after #32, plus `lycheeverse/lychee-action` +
 `markdownlint-cli2-action` + MD013 `line_length` / pip install deepen after #33,
 plus `DavidAnson/markdownlint-cli2-action` + `--github-token` + MD024 /
-`download-actionlint.bash` deepen after #34).
+`download-actionlint.bash` deepen after #34,
+plus MD024 `siblings_only` + `rhysd/actionlint` + `curl` download +
+lychee-action `with: token:` deepen after #35).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

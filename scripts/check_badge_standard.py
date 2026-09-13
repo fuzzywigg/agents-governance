@@ -124,6 +124,12 @@ def check_workflows_and_license(errors: list[str]) -> None:
                 ".markdownlint.json must configure MD024 (siblings_only) for docs lint",
                 errors,
             )
+        # Fail-closed after #35: MD024 must set siblings_only (symmetric with line_length).
+        if "siblings_only" not in md_cfg:
+            fail(
+                ".markdownlint.json MD024 must set siblings_only for docs lint",
+                errors,
+            )
 
 
 def check_lycheeignore(errors: list[str]) -> None:
@@ -229,6 +235,12 @@ def check_workflow_hardening(errors: list[str]) -> None:
     if "--github-token" not in link:
         fail(
             "link-check.yml must pass lychee --github-token on the existing path",
+            errors,
+        )
+    # Fail-closed after #35: lychee-action with: token: (secrets.GITHUB_TOKEN path).
+    if not re.search(r"(?m)^\s*token:\s*\S", link):
+        fail(
+            "link-check.yml must pass lychee-action with: token: on the existing path",
             errors,
         )
     # Fail-closed: link-check must checkout before lychee (symmetric with stewardship).
@@ -342,6 +354,18 @@ def check_workflow_hardening(errors: list[str]) -> None:
     if "download-actionlint.bash" not in stew.lower():
         fail(
             "stewardship-checks.yml must download actionlint via download-actionlint.bash",
+            errors,
+        )
+    # Fail-closed after #35: org-qualified rhysd/actionlint download (existing path).
+    if "rhysd/actionlint" not in stew.lower():
+        fail(
+            "stewardship-checks.yml must download actionlint from rhysd/actionlint",
+            errors,
+        )
+    # Fail-closed after #35: live download uses curl (fsSL raw.githubusercontent path).
+    if "curl" not in stew.lower():
+        fail(
+            "stewardship-checks.yml must curl the actionlint download script",
             errors,
         )
     if "actionlint" not in stew.lower():

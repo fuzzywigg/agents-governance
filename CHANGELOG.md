@@ -11,6 +11,21 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship fixtures after #35: expand self-tests to 588 cases
+  (was 526) covering `.markdownlint.json` MD024 `siblings_only`, stewardship
+  `rhysd/actionlint` + `curl` download, lychee-action `with: token:`,
+  pull_request_target on link-check, contents:write/write-all on stewardship/
+  link-check, checkout@latest float, cancel-in-progress:false on markdown-lint,
+  missing concurrency/timeout, badge buymeacoffee/opencollective/coveralls/
+  x.com/client_secret/http-image/four-badge/fourth-refusal still, relative
+  Mailto/VbScript/FILE / underscore slug / sibling broken / angle tel / bare
+  `#` / nested %2e escape, wiki Home→Overview / discord/twitter/stars/forks
+  chrome / JAVASCRIPT / PUBLISH Autonomy-Levels / CI+badge topic still, schema
+  empty scope/owner/closes / missing maintainer+repo / DRAFT publish / autonomy
+  -1 / wrong scope / semver prerelease, common github_pat_/xoxb-/RSA key /
+  buymeacoffee+opencollective hints / xoxb scan / vbscript casefold, plus
+  DavidAnson/--github-token/MD024/download-actionlint/producthunt/http /
+  tier 0 / javascript / https://* lycheeignore still-needles
 - TOKENMAXX stewardship fixtures after #34: expand self-tests to 526 cases
   (was 464) covering `DavidAnson/markdownlint-cli2-action`, lychee
   `--github-token`, `.markdownlint.json` MD024, stewardship

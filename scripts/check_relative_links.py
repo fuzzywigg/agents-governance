@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Offline relative markdown link integrity (complements lychee external checks).
 
-Fail-closed pins (live path after #53):
+Fail-closed pins (live path after #53 / PR #58):
 - Skip OWASP-AGENTIC.md / .github/agents / .git / node_modules (align lint/lychee)
 - Strip fenced code before link scan; percent-decode until stable (traversal)
 - Reject empty targets, bare `#`, empty `path#` fragments, query strings on

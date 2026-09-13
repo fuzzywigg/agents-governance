@@ -158,7 +158,9 @@ _None yet._
 - [x] cursor: Read live tree post-#32 (345 fixtures + actionlint v1.7.7)
 - [x] cursor: Harden link/markdown actions/checkout + lychee-action + MD013 + HTTP:// casefold
 - [x] cursor: Expand fixtures 345 → 404 (badge/wiki/schema/relative/actionlint/common)
-- [ ] cursor: Green PR with CI
+- [x] cursor: Green PR with CI
 - Scope: EXISTING stewardship fixtures / actionlint / link-check edges only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-stewardship-fixtures-28a3
 2026-09-13T19:26:58Z
+
+2026-09-13T19:40:00Z cursor: PR #33 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-028 TOKENMAXX deepen

@@ -17,6 +17,7 @@ from stewardship_common import (  # noqa: E402
     fail,
     has_dangerous_scheme,
     scan_secrets,
+    strip_fenced_code,
 )
 
 WIKI = ROOT / "docs" / "wiki"
@@ -51,10 +52,12 @@ STEWARDSHIP_CI_HINTS = (
 )
 
 # Topic anchors expected on key publishable pages (no invent-product content).
+# Fail-closed after #43: pin live L2/L3 / credential / copilot wording already
+# present on Autonomy-Levels / Security-Boundaries / Agent-Routing.
 PAGE_TOPIC_HINTS: dict[str, tuple[str, ...]] = {
-    "Autonomy-Levels.md": ("L0", "L1", "autonomy"),
-    "Security-Boundaries.md": ("kill", "secret"),
-    "Agent-Routing.md": ("surface", "routing"),
+    "Autonomy-Levels.md": ("L0", "L1", "L2", "L3", "autonomy"),
+    "Security-Boundaries.md": ("kill", "secret", "credential"),
+    "Agent-Routing.md": ("surface", "routing", "copilot"),
     "Overview.md": ("governance", "public"),
     "Repo-Stewardship.md": ("run_stewardship_checks.sh", "badge"),
 }
@@ -142,6 +145,12 @@ def main() -> int:
             )
         if "out of scope" not in home_text.lower():
             fail("Home.md must retain an Out of scope section", errors)
+        # Fail-closed after #43: Home security row already names kill.
+        if "kill" not in home_text.lower():
+            fail(
+                "Home.md must retain kill-switch security callout",
+                errors,
+            )
 
     stewardship = WIKI / "Repo-Stewardship.md"
     if stewardship.is_file():
@@ -177,12 +186,22 @@ def main() -> int:
             if topic.lower() not in text.lower():
                 fail(f"{name} must retain topic hint '{topic}'", errors)
         _reject_invent_badge_chrome(name, text, errors)
-        # Public wiki: no insecure http:// or dangerous schemes outside fences.
-        for match in re.finditer(r"!?\[([^\]]*)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)", text):
+        # Public wiki: no insecure http://, protocol-relative, or dangerous
+        # schemes outside fences (strip fences so publish/bash examples pass).
+        scan_text = strip_fenced_code(text)
+        for match in re.finditer(
+            r"!?\[([^\]]*)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)",
+            scan_text,
+        ):
             target = match.group(2).strip().strip("<>")
             dangerous = has_dangerous_scheme(target)
             if dangerous:
                 fail(f"{name}: dangerous link scheme '{dangerous}'", errors)
+            if target.startswith("//"):
+                fail(
+                    f"{name}: protocol-relative link '{target}' (use https://)",
+                    errors,
+                )
             if target.lower().startswith("http://"):
                 fail(f"{name}: insecure http:// link (use https://)", errors)
         scan_secrets(path, errors)

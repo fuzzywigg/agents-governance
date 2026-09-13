@@ -25,8 +25,9 @@ Markdown Lint only — stewardship stays in CI/docs, not as a product badge):
 
 Locally: `bash scripts/run_stewardship_checks.sh` then
 `python3 scripts/test_stewardship_gates.py` (heavy negative/positive fixtures:
-badge order/http/secrets, relative schemes/escapes/fragments, wiki invent chrome,
-schema value/date/semver, workflow hardening needles).
+badge order/http/secrets/lycheeignore shields, relative schemes/escapes/fragments,
+wiki invent chrome, schema value/date/semver, workflow/actionlint hardening needles).
+Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)
 

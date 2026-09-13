@@ -11,6 +11,13 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship fixtures after #26: expand self-tests to 89 cases
+  (was 50) covering lycheeignore shields exclude, actionlint-style workflow
+  harden (no pull_request_target / contents:write / unpinned@main), markdown-
+  link empty/file/vbscript/mailto/agents-skip/image/slug fixtures, wiki/schema
+  positive + missing-page/yaml/file negatives
+- Stewardship Checks CI: run pinned actionlint v1.7.7 on the three existing
+  workflow paths (link-check / markdown-lint / stewardship-checks)
 - TOKENMAXX stewardship gate burn after #24: 50 negative/positive self-test
   fixtures (was 14) covering http badges, dangerous link schemes, percent-
   encoded path escape, tilde fences, wiki invent chrome / http / secrets,
@@ -37,6 +44,10 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
+- Badge/stewardship gates: require `.lycheeignore` + shields CDN exclude (after
+  #26), `.markdownlint.json` present, actionlint needle in stewardship-checks,
+  link-check paths filter references `.lycheeignore`
+- Relative links: catch empty `()` targets (markdown-link fail-closed)
 - Link Check: exclude `img.shields.io` in `.lycheeignore` so transient badge
   CDN RST / Connection-reset blips do not fail the gate; keep lychee `fail: true`
   for real broken doc links (after #25 flake)

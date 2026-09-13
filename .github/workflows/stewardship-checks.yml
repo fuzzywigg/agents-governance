@@ -42,3 +42,9 @@ jobs:
         run: bash scripts/run_stewardship_checks.sh
       - name: Stewardship gate self-tests
         run: python3 scripts/test_stewardship_gates.py
+      - name: Download actionlint
+        id: get_actionlint
+        run: bash <(curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/v1.7.7/scripts/download-actionlint.bash) 1.7.7
+        shell: bash
+      - name: actionlint existing workflow paths
+        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml

@@ -11,6 +11,13 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship fixtures after #27: expand self-tests to 134 cases
+  (was 89) covering actionlint write-all/@master/@latest/name/steps, link-check
+  GITHUB_TOKEN / lychee / exclude-path / concurrency / timeout needles,
+  markdown-lint OWASP/agents excludes, stewardship actionlint 1.7.7 + all three
+  workflow path targets, lycheeignore literal/regex positives, relative
+  tel/NUL/bare-hash/title/image, wiki PUBLISH/badge/home/relative/invent edges,
+  schema maintainer/parent/owner/secret negatives
 - TOKENMAXX stewardship fixtures after #26: expand self-tests to 89 cases
   (was 50) covering lycheeignore shields exclude, actionlint-style workflow
   harden (no pull_request_target / contents:write / unpinned@main), markdown-
@@ -44,6 +51,9 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
+- Badge/stewardship gates after #27: require link-check `GITHUB_TOKEN`, stewardship
+  actionlint pin `1.7.7`, and actionlint targets for all three existing workflow
+  filenames (link-check / markdown-lint / stewardship-checks)
 - Badge/stewardship gates: require `.lycheeignore` + shields CDN exclude (after
   #26), `.markdownlint.json` present, actionlint needle in stewardship-checks,
   link-check paths filter references `.lycheeignore`

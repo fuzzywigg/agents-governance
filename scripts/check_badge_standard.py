@@ -192,6 +192,12 @@ def check_workflow_hardening(errors: list[str]) -> None:
         fail("link-check.yml must set fail: true so broken links fail the job", errors)
     if "--exclude-loopback" not in link and "exclude-loopback" not in link:
         fail("link-check.yml must exclude loopback targets", errors)
+    # Private-repo / rate-limit auth for lychee (existing path from # link-check harden).
+    if "GITHUB_TOKEN" not in link:
+        fail(
+            "link-check.yml must pass GITHUB_TOKEN for private-repo / GitHub auth",
+            errors,
+        )
 
     lint = load_workflow_text("markdown-lint.yml") or ""
     if "markdownlint" not in lint.lower():
@@ -217,6 +223,20 @@ def check_workflow_hardening(errors: list[str]) -> None:
             "stewardship-checks.yml must run actionlint on existing workflow paths",
             errors,
         )
+    # Pin actionlint major.minor.patch in the download / run step (supply-chain).
+    if "1.7.7" not in stew:
+        fail(
+            "stewardship-checks.yml must pin actionlint 1.7.7 on existing workflow paths",
+            errors,
+        )
+    # Explicitly lint only the three existing workflow paths (no invent workflows).
+    for wf_name in REQUIRED_WORKFLOWS:
+        if wf_name not in stew:
+            fail(
+                "stewardship-checks.yml actionlint must target existing "
+                f"workflow path {wf_name}",
+                errors,
+            )
 
     # Link-check path filter / lycheeignore stay wired after shields harden (#26).
     if ".lycheeignore" not in link:

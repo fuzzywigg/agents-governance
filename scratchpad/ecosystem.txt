@@ -336,7 +336,9 @@ _None yet._
 - [x] cursor: Read live tree post-#61 (1396 cases; wiki-outline second-pass saturated; open #63 is actionlint-style — different slice)
 - [x] cursor: Fail-close badge-standard second-pass — REQUIRED_ORDER+EXPECTED_REPO exact assigns / path constants / contract+main / full badge.svg paths / fail needles / LICENSE link / load_workflow_text / invent+intentionally+quiet / AGENTS selftest+relative / https startswith / http link reject
 - [x] cursor: Expand self-tests 1396 → 1468 (badge-standard second-pass slice; not wiki / relative / schema / common / CI workflow pin spam)
-- [ ] cursor: Green PR with CI
+- [x] cursor: Green PR with CI
 - Scope: EXISTING badge-standard integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-badge-second-pass-6ade
 2026-09-13T23:45:00Z
+
+2026-09-13T23:55:00Z cursor: PR #65 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-044 TOKENMAXX badge-standard second-pass pins

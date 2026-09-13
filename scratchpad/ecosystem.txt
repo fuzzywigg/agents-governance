@@ -96,3 +96,5 @@ _None yet._
 - Scope: EXISTING stewardship CI/docs fixtures only; no invent-product; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; avoid flaky badge hosts
 - Branch: cursor/tokenmaxx-stewardship-fixtures-b67e
 2026-09-13T17:43:00Z
+
+2026-09-13T17:48:00Z cursor: PR #27 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-022 TOKENMAXX fixtures

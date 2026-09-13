@@ -303,7 +303,9 @@ _None yet._
 - [x] cursor: Read live tree post-#53 (1182 cases; badge-standard pins saturated)
 - [x] cursor: Fail-close second-pass common/badge/schema/wiki — SECRET_URL_HINTS token prefixes / password+secret patterns / helper docs / path+H1+cross-gate / DATE_KEYS+EXPECTED_VALUES / OPERATOR_ONLY+invent-helper+Overview topics
 - [x] cursor: Expand self-tests 1182 → 1253 (common/badge/schema/wiki second-pass; not relative / CI workflow pin / fixture-reject spam)
-- [ ] cursor: Green PR with CI
+- [x] cursor: Green PR with CI
 - Scope: EXISTING common/badge/schema/wiki gate pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history/envjson stubs
 - Branch: cursor/tokenmaxx-gate-pins-deepen-67f3
 2026-09-13T22:43:00Z
+
+2026-09-13T22:55:00Z cursor: PR #56 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-041 TOKENMAXX common/badge/schema/wiki second-pass gate pins

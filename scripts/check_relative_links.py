@@ -30,7 +30,8 @@ SKIP_FILES = {
 }
 
 # Captures markdown links and images: [text](target) / ![alt](target)
-MD_LINK_RE = re.compile(r"!?\[([^\]]*)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
+# Allow empty () so missing targets fail closed (markdown-link coverage).
+MD_LINK_RE = re.compile(r"!?\[([^\]]*)\]\(\s*([^)\s]*)(?:\s+\"[^\"]*\")?\s*\)")
 # ATX headings for fragment checks (GitHub-ish slug approximation).
 ATX_HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$", re.MULTILINE)
 

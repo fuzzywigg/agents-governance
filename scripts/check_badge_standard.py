@@ -25,6 +25,8 @@ LICENSE = ROOT / "LICENSE"
 BADGE_STANDARD = ROOT / "docs" / "badge-standard.md"
 CONTRIBUTING = ROOT / "CONTRIBUTING.md"
 AGENTS = ROOT / "AGENTS.md"
+LYCHEEIGNORE = ROOT / ".lycheeignore"
+MARKDOWNLINT_CONFIG = ROOT / ".markdownlint.json"
 WORKFLOWS = ROOT / ".github" / "workflows"
 
 REQUIRED_ORDER = ("Link Check", "Markdown Lint", "License")
@@ -98,6 +100,62 @@ def check_workflows_and_license(errors: list[str]) -> None:
         fail("Missing LICENSE (required for License badge)", errors)
     if not BADGE_STANDARD.is_file():
         fail("Missing docs/badge-standard.md", errors)
+    if not LYCHEEIGNORE.is_file():
+        fail("Missing .lycheeignore (lychee link-check excludes)", errors)
+    if not MARKDOWNLINT_CONFIG.is_file():
+        fail("Missing .markdownlint.json (markdown-lint config)", errors)
+
+
+def check_lycheeignore(errors: list[str]) -> None:
+    """Keep flaky badge CDN out of lychee; license badge stays in stewardship."""
+    if not LYCHEEIGNORE.is_file():
+        return
+    text = LYCHEEIGNORE.read_text(encoding="utf-8")
+    # Accept literal or regex-escaped host form from #26.
+    if "img.shields.io" not in text and r"img\.shields\.io" not in text:
+        fail(
+            ".lycheeignore must exclude flaky img.shields.io badge CDN "
+            "(license badge presence remains stewardship-enforced)",
+            errors,
+        )
+    # Do not quietly drop fail-closed posture by ignoring everything.
+    if text.strip() == "*" or "https://*" in text:
+        fail(".lycheeignore must not exclude all https targets", errors)
+
+
+def check_actionlint_style(errors: list[str]) -> None:
+    """Static actionlint-like checks on existing workflow paths only."""
+    for name in REQUIRED_WORKFLOWS:
+        text = load_workflow_text(name)
+        if text is None:
+            continue
+        if not re.search(r"(?m)^name:\s*\S", text):
+            fail(f"{name}: actionlint-style requires top-level name:", errors)
+        if "runs-on:" not in text:
+            fail(f"{name}: actionlint-style requires jobs.*.runs-on", errors)
+        if "steps:" not in text:
+            fail(f"{name}: actionlint-style requires jobs.*.steps", errors)
+        if "pull_request_target:" in text:
+            fail(f"{name}: must not use pull_request_target (actionlint harden)", errors)
+        if re.search(r"(?m)^\s*permissions:\s*write-all\s*$", text):
+            fail(f"{name}: must not set permissions: write-all", errors)
+        # Prefer least privilege: contents: read already required; reject write on contents.
+        if re.search(r"(?m)^\s*contents:\s*write\s*$", text):
+            fail(f"{name}: contents: write is forbidden on stewardship workflows", errors)
+        # Pin GitHub Actions majors (actionlint / supply-chain hygiene).
+        for match in re.finditer(r"(?m)^\s*-\s*uses:\s*([^\s#]+)", text):
+            uses = match.group(1).strip()
+            if uses.startswith("docker://"):
+                continue
+            if "@" not in uses:
+                fail(f"{name}: unpinned action uses: {uses}", errors)
+                continue
+            ref = uses.rsplit("@", 1)[-1]
+            if ref in {"main", "master", "latest"}:
+                fail(f"{name}: action must not float on @{ref}: {uses}", errors)
+        # jobs must declare timeout (already checked globally; keep local needle).
+        if "timeout-minutes:" not in text:
+            fail(f"{name}: actionlint-style requires timeout-minutes on jobs", errors)
 
 
 def check_workflow_hardening(errors: list[str]) -> None:
@@ -154,6 +212,19 @@ def check_workflow_hardening(errors: list[str]) -> None:
         fail("stewardship-checks.yml must set up Python for gate scripts", errors)
     if "pyyaml" not in stew.lower():
         fail("stewardship-checks.yml must install PyYAML for schema parsing", errors)
+    if "actionlint" not in stew.lower():
+        fail(
+            "stewardship-checks.yml must run actionlint on existing workflow paths",
+            errors,
+        )
+
+    # Link-check path filter / lycheeignore stay wired after shields harden (#26).
+    if ".lycheeignore" not in link:
+        fail(
+            "link-check.yml must reference .lycheeignore (paths filter or args) "
+            "so shields CDN excludes stay wired",
+            errors,
+        )
 
 
 def check_badge_standard_doc(errors: list[str]) -> None:
@@ -304,7 +375,9 @@ def main() -> int:
 
     text = README.read_text(encoding="utf-8")
     check_workflows_and_license(errors)
+    check_lycheeignore(errors)
     check_workflow_hardening(errors)
+    check_actionlint_style(errors)
     if BADGE_STANDARD.is_file():
         check_badge_standard_doc(errors)
         scan_secrets(BADGE_STANDARD, errors)

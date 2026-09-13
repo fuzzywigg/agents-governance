@@ -65,7 +65,11 @@ SECRET_URL_HINTS / FORBIDDEN_BADGE_HINTS / DANGEROUS_LINK_SCHEMES /
 plus badge-standard gate contract pins after #48: REQUIRED_ORDER /
 MAX_BADGES = 3 / EXPECTED_REPO / REQUIRED_WORKFLOWS / badge.svg + shields
 license / contiguous row / invent-product / fourth-badge refusal /
-Stewardship product badge reject).
+Stewardship product badge reject,
+plus common/badge/schema/wiki second-pass gate pins after #53:
+SECRET_URL_HINTS token prefixes / password+secret patterns / helper docs /
+README path+H1+cross-gate wiring / DATE_KEYS+EXPECTED_VALUES deepen /
+OPERATOR_ONLY+invent-helper+Overview topics).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

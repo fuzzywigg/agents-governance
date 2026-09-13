@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Enforce docs/badge-standard.md against README.md (executable gate).
 
-Fail-closed pins (live path after #48):
+Fail-closed pins (live path after #53 second-pass):
 - REQUIRED_ORDER: Link Check → Markdown Lint → License (exactly MAX_BADGES = 3)
 - EXPECTED_REPO: fuzzywigg/agents-governance
 - REQUIRED_WORKFLOWS: link-check.yml / markdown-lint.yml / stewardship-checks.yml
@@ -9,6 +9,9 @@ Fail-closed pins (live path after #48):
 - Badge images https-only; link-check.yml/badge.svg + markdown-lint.yml/badge.svg
 - License via img.shields.io/github/license/; contiguous row; no invent-product
 - Quiet stewardship: no Stewardship product/status badge; no fourth badge
+- Path pins: README.md / LICENSE / docs/badge-standard.md / CONTRIBUTING.md /
+  AGENTS.md; actions/workflows badge links; immediately under the H1
+- Cross-gate contracts: common / wiki-outline / schema still wired from main
 """
 
 from __future__ import annotations
@@ -685,7 +688,10 @@ def check_contributing_and_agents(errors: list[str]) -> None:
 
 
 def check_badge_standard_gate_contract(errors: list[str]) -> None:
-    """Fail-close live badge-standard gate wiring (after #48; not common-pin spam)."""
+    """Fail-close live badge-standard gate wiring (after #48; not common-pin spam).
+
+    Second-pass deepen after #53; not relative-pin spam.
+    """
     if not BADGE_GATE.is_file():
         fail("Missing scripts/check_badge_standard.py (badge-standard gate)", errors)
         return
@@ -820,10 +826,64 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
         fail("check_badge_standard.py must use " + secret_pin, errors)
     if scan_pin not in text:
         fail("check_badge_standard.py must scan docs via " + scan_pin, errors)
+    # Fail-closed after #53: live path / front-door wiring still present.
+    # Split path pins so global rename of constants cannot neutralize checks.
+    readme_pin = "READ" + "ME.md"
+    license_pin = "LIC" + "ENSE"
+    badge_doc_pin = "docs/badge-" + "standard.md"
+    contributing_pin = "CONTRIBUT" + "ING.md"
+    agents_pin = "AGE" + "NTS.md"
+    for path_pin in (
+        readme_pin,
+        license_pin,
+        badge_doc_pin,
+        contributing_pin,
+        agents_pin,
+    ):
+        if path_pin not in text:
+            fail(
+                "check_badge_standard.py must pin path " + path_pin,
+                errors,
+            )
+    actions_wf = "actions/" + "workflows"
+    if actions_wf not in text:
+        fail(
+            "check_badge_standard.py must pin " + actions_wf + " badge links",
+            errors,
+        )
+    under_h1 = "immediately under the " + "H1"
+    if under_h1 not in text:
+        fail(
+            "check_badge_standard.py must require badge row " + under_h1,
+            errors,
+        )
+    for cross_fn in (
+        "check_stewardship_common_contract",
+        "check_wiki_outline_gate_contract",
+        "check_stewardship_schema_gate_contract",
+    ):
+        if f"{cross_fn}(errors)" not in text:
+            fail(
+                "check_badge_standard.py main must call " + cross_fn,
+                errors,
+            )
+    for gate_const in (
+        "COMMON_" + "GATE",
+        "SCHEMA_" + "GATE",
+        "WIKI_OUTLINE_" + "GATE",
+    ):
+        if gate_const not in text:
+            fail(
+                "check_badge_standard.py must declare " + gate_const,
+                errors,
+            )
 
 
 def check_stewardship_common_contract(errors: list[str]) -> None:
-    """Fail-close live stewardship_common wiring (after #46; not schema-pin spam)."""
+    """Fail-close live stewardship_common wiring (after #46; not schema-pin spam).
+
+    Second-pass deepen after #53; not relative-pin spam.
+    """
     if not COMMON_GATE.is_file():
         fail("Missing scripts/stewardship_common.py (shared gate helpers)", errors)
         return
@@ -954,10 +1014,47 @@ def check_stewardship_common_contract(errors: list[str]) -> None:
             "stewardship_common.py must pin live secret scan covers CI tokens",
             errors,
         )
+    # Fail-closed after #53: SECRET_URL_HINTS token prefixes + password/secret
+    # pattern needles + helper doc pins already live on stewardship_common.
+    for hint in ("ghp_", "gho_", "github_pat_"):
+        # Require quoted form so SECRET_PATTERNS-only mentions do not satisfy.
+        if f'"{hint}"' not in text and f"'{hint}'" not in text:
+            fail(
+                f"stewardship_common.py SECRET_URL_HINTS must pin {hint}",
+                errors,
+            )
+    for needle in (
+        "password|passwd|token",
+        r"secret\s*[:=]",
+    ):
+        if needle not in text:
+            fail(
+                f"stewardship_common.py SECRET_PATTERNS must pin {needle}",
+                errors,
+            )
+    for doc_pin in (
+        "Collect markdown paths",
+        "Return the matched dangerous scheme",
+        "Remove fenced code blocks",
+        "Append errors if path content matches",
+    ):
+        if doc_pin not in text:
+            fail(
+                f"stewardship_common.py must keep helper doc pin '{doc_pin}'",
+                errors,
+            )
+    if "parents[1]" not in text:
+        fail(
+            "stewardship_common.py ROOT must resolve via parents[1]",
+            errors,
+        )
 
 
 def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
-    """Fail-close live stewardship-schema gate wiring (after #45; not wiki-pin spam)."""
+    """Fail-close live stewardship-schema gate wiring (after #45; not wiki-pin spam).
+
+    Second-pass deepen after #53; not relative-pin spam.
+    """
     if not SCHEMA_GATE.is_file():
         fail("Missing scripts/check_stewardship_schema.py (schema gate)", errors)
         return
@@ -1077,10 +1174,54 @@ def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
             "check_stewardship_schema.py must pin issue-backlog owner copilot",
             errors,
         )
+    # Fail-closed after #53: DATE_KEYS + live EXPECTED_VALUES deepen.
+    if '"created"' not in text and "'created'" not in text:
+        fail(
+            "check_stewardship_schema.py DATE_KEYS must pin created",
+            errors,
+        )
+    if '"last_updated"' not in text and "'last_updated'" not in text:
+        fail(
+            "check_stewardship_schema.py DATE_KEYS must pin last_updated",
+            errors,
+        )
+    if "five live stewardship docs" not in text.lower():
+        fail(
+            "check_stewardship_schema.py must pin five live stewardship docs only",
+            errors,
+        )
+    if "agents-governance" not in text:
+        fail(
+            "check_stewardship_schema.py EXPECTED_VALUES must pin agents-governance",
+            errors,
+        )
+    if "AGENTS-ECOSYSTEM.md" not in text:
+        fail(
+            "check_stewardship_schema.py EXPECTED_VALUES must pin AGENTS-ECOSYSTEM.md",
+            errors,
+        )
+    # Live autonomy_level expected value is 1 on AGENTS/CLAUDE.
+    if "autonomy_level\": 1" not in text and "autonomy_level': 1" not in text:
+        # Also accept spaced / unquoted YAML-ish forms in source.
+        if "autonomy_level\": 1" not in text and '"autonomy_level": 1' not in text:
+            if "'autonomy_level': 1" not in text:
+                fail(
+                    "check_stewardship_schema.py EXPECTED_VALUES must pin "
+                    "autonomy_level 1",
+                    errors,
+                )
+    if '"tier": 1' not in text and "'tier': 1" not in text:
+        fail(
+            "check_stewardship_schema.py EXPECTED_VALUES must pin tier 1",
+            errors,
+        )
 
 
 def check_wiki_outline_gate_contract(errors: list[str]) -> None:
-    """Fail-close live wiki-outline gate wiring (after #43; not relative-pin spam)."""
+    """Fail-close live wiki-outline gate wiring (after #43; not relative-pin spam).
+
+    Second-pass deepen after #53; not CI workflow pin spam.
+    """
     if not WIKI_OUTLINE_GATE.is_file():
         fail("Missing scripts/check_wiki_outline.py (wiki-outline gate)", errors)
         return
@@ -1210,6 +1351,61 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
             "check_wiki_outline.py must require Home Out of scope section",
             errors,
         )
+    # Fail-closed after #53: operator-only / invent-helper / topic deepen.
+    if "OPERATOR_ONLY" not in text:
+        fail(
+            "check_wiki_outline.py must declare OPERATOR_ONLY",
+            errors,
+        )
+    if "_reject_invent_badge_chrome" not in text:
+        fail(
+            "check_wiki_outline.py must provide _reject_invent_badge_chrome",
+            errors,
+        )
+    if '"governance"' not in text and "'governance'" not in text:
+        fail(
+            "check_wiki_outline.py PAGE_TOPIC_HINTS must pin governance "
+            "on Overview",
+            errors,
+        )
+    if '"public"' not in text and "'public'" not in text:
+        fail(
+            "check_wiki_outline.py PAGE_TOPIC_HINTS must pin public on Overview",
+            errors,
+        )
+    if "run_stewardship_checks.sh" not in text:
+        fail(
+            "check_wiki_outline.py must require run_stewardship_checks.sh "
+            "on Repo-Stewardship",
+            errors,
+        )
+    if "Do **not** push" not in text and "Do not push" not in text:
+        fail(
+            "check_wiki_outline.py must require PUBLISH.md Do not push pin",
+            errors,
+        )
+    if "docs" not in text or "wiki" not in text:
+        fail(
+            "check_wiki_outline.py must pin docs/wiki path",
+            errors,
+        )
+    if "invent-product out-of-scope" not in text.lower():
+        fail(
+            "check_wiki_outline.py must require Home invent-product out-of-scope",
+            errors,
+        )
+    if "secrets out-of-scope" not in text.lower():
+        fail(
+            "check_wiki_outline.py must require Home secrets out-of-scope",
+            errors,
+        )
+    if "6 pages" not in text.lower() and "six pages" not in text.lower():
+        # OK message uses ({len(PUBLISHABLE_PAGES)} pages — also accept docstring.
+        if "six pages" not in text.lower():
+            fail(
+                "check_wiki_outline.py must pin six publishable pages",
+                errors,
+            )
 
 
 def check_relative_link_gate_contract(errors: list[str]) -> None:

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Shared helpers for stewardship doc gates (no invent-product surface).
 
-Fail-closed pins (live path after #46):
+Fail-closed pins (live path after #53 second-pass):
 - SECRET_PATTERNS: ghp_/gho_/ghu_/ghs_/ghr_, github_pat_, PRIVATE KEY,
   sk-/rk-, api_key/secret/password/token, aws_secret_access_key, xox*,
   npm_, AIza
@@ -13,6 +13,8 @@ Fail-closed pins (live path after #46):
 - DANGEROUS_LINK_SCHEMES: javascript:/data:/vbscript:/file:
 - strip_fenced_code via FENCED_BLOCK_RE (``` or ~~~); has_dangerous_scheme;
   scan_secrets; markdown_files; load_workflow_text; fail
+- Helper doc pins: Collect markdown paths / Return the matched dangerous
+  scheme / Remove fenced code blocks / Append errors if path content matches
 """
 
 from __future__ import annotations

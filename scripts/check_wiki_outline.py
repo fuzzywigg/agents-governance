@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
-"""Enforce docs/wiki/PUBLISH.md page set and acceptance checks (executable gate)."""
+"""Enforce docs/wiki/PUBLISH.md page set and acceptance checks (executable gate).
+
+Fail-closed pins (live path after #53 second-pass):
+- PUBLISHABLE_PAGES: Home / Overview / Autonomy-Levels / Repo-Stewardship /
+  Agent-Routing / Security-Boundaries (six pages + operator PUBLISH.md)
+- PAGE_TOPIC_HINTS: L0–L3 / credential / copilot / governance / public /
+  run_stewardship_checks.sh / badge / kill / secret / surface / routing
+- strip_fenced_code before link scan; protocol-relative // + http:// reject
+- Home invent+secrets out-of-scope + kill-switch; OPERATOR_ONLY PUBLISH.md
+- STEWARDSHIP_CI_HINTS + actionlint + invent-product; scan_secrets on wiki
+"""
 
 from __future__ import annotations
 

@@ -11,6 +11,17 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX common/badge/schema/wiki second-pass gate pins after #53: expand
+  self-tests to 1253 cases (was 1182) fail-closing live shared integrity —
+  SECRET_URL_HINTS `ghp_`/`gho_`/`github_pat_` / password+secret patterns /
+  helper doc pins / `parents[1]` ROOT / README+LICENSE+badge-standard+
+  CONTRIBUTING+AGENTS path pins / `actions/workflows` + under-H1 /
+  cross-gate contract calls / DATE_KEYS created+last_updated / five live
+  docs / autonomy_level 1 / tier 1 / OPERATOR_ONLY /
+  `_reject_invent_badge_chrome` / Overview governance+public / six pages /
+  invent+secrets out-of-scope — common/badge/schema/wiki second-pass only
+  (not relative-link / CI workflow pin / fixture-reject spam); no
+  invent-product; no fourth badge
 - TOKENMAXX badge-standard gate pins after #48: expand self-tests to 1182
   cases (was 1114) fail-closing live badge-standard integrity — REQUIRED_ORDER
   Link Check → Markdown Lint → License / MAX_BADGES = 3 / EXPECTED_REPO /

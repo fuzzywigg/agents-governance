@@ -47,6 +47,11 @@ MAX_BADGES=3 / EXPECTED_REPO / REQUIRED_WORKFLOWS / badge.svg + shields
 license / contiguous row / invent-product / fourth-badge refusal /
 Stewardship product badge reject (not common / schema / wiki / relative /
 CI workflow pin spam).
+Deepened after #53: second-pass common/badge/schema/wiki gate pins —
+SECRET_URL_HINTS token prefixes / password+secret patterns / helper docs /
+README path+H1+cross-gate wiring / DATE_KEYS+EXPECTED_VALUES deepen /
+OPERATOR_ONLY+invent-helper+Overview topics (not relative / CI workflow
+pin / fixture-reject spam).
 """
 
 from __future__ import annotations
@@ -18118,6 +18123,905 @@ def test_badge_gate_quiet_stewardship_doc_still_after_48() -> None:
     if "Quiet stewardship" not in text:
         raise AssertionError("module docstring missing Quiet stewardship pin")
 
+
+# --- TOKENMAXX deepen after #53: common/badge/schema/wiki second-pass pins ---
+
+def test_common_gate_requires_url_hint_ghp_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        raw = path.read_text(encoding="utf-8")
+        # Drop only the SECRET_URL_HINTS quoted ghp_ entry.
+        raw = raw.replace('    "ghp_",\n', "", 1)
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "ghp_",
+        )
+
+
+def test_common_gate_requires_url_hint_gho_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        raw = path.read_text(encoding="utf-8")
+        raw = raw.replace('    "gho_",\n', "", 1)
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "gho_",
+        )
+
+
+def test_common_gate_requires_url_hint_github_pat_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        raw = path.read_text(encoding="utf-8")
+        raw = raw.replace('    "github_pat_",\n', "", 1)
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "github_pat_",
+        )
+
+
+def test_common_gate_requires_password_pattern_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "password|passwd|token", "passwd|pwd"
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "password|passwd|token",
+        )
+
+
+def test_common_gate_requires_secret_assign_pattern_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            r"secret\s*[:=]", r"sekrit\s*[:=]"
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            r"secret\s*[:=]",
+        )
+
+
+def test_common_gate_requires_markdown_files_doc_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "Collect markdown paths", "Gather markdown paths"
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Collect markdown paths",
+        )
+
+
+def test_common_gate_requires_dangerous_scheme_doc_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "Return the matched dangerous scheme",
+            "Return the matched unsafe scheme",
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Return the matched dangerous scheme",
+        )
+
+
+def test_common_gate_requires_strip_fenced_doc_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "Remove fenced code blocks", "Drop fenced code blocks"
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Remove fenced code blocks",
+        )
+
+
+def test_common_gate_requires_scan_secrets_doc_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "Append errors if path content matches",
+            "Append failures if path content matches",
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Append errors if path content matches",
+        )
+
+
+def test_common_gate_requires_parents1_root_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "stewardship_common.py"
+        # Keep ROOT resolving to repo root while removing contiguous parents[1].
+        raw = path.read_text(encoding="utf-8").replace(
+            "Path(__file__).resolve().parents[1]",
+            "Path(__file__).resolve().parent.parents[0]",
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "parents[1]",
+        )
+
+
+def test_common_gate_docstring_second_pass_after_53() -> None:
+    text = (SCRIPTS / "stewardship_common.py").read_text(encoding="utf-8")
+    if "after #53 second-pass" not in text:
+        raise AssertionError("stewardship_common docstring missing #53 second-pass")
+
+
+def test_common_gate_contract_errors_empty_live_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    errors: list[str] = []
+    cbs.check_stewardship_common_contract(errors)
+    if errors:
+        raise AssertionError(f"unexpected common contract errors: {errors}")
+
+
+def test_common_gate_secret_url_hints_len_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import stewardship_common as sc  # noqa: E402
+    importlib.reload(sc)
+    if len(sc.SECRET_URL_HINTS) < 8:
+        raise AssertionError(f"SECRET_URL_HINTS too short: {sc.SECRET_URL_HINTS}")
+
+
+def test_common_gate_forbidden_hints_len_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import stewardship_common as sc  # noqa: E402
+    importlib.reload(sc)
+    if len(sc.FORBIDDEN_BADGE_HINTS) < 15:
+        raise AssertionError(
+            f"FORBIDDEN_BADGE_HINTS too short: {len(sc.FORBIDDEN_BADGE_HINTS)}"
+        )
+
+
+def test_common_gate_dangerous_schemes_len_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import stewardship_common as sc  # noqa: E402
+    importlib.reload(sc)
+    if len(sc.DANGEROUS_LINK_SCHEMES) != 4:
+        raise AssertionError(
+            f"DANGEROUS_LINK_SCHEMES drifted: {sc.DANGEROUS_LINK_SCHEMES}"
+        )
+
+
+def test_common_gate_secret_patterns_len_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import stewardship_common as sc  # noqa: E402
+    importlib.reload(sc)
+    if len(sc.SECRET_PATTERNS) < 11:
+        raise AssertionError(
+            f"SECRET_PATTERNS too short: {len(sc.SECRET_PATTERNS)}"
+        )
+
+
+def test_common_gate_has_dangerous_file_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import stewardship_common as sc  # noqa: E402
+    importlib.reload(sc)
+    if sc.has_dangerous_scheme("file:///etc/passwd") != "file:":
+        raise AssertionError("has_dangerous_scheme missed file:")
+
+
+def test_common_gate_strip_fenced_keeps_prose_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import stewardship_common as sc  # noqa: E402
+    importlib.reload(sc)
+    out = sc.strip_fenced_code("hello\n```\nsecret\n```\nworld")
+    if "hello" not in out or "world" not in out or "secret" in out:
+        raise AssertionError(f"strip_fenced_code drifted: {out!r}")
+
+
+# --- badge second-pass after #53 ---
+
+def test_badge_gate_requires_readme_path_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        raw = path.read_text(encoding="utf-8").replace("README.md", "READ_ME.md")
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "README.md",
+        )
+
+
+def test_badge_gate_requires_license_path_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        # Only rewrite the LICENSE path constant assignment, not license badge prose.
+        raw = path.read_text(encoding="utf-8").replace(
+            'LICENSE = ROOT / "LICENSE"', 'LICENSE = ROOT / "LICENCE"'
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "LICENSE",
+        )
+
+
+def test_badge_gate_requires_badge_standard_path_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "docs/badge-standard.md", "docs/badge-policy.md"
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "docs/badge-standard.md",
+        )
+
+
+def test_badge_gate_requires_contributing_path_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "CONTRIBUTING.md", "CONTRIBUTE.md"
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "CONTRIBUTING.md",
+        )
+
+
+def test_badge_gate_requires_agents_path_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        raw = path.read_text(encoding="utf-8").replace("AGENTS.md", "AGENT.md")
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "AGENTS.md",
+        )
+
+
+def test_badge_gate_requires_actions_workflows_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "actions/workflows", "actions/flows"
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "actions/workflows",
+        )
+
+
+def test_badge_gate_requires_under_h1_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "immediately under the H1", "immediately under the title"
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "immediately under the H1",
+        )
+
+
+def test_badge_gate_requires_common_contract_call_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "check_stewardship_common_contract(errors)",
+            "check_stewardship_common_contract_x(errors)",
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "check_stewardship_common_contract",
+        )
+
+
+def test_badge_gate_requires_wiki_contract_call_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "check_wiki_outline_gate_contract(errors)",
+            "check_wiki_outline_gate_contract_x(errors)",
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "check_wiki_outline_gate_contract",
+        )
+
+
+def test_badge_gate_requires_schema_contract_call_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "check_stewardship_schema_gate_contract(errors)",
+            "check_stewardship_schema_gate_contract_x(errors)",
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "check_stewardship_schema_gate_contract",
+        )
+
+
+def test_badge_gate_requires_common_gate_const_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        raw = path.read_text(encoding="utf-8").replace("COMMON_GATE", "COMMON_HELPER")
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "COMMON_GATE",
+        )
+
+
+def test_badge_gate_requires_schema_gate_const_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        raw = path.read_text(encoding="utf-8").replace("SCHEMA_GATE", "SCHEMA_HELPER")
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "SCHEMA_GATE",
+        )
+
+
+def test_badge_gate_requires_wiki_gate_const_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "WIKI_OUTLINE_GATE", "WIKI_OUTLINE_HELPER"
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "WIKI_OUTLINE_GATE",
+        )
+
+
+def test_badge_gate_docstring_second_pass_after_53() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "after #53 second-pass" not in text:
+        raise AssertionError("badge-standard docstring missing #53 second-pass")
+
+
+def test_badge_gate_contract_second_pass_note_after_53() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "Second-pass deepen after #53" not in text:
+        raise AssertionError("badge gate contract missing #53 second-pass note")
+
+
+def test_badge_gate_contract_errors_empty_live_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    errors: list[str] = []
+    cbs.check_badge_standard_gate_contract(errors)
+    if errors:
+        raise AssertionError(f"unexpected badge contract errors: {errors}")
+
+
+def test_badge_gate_passes_live_still_after_53() -> None:
+    assert_pass_live("check_badge_standard.py")
+
+
+def test_badge_gate_required_order_len_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    if len(cbs.REQUIRED_ORDER) != 3:
+        raise AssertionError(f"REQUIRED_ORDER len drifted: {cbs.REQUIRED_ORDER}")
+
+
+# --- schema second-pass after #53 ---
+
+def test_schema_gate_requires_created_date_key_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        raw = path.read_text(encoding="utf-8").replace('"created"', '"created_on"')
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "created",
+        )
+
+
+def test_schema_gate_requires_last_updated_date_key_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            '"last_updated"', '"updated_at"'
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "last_updated",
+        )
+
+
+def test_schema_gate_requires_five_docs_pin_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "five live stewardship docs", "several live stewardship docs"
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "five live stewardship docs",
+        )
+
+
+def test_schema_gate_requires_agents_governance_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "agents-governance", "agents-gov"
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "agents-governance",
+        )
+
+
+def test_schema_gate_requires_agents_ecosystem_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "AGENTS-ECOSYSTEM.md", "AGENTS-ECO.md"
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "AGENTS-ECOSYSTEM.md",
+        )
+
+
+def test_schema_gate_requires_autonomy_level_one_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            '"autonomy_level": 1', '"autonomy_level": 0'
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "autonomy_level 1",
+        )
+
+
+def test_schema_gate_requires_tier_one_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        raw = path.read_text(encoding="utf-8").replace('"tier": 1', '"tier": 2')
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "tier 1",
+        )
+
+
+def test_schema_gate_docstring_second_pass_after_53() -> None:
+    text = (SCRIPTS / "check_stewardship_schema.py").read_text(encoding="utf-8")
+    if "after #53 second-pass" not in text:
+        raise AssertionError("schema docstring missing #53 second-pass")
+
+
+def test_schema_gate_contract_second_pass_note_after_53() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "Second-pass deepen after #53" not in text:
+        raise AssertionError("schema gate contract missing #53 second-pass note")
+
+
+def test_schema_gate_contract_errors_empty_live_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    errors: list[str] = []
+    cbs.check_stewardship_schema_gate_contract(errors)
+    if errors:
+        raise AssertionError(f"unexpected schema contract errors: {errors}")
+
+
+def test_schema_gate_doc_schemas_len_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_stewardship_schema as css  # noqa: E402
+    importlib.reload(css)
+    if len(css.DOC_SCHEMAS) != 5:
+        raise AssertionError(f"DOC_SCHEMAS len drifted: {len(css.DOC_SCHEMAS)}")
+
+
+def test_schema_gate_date_keys_tuple_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_stewardship_schema as css  # noqa: E402
+    importlib.reload(css)
+    if css.DATE_KEYS != ("created", "last_updated"):
+        raise AssertionError(f"DATE_KEYS drifted: {css.DATE_KEYS}")
+
+
+def test_schema_gate_passes_live_still_after_53() -> None:
+    assert_pass_live("check_stewardship_schema.py")
+
+
+def test_schema_gate_expected_agents_autonomy_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_stewardship_schema as css  # noqa: E402
+    importlib.reload(css)
+    got = css.EXPECTED_VALUES["AGENTS.md"]["autonomy_level"]
+    if got != 1:
+        raise AssertionError(f"AGENTS autonomy_level drifted: {got}")
+
+
+def test_schema_gate_expected_claude_repo_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_stewardship_schema as css  # noqa: E402
+    importlib.reload(css)
+    got = css.EXPECTED_VALUES["CLAUDE.md"]["repo"]
+    if got != "agents-governance":
+        raise AssertionError(f"CLAUDE repo drifted: {got}")
+
+
+def test_schema_gate_expected_badge_owner_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_stewardship_schema as css  # noqa: E402
+    importlib.reload(css)
+    got = css.EXPECTED_VALUES["docs/badge-standard.md"]["owner"]
+    if got != "copilot":
+        raise AssertionError(f"badge owner drifted: {got}")
+
+
+def test_schema_gate_expected_backlog_owner_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_stewardship_schema as css  # noqa: E402
+    importlib.reload(css)
+    got = css.EXPECTED_VALUES["docs/issue-backlog.md"]["owner"]
+    if got != "copilot":
+        raise AssertionError(f"backlog owner drifted: {got}")
+
+
+# --- wiki second-pass after #53 ---
+
+def test_wiki_gate_requires_operator_only_const_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "OPERATOR_ONLY", "OPERATOR_PAGE"
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "OPERATOR_ONLY",
+        )
+
+
+def test_wiki_gate_requires_reject_invent_helper_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "_reject_invent_badge_chrome", "_reject_social_badge_chrome"
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "_reject_invent_badge_chrome",
+        )
+
+
+def test_wiki_gate_requires_governance_topic_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        raw = path.read_text(encoding="utf-8").replace('"governance"', '"govern"')
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "governance",
+        )
+
+
+def test_wiki_gate_requires_public_topic_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        raw = path.read_text(encoding="utf-8").replace('"public"', '"open"')
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "public",
+        )
+
+
+def test_wiki_gate_requires_run_script_needle_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "run_stewardship_checks.sh", "run_stewardship.sh"
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "run_stewardship_checks.sh",
+        )
+
+
+def test_wiki_gate_requires_do_not_push_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        raw = path.read_text(encoding="utf-8")
+        raw = raw.replace("Do **not** push", "Do never push").replace(
+            "Do not push", "Do never push"
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Do not push",
+        )
+
+
+def test_wiki_gate_requires_invent_oos_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "invent-product out-of-scope", "invent-product out of bounds"
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "invent-product out-of-scope",
+        )
+
+
+def test_wiki_gate_requires_secrets_oos_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        raw = path.read_text(encoding="utf-8").replace(
+            "secrets out-of-scope", "secrets out of bounds"
+        )
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "secrets out-of-scope",
+        )
+
+
+def test_wiki_gate_requires_six_pages_pin_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        raw = path.read_text(encoding="utf-8")
+        raw = raw.replace("six pages", "many pages").replace("6 pages", "N pages")
+        path.write_text(raw, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "six publishable pages",
+        )
+
+
+def test_wiki_gate_docstring_second_pass_after_53() -> None:
+    text = (SCRIPTS / "check_wiki_outline.py").read_text(encoding="utf-8")
+    if "after #53 second-pass" not in text:
+        raise AssertionError("wiki docstring missing #53 second-pass")
+
+
+def test_wiki_gate_contract_second_pass_note_after_53() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "Second-pass deepen after #53" not in text:
+        raise AssertionError("wiki gate contract missing #53 second-pass note")
+
+
+def test_wiki_gate_contract_errors_empty_live_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    errors: list[str] = []
+    cbs.check_wiki_outline_gate_contract(errors)
+    if errors:
+        raise AssertionError(f"unexpected wiki contract errors: {errors}")
+
+
+def test_wiki_gate_publishable_pages_len_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_wiki_outline as cwo  # noqa: E402
+    importlib.reload(cwo)
+    if len(cwo.PUBLISHABLE_PAGES) != 6:
+        raise AssertionError(
+            f"PUBLISHABLE_PAGES len drifted: {len(cwo.PUBLISHABLE_PAGES)}"
+        )
+
+
+def test_wiki_gate_operator_only_value_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_wiki_outline as cwo  # noqa: E402
+    importlib.reload(cwo)
+    if cwo.OPERATOR_ONLY != "PUBLISH.md":
+        raise AssertionError(f"OPERATOR_ONLY drifted: {cwo.OPERATOR_ONLY}")
+
+
+def test_wiki_gate_passes_live_still_after_53() -> None:
+    assert_pass_live("check_wiki_outline.py")
+
+
+def test_wiki_gate_overview_topics_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_wiki_outline as cwo  # noqa: E402
+    importlib.reload(cwo)
+    hints = cwo.PAGE_TOPIC_HINTS.get("Overview.md", ())
+    if "governance" not in hints or "public" not in hints:
+        raise AssertionError(f"Overview topics drifted: {hints}")
+
+
+def test_wiki_gate_stewardship_topics_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_wiki_outline as cwo  # noqa: E402
+    importlib.reload(cwo)
+    hints = cwo.PAGE_TOPIC_HINTS.get("Repo-Stewardship.md", ())
+    if "run_stewardship_checks.sh" not in hints or "badge" not in hints:
+        raise AssertionError(f"Repo-Stewardship topics drifted: {hints}")
+
+
+def test_wiki_gate_ci_hints_tuple_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_wiki_outline as cwo  # noqa: E402
+    importlib.reload(cwo)
+    expected = ("markdown-lint", "link-check", "stewardship-checks")
+    if cwo.STEWARDSHIP_CI_HINTS != expected:
+        raise AssertionError(f"STEWARDSHIP_CI_HINTS drifted: {cwo.STEWARDSHIP_CI_HINTS}")
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -19330,6 +20234,79 @@ def main() -> int:
         test_badge_gate_lycheeignore_shields_still_after_48,
         test_badge_gate_source_has_contract_section_still_after_48,
         test_badge_gate_quiet_stewardship_doc_still_after_48,
+
+        # TOKENMAXX deepen after #53 (+71 common/badge/schema/wiki second-pass pins)
+        test_common_gate_requires_url_hint_ghp_after_53,
+        test_common_gate_requires_url_hint_gho_after_53,
+        test_common_gate_requires_url_hint_github_pat_after_53,
+        test_common_gate_requires_password_pattern_after_53,
+        test_common_gate_requires_secret_assign_pattern_after_53,
+        test_common_gate_requires_markdown_files_doc_after_53,
+        test_common_gate_requires_dangerous_scheme_doc_after_53,
+        test_common_gate_requires_strip_fenced_doc_after_53,
+        test_common_gate_requires_scan_secrets_doc_after_53,
+        test_common_gate_requires_parents1_root_after_53,
+        test_common_gate_docstring_second_pass_after_53,
+        test_common_gate_contract_errors_empty_live_after_53,
+        test_common_gate_secret_url_hints_len_after_53,
+        test_common_gate_forbidden_hints_len_after_53,
+        test_common_gate_dangerous_schemes_len_after_53,
+        test_common_gate_secret_patterns_len_after_53,
+        test_common_gate_has_dangerous_file_after_53,
+        test_common_gate_strip_fenced_keeps_prose_after_53,
+        test_badge_gate_requires_readme_path_after_53,
+        test_badge_gate_requires_license_path_after_53,
+        test_badge_gate_requires_badge_standard_path_after_53,
+        test_badge_gate_requires_contributing_path_after_53,
+        test_badge_gate_requires_agents_path_after_53,
+        test_badge_gate_requires_actions_workflows_after_53,
+        test_badge_gate_requires_under_h1_after_53,
+        test_badge_gate_requires_common_contract_call_after_53,
+        test_badge_gate_requires_wiki_contract_call_after_53,
+        test_badge_gate_requires_schema_contract_call_after_53,
+        test_badge_gate_requires_common_gate_const_after_53,
+        test_badge_gate_requires_schema_gate_const_after_53,
+        test_badge_gate_requires_wiki_gate_const_after_53,
+        test_badge_gate_docstring_second_pass_after_53,
+        test_badge_gate_contract_second_pass_note_after_53,
+        test_badge_gate_contract_errors_empty_live_after_53,
+        test_badge_gate_passes_live_still_after_53,
+        test_badge_gate_required_order_len_after_53,
+        test_schema_gate_requires_created_date_key_after_53,
+        test_schema_gate_requires_last_updated_date_key_after_53,
+        test_schema_gate_requires_five_docs_pin_after_53,
+        test_schema_gate_requires_agents_governance_after_53,
+        test_schema_gate_requires_agents_ecosystem_after_53,
+        test_schema_gate_requires_autonomy_level_one_after_53,
+        test_schema_gate_requires_tier_one_after_53,
+        test_schema_gate_docstring_second_pass_after_53,
+        test_schema_gate_contract_second_pass_note_after_53,
+        test_schema_gate_contract_errors_empty_live_after_53,
+        test_schema_gate_doc_schemas_len_after_53,
+        test_schema_gate_date_keys_tuple_after_53,
+        test_schema_gate_passes_live_still_after_53,
+        test_schema_gate_expected_agents_autonomy_after_53,
+        test_schema_gate_expected_claude_repo_after_53,
+        test_schema_gate_expected_badge_owner_after_53,
+        test_schema_gate_expected_backlog_owner_after_53,
+        test_wiki_gate_requires_operator_only_const_after_53,
+        test_wiki_gate_requires_reject_invent_helper_after_53,
+        test_wiki_gate_requires_governance_topic_after_53,
+        test_wiki_gate_requires_public_topic_after_53,
+        test_wiki_gate_requires_run_script_needle_after_53,
+        test_wiki_gate_requires_do_not_push_after_53,
+        test_wiki_gate_requires_invent_oos_after_53,
+        test_wiki_gate_requires_secrets_oos_after_53,
+        test_wiki_gate_requires_six_pages_pin_after_53,
+        test_wiki_gate_docstring_second_pass_after_53,
+        test_wiki_gate_contract_second_pass_note_after_53,
+        test_wiki_gate_contract_errors_empty_live_after_53,
+        test_wiki_gate_publishable_pages_len_after_53,
+        test_wiki_gate_operator_only_value_after_53,
+        test_wiki_gate_passes_live_still_after_53,
+        test_wiki_gate_overview_topics_after_53,
+        test_wiki_gate_stewardship_topics_after_53,
+        test_wiki_gate_ci_hints_tuple_after_53,
 
     ]
     try:

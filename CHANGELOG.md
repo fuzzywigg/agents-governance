@@ -37,6 +37,9 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
+- Link Check: exclude `img.shields.io` in `.lycheeignore` so transient badge
+  CDN RST / Connection-reset blips do not fail the gate; keep lychee `fail: true`
+  for real broken doc links (after #25 flake)
 - Badge workflow hardening: require `workflow_dispatch` + weekly `schedule` on
   all three CI workflows; lychee `fail: true` + `--exclude-loopback`;
   markdown-lint `.markdownlint.json` + `.github/agents` exclusion; stewardship

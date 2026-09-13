@@ -28,6 +28,8 @@ AGENTS = ROOT / "AGENTS.md"
 LYCHEEIGNORE = ROOT / ".lycheeignore"
 MARKDOWNLINT_CONFIG = ROOT / ".markdownlint.json"
 WORKFLOWS = ROOT / ".github" / "workflows"
+RELATIVE_LINK_GATE = ROOT / "scripts" / "check_relative_links.py"
+RUN_STEWARDSHIP = ROOT / "scripts" / "run_stewardship_checks.sh"
 
 REQUIRED_ORDER = ("Link Check", "Markdown Lint", "License")
 MAX_BADGES = 3
@@ -659,12 +661,122 @@ def check_contributing_and_agents(errors: list[str]) -> None:
             "markdown-lint.yml",
             "link-check.yml",
             "stewardship-checks.yml",
+            "relative",
         ):
             if needle not in text:
                 fail(f"AGENTS.md §3 / testing must mention {needle}", errors)
         scan_secrets(AGENTS, errors)
     else:
         fail("Missing AGENTS.md", errors)
+
+
+def check_relative_link_gate_contract(errors: list[str]) -> None:
+    """Fail-close live relative-link gate wiring (after #41; not workflow-pin spam)."""
+    if not RELATIVE_LINK_GATE.is_file():
+        fail("Missing scripts/check_relative_links.py (relative-link gate)", errors)
+        return
+    text = RELATIVE_LINK_GATE.read_text(encoding="utf-8")
+    # Skip set must stay aligned with markdown-lint / lychee exclusions.
+    if "OWASP-AGENTIC.md" not in text:
+        fail(
+            "check_relative_links.py must skip OWASP-AGENTIC.md (align markdown-lint)",
+            errors,
+        )
+    if ".github" not in text or "agents" not in text:
+        fail(
+            "check_relative_links.py must skip .github/agents (align link-check)",
+            errors,
+        )
+    if "node_modules" not in text:
+        fail(
+            "check_relative_links.py must skip node_modules in SKIP_PARTS",
+            errors,
+        )
+    # Quoted ".git" only — bare .git also matches .github paths.
+    if '".git"' not in text and "'.git'" not in text:
+        fail(
+            "check_relative_links.py must skip .git in SKIP_PARTS",
+            errors,
+        )
+    if "strip_fenced_code" not in text:
+        fail(
+            "check_relative_links.py must strip fenced code before link scan",
+            errors,
+        )
+    if "unquote" not in text and "fully_unquote" not in text:
+        fail(
+            "check_relative_links.py must percent-decode link targets (unquote)",
+            errors,
+        )
+    if "fully_unquote" not in text:
+        fail(
+            "check_relative_links.py must fully_unquote nested percent-encoding",
+            errors,
+        )
+    if '"//"' not in text and "'//'" not in text:
+        fail(
+            "check_relative_links.py must reject protocol-relative // links",
+            errors,
+        )
+    if "github_slug" not in text:
+        fail(
+            "check_relative_links.py must resolve heading fragments via github_slug",
+            errors,
+        )
+    if "ATX_HEADING_RE" not in text:
+        fail(
+            "check_relative_links.py must scan ATX headings for fragment checks",
+            errors,
+        )
+    if "has_dangerous_scheme" not in text:
+        fail(
+            "check_relative_links.py must reject dangerous link schemes",
+            errors,
+        )
+    if "empty fragment" not in text.lower():
+        fail(
+            "check_relative_links.py must reject empty path# fragments",
+            errors,
+        )
+    if "query string" not in text.lower():
+        fail(
+            "check_relative_links.py must reject query strings on relative links",
+            errors,
+        )
+    if "http://" not in text:
+        fail(
+            "check_relative_links.py must reject insecure http:// links",
+            errors,
+        )
+
+    if not RUN_STEWARDSHIP.is_file():
+        fail("Missing scripts/run_stewardship_checks.sh", errors)
+    else:
+        run_text = RUN_STEWARDSHIP.read_text(encoding="utf-8")
+        for gate in (
+            "check_badge_standard.py",
+            "check_wiki_outline.py",
+            "check_stewardship_schema.py",
+            "check_relative_links.py",
+        ):
+            if gate not in run_text:
+                fail(
+                    f"run_stewardship_checks.sh must invoke scripts/{gate}",
+                    errors,
+                )
+        # Fail-closed: relative gate runs after schema (live order).
+        badge_i = run_text.find("check_badge_standard.py")
+        wiki_i = run_text.find("check_wiki_outline.py")
+        schema_i = run_text.find("check_stewardship_schema.py")
+        rel_i = run_text.find("check_relative_links.py")
+        if min(badge_i, wiki_i, schema_i, rel_i) < 0 or not (
+            badge_i < wiki_i < schema_i < rel_i
+        ):
+            fail(
+                "run_stewardship_checks.sh must run gates in order: "
+                "badge → wiki → schema → relative",
+                errors,
+            )
 
 
 def check_badges(badges: list[re.Match[str]], errors: list[str]) -> None:
@@ -751,6 +863,7 @@ def main() -> int:
     check_lycheeignore(errors)
     check_workflow_hardening(errors)
     check_actionlint_style(errors)
+    check_relative_link_gate_contract(errors)
     if BADGE_STANDARD.is_file():
         check_badge_standard_doc(errors)
         scan_secrets(BADGE_STANDARD, errors)

@@ -690,7 +690,7 @@ def check_contributing_and_agents(errors: list[str]) -> None:
 
 
 def check_badge_standard_gate_contract(errors: list[str]) -> None:
-    """Fail-close live badge-standard gate wiring (after #61; deepen after #48)."""
+    """Fail-close live badge-standard gate wiring (after #61; deepen after #48; not common-pin spam)."""
     if not BADGE_GATE.is_file():
         fail("Missing scripts/check_badge_standard.py (badge-standard gate)", errors)
         return

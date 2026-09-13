@@ -11,6 +11,16 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX relative-link gate pins after #53: expand self-tests to 1250
+  cases (was 1182) fail-closing live relative-link integrity —
+  `SKIP_PARTS` / `SKIP_FILES` / `SKIP_PREFIXES`, `MD_LINK_RE` image capture,
+  `_MAX_UNQUOTE_PASSES = 4`, mailto/tel/https startswith allowlist, NUL /
+  escapes-repo / broken-relative / missing-heading needles, helper inventory,
+  `run_stewardship_checks.sh` `set -euo pipefail` + bash shebang, plus
+  relative-link gate contract pins in `check_badge_standard.py` —
+  relative-link gate contract slice only (not badge / common / schema /
+  wiki-outline / CI workflow pin / fixture-reject spam); no invent-product;
+  no fourth badge
 - TOKENMAXX badge-standard gate pins after #48: expand self-tests to 1182
   cases (was 1114) fail-closing live badge-standard integrity — REQUIRED_ORDER
   Link Check → Markdown Lint → License / MAX_BADGES = 3 / EXPECTED_REPO /

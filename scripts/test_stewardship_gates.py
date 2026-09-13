@@ -47,6 +47,12 @@ MAX_BADGES=3 / EXPECTED_REPO / REQUIRED_WORKFLOWS / badge.svg + shields
 license / contiguous row / invent-product / fourth-badge refusal /
 Stewardship product badge reject (not common / schema / wiki / relative /
 CI workflow pin spam).
+Deepened after #53: relative-link gate contract pins — SKIP_PARTS/FILES/
+PREFIXES, MD_LINK_RE image capture, _MAX_UNQUOTE_PASSES=4, mailto/tel/https
+allowlists, NUL/escapes-repo/broken-relative/missing-heading needles,
+should_skip/iter_markdown/check_file helpers, run_stewardship set -euo
+pipefail + bash shebang (not badge / common / schema / wiki / CI workflow
+pin spam).
 """
 
 from __future__ import annotations
@@ -18118,6 +18124,792 @@ def test_badge_gate_quiet_stewardship_doc_still_after_48() -> None:
     if "Quiet stewardship" not in text:
         raise AssertionError("module docstring missing Quiet stewardship pin")
 
+
+# --- TOKENMAXX deepen after #53: relative-link gate pins (+68) ---
+
+def test_relative_gate_requires_skip_parts_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace("SKIP_PARTS", "SKIP_PARTZ")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "SKIP_PARTS",
+        )
+
+
+def test_relative_gate_requires_skip_files_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace("SKIP_FILES", "SKIP_FILEZ")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "SKIP_FILES",
+        )
+
+
+def test_relative_gate_requires_skip_prefixes_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace("SKIP_PREFIXES", "SKIP_PREFIXEZ")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "SKIP_PREFIXES",
+        )
+
+
+def test_relative_gate_requires_md_link_re_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace("MD_LINK_RE", "MD_LINK_RX")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "MD_LINK_RE",
+        )
+
+
+def test_relative_gate_requires_image_capture_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace("!?\\[", "![")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "images via !?[",
+        )
+
+
+def test_relative_gate_requires_max_unquote_passes_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "_MAX_UNQUOTE_PASSES", "_MAX_DECODE_PASSES"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "_MAX_UNQUOTE_PASSES",
+        )
+
+
+def test_relative_gate_requires_max_unquote_eq_4_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "_MAX_UNQUOTE_PASSES = 4", "_MAX_UNQUOTE_PASSES = 8"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "_MAX_UNQUOTE_PASSES = 4",
+        )
+
+
+def test_relative_gate_requires_mailto_allowlist_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace("mailto:", "mailx:")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "mailto:",
+        )
+
+
+def test_relative_gate_requires_tel_allowlist_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace("tel:", "phone:")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "tel:",
+        )
+
+
+def test_relative_gate_requires_https_allowlist_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        # Break the live startswith allowlist tuple (keep docstring https:// prose).
+        text = path.read_text(encoding="utf-8").replace(
+            '("http://", "https://", "mailto:", "tel:")',
+            '("http://", "mailto:", "tel:")',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "startswith tuple",
+        )
+
+
+def test_relative_gate_requires_nul_needle_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "NUL in link target", "zero-byte in link target"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "NUL in link targets",
+        )
+
+
+def test_relative_gate_requires_escapes_repo_needle_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "escapes repo", "leaves repo"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "escapes repo",
+        )
+
+
+def test_relative_gate_requires_broken_relative_needle_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "broken relative link", "missing relative link"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "broken relative link",
+        )
+
+
+def test_relative_gate_requires_missing_heading_needle_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "missing heading", "absent heading"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "missing heading",
+        )
+
+
+def test_relative_gate_requires_fn_should_skip_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "def should_skip(", "def should_omit("
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "should_skip()",
+        )
+
+
+def test_relative_gate_requires_fn_iter_markdown_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "def iter_markdown(", "def iter_md("
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "iter_markdown()",
+        )
+
+
+def test_relative_gate_requires_fn_check_file_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "def check_file(", "def check_path("
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "check_file()",
+        )
+
+
+def test_relative_gate_requires_fn_headings_in_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "def headings_in(", "def headings_of("
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "headings_in()",
+        )
+
+
+def test_relative_gate_requires_fn_fully_unquote_def_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "def fully_unquote(", "def fully_decode("
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "fully_unquote()",
+        )
+
+
+def test_relative_gate_requires_fn_github_slug_def_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "def github_slug(", "def gh_slug("
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "github_slug()",
+        )
+
+
+def test_relative_gate_requires_rglob_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace("rglob", "walk_md")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "rglob",
+        )
+
+
+def test_relative_gate_requires_live_path_53_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "live path after #53", "live path after #41"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "live path after #53",
+        )
+
+
+def test_relative_gate_requires_cap_wording_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8").replace("capped", "limited")
+        text = text.replace("Cap nested", "Bound nested")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "nested percent-decode cap",
+        )
+
+
+def test_run_stewardship_requires_pipefail_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "set -euo pipefail", "set -eu"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "set -euo pipefail",
+        )
+
+
+def test_run_stewardship_requires_bash_shebang_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "#!/usr/bin/env bash", "#!/bin/sh"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "#!/usr/bin/env bash",
+        )
+
+
+def test_relative_gate_max_unquote_still_4_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_relative_links as crl  # noqa: E402
+    importlib.reload(crl)
+    if crl._MAX_UNQUOTE_PASSES != 4:
+        raise AssertionError(f"_MAX_UNQUOTE_PASSES drifted: {crl._MAX_UNQUOTE_PASSES}")
+
+
+def test_relative_gate_skip_files_owasp_still_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_relative_links as crl  # noqa: E402
+    importlib.reload(crl)
+    if "OWASP-AGENTIC.md" not in crl.SKIP_FILES:
+        raise AssertionError("SKIP_FILES missing OWASP-AGENTIC.md")
+
+
+def test_relative_gate_skip_parts_git_still_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_relative_links as crl  # noqa: E402
+    importlib.reload(crl)
+    if ".git" not in crl.SKIP_PARTS:
+        raise AssertionError("SKIP_PARTS missing .git")
+
+
+def test_relative_gate_skip_parts_node_modules_still_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_relative_links as crl  # noqa: E402
+    importlib.reload(crl)
+    if "node_modules" not in crl.SKIP_PARTS:
+        raise AssertionError("SKIP_PARTS missing node_modules")
+
+
+def test_relative_gate_skip_prefixes_agents_still_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_relative_links as crl  # noqa: E402
+    importlib.reload(crl)
+    joined = " ".join(crl.SKIP_PREFIXES)
+    if "agents" not in joined:
+        raise AssertionError("SKIP_PREFIXES missing agents")
+
+
+def test_relative_gate_md_link_re_matches_link_still_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_relative_links as crl  # noqa: E402
+    importlib.reload(crl)
+    m = crl.MD_LINK_RE.search("[x](README.md)")
+    if not m or m.group(2) != "README.md":
+        raise AssertionError("MD_LINK_RE missed link target")
+
+
+def test_relative_gate_md_link_re_matches_image_still_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_relative_links as crl  # noqa: E402
+    importlib.reload(crl)
+    m = crl.MD_LINK_RE.search("![alt](img.png)")
+    if not m or m.group(2) != "img.png":
+        raise AssertionError("MD_LINK_RE missed image target")
+
+
+def test_relative_gate_fully_unquote_nested_still_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_relative_links as crl  # noqa: E402
+    importlib.reload(crl)
+    got = crl.fully_unquote("%252e%252e/x")
+    if "%25" in got.lower():
+        raise AssertionError(f"fully_unquote under-decoded: {got!r}")
+
+
+def test_relative_gate_github_slug_space_still_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_relative_links as crl  # noqa: E402
+    importlib.reload(crl)
+    if crl.github_slug("Hello World") != "hello-world":
+        raise AssertionError("github_slug space mapping drifted")
+
+
+def test_relative_gate_contract_fn_callable_still_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    if not callable(getattr(cbs, "check_relative_link_gate_contract", None)):
+        raise AssertionError("check_relative_link_gate_contract missing")
+
+
+def test_relative_gate_contract_live_empty_still_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+    importlib.reload(cbs)
+    errors: list[str] = []
+    cbs.check_relative_link_gate_contract(errors)
+    if errors:
+        raise AssertionError(f"live relative contract failed: {errors}")
+
+
+def test_relative_gate_docstring_live_path_53_still_after_53() -> None:
+    text = (SCRIPTS / "check_relative_links.py").read_text(encoding="utf-8")
+    if "live path after #53" not in text:
+        raise AssertionError("relative gate docstring missing live path after #53")
+
+
+def test_relative_gate_main_calls_iter_still_after_53() -> None:
+    text = (SCRIPTS / "check_relative_links.py").read_text(encoding="utf-8")
+    if "iter_markdown()" not in text:
+        raise AssertionError("main must call iter_markdown()")
+
+
+def test_relative_gate_main_calls_check_file_still_after_53() -> None:
+    text = (SCRIPTS / "check_relative_links.py").read_text(encoding="utf-8")
+    if "check_file(path, errors)" not in text:
+        raise AssertionError("main must call check_file(path, errors)")
+
+
+def test_run_stewardship_pipefail_still_after_53() -> None:
+    text = (SCRIPTS / "run_stewardship_checks.sh").read_text(encoding="utf-8")
+    if "set -euo pipefail" not in text:
+        raise AssertionError("run_stewardship_checks.sh missing set -euo pipefail")
+
+
+def test_run_stewardship_bash_shebang_still_after_53() -> None:
+    text = (SCRIPTS / "run_stewardship_checks.sh").read_text(encoding="utf-8")
+    if not text.startswith("#!/usr/bin/env bash"):
+        raise AssertionError("run_stewardship_checks.sh missing bash shebang")
+
+
+def test_relative_links_reject_empty_path_fragment_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](README.md#)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "empty fragment",
+        )
+
+
+def test_relative_links_reject_query_string_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](README.md?x=1)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "query string",
+        )
+
+
+def test_relative_links_accept_mailto_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](mailto:ops@example.com)\n")
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+
+def test_relative_links_accept_tel_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](tel:+15551212)\n")
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+
+def test_relative_links_accept_https_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](https://example.com)\n")
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+
+def test_relative_links_reject_http_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](http://example.com)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "insecure http://",
+        )
+
+
+def test_relative_links_reject_protocol_relative_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](//example.com)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "protocol-relative",
+        )
+
+
+def test_relative_links_reject_javascript_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](javascript:alert(1))\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "dangerous link scheme",
+        )
+
+
+def test_relative_links_reject_nul_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](README.md%00x)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "NUL",
+        )
+
+
+def test_relative_links_reject_escape_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](../../../../../../etc/passwd)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "escapes repo",
+        )
+
+
+def test_relative_links_reject_broken_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](no-such-file.md)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "broken relative link",
+        )
+
+
+def test_relative_links_reject_missing_heading_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# Title\n\n[x](#no-such-heading)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "missing heading",
+        )
+
+
+def test_relative_links_accept_valid_fragment_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# Title\n\n## Hello\n\n[x](#hello)\n")
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+
+def test_relative_links_skip_owasp_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n")
+        _write(tmp_path / "OWASP-AGENTIC.md", "# O\n\n[x](missing.md)\n")
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+
+def test_relative_links_skip_agents_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n")
+        agents = tmp_path / ".github" / "agents"
+        agents.mkdir(parents=True)
+        _write(agents / "prompt.md", "# P\n\n[x](missing.md)\n")
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+
+def test_relative_links_skip_node_modules_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n")
+        nm = tmp_path / "node_modules" / "pkg"
+        nm.mkdir(parents=True)
+        _write(nm / "README.md", "# P\n\n[x](missing.md)\n")
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+
+def test_relative_links_ignore_fenced_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(
+            tmp_path / "README.md",
+            "# T\n\n```md\n[x](missing.md)\n```\n",
+        )
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+
+def test_relative_links_accept_image_existing_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        (tmp_path / "logo.png").write_bytes(b"\x89PNG\r\n")
+        _write(tmp_path / "README.md", "# T\n\n![logo](logo.png)\n")
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+
+def test_relative_links_reject_broken_image_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n![logo](no-logo.png)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "broken relative link",
+        )
+
+
+def test_relative_links_reject_image_query_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        (tmp_path / "logo.png").write_bytes(b"\x89PNG\r\n")
+        _write(tmp_path / "README.md", "# T\n\n![logo](logo.png?x=1)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "query string",
+        )
+
+
+def test_relative_links_accept_title_attr_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", '# T\n\n[x](README.md "title")\n')
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+
+def test_relative_links_accept_angle_https_still_after_53() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](<https://example.com>)\n")
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+
+def test_relative_gate_contract_docstring_after_53_still() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "after #53; not badge-pin spam" not in text:
+        raise AssertionError("relative gate contract docstring missing #53 pin")
+
+
+def test_relative_gate_passes_live_script_still_after_53() -> None:
+    assert_pass_live("check_relative_links.py")
+
+
+def test_relative_gate_source_has_md_link_re_still_after_53() -> None:
+    text = (SCRIPTS / "check_relative_links.py").read_text(encoding="utf-8")
+    if "MD_LINK_RE" not in text:
+        raise AssertionError("check_relative_links.py missing MD_LINK_RE")
+
+
+def test_relative_gate_source_has_max_unquote_4_still_after_53() -> None:
+    text = (SCRIPTS / "check_relative_links.py").read_text(encoding="utf-8")
+    if "_MAX_UNQUOTE_PASSES = 4" not in text:
+        raise AssertionError("check_relative_links.py missing _MAX_UNQUOTE_PASSES = 4")
+
+
+def test_relative_gate_atx_heading_re_still_after_53() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_relative_links as crl  # noqa: E402
+    importlib.reload(crl)
+    if not crl.ATX_HEADING_RE.search("# Hello"):
+        raise AssertionError("ATX_HEADING_RE missed H1")
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -19330,6 +20122,75 @@ def main() -> int:
         test_badge_gate_lycheeignore_shields_still_after_48,
         test_badge_gate_source_has_contract_section_still_after_48,
         test_badge_gate_quiet_stewardship_doc_still_after_48,
+        # TOKENMAXX deepen after #53 (+68 relative-link gate pins)
+        test_relative_gate_requires_skip_parts_after_53,
+        test_relative_gate_requires_skip_files_after_53,
+        test_relative_gate_requires_skip_prefixes_after_53,
+        test_relative_gate_requires_md_link_re_after_53,
+        test_relative_gate_requires_image_capture_after_53,
+        test_relative_gate_requires_max_unquote_passes_after_53,
+        test_relative_gate_requires_max_unquote_eq_4_after_53,
+        test_relative_gate_requires_mailto_allowlist_after_53,
+        test_relative_gate_requires_tel_allowlist_after_53,
+        test_relative_gate_requires_https_allowlist_after_53,
+        test_relative_gate_requires_nul_needle_after_53,
+        test_relative_gate_requires_escapes_repo_needle_after_53,
+        test_relative_gate_requires_broken_relative_needle_after_53,
+        test_relative_gate_requires_missing_heading_needle_after_53,
+        test_relative_gate_requires_fn_should_skip_after_53,
+        test_relative_gate_requires_fn_iter_markdown_after_53,
+        test_relative_gate_requires_fn_check_file_after_53,
+        test_relative_gate_requires_fn_headings_in_after_53,
+        test_relative_gate_requires_fn_fully_unquote_def_after_53,
+        test_relative_gate_requires_fn_github_slug_def_after_53,
+        test_relative_gate_requires_rglob_after_53,
+        test_relative_gate_requires_live_path_53_after_53,
+        test_relative_gate_requires_cap_wording_after_53,
+        test_run_stewardship_requires_pipefail_after_53,
+        test_run_stewardship_requires_bash_shebang_after_53,
+        test_relative_gate_max_unquote_still_4_after_53,
+        test_relative_gate_skip_files_owasp_still_after_53,
+        test_relative_gate_skip_parts_git_still_after_53,
+        test_relative_gate_skip_parts_node_modules_still_after_53,
+        test_relative_gate_skip_prefixes_agents_still_after_53,
+        test_relative_gate_md_link_re_matches_link_still_after_53,
+        test_relative_gate_md_link_re_matches_image_still_after_53,
+        test_relative_gate_fully_unquote_nested_still_after_53,
+        test_relative_gate_github_slug_space_still_after_53,
+        test_relative_gate_contract_fn_callable_still_after_53,
+        test_relative_gate_contract_live_empty_still_after_53,
+        test_relative_gate_docstring_live_path_53_still_after_53,
+        test_relative_gate_main_calls_iter_still_after_53,
+        test_relative_gate_main_calls_check_file_still_after_53,
+        test_run_stewardship_pipefail_still_after_53,
+        test_run_stewardship_bash_shebang_still_after_53,
+        test_relative_links_reject_empty_path_fragment_still_after_53,
+        test_relative_links_reject_query_string_still_after_53,
+        test_relative_links_accept_mailto_still_after_53,
+        test_relative_links_accept_tel_still_after_53,
+        test_relative_links_accept_https_still_after_53,
+        test_relative_links_reject_http_still_after_53,
+        test_relative_links_reject_protocol_relative_still_after_53,
+        test_relative_links_reject_javascript_still_after_53,
+        test_relative_links_reject_nul_still_after_53,
+        test_relative_links_reject_escape_still_after_53,
+        test_relative_links_reject_broken_still_after_53,
+        test_relative_links_reject_missing_heading_still_after_53,
+        test_relative_links_accept_valid_fragment_still_after_53,
+        test_relative_links_skip_owasp_still_after_53,
+        test_relative_links_skip_agents_still_after_53,
+        test_relative_links_skip_node_modules_still_after_53,
+        test_relative_links_ignore_fenced_still_after_53,
+        test_relative_links_accept_image_existing_still_after_53,
+        test_relative_links_reject_broken_image_still_after_53,
+        test_relative_links_reject_image_query_still_after_53,
+        test_relative_links_accept_title_attr_still_after_53,
+        test_relative_links_accept_angle_https_still_after_53,
+        test_relative_gate_contract_docstring_after_53_still,
+        test_relative_gate_passes_live_script_still_after_53,
+        test_relative_gate_source_has_md_link_re_still_after_53,
+        test_relative_gate_source_has_max_unquote_4_still_after_53,
+        test_relative_gate_atx_heading_re_still_after_53,
 
     ]
     try:

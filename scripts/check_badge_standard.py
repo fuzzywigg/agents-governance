@@ -31,6 +31,7 @@ WORKFLOWS = ROOT / ".github" / "workflows"
 RELATIVE_LINK_GATE = ROOT / "scripts" / "check_relative_links.py"
 WIKI_OUTLINE_GATE = ROOT / "scripts" / "check_wiki_outline.py"
 SCHEMA_GATE = ROOT / "scripts" / "check_stewardship_schema.py"
+COMMON_GATE = ROOT / "scripts" / "stewardship_common.py"
 RUN_STEWARDSHIP = ROOT / "scripts" / "run_stewardship_checks.sh"
 
 REQUIRED_ORDER = ("Link Check", "Markdown Lint", "License")
@@ -672,6 +673,119 @@ def check_contributing_and_agents(errors: list[str]) -> None:
         fail("Missing AGENTS.md", errors)
 
 
+def check_stewardship_common_gate_contract(errors: list[str]) -> None:
+    """Fail-close live stewardship_common wiring (after #46; not schema-pin spam)."""
+    if not COMMON_GATE.is_file():
+        fail("Missing scripts/stewardship_common.py (common helpers gate)", errors)
+        return
+    text = COMMON_GATE.read_text(encoding="utf-8")
+    for const in (
+        "SECRET_PATTERNS",
+        "SECRET_URL_HINTS",
+        "FORBIDDEN_BADGE_HINTS",
+        "DANGEROUS_LINK_SCHEMES",
+        "FENCED_BLOCK_RE",
+    ):
+        if const not in text:
+            fail(f"stewardship_common.py must declare {const}", errors)
+    for helper in (
+        "strip_fenced_code",
+        "has_dangerous_scheme",
+        "scan_secrets",
+        "markdown_files",
+        "load_workflow_text",
+        "fail",
+    ):
+        if f"def {helper}" not in text:
+            fail(f"stewardship_common.py must provide {helper}", errors)
+    if "ROOT =" not in text and "ROOT=" not in text:
+        fail("stewardship_common.py must declare ROOT", errors)
+    # Fail-closed after #46: live dangerous schemes.
+    for scheme in ("javascript:", "data:", "vbscript:", "file:"):
+        if f'"{scheme}"' not in text and f"'{scheme}'" not in text:
+            fail(
+                f"stewardship_common.py DANGEROUS_LINK_SCHEMES must pin {scheme}",
+                errors,
+            )
+    # Fail-closed after #46: live secret pattern needles.
+    for needle in (
+        "PRIVATE KEY",
+        "ghp",
+        "gho",
+        "ghu",
+        "ghs",
+        "ghr",
+        "github_pat_",
+        "aws_secret_access_key",
+        "xox[baprs]",
+        "npm_",
+        "AIza",
+        "sk|rk",
+    ):
+        if needle not in text:
+            fail(
+                f"stewardship_common.py SECRET_PATTERNS must pin {needle}",
+                errors,
+            )
+    # Fail-closed after #46: live URL hint set.
+    for hint in (
+        "token=",
+        "access_token=",
+        "api_key=",
+        "apikey=",
+        "client_secret=",
+        "ghp_",
+        "gho_",
+        "github_pat_",
+    ):
+        if f'"{hint}"' not in text and f"'{hint}'" not in text:
+            fail(
+                f"stewardship_common.py SECRET_URL_HINTS must pin {hint}",
+                errors,
+            )
+    # Fail-closed after #46: invent-product / social / registry chrome.
+    for hint in (
+        "coverage",
+        "codecov",
+        "coveralls",
+        "downloads",
+        "discord",
+        "twitter",
+        "x.com",
+        "stars",
+        "forks",
+        "followers",
+        "npm/",
+        "pypi/",
+        "producthunt",
+        "buymeacoffee",
+        "opencollective",
+    ):
+        if f'"{hint}"' not in text and f"'{hint}'" not in text:
+            fail(
+                f"stewardship_common.py FORBIDDEN_BADGE_HINTS must pin {hint}",
+                errors,
+            )
+    # Fence strip must cover both markdown fence styles.
+    if "```" not in text or "~~~" not in text:
+        fail(
+            "stewardship_common.py FENCED_BLOCK_RE must cover ``` and ~~~ fences",
+            errors,
+        )
+    # Query-param URL hints are distinguished via endswith("=").
+    if 'endswith("=")' not in text and "endswith('=')" not in text:
+        fail(
+            "stewardship_common.py scan_secrets must treat endswith('=') "
+            "URL hints as query params",
+            errors,
+        )
+    if "lowered" not in text and ".lower()" not in text:
+        fail(
+            "stewardship_common.py must casefold targets via lower()/lowered",
+            errors,
+        )
+
+
 def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
     """Fail-close live stewardship-schema gate wiring (after #45; not wiki-pin spam)."""
     if not SCHEMA_GATE.is_file():
@@ -1124,6 +1238,7 @@ def main() -> int:
     check_relative_link_gate_contract(errors)
     check_wiki_outline_gate_contract(errors)
     check_stewardship_schema_gate_contract(errors)
+    check_stewardship_common_gate_contract(errors)
     if BADGE_STANDARD.is_file():
         check_badge_standard_doc(errors)
         scan_secrets(BADGE_STANDARD, errors)

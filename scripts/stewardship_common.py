@@ -1,5 +1,18 @@
 #!/usr/bin/env python3
-"""Shared helpers for stewardship doc gates (no invent-product surface)."""
+"""Shared helpers for stewardship doc gates (no invent-product surface).
+
+Fail-closed pins (live path after #46):
+- SECRET_PATTERNS cover private keys / ghp|gho|ghu|ghs|ghr / github_pat_ /
+  sk|rk- / api_key / aws_secret_access_key / xox[baprs]- / npm_ / AIza
+- SECRET_URL_HINTS pin token= / access_token= / api_key= / apikey= /
+  client_secret= / ghp_ / gho_ / github_pat_ (query hints only when endswith =)
+- FORBIDDEN_BADGE_HINTS pin invent-product / social / registry chrome
+  (coverage / codecov / discord / stars / npm/ / producthunt / …)
+- DANGEROUS_LINK_SCHEMES pin javascript: / data: / vbscript: / file:
+- FENCED_BLOCK_RE strips ``` and ~~~ fences before integrity scans
+- Helpers: strip_fenced_code / has_dangerous_scheme / scan_secrets /
+  markdown_files / load_workflow_text / fail (shared across gates)
+"""
 
 from __future__ import annotations
 
@@ -9,6 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 # Public docs must not ship secrets / private MEMORY dumps.
+# Fail-closed after #46: live secret patterns only (no invent-product surface).
 SECRET_PATTERNS: tuple[re.Pattern[str], ...] = (
     re.compile(r"-----BEGIN (?:RSA |OPENSSH |EC )?PRIVATE KEY-----"),
     re.compile(r"\b(ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9]{20,}\b"),
@@ -23,6 +37,7 @@ SECRET_PATTERNS: tuple[re.Pattern[str], ...] = (
     re.compile(r"\bAIza[0-9A-Za-z\-_]{20,}\b"),
 )
 
+# Fail-closed after #46: query-param hints end with "="; token prefixes do not.
 SECRET_URL_HINTS = (
     "token=",
     "access_token=",
@@ -35,6 +50,7 @@ SECRET_URL_HINTS = (
 )
 
 # Invent-product / social chrome that must never appear as README badges.
+# Fail-closed after #46: live forbidden badge chrome set (no fourth-badge spam).
 FORBIDDEN_BADGE_HINTS = (
     "coverage",
     "codecov",
@@ -54,6 +70,7 @@ FORBIDDEN_BADGE_HINTS = (
 )
 
 # Link schemes that must never appear as markdown targets in public docs.
+# Fail-closed after #46: four live dangerous schemes only.
 DANGEROUS_LINK_SCHEMES = (
     "javascript:",
     "data:",
@@ -62,6 +79,7 @@ DANGEROUS_LINK_SCHEMES = (
 )
 
 # Fenced code: ``` or ~~~, optional language tag.
+# Fail-closed after #46: both fence styles stripped before link/secret scans.
 FENCED_BLOCK_RE = re.compile(r"(?:```|~~~).*?(?:```|~~~)", re.DOTALL)
 
 

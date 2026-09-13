@@ -276,3 +276,12 @@ _None yet._
 2026-09-13T21:50:50Z
 
 2026-09-13T21:53:48Z cursor: PR #46 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-038 TOKENMAXX stewardship-schema gate pins
+
+### [ECO-039] TOKENMAXX deepen stewardship_common gate pins after #46 — 2026-09-13T22:10:45Z
+- [x] cursor: Read live tree post-#46 (1045 cases; stewardship-schema pins saturated)
+- [x] cursor: Fail-close stewardship_common — SECRET_PATTERNS / SECRET_URL_HINTS / FORBIDDEN_BADGE_HINTS / DANGEROUS_LINK_SCHEMES / FENCED_BLOCK_RE / strip_fenced_code / scan_secrets / endswith(=) URL hints
+- [x] cursor: Expand self-tests 1045 → 1116 (common helper gate contract slice; not schema / wiki-outline / relative-link / CI workflow pin / fixture-reject spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING stewardship_common shared-helper / invent-chrome / secret-scheme pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-common-gate-pins-29f9
+2026-09-13T22:10:45Z

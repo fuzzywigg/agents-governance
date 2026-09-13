@@ -11,6 +11,14 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship_common gate pins after #46: expand self-tests to 1116
+  cases (was 1045) fail-closing live shared helper integrity — SECRET_PATTERNS /
+  SECRET_URL_HINTS / FORBIDDEN_BADGE_HINTS / DANGEROUS_LINK_SCHEMES /
+  FENCED_BLOCK_RE / strip_fenced_code / scan_secrets / endswith(`=`) URL-hint
+  query distinction, plus stewardship_common gate contract pins in
+  `check_badge_standard.py` — common helper gate contract slice only
+  (not schema / wiki-outline / relative-link / CI workflow pin /
+  fixture-reject spam); no invent-product; no fourth badge
 - TOKENMAXX stewardship-schema gate pins after #45: expand self-tests to 1045
   cases (was 974) fail-closing live schema integrity — DOC_SCHEMAS /
   EXPECTED_VALUES / SEMVER / ISO-8601 / closes `#N` / invent edit_policy /

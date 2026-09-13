@@ -241,3 +241,4 @@ _None yet._
 - Scope: EXISTING relative-link gate / relative self-tests only; different slice from mega stewardship fixtures + schema (#40) + CI pins (#41); no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-relative-link-gates-7675
 2026-09-13T21:00:00Z
+2026-09-13T21:10:00Z cursor: PR #42 CI green (lint + link-check + stewardship/actionlint + relative self-tests) ← complete ECO-035 TOKENMAXX relative-link gate slice

@@ -85,7 +85,11 @@ EXPECTED_VALUES / SEMVER / ISO-8601 / closes `#N` / invent edit_policy /
 issue-backlog owner `copilot` / `scan_secrets`,
 plus stewardship_common contract pins after #46: SECRET_PATTERNS /
 SECRET_URL_HINTS / FORBIDDEN_BADGE_HINTS / DANGEROUS_LINK_SCHEMES /
-`strip_fenced_code` / `scan_secrets` / invent-product wording).
+`strip_fenced_code` / `scan_secrets` / invent-product wording,
+plus badge-standard gate contract pins after #48: `REQUIRED_ORDER` /
+`MAX_BADGES=3` / `EXPECTED_REPO` / `BADGE_LINE_RE` / contiguous row /
+shields license / `FORBIDDEN_BADGE_HINTS` + `SECRET_URL_HINTS` /
+`verify_badge_standard_source_contract`).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

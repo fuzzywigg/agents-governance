@@ -287,3 +287,12 @@ _None yet._
 2026-09-13T22:02:06Z
 
 2026-09-13T22:05:00Z cursor: PR #48 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-039 TOKENMAXX stewardship_common gate pins
+
+### [ECO-040] TOKENMAXX deepen badge-standard gate pins after #48 — 2026-09-13T22:15:00Z
+- [x] cursor: Read live tree post-#48 (1114 cases; stewardship_common pins saturated; closed conflicting #49/#50/#51)
+- [x] cursor: Fail-close badge-standard gate — REQUIRED_ORDER / MAX_BADGES=3 / EXPECTED_REPO / BADGE_LINE_RE / contiguous / shields license / FORBIDDEN_BADGE_HINTS + SECRET_URL_HINTS / verify_badge_standard_source_contract
+- [x] cursor: Expand self-tests 1114 → 1188 (badge-standard gate contract slice; not schema / wiki / relative / common / CI workflow pin spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING badge-standard / source-contract pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-badge-standard-pins-7b82
+2026-09-13T22:15:00Z

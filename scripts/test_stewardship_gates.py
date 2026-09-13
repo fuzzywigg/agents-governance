@@ -62,6 +62,12 @@ backlink / Unexpected+Missing+FAILED needles / angle+image RE /
 Do-not-push / README blob / badge-standard hint / stars+forks+followers /
 invent-chrome needle / Home.md table row (not relative / schema / badge /
 common / CI workflow pin spam).
+Deepened after #61: badge-standard second-pass — BADGE_LINE_RE named groups /
+path constants / contiguous+order+exactly fail needles / Forbidden
+invent-product / Secret-like token / repo slug / actions/workflows /
+absolute https / Unexpected label / H1 row / LICENSE link / OK+FAILED
+banners / docs+CONTRIBUTING+AGENTS path pins (not wiki / relative /
+schema / common / actionlint / CI workflow pin spam).
 """
 
 from __future__ import annotations
@@ -18125,7 +18131,8 @@ def test_badge_gate_lycheeignore_shields_still_after_48() -> None:
 
 def test_badge_gate_source_has_contract_section_still_after_48() -> None:
     text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
-    if "after #48; not common-pin spam" not in text:
+    # Second-pass after #61 keeps #48 lineage via "deepen after #48".
+    if "deepen after #48" not in text and "after #48; not common-pin spam" not in text:
         raise AssertionError("badge gate contract docstring missing #48 pin")
 
 def test_badge_gate_quiet_stewardship_doc_still_after_48() -> None:
@@ -21328,6 +21335,932 @@ def test_wiki_passes_good_fixture_still_after_59() -> None:
         assert_pass_script(scripts / "check_wiki_outline.py", tmp_path)
 
 
+# --- TOKENMAXX deepen after #61: badge-standard second-pass / fail-closed pins ---
+
+def test_badge_gate_requires_label_group_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace("(?P<label>", "(?P<lbl>")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "label",
+        )
+
+
+def test_badge_gate_requires_img_group_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace("(?P<img>", "(?P<image>")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "img",
+        )
+
+
+def test_badge_gate_requires_link_group_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace("(?P<link>", "(?P<href>")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "link",
+        )
+
+
+def test_badge_gate_requires_readme_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('"README.md"', '"READ_ME.md"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "README.md",
+        )
+
+
+def test_badge_gate_requires_license_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'LICENSE = ROOT / "LICENSE"', 'LICENSE = ROOT / "LICENCE"'
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'LICENSE = ROOT / "LICENSE"',
+        )
+
+
+def test_badge_gate_requires_badge_standard_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'ROOT / "docs" / "badge-standard.md"',
+            'ROOT / "docs" / "badge_standard.md"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "badge-standard.md",
+        )
+
+
+def test_badge_gate_requires_contributing_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '"CONTRIBUTING.md"', '"CONTRIBUTE.md"'
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "CONTRIBUTING.md",
+        )
+
+
+def test_badge_gate_requires_agents_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('"AGENTS.md"', '"AGENT.md"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "AGENTS.md",
+        )
+
+
+def test_badge_gate_requires_lycheeignore_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '".lycheeignore"', '".lychee-ignore"'
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            ".lycheeignore",
+        )
+
+
+def test_badge_gate_requires_markdownlint_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '".markdownlint.json"', '".markdown-lint.json"'
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            ".markdownlint.json",
+        )
+
+
+def test_badge_gate_requires_github_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'ROOT / ".github" / "workflows"',
+            'ROOT / ".gh" / "workflows"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            ".github",
+        )
+
+
+def test_badge_gate_requires_workflows_path_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'ROOT / ".github" / "workflows"',
+            'ROOT / ".github" / "workflowz"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "workflows",
+        )
+
+
+def test_badge_gate_requires_owner_group_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace("(?P<owner>", "(?P<org>")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "owner",
+        )
+
+
+def test_badge_gate_requires_repo_group_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace("(?P<repo>", "(?P<name>")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "repo",
+        )
+
+
+def test_badge_gate_requires_contiguous_msg_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "Badge row must be contiguous", "Badge row must be adjacent"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Badge row must be contiguous",
+        )
+
+
+def test_badge_gate_requires_exactly_max_msg_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "exactly {MAX_BADGES} badges", "precisely {MAX_BADGES} badges"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exactly {MAX_BADGES} badges",
+        )
+
+
+def test_badge_gate_requires_order_msg_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "Badge labels must be in order", "Badge labels must follow sequence"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Badge labels must be in order",
+        )
+
+
+def test_badge_gate_requires_invent_hint_msg_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "Forbidden invent-product / social badge hint",
+            "Forbidden invent-product / social chrome hint",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Forbidden invent-product / social badge hint",
+        )
+
+
+def test_badge_gate_requires_secret_msg_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "Secret-like token in badge URL", "Secret-like token in badge href"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Secret-like token in badge URL",
+        )
+
+
+def test_badge_gate_requires_slug_msg_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "Badge URL repo slug must be", "Badge URL repo slug must equal"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Badge URL repo slug must be",
+        )
+
+
+def test_badge_gate_requires_actions_workflows_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "actions/workflows/", "actions/workflow/"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "actions/workflows/",
+        )
+
+
+def test_badge_gate_requires_absolute_https_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "absolute https://", "absolute http://"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "absolute https://",
+        )
+
+
+def test_badge_gate_requires_unexpected_label_msg_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "Unexpected badge label", "Unknown badge label"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Unexpected badge label",
+        )
+
+
+def test_badge_gate_requires_h1_row_msg_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "immediately under the H1", "immediately under the title"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "immediately under the H1",
+        )
+
+
+def test_badge_gate_requires_license_link_msg_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "License badge link must point at LICENSE",
+            "License badge link must target LICENSE",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "License badge link must point at LICENSE",
+        )
+
+
+def test_badge_gate_requires_dot_slash_license_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('"./LICENSE"', '"./LICENCE"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "./LICENSE",
+        )
+
+
+def test_badge_gate_requires_ok_banner_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "OK: README badge row matches", "OK: README badges match"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "OK: README badge row matches",
+        )
+
+
+def test_badge_gate_requires_fail_banner_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "Badge standard check FAILED", "Badge standard check failed"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Badge standard check FAILED",
+        )
+
+
+def test_badge_gate_requires_docs_badge_ref_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "docs/badge-standard.md", "docs/badge_standard.md"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "docs/badge-standard.md",
+        )
+
+
+def test_badge_gate_requires_run_script_ref_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "run_stewardship_checks.sh", "run_stewardship_check.sh"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "run_stewardship_checks.sh",
+        )
+
+
+def test_badge_gate_requires_relative_agents_needle_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('"relative"', '"relatives"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "relative",
+        )
+
+
+def test_badge_gate_requires_self_contract_first_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "self-contract first", "self-contract early"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "self-contract first",
+        )
+
+
+def test_badge_gate_requires_badge_gate_const_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace("BADGE_GATE", "BADGE_SCRIPT")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "BADGE_GATE",
+        )
+
+
+def test_badge_gate_requires_badge_standard_const_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "BADGE_STANDARD", "BADGE_STD_DOC"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "BADGE_STANDARD",
+        )
+
+
+def test_badge_gate_requires_contributing_const_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace("CONTRIBUTING", "CONTRIB")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "CONTRIBUTING",
+        )
+
+
+def test_badge_gate_requires_lycheeignore_const_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace("LYCHEEIGNORE", "LYCHEE_IGNORE")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "LYCHEEIGNORE",
+        )
+
+
+def test_badge_gate_requires_markdownlint_const_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "MARKDOWNLINT_CONFIG", "MARKDOWN_LINT_CONFIG"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "MARKDOWNLINT_CONFIG",
+        )
+
+
+def test_badge_rejects_wrong_order_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(
+            tmp_path,
+            _good_readme(("Markdown Lint", "Link Check", "License")),
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Badge labels must be in order",
+        )
+
+
+def test_badge_rejects_noncontiguous_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = _good_readme()
+        out = []
+        inserted = False
+        for line in readme.splitlines():
+            out.append(line)
+            if not inserted and line.startswith("[![Link Check]"):
+                out.append("")
+                inserted = True
+        scripts = _seed_badge_tree(tmp_path, "\n".join(out) + "\n")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "contiguous",
+        )
+
+
+def test_badge_rejects_four_badges_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        out = []
+        for line in _good_readme().splitlines():
+            out.append(line)
+            if line.startswith("[![License]"):
+                out.append(
+                    "[![Extra](https://img.shields.io/badge/extra-x-red)]"
+                    "(https://example.com/extra)"
+                )
+        scripts = _seed_badge_tree(tmp_path, "\n".join(out) + "\n")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exactly 3 badges",
+        )
+
+
+def test_badge_rejects_http_image_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = _good_readme().replace(
+            "https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/link-check.yml/badge.svg",
+            "http://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/link-check.yml/badge.svg",
+            1,
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "https://",
+        )
+
+
+def test_badge_rejects_secret_url_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = _good_readme().replace(
+            "actions/workflows/link-check.yml)",
+            "actions/workflows/link-check.yml?token=ghp_example)",
+            1,
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Secret-like token",
+        )
+
+
+def test_badge_rejects_wrong_repo_slug_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = _good_readme().replace(
+            "fuzzywigg/agents-governance",
+            "fuzzywigg/other-repo",
+            1,
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "fuzzywigg/agents-governance",
+        )
+
+
+def test_badge_rejects_wrong_license_link_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = _good_readme().replace("(LICENSE)", "(COPYING)", 1)
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "License badge link must point at LICENSE",
+        )
+
+
+def test_badge_rejects_stewardship_product_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = _good_readme() + (
+            "\n[![Stewardship](https://img.shields.io/badge/stewardship-x-blue)]"
+            "(https://example.com/stew)\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Stewardship product/status badge",
+        )
+
+
+def test_badge_rejects_missing_h1_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = _good_readme().replace("# agents-governance", "agents-governance", 1)
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "H1",
+        )
+
+
+def test_badge_rejects_link_check_rel_workflow_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = _good_readme().replace(
+            "(https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/link-check.yml)",
+            "(actions/workflows/link-check.yml)",
+            1,
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "absolute https://",
+        )
+
+
+def test_badge_rejects_stars_hint_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        lines = []
+        for line in _good_readme().splitlines():
+            if line.startswith("[![Link Check]"):
+                lines.append(
+                    "[![Link Check](https://github.com/fuzzywigg/agents-governance/"
+                    "actions/workflows/link-check.yml/badge.svg?label=stars)]"
+                    "(https://github.com/fuzzywigg/agents-governance/"
+                    "actions/workflows/link-check.yml)"
+                )
+            else:
+                lines.append(line)
+        scripts = _seed_badge_tree(tmp_path, "\n".join(lines) + "\n")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "stars",
+        )
+
+
+def test_badge_rejects_missing_readme_doc_link_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = _good_readme().replace("docs/badge-standard.md", "docs/other.md")
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "docs/badge-standard.md",
+        )
+
+
+def test_badge_rejects_missing_run_script_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = _good_readme().replace(
+            "scripts/run_stewardship_checks.sh", "scripts/run_checks.sh"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "run_stewardship_checks.sh",
+        )
+
+
+def test_badge_accepts_dot_slash_license_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = _good_readme().replace("(LICENSE)", "(./LICENSE)", 1)
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+
+def test_badge_passes_good_fixture_still_after_61() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+
+def test_badge_gate_required_order_still_after_61() -> None:
+    import check_badge_standard as cbs  # noqa: E402
+
+    assert list(cbs.REQUIRED_ORDER) == ["Link Check", "Markdown Lint", "License"]
+
+
+def test_badge_gate_max_badges_still_after_61() -> None:
+    import check_badge_standard as cbs  # noqa: E402
+
+    assert cbs.MAX_BADGES == 3
+
+
+def test_badge_gate_expected_repo_still_after_61() -> None:
+    import check_badge_standard as cbs  # noqa: E402
+
+    assert cbs.EXPECTED_REPO == "fuzzywigg/agents-governance"
+
+
+def test_badge_gate_contract_fn_still_after_61() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "def check_badge_standard_gate_contract(" not in text:
+        raise AssertionError("missing check_badge_standard_gate_contract")
+
+
+def test_badge_gate_second_pass_comment_still_after_61() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "Fail-closed after #61: second-pass" not in text:
+        raise AssertionError("missing #61 second-pass contract comment")
+
+
+def test_badge_gate_docstring_second_pass_still_after_61() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "Second-pass (#61)" not in text:
+        raise AssertionError("module docstring missing Second-pass (#61)")
+
+
+def test_badge_gate_contract_errors_empty_live_still_after_61() -> None:
+    import check_badge_standard as cbs  # noqa: E402
+
+    errors: list[str] = []
+    cbs.check_badge_standard_gate_contract(errors)
+    if errors:
+        raise AssertionError(f"live contract errors: {errors}")
+
+
+def test_badge_gate_main_calls_contract_still_after_61() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "check_badge_standard_gate_contract(errors)" not in text:
+        raise AssertionError("main must call check_badge_standard_gate_contract")
+
+
+def test_badge_gate_ok_banner_live_still_after_61() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "OK: README badge row matches" not in text:
+        raise AssertionError("missing OK banner")
+
+
+def test_badge_gate_fail_banner_live_still_after_61() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "Badge standard check FAILED" not in text:
+        raise AssertionError("missing FAIL banner")
+
+
+def test_badge_gate_actions_workflows_live_still_after_61() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "actions/workflows/" not in text:
+        raise AssertionError("missing actions/workflows/ pin")
+
+
+def test_badge_gate_absolute_https_live_still_after_61() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "absolute https://" not in text:
+        raise AssertionError("missing absolute https:// pin")
+
+
+def test_badge_gate_relative_agents_live_still_after_61() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if '"relative"' not in text:
+        raise AssertionError("missing AGENTS relative needle")
+
+
+def test_badge_gate_self_contract_first_live_still_after_61() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "self-contract first" not in text:
+        raise AssertionError("missing self-contract first pin")
+
+
+def test_badge_gate_named_groups_live_still_after_61() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    for g in ("label", "img", "link"):
+        if f"(?P<{g}>" not in text:
+            raise AssertionError(f"missing BADGE_LINE_RE group {g}")
+
+
+def test_badge_gate_path_constants_live_still_after_61() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    for pin in (
+        "BADGE_GATE",
+        "BADGE_STANDARD",
+        "CONTRIBUTING",
+        "LYCHEEIGNORE",
+        "MARKDOWNLINT_CONFIG",
+    ):
+        if pin not in text:
+            raise AssertionError(f"missing path constant {pin}")
+
+
+def test_badge_gate_passes_live_contract_still_after_61() -> None:
+    assert_pass_live("check_badge_standard.py")
+
+
+def test_badge_gate_requires_license_assignment_pin_after_61() -> None:
+    """Contract itself pins LICENSE = ROOT / \"LICENSE\" assignment form."""
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if 'LICENSE = ROOT / "LICENSE"' not in text:
+        raise AssertionError("missing LICENSE assignment pin")
+
+
+def test_badge_gate_requires_readme_assignment_pin_after_61() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if 'README = ROOT / "README.md"' not in text:
+        raise AssertionError("missing README assignment pin")
+
+
+def test_badge_gate_quiet_stewardship_still_after_61() -> None:
+    text = (SCRIPTS / "check_badge_standard.py").read_text(encoding="utf-8")
+    if "Quiet stewardship" not in text:
+        raise AssertionError("missing Quiet stewardship pin")
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -22758,6 +23691,79 @@ def main() -> int:
         test_wiki_gate_requires_kill_switch_still_after_59,
         test_wiki_gate_requires_scan_secrets_still_after_59,
         test_wiki_passes_good_fixture_still_after_59,
+        # TOKENMAXX deepen after #61 (+72 badge-standard second-pass pins)
+        test_badge_gate_requires_label_group_after_61,
+        test_badge_gate_requires_img_group_after_61,
+        test_badge_gate_requires_link_group_after_61,
+        test_badge_gate_requires_readme_path_after_61,
+        test_badge_gate_requires_license_path_after_61,
+        test_badge_gate_requires_badge_standard_path_after_61,
+        test_badge_gate_requires_contributing_path_after_61,
+        test_badge_gate_requires_agents_path_after_61,
+        test_badge_gate_requires_lycheeignore_path_after_61,
+        test_badge_gate_requires_markdownlint_path_after_61,
+        test_badge_gate_requires_github_path_after_61,
+        test_badge_gate_requires_workflows_path_after_61,
+        test_badge_gate_requires_owner_group_after_61,
+        test_badge_gate_requires_repo_group_after_61,
+        test_badge_gate_requires_contiguous_msg_after_61,
+        test_badge_gate_requires_exactly_max_msg_after_61,
+        test_badge_gate_requires_order_msg_after_61,
+        test_badge_gate_requires_invent_hint_msg_after_61,
+        test_badge_gate_requires_secret_msg_after_61,
+        test_badge_gate_requires_slug_msg_after_61,
+        test_badge_gate_requires_actions_workflows_after_61,
+        test_badge_gate_requires_absolute_https_after_61,
+        test_badge_gate_requires_unexpected_label_msg_after_61,
+        test_badge_gate_requires_h1_row_msg_after_61,
+        test_badge_gate_requires_license_link_msg_after_61,
+        test_badge_gate_requires_dot_slash_license_after_61,
+        test_badge_gate_requires_ok_banner_after_61,
+        test_badge_gate_requires_fail_banner_after_61,
+        test_badge_gate_requires_docs_badge_ref_after_61,
+        test_badge_gate_requires_run_script_ref_after_61,
+        test_badge_gate_requires_relative_agents_needle_after_61,
+        test_badge_gate_requires_self_contract_first_after_61,
+        test_badge_gate_requires_badge_gate_const_after_61,
+        test_badge_gate_requires_badge_standard_const_after_61,
+        test_badge_gate_requires_contributing_const_after_61,
+        test_badge_gate_requires_lycheeignore_const_after_61,
+        test_badge_gate_requires_markdownlint_const_after_61,
+        test_badge_rejects_wrong_order_still_after_61,
+        test_badge_rejects_noncontiguous_still_after_61,
+        test_badge_rejects_four_badges_still_after_61,
+        test_badge_rejects_http_image_still_after_61,
+        test_badge_rejects_secret_url_still_after_61,
+        test_badge_rejects_wrong_repo_slug_still_after_61,
+        test_badge_rejects_wrong_license_link_still_after_61,
+        test_badge_rejects_stewardship_product_still_after_61,
+        test_badge_rejects_missing_h1_still_after_61,
+        test_badge_rejects_link_check_rel_workflow_still_after_61,
+        test_badge_rejects_stars_hint_still_after_61,
+        test_badge_rejects_missing_readme_doc_link_still_after_61,
+        test_badge_rejects_missing_run_script_still_after_61,
+        test_badge_accepts_dot_slash_license_still_after_61,
+        test_badge_passes_good_fixture_still_after_61,
+        test_badge_gate_required_order_still_after_61,
+        test_badge_gate_max_badges_still_after_61,
+        test_badge_gate_expected_repo_still_after_61,
+        test_badge_gate_contract_fn_still_after_61,
+        test_badge_gate_second_pass_comment_still_after_61,
+        test_badge_gate_docstring_second_pass_still_after_61,
+        test_badge_gate_contract_errors_empty_live_still_after_61,
+        test_badge_gate_main_calls_contract_still_after_61,
+        test_badge_gate_ok_banner_live_still_after_61,
+        test_badge_gate_fail_banner_live_still_after_61,
+        test_badge_gate_actions_workflows_live_still_after_61,
+        test_badge_gate_absolute_https_live_still_after_61,
+        test_badge_gate_relative_agents_live_still_after_61,
+        test_badge_gate_self_contract_first_live_still_after_61,
+        test_badge_gate_named_groups_live_still_after_61,
+        test_badge_gate_path_constants_live_still_after_61,
+        test_badge_gate_passes_live_contract_still_after_61,
+        test_badge_gate_requires_license_assignment_pin_after_61,
+        test_badge_gate_requires_readme_assignment_pin_after_61,
+        test_badge_gate_quiet_stewardship_still_after_61,
 
     ]
     try:

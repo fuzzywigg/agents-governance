@@ -77,7 +77,12 @@ plus wiki-outline second-pass after #59: `OPERATOR_ONLY` / docs/wiki /
 surface+routing+`run_stewardship_checks.sh`+badge topic pins / `](Home.md)`
 backlink / Unexpected+Missing+FAILED needles / angle+image RE /
 Do-not-push / README blob / badge-standard hint / social special-case
-pins / invent-chrome needle / Home.md table row).
+pins / invent-chrome needle / Home.md table row,
+plus badge-standard second-pass after #61: `BADGE_LINE_RE` named groups /
+path constants / contiguous+order+exactly fail needles / Forbidden
+invent-product / Secret-like token / repo slug / `actions/workflows/` /
+absolute https / Unexpected label / H1 row / LICENSE link / OK+FAILED
+banners / docs+CONTRIBUTING+AGENTS path pins).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

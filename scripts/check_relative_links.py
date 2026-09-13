@@ -35,6 +35,9 @@ MD_LINK_RE = re.compile(r"!?\[([^\]]*)\]\(\s*([^)\s]*)(?:\s+\"[^\"]*\")?\s*\)")
 # ATX headings for fragment checks (GitHub-ish slug approximation).
 ATX_HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$", re.MULTILINE)
 
+# External schemes allowed after dangerous/http checks (fail-closed empty payload).
+SAFE_EXTERNAL_SCHEMES = ("https://", "mailto:", "tel:")
+
 
 def should_skip(path: Path) -> bool:
     rel = path.relative_to(ROOT).as_posix()
@@ -43,6 +46,23 @@ def should_skip(path: Path) -> bool:
     if any(part in SKIP_PARTS for part in path.parts):
         return True
     return any(rel.startswith(prefix.replace("\\", "/")) for prefix in SKIP_PREFIXES)
+
+
+def has_control_chars(text: str) -> bool:
+    """True if text contains ASCII control characters (incl. NUL / CR / LF / TAB)."""
+    return any(ord(ch) < 32 for ch in text)
+
+
+def empty_scheme_payload(raw: str) -> str | None:
+    """Return scheme name if mailto:/tel: has an empty payload; else None."""
+    lowered = raw.strip().lower()
+    for scheme in ("mailto:", "tel:"):
+        if lowered.startswith(scheme):
+            payload = raw.strip()[len(scheme) :].strip()
+            if not payload:
+                return scheme.rstrip(":")
+            return None
+    return None
 
 
 def github_slug(heading: str) -> str:
@@ -62,6 +82,14 @@ def github_slug(heading: str) -> str:
 def headings_in(path: Path) -> set[str]:
     text = path.read_text(encoding="utf-8")
     return {github_slug(match.group(2)) for match in ATX_HEADING_RE.finditer(text)}
+
+
+def fragment_resolves(frag: str, slugs: set[str]) -> bool:
+    """True if fragment matches a heading slug (normalized or github_slug)."""
+    if not frag or not frag.strip():
+        return False
+    normalized = frag.strip().lower()
+    return normalized in slugs or github_slug(frag) in slugs
 
 
 def iter_markdown() -> list[Path]:
@@ -91,6 +119,13 @@ def check_file(path: Path, errors: list[str]) -> None:
                     f"{path.relative_to(ROOT)}: insecure http:// link (use https://) → {raw}",
                     errors,
                 )
+                continue
+            empty = empty_scheme_payload(raw)
+            if empty:
+                fail(
+                    f"{path.relative_to(ROOT)}: empty {empty}: link payload → {raw}",
+                    errors,
+                )
             continue
         if raw.startswith("//"):
             fail(
@@ -101,29 +136,50 @@ def check_file(path: Path, errors: list[str]) -> None:
 
         # Percent-encoded path traversal (e.g. %2e%2e/..) must not escape the repo.
         decoded = unquote(raw)
-        if "\0" in decoded:
-            fail(f"{path.relative_to(ROOT)}: NUL in link target → {raw}", errors)
+        if "\0" in decoded or has_control_chars(decoded):
+            fail(
+                f"{path.relative_to(ROOT)}: control char / NUL in link target → {raw}",
+                errors,
+            )
+            continue
+        # Windows-style backslash paths must not sneak past POSIX resolve checks.
+        if "\\" in decoded:
+            fail(
+                f"{path.relative_to(ROOT)}: backslash path separator not allowed → {raw}",
+                errors,
+            )
             continue
 
         # Ignore pure fragment self-links without a path (same-file anchors).
+        # Use decoded so percent-encoded whitespace fragments fail closed.
         if raw.startswith("#"):
             dest = path
-            frag = raw[1:]
-            if frag:
-                slugs = headings_in(dest)
-                normalized = frag.strip().lower()
-                if normalized not in slugs and github_slug(frag) not in slugs:
-                    fail(
-                        f"{path.relative_to(ROOT)}: missing heading #{frag} in "
-                        f"{dest.relative_to(ROOT)}",
-                        errors,
-                    )
+            frag = decoded[1:] if decoded.startswith("#") else raw[1:]
+            if not frag.strip():
+                fail(
+                    f"{path.relative_to(ROOT)}: empty / whitespace-only fragment → {raw}",
+                    errors,
+                )
+                continue
+            slugs = headings_in(dest)
+            if not fragment_resolves(frag, slugs):
+                fail(
+                    f"{path.relative_to(ROOT)}: missing heading #{frag} in "
+                    f"{dest.relative_to(ROOT)}",
+                    errors,
+                )
             continue
 
         check_target = decoded if decoded != raw else raw
         target, frag = (
             (check_target.split("#", 1) + [""])[:2] if "#" in check_target else (check_target, "")
         )
+        if frag and not frag.strip():
+            fail(
+                f"{path.relative_to(ROOT)}: empty / whitespace-only fragment → {raw}",
+                errors,
+            )
+            continue
         if not target:
             dest = path
         else:
@@ -145,8 +201,7 @@ def check_file(path: Path, errors: list[str]) -> None:
 
         if frag and dest.suffix.lower() == ".md" and dest.is_file():
             slugs = headings_in(dest)
-            normalized = frag.strip().lower()
-            if normalized not in slugs and github_slug(frag) not in slugs:
+            if not fragment_resolves(frag, slugs):
                 fail(
                     f"{path.relative_to(ROOT)}: missing heading #{frag} in "
                     f"{dest.relative_to(ROOT)}",

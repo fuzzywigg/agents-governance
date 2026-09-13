@@ -11,6 +11,12 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX relative-link gate slice after #39: dedicated
+  `scripts/test_relative_links.py` (162 cases) + fail-closed hardenings in
+  `check_relative_links.py` (empty mailto:/tel: payloads, backslash path
+  separators, ASCII control chars, whitespace-only fragments), wired into
+  `stewardship-checks.yml`; AGENTS.md + badge gate needles require the new
+  relative self-test. No invent-product, no fourth badge, no mega-fixture climb.
 - TOKENMAXX stewardship fixtures after #38: expand self-tests to 774 cases
   (was 712) covering `.markdownlint.json` `MD033`/`MD041`/`MD060`: false,
   markdownlint-cli2-action `@v24`, stewardship `actions/setup-python@v5` +

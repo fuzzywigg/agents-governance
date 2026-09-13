@@ -71,6 +71,9 @@ actionlint `/v1.7.7/` path + lychee `--max-concurrency 8` / `--timeout 20` /
 `--max-retries 3` deepen after #37,
 plus MD033/MD041/MD060 `false` + `markdownlint-cli2-action@v24` +
 `actions/setup-python@v5` + `id: get_actionlint` deepen after #38).
+Dedicated relative-link slice self-tests live in `scripts/test_relative_links.py`
+(empty mailto:/tel:, backslash separators, control chars, whitespace fragments;
+wired in `stewardship-checks.yml` after #39).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

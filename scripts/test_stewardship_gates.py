@@ -153,6 +153,7 @@ jobs:
       - run: pip install pyyaml
       - run: bash scripts/run_stewardship_checks.sh
       - run: python3 scripts/test_stewardship_gates.py
+      - run: python3 scripts/test_relative_links.py
       - name: Download actionlint
         id: get_actionlint
         run: bash <(curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/v1.7.7/scripts/download-actionlint.bash) 1.7.7
@@ -243,6 +244,7 @@ def _seed_badge_tree(tmp: Path, readme: str) -> Path:
         "## 3. Testing Requirements\n\n"
         "bash scripts/run_stewardship_checks.sh\n"
         "python3 scripts/test_stewardship_gates.py\n"
+        "python3 scripts/test_relative_links.py\n"
         "CI: markdown-lint.yml, link-check.yml, stewardship-checks.yml\n",
     )
     _write(tmp / "README.md", readme)

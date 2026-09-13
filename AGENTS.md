@@ -85,6 +85,7 @@ npx markdownlint-cli2 "**/*.md" "!.github/agents/**" "!OWASP-AGENTIC.md"
 # no invent-product badges, no secrets in public docs
 bash scripts/run_stewardship_checks.sh
 python3 scripts/test_stewardship_gates.py
+python3 scripts/test_relative_links.py
 ```
 
 CI workflows: `markdown-lint.yml`, `link-check.yml`, `stewardship-checks.yml`.

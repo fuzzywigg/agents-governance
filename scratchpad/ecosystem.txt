@@ -232,3 +232,12 @@ _None yet._
 2026-09-13T20:32:00Z
 
 2026-09-13T20:40:00Z cursor: PR #39 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-034 TOKENMAXX deepen
+
+### [ECO-035] TOKENMAXX deepen relative-link gate slice after #39 — 2026-09-13T21:00:00Z
+- [x] cursor: Read live tree post-#39 (774 mega-fixtures; relative gate under-hardened vs schema/CI-pin drafts)
+- [x] cursor: Harden check_relative_links.py (empty mailto/tel, backslash, control chars, whitespace fragments)
+- [x] cursor: Add dedicated scripts/test_relative_links.py (162 cases) + CI wire
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING relative-link gate / relative self-tests only; different slice from mega stewardship fixtures + schema (#40) + CI pins (#41); no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-relative-link-gates-7675
+2026-09-13T21:00:00Z

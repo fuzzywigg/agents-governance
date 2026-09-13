@@ -11,6 +11,21 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship fixtures after #38: expand self-tests to 774 cases
+  (was 712) covering `.markdownlint.json` `MD033`/`MD041`/`MD060`: false,
+  markdownlint-cli2-action `@v24`, stewardship `actions/setup-python@v5` +
+  `id: get_actionlint`, pull_request_target on markdown-lint, contents:write/
+  write-all on link-check/stewardship, checkout@main float, cancel-in-
+  progress:false on stewardship, missing schedule/workflow_dispatch, badge
+  coverage/stars/discord/npm/token/http-image/four-badge/three-max, relative
+  HtTpS/Javascript/Data / hash slug / parent broken / angle MailTo / empty
+  parens / protocol-relative, wiki Home→Routing / coveralls/producthunt/npm/
+  pypi chrome / DATA: / PUBLISH Security-Boundaries / actionlint+relative
+  still, schema empty edit_policy/maintainer/created / missing parent+
+  autonomy / DRAFT badge / autonomy 2 / wrong CLAUDE parent / closes without
+  #, common ghs_/ghu_/rk-/aws / coverage+stars hints / ghs scan / FILE:
+  casefold, plus default:true / max-concurrency 8 /v1.7.7/ /
+  get_actionlint.outputs / codecov/http / tier 0 still-needles
 - TOKENMAXX stewardship fixtures after #37: expand self-tests to 712 cases
   (was 650) covering `.markdownlint.json` `default: true`, stewardship
   `get_actionlint.outputs.executable` + actionlint download path `/v1.7.7/`,

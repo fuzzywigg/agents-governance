@@ -148,6 +148,24 @@ def check_workflows_and_license(errors: list[str]) -> None:
                 ".markdownlint.json must set default: true for docs lint",
                 errors,
             )
+        # Fail-closed after #38: live config disables MD033 (inline HTML allowed in docs).
+        if not re.search(r'"MD033"\s*:\s*false\b', md_cfg):
+            fail(
+                ".markdownlint.json must set MD033: false for docs lint",
+                errors,
+            )
+        # Fail-closed after #38: live config disables MD041 (first-line H1 not required).
+        if not re.search(r'"MD041"\s*:\s*false\b', md_cfg):
+            fail(
+                ".markdownlint.json must set MD041: false for docs lint",
+                errors,
+            )
+        # Fail-closed after #38: live config disables MD060 (table column style).
+        if not re.search(r'"MD060"\s*:\s*false\b', md_cfg):
+            fail(
+                ".markdownlint.json must set MD060: false for docs lint",
+                errors,
+            )
 
 
 def check_lycheeignore(errors: list[str]) -> None:
@@ -336,6 +354,12 @@ def check_workflow_hardening(errors: list[str]) -> None:
             "on the existing path",
             errors,
         )
+    # Fail-closed after #38: live markdownlint-cli2-action pin is @v24.
+    if not re.search(r"(?i)davidanson/markdownlint-cli2-action@v24\b", lint):
+        fail(
+            "markdown-lint.yml must pin DavidAnson/markdownlint-cli2-action@v24",
+            errors,
+        )
     # Fail-closed: markdown-lint must checkout before lint (symmetric with stewardship).
     if "actions/checkout" not in lint:
         fail(
@@ -367,6 +391,12 @@ def check_workflow_hardening(errors: list[str]) -> None:
         )
     if "setup-python" not in stew.lower() and "actions/setup-python" not in stew:
         fail("stewardship-checks.yml must set up Python for gate scripts", errors)
+    # Fail-closed after #38: live setup-python pin is @v5.
+    if not re.search(r"(?i)actions/setup-python@v5\b", stew):
+        fail(
+            "stewardship-checks.yml must pin actions/setup-python@v5",
+            errors,
+        )
     # Fail-closed: pin the Python minor used by gate scripts (live path after #30).
     if "python-version" not in stew:
         fail(
@@ -426,6 +456,12 @@ def check_workflow_hardening(errors: list[str]) -> None:
     if "get_actionlint.outputs.executable" not in stew:
         fail(
             "stewardship-checks.yml must run actionlint via get_actionlint.outputs.executable",
+            errors,
+        )
+    # Fail-closed after #38: live download step sets id: get_actionlint.
+    if not re.search(r"(?m)^\s*(?:-\s*)?id:\s*get_actionlint\s*$", stew):
+        fail(
+            "stewardship-checks.yml must set id: get_actionlint on the download step",
             errors,
         )
     if "actionlint" not in stew.lower():

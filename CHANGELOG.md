@@ -11,6 +11,17 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship fixtures after #29: expand self-tests to 233 cases
+  (was 182) covering `cancel-in-progress: true`, link-check `.github/agents`
+  exclude, markdown-lint `**/*.md` glob, lycheeignore `http://*`, actionlint
+  markdown-lint path + unpinned/float setup-python, schedule/concurrency/
+  permissions edges, relative/absolute badge link + ./LICENSE + coverage/
+  token= + four-badge + badge-doc label/shields, relative angle-bracket/
+  nested/image-title/percent-escape/slug backticks, wiki actionlint/autonomy/
+  routing/out-of-scope/forks/codecov/home-routing/PUBLISH secret/table,
+  schema badge status/tier/closes/empty/tier-string/autonomy-range/non-
+  mapping/date, extended common secret-url/forbidden/private-key/tilde/
+  ghp helpers, fail:true + PyYAML needles
 - TOKENMAXX stewardship fixtures after #28: expand self-tests to 182 cases
   (was 134) covering cancel-in-progress / `**/*.md` link-check glob, actionlint
   timeout + docker:// pin skip, badge-standard/CONTRIBUTING missing-file,
@@ -61,6 +72,10 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
+- Badge/stewardship gates after #29: require concurrency `cancel-in-progress: true`
+  (value, not just key); link-check exclude-path must target `.github/agents`;
+  markdown-lint must scan `**/*.md`; lycheeignore rejects `http://*` as well as
+  `https://*`; Repo-Stewardship must call out actionlint
 - Badge/stewardship gates after #28: require concurrency `cancel-in-progress` on
   all three workflows; link-check must scan `**/*.md`; badge-standard doc that
   mentions stewardship-checks must refuse a fourth badge explicitly

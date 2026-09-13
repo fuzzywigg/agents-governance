@@ -28,7 +28,9 @@ Locally: `bash scripts/run_stewardship_checks.sh` then
 badge order/http/secrets/lycheeignore shields, relative schemes/escapes/fragments,
 wiki invent chrome, schema value/date/semver, workflow/actionlint hardening needles,
 link-check GITHUB_TOKEN + actionlint 1.7.7 three-path targets after #27, plus
-cancel-in-progress / `**/*.md` / fourth-badge refusal deepen after #28).
+cancel-in-progress / `**/*.md` / fourth-badge refusal deepen after #28, plus
+`cancel-in-progress: true` / `.github/agents` exclude / markdown-lint `**/*.md` /
+lycheeignore `http://*` / actionlint callout deepen after #29).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

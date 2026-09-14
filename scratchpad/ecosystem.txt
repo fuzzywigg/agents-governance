@@ -353,3 +353,12 @@ _None yet._
 2026-09-13T23:49:02Z
 
 2026-09-13T23:53:22Z cursor: PR #72 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-045 TOKENMAXX stewardship_common second-pass pins
+
+### [ECO-046] TOKENMAXX deepen stewardship-schema second-pass pins after #72 — 2026-09-14T00:05:00Z
+- [x] cursor: Read live tree post-#72 (1540 cases; common second-pass saturated; badge/CI workflow excluded per ask)
+- [x] cursor: Fail-close stewardship-schema second-pass — FENCED_YAML_RE MULTILINE|DOTALL / ISO+SEMVER+ISSUE regexes / DATE_KEYS exact / STRING_KEYS frozenset / parse_simple_yaml null~+bool+int / unsupported+empty-key / no-fenced / scalar+non-empty+string msgs / ACTIVE docs/ / autonomy 0..3 + tier<1 / ISO-8601 date-prefixed / invent edit_policy / semver X.Y.Z / closes #N / FAILED+OK banners / sys.path+ImportError / ROOT/fail/scan_secrets import / badge+PUBLISH closes pair / PyYAML|stdlib-subset
+- [x] cursor: Expand self-tests 1540 → 1615 (schema second-pass slice; not badge / wiki / relative / common / CI workflow pin spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING stewardship-schema integrity / regex+parser+message pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-schema-second-pass-b89d
+2026-09-14T00:05:00Z

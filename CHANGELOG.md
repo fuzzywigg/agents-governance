@@ -11,6 +11,18 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-schema second-pass pins after #72: expand self-tests to
+  1615 cases (was 1540) fail-closing live schema integrity — `FENCED_YAML_RE`
+  MULTILINE|DOTALL / ISO+SEMVER+ISSUE regexes / `DATE_KEYS` exact /
+  `STRING_KEYS` frozenset / parse_simple_yaml null~+bool+int /
+  unsupported+empty-key / no-fenced / scalar+non-empty+string msgs /
+  ACTIVE `docs/` / autonomy 0..3 + `tier < 1` / ISO-8601 date-prefixed /
+  invent edit_policy / semver X.Y.Z / closes #N / FAILED+OK banners /
+  `sys.path`+ImportError / ROOT/fail/scan_secrets import / badge+PUBLISH
+  closes pair / PyYAML|stdlib-subset, plus stewardship-schema gate contract
+  pins in `check_badge_standard.py` — schema second-pass slice only (not
+  badge / wiki / relative / common / CI workflow pin / fixture-reject spam);
+  no invent-product; no fourth badge
 - TOKENMAXX stewardship_common second-pass pins after #65: expand self-tests to
   1540 cases (was 1468) fail-closing live shared-helper integrity — ROOT
   `parents[1]` / `FENCED_BLOCK_RE` DOTALL / helper doc pins / scan_secrets

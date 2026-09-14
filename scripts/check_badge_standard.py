@@ -1319,7 +1319,7 @@ def check_stewardship_common_contract(errors: list[str]) -> None:
 
 
 def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
-    """Fail-close live stewardship-schema gate wiring (after #53; not badge/common spam)."""
+    """Fail-close live stewardship-schema gate wiring (after #72; deepen after #53)."""
     if not SCHEMA_GATE.is_file():
         fail("Missing scripts/check_stewardship_schema.py (schema gate)", errors)
         return
@@ -1495,6 +1495,257 @@ def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
         fail(
             "check_stewardship_schema.py EXPECTED_VALUES must pin "
             'repo": "agents-governance"',
+            errors,
+        )
+    # Fail-closed after #72: schema second-pass regex / parser / message pins
+    # (stewardship-schema slice only; not badge / wiki / relative / common / CI spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    fence_flags = "re.MULTILINE | re." + "DOTALL"
+    if fence_flags not in text and "re.DOTALL | re.MULTILINE" not in text:
+        fail(
+            "check_stewardship_schema.py FENCED_YAML_RE must use MULTILINE|DOTALL",
+            errors,
+        )
+    fence_pat = r"^```yaml\n(.*?)\n```"
+    if fence_pat not in text:
+        fail(
+            "check_stewardship_schema.py FENCED_YAML_RE must match ^```yaml fence pattern",
+            errors,
+        )
+    iso_pat = r"^\d{4}-\d{2}-\d{2}"
+    if iso_pat not in text:
+        fail(
+            "check_stewardship_schema.py ISO_DATE_RE must pin YYYY-MM-DD prefix",
+            errors,
+        )
+    semver_pat = r"^\d+\.\d+\.\d+$"
+    if semver_pat not in text:
+        fail(
+            "check_stewardship_schema.py SEMVER_RE must pin X.Y.Z fullmatch",
+            errors,
+        )
+    issue_pat = r"#\d+"
+    if issue_pat not in text:
+        fail(
+            "check_stewardship_schema.py ISSUE_REF_RE must pin #N issue refs",
+            errors,
+        )
+    date_keys_eq = 'DATE_KEYS = ("created", "last_updated")'
+    date_keys_eq_sq = "DATE_KEYS = ('created', 'last_updated')"
+    if date_keys_eq not in text and date_keys_eq_sq not in text:
+        fail(
+            "check_stewardship_schema.py must set DATE_KEYS = (created, last_updated)",
+            errors,
+        )
+    string_keys_fs = "STRING_KEYS = " + "frozenset"
+    if string_keys_fs not in text:
+        fail(
+            "check_stewardship_schema.py STRING_KEYS must be a frozenset",
+            errors,
+        )
+    unsupported_yaml = "unsupported YAML " + "line"
+    if unsupported_yaml not in text:
+        fail(
+            "check_stewardship_schema.py parse_simple_yaml must raise unsupported YAML line",
+            errors,
+        )
+    empty_key = "empty key in YAML " + "line"
+    if empty_key not in text:
+        fail(
+            "check_stewardship_schema.py parse_simple_yaml must raise empty key in YAML line",
+            errors,
+        )
+    no_fenced = "no fenced ```yaml metadata block " + "found"
+    if no_fenced not in text:
+        fail(
+            "check_stewardship_schema.py first_yaml_block must raise no fenced ```yaml found",
+            errors,
+        )
+    scalar_msg = "must be a " + "scalar"
+    if scalar_msg not in text:
+        fail(
+            "check_stewardship_schema.py reject_non_scalar must emit must be a scalar",
+            errors,
+        )
+    non_empty_msg = "must be " + "non-empty"
+    if non_empty_msg not in text:
+        fail(
+            "check_stewardship_schema.py must reject empty metadata via must be non-empty",
+            errors,
+        )
+    string_msg = "must be a " + "string"
+    if string_msg not in text:
+        fail(
+            "check_stewardship_schema.py STRING_KEYS must emit must be a string",
+            errors,
+        )
+    active_docs = "status must be ACTIVE for active stewardship " + "docs"
+    if active_docs not in text:
+        fail(
+            "check_stewardship_schema.py must require ACTIVE status for stewardship docs",
+            errors,
+        )
+    docs_prefix = 'startswith("docs/")'
+    docs_prefix_sq = "startswith('docs/')"
+    if docs_prefix not in text and docs_prefix_sq not in text:
+        fail(
+            'check_stewardship_schema.py ACTIVE status check must startswith("docs/")',
+            errors,
+        )
+    autonomy_msg = "autonomy_level must be int in " + "0..3"
+    if autonomy_msg not in text:
+        fail(
+            "check_stewardship_schema.py must emit autonomy_level must be int in 0..3",
+            errors,
+        )
+    autonomy_range = "(0, 1, 2, " + "3)"
+    if autonomy_range not in text and "(0,1,2,3)" not in text:
+        fail(
+            "check_stewardship_schema.py autonomy_level must constrain (0, 1, 2, 3)",
+            errors,
+        )
+    tier_msg = "tier must be a positive " + "int"
+    if tier_msg not in text:
+        fail(
+            "check_stewardship_schema.py must emit tier must be a positive int",
+            errors,
+        )
+    tier_lt = "tier < " + "1"
+    if tier_lt not in text:
+        fail(
+            "check_stewardship_schema.py tier must reject via tier < 1",
+            errors,
+        )
+    iso_msg = "must be ISO-8601 date-" + "prefixed"
+    if iso_msg not in text:
+        fail(
+            "check_stewardship_schema.py DATE_KEYS must emit ISO-8601 date-prefixed",
+            errors,
+        )
+    invent_msg = "edit_policy must retain no-invent-product " + "wording"
+    if invent_msg not in text:
+        fail(
+            "check_stewardship_schema.py badge edit_policy must retain invent wording msg",
+            errors,
+        )
+    semver_msg = "version must be semver " + "X.Y.Z"
+    if semver_msg not in text:
+        fail(
+            "check_stewardship_schema.py AGENTS version must emit semver X.Y.Z",
+            errors,
+        )
+    closes_msg = "closes must reference an issue like " + "#N"
+    if closes_msg not in text:
+        fail(
+            "check_stewardship_schema.py closes must emit issue like #N message",
+            errors,
+        )
+    failed_banner = "Stewardship schema check " + "FAILED"
+    if failed_banner not in text:
+        fail(
+            "check_stewardship_schema.py must print Stewardship schema check FAILED",
+            errors,
+        )
+    ok_banner = "OK: stewardship metadata schemas " + "valid"
+    if ok_banner not in text:
+        fail(
+            "check_stewardship_schema.py must print OK: stewardship metadata schemas valid",
+            errors,
+        )
+    if "ImportError" not in text:
+        fail(
+            "check_stewardship_schema.py must catch ImportError for missing PyYAML",
+            errors,
+        )
+    yaml_none = "yaml = " + "None"
+    if yaml_none not in text:
+        fail(
+            "check_stewardship_schema.py must set yaml = None when PyYAML absent",
+            errors,
+        )
+    path_insert = "sys.path." + "insert"
+    if path_insert not in text:
+        fail(
+            "check_stewardship_schema.py must sys.path.insert scripts dir",
+            errors,
+        )
+    import_pin = "from stewardship_common import ROOT, fail, scan_" + "secrets"
+    if import_pin not in text:
+        fail(
+            "check_stewardship_schema.py must import ROOT, fail, scan_secrets",
+            errors,
+        )
+    null_tilde = '"null", ' + '"~"'
+    null_tilde_sq = "'null', '~'"
+    if null_tilde not in text and null_tilde_sq not in text and '"~"' not in text:
+        fail(
+            "check_stewardship_schema.py parse_simple_yaml must handle null/~",
+            errors,
+        )
+    true_false = '"true", "false"'
+    true_false_sq = "'true', 'false'"
+    if true_false not in text and true_false_sq not in text:
+        fail(
+            "check_stewardship_schema.py parse_simple_yaml must handle true/false",
+            errors,
+        )
+    int_fullmatch = 're.fullmatch(r"-?\\d+"'
+    int_fullmatch_alt = "re.fullmatch(r'-?\\d+'"
+    if int_fullmatch not in text and int_fullmatch_alt not in text:
+        fail(
+            "check_stewardship_schema.py parse_simple_yaml must fullmatch ints",
+            errors,
+        )
+    nested_type = "isinstance(value, (dict, " + "list))"
+    if nested_type not in text:
+        fail(
+            "check_stewardship_schema.py reject_non_scalar must isinstance dict/list",
+            errors,
+        )
+    agents_semver = 'rel == "AGENTS.md"'
+    agents_semver_sq = "rel == 'AGENTS.md'"
+    if agents_semver not in text and agents_semver_sq not in text:
+        fail(
+            'check_stewardship_schema.py semver check must gate on rel == "AGENTS.md"',
+            errors,
+        )
+    badge_invent = 'rel == "docs/badge-standard.md"'
+    badge_invent_sq = "rel == 'docs/badge-standard.md'"
+    if badge_invent not in text and badge_invent_sq not in text:
+        fail(
+            'check_stewardship_schema.py invent edit_policy must gate on badge-standard.md',
+            errors,
+        )
+    closes_pair = '"docs/badge-standard.md", "docs/wiki/PUBLISH.md"'
+    closes_pair_sq = "'docs/badge-standard.md', 'docs/wiki/PUBLISH.md'"
+    if closes_pair not in text and closes_pair_sq not in text:
+        fail(
+            "check_stewardship_schema.py closes #N check must cover badge+PUBLISH",
+            errors,
+        )
+    engine_pyyaml = '"PyYAML" if yaml is not None else "stdlib-subset"'
+    engine_pyyaml_sq = "'PyYAML' if yaml is not None else 'stdlib-subset'"
+    if engine_pyyaml not in text and engine_pyyaml_sq not in text:
+        fail(
+            "check_stewardship_schema.py OK banner must name PyYAML/stdlib-subset",
+            errors,
+        )
+    second_pass_doc = "second-pass after " + "#72"
+    if second_pass_doc not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin second-pass after #72",
+            errors,
+        )
+    contract_fn = "check_stewardship_schema_gate_" + "contract"
+    self_text = BADGE_GATE.read_text(encoding="utf-8")
+    if f"def {contract_fn}(" not in self_text:
+        fail(
+            "check_badge_standard.py must provide " + contract_fn + "()",
+            errors,
+        )
+    if contract_fn + "(" not in self_text.replace(f"def {contract_fn}(", "", 1):
+        fail(
+            "check_badge_standard.py main must call " + contract_fn + "()",
             errors,
         )
 

@@ -92,7 +92,15 @@ plus stewardship_common second-pass after #65: ROOT `parents[1]` /
 `password|passwd|token` / OPENSSH+EC / Public docs / invent-product
 surface / social chrome / Link schemes / `is_file`+`sorted` /
 workflows path / `return None` / exact `DANGEROUS_LINK_SCHEMES` +
-`SECRET_URL_HINTS` head).
+`SECRET_URL_HINTS` head,
+plus stewardship-schema second-pass after #72: `FENCED_YAML_RE`
+MULTILINE|DOTALL / ISO+SEMVER+ISSUE regexes / `DATE_KEYS` exact /
+`STRING_KEYS` frozenset / parse_simple_yaml null~+bool+int /
+unsupported+empty-key / no-fenced / scalar+non-empty+string msgs /
+ACTIVE `docs/` / autonomy 0..3 + `tier < 1` / ISO-8601 date-prefixed /
+invent edit_policy / semver X.Y.Z / closes #N / FAILED+OK banners /
+`sys.path`+ImportError / ROOT/fail/scan_secrets import / badge+PUBLISH
+closes pair / PyYAML|stdlib-subset).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

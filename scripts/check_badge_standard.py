@@ -158,6 +158,17 @@ lands closed #222/#215/#196 leftover after #225 tip):
   exact actions/workflows/link-check.yml/badge.svg +
   markdown-lint.yml/badge.svg image pins / no Stewardship product badge
 
+
+Fail-closed markdown-lint/link-check residual exact layouts after #227 tip
+(lands closed #221 leftover residual; NOT Pass-2 leftover + md/link #220 core /
+NOT path-edges #225 / NOT wiki-index/badge leftover #227 / NOT stewardship-badge lint #208):
+- exact contiguous link-check args: >- flag block (verbose→*.md)
+- exact contiguous link-check on: push/PR/schedule/workflow_dispatch block
+- exact contiguous markdown-lint on: push/PR/schedule/workflow_dispatch block
+- exact contiguous markdown-lint with: globs|+config block
+- exact contiguous link-check with: token commentary block
+
+
 """
 
 from __future__ import annotations
@@ -1958,6 +1969,97 @@ def check_workflow_hardening(errors: list[str]) -> None:
 
 
 
+# Fail-closed after #227: markdown-lint/link-check residual exact layouts
+    # (lands closed #221 leftover residual; NOT Pass-2 leftover + md/link #220 core /
+    # NOT path-edges #225 / NOT wiki-index/badge leftover #227).
+    link_args_exact = (
+        "args: >-\n"
+        "            --verbose\n"
+        "            --no-progress\n"
+        "            --exclude-loopback\n"
+        "            --max-concurrency 8\n"
+        "            --timeout 20\n"
+        "            --max-retries 3\n"
+        "            --github-token ${{ secrets.GITHUB_TOKEN }}\n"
+        "            --exclude-path .github/agents\n"
+        '            "**/*.md"'
+    )
+    if link_args_exact not in link:
+        fail(
+            "link-check.yml must keep exact contiguous args: >- flag block "
+            "(markdown-lint/link-check residual after #227)",
+            errors,
+        )
+    link_on_exact = (
+        "on:\n"
+        "  push:\n"
+        '    branches: ["**"]\n'
+        "    paths:\n"
+        '      - "**/*.md"\n'
+        '      - ".lycheeignore"\n'
+        '      - ".github/workflows/link-check.yml"\n'
+        "  pull_request:\n"
+        "  schedule:\n"
+        "    # Run weekly to catch externally broken links\n"
+        '    - cron: "0 6 * * 1"\n'
+        "  workflow_dispatch:"
+    )
+    if link_on_exact not in link:
+        fail(
+            "link-check.yml must keep exact contiguous on: "
+            "push/PR/schedule/workflow_dispatch block "
+            "(markdown-lint/link-check residual after #227)",
+            errors,
+        )
+    lint_on_exact = (
+        "on:\n"
+        "  push:\n"
+        '    branches: ["**"]\n'
+        "    paths:\n"
+        '      - "**/*.md"\n'
+        '      - ".markdownlint.json"\n'
+        '      - ".github/workflows/markdown-lint.yml"\n'
+        "  pull_request:\n"
+        "  schedule:\n"
+        "    # Weekly drift catch aligned with link/stewardship schedules\n"
+        '    - cron: "30 6 * * 1"\n'
+        "  workflow_dispatch:"
+    )
+    if lint_on_exact not in lint:
+        fail(
+            "markdown-lint.yml must keep exact contiguous on: "
+            "push/PR/schedule/workflow_dispatch block "
+            "(markdown-lint/link-check residual after #227)",
+            errors,
+        )
+    lint_with_exact = (
+        "with:\n"
+        "          globs: |\n"
+        "            **/*.md\n"
+        "            !.github/agents/**\n"
+        "            !OWASP-AGENTIC.md\n"
+        '          config: ".markdownlint.json"'
+    )
+    if lint_with_exact not in lint:
+        fail(
+            "markdown-lint.yml must keep exact contiguous with: globs|+config block "
+            "(markdown-lint/link-check residual after #227)",
+            errors,
+        )
+    link_token_with = (
+        "with:\n"
+        "          # GITHUB_TOKEN allows lychee to authenticate private GitHub repos\n"
+        "          # without it, private repos return 404 and fail the check\n"
+        "          token: ${{ secrets.GITHUB_TOKEN }}"
+    )
+    if link_token_with not in link:
+        fail(
+            "link-check.yml must keep exact contiguous with: token commentary block "
+            "(markdown-lint/link-check residual after #227)",
+            errors,
+        )
+
+
 def check_badge_standard_doc(errors: list[str]) -> None:
     """Ensure docs/badge-standard.md still documents the same required order."""
     text = BADGE_STANDARD.read_text(encoding="utf-8")
@@ -2847,6 +2949,64 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
             errors,
         )
 
+
+
+
+    # Deepen after #227 tip: markdown-lint/link-check residual exact layouts
+    # (lands closed #221 leftover residual; NOT Pass-2 leftover + md/link #220 core /
+    # NOT path-edges #225 / NOT wiki-index/badge leftover #227).
+    mdlink_residual_doc = "markdown-lint/link-check residual exact layouts after " + "#227"
+    if mdlink_residual_doc not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + mdlink_residual_doc + " pin",
+            errors,
+        )
+    link_args_residual_pin = "exact contiguous args: >- flag " + "block"
+    if link_args_residual_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + link_args_residual_pin + " residual pin",
+            errors,
+        )
+    link_on_residual_pin = (
+        "exact contiguous link-check on: push/PR/schedule/" + "workflow_dispatch"
+    )
+    if link_on_residual_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + link_on_residual_pin + " residual pin",
+            errors,
+        )
+    lint_on_residual_pin = (
+        "exact contiguous markdown-lint on: push/PR/schedule/" + "workflow_dispatch"
+    )
+    if lint_on_residual_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + lint_on_residual_pin + " residual pin",
+            errors,
+        )
+    lint_with_residual_pin = "exact contiguous with: globs|+config " + "block"
+    if lint_with_residual_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + lint_with_residual_pin + " residual pin",
+            errors,
+        )
+    link_token_residual_pin = "exact contiguous with: token commentary " + "block"
+    if link_token_residual_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + link_token_residual_pin + " residual pin",
+            errors,
+        )
+    not_wiki_227 = "NOT wiki-index/badge leftover " + "#227"
+    if not_wiki_227 not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + not_wiki_227 + " distinctness pin",
+            errors,
+        )
+    not_mdlink_220 = "NOT Pass-2 leftover + md/link " + "#220"
+    if not_mdlink_220 not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + not_mdlink_220 + " distinctness pin",
+            errors,
+        )
 
 
 def check_docs_lint_gate_contract(errors: list[str]) -> None:

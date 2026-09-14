@@ -772,3 +772,37 @@ _None yet._
 2026-09-14T08:12:29Z cursor: Rebased ECO-074 onto post-#233 tip (82b7d98); self-tests 4414 → 4462; local green (gates + 4462 + markdownlint); leave draft / do-not-merge; do not revive #231/#221; do not redo #233 schema / #227 wiki / #225 path-edges
 
 2026-09-14T08:13:45Z cursor: Draft PR #239 opened (cursor/tokenmaxx-mdlink-wiki-leftover-after-225-9959) replacing closed CONFLICTING #234; leave draft / do-not-merge; awaiting CI ← ECO-074 md/link residual after #233 (do not revive #234/#231/#221; do not redo #233/#227/#225)
+2026-09-14T08:03:01Z cursor: PR #233 MERGED (stewardship-checks/schema leftovers after #227) ← tip
+2026-09-14T08:05:37Z cursor: CONFLICTING sibling #232 path-edges residual CLOSED after #233 tip move
+
+### [ECO-075] TOKENMAXX deepen path-filter/path-order residuals after #233 — 2026-09-14T08:08:00Z
+- [x] cursor: Read live tree post-#233 (4414 cases; wiki-badge #227 + schema leftover #233 saturated; closed CONFLICTING #232 path-edges residual)
+- [x] cursor: Fail-close residual path-edges on post-#233 tip — PR/schedule adjacency / reject branches-ignore / PR type-unfiltered / reject changed-files / four-step actionlint path-order / schedule before dispatch / shell-less actionlint run step
+- [x] cursor: Expand self-tests 4414 → 4560 (path-edges residual slice only; not #233/#227/#225/#220 spam; do not revive #232/#228/#226)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING actionlint path-filter/path-order residual edge pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; do not revive #232/#228/#226/#223/#217/#213/#198; do not redo #233/#227/#225
+- Branch: cursor/tokenmaxx-path-edges-residual-after-233-7fba
+2026-09-14T08:08:00Z
+
+2026-09-14T08:12:00Z cursor: Local green — run_stewardship + self-tests 4560 + markdownlint ← ECO-075 path-filter/path-order residuals after #233 (leave draft; do not revive #232/#228/#226)
+
+2026-09-14T08:12:30Z cursor: Draft PR #236 opened (cursor/tokenmaxx-path-edges-residual-after-233-7fba); leave draft / do-not-merge; awaiting CI ← ECO-075 residual after #233 (do not revive #232/#228/#226/#223/#217/#213/#198)
+
+2026-09-14T08:22:02Z cursor: PR #239 MERGED (md/link residual layouts after #233) ← tip
+2026-09-14T08:24:00Z cursor: Merged origin/main (#239) into open #236 — MERGEABLE; local self-tests 4608 ← ECO-075 residual on post-#239 tip (leave draft; do not revive #232/#228)
+
+2026-09-14T08:32:23Z cursor: PR #243 MERGED (wiki outline/PUBLISH leftover after #239) ← tip
+2026-09-14T08:33:09Z cursor: CONFLICTING sibling #236 path-edges residual CLOSED after #243 tip move
+
+### [ECO-076] TOKENMAXX deepen path-filter/path-order residuals after #243 — 2026-09-14T08:36:00Z
+- [x] cursor: Read live tree post-#243 (4646 cases; wiki/PUBLISH leftover saturated; closed CONFLICTING #236 path-edges residual)
+- [x] cursor: Fail-close residual path-edges on post-#243 tip
+- [x] cursor: Expand self-tests 4646 → 4792 (path-edges residual slice only; not #243/#239/#233/#227/#225 spam; do not revive #236/#232/#228)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING actionlint path-filter/path-order residual edge pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; do not revive #236/#232/#228/#226/#223/#217/#213/#198; do not redo #243/#239/#233/#227/#225
+- Branch: cursor/tokenmaxx-path-edges-residual-after-243-7fba
+2026-09-14T08:36:00Z
+
+2026-09-14T08:40:00Z cursor: Local green — run_stewardship + self-tests 4792 + markdownlint ← ECO-076 path-filter/path-order residuals after #243 (leave draft; do not revive #236/#232/#228)
+
+2026-09-14T08:40:30Z cursor: Draft PR #244 opened (cursor/tokenmaxx-path-edges-residual-after-243-7fba); leave draft / do-not-merge; awaiting CI ← ECO-076 residual after #243 (do not revive #236/#232/#228)

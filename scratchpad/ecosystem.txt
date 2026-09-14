@@ -377,3 +377,13 @@ _None yet._
 2026-09-14T00:21:26Z
 
 2026-09-14T00:27:11Z cursor: PR #83 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-047 TOKENMAXX stewardship-schema second-pass pins
+
+### [ECO-048] TOKENMAXX deepen actionlint-style second-pass pins after #83/#86 — 2026-09-14T00:34:00Z
+- [x] cursor: Read live tree post-#86 (1755 cases; schema second-pass saturated; actionlint-style first-pass only)
+- [x] cursor: Fail-close actionlint-style second-pass — exact name/uses regexes / write-all+contents+id-token regexes / docker startswith / @ not in uses / rsplit / group(1).strip() / fail needles / least-privilege+OIDC+majors comments / REQUIRED_WORKFLOWS loop
+- [x] cursor: Expand self-tests 1755 → 1827 (actionlint-style second-pass slice; not schema / badge / wiki / relative / common / CI workflow pin spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING actionlint-style integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-actionlint-second-pass-fc10
+2026-09-14T00:34:00Z
+

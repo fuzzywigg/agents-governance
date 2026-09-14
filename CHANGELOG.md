@@ -11,6 +11,18 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX Pass-2 residual deepen + concurrency template validation residual after #227:
+  expand self-tests to 4350 cases (was 4230) fail-closing DISTINCT leftover Pass-2 residual
+  soft-fail + existing concurrency group template edges — soft-fail with `|| :` /
+  soft-fail with `|| return 0` / `set +o errexit` / `set +o nounset` /
+  invent `python3 -m` for gates / must not source env files / must not dot-source paths /
+  stewardship-checks reject any `continue-on-error:` / exact contiguous concurrency group
+  template on all three workflows (existing templates only; no invent) — Pass-2 residual
+  and template validation residual slice only (not wiki-index/badge #227 / not path-edges
+  #225 / not Pass-2 leftover and md/link #220 / not Pass-2 residual #199/#203 /
+  not badge-lint #208 / not schema #216); no invent-product; no fourth badge;
+  no new templates. Distinct from merged #227/#225/#220/#216/#208/#203/#199.
+
 - TOKENMAXX wiki-index/badge leftover deepen after #225 tip: expand self-tests
   to 4230 cases (was 4116) fail-closing unsaturated wiki-index/badge leftover —
   exact PUBLISHABLE_PAGES contiguous order / Home TOC loop+skip+link forms /

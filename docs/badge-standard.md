@@ -267,6 +267,14 @@ stewardship-checks badge refuse leftover framing — DISTINCT leftover only
 not schema fourth-pass #216 / not stewardship-badge lint #208;
 lands closed #222/#215/#196 leftover on post-#225 tip; do not revive
 closed #222/#215/#196/#185/#172)).
+plus Pass-2 residual deepen + concurrency template validation residual after #227:
+soft-fail with `|| :` / `|| return 0` / `set +o errexit` / `set +o nounset` /
+invent `python3 -m` for gates / must not source env files / must not dot-source paths /
+stewardship-checks reject any `continue-on-error:` / exact contiguous concurrency group
+template on all three workflows (existing templates only; no invent) —
+DISTINCT leftover edges only (not wiki-index/badge #227 / not path-edges #225 /
+not Pass-2 leftover + md/link #220 / not Pass-2 residual #199/#203 /
+not badge-lint #208 / not schema #216).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

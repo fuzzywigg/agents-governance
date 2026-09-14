@@ -766,3 +766,5 @@ _None yet._
 2026-09-14T07:56:33Z cursor: Local green — run_stewardship + self-tests 4278 + markdownlint ← ECO-074 md/link residual exact layouts after #227 (leave draft; do not revive #221; do not redo #227 wiki / #225 path-edges)
 
 2026-09-14T07:56:55Z cursor: Draft PR #231 updated onto post-#227 tip (cursor/tokenmaxx-mdlink-wiki-leftover-after-225-9959); leave draft / do-not-merge; awaiting CI ← ECO-074 md/link residual exact layouts after #227 (do not revive #221; do not redo #227 wiki)
+
+2026-09-14T07:57:54Z cursor: Draft PR #234 opened (cursor/tokenmaxx-mdlink-wiki-leftover-after-225-9959) replacing closed CONFLICTING #231; leave draft / do-not-merge; awaiting CI ← ECO-074 md/link residual exact layouts after #227 (do not revive #231/#221; do not redo #227 wiki)

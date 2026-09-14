@@ -221,7 +221,7 @@ plus actionlint path-order leftover after #181: contiguous three-path
 actionlint order / exact bash <(curl -fsSL) download /
 reject continue-on-error: true / Download actionlint + actionlint existing
 workflow paths step names / path-order leftover docstring — lands closed
-#182/#157 leftover; do not revive #182/#157/#143/#120; distinct from
+PR #182/#157 leftover; do not revive #182/#157/#143/#120; distinct from
 path-filter #176 / run_stewardship #179 / wiki-index #181).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.

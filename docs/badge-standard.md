@@ -124,7 +124,17 @@ plus actionlint-style gate contract pins after #75: top-level `name:` /
 skip / unpinned reject,
 plus stewardship-schema second-pass after #72/#75: `FENCED_YAML_RE` exact /
 `ISO_DATE_RE` / `SEMVER_RE` / `ISSUE_REF_RE` / `DATE_KEYS` / Tiny YAML /
-scalar+non-empty+string / ACTIVE / tier / 0..3 / ISO-8601 / invent /
+scalar+non-empty+string / ACTIVE / tier / 0.
+plus stewardship-schema third-pass after #132: future annotations /
+Path.parent+sys.path.insert / stewardship_common import / yaml=None /
+pragma / five docs only / startswith("#") / true+false / null+~ /
+re.fullmatch / split(":", 1) / value[1:-1] / isinstance(loaded, dict) /
+FENCED_YAML_RE.search / (dict, list) / sorted(required_keys - set(data)) /
+startswith("docs/") / .upper()!=ACTIVE / EXPECTED_VALUES.get /
+(expected {want!r}) / level not in (0,1,2,3) / tier < 1 /
+ISO_DATE_RE+SEMVER_RE+ISSUE_REF_RE call sites / closes scope set /
+scan_secrets(path, errors) / len(DOC_SCHEMAS) / sys.exit(main()) /
+mapping+empty+missing-file / bool subclass / yaml.safe_load
 semver / closes #N / FAILED+OK / stdlib-subset+PyYAML / bool subclass /
 `match.group(1)` / missing keys / utf-8 / `STRING_KEYS` members,
 plus actionlint-style second-pass after #83/#86: exact `name:`/`uses:`

@@ -207,7 +207,12 @@ closed #167/#168/#169,
 plus actionlint path-filter leftovers after #173: exact push `paths:` layouts /
 residual stewardship path entries / reject `paths-ignore:` / ignore-glob
 exactness — empty stubs already handled; distinct from path-order/badge and
-stewardship-badge lint; lands closed #166 leftover; do not revive #166/#157).
+stewardship-badge lint; lands closed #166 leftover; do not revive #166/#157,
+plus wiki-index validators after #176: Home TOC empty-index / publishable
+page index stubs / broken internal stub links / empty markdown index /
+duplicate slug `headings_in` set collapse — lands closed #177/#168/#170 leftover;
+do not revive #177/#168/#170; distinct from path-filter #176 and
+run_stewardship #178).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

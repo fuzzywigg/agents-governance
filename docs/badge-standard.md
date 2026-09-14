@@ -130,7 +130,16 @@ semver / closes #N / FAILED+OK / stdlib-subset+PyYAML / bool subclass /
 plus actionlint-style second-pass after #83/#86: exact `name:`/`uses:`
 regexes / write-all+contents+id-token regexes / `docker://` startswith /
 `@` not in uses / `rsplit` / `group(1).strip()` / fail needles /
-least-privilege+OIDC+majors comments / `REQUIRED_WORKFLOWS` loop).
+least-privilege+OIDC+majors comments / `REQUIRED_WORKFLOWS` loop,
+plus wiki-outline third-pass after #90: WIKI exact / `removesuffix` /
+`glob("*.md")` / `sorted(unexpected)` / Link Check+Markdown Lint+No secrets /
+Home invent+secrets+kill needles / Repo-Stewardship relative+invent+
+actionlint+run_script needles / `startswith("//")`+`http://` / `group(2)` /
+utf-8 / `sys.exit` / stewardship_common / invent-chrome social special-cases /
+shields host / markdown-badge open / badge-in-lowered gate /
+README+badge hint paths / pages+operator OK / intentional PUBLISH pin /
+`PAGE_TOPIC_HINTS.get` / `strip_fenced_code(text)` /
+`has_dangerous_scheme(target)` / `scan_secrets` calls).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

@@ -11,6 +11,25 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX actionlint path-filter/path-order residual leftover deepen after
+  #258 tip: expand self-tests to 5326 cases (was 5176) fail-closing DISTINCT
+  residual leftover actionlint path-filter / path-order edges on existing
+  workflow modules — contiguous push:/pull_request: adjacency / contiguous
+  schedule:/workflow_dispatch: adjacency / pull_request branches-unfiltered /
+  reject tags-ignore: / reject workflow_call: / contiguous five-step
+  actionlint path-order (Install PyYAML → gates → self-tests → Download →
+  actionlint run) / contiguous on:/push: header / leftover docstring +
+  gate-contract needles — path-filter/path-order residual leftover slice only
+  (not stewardship-schema leftover #258 / not wiki/mdlink leftover #252 /
+  not saturated residual #244 / not saturated deepen #225/#203 /
+  not wiki outline/PUBLISH leftover #243 / not md/link residual #239 /
+  not stewardship-checks/schema leftover #233 / not wiki-badge leftover #227 /
+  not #189 path-order / not #176 layouts / not schema #191/#216 /
+  not Pass-2 residual #199/#203 / not Pass-2 leftover + md/link #220 /
+  not stewardship-badge lint #208); no invent-product; no fourth badge.
+  Lands closed #255/#247 leftover on post-#258 tip (do **not** revive
+  #255/#247/#244/#236/#232/#228/#226/#223/#217/#213/#198/#186/#166/#157).
+  Distinct from merged #258/#252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
 - TOKENMAXX stewardship-schema leftover deepen after #252 tip: expand
   self-tests to 5176 cases (was 4976) fail-closing unsaturated schema +
   `stewardship_common` leftover helpers on existing modules only —

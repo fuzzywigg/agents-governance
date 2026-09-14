@@ -70813,6 +70813,1662 @@ def test_common_host_leftover_after_252() -> None:
         path.write_text(text.replace('common leftover after #252', 'common leftover after #000'), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'common leftover after #252')
 
+# --- TOKENMAXX path-filter/path-order residual leftover deepen after #258 (+150) -----
+
+def test_path_edges_gate_leftover_doc_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Path-filter/path-order residual leftover deepen after #258' in text
+        path.write_text(text.replace('Path-filter/path-order residual leftover deepen after #258', 'Path-filter/path-order residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Path-filter/path-order residual leftover deepen after #258',
+        )
+
+def test_path_edges_gate_leftover_doc_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Path-filter/path-order residual leftover deepen after #258' in text
+        path.write_text(text.replace('Path-filter/path-order residual leftover deepen after #258', 'Path-filter/path-order residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Path-filter/path-order residual leftover deepen after #258',
+        )
+
+def test_path_edges_gate_module_leftover_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'path-filter/path-order residual leftover deepen after #258' in text
+        path.write_text(text.replace('path-filter/path-order residual leftover deepen after #258', 'path-filter/path-order residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'path-filter/path-order residual leftover deepen after #258',
+        )
+
+def test_path_edges_gate_module_leftover_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'path-filter/path-order residual leftover deepen after #258' in text
+        path.write_text(text.replace('path-filter/path-order residual leftover deepen after #258', 'path-filter/path-order residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'path-filter/path-order residual leftover deepen after #258',
+        )
+
+def test_path_edges_gate_not_saturated_244_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT saturated residual #244' in text
+        path.write_text(text.replace('NOT saturated residual #244', 'NOT saturated residual #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT saturated residual #244',
+        )
+
+def test_path_edges_gate_not_saturated_244_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT saturated residual #244' in text
+        path.write_text(text.replace('NOT saturated residual #244', 'NOT saturated residual #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT saturated residual #244',
+        )
+
+def test_path_edges_gate_not_wiki_243_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki outline/PUBLISH leftover #243' in text
+        path.write_text(text.replace('NOT wiki outline/PUBLISH leftover #243', 'NOT wiki outline/PUBLISH leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT wiki outline/PUBLISH leftover #243',
+        )
+
+def test_path_edges_gate_not_wiki_243_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki outline/PUBLISH leftover #243' in text
+        path.write_text(text.replace('NOT wiki outline/PUBLISH leftover #243', 'NOT wiki outline/PUBLISH leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT wiki outline/PUBLISH leftover #243',
+        )
+
+def test_path_edges_gate_not_mdlink_239_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT md/link residual #239' in text
+        path.write_text(text.replace('NOT md/link residual #239', 'NOT md/link residual #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT md/link residual #239',
+        )
+
+def test_path_edges_gate_not_mdlink_239_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT md/link residual #239' in text
+        path.write_text(text.replace('NOT md/link residual #239', 'NOT md/link residual #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT md/link residual #239',
+        )
+
+def test_path_edges_gate_not_stew_233_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema leftover #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema leftover #233', 'NOT stewardship-checks/schema leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT stewardship-checks/schema leftover #233',
+        )
+
+def test_path_edges_gate_not_stew_233_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema leftover #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema leftover #233', 'NOT stewardship-checks/schema leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT stewardship-checks/schema leftover #233',
+        )
+
+def test_path_edges_gate_not_wiki_badge_227_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki-badge leftover #227' in text
+        path.write_text(text.replace('NOT wiki-badge leftover #227', 'NOT wiki-badge leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT wiki-badge leftover #227',
+        )
+
+def test_path_edges_gate_not_wiki_badge_227_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki-badge leftover #227' in text
+        path.write_text(text.replace('NOT wiki-badge leftover #227', 'NOT wiki-badge leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT wiki-badge leftover #227',
+        )
+
+def test_path_edges_gate_not_saturated_225_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT saturated deepen #225' in text
+        path.write_text(text.replace('NOT saturated deepen #225', 'NOT saturated deepen #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT saturated deepen #225',
+        )
+
+def test_path_edges_gate_not_saturated_225_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT saturated deepen #225' in text
+        path.write_text(text.replace('NOT saturated deepen #225', 'NOT saturated deepen #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT saturated deepen #225',
+        )
+
+def test_path_edges_gate_not_pass2_220_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT Pass-2 leftover + md/link #220' in text
+        path.write_text(text.replace('NOT Pass-2 leftover + md/link #220', 'NOT Pass-2 leftover + md/link #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT Pass-2 leftover + md/link #220',
+        )
+
+def test_path_edges_gate_not_pass2_220_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT Pass-2 leftover + md/link #220' in text
+        path.write_text(text.replace('NOT Pass-2 leftover + md/link #220', 'NOT Pass-2 leftover + md/link #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT Pass-2 leftover + md/link #220',
+        )
+
+
+def test_path_edges_gate_not_schema_258_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-schema leftover #258' in text
+        path.write_text(text.replace('NOT stewardship-schema leftover #258', 'NOT stewardship-schema leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT stewardship-schema leftover #258',
+        )
+
+def test_path_edges_gate_not_schema_258_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-schema leftover #258' in text
+        path.write_text(text.replace('NOT stewardship-schema leftover #258', 'NOT stewardship-schema leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT stewardship-schema leftover #258',
+        )
+
+def test_path_edges_gate_not_wiki_mdlink_252_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki/mdlink leftover #252' in text
+        path.write_text(text.replace('NOT wiki/mdlink leftover #252', 'NOT wiki/mdlink leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT wiki/mdlink leftover #252',
+        )
+
+def test_path_edges_gate_not_wiki_mdlink_252_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki/mdlink leftover #252' in text
+        path.write_text(text.replace('NOT wiki/mdlink leftover #252', 'NOT wiki/mdlink leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT wiki/mdlink leftover #252',
+        )
+
+def test_path_edges_gate_push_pr_needle_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'contiguous push:/pull_request: adjacency' in text
+        path.write_text(text.replace('contiguous push:/pull_request: adjacency', 'contiguous push:/pull_request: apart'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'push/pull_request adjacency fail needle',
+        )
+
+def test_path_edges_gate_push_pr_needle_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'contiguous push:/pull_request: adjacency' in text
+        path.write_text(text.replace('contiguous push:/pull_request: adjacency', 'contiguous push:/pull_request: apart'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'push/pull_request adjacency fail needle',
+        )
+
+def test_path_edges_gate_sched_dispatch_needle_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'contiguous schedule:/workflow_dispatch: adjacency' in text
+        path.write_text(text.replace('contiguous schedule:/workflow_dispatch: adjacency', 'contiguous schedule:/workflow_dispatch: apart'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'schedule/workflow_dispatch adjacency fail needle',
+        )
+
+def test_path_edges_gate_sched_dispatch_needle_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'contiguous schedule:/workflow_dispatch: adjacency' in text
+        path.write_text(text.replace('contiguous schedule:/workflow_dispatch: adjacency', 'contiguous schedule:/workflow_dispatch: apart'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'schedule/workflow_dispatch adjacency fail needle',
+        )
+
+def test_path_edges_gate_pr_branches_needle_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pull_request must stay branches-unfiltered' in text
+        path.write_text(text.replace('pull_request must stay branches-unfiltered', 'pull_request must stay branches-filtered'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'pull_request branches-unfiltered fail needle',
+        )
+
+def test_path_edges_gate_pr_branches_needle_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pull_request must stay branches-unfiltered' in text
+        path.write_text(text.replace('pull_request must stay branches-unfiltered', 'pull_request must stay branches-filtered'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'pull_request branches-unfiltered fail needle',
+        )
+
+def test_path_edges_gate_tags_ignore_needle_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must not invent tags-ignore:' in text
+        path.write_text(text.replace('must not invent tags-ignore:', 'must not invent tags-allow:'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'tags-ignore invent reject needle',
+        )
+
+def test_path_edges_gate_tags_ignore_needle_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must not invent tags-ignore:' in text
+        path.write_text(text.replace('must not invent tags-ignore:', 'must not invent tags-allow:'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'tags-ignore invent reject needle',
+        )
+
+def test_path_edges_gate_workflow_call_needle_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must not invent workflow_call:' in text
+        path.write_text(text.replace('must not invent workflow_call:', 'must not invent workflow_dispatch:'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'workflow_call invent reject needle',
+        )
+
+def test_path_edges_gate_workflow_call_needle_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must not invent workflow_call:' in text
+        path.write_text(text.replace('must not invent workflow_call:', 'must not invent workflow_dispatch:'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'workflow_call invent reject needle',
+        )
+
+def test_path_edges_gate_five_step_needle_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'contiguous five-step actionlint path-order' in text
+        path.write_text(text.replace('contiguous five-step actionlint path-order', 'contiguous five-step actionlint path-chaos'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'five-step actionlint path-order fail needle',
+        )
+
+def test_path_edges_gate_five_step_needle_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'contiguous five-step actionlint path-order' in text
+        path.write_text(text.replace('contiguous five-step actionlint path-order', 'contiguous five-step actionlint path-chaos'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'five-step actionlint path-order fail needle',
+        )
+
+def test_path_edges_gate_on_push_needle_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'contiguous on:/push: header' in text
+        path.write_text(text.replace('contiguous on:/push: header', 'contiguous on:/push: hdr'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'on/push header fail needle',
+        )
+
+def test_path_edges_gate_on_push_needle_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'contiguous on:/push: header' in text
+        path.write_text(text.replace('contiguous on:/push: header', 'contiguous on:/push: hdr'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'on/push header fail needle',
+        )
+
+def test_path_edges_gate_wording_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'path-filter/path-order residual leftover deepen after #258' in text
+        path.write_text(text.replace('path-filter/path-order residual leftover deepen after #258', 'path-filter/path-order residual leftover deepen after #111'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'path leftover-after-258 wording pin',
+        )
+
+def test_path_edges_gate_wording_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'path-filter/path-order residual leftover deepen after #258' in text
+        path.write_text(text.replace('path-filter/path-order residual leftover deepen after #258', 'path-filter/path-order residual leftover deepen after #111'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'path leftover-after-258 wording pin',
+        )
+
+def test_path_edges_rejects_link_push_pr_pad0_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".github/workflows/link-check.yml"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".github/workflows/link-check.yml"\n  pull_request:', '      - ".github/workflows/link-check.yml"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_link_push_pr_pad1_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".github/workflows/link-check.yml"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".github/workflows/link-check.yml"\n  pull_request:', '      - ".github/workflows/link-check.yml"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_link_push_pr_pad2_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".github/workflows/link-check.yml"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".github/workflows/link-check.yml"\n  pull_request:', '      - ".github/workflows/link-check.yml"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_link_push_pr_pad3_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".github/workflows/link-check.yml"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".github/workflows/link-check.yml"\n  pull_request:', '      - ".github/workflows/link-check.yml"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_link_push_pr_pad4_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".github/workflows/link-check.yml"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".github/workflows/link-check.yml"\n  pull_request:', '      - ".github/workflows/link-check.yml"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_link_push_pr_pad5_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".github/workflows/link-check.yml"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".github/workflows/link-check.yml"\n  pull_request:', '      - ".github/workflows/link-check.yml"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_link_push_pr_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".github/workflows/link-check.yml"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".github/workflows/link-check.yml"\n  pull_request:', '      - ".github/workflows/link-check.yml"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_link_push_pr_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".github/workflows/link-check.yml"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".github/workflows/link-check.yml"\n  pull_request:', '      - ".github/workflows/link-check.yml"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_lint_push_pr_pad0_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".github/workflows/markdown-lint.yml"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".github/workflows/markdown-lint.yml"\n  pull_request:', '      - ".github/workflows/markdown-lint.yml"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_lint_push_pr_pad1_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".github/workflows/markdown-lint.yml"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".github/workflows/markdown-lint.yml"\n  pull_request:', '      - ".github/workflows/markdown-lint.yml"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_lint_push_pr_pad2_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".github/workflows/markdown-lint.yml"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".github/workflows/markdown-lint.yml"\n  pull_request:', '      - ".github/workflows/markdown-lint.yml"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_lint_push_pr_pad3_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".github/workflows/markdown-lint.yml"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".github/workflows/markdown-lint.yml"\n  pull_request:', '      - ".github/workflows/markdown-lint.yml"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_lint_push_pr_pad4_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".github/workflows/markdown-lint.yml"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".github/workflows/markdown-lint.yml"\n  pull_request:', '      - ".github/workflows/markdown-lint.yml"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_lint_push_pr_pad5_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".github/workflows/markdown-lint.yml"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".github/workflows/markdown-lint.yml"\n  pull_request:', '      - ".github/workflows/markdown-lint.yml"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_lint_push_pr_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".github/workflows/markdown-lint.yml"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".github/workflows/markdown-lint.yml"\n  pull_request:', '      - ".github/workflows/markdown-lint.yml"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_lint_push_pr_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".github/workflows/markdown-lint.yml"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".github/workflows/markdown-lint.yml"\n  pull_request:', '      - ".github/workflows/markdown-lint.yml"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_stew_push_pr_pad0_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".markdownlint.json"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".markdownlint.json"\n  pull_request:', '      - ".markdownlint.json"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_stew_push_pr_pad1_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".markdownlint.json"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".markdownlint.json"\n  pull_request:', '      - ".markdownlint.json"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_stew_push_pr_pad2_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".markdownlint.json"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".markdownlint.json"\n  pull_request:', '      - ".markdownlint.json"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_stew_push_pr_pad3_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".markdownlint.json"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".markdownlint.json"\n  pull_request:', '      - ".markdownlint.json"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_stew_push_pr_pad4_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".markdownlint.json"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".markdownlint.json"\n  pull_request:', '      - ".markdownlint.json"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_stew_push_pr_pad5_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".markdownlint.json"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".markdownlint.json"\n  pull_request:', '      - ".markdownlint.json"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_stew_push_pr_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".markdownlint.json"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".markdownlint.json"\n  pull_request:', '      - ".markdownlint.json"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_stew_push_pr_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".markdownlint.json"\n  pull_request:' in text
+        path.write_text(text.replace('      - ".markdownlint.json"\n  pull_request:', '      - ".markdownlint.json"\n\n  pull_request:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous push:/pull_request: adjacency')
+
+def test_path_edges_rejects_link_sched_dispatch_pad0_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "0 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "0 6 * * 1"\n  workflow_dispatch:', '    - cron: "0 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_link_sched_dispatch_pad1_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "0 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "0 6 * * 1"\n  workflow_dispatch:', '    - cron: "0 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_link_sched_dispatch_pad2_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "0 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "0 6 * * 1"\n  workflow_dispatch:', '    - cron: "0 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_link_sched_dispatch_pad3_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "0 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "0 6 * * 1"\n  workflow_dispatch:', '    - cron: "0 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_link_sched_dispatch_pad4_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "0 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "0 6 * * 1"\n  workflow_dispatch:', '    - cron: "0 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_link_sched_dispatch_pad5_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "0 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "0 6 * * 1"\n  workflow_dispatch:', '    - cron: "0 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_link_sched_dispatch_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "0 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "0 6 * * 1"\n  workflow_dispatch:', '    - cron: "0 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_link_sched_dispatch_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "0 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "0 6 * * 1"\n  workflow_dispatch:', '    - cron: "0 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_lint_sched_dispatch_pad0_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "30 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "30 6 * * 1"\n  workflow_dispatch:', '    - cron: "30 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_lint_sched_dispatch_pad1_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "30 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "30 6 * * 1"\n  workflow_dispatch:', '    - cron: "30 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_lint_sched_dispatch_pad2_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "30 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "30 6 * * 1"\n  workflow_dispatch:', '    - cron: "30 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_lint_sched_dispatch_pad3_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "30 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "30 6 * * 1"\n  workflow_dispatch:', '    - cron: "30 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_lint_sched_dispatch_pad4_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "30 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "30 6 * * 1"\n  workflow_dispatch:', '    - cron: "30 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_lint_sched_dispatch_pad5_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "30 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "30 6 * * 1"\n  workflow_dispatch:', '    - cron: "30 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_lint_sched_dispatch_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "30 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "30 6 * * 1"\n  workflow_dispatch:', '    - cron: "30 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_lint_sched_dispatch_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "30 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "30 6 * * 1"\n  workflow_dispatch:', '    - cron: "30 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_stew_sched_dispatch_pad0_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "15 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "15 6 * * 1"\n  workflow_dispatch:', '    - cron: "15 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_stew_sched_dispatch_pad1_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "15 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "15 6 * * 1"\n  workflow_dispatch:', '    - cron: "15 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_stew_sched_dispatch_pad2_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "15 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "15 6 * * 1"\n  workflow_dispatch:', '    - cron: "15 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_stew_sched_dispatch_pad3_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "15 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "15 6 * * 1"\n  workflow_dispatch:', '    - cron: "15 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_stew_sched_dispatch_pad4_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "15 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "15 6 * * 1"\n  workflow_dispatch:', '    - cron: "15 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_stew_sched_dispatch_pad5_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "15 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "15 6 * * 1"\n  workflow_dispatch:', '    - cron: "15 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_stew_sched_dispatch_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "15 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "15 6 * * 1"\n  workflow_dispatch:', '    - cron: "15 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_stew_sched_dispatch_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    - cron: "15 6 * * 1"\n  workflow_dispatch:' in text
+        path.write_text(text.replace('    - cron: "15 6 * * 1"\n  workflow_dispatch:', '    - cron: "15 6 * * 1"\n\n  workflow_dispatch:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous schedule:/workflow_dispatch: adjacency')
+
+def test_path_edges_rejects_link_pr_branches_pad0_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_link_pr_branches_pad1_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_link_pr_branches_pad2_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_link_pr_branches_pad3_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_link_pr_branches_pad4_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_link_pr_branches_pad5_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_link_pr_branches_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_link_pr_branches_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_lint_pr_branches_pad0_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_lint_pr_branches_pad1_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_lint_pr_branches_pad2_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_lint_pr_branches_pad3_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_lint_pr_branches_pad4_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_lint_pr_branches_pad5_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_lint_pr_branches_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_lint_pr_branches_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_stew_pr_branches_pad0_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_stew_pr_branches_pad1_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_stew_pr_branches_pad2_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_stew_pr_branches_pad3_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_stew_pr_branches_pad4_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_stew_pr_branches_pad5_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_stew_pr_branches_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_stew_pr_branches_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n  schedule:' in text
+        path.write_text(text.replace('  pull_request:\n  schedule:', '  pull_request:\n    branches: ["**"]\n  schedule:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'branches-unfiltered')
+
+def test_path_edges_rejects_link_tags_ignore_pad0_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_link_tags_ignore_pad1_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_link_tags_ignore_pad2_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_link_tags_ignore_pad3_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_link_tags_ignore_pad4_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_link_tags_ignore_pad5_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_link_tags_ignore_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_link_tags_ignore_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_lint_tags_ignore_pad0_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_lint_tags_ignore_pad1_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_lint_tags_ignore_pad2_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_lint_tags_ignore_pad3_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_lint_tags_ignore_pad4_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_lint_tags_ignore_pad5_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_lint_tags_ignore_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_lint_tags_ignore_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_stew_tags_ignore_pad0_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_stew_tags_ignore_pad1_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_stew_tags_ignore_pad2_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_stew_tags_ignore_pad3_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_stew_tags_ignore_pad4_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_stew_tags_ignore_pad5_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_stew_tags_ignore_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_stew_tags_ignore_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  tags-ignore:\n    - "v*"\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'tags-ignore:')
+
+def test_path_edges_rejects_stew_five_step_pad0_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n' in text
+        path.write_text(text.replace('      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n', '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous five-step actionlint path-order')
+
+def test_path_edges_rejects_stew_five_step_pad1_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n' in text
+        path.write_text(text.replace('      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n', '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous five-step actionlint path-order')
+
+def test_path_edges_rejects_stew_five_step_pad2_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n' in text
+        path.write_text(text.replace('      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n', '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous five-step actionlint path-order')
+
+def test_path_edges_rejects_stew_five_step_pad3_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n' in text
+        path.write_text(text.replace('      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n', '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous five-step actionlint path-order')
+
+def test_path_edges_rejects_stew_five_step_pad4_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n' in text
+        path.write_text(text.replace('      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n', '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous five-step actionlint path-order')
+
+def test_path_edges_rejects_stew_five_step_pad5_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n' in text
+        path.write_text(text.replace('      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n', '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous five-step actionlint path-order')
+
+def test_path_edges_rejects_stew_five_step_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n' in text
+        path.write_text(text.replace('      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n', '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous five-step actionlint path-order')
+
+def test_path_edges_rejects_stew_five_step_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n' in text
+        path.write_text(text.replace('      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n', '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous five-step actionlint path-order')
+
+def test_path_edges_rejects_stew_workflow_call_pad0_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  workflow_call:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'workflow_call:')
+
+def test_path_edges_rejects_stew_workflow_call_pad1_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  workflow_call:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'workflow_call:')
+
+def test_path_edges_rejects_stew_workflow_call_pad2_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  workflow_call:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'workflow_call:')
+
+def test_path_edges_rejects_stew_workflow_call_pad3_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  workflow_call:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'workflow_call:')
+
+def test_path_edges_rejects_stew_workflow_call_pad4_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  workflow_call:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'workflow_call:')
+
+def test_path_edges_rejects_stew_workflow_call_pad5_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  workflow_call:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'workflow_call:')
+
+def test_path_edges_rejects_stew_workflow_call_still_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  workflow_call:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'workflow_call:')
+
+def test_path_edges_rejects_stew_workflow_call_after_258() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  workflow_call:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'workflow_call:')
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -76247,6 +77903,158 @@ def main() -> int:
         test_common_host_leftover_pad5_after_252,
         test_common_host_leftover_still_after_252,
         test_common_host_leftover_after_252,
+        # TOKENMAXX path-filter/path-order residual leftover deepen after #258 (+150)
+        test_path_edges_gate_leftover_doc_after_258,
+        test_path_edges_gate_leftover_doc_still_after_258,
+        test_path_edges_gate_module_leftover_after_258,
+        test_path_edges_gate_module_leftover_still_after_258,
+        test_path_edges_gate_not_saturated_244_after_258,
+        test_path_edges_gate_not_saturated_244_still_after_258,
+        test_path_edges_gate_not_wiki_243_after_258,
+        test_path_edges_gate_not_wiki_243_still_after_258,
+        test_path_edges_gate_not_mdlink_239_after_258,
+        test_path_edges_gate_not_mdlink_239_still_after_258,
+        test_path_edges_gate_not_stew_233_after_258,
+        test_path_edges_gate_not_stew_233_still_after_258,
+        test_path_edges_gate_not_wiki_badge_227_after_258,
+        test_path_edges_gate_not_wiki_badge_227_still_after_258,
+        test_path_edges_gate_not_saturated_225_after_258,
+        test_path_edges_gate_not_saturated_225_still_after_258,
+        test_path_edges_gate_not_pass2_220_after_258,
+        test_path_edges_gate_not_pass2_220_still_after_258,
+        test_path_edges_gate_not_schema_258_after_258,
+        test_path_edges_gate_not_schema_258_still_after_258,
+        test_path_edges_gate_not_wiki_mdlink_252_after_258,
+        test_path_edges_gate_not_wiki_mdlink_252_still_after_258,
+        test_path_edges_gate_push_pr_needle_after_258,
+        test_path_edges_gate_push_pr_needle_still_after_258,
+        test_path_edges_gate_sched_dispatch_needle_after_258,
+        test_path_edges_gate_sched_dispatch_needle_still_after_258,
+        test_path_edges_gate_pr_branches_needle_after_258,
+        test_path_edges_gate_pr_branches_needle_still_after_258,
+        test_path_edges_gate_tags_ignore_needle_after_258,
+        test_path_edges_gate_tags_ignore_needle_still_after_258,
+        test_path_edges_gate_workflow_call_needle_after_258,
+        test_path_edges_gate_workflow_call_needle_still_after_258,
+        test_path_edges_gate_five_step_needle_after_258,
+        test_path_edges_gate_five_step_needle_still_after_258,
+        test_path_edges_gate_on_push_needle_after_258,
+        test_path_edges_gate_on_push_needle_still_after_258,
+        test_path_edges_gate_wording_after_258,
+        test_path_edges_gate_wording_still_after_258,
+        test_path_edges_rejects_link_push_pr_pad0_after_258,
+        test_path_edges_rejects_link_push_pr_pad1_after_258,
+        test_path_edges_rejects_link_push_pr_pad2_after_258,
+        test_path_edges_rejects_link_push_pr_pad3_after_258,
+        test_path_edges_rejects_link_push_pr_pad4_after_258,
+        test_path_edges_rejects_link_push_pr_pad5_after_258,
+        test_path_edges_rejects_link_push_pr_still_after_258,
+        test_path_edges_rejects_link_push_pr_after_258,
+        test_path_edges_rejects_lint_push_pr_pad0_after_258,
+        test_path_edges_rejects_lint_push_pr_pad1_after_258,
+        test_path_edges_rejects_lint_push_pr_pad2_after_258,
+        test_path_edges_rejects_lint_push_pr_pad3_after_258,
+        test_path_edges_rejects_lint_push_pr_pad4_after_258,
+        test_path_edges_rejects_lint_push_pr_pad5_after_258,
+        test_path_edges_rejects_lint_push_pr_still_after_258,
+        test_path_edges_rejects_lint_push_pr_after_258,
+        test_path_edges_rejects_stew_push_pr_pad0_after_258,
+        test_path_edges_rejects_stew_push_pr_pad1_after_258,
+        test_path_edges_rejects_stew_push_pr_pad2_after_258,
+        test_path_edges_rejects_stew_push_pr_pad3_after_258,
+        test_path_edges_rejects_stew_push_pr_pad4_after_258,
+        test_path_edges_rejects_stew_push_pr_pad5_after_258,
+        test_path_edges_rejects_stew_push_pr_still_after_258,
+        test_path_edges_rejects_stew_push_pr_after_258,
+        test_path_edges_rejects_link_sched_dispatch_pad0_after_258,
+        test_path_edges_rejects_link_sched_dispatch_pad1_after_258,
+        test_path_edges_rejects_link_sched_dispatch_pad2_after_258,
+        test_path_edges_rejects_link_sched_dispatch_pad3_after_258,
+        test_path_edges_rejects_link_sched_dispatch_pad4_after_258,
+        test_path_edges_rejects_link_sched_dispatch_pad5_after_258,
+        test_path_edges_rejects_link_sched_dispatch_still_after_258,
+        test_path_edges_rejects_link_sched_dispatch_after_258,
+        test_path_edges_rejects_lint_sched_dispatch_pad0_after_258,
+        test_path_edges_rejects_lint_sched_dispatch_pad1_after_258,
+        test_path_edges_rejects_lint_sched_dispatch_pad2_after_258,
+        test_path_edges_rejects_lint_sched_dispatch_pad3_after_258,
+        test_path_edges_rejects_lint_sched_dispatch_pad4_after_258,
+        test_path_edges_rejects_lint_sched_dispatch_pad5_after_258,
+        test_path_edges_rejects_lint_sched_dispatch_still_after_258,
+        test_path_edges_rejects_lint_sched_dispatch_after_258,
+        test_path_edges_rejects_stew_sched_dispatch_pad0_after_258,
+        test_path_edges_rejects_stew_sched_dispatch_pad1_after_258,
+        test_path_edges_rejects_stew_sched_dispatch_pad2_after_258,
+        test_path_edges_rejects_stew_sched_dispatch_pad3_after_258,
+        test_path_edges_rejects_stew_sched_dispatch_pad4_after_258,
+        test_path_edges_rejects_stew_sched_dispatch_pad5_after_258,
+        test_path_edges_rejects_stew_sched_dispatch_still_after_258,
+        test_path_edges_rejects_stew_sched_dispatch_after_258,
+        test_path_edges_rejects_link_pr_branches_pad0_after_258,
+        test_path_edges_rejects_link_pr_branches_pad1_after_258,
+        test_path_edges_rejects_link_pr_branches_pad2_after_258,
+        test_path_edges_rejects_link_pr_branches_pad3_after_258,
+        test_path_edges_rejects_link_pr_branches_pad4_after_258,
+        test_path_edges_rejects_link_pr_branches_pad5_after_258,
+        test_path_edges_rejects_link_pr_branches_still_after_258,
+        test_path_edges_rejects_link_pr_branches_after_258,
+        test_path_edges_rejects_lint_pr_branches_pad0_after_258,
+        test_path_edges_rejects_lint_pr_branches_pad1_after_258,
+        test_path_edges_rejects_lint_pr_branches_pad2_after_258,
+        test_path_edges_rejects_lint_pr_branches_pad3_after_258,
+        test_path_edges_rejects_lint_pr_branches_pad4_after_258,
+        test_path_edges_rejects_lint_pr_branches_pad5_after_258,
+        test_path_edges_rejects_lint_pr_branches_still_after_258,
+        test_path_edges_rejects_lint_pr_branches_after_258,
+        test_path_edges_rejects_stew_pr_branches_pad0_after_258,
+        test_path_edges_rejects_stew_pr_branches_pad1_after_258,
+        test_path_edges_rejects_stew_pr_branches_pad2_after_258,
+        test_path_edges_rejects_stew_pr_branches_pad3_after_258,
+        test_path_edges_rejects_stew_pr_branches_pad4_after_258,
+        test_path_edges_rejects_stew_pr_branches_pad5_after_258,
+        test_path_edges_rejects_stew_pr_branches_still_after_258,
+        test_path_edges_rejects_stew_pr_branches_after_258,
+        test_path_edges_rejects_link_tags_ignore_pad0_after_258,
+        test_path_edges_rejects_link_tags_ignore_pad1_after_258,
+        test_path_edges_rejects_link_tags_ignore_pad2_after_258,
+        test_path_edges_rejects_link_tags_ignore_pad3_after_258,
+        test_path_edges_rejects_link_tags_ignore_pad4_after_258,
+        test_path_edges_rejects_link_tags_ignore_pad5_after_258,
+        test_path_edges_rejects_link_tags_ignore_still_after_258,
+        test_path_edges_rejects_link_tags_ignore_after_258,
+        test_path_edges_rejects_lint_tags_ignore_pad0_after_258,
+        test_path_edges_rejects_lint_tags_ignore_pad1_after_258,
+        test_path_edges_rejects_lint_tags_ignore_pad2_after_258,
+        test_path_edges_rejects_lint_tags_ignore_pad3_after_258,
+        test_path_edges_rejects_lint_tags_ignore_pad4_after_258,
+        test_path_edges_rejects_lint_tags_ignore_pad5_after_258,
+        test_path_edges_rejects_lint_tags_ignore_still_after_258,
+        test_path_edges_rejects_lint_tags_ignore_after_258,
+        test_path_edges_rejects_stew_tags_ignore_pad0_after_258,
+        test_path_edges_rejects_stew_tags_ignore_pad1_after_258,
+        test_path_edges_rejects_stew_tags_ignore_pad2_after_258,
+        test_path_edges_rejects_stew_tags_ignore_pad3_after_258,
+        test_path_edges_rejects_stew_tags_ignore_pad4_after_258,
+        test_path_edges_rejects_stew_tags_ignore_pad5_after_258,
+        test_path_edges_rejects_stew_tags_ignore_still_after_258,
+        test_path_edges_rejects_stew_tags_ignore_after_258,
+        test_path_edges_rejects_stew_five_step_pad0_after_258,
+        test_path_edges_rejects_stew_five_step_pad1_after_258,
+        test_path_edges_rejects_stew_five_step_pad2_after_258,
+        test_path_edges_rejects_stew_five_step_pad3_after_258,
+        test_path_edges_rejects_stew_five_step_pad4_after_258,
+        test_path_edges_rejects_stew_five_step_pad5_after_258,
+        test_path_edges_rejects_stew_five_step_still_after_258,
+        test_path_edges_rejects_stew_five_step_after_258,
+        test_path_edges_rejects_stew_workflow_call_pad0_after_258,
+        test_path_edges_rejects_stew_workflow_call_pad1_after_258,
+        test_path_edges_rejects_stew_workflow_call_pad2_after_258,
+        test_path_edges_rejects_stew_workflow_call_pad3_after_258,
+        test_path_edges_rejects_stew_workflow_call_pad4_after_258,
+        test_path_edges_rejects_stew_workflow_call_pad5_after_258,
+        test_path_edges_rejects_stew_workflow_call_still_after_258,
+        test_path_edges_rejects_stew_workflow_call_after_258,
+
 ]
 
 

@@ -211,6 +211,25 @@ def check_lycheeignore(errors: list[str]) -> None:
             "(https://* / http://* / bare *)",
             errors,
         )
+    # Live docs-CI excludes after #83 (redirect / early-hints false positives).
+    if "modelcontextprotocol.io" not in text:
+        fail(
+            ".lycheeignore must exclude modelcontextprotocol.io "
+            "(lychee false-positive redirect)",
+            errors,
+        )
+    if "linuxfoundation.org" not in text:
+        fail(
+            ".lycheeignore must exclude linuxfoundation.org "
+            "(lychee false-positive early hints)",
+            errors,
+        )
+    # License badge stays stewardship-owned even when shields CDN is ignored.
+    if "enforced by stewardship" not in text:
+        fail(
+            ".lycheeignore must note license badge presence remains enforced by stewardship",
+            errors,
+        )
 
 
 def check_actionlint_style(errors: list[str]) -> None:
@@ -2564,6 +2583,175 @@ def check_badges(badges: list[re.Match[str]], errors: list[str]) -> None:
             fail(f"Unexpected badge label {label!r} (only {list(REQUIRED_ORDER)} allowed)", errors)
 
 
+def check_markdownlint_lycheeignore_gate_contract(errors: list[str]) -> None:
+    """Fail-close markdownlint + lycheeignore docs-CI pins after #83.
+
+    Orthogonal leftover vs stewardship-schema / actionlint / badge-row /
+    wiki / relative / common / CI-workflow second-passes. Split literals so
+    whole-string needle edits cannot neutralize live gate + self-pin together.
+    Fail messages also use only split concatenations so mutation of live
+    needles cannot rewrite the assertion text.
+    """
+    if not BADGE_GATE.is_file():
+        fail(
+            "Missing scripts/check_badge_standard.py "
+            "(markdownlint+lycheeignore host)",
+            errors,
+        )
+        return
+    text = BADGE_GATE.read_text(encoding="utf-8")
+
+    md_const = "MARKDOWNLINT_" + "CONFIG"
+    if md_const not in text:
+        fail(
+            "check_badge_standard.py must define " + "MARKDOWNLINT_" + "CONFIG",
+            errors,
+        )
+    ly_const = "LYCHEE" + "IGNORE"
+    if ly_const not in text:
+        fail(
+            "check_badge_standard.py must define " + "LYCHEE" + "IGNORE",
+            errors,
+        )
+    md_path = '".markdownlint' + '.json"'
+    if md_path not in text:
+        fail(
+            "check_badge_standard.py must pin " + ".markdownlint" + ".json",
+            errors,
+        )
+    ly_path = '".lychee' + 'ignore"'
+    if ly_path not in text:
+        fail(
+            "check_badge_standard.py must pin " + ".lychee" + "ignore",
+            errors,
+        )
+    fn_ly = "def check_" + "lycheeignore("
+    if fn_ly not in text:
+        fail(
+            "check_badge_standard.py must provide " + "check_" + "lycheeignore",
+            errors,
+        )
+    fn_wf = "def check_workflows_" + "and_license("
+    if fn_wf not in text:
+        fail(
+            "check_badge_standard.py must provide "
+            + "check_workflows_"
+            + "and_license",
+            errors,
+        )
+
+    for code in ("MD013", "MD024"):
+        if code not in text:
+            fail("check_badge_standard.py must pin " + code, errors)
+    for code in ("MD033", "MD041", "MD060"):
+        token = '"' + code + '"'
+        if token not in text:
+            fail("check_badge_standard.py must pin " + code, errors)
+
+    ll_word = "line_" + "length"
+    if ll_word not in text:
+        fail("check_badge_standard.py must pin " + "line_" + "length", errors)
+    sib_word = "siblings_" + "only"
+    if sib_word not in text:
+        fail("check_badge_standard.py must pin " + "siblings_" + "only", errors)
+
+    # Regex assigns (raw-string bodies as they appear in source).
+    ll_re = '"line_length"\\s*:\\s*200\\b'
+    if ll_re not in text:
+        fail(
+            "check_badge_standard.py must regex-pin " + "line_length: " + "200",
+            errors,
+        )
+    sib_re = '"siblings_only"\\s*:\\s*true\\b'
+    if sib_re not in text:
+        fail(
+            "check_badge_standard.py must regex-pin "
+            + "siblings_only: "
+            + "true",
+            errors,
+        )
+    default_re = '"default"\\s*:\\s*true\\b'
+    if default_re not in text:
+        fail(
+            "check_badge_standard.py must regex-pin " + "default: " + "true",
+            errors,
+        )
+    for code in ("MD033", "MD041", "MD060"):
+        cre = '"' + code + '"\\s*:\\s*false\\b'
+        if cre not in text:
+            fail(
+                "check_badge_standard.py must regex-pin " + code + ": " + "false",
+                errors,
+            )
+
+    # Live fail-message needles, reconstructed only via splits.
+    pin_checks = (
+        "must configure MD" + "013",
+        "must set line_" + "length",
+        "line_length: " + "200",
+        "must configure MD" + "024",
+        "must set siblings_" + "only",
+        "siblings_only: " + "true",
+        "default: " + "true",
+        "MD033: " + "false",
+        "MD041: " + "false",
+        "MD060: " + "false",
+        "markdown-lint.yml must use .markdownlint.json " + "config",
+        "img.shields." + "io",
+        "img\\.shields\\." + "io",
+        "https://" + "*",
+        "http://" + "*",
+        "bare " + "*",
+        "license badge presence remains stewardship-" + "enforced",
+        "license badge presence remains enforced by " + "stewardship",
+        "modelcontextprotocol." + "io",
+        "linuxfoundation." + "org",
+        "must exclude flaky img.shields." + "io",
+        "must not exclude all http(s) " + "targets",
+        "run_stewardship_checks" + ".sh",
+        "test_stewardship_gates" + ".py",
+        "markdown-lint" + ".yml",
+        "link-check" + ".yml",
+        "stewardship-checks" + ".yml",
+    )
+    for needle in pin_checks:
+        if needle not in text:
+            fail(
+                "check_badge_standard.py markdownlint/lycheeignore pin missing "
+                + needle,
+                errors,
+            )
+
+    if "CONTRIBUTING" + ".md" not in text:
+        fail(
+            "check_badge_standard.py must reference " + "CONTRIBUTING" + ".md",
+            errors,
+        )
+    if "AGENTS" + ".md" not in text:
+        fail(
+            "check_badge_standard.py must reference " + "AGENTS" + ".md",
+            errors,
+        )
+
+    fn_contract = "def check_markdownlint_" + "lycheeignore_gate_contract("
+    if fn_contract not in text:
+        fail(
+            "check_badge_standard.py must provide "
+            + "check_markdownlint_"
+            + "lycheeignore_gate_contract",
+            errors,
+        )
+    call_contract = "check_markdownlint_" + "lycheeignore_gate_contract(errors)"
+    if call_contract not in text:
+        fail(
+            "main() must call "
+            + "check_markdownlint_"
+            + "lycheeignore_gate_contract",
+            errors,
+        )
+
+
+
 def main() -> int:
     errors: list[str] = []
     # Fail-closed after #48: self-contract first so helper renames fail closed
@@ -2572,6 +2760,9 @@ def main() -> int:
     # Fail-closed after #75: actionlint-style contract early (same self-host file)
     # so style-helper renames / needle drift fail closed before NameError.
     check_actionlint_style_gate_contract(errors)
+    # Fail-closed after #83: markdownlint+lycheeignore docs-CI contract early
+    # so config-helper renames / needle drift fail closed before NameError.
+    check_markdownlint_lycheeignore_gate_contract(errors)
     if errors:
         print("Badge standard check FAILED:", file=sys.stderr)
         for err in errors:

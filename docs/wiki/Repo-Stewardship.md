@@ -102,7 +102,14 @@ plus stewardship-schema second-pass after #72/#75: `FENCED_YAML_RE` exact /
 `ISO_DATE_RE` / `SEMVER_RE` / `ISSUE_REF_RE` / `DATE_KEYS` / Tiny YAML /
 scalar+non-empty+string / ACTIVE / tier / 0..3 / ISO-8601 / invent /
 semver / closes #N / FAILED+OK / stdlib-subset+PyYAML / bool subclass /
-`match.group(1)` / missing keys / utf-8 / `STRING_KEYS` members).
+`match.group(1)` / missing keys / utf-8 / `STRING_KEYS` members,
+plus markdownlint+lycheeignore docs-CI config pins after #83:
+`.markdownlint.json` MD013 `line_length:200` / MD024 `siblings_only:true` /
+`default:true` / MD033+MD041+MD060 false / `.lycheeignore` `img.shields.io` +
+anti-global + stewardship license wording / `modelcontextprotocol.io` +
+`linuxfoundation.org` live excludes / `markdown-lint.yml`
+`.markdownlint.json` needle / CONTRIBUTING+AGENTS front-door /
+contract fn+call self-pin).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

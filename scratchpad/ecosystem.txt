@@ -686,3 +686,5 @@ _None yet._
 2026-09-14T06:24:21Z
 
 2026-09-14T06:24:21Z cursor: Local green pending — run_stewardship + self-tests 3724 + markdownlint ← ECO-069 Pass-2 leftover + md/link edges after #203 (do not revive #202/#192; leave CONFLICTING #205/#204 alone; do not redo #199/#203)
+
+2026-09-14T06:28:42Z cursor: Draft PR #212 opened (cursor/tokenmaxx-pass2-leftover-mdlink-edges-after-203-f641); leave draft / do-not-merge; awaiting CI ← ECO-069 Pass-2 leftover + md/link edges after #203 (do not revive #202/#192; leave CONFLICTING #205/#204 alone; do not redo #199/#203)

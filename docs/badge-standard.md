@@ -203,6 +203,8 @@ stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license
 badge presence remains stewardship-enforced.
 
+
+<!-- CI re-trigger for draft PR #172 -->
 ## Related
 
 - Public wiki outline: [wiki/Home.md](./wiki/Home.md)

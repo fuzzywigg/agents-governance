@@ -40,6 +40,12 @@ Fail-closed pins (live path after #53; second-pass after #72/#75):
   whitespace-only non-empty / nested version+autonomy+maintainer+status+
   surface+closes+tier / list surface+closes+purpose+autonomy /
   fourth-pass docstring (distinct from schema-third-pass after-149)
+- Residual after #225 (schema pass-5; NOT fourth-pass #216 / NOT path-edges #225 /
+  NOT Pass-2 leftover+md/link #220 / NOT badge-lint #208 / NOT wiki-index/badge #227;
+  lands closed #229 leftover on post-#227 tip): residual invalid status
+  stubs WIP|BETA|LEGACY|FROZEN|CANCELLED|PROTOTYPE / residual invalid surface stubs
+  openai|anthropic|slack|auto|agents / "status" in required_keys / loaded is None /
+  value.lower() == "true" / int(value) / if not text.strip() / residual docstring
 """
 
 from __future__ import annotations

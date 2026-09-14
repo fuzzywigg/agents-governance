@@ -267,6 +267,15 @@ stewardship-checks badge refuse leftover framing — DISTINCT leftover only
 not schema fourth-pass #216 / not stewardship-badge lint #208;
 lands closed #222/#215/#196 leftover on post-#225 tip; do not revive
 closed #222/#215/#196/#185/#172)).
+plus stewardship-checks + schema residual deepen leftovers after #227 tip:
+exact contiguous Set up Python / Install PyYAML / checkout→Set up Python /
+full push paths / schedule+cron / concurrency / jobs.stewardship header /
+reject strategy|matrix|services invent / schema residual (pass-5)
+status+surface stubs + helper needles — DISTINCT leftover only
+(not wiki-index/badge #227 / not path-filter/path-order #225 /
+not Pass-2 leftover + md/link #220 / not schema fourth-pass #216 /
+not stewardship-badge lint #208; lands closed #229 leftover on post-#227
+tip; do not revive closed #229/#228/#230/#231)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

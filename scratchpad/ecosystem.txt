@@ -847,3 +847,5 @@ _None yet._
 2026-09-14T09:40:17Z cursor: Local green — run_stewardship + self-tests 5058 + markdownlint ← ECO-078 docs-lint pass-4 blob/503 + Pass-2 residual leftover after #244 (leave draft; do not revive #251/#250/#246/#245/#240)
 
 2026-09-14T09:41:05Z cursor: Draft PR #256 opened (cursor/tokenmaxx-pass2-residual-templates-after-244-linkflake-84bf); leave draft / do-not-merge; awaiting CI ← ECO-078 (do not revive #251/#250/#246/#245/#240)
+
+2026-09-14T09:42:59Z cursor: Tip-push CHANGELOG track #256 to fire PR CI on head (scratchpad-only tip lacked path triggers); leave draft; do not revive #251/#250 ← ECO-078

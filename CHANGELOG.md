@@ -11,6 +11,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- Draft PR tracking for Pass-2 residual + blob/503 harden: #256 (leave draft / do-not-merge; do not revive #251/#250).
 - TOKENMAXX docs-lint pass-4: exclude flaky same-repo GitHub `blob/main`
   HTML (intermittent 503) via `.lycheeignore`, with wiki-outline still enforcing
   absolute blob pins — fail-closed layout + commentary + gate-contract needles;

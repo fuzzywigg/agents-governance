@@ -520,3 +520,5 @@ _None yet._
 - Scope: EXISTING stewardship CI workflow reversible pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands after #135; do not revive #113
 - Branch: cursor/tokenmaxx-stewardship-ci-deepen-after-135-f041
 2026-09-14T03:40:00Z
+
+2026-09-14T03:46:00Z cursor: PR #158 CI green (lint + link-check + stewardship) ← complete ECO-058 TOKENMAXX stewardship CI deepen after #135

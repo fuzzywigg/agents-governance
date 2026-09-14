@@ -33,7 +33,8 @@ Fail-closed actionlint-style pins (live path after #75; second-pass after #83/#8
   statuses|deployments: write / deepen docstring
 
 Fail-closed run_stewardship runner pins (live path after #117; Pass-2 after #176;
-lands closed #175 leftover; lands closed #140; lands closed #96):
+lands closed #175 leftover; lands closed #140; lands closed #96;
+Pass-2 leftovers after #181):
 - shebang #!/usr/bin/env bash / set -euo pipefail
 - dirname "$0" ROOT resolve / cd "$ROOT"
 - same set as CI commentary / python3 scripts/<gate> for four gates
@@ -44,8 +45,10 @@ lands closed #175 leftover; lands closed #140; lands closed #96):
   dirname "$0")/.." fragment / doc gates locally commentary /
   CI runs run_stewardship_checks.sh before test_stewardship_gates.py;
   CI runner-before-self-tests order pin
+- Pass-2 leftovers after #181: shebang-first-line / reject || exit 0 /
+  reject set +u (nounset disable) — residual soft-fail posture beyond #179
 Fail-closed CI workflow pins (live path after #39/#72; third-pass after #111; deepen after #161;
-path-filter leftovers after #173):
+path-filter leftovers after #173; markdown-lint/link-check edges after #181):
 - Third-pass after #111: exact concurrency group templates /
   markdown-lint+stewardship cron/timeout pins / DavidAnson@v24 /
   setup-python@v5 / lychee --verbose/--no-progress/--max-concurrency 8 /
@@ -58,6 +61,10 @@ path-filter leftovers after #173):
   Weekly drift + GITHUB_TOKEN commentary / deepen docstring
 - Path-filter leftovers after #173: exact push paths layouts / residual
   stewardship path entries / reject paths-ignore / ignore-glob exactness
+- Markdown-lint/link-check workflow edges after #181: args: >- /
+  externally-broken-links commentary / without-it private-404 line /
+  reject continue-on-error / exact job permissions / checkout adjacency
+  (not path-filter / Pass-2 / wiki-index spam)
 
 Fail-closed leftover docs-lint/stewardship/actionlint pins after #149:
 - docs-lint third-pass: exact live .lycheeignore full layout + exact
@@ -647,6 +654,10 @@ def check_workflow_hardening(errors: list[str]) -> None:
     Path-filter leftovers after #173: exact push paths layouts / residual
     stewardship path entries / reject paths-ignore / ignore-glob exactness
     (empty workflow stubs already handled; not path-order/badge spam).
+    Markdown-lint/link-check workflow edges after #181: args: >- /
+    externally-broken-links commentary / without-it private-404 line /
+    reject continue-on-error / exact job permissions / checkout adjacency
+    (not path-filter / Pass-2 / wiki-index spam).
     """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
@@ -1434,6 +1445,65 @@ def check_workflow_hardening(errors: list[str]) -> None:
             errors,
         )
 
+    # Fail-closed after #181: markdown-lint / link-check workflow edges
+    # (distinct from path-filter #176 / Pass-2 #179 / wiki-index #181 spam).
+    if "args: >-" not in link:
+        fail(
+            "link-check.yml must keep multiline args: >- form",
+            errors,
+        )
+    if "Run weekly to catch externally broken links" not in link:
+        fail(
+            "link-check.yml must keep externally broken links commentary",
+            errors,
+        )
+    without_it = "without it, private repos return 404 and fail the check"
+    if without_it not in link:
+        fail(
+            "link-check.yml must keep without-it private-404 commentary",
+            errors,
+        )
+    if "continue-on-error:" in link:
+        fail(
+            "link-check.yml must not set continue-on-error "
+            "(markdown-lint/link-check edges after #181)",
+            errors,
+        )
+    if "continue-on-error:" in lint:
+        fail(
+            "markdown-lint.yml must not set continue-on-error "
+            "(markdown-lint/link-check edges after #181)",
+            errors,
+        )
+    job_perms = "    permissions:\n      contents: read"
+    if job_perms not in link:
+        fail(
+            "link-check.yml must keep exact job permissions: contents: read",
+            errors,
+        )
+    if job_perms not in lint:
+        fail(
+            "markdown-lint.yml must keep exact job permissions: contents: read",
+            errors,
+        )
+    link_checkout_adj = (
+        "      - uses: actions/checkout@v7\n"
+        "      - name: Check links"
+    )
+    if link_checkout_adj not in link:
+        fail(
+            "link-check.yml must keep checkout before Check links adjacency",
+            errors,
+        )
+    lint_checkout_adj = (
+        "      - uses: actions/checkout@v7\n"
+        "      - name: Run markdownlint"
+    )
+    if lint_checkout_adj not in lint:
+        fail(
+            "markdown-lint.yml must keep checkout before Run markdownlint adjacency",
+            errors,
+        )
 
 def check_badge_standard_doc(errors: list[str]) -> None:
     """Ensure docs/badge-standard.md still documents the same required order."""
@@ -3200,7 +3270,7 @@ def check_actionlint_style_gate_contract(errors: list[str]) -> None:
 
 def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
     """Fail-close live CI workflow hardening wiring (third-pass after #111; deepen after #161;
-    path-filter leftovers after #173)."""
+    path-filter leftovers after #173; markdown-lint/link-check edges after #181)."""
     text = Path(__file__).read_text(encoding="utf-8")
     # Fail-closed after #111: third-pass helper / constant / needle pins
     # (CI workflow reversible slice only; not badge/wiki/relative/schema/actionlint spam).
@@ -3460,6 +3530,54 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
             "check_workflow_hardening must require push paths: declaration",
             errors,
         )
+
+    # Fail-closed after #181: markdown-lint / link-check workflow edge pins
+    # (not path-filter / Pass-2 / wiki-index spam).
+    edge_doc = "Markdown-lint/link-check workflow edges after " + "#181"
+    if edge_doc not in text:
+        fail(
+            "check_workflow_hardening docstring must pin " + edge_doc,
+            errors,
+        )
+    module_edge = "markdown-lint/link-check edges after " + "#181"
+    if module_edge not in text:
+        fail(
+            "check_badge_standard.py module docstring must pin " + module_edge,
+            errors,
+        )
+    edge_pins = (
+        ("args: " + ">-", "lychee args multiline form pin"),
+        (
+            "externally broken links " + "commentary",
+            "link-check externally-broken commentary pin",
+        ),
+        (
+            "without-it private-404 " + "commentary",
+            "link-check without-it private-404 pin",
+        ),
+        (
+            "must not set continue-on-" + "error",
+            "continue-on-error reject pin",
+        ),
+        (
+            "exact job permissions: contents: " + "read",
+            "job permissions exact pin",
+        ),
+        (
+            "checkout before Check links " + "adjacency",
+            "link-check checkout adjacency pin",
+        ),
+        (
+            "checkout before Run markdownlint " + "adjacency",
+            "markdown-lint checkout adjacency pin",
+        ),
+    )
+    for needle, label in edge_pins:
+        if needle not in text:
+            fail(
+                "check_workflow_hardening must keep " + label,
+                errors,
+            )
 
     fn_pin = "def check_workflow_hardening" + "("
     if fn_pin not in text:
@@ -5765,6 +5883,22 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
                 "run_stewardship_checks.sh must not disable errexit with set +e",
                 errors,
             )
+        # Pass-2 leftovers after #181: residual soft-fail posture beyond #179.
+        if "|| exit 0" in run_text or "||exit 0" in run_text:
+            fail(
+                "run_stewardship_checks.sh must not soft-fail with || exit 0",
+                errors,
+            )
+        if "set +u" in run_text:
+            fail(
+                "run_stewardship_checks.sh must not disable nounset with set +u",
+                errors,
+            )
+        if not run_text.startswith("#!/usr/bin/env bash\n"):
+            fail(
+                "run_stewardship_checks.sh must keep shebang as first line",
+                errors,
+            )
         # Fail-closed after #176: parent-dir fragment from live ROOT assign.
         # Checked before exact-ROOT leftover so parent-frag mutations get this needle.
         parent_frag = 'dirname "$0")/..'
@@ -5823,7 +5957,7 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
 
 
 def check_run_stewardship_gate_contract(errors: list[str]) -> None:
-    """Fail-close live run_stewardship_checks.sh wiring (after #117/#176; not lychee/mdlint spam)."""
+    """Fail-close live run_stewardship_checks.sh wiring (after #117/#176/#181; not lychee/mdlint spam)."""
     if not BADGE_GATE.is_file():
         fail("Missing scripts/check_badge_standard.py (run_stewardship host)", errors)
         return
@@ -6035,6 +6169,31 @@ def check_run_stewardship_gate_contract(errors: list[str]) -> None:
     if order_marker not in text:
         fail(
             "run_stewardship contract must keep " + order_marker,
+            errors,
+        )
+    # Pass-2 leftovers after #181: residual soft-fail / shebang-first pins.
+    leftover_181 = "Pass-2 leftovers after " + "#181"
+    if leftover_181 not in text:
+        fail(
+            "run_stewardship pins must keep " + leftover_181 + " marker",
+            errors,
+        )
+    exit0_pin = "soft-fail with || exit " + "0"
+    if exit0_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + exit0_pin + " pin",
+            errors,
+        )
+    set_plus_u = "disable nounset with set " + "+u"
+    if set_plus_u not in text:
+        fail(
+            "run_stewardship contract must keep " + set_plus_u + " pin",
+            errors,
+        )
+    shebang_first = "shebang as first " + "line"
+    if shebang_first not in text:
+        fail(
+            "run_stewardship contract must keep " + shebang_first + " pin",
             errors,
         )
 

@@ -620,3 +620,14 @@ _None yet._
 2026-09-14T05:25:00Z cursor: Local green on post-#179 tip — run_stewardship + self-tests 3330 + markdownlint ← ECO-064 wiki-index validators after #176 (do not revive #177/#180)
 
 2026-09-14T05:28:00Z cursor: Draft PR #181 opened (rebased wiki-index after #176 onto post-#179 tip; 3330 cases) — awaiting CI; do not revive #177/#180
+
+### [ECO-065] TOKENMAXX deepen Pass-2 leftover + md/link workflow edges after #181 — 2026-09-14T05:30:00Z
+- [x] cursor: Read live tree post-#181 (3330 cases; fixtures #173 / path-filter #176 / Pass-2 #179 / wiki-index #181 saturated; pick unsaturated Pass-2 leftover + markdown-lint/link-check workflow edges)
+- [x] cursor: Fail-close Pass-2 leftovers — || exit 0 / set +u / shebang-first-line; md/link edges — args: >- / externally-broken commentary / without-it private-404 / reject continue-on-error / exact job permissions / checkout adjacency / gate contracts
+- [x] cursor: Expand self-tests 3330 → 3414 (Pass-2 leftover + md/link workflow edge slice only; not fixtures #173 / path-filter #176 / Pass-2 main #179 / wiki-index #181 spam)
+- [ ] cursor: Green draft PR with CI
+- Scope: EXISTING run_stewardship Pass-2 residual + markdown-lint.yml / link-check.yml workflow edge integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; distinct leftover after merged #173–#181; do not revive #175/#178/#182/#183
+- Branch: cursor/tokenmaxx-pass2-mdlint-link-after-181-12d5
+2026-09-14T05:30:00Z
+
+2026-09-14T05:45:00Z cursor: Local green — run_stewardship + self-tests 3414 + markdownlint ← ECO-065 Pass-2 leftover + md/link edges after #181 (distinct from #173–#181; do not revive #175/#178/#182/#183)

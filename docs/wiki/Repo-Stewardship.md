@@ -192,7 +192,12 @@ do not revive #175/#140/#122),
 plus wiki-index validators after #176: Home TOC empty-index / publishable
 page index stubs / broken internal stub links / empty markdown index /
 duplicate slug `headings_in` set collapse — lands closed #177/#168/#170 leftover;
-do not revive #177/#168/#170; distinct from path-filter #176 and run_stewardship #179).
+do not revive #177/#168/#170; distinct from path-filter #176 and run_stewardship #179,
+plus Pass-2 leftover + markdown-lint/link-check workflow edges after #181:
+`|| exit 0` / `set +u` / shebang-first-line / `args: >-` / externally-broken
+commentary / without-it private-404 / reject `continue-on-error` / exact job
+permissions / checkout adjacency — distinct leftover after #173–#181; not
+fixtures / path-filter / Pass-2 main / wiki-index spam).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

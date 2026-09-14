@@ -197,6 +197,11 @@ plus actionlint path-order leftover after #181: contiguous three-path
 actionlint order / exact bash <(curl -fsSL) download /
 reject continue-on-error: true / Download actionlint + actionlint existing
 workflow paths step names / path-order leftover docstring).
+plus stewardship-schema third-pass + deepen after #189 tip: future annotations /
+Path parent / yaml=None / five live docs / parse pins / path.is_file /
+block.strip / STRING_KEYS / BLE001 / DATE_KEYS / deepen docstring (lands
+closed #190/#183/#164 leftover; do not revive closed
+closed #190/#188/#187/#183/#164/#163/#142/#147/#153/#171),
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

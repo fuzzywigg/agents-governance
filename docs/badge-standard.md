@@ -169,7 +169,12 @@ tuple typing / FENCED_BLOCK_RE.sub / label or relative_to / pattern.search /
 lowered=text.lower / re.escape / https? URL-ish / ROOT.glob+found.update /
 set[Path] / workflows path join / scheme+pattern+hint loops / Shared helpers
 doc / hint.endswith(=) / MEMORY dumps / str|None+list[Path] /
-FORBIDDEN_BADGE_HINTS head / SECRET_URL_HINTS gh-family prefix members).
+FORBIDDEN_BADGE_HINTS head / SECRET_URL_HINTS gh-family prefix members,
+plus run_stewardship runner pins after #117: `#!/usr/bin/env bash` /
+`set -euo pipefail` / `dirname "$0"`+`pwd` ROOT / `cd "$ROOT"` / same set as
+CI / `python3 scripts/<gate>` ×4 / badge→wiki→schema→relative order /
+`check_run_stewardship_gate_contract` (lands closed #122/#96 leftover; do not
+revive #119)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

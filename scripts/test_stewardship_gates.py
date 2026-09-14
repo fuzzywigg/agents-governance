@@ -12,6 +12,10 @@ Markdown Lint / product badge refusal / reject stewardship-checks.yml/badge.svg
 invent / reject embedded markdown badge images / PUBLISH Link Check+Markdown Lint
 exactly / Home no badge-row embeds (not docs-lint #135 / common / run_stewardship /
 actionlint / relative / CI workflow spam).
+Deepened after #141: actionlint-style deepen — cancel-in-progress: true /
+contents: read / ubuntu-latest / workflow_dispatch: / reject
+security-events|attestations|statuses|deployments write / deepen docstring
+(not wiki-badge #141 / docs-lint #135 / workflow-hardening / badge / schema spam).
 Deepened after #104: badge-standard third-pass — BADGE_LINE_RE+REPO_FROM_* exact /
 REQUIRED_WORKFLOWS exact / group(label|img|link) / sys.exit / stewardship_common /
 BADGE_GATE / utf-8 / Strict row / H1 startswith / FAIL README / https needles /
@@ -32831,6 +32835,794 @@ def test_actionlint_third_rejects_concurrency_link_check_pad24_after_108() -> No
 
 # --- TOKENMAXX deepen after #111: stewardship_common third-pass pins ---
 
+# --- TOKENMAXX deepen after #135: actionlint-style deepen pins ---
+
+def test_actionlint_fourth_gate_fourth_pass_doc_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Deepen after #135' in text
+        path.write_text(text.replace('Deepen after #135', 'Deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Deepen after #135')
+
+def test_actionlint_fourth_gate_fourth_pass_doc_still_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Deepen after #135' in text
+        path.write_text(text.replace('Deepen after #135', 'Deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Deepen after #135')
+
+def test_actionlint_fourth_gate_module_fourth_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'deepen after #135' in text
+        path.write_text(text.replace('deepen after #135', 'deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'deepen after #135')
+
+def test_actionlint_fourth_gate_module_fourth_still_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'deepen after #135' in text
+        path.write_text(text.replace('deepen after #135', 'deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'deepen after #135')
+
+def test_actionlint_fourth_gate_cancel_true_re_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'cancel-in-progress:\\s*true' in text
+        path.write_text(text.replace('cancel-in-progress:\\s*true', 'cancel-in-progress:\\s*yes', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'cancel-in-progress: true')
+
+def test_actionlint_fourth_gate_cancel_true_re_still_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'cancel-in-progress:\\s*true' in text
+        path.write_text(text.replace('cancel-in-progress:\\s*true', 'cancel-in-progress:\\s*yes', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'cancel-in-progress: true')
+
+def test_actionlint_fourth_gate_contents_read_re_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'contents:\\s*read' in text
+        path.write_text(text.replace('contents:\\s*read', 'contents:\\s*allow', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contents: read')
+
+def test_actionlint_fourth_gate_contents_read_re_still_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'contents:\\s*read' in text
+        path.write_text(text.replace('contents:\\s*read', 'contents:\\s*allow', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contents: read')
+
+def test_actionlint_fourth_gate_ubuntu_membership_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"ubuntu-latest" not in text' in text
+        path.write_text(text.replace('"ubuntu-latest" not in text', '"ubuntu-rolling" not in text', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'ubuntu-latest')
+
+def test_actionlint_fourth_gate_ubuntu_membership_still_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"ubuntu-latest" not in text' in text
+        path.write_text(text.replace('"ubuntu-latest" not in text', '"ubuntu-rolling" not in text', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'ubuntu-latest')
+
+def test_actionlint_fourth_gate_dispatch_membership_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"workflow_dispatch:" not in text' in text
+        path.write_text(text.replace('"workflow_dispatch:" not in text', '"workflow_call:" not in text', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'workflow_dispatch:')
+
+def test_actionlint_fourth_gate_dispatch_membership_still_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"workflow_dispatch:" not in text' in text
+        path.write_text(text.replace('"workflow_dispatch:" not in text', '"workflow_call:" not in text', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'workflow_dispatch:')
+
+def test_actionlint_fourth_gate_security_write_re_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'security-events:\\s*write' in text
+        path.write_text(text.replace('security-events:\\s*write', 'security-events:\\s*read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'security-events: write')
+
+def test_actionlint_fourth_gate_security_write_re_still_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'security-events:\\s*write' in text
+        path.write_text(text.replace('security-events:\\s*write', 'security-events:\\s*read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'security-events: write')
+
+def test_actionlint_fourth_gate_attest_write_re_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'attestations:\\s*write' in text
+        path.write_text(text.replace('attestations:\\s*write', 'attestations:\\s*read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'attestations: write')
+
+def test_actionlint_fourth_gate_attest_write_re_still_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'attestations:\\s*write' in text
+        path.write_text(text.replace('attestations:\\s*write', 'attestations:\\s*read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'attestations: write')
+
+def test_actionlint_fourth_gate_statuses_write_re_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'statuses:\\s*write' in text
+        path.write_text(text.replace('statuses:\\s*write', 'statuses:\\s*read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'statuses: write')
+
+def test_actionlint_fourth_gate_statuses_write_re_still_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'statuses:\\s*write' in text
+        path.write_text(text.replace('statuses:\\s*write', 'statuses:\\s*read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'statuses: write')
+
+def test_actionlint_fourth_gate_deployments_write_re_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'deployments:\\s*write' in text
+        path.write_text(text.replace('deployments:\\s*write', 'deployments:\\s*read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'deployments: write')
+
+def test_actionlint_fourth_gate_deployments_write_re_still_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'deployments:\\s*write' in text
+        path.write_text(text.replace('deployments:\\s*write', 'deployments:\\s*read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'deployments: write')
+
+def test_actionlint_fourth_gate_fail_cancel_true_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'actionlint-style requires cancel-in-progress: true' in text
+        path.write_text(text.replace('actionlint-style requires cancel-in-progress: true', 'actionlint-style requires cancel-in-progress: yes', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'cancel-in-progress: true')
+
+def test_actionlint_fourth_gate_fail_cancel_true_still_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'actionlint-style requires cancel-in-progress: true' in text
+        path.write_text(text.replace('actionlint-style requires cancel-in-progress: true', 'actionlint-style requires cancel-in-progress: yes', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'cancel-in-progress: true')
+
+def test_actionlint_fourth_gate_fail_contents_read_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'actionlint-style requires contents: read' in text
+        path.write_text(text.replace('actionlint-style requires contents: read', 'actionlint-style requires contents: allow', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contents: read')
+
+def test_actionlint_fourth_gate_fail_contents_read_still_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'actionlint-style requires contents: read' in text
+        path.write_text(text.replace('actionlint-style requires contents: read', 'actionlint-style requires contents: allow', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contents: read')
+
+def test_actionlint_fourth_gate_fail_ubuntu_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'actionlint-style requires runs-on ubuntu-latest' in text
+        path.write_text(text.replace('actionlint-style requires runs-on ubuntu-latest', 'actionlint-style requires runs-on ubuntu-rolling', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'ubuntu-latest')
+
+def test_actionlint_fourth_gate_fail_ubuntu_still_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'actionlint-style requires runs-on ubuntu-latest' in text
+        path.write_text(text.replace('actionlint-style requires runs-on ubuntu-latest', 'actionlint-style requires runs-on ubuntu-rolling', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'ubuntu-latest')
+
+def test_actionlint_fourth_gate_fail_dispatch_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'actionlint-style requires workflow_dispatch:' in text
+        path.write_text(text.replace('actionlint-style requires workflow_dispatch:', 'actionlint-style requires workflow_call:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'workflow_dispatch:')
+
+def test_actionlint_fourth_gate_fail_dispatch_still_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'actionlint-style requires workflow_dispatch:' in text
+        path.write_text(text.replace('actionlint-style requires workflow_dispatch:', 'actionlint-style requires workflow_call:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'workflow_dispatch:')
+
+def test_actionlint_fourth_gate_fail_security_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'security-events: write is forbidden on stewardship workflows' in text
+        path.write_text(text.replace('security-events: write is forbidden on stewardship workflows', 'security-events: write is discouraged on stewardship workflows', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'security-events: write')
+
+def test_actionlint_fourth_gate_fail_security_still_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'security-events: write is forbidden on stewardship workflows' in text
+        path.write_text(text.replace('security-events: write is forbidden on stewardship workflows', 'security-events: write is discouraged on stewardship workflows', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'security-events: write')
+
+def test_actionlint_fourth_gate_fail_attest_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'attestations: write is forbidden on stewardship workflows' in text
+        path.write_text(text.replace('attestations: write is forbidden on stewardship workflows', 'attestations: write is discouraged on stewardship workflows', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'attestations: write')
+
+def test_actionlint_fourth_gate_fail_attest_still_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'attestations: write is forbidden on stewardship workflows' in text
+        path.write_text(text.replace('attestations: write is forbidden on stewardship workflows', 'attestations: write is discouraged on stewardship workflows', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'attestations: write')
+
+def test_actionlint_fourth_gate_fail_statuses_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'statuses: write is forbidden on stewardship workflows' in text
+        path.write_text(text.replace('statuses: write is forbidden on stewardship workflows', 'statuses: write is discouraged on stewardship workflows', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'statuses: write')
+
+def test_actionlint_fourth_gate_fail_statuses_still_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'statuses: write is forbidden on stewardship workflows' in text
+        path.write_text(text.replace('statuses: write is forbidden on stewardship workflows', 'statuses: write is discouraged on stewardship workflows', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'statuses: write')
+
+def test_actionlint_fourth_gate_fail_deployments_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'deployments: write is forbidden on stewardship workflows' in text
+        path.write_text(text.replace('deployments: write is forbidden on stewardship workflows', 'deployments: write is discouraged on stewardship workflows', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'deployments: write')
+
+def test_actionlint_fourth_gate_fail_deployments_still_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'deployments: write is forbidden on stewardship workflows' in text
+        path.write_text(text.replace('deployments: write is forbidden on stewardship workflows', 'deployments: write is discouraged on stewardship workflows', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'deployments: write')
+
+def test_actionlint_fourth_rejects_cancel_true_link_check_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'cancel-in-progress: true' in text
+        path.write_text(text.replace('cancel-in-progress: true', 'cancel-in-progress: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'cancel-in-progress: true')
+
+def test_actionlint_fourth_rejects_ubuntu_link_check_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'ubuntu-latest' in text
+        path.write_text(text.replace('ubuntu-latest', 'ubuntu-22.04', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'ubuntu-latest')
+
+def test_actionlint_fourth_rejects_dispatch_link_check_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'workflow_dispatch:' in text
+        path.write_text(text.replace('workflow_dispatch:', 'workflow_call:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'workflow_dispatch:')
+
+def test_actionlint_fourth_rejects_contents_read_link_check_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'contents: read' in text
+        path.write_text(text.replace('contents: read', 'contents: none'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contents: read')
+
+def test_actionlint_fourth_rejects_cancel_true_markdown_lint_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'cancel-in-progress: true' in text
+        path.write_text(text.replace('cancel-in-progress: true', 'cancel-in-progress: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'cancel-in-progress: true')
+
+def test_actionlint_fourth_rejects_ubuntu_markdown_lint_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'ubuntu-latest' in text
+        path.write_text(text.replace('ubuntu-latest', 'ubuntu-22.04', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'ubuntu-latest')
+
+def test_actionlint_fourth_rejects_dispatch_markdown_lint_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'workflow_dispatch:' in text
+        path.write_text(text.replace('workflow_dispatch:', 'workflow_call:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'workflow_dispatch:')
+
+def test_actionlint_fourth_rejects_contents_read_markdown_lint_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'contents: read' in text
+        path.write_text(text.replace('contents: read', 'contents: none'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contents: read')
+
+def test_actionlint_fourth_rejects_cancel_true_stewardship_checks_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'cancel-in-progress: true' in text
+        path.write_text(text.replace('cancel-in-progress: true', 'cancel-in-progress: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'cancel-in-progress: true')
+
+def test_actionlint_fourth_rejects_ubuntu_stewardship_checks_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'ubuntu-latest' in text
+        path.write_text(text.replace('ubuntu-latest', 'ubuntu-22.04', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'ubuntu-latest')
+
+def test_actionlint_fourth_rejects_dispatch_stewardship_checks_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'workflow_dispatch:' in text
+        path.write_text(text.replace('workflow_dispatch:', 'workflow_call:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'workflow_dispatch:')
+
+def test_actionlint_fourth_rejects_contents_read_stewardship_checks_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'contents: read' in text
+        path.write_text(text.replace('contents: read', 'contents: none'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contents: read')
+
+def test_actionlint_fourth_rejects_security_events_link_check_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert "permissions:" in text
+        # Inject forbidden write scope under top-level permissions.
+        text = text.replace(
+            "permissions:\n  contents: read",
+            "permissions:\n  contents: read\n  security-events: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'security-events: write')
+
+def test_actionlint_fourth_rejects_security_events_markdown_lint_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert "permissions:" in text
+        # Inject forbidden write scope under top-level permissions.
+        text = text.replace(
+            "permissions:\n  contents: read",
+            "permissions:\n  contents: read\n  security-events: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'security-events: write')
+
+def test_actionlint_fourth_rejects_security_events_stewardship_checks_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert "permissions:" in text
+        # Inject forbidden write scope under top-level permissions.
+        text = text.replace(
+            "permissions:\n  contents: read",
+            "permissions:\n  contents: read\n  security-events: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'security-events: write')
+
+def test_actionlint_fourth_rejects_attestations_link_check_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert "permissions:" in text
+        # Inject forbidden write scope under top-level permissions.
+        text = text.replace(
+            "permissions:\n  contents: read",
+            "permissions:\n  contents: read\n  attestations: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'attestations: write')
+
+def test_actionlint_fourth_rejects_attestations_markdown_lint_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert "permissions:" in text
+        # Inject forbidden write scope under top-level permissions.
+        text = text.replace(
+            "permissions:\n  contents: read",
+            "permissions:\n  contents: read\n  attestations: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'attestations: write')
+
+def test_actionlint_fourth_rejects_attestations_stewardship_checks_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert "permissions:" in text
+        # Inject forbidden write scope under top-level permissions.
+        text = text.replace(
+            "permissions:\n  contents: read",
+            "permissions:\n  contents: read\n  attestations: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'attestations: write')
+
+def test_actionlint_fourth_rejects_statuses_link_check_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert "permissions:" in text
+        # Inject forbidden write scope under top-level permissions.
+        text = text.replace(
+            "permissions:\n  contents: read",
+            "permissions:\n  contents: read\n  statuses: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'statuses: write')
+
+def test_actionlint_fourth_rejects_statuses_markdown_lint_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert "permissions:" in text
+        # Inject forbidden write scope under top-level permissions.
+        text = text.replace(
+            "permissions:\n  contents: read",
+            "permissions:\n  contents: read\n  statuses: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'statuses: write')
+
+def test_actionlint_fourth_rejects_statuses_stewardship_checks_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert "permissions:" in text
+        # Inject forbidden write scope under top-level permissions.
+        text = text.replace(
+            "permissions:\n  contents: read",
+            "permissions:\n  contents: read\n  statuses: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'statuses: write')
+
+def test_actionlint_fourth_rejects_deployments_link_check_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert "permissions:" in text
+        # Inject forbidden write scope under top-level permissions.
+        text = text.replace(
+            "permissions:\n  contents: read",
+            "permissions:\n  contents: read\n  deployments: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'deployments: write')
+
+def test_actionlint_fourth_rejects_deployments_markdown_lint_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert "permissions:" in text
+        # Inject forbidden write scope under top-level permissions.
+        text = text.replace(
+            "permissions:\n  contents: read",
+            "permissions:\n  contents: read\n  deployments: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'deployments: write')
+
+def test_actionlint_fourth_rejects_deployments_stewardship_checks_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert "permissions:" in text
+        # Inject forbidden write scope under top-level permissions.
+        text = text.replace(
+            "permissions:\n  contents: read",
+            "permissions:\n  contents: read\n  deployments: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'deployments: write')
+
+def test_actionlint_fourth_gate_reliability_pin_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'CI reliability leftovers' in text
+        path.write_text(text.replace('CI reliability leftovers', 'CI reliability extras'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'CI reliability leftovers')
+
+def test_actionlint_fourth_gate_reliability_pin_still_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'CI reliability leftovers' in text
+        path.write_text(text.replace('CI reliability leftovers', 'CI reliability extras'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'CI reliability leftovers')
+
+def test_actionlint_fourth_rejects_cancel_true_link_check_pad0_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("cancel-in-progress: true", "cancel-in-progress: false", 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "cancel-in-progress: true")
+
+def test_actionlint_fourth_rejects_cancel_true_markdown_lint_pad1_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("cancel-in-progress: true", "cancel-in-progress: false", 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "cancel-in-progress: true")
+
+def test_actionlint_fourth_rejects_cancel_true_stewardship_checks_pad2_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("cancel-in-progress: true", "cancel-in-progress: false", 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "cancel-in-progress: true")
+
+def test_actionlint_fourth_rejects_cancel_true_link_check_pad3_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("cancel-in-progress: true", "cancel-in-progress: false", 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "cancel-in-progress: true")
+
+def test_actionlint_fourth_rejects_cancel_true_markdown_lint_pad4_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("cancel-in-progress: true", "cancel-in-progress: false", 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "cancel-in-progress: true")
+
+def test_actionlint_fourth_rejects_cancel_true_stewardship_checks_pad5_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("cancel-in-progress: true", "cancel-in-progress: false", 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "cancel-in-progress: true")
+
+def test_actionlint_fourth_rejects_cancel_true_link_check_pad6_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("cancel-in-progress: true", "cancel-in-progress: false", 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "cancel-in-progress: true")
+
+def test_actionlint_fourth_rejects_cancel_true_markdown_lint_pad7_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("cancel-in-progress: true", "cancel-in-progress: false", 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "cancel-in-progress: true")
+
+def test_actionlint_fourth_rejects_cancel_true_stewardship_checks_pad8_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("cancel-in-progress: true", "cancel-in-progress: false", 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "cancel-in-progress: true")
+
+def test_actionlint_fourth_rejects_cancel_true_link_check_pad9_after_135() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("cancel-in-progress: true", "cancel-in-progress: false", 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "cancel-in-progress: true")
+
+
+
+# --- TOKENMAXX deepen after #111: stewardship_common third-pass pins ---
+
 def test_common_gate_requires_future_annotations_after_111() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
@@ -41340,6 +42132,78 @@ def main() -> int:
     test_actionlint_third_rejects_concurrency_stewardship_checks_pad23_after_108,
 
     test_actionlint_third_rejects_concurrency_link_check_pad24_after_108,
+    test_actionlint_fourth_gate_fourth_pass_doc_after_135,
+    test_actionlint_fourth_gate_fourth_pass_doc_still_after_135,
+    test_actionlint_fourth_gate_module_fourth_after_135,
+    test_actionlint_fourth_gate_module_fourth_still_after_135,
+    test_actionlint_fourth_gate_cancel_true_re_after_135,
+    test_actionlint_fourth_gate_cancel_true_re_still_after_135,
+    test_actionlint_fourth_gate_contents_read_re_after_135,
+    test_actionlint_fourth_gate_contents_read_re_still_after_135,
+    test_actionlint_fourth_gate_ubuntu_membership_after_135,
+    test_actionlint_fourth_gate_ubuntu_membership_still_after_135,
+    test_actionlint_fourth_gate_dispatch_membership_after_135,
+    test_actionlint_fourth_gate_dispatch_membership_still_after_135,
+    test_actionlint_fourth_gate_security_write_re_after_135,
+    test_actionlint_fourth_gate_security_write_re_still_after_135,
+    test_actionlint_fourth_gate_attest_write_re_after_135,
+    test_actionlint_fourth_gate_attest_write_re_still_after_135,
+    test_actionlint_fourth_gate_statuses_write_re_after_135,
+    test_actionlint_fourth_gate_statuses_write_re_still_after_135,
+    test_actionlint_fourth_gate_deployments_write_re_after_135,
+    test_actionlint_fourth_gate_deployments_write_re_still_after_135,
+    test_actionlint_fourth_gate_fail_cancel_true_after_135,
+    test_actionlint_fourth_gate_fail_cancel_true_still_after_135,
+    test_actionlint_fourth_gate_fail_contents_read_after_135,
+    test_actionlint_fourth_gate_fail_contents_read_still_after_135,
+    test_actionlint_fourth_gate_fail_ubuntu_after_135,
+    test_actionlint_fourth_gate_fail_ubuntu_still_after_135,
+    test_actionlint_fourth_gate_fail_dispatch_after_135,
+    test_actionlint_fourth_gate_fail_dispatch_still_after_135,
+    test_actionlint_fourth_gate_fail_security_after_135,
+    test_actionlint_fourth_gate_fail_security_still_after_135,
+    test_actionlint_fourth_gate_fail_attest_after_135,
+    test_actionlint_fourth_gate_fail_attest_still_after_135,
+    test_actionlint_fourth_gate_fail_statuses_after_135,
+    test_actionlint_fourth_gate_fail_statuses_still_after_135,
+    test_actionlint_fourth_gate_fail_deployments_after_135,
+    test_actionlint_fourth_gate_fail_deployments_still_after_135,
+    test_actionlint_fourth_rejects_cancel_true_link_check_after_135,
+    test_actionlint_fourth_rejects_ubuntu_link_check_after_135,
+    test_actionlint_fourth_rejects_dispatch_link_check_after_135,
+    test_actionlint_fourth_rejects_contents_read_link_check_after_135,
+    test_actionlint_fourth_rejects_cancel_true_markdown_lint_after_135,
+    test_actionlint_fourth_rejects_ubuntu_markdown_lint_after_135,
+    test_actionlint_fourth_rejects_dispatch_markdown_lint_after_135,
+    test_actionlint_fourth_rejects_contents_read_markdown_lint_after_135,
+    test_actionlint_fourth_rejects_cancel_true_stewardship_checks_after_135,
+    test_actionlint_fourth_rejects_ubuntu_stewardship_checks_after_135,
+    test_actionlint_fourth_rejects_dispatch_stewardship_checks_after_135,
+    test_actionlint_fourth_rejects_contents_read_stewardship_checks_after_135,
+    test_actionlint_fourth_rejects_security_events_link_check_after_135,
+    test_actionlint_fourth_rejects_security_events_markdown_lint_after_135,
+    test_actionlint_fourth_rejects_security_events_stewardship_checks_after_135,
+    test_actionlint_fourth_rejects_attestations_link_check_after_135,
+    test_actionlint_fourth_rejects_attestations_markdown_lint_after_135,
+    test_actionlint_fourth_rejects_attestations_stewardship_checks_after_135,
+    test_actionlint_fourth_rejects_statuses_link_check_after_135,
+    test_actionlint_fourth_rejects_statuses_markdown_lint_after_135,
+    test_actionlint_fourth_rejects_statuses_stewardship_checks_after_135,
+    test_actionlint_fourth_rejects_deployments_link_check_after_135,
+    test_actionlint_fourth_rejects_deployments_markdown_lint_after_135,
+    test_actionlint_fourth_rejects_deployments_stewardship_checks_after_135,
+    test_actionlint_fourth_gate_reliability_pin_after_135,
+    test_actionlint_fourth_gate_reliability_pin_still_after_135,
+    test_actionlint_fourth_rejects_cancel_true_link_check_pad0_after_135,
+    test_actionlint_fourth_rejects_cancel_true_markdown_lint_pad1_after_135,
+    test_actionlint_fourth_rejects_cancel_true_stewardship_checks_pad2_after_135,
+    test_actionlint_fourth_rejects_cancel_true_link_check_pad3_after_135,
+    test_actionlint_fourth_rejects_cancel_true_markdown_lint_pad4_after_135,
+    test_actionlint_fourth_rejects_cancel_true_stewardship_checks_pad5_after_135,
+    test_actionlint_fourth_rejects_cancel_true_link_check_pad6_after_135,
+    test_actionlint_fourth_rejects_cancel_true_markdown_lint_pad7_after_135,
+    test_actionlint_fourth_rejects_cancel_true_stewardship_checks_pad8_after_135,
+    test_actionlint_fourth_rejects_cancel_true_link_check_pad9_after_135,
     test_common_gate_requires_future_annotations_after_111,
 
     test_common_gate_requires_import_re_after_111,

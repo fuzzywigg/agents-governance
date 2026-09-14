@@ -154,6 +154,11 @@ revive #119),
 plus CI workflow third-pass after #111/#117/#127: concurrency templates /
 cron+timeout / DavidAnson@v24 / setup-python@v5 / lychee verbose+
 concurrency+timeout+retries / fail:true / get_actionlint / curl -fsSL,
+plus stewardship CI deepen after #135: Check links / Run markdownlint /
+Set up Python / Install PyYAML (schema parser) / Stewardship gates+self-tests
+step names / exact token+`--github-token` forms / `--exclude-path .github/agents` /
+`globs: |` / AGENTS+CLAUDE+LICENSE+CONTRIBUTING+`.github/workflows/**` paths /
+Weekly drift + GITHUB_TOKEN commentary / deepen docstring,
 plus docs-lint second-pass after #132: exact live exclude URLs /
 Connection-reset+RST+false-positive+early-hints+valid-site commentary /
 `check_badge_standard.py` reference / License badge presence remains enforced /

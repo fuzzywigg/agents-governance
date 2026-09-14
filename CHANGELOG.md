@@ -11,6 +11,16 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship CI deepen pins after #135: expand self-tests to
+  2665 cases (was 2593) fail-closing live stewardship CI reliability leftovers —
+  Check links / Run markdownlint / Set up Python / Install PyYAML (schema parser) /
+  Stewardship gates+self-tests step names / exact `token`+`--github-token` forms /
+  `--exclude-path .github/agents` / `globs: |` / AGENTS+CLAUDE+LICENSE+CONTRIBUTING+
+  `.github/workflows/**` path filters / Weekly drift + GITHUB_TOKEN commentary /
+  deepen docstring + gate-contract needles — stewardship CI workflow slice only
+  (not actionlint / badge / wiki / docs-lint / schema / common spam); no
+  invent-product; no fourth badge. New draft after #135 (do **not** revive #113).
+
 - TOKENMAXX CI workflow third-pass pins after #111/#117/#127: expand self-tests to
   2491 cases (was 2419) fail-closing live reversible CI workflow integrity —
   exact concurrency group templates / markdown-lint+stewardship cron+timeout /

@@ -35,12 +35,17 @@ Fail-closed run_stewardship runner pins (live path after #117; lands closed #96)
 - same set as CI commentary / python3 scripts/<gate> for four gates
 - gate order badge → wiki → schema → relative
 - check_run_stewardship_gate_contract self-pins
-Fail-closed CI workflow pins (live path after #39/#72; third-pass after #111):
+Fail-closed CI workflow pins (live path after #39/#72; third-pass after #111; deepen after #135):
 - Third-pass after #111: exact concurrency group templates /
   markdown-lint+stewardship cron/timeout pins / DavidAnson@v24 /
   setup-python@v5 / lychee --verbose/--no-progress/--max-concurrency 8 /
   --timeout 20/--max-retries 3 / fail: true / get_actionlint id+outputs /
   curl -fsSL download / third-pass docstring
+- Deepen after #135: Check links / Run markdownlint / Set up Python /
+  Install PyYAML (schema parser) / Stewardship gates+self-tests step names /
+  exact token+--github-token forms / --exclude-path .github/agents /
+  globs: | / AGENTS+CLAUDE+LICENSE+CONTRIBUTING+.github/workflows/** paths /
+  Weekly drift + GITHUB_TOKEN commentary / deepen docstring
 """
 
 from __future__ import annotations
@@ -486,7 +491,7 @@ def check_actionlint_style(errors: list[str]) -> None:
         if re.search(r"(?m)^\s*pull-requests:\s*write\s*$", text):
             fail(f"{name}: pull-requests: write is forbidden on stewardship workflows", errors)
         # Pin GitHub Actions majors (actionlint / supply-chain hygiene).
-        for match in re.finditer(r"(?m)^\s*-\s*uses:\s*([^\s#]+)", text):
+        for match in re.finditer(r"(?m)^\s*(?:-\s+)?uses:\s*([^\s#]+)", text):
             uses = match.group(1).strip()
             if uses.startswith("docker://"):
                 continue
@@ -509,6 +514,11 @@ def check_workflow_hardening(errors: list[str]) -> None:
     DavidAnson@v24 / setup-python@v5 / lychee verbose+no-progress+
     max-concurrency 8+timeout 20+max-retries 3 / fail: true /
     get_actionlint id+outputs / curl -fsSL / third-pass docstring.
+    Deepen after #135: Check links / Run markdownlint / Set up Python /
+    Install PyYAML (schema parser) / Stewardship gates+self-tests step names /
+    exact token+--github-token forms / --exclude-path .github/agents /
+    globs: | / AGENTS+CLAUDE+LICENSE+CONTRIBUTING+.github/workflows/** paths /
+    Weekly drift + GITHUB_TOKEN commentary / deepen docstring.
     """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
@@ -1055,6 +1065,98 @@ def check_workflow_hardening(errors: list[str]) -> None:
     if "download-actionlint.bash) 1.7.7" not in stew and "download-actionlint.bash ) 1.7.7" not in stew:
         fail(
             "stewardship-checks.yml must pass actionlint version 1.7.7 to download script",
+            errors,
+        )
+
+    # Deepen after #135: stewardship CI reliability leftovers (workflow slice).
+    # Step-name pins keep operator-facing CI labels fail-closed.
+    if "name: Check links" not in link:
+        fail(
+            'link-check.yml must keep step name: Check links',
+            errors,
+        )
+    if "name: Run markdownlint" not in lint:
+        fail(
+            'markdown-lint.yml must keep step name: Run markdownlint',
+            errors,
+        )
+    if "name: Set up Python" not in stew:
+        fail(
+            'stewardship-checks.yml must keep step name: Set up Python',
+            errors,
+        )
+    if "name: Install PyYAML (schema parser)" not in stew:
+        fail(
+            "stewardship-checks.yml must keep step name: "
+            "Install PyYAML (schema parser)",
+            errors,
+        )
+    if "name: Stewardship gates (badge / wiki / schema / relative links)" not in stew:
+        fail(
+            "stewardship-checks.yml must keep step name: Stewardship gates "
+            "(badge / wiki / schema / relative links)",
+            errors,
+        )
+    if "name: Stewardship gate self-tests" not in stew:
+        fail(
+            "stewardship-checks.yml must keep step name: "
+            "Stewardship gate self-tests",
+            errors,
+        )
+    # Exact auth / exclude forms (beyond membership-only third-pass pins).
+    if "token: ${{ secrets.GITHUB_TOKEN }}" not in link:
+        fail(
+            "link-check.yml must set token: ${{ secrets.GITHUB_TOKEN }}",
+            errors,
+        )
+    if "--github-token ${{ secrets.GITHUB_TOKEN }}" not in link:
+        fail(
+            "link-check.yml must pass --github-token ${{ secrets.GITHUB_TOKEN }}",
+            errors,
+        )
+    if "--exclude-path .github/agents" not in link:
+        fail(
+            "link-check.yml must pass contiguous --exclude-path .github/agents",
+            errors,
+        )
+    if "globs: |" not in lint:
+        fail(
+            "markdown-lint.yml must keep multiline globs: | form",
+            errors,
+        )
+    # Stewardship path-filter leftovers beyond README/docs/scripts.
+    for path_needle in (
+        '"AGENTS.md"',
+        '"CLAUDE.md"',
+        '"LICENSE"',
+        '"CONTRIBUTING.md"',
+        '".github/workflows/**"',
+    ):
+        if path_needle not in stew and path_needle.replace('"', "'") not in stew:
+            fail(
+                "stewardship-checks.yml paths filter must include "
+                + path_needle.strip('"'),
+                errors,
+            )
+    # Live commentary leftovers (docs CI reliability rationale).
+    if "GITHUB_TOKEN allows lychee to authenticate private GitHub repos" not in link:
+        fail(
+            "link-check.yml must keep GITHUB_TOKEN allows lychee commentary",
+            errors,
+        )
+    if "private repos return 404" not in link:
+        fail(
+            "link-check.yml must keep private repos return 404 commentary",
+            errors,
+        )
+    if "Weekly drift catch aligned with link/stewardship schedules" not in lint:
+        fail(
+            "markdown-lint.yml must keep Weekly drift catch commentary",
+            errors,
+        )
+    if "Weekly drift catch for badge/wiki/schema/relative-link gates" not in stew:
+        fail(
+            "stewardship-checks.yml must keep Weekly drift catch commentary",
             errors,
         )
 
@@ -2256,8 +2358,8 @@ def check_actionlint_style_gate_contract(errors: list[str]) -> None:
             "check_actionlint_style must keep exact top-level name: regex",
             errors,
         )
-    uses_re = 'r"(?m)^\\s*-\\s*uses:\\s*(' + '[^\\s#]+)"'
-    uses_re_sq = "r'(?m)^\\s*-\\s*uses:\\s*(" + "[^\\s#]+)'"
+    uses_re = 'r"(?m)^\\s*(?:-\\s+)?uses:\\s*(' + '[^\\s#]+)"'
+    uses_re_sq = "r'(?m)^\\s*(?:-\\s+)?uses:\\s*(" + "[^\\s#]+)'"
     if uses_re not in text and uses_re_sq not in text:
         fail(
             "check_actionlint_style must keep exact uses: capture regex",
@@ -2584,7 +2686,7 @@ def check_actionlint_style_gate_contract(errors: list[str]) -> None:
 
 
 def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
-    """Fail-close live CI workflow hardening wiring (third-pass after #111)."""
+    """Fail-close live CI workflow hardening wiring (third-pass after #111; deepen after #135)."""
     text = Path(__file__).read_text(encoding="utf-8")
     # Fail-closed after #111: third-pass helper / constant / needle pins
     # (CI workflow reversible slice only; not badge/wiki/relative/schema/actionlint spam).
@@ -2636,6 +2738,85 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
         if needle not in text:
             fail(
                 "check_workflow_hardening must keep " + label + " pin",
+                errors,
+            )
+    # Fail-closed after #135: deepen helper / constant / needle pins
+    # (stewardship CI reliability leftovers only; not actionlint/badge/wiki/
+    # docs-lint / schema / common spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    # Avoid contiguous "four"+"th" wording here — badge-refusal self-tests mutate it.
+    deepen_doc = "Deepen after " + "#135"
+    if deepen_doc not in text:
+        fail(
+            "check_workflow_hardening docstring must pin " + deepen_doc,
+            errors,
+        )
+    module_deepen = "deepen after " + "#135"
+    if module_deepen not in text:
+        fail(
+            "check_badge_standard.py module docstring must pin workflow "
+            + module_deepen,
+            errors,
+        )
+    deepen_pins = (
+        ('name: Check ' + 'links', 'Check links ' + 'step-name pin'),
+        ('name: Run ' + 'markdownlint', 'Run markdownlint ' + 'step-name pin'),
+        ('name: Set up ' + 'Python', 'Set up Python ' + 'step-name pin'),
+        (
+            'name: Install PyYAML (schema ' + 'parser)',
+            'Install PyYAML ' + 'step-name pin',
+        ),
+        (
+            'name: Stewardship gates (badge / wiki / schema / relative ' + 'links)',
+            'Stewardship gates ' + 'step-name pin',
+        ),
+        (
+            'name: Stewardship gate ' + 'self-tests',
+            'Stewardship gate self-tests ' + 'step-name pin',
+        ),
+        (
+            'token: ${{ secrets.GITHUB_' + 'TOKEN }}',
+            'exact token secrets.GITHUB_' + 'TOKEN pin',
+        ),
+        (
+            '--github-token ${{ secrets.GITHUB_' + 'TOKEN }}',
+            'exact --github-token secrets.GITHUB_' + 'TOKEN pin',
+        ),
+        (
+            '--exclude-path .github/' + 'agents',
+            'contiguous --exclude-path .github/' + 'agents pin',
+        ),
+        ('globs: ' + '|', 'markdownlint globs ' + 'multiline pin'),
+        ('"AGENTS' + '.md"', 'stewardship AGENTS.md ' + 'path pin'),
+        ('"CLAUDE' + '.md"', 'stewardship CLAUDE.md ' + 'path pin'),
+        ('"LIC' + 'ENSE"', 'stewardship LICENSE ' + 'path pin'),
+        ('"CONTRIBUTING' + '.md"', 'stewardship CONTRIBUTING.md ' + 'path pin'),
+        (
+            '".github/workflows/' + '**"',
+            'stewardship .github/workflows/** ' + 'path pin',
+        ),
+        (
+            'GITHUB_TOKEN allows lychee to authenticate private GitHub ' + 'repos',
+            'GITHUB_TOKEN allows lychee ' + 'commentary pin',
+        ),
+        (
+            'private repos return ' + '404',
+            'private-404 ' + 'commentary pin',
+        ),
+        (
+            'Weekly drift catch aligned with link/stewardship ' + 'schedules',
+            'markdownlint Weekly drift ' + 'commentary pin',
+        ),
+        (
+            'Weekly drift catch for badge/wiki/schema/relative-link ' + 'gates',
+            'stewardship Weekly drift ' + 'commentary pin',
+        ),
+        ('CI reliability ' + 'leftovers', 'reliability-leftovers ' + 'wording'),
+    )
+    for needle, label in deepen_pins:
+        if needle not in text:
+            fail(
+                "check_workflow_hardening must keep " + label,
                 errors,
             )
     fn_pin = "def check_workflow_hardening" + "("

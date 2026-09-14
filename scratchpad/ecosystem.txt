@@ -819,3 +819,4 @@ _None yet._
 2026-09-14T08:55:30Z cursor: Draft PR #248 opened (cursor/tokenmaxx-schema-leftover-after-243-811f); awaiting CI ← ECO-076 stewardship-schema leftovers after #243
 2026-09-14T08:58:00Z cursor: Empty-commit retrigger after link-check HTTP 503 on live CLAUDE.md/SECURITY.md blobs (transient); lint+stewardship green on tip ← ECO-076 awaiting CI
 2026-09-14T09:05:00Z cursor: Reopened draft PR #248 after premature close; CHANGELOG path touch to re-fire CI (prior link-check 503 transient) ← ECO-076
+2026-09-14T09:20:00Z cursor: Rebased ECO-077 onto post-#244 tip (c38ae7b); self-tests 4792 → 4984; local leftover pins green; reopen draft #248 ← ECO-077 schema leftover after #243/#244 (do not redo #244/#243/#239/#233)

@@ -17,7 +17,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   stewardship+308+103 commentary / reject `https://*`+`http://*`+`*` /
   exact MD013+MD024 objects / MD033+MD041+MD060 false / `default: true` /
   LYCHEEIGNORE+MARKDOWNLINT_CONFIG ROOT assigns / `check_workflows_and_license`
-  + CDN-exclude needle / `check_docs_lint_gate_contract` — docs-lint slice
+  and CDN-exclude needle / `check_docs_lint_gate_contract` — docs-lint slice
   only (not wiki / relative / actionlint / schema / badge / common / CI
   workflow pin spam); no invent-product; no fourth badge; lands closed #101
   leftover on post-#100 main

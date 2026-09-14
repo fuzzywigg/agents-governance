@@ -45,7 +45,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   not md/link residual #239 / not stewardship-checks/schema residual #233 /
   not wiki-index/badge #227); no invent-product; no fourth badge. Distinct from
   merged PRs #278/#272/#262/#258/#252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
-  Lands closed #276/#275/#269 leftover on post-#272 tip (do **not** revive
+  Lands closed #276/#275/#269 leftover on post-#278 tip (do **not** revive
   #276/#275/#269/#263/#257/#253/#248/#241).
 
 - TOKENMAXX Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #244

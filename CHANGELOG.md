@@ -11,6 +11,17 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX markdown-lint/link-check workflow edges after #199: expand
+  self-tests to 3724 cases (was 3660) fail-closing unsaturated md/link CI
+  edges — `args: >-` / externally-broken commentary / without-it
+  private-404 / reject continue-on-error / exact job permissions /
+  checkout adjacency — md/link edge slice only (not Pass-2 residual #199 /
+  schema third-pass #191 / path-order #189 / open CONFLICTING schema
+  fourth-pass #204 / badge-lint #205); no invent-product; no fourth badge.
+  Lands closed #201/#192 leftover on post-#203 tip (do **not** revive
+  #201/#192/#197). Distinct from merged #199/#203 and open CONFLICTING
+  #204/#205.
+
 - TOKENMAXX register Pass-2 residual after_191 self-tests after #199: wire
   orphaned +70 `*_after_191` defs into `main()` so the suite reports 3660
   (was still 3590 with pins live but cases unregistered). Tests/CI only;

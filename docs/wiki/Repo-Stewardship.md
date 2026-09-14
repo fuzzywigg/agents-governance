@@ -207,7 +207,13 @@ no BASH_SOURCE / no bare python / no set +u|+o pipefail /
 back-to-back gates→self-tests block / no inline check_*.py /
 self-tests before actionlint (lands closed #193/#178 leftover; do not
 revive #193/#178/#175/#140; distinct from schema third-pass #191 and
-path-order #189)).
+path-order #189),
+plus markdown-lint/link-check workflow edges after #199: `args: >-` /
+externally-broken commentary / without-it private-404 /
+reject continue-on-error / exact job permissions / checkout adjacency
+(lands closed #201/#192 leftover; do not revive #201/#192/#197;
+distinct from Pass-2 residual #199 / schema #191/#204 / path-order #189 /
+badge-lint #205)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

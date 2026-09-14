@@ -561,3 +561,5 @@ _None yet._
 - Scope: EXISTING actionlint path-filter leftover pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; distinct from #157/#111 third-pass
 - Branch: overnight-actionlint-path-filter-leftovers
 2026-09-14T04:12:00Z
+
+2026-09-14T04:25:00Z cursor: Local green — run_stewardship + self-tests 2979 + markdownlint ← ECO-060 actionlint path-filter leftovers after #161 (distinct from #157 path-order/badge)

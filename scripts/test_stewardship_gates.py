@@ -42650,13 +42650,16 @@ def test_path_filter_rejects_stew_layout_pad9_after_161() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
         text = path.read_text(encoding="utf-8")
-        assert '      - "README.md"\n      - "LICENSE"' in text
-        path.write_text(text.replace('      - "README.md"\n      - "LICENSE"', '      - "LICENSE"\n      - "README.md"', 1), encoding="utf-8")
+        old = '      - "README.md"\n      - "AGENTS.md"\n      - "CLAUDE.md"'
+        new = '      - "AGENTS.md"\n      - "README.md"\n      - "CLAUDE.md"'
+        assert old in text
+        path.write_text(text.replace(old, new, 1), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
             "exact push paths filter layout",
         )
+
 
 def test_path_filter_rejects_stew_layout_pad10_after_161() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -42664,13 +42667,16 @@ def test_path_filter_rejects_stew_layout_pad10_after_161() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
         text = path.read_text(encoding="utf-8")
-        assert '      - "AGENTS.md"\n      - "CONTRIBUTING.md"' in text
-        path.write_text(text.replace('      - "AGENTS.md"\n      - "CONTRIBUTING.md"', '      - "CONTRIBUTING.md"\n      - "AGENTS.md"', 1), encoding="utf-8")
+        old = '      - "docs/**"\n      - "scripts/**"\n      - ".github/workflows/**"'
+        new = '      - "scripts/**"\n      - "docs/**"\n      - ".github/workflows/**"'
+        assert old in text
+        path.write_text(text.replace(old, new, 1), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
             "exact push paths filter layout",
         )
+
 
 def test_path_filter_rejects_stew_layout_pad11_after_161() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -42678,13 +42684,16 @@ def test_path_filter_rejects_stew_layout_pad11_after_161() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
         text = path.read_text(encoding="utf-8")
-        assert '      - "CLAUDE.md"\n      - "docs/**"' in text
-        path.write_text(text.replace('      - "CLAUDE.md"\n      - "docs/**"', '      - "docs/**"\n      - "CLAUDE.md"', 1), encoding="utf-8")
+        old = '      - ".github/workflows/**"\n      - ".lycheeignore"\n      - ".markdownlint.json"'
+        new = '      - ".lycheeignore"\n      - ".github/workflows/**"\n      - ".markdownlint.json"'
+        assert old in text
+        path.write_text(text.replace(old, new, 1), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
             "exact push paths filter layout",
         )
+
 
 def test_path_filter_accepts_live_layouts_after_161() -> None:
     with tempfile.TemporaryDirectory() as tmp:

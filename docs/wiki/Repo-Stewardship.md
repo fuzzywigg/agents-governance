@@ -179,7 +179,11 @@ plus overnight stewardship/CI/schema/wiki fixture deepen after #165: residual
 schema/wiki/relative/common/badge policy edge fixtures via existing `_seed_*`
 harnesses only — not actionlint / docs-lint / stewardship-CI pin / path-filter /
 schema-third-pass pin spam; lands closed #167 leftover; do not revive
-closed #167/#168/#169).
+closed #167/#168/#169,
+plus actionlint path-filter leftovers after #173: exact push `paths:` layouts /
+residual stewardship path entries / reject `paths-ignore:` / ignore-glob
+exactness — empty stubs already handled; distinct from path-order/badge and
+stewardship-badge lint; lands closed #166 leftover; do not revive #166/#157).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

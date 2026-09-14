@@ -135,6 +135,11 @@ residual schema/wiki/relative/common/badge policy fixtures only (not
 actionlint / docs-lint / stewardship-CI pin / path-filter / schema-third-pass
 pin spam). Lands closed #167 leftover on post-#165 main (do not revive
 #167/#168/#169).
+Deepened after #173: actionlint path-filter leftovers — exact push paths
+layouts / residual stewardship path entries / reject paths-ignore /
+ignore-glob exactness (not path-order/badge / stewardship-badge lint /
+stewardship CI deepen / fixture spam; empty stubs already handled; lands
+closed #166 leftover on post-#173 main; do not revive #166/#157).
 """
 
 from __future__ import annotations
@@ -44082,6 +44087,1317 @@ def test_relative_passes_valid_fragment_still_after_165() -> None:
         _write(tmp_path / "README.md", "# Title\n\n[x](#title)\n")
         assert_pass_script(scripts / "check_relative_links.py", tmp_path)
 
+
+def test_path_filter_gate_requires_path_filter_doc_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Path-filter leftovers after #173' in text
+        path.write_text(text.replace('Path-filter leftovers after #173', 'Path-filter leftovers after #999'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Path-filter leftovers after #173',
+        )
+
+def test_path_filter_gate_requires_path_filter_doc_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Path-filter leftovers after #173' in text
+        path.write_text(text.replace('Path-filter leftovers after #173', 'Path-filter leftovers after #999'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Path-filter leftovers after #173',
+        )
+
+def test_path_filter_gate_requires_module_path_filter_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'path-filter leftovers after #173' in text
+        path.write_text(text.replace('path-filter leftovers after #173', 'path-filter leftovers after #999'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'path-filter leftovers after #173',
+        )
+
+def test_path_filter_gate_requires_module_path_filter_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'path-filter leftovers after #173' in text
+        path.write_text(text.replace('path-filter leftovers after #173', 'path-filter leftovers after #999'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'path-filter leftovers after #173',
+        )
+
+def test_path_filter_gate_requires_empty_stub_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'empty workflow stubs already handled' in text
+        path.write_text(text.replace('empty workflow stubs already handled', 'empty workflow stubs already done'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'empty workflow stubs already handled',
+        )
+
+def test_path_filter_gate_requires_empty_stub_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'empty workflow stubs already handled' in text
+        path.write_text(text.replace('empty workflow stubs already handled', 'empty workflow stubs already done'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'empty workflow stubs already handled',
+        )
+
+def test_path_filter_gate_requires_not_path_order_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'not path-order/badge spam' in text
+        path.write_text(text.replace('not path-order/badge spam', 'not path-order/badge noise'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'not path-order/badge spam',
+        )
+
+def test_path_filter_gate_requires_not_path_order_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'not path-order/badge spam' in text
+        path.write_text(text.replace('not path-order/badge spam', 'not path-order/badge noise'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'not path-order/badge spam',
+        )
+
+def test_path_filter_gate_requires_reject_paths_ignore_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must not use paths-ignore: (path-filter leftovers)' in text
+        path.write_text(text.replace('must not use paths-ignore: (path-filter leftovers)', 'must not use paths-ignore: (path-filter done)'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'paths-ignore leftovers',
+        )
+
+def test_path_filter_gate_requires_reject_paths_ignore_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must not use paths-ignore: (path-filter leftovers)' in text
+        path.write_text(text.replace('must not use paths-ignore: (path-filter leftovers)', 'must not use paths-ignore: (path-filter done)'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'paths-ignore leftovers',
+        )
+
+def test_path_filter_gate_requires_link_layout_pin_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'link-check.yml must keep exact push paths filter layout' in text
+        path.write_text(text.replace('link-check.yml must keep exact push paths filter layout', 'link-check.yml must keep exact push paths filter blob'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check.yml must keep exact push paths filter layout',
+        )
+
+def test_path_filter_gate_requires_link_layout_pin_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'link-check.yml must keep exact push paths filter layout' in text
+        path.write_text(text.replace('link-check.yml must keep exact push paths filter layout', 'link-check.yml must keep exact push paths filter blob'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check.yml must keep exact push paths filter layout',
+        )
+
+def test_path_filter_gate_requires_lint_layout_pin_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'markdown-lint.yml must keep exact push paths filter layout' in text
+        path.write_text(text.replace('markdown-lint.yml must keep exact push paths filter layout', 'markdown-lint.yml must keep exact push paths filter blob'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'markdown-lint.yml must keep exact push paths filter layout',
+        )
+
+def test_path_filter_gate_requires_lint_layout_pin_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'markdown-lint.yml must keep exact push paths filter layout' in text
+        path.write_text(text.replace('markdown-lint.yml must keep exact push paths filter layout', 'markdown-lint.yml must keep exact push paths filter blob'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'markdown-lint.yml must keep exact push paths filter layout',
+        )
+
+def test_path_filter_gate_requires_stew_layout_pin_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'stewardship-checks.yml must keep exact push paths filter layout' in text
+        path.write_text(text.replace('stewardship-checks.yml must keep exact push paths filter layout', 'stewardship-checks.yml must keep exact push paths filter blob'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship-checks.yml must keep exact push paths filter layout',
+        )
+
+def test_path_filter_gate_requires_stew_layout_pin_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'stewardship-checks.yml must keep exact push paths filter layout' in text
+        path.write_text(text.replace('stewardship-checks.yml must keep exact push paths filter layout', 'stewardship-checks.yml must keep exact push paths filter blob'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship-checks.yml must keep exact push paths filter layout',
+        )
+
+def test_path_filter_gate_requires_agents_path_pin_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'paths filter must include AGENTS.md' in text
+        path.write_text(text.replace('paths filter must include AGENTS.md', 'paths filter must include AGENTS_FILE.md'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship AGENTS.md path',
+        )
+
+def test_path_filter_gate_requires_agents_path_pin_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'paths filter must include AGENTS.md' in text
+        path.write_text(text.replace('paths filter must include AGENTS.md', 'paths filter must include AGENTS_FILE.md'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship AGENTS.md path',
+        )
+
+def test_path_filter_gate_requires_claude_path_pin_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'paths filter must include CLAUDE.md' in text
+        path.write_text(text.replace('paths filter must include CLAUDE.md', 'paths filter must include CLAUDE_FILE.md'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship CLAUDE.md path',
+        )
+
+def test_path_filter_gate_requires_claude_path_pin_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'paths filter must include CLAUDE.md' in text
+        path.write_text(text.replace('paths filter must include CLAUDE.md', 'paths filter must include CLAUDE_FILE.md'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship CLAUDE.md path',
+        )
+
+def test_path_filter_gate_requires_license_path_pin_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'paths filter must include LICENSE' in text
+        path.write_text(text.replace('paths filter must include LICENSE', 'paths filter must include COPYING'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship LICENSE path',
+        )
+
+def test_path_filter_gate_requires_license_path_pin_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'paths filter must include LICENSE' in text
+        path.write_text(text.replace('paths filter must include LICENSE', 'paths filter must include COPYING'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship LICENSE path',
+        )
+
+def test_path_filter_gate_requires_contrib_path_pin_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'paths filter must include CONTRIBUTING.md' in text
+        path.write_text(text.replace('paths filter must include CONTRIBUTING.md', 'paths filter must include CONTRIBUTE.md'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship CONTRIBUTING.md path',
+        )
+
+def test_path_filter_gate_requires_contrib_path_pin_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'paths filter must include CONTRIBUTING.md' in text
+        path.write_text(text.replace('paths filter must include CONTRIBUTING.md', 'paths filter must include CONTRIBUTE.md'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship CONTRIBUTING.md path',
+        )
+
+def test_path_filter_gate_requires_workflows_glob_pin_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'paths filter must include .github/workflows/**' in text
+        path.write_text(text.replace('paths filter must include .github/workflows/**', 'paths filter must include .github/workflow/**'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship workflows/** path',
+        )
+
+def test_path_filter_gate_requires_workflows_glob_pin_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'paths filter must include .github/workflows/**' in text
+        path.write_text(text.replace('paths filter must include .github/workflows/**', 'paths filter must include .github/workflow/**'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship workflows/** path',
+        )
+
+def test_path_filter_gate_requires_stew_lychee_pin_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'stewardship-checks.yml paths filter must list .lycheeignore' in text
+        path.write_text(text.replace('stewardship-checks.yml paths filter must list .lycheeignore', 'stewardship-checks.yml paths filter must list .lychee-ignore'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship .lycheeignore path',
+        )
+
+def test_path_filter_gate_requires_stew_lychee_pin_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'stewardship-checks.yml paths filter must list .lycheeignore' in text
+        path.write_text(text.replace('stewardship-checks.yml paths filter must list .lycheeignore', 'stewardship-checks.yml paths filter must list .lychee-ignore'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship .lycheeignore path',
+        )
+
+def test_path_filter_gate_requires_stew_mdlint_pin_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'stewardship-checks.yml paths filter must list .markdownlint.json' in text
+        path.write_text(text.replace('stewardship-checks.yml paths filter must list .markdownlint.json', 'stewardship-checks.yml paths filter must list .markdown-lint.json'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship .markdownlint.json path',
+        )
+
+def test_path_filter_gate_requires_stew_mdlint_pin_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'stewardship-checks.yml paths filter must list .markdownlint.json' in text
+        path.write_text(text.replace('stewardship-checks.yml paths filter must list .markdownlint.json', 'stewardship-checks.yml paths filter must list .markdown-lint.json'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship .markdownlint.json path',
+        )
+
+def test_path_filter_gate_requires_link_lychee_pin_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'link-check.yml paths filter must list .lycheeignore' in text
+        path.write_text(text.replace('link-check.yml paths filter must list .lycheeignore', 'link-check.yml paths filter must list .lychee-ignore'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check .lycheeignore path',
+        )
+
+def test_path_filter_gate_requires_link_lychee_pin_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'link-check.yml paths filter must list .lycheeignore' in text
+        path.write_text(text.replace('link-check.yml paths filter must list .lycheeignore', 'link-check.yml paths filter must list .lychee-ignore'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check .lycheeignore path',
+        )
+
+def test_path_filter_gate_requires_lint_md_pin_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'markdown-lint.yml paths filter must list .markdownlint.json' in text
+        path.write_text(text.replace('markdown-lint.yml paths filter must list .markdownlint.json', 'markdown-lint.yml paths filter must list .markdown-lint.json'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'markdown-lint .markdownlint.json path',
+        )
+
+def test_path_filter_gate_requires_lint_md_pin_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'markdown-lint.yml paths filter must list .markdownlint.json' in text
+        path.write_text(text.replace('markdown-lint.yml paths filter must list .markdownlint.json', 'markdown-lint.yml paths filter must list .markdown-lint.json'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'markdown-lint .markdownlint.json path',
+        )
+
+def test_path_filter_gate_requires_exclude_path_pin_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '--exclude-path .github/agents' in text
+        path.write_text(text.replace('--exclude-path .github/agents', '--exclude-path .github/agent'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check agents exclude-path',
+        )
+
+def test_path_filter_gate_requires_exclude_path_pin_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '--exclude-path .github/agents' in text
+        path.write_text(text.replace('--exclude-path .github/agents', '--exclude-path .github/agent'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check agents exclude-path',
+        )
+
+def test_path_filter_gate_requires_ignore_glob_layout_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact ignore-glob globs layout' in text
+        path.write_text(text.replace('exact ignore-glob globs layout', 'exact ignore-glob globs blob'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact ignore-glob globs layout',
+        )
+
+def test_path_filter_gate_requires_ignore_glob_layout_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact ignore-glob globs layout' in text
+        path.write_text(text.replace('exact ignore-glob globs layout', 'exact ignore-glob globs blob'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact ignore-glob globs layout',
+        )
+
+def test_path_filter_gate_requires_declare_paths_pin_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must declare push paths: filter' in text
+        path.write_text(text.replace('must declare push paths: filter', 'must declare push paths: blob'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'push paths: declaration',
+        )
+
+def test_path_filter_gate_requires_declare_paths_pin_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must declare push paths: filter' in text
+        path.write_text(text.replace('must declare push paths: filter', 'must declare push paths: blob'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'push paths: declaration',
+        )
+
+def test_path_filter_rejects_link_missing_paths_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    paths:\n' in text
+        path.write_text(text.replace('    paths:\n', '    pathz:\n', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'push paths: filter',
+        )
+
+def test_path_filter_rejects_link_missing_paths_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    paths:\n' in text
+        path.write_text(text.replace('    paths:\n', '    pathz:\n', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'push paths: filter',
+        )
+
+def test_path_filter_rejects_lint_missing_paths_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    paths:\n' in text
+        path.write_text(text.replace('    paths:\n', '    pathz:\n', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'push paths: filter',
+        )
+
+def test_path_filter_rejects_lint_missing_paths_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    paths:\n' in text
+        path.write_text(text.replace('    paths:\n', '    pathz:\n', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'push paths: filter',
+        )
+
+def test_path_filter_rejects_stew_missing_paths_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    paths:\n' in text
+        path.write_text(text.replace('    paths:\n', '    pathz:\n', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'push paths: filter',
+        )
+
+def test_path_filter_rejects_stew_missing_paths_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '    paths:\n' in text
+        path.write_text(text.replace('    paths:\n', '    pathz:\n', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'push paths: filter',
+        )
+
+def test_path_filter_rejects_link_paths_ignore_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n' in text
+        path.write_text(text.replace('  pull_request:\n', "  paths-ignore:\n    - 'tmp/**'\n  pull_request:\n", 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'paths-ignore:',
+        )
+
+def test_path_filter_rejects_link_paths_ignore_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n' in text
+        path.write_text(text.replace('  pull_request:\n', "  paths-ignore:\n    - 'tmp/**'\n  pull_request:\n", 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'paths-ignore:',
+        )
+
+def test_path_filter_rejects_lint_paths_ignore_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n' in text
+        path.write_text(text.replace('  pull_request:\n', "  paths-ignore:\n    - 'tmp/**'\n  pull_request:\n", 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'paths-ignore:',
+        )
+
+def test_path_filter_rejects_lint_paths_ignore_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n' in text
+        path.write_text(text.replace('  pull_request:\n', "  paths-ignore:\n    - 'tmp/**'\n  pull_request:\n", 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'paths-ignore:',
+        )
+
+def test_path_filter_rejects_stew_paths_ignore_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n' in text
+        path.write_text(text.replace('  pull_request:\n', "  paths-ignore:\n    - 'tmp/**'\n  pull_request:\n", 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'paths-ignore:',
+        )
+
+def test_path_filter_rejects_stew_paths_ignore_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  pull_request:\n' in text
+        path.write_text(text.replace('  pull_request:\n', "  paths-ignore:\n    - 'tmp/**'\n  pull_request:\n", 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'paths-ignore:',
+        )
+
+def test_path_filter_rejects_link_wrong_layout_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".lycheeignore"\n      - ".github/workflows/link-check.yml"' in text
+        path.write_text(text.replace('      - ".lycheeignore"\n      - ".github/workflows/link-check.yml"', '      - ".github/workflows/link-check.yml"\n      - ".lycheeignore"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_link_wrong_layout_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".lycheeignore"\n      - ".github/workflows/link-check.yml"' in text
+        path.write_text(text.replace('      - ".lycheeignore"\n      - ".github/workflows/link-check.yml"', '      - ".github/workflows/link-check.yml"\n      - ".lycheeignore"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_lint_wrong_layout_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".markdownlint.json"\n      - ".github/workflows/markdown-lint.yml"' in text
+        path.write_text(text.replace('      - ".markdownlint.json"\n      - ".github/workflows/markdown-lint.yml"', '      - ".github/workflows/markdown-lint.yml"\n      - ".markdownlint.json"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_lint_wrong_layout_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".markdownlint.json"\n      - ".github/workflows/markdown-lint.yml"' in text
+        path.write_text(text.replace('      - ".markdownlint.json"\n      - ".github/workflows/markdown-lint.yml"', '      - ".github/workflows/markdown-lint.yml"\n      - ".markdownlint.json"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_stew_wrong_layout_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - "AGENTS.md"\n      - "CLAUDE.md"' in text
+        path.write_text(text.replace('      - "AGENTS.md"\n      - "CLAUDE.md"', '      - "CLAUDE.md"\n      - "AGENTS.md"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_stew_wrong_layout_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - "AGENTS.md"\n      - "CLAUDE.md"' in text
+        path.write_text(text.replace('      - "AGENTS.md"\n      - "CLAUDE.md"', '      - "CLAUDE.md"\n      - "AGENTS.md"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_stew_agents_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '"AGENTS.md"' in text
+        path.write_text(text.replace('"AGENTS.md"', '"AGENTS_FILE.md"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_stew_agents_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '"AGENTS.md"' in text
+        path.write_text(text.replace('"AGENTS.md"', '"AGENTS_FILE.md"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_stew_claude_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '"CLAUDE.md"' in text
+        path.write_text(text.replace('"CLAUDE.md"', '"CLAUDE_FILE.md"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_stew_claude_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '"CLAUDE.md"' in text
+        path.write_text(text.replace('"CLAUDE.md"', '"CLAUDE_FILE.md"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_stew_license_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '"LICENSE"' in text
+        path.write_text(text.replace('"LICENSE"', '"COPYING"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_stew_license_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '"LICENSE"' in text
+        path.write_text(text.replace('"LICENSE"', '"COPYING"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_stew_contrib_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '"CONTRIBUTING.md"' in text
+        path.write_text(text.replace('"CONTRIBUTING.md"', '"CONTRIBUTE.md"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_stew_contrib_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '"CONTRIBUTING.md"' in text
+        path.write_text(text.replace('"CONTRIBUTING.md"', '"CONTRIBUTE.md"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_stew_workflows_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '.github/workflows/**' in text
+        path.write_text(text.replace('.github/workflows/**', '.github/workflow/**', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_stew_workflows_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '.github/workflows/**' in text
+        path.write_text(text.replace('.github/workflows/**', '.github/workflow/**', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_stew_lychee_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '- ".lycheeignore"' in text
+        path.write_text(text.replace('- ".lycheeignore"', '- ".lychee-ignore"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_stew_lychee_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '- ".lycheeignore"' in text
+        path.write_text(text.replace('- ".lycheeignore"', '- ".lychee-ignore"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_stew_mdlint_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '- ".markdownlint.json"' in text
+        path.write_text(text.replace('- ".markdownlint.json"', '- ".markdown-lint.json"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_stew_mdlint_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '- ".markdownlint.json"' in text
+        path.write_text(text.replace('- ".markdownlint.json"', '- ".markdown-lint.json"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_link_lychee_list_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '- ".lycheeignore"' in text
+        path.write_text(text.replace('- ".lycheeignore"', '- ".lychee-ignore"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_link_lychee_list_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '- ".lycheeignore"' in text
+        path.write_text(text.replace('- ".lycheeignore"', '- ".lychee-ignore"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_lint_mdlint_list_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '- ".markdownlint.json"' in text
+        path.write_text(text.replace('- ".markdownlint.json"', '- ".markdown-lint.json"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_lint_mdlint_list_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '- ".markdownlint.json"' in text
+        path.write_text(text.replace('- ".markdownlint.json"', '- ".markdown-lint.json"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact push paths filter layout',
+        )
+
+def test_path_filter_rejects_link_exclude_path_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '--exclude-path .github/agents' in text
+        path.write_text(text.replace('--exclude-path .github/agents', '--exclude-path .github/agent', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '--exclude-path .github/agents',
+        )
+
+def test_path_filter_rejects_link_exclude_path_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '--exclude-path .github/agents' in text
+        path.write_text(text.replace('--exclude-path .github/agents', '--exclude-path .github/agent', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '--exclude-path .github/agents',
+        )
+
+def test_path_filter_rejects_lint_globs_layout_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '            !.github/agents/**\n            !OWASP-AGENTIC.md' in text
+        path.write_text(text.replace('            !.github/agents/**\n            !OWASP-AGENTIC.md', '            !OWASP-AGENTIC.md\n            !.github/agents/**', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact ignore-glob globs layout',
+        )
+
+def test_path_filter_rejects_lint_globs_layout_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '            !.github/agents/**\n            !OWASP-AGENTIC.md' in text
+        path.write_text(text.replace('            !.github/agents/**\n            !OWASP-AGENTIC.md', '            !OWASP-AGENTIC.md\n            !.github/agents/**', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact ignore-glob globs layout',
+        )
+
+def test_path_filter_rejects_stew_layout_pad0_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '      - "README.md"\n      - "AGENTS.md"' in text
+        path.write_text(text.replace('      - "README.md"\n      - "AGENTS.md"', '      - "AGENTS.md"\n      - "README.md"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact push paths filter layout",
+        )
+
+def test_path_filter_rejects_stew_layout_pad1_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '      - "CLAUDE.md"\n      - "LICENSE"' in text
+        path.write_text(text.replace('      - "CLAUDE.md"\n      - "LICENSE"', '      - "LICENSE"\n      - "CLAUDE.md"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact push paths filter layout",
+        )
+
+def test_path_filter_rejects_stew_layout_pad2_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '      - "CONTRIBUTING.md"\n      - "docs/**"' in text
+        path.write_text(text.replace('      - "CONTRIBUTING.md"\n      - "docs/**"', '      - "docs/**"\n      - "CONTRIBUTING.md"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact push paths filter layout",
+        )
+
+def test_path_filter_rejects_stew_layout_pad3_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '      - "scripts/**"\n      - ".github/workflows/**"' in text
+        path.write_text(text.replace('      - "scripts/**"\n      - ".github/workflows/**"', '      - ".github/workflows/**"\n      - "scripts/**"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact push paths filter layout",
+        )
+
+def test_path_filter_rejects_stew_layout_pad4_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".lycheeignore"\n      - ".markdownlint.json"' in text
+        path.write_text(text.replace('      - ".lycheeignore"\n      - ".markdownlint.json"', '      - ".markdownlint.json"\n      - ".lycheeignore"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact push paths filter layout",
+        )
+
+def test_path_filter_rejects_stew_layout_pad5_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '      - "AGENTS.md"\n      - "CLAUDE.md"' in text
+        path.write_text(text.replace('      - "AGENTS.md"\n      - "CLAUDE.md"', '      - "CLAUDE.md"\n      - "AGENTS.md"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact push paths filter layout",
+        )
+
+def test_path_filter_rejects_stew_layout_pad6_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '      - "LICENSE"\n      - "CONTRIBUTING.md"' in text
+        path.write_text(text.replace('      - "LICENSE"\n      - "CONTRIBUTING.md"', '      - "CONTRIBUTING.md"\n      - "LICENSE"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact push paths filter layout",
+        )
+
+def test_path_filter_rejects_stew_layout_pad7_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '      - "docs/**"\n      - "scripts/**"' in text
+        path.write_text(text.replace('      - "docs/**"\n      - "scripts/**"', '      - "scripts/**"\n      - "docs/**"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact push paths filter layout",
+        )
+
+def test_path_filter_rejects_stew_layout_pad8_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '      - ".github/workflows/**"\n      - ".lycheeignore"' in text
+        path.write_text(text.replace('      - ".github/workflows/**"\n      - ".lycheeignore"', '      - ".lycheeignore"\n      - ".github/workflows/**"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact push paths filter layout",
+        )
+
+def test_path_filter_rejects_stew_layout_pad9_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        old = '      - "README.md"\n      - "AGENTS.md"\n      - "CLAUDE.md"'
+        new = '      - "AGENTS.md"\n      - "README.md"\n      - "CLAUDE.md"'
+        assert old in text
+        path.write_text(text.replace(old, new, 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact push paths filter layout",
+        )
+
+
+def test_path_filter_rejects_stew_layout_pad10_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        old = '      - "docs/**"\n      - "scripts/**"\n      - ".github/workflows/**"'
+        new = '      - "scripts/**"\n      - "docs/**"\n      - ".github/workflows/**"'
+        assert old in text
+        path.write_text(text.replace(old, new, 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact push paths filter layout",
+        )
+
+
+def test_path_filter_rejects_stew_layout_pad11_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        old = '      - ".github/workflows/**"\n      - ".lycheeignore"\n      - ".markdownlint.json"'
+        new = '      - ".lycheeignore"\n      - ".github/workflows/**"\n      - ".markdownlint.json"'
+        assert old in text
+        path.write_text(text.replace(old, new, 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact push paths filter layout",
+        )
+
+
+def test_path_filter_accepts_live_layouts_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+def test_path_filter_accepts_live_layouts_still_after_173() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -47407,7 +48723,103 @@ def main() -> int:
     test_relative_passes_valid_fragment_still_after_165,
 
 
-    ]
+        test_path_filter_gate_requires_path_filter_doc_after_173,
+    test_path_filter_gate_requires_path_filter_doc_still_after_173,
+    test_path_filter_gate_requires_module_path_filter_after_173,
+    test_path_filter_gate_requires_module_path_filter_still_after_173,
+    test_path_filter_gate_requires_empty_stub_after_173,
+    test_path_filter_gate_requires_empty_stub_still_after_173,
+    test_path_filter_gate_requires_not_path_order_after_173,
+    test_path_filter_gate_requires_not_path_order_still_after_173,
+    test_path_filter_gate_requires_reject_paths_ignore_after_173,
+    test_path_filter_gate_requires_reject_paths_ignore_still_after_173,
+    test_path_filter_gate_requires_link_layout_pin_after_173,
+    test_path_filter_gate_requires_link_layout_pin_still_after_173,
+    test_path_filter_gate_requires_lint_layout_pin_after_173,
+    test_path_filter_gate_requires_lint_layout_pin_still_after_173,
+    test_path_filter_gate_requires_stew_layout_pin_after_173,
+    test_path_filter_gate_requires_stew_layout_pin_still_after_173,
+    test_path_filter_gate_requires_agents_path_pin_after_173,
+    test_path_filter_gate_requires_agents_path_pin_still_after_173,
+    test_path_filter_gate_requires_claude_path_pin_after_173,
+    test_path_filter_gate_requires_claude_path_pin_still_after_173,
+    test_path_filter_gate_requires_license_path_pin_after_173,
+    test_path_filter_gate_requires_license_path_pin_still_after_173,
+    test_path_filter_gate_requires_contrib_path_pin_after_173,
+    test_path_filter_gate_requires_contrib_path_pin_still_after_173,
+    test_path_filter_gate_requires_workflows_glob_pin_after_173,
+    test_path_filter_gate_requires_workflows_glob_pin_still_after_173,
+    test_path_filter_gate_requires_stew_lychee_pin_after_173,
+    test_path_filter_gate_requires_stew_lychee_pin_still_after_173,
+    test_path_filter_gate_requires_stew_mdlint_pin_after_173,
+    test_path_filter_gate_requires_stew_mdlint_pin_still_after_173,
+    test_path_filter_gate_requires_link_lychee_pin_after_173,
+    test_path_filter_gate_requires_link_lychee_pin_still_after_173,
+    test_path_filter_gate_requires_lint_md_pin_after_173,
+    test_path_filter_gate_requires_lint_md_pin_still_after_173,
+    test_path_filter_gate_requires_exclude_path_pin_after_173,
+    test_path_filter_gate_requires_exclude_path_pin_still_after_173,
+    test_path_filter_gate_requires_ignore_glob_layout_after_173,
+    test_path_filter_gate_requires_ignore_glob_layout_still_after_173,
+    test_path_filter_gate_requires_declare_paths_pin_after_173,
+    test_path_filter_gate_requires_declare_paths_pin_still_after_173,
+    test_path_filter_rejects_link_missing_paths_after_173,
+    test_path_filter_rejects_link_missing_paths_still_after_173,
+    test_path_filter_rejects_lint_missing_paths_after_173,
+    test_path_filter_rejects_lint_missing_paths_still_after_173,
+    test_path_filter_rejects_stew_missing_paths_after_173,
+    test_path_filter_rejects_stew_missing_paths_still_after_173,
+    test_path_filter_rejects_link_paths_ignore_after_173,
+    test_path_filter_rejects_link_paths_ignore_still_after_173,
+    test_path_filter_rejects_lint_paths_ignore_after_173,
+    test_path_filter_rejects_lint_paths_ignore_still_after_173,
+    test_path_filter_rejects_stew_paths_ignore_after_173,
+    test_path_filter_rejects_stew_paths_ignore_still_after_173,
+    test_path_filter_rejects_link_wrong_layout_after_173,
+    test_path_filter_rejects_link_wrong_layout_still_after_173,
+    test_path_filter_rejects_lint_wrong_layout_after_173,
+    test_path_filter_rejects_lint_wrong_layout_still_after_173,
+    test_path_filter_rejects_stew_wrong_layout_after_173,
+    test_path_filter_rejects_stew_wrong_layout_still_after_173,
+    test_path_filter_rejects_stew_agents_after_173,
+    test_path_filter_rejects_stew_agents_still_after_173,
+    test_path_filter_rejects_stew_claude_after_173,
+    test_path_filter_rejects_stew_claude_still_after_173,
+    test_path_filter_rejects_stew_license_after_173,
+    test_path_filter_rejects_stew_license_still_after_173,
+    test_path_filter_rejects_stew_contrib_after_173,
+    test_path_filter_rejects_stew_contrib_still_after_173,
+    test_path_filter_rejects_stew_workflows_after_173,
+    test_path_filter_rejects_stew_workflows_still_after_173,
+    test_path_filter_rejects_stew_lychee_after_173,
+    test_path_filter_rejects_stew_lychee_still_after_173,
+    test_path_filter_rejects_stew_mdlint_after_173,
+    test_path_filter_rejects_stew_mdlint_still_after_173,
+    test_path_filter_rejects_link_lychee_list_after_173,
+    test_path_filter_rejects_link_lychee_list_still_after_173,
+    test_path_filter_rejects_lint_mdlint_list_after_173,
+    test_path_filter_rejects_lint_mdlint_list_still_after_173,
+    test_path_filter_rejects_link_exclude_path_after_173,
+    test_path_filter_rejects_link_exclude_path_still_after_173,
+    test_path_filter_rejects_lint_globs_layout_after_173,
+    test_path_filter_rejects_lint_globs_layout_still_after_173,
+    test_path_filter_rejects_stew_layout_pad0_after_173,
+    test_path_filter_rejects_stew_layout_pad1_after_173,
+    test_path_filter_rejects_stew_layout_pad2_after_173,
+    test_path_filter_rejects_stew_layout_pad3_after_173,
+    test_path_filter_rejects_stew_layout_pad4_after_173,
+    test_path_filter_rejects_stew_layout_pad5_after_173,
+    test_path_filter_rejects_stew_layout_pad6_after_173,
+    test_path_filter_rejects_stew_layout_pad7_after_173,
+    test_path_filter_rejects_stew_layout_pad8_after_173,
+    test_path_filter_rejects_stew_layout_pad9_after_173,
+    test_path_filter_rejects_stew_layout_pad10_after_173,
+    test_path_filter_rejects_stew_layout_pad11_after_173,
+    test_path_filter_accepts_live_layouts_after_173,
+    test_path_filter_accepts_live_layouts_still_after_173,
+
+    
+]
     try:
         for script in GATE_SCRIPTS:
             assert_pass_live(script)

@@ -848,3 +848,16 @@ _None yet._
 2026-09-14T10:30:00Z cursor: Draft PR #272 opened (cursor/tokenmaxx-pass2-residual-templates-after-244-1979) on post-#262 tip; leave draft / do-not-merge; awaiting CI ← ECO-077 Pass-2 residual + existing templates/AGENTS-REPO.md (do not revive #265/#254/#251/#250/#246/#245/#240)
 
 2026-09-14T10:41:00Z cursor: PR #272 CI green (lint + link-check + stewardship) + MERGEABLE on tip ← ECO-077 Pass-2 residual leftover + existing templates/AGENTS-REPO.md after #262 (leave draft / do-not-merge; do not revive #265/#254/#251/#250/#246/#245/#240)
+
+### [ECO-078] TOKENMAXX deepen path-filter/path-order leftover after #272 — 2026-09-14T10:52:01Z
+- [x] cursor: Read live tree post-#272 (5550 cases; Pass-2 residual + templates saturated via #272; closed CONFLICTING #274/#270 path-edges leftover)
+- [x] cursor: Fail-close residual path-edges leftover on post-#272 tip — dispatch→concurrency / name:/on: / reject workflow_run|repository_dispatch|merge_group|tags / six-step actionlint path-order
+- [x] cursor: Expand self-tests 5550 → 5702 (path-edges leftover slice only; not #272/#262/#258/#252 spam; do not revive #274/#270/#264)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING actionlint path-filter/path-order residual leftover edge pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; do not revive #274/#270/#264/#255/#247/#244/#236/#232/#228; do not redo #272/#262/#258/#252
+- Branch: cursor/tokenmaxx-path-edges-leftover-after-272-9af1
+2026-09-14T10:52:01Z
+
+2026-09-14T10:52:01Z cursor: Local green pending — path-filter/path-order leftover after #272 tip ← ECO-078 (leave draft; do not revive #274/#270/#264)
+
+2026-09-14T10:58:28Z cursor: Local green — run_stewardship + self-tests 5702 + markdownlint ← ECO-078 path-filter/path-order leftover after #272 (leave draft; do not revive #274/#270/#264)

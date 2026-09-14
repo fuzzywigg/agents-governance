@@ -11,6 +11,18 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-schema second-pass pins after #79: expand self-tests
+  to 1755 cases (was 1683) fail-closing live schema integrity —
+  `FENCED_YAML_RE` exact / `ISO_DATE_RE` / `SEMVER_RE` / `ISSUE_REF_RE` /
+  `DATE_KEYS` exact / Tiny YAML subset / scalar+non-empty+string needles /
+  ACTIVE status / positive tier / 0..3 autonomy / ISO-8601 / invent wording /
+  semver / closes #N / FAILED+OK banners / stdlib-subset+PyYAML /
+  bool subclass / `match.group(1)` / missing metadata keys / utf-8 /
+  `STRING_KEYS` members, plus stewardship-schema gate contract pins in
+  `check_badge_standard.py` — schema second-pass slice only (not badge /
+  wiki / relative / common / CI workflow / actionlint pin spam); no
+  invent-product; no fourth badge
+
 - TOKENMAXX actionlint-style gate pins after #75: expand self-tests to 1683
   cases (was 1612) fail-closing live actionlint-style integrity — top-level
   `name:` / `jobs.*.runs-on` / `jobs.*.steps` / `timeout-minutes` / no
@@ -20,6 +32,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   `check_badge_standard.py` — actionlint-style gate contract slice only (not
   CI workflow / common / relative-link / schema-scalar / badge / wiki-outline
   / fixture-reject spam); no invent-product; no fourth badge
+
 - TOKENMAXX stewardship_common second-pass pins after #65: expand self-tests to
   1540 cases (was 1468) fail-closing live shared-helper integrity — ROOT
   `parents[1]` / `FENCED_BLOCK_RE` DOTALL / helper doc pins / scan_secrets
@@ -31,6 +44,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   `check_badge_standard.py` — common second-pass slice only (not badge /
   wiki / relative / schema / CI workflow pin / fixture-reject spam); no
   invent-product; no fourth badge
+
 - TOKENMAXX badge-standard second-pass pins after #61: expand self-tests to 1468
   cases (was 1396) fail-closing live badge-standard integrity —
   `REQUIRED_ORDER`+`EXPECTED_REPO` exact assigns / README+LICENSE+
@@ -43,6 +57,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   pins in `check_badge_standard.py` — badge-standard second-pass slice only
   (not wiki / relative / schema / common / CI workflow pin / fixture-reject
   spam); no invent-product; no fourth badge
+
 - TOKENMAXX wiki-outline second-pass pins after #59: expand self-tests to 1396
   cases (was 1324) fail-closing live wiki-outline integrity — `OPERATOR_ONLY` /
   docs/wiki / `_reject_invent_badge_chrome` / autonomy+governance+public+kill+
@@ -53,6 +68,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   pins in `check_badge_standard.py` — wiki-outline second-pass slice only
   (not relative / schema-scalar / badge-standard / common / CI workflow pin /
   fixture-reject spam); no invent-product; no fourth badge
+
 - TOKENMAXX relative-link second-pass pins after #55: expand self-tests to 1324
   cases (was 1253) fail-closing live relative-link integrity — `MD_LINK_RE` /
   `SKIP_PARTS` / `SKIP_PREFIXES` / `SKIP_FILES` / `_MAX_UNQUOTE_PASSES = 4` /
@@ -62,6 +78,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   pins in `check_badge_standard.py` — relative-link second-pass slice only
   (not schema-scalar / badge-standard / common / wiki-outline / CI workflow
   pin / fixture-reject spam); no invent-product; no fourth badge
+
 - TOKENMAXX stewardship-schema scalar / live pins after #53: expand self-tests
   to 1253 cases (was 1182) fail-closing live schema integrity — `STRING_KEYS` /
   `reject_non_scalar` / empty yaml metadata / bool pretending to be
@@ -71,6 +88,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   schema gate scalar / live-pin slice only (not badge-standard / common /
   wiki-outline / relative-link / CI workflow pin / fixture-reject spam); no
   invent-product; no fourth badge
+
 - TOKENMAXX badge-standard gate pins after #48: expand self-tests to 1182
   cases (was 1114) fail-closing live badge-standard integrity — REQUIRED_ORDER
   Link Check → Markdown Lint → License / MAX_BADGES = 3 / EXPECTED_REPO /
@@ -80,6 +98,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   badge-standard gate contract slice only (not common / schema / wiki-outline /
   relative-link / CI workflow pin / fixture-reject spam); no invent-product;
   no fourth badge
+
 - TOKENMAXX stewardship_common gate pins after #46: expand self-tests to 1114
   cases (was 1045) fail-closing live shared-helper integrity — SECRET_PATTERNS /
   SECRET_URL_HINTS / FORBIDDEN_BADGE_HINTS / DANGEROUS_LINK_SCHEMES /
@@ -87,6 +106,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   stewardship_common contract pins in `check_badge_standard.py` — common helper
   contract slice only (not schema / wiki-outline / relative-link / CI workflow
   pin / fixture-reject spam); no invent-product; no fourth badge
+
 - TOKENMAXX stewardship-schema gate pins after #45: expand self-tests to 1045
   cases (was 974) fail-closing live schema integrity — DOC_SCHEMAS /
   EXPECTED_VALUES / SEMVER / ISO-8601 / closes `#N` / invent edit_policy /
@@ -94,6 +114,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   contract pins in `check_badge_standard.py` — schema gate contract slice only
   (not wiki-outline / relative-link / CI workflow pin / fixture-reject spam);
   no invent-product; no fourth badge
+
 - TOKENMAXX wiki-outline gate pins after #43: expand self-tests to 974 cases
   (was 903) fail-closing live wiki outline integrity — PUBLISHABLE_PAGES
   L0–L3 / credential / copilot topic hints, `strip_fenced_code` before link
@@ -101,6 +122,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   wiki-outline gate contract pins in `check_badge_standard.py` — wiki-outline
   gate contract slice only (not relative-link / CI workflow pin /
   badge-wiki-schema fixture-reject spam); no invent-product; no fourth badge
+
 - TOKENMAXX relative-link gate pins after #41: expand self-tests to 903 cases
   (was 836) fail-closing live relative-link integrity — `OWASP-AGENTIC.md` /
   `.github/agents` / `node_modules` / `.git` skips, `strip_fenced_code`,
@@ -110,6 +132,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   in order, AGENTS.md relative mention — relative-link gate contract slice
   only (not CI workflow pin / badge-wiki-schema fixture-reject spam); no
   invent-product; no fourth badge
+
 - TOKENMAXX CI workflow pins after #39: expand self-tests to 836 cases
   (was 774) fail-closing live `actions/checkout@v7` on all three workflows,
   `lycheeverse/lychee-action@v2`, job `timeout-minutes` 20/10/15, weekly
@@ -124,6 +147,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   raw.githubusercontent still, lycheeignore https://*/http://*/shields
   still — CI workflow pin slice only (not badge/wiki/schema/relative
   fixture-reject spam); no invent-product; no fourth badge
+
 - TOKENMAXX stewardship fixtures after #38: expand self-tests to 774 cases
   (was 712) covering `.markdownlint.json` `MD033`/`MD041`/`MD060`: false,
   markdownlint-cli2-action `@v24`, stewardship `actions/setup-python@v5` +
@@ -139,6 +163,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   #, common ghs_/ghu_/rk-/aws / coverage+stars hints / ghs scan / FILE:
   casefold, plus default:true / max-concurrency 8 /v1.7.7/ /
   get_actionlint.outputs / codecov/http / tier 0 still-needles
+
 - TOKENMAXX stewardship fixtures after #37: expand self-tests to 712 cases
   (was 650) covering `.markdownlint.json` `default: true`, stewardship
   `get_actionlint.outputs.executable` + actionlint download path `/v1.7.7/`,
@@ -155,6 +180,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   key / buymeacoffee+opencollective hints / xoxb scan / vbscript casefold,
   plus DavidAnson/--github-token/line_length:200/raw.githubusercontent/
   coveralls/http / tier 0 still-needles
+
 - TOKENMAXX stewardship fixtures after #36: expand self-tests to 650 cases
   (was 588) covering `.markdownlint.json` MD013 `line_length: 200` + MD024
   `siblings_only: true`, stewardship `raw.githubusercontent.com` + curl `-fsSL`,
@@ -169,6 +195,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   wrong CLAUDE parent / closes without #, common ghs_/ghu_/rk-/aws /
   coverage+stars hints / ghs scan / FILE: casefold, plus cli2/lycheeverse/
   siblings_only/rhysd/twitter/http / tier 0 / data: still-needles
+
 - TOKENMAXX stewardship fixtures after #35: expand self-tests to 588 cases
   (was 526) covering `.markdownlint.json` MD024 `siblings_only`, stewardship
   `rhysd/actionlint` + `curl` download, lychee-action `with: token:`,
@@ -184,6 +211,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   buymeacoffee+opencollective hints / xoxb scan / vbscript casefold, plus
   DavidAnson/--github-token/MD024/download-actionlint/producthunt/http /
   tier 0 / javascript / https://* lycheeignore still-needles
+
 - TOKENMAXX stewardship fixtures after #34: expand self-tests to 526 cases
   (was 464) covering `DavidAnson/markdownlint-cli2-action`, lychee
   `--github-token`, `.markdownlint.json` MD024, stewardship
@@ -198,6 +226,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   autonomy 4 / wrong CLAUDE repo / closes without #, common ghr_/gho_/sk-/EC key /
   followers+forks hints / AIza scan / JAVASCRIPT casefold, plus cli2/lycheeverse/
   line_length/pip/twitter/Http:// / data: / tier 0 / data: still-needles
+
 - TOKENMAXX stewardship fixtures after #33: expand self-tests to 464 cases
   (was 404) covering `lycheeverse/lychee-action`, `markdownlint-cli2-action`,
   `.markdownlint.json` MD013 `line_length`, stewardship `pip install` PyYAML,
@@ -212,6 +241,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   wrong maintainer, common ghs_/ghu_/rk-/aws/OPENSSH / coveralls+producthunt
   hints / npm scan / FILE: casefold, plus lychee-action/MD013/checkout/PyYAML/
   discord/HTTP:// / javascript / tier 0 / VBSCRIPT still-needles
+
 - TOKENMAXX stewardship fixtures after #32: expand self-tests to 404 cases
   (was 345) covering link-check/markdown-lint `actions/checkout`, `lychee-action`,
   `.markdownlint.json` MD013, pull_request_target on link-check, contents:write on
@@ -224,6 +254,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   CLAUDE owner / missing version+edit_policy+last_updated / tier 0 / empty created /
   autonomy 3 vs expected 1, common npm_/AIza/xoxb/github_pat/twitter+codecov hints +
   javascript+data schemes, plus verbose/no-progress/checkout/config/lycheeignore still
+
 - TOKENMAXX stewardship fixtures after #31: expand self-tests to 345 cases
   (was 289) covering lychee `--verbose` / `--no-progress`, stewardship
   `actions/checkout`, cancel-in-progress:true on markdown-lint, pull_request_target
@@ -236,6 +267,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   repo keys / backlog owner / empty purpose+scope / autonomy 0 / publish closes /
   closes without #, common hint registry + gho_ / apikey scan, plus markdown
   **/*.md / exclude-loopback / Python 3.12 / stewardship schedule still-needles
+
 - TOKENMAXX stewardship fixtures after #30: expand self-tests to 289 cases
   (was 233) covering stewardship Python `3.12` / `python-version` pin,
   cancel-in-progress:true on link-check, setup-python @master/@latest float,
@@ -249,6 +281,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   empty scope / missing closes/purpose / autonomy drift+float / semver
   prerelease, common commerce hints / sk- / casefold / token= / file:, plus
   markdown-lint OWASP + stewardship timeout + write-all needles
+
 - TOKENMAXX stewardship fixtures after #29: expand self-tests to 233 cases
   (was 182) covering `cancel-in-progress: true`, link-check `.github/agents`
   exclude, markdown-lint `**/*.md` glob, lycheeignore `http://*`, actionlint
@@ -260,6 +293,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   schema badge status/tier/closes/empty/tier-string/autonomy-range/non-
   mapping/date, extended common secret-url/forbidden/private-key/tilde/
   ghp helpers, fail:true + PyYAML needles
+
 - TOKENMAXX stewardship fixtures after #28: expand self-tests to 182 cases
   (was 134) covering cancel-in-progress / `**/*.md` link-check glob, actionlint
   timeout + docker:// pin skip, badge-standard/CONTRIBUTING missing-file,
@@ -270,6 +304,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   missing wiki dir, schema scope/parent/repo/publish/backlog/autonomy-string/
   date/YAML parse, extended secret/forbidden-hint helpers, markdown-lint
   config + actionlint path needles, stewardship workflow_dispatch
+
 - TOKENMAXX stewardship fixtures after #27: expand self-tests to 134 cases
   (was 89) covering actionlint write-all/@master/@latest/name/steps, link-check
   GITHUB_TOKEN / lychee / exclude-path / concurrency / timeout needles,
@@ -277,6 +312,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   workflow path targets, lycheeignore literal/regex positives, relative
   tel/NUL/bare-hash/title/image, wiki PUBLISH/badge/home/relative/invent edges,
   schema maintainer/parent/owner/secret negatives
+
 - TOKENMAXX stewardship fixtures after #26: expand self-tests to 89 cases
   (was 50) covering lycheeignore shields exclude, actionlint-style workflow
   harden (no pull_request_target / contents:write / unpinned@main), markdown-
@@ -284,6 +320,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   positive + missing-page/yaml/file negatives
 - Stewardship Checks CI: run pinned actionlint v1.7.7 on the three existing
   workflow paths (link-check / markdown-lint / stewardship-checks)
+
 - TOKENMAXX stewardship gate burn after #24: 50 negative/positive self-test
   fixtures (was 14) covering http badges, dangerous link schemes, percent-
   encoded path escape, tilde fences, wiki invent chrome / http / secrets,

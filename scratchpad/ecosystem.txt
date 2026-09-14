@@ -717,3 +717,5 @@ _None yet._
 2026-09-14T06:50:00Z
 
 2026-09-14T06:55:00Z cursor: Local green — run_stewardship + self-tests 4052 + markdownlint ← ECO-071 path-filter/path-order deepen after #216 tip (leave draft; leave CONFLICTING #219 alone; do not revive #217/#213/#198)
+
+2026-09-14T06:56:00Z cursor: Draft PR #223 opened (cursor/tokenmaxx-path-edges-after-216-ab79); leave draft / do-not-merge; awaiting CI ← ECO-071 path-filter/path-order deepen after #216 tip (do not revive #217/#213/#198; leave CONFLICTING #219 alone)

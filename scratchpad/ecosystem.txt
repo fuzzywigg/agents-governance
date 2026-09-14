@@ -565,3 +565,12 @@ _None yet._
 2026-09-14T04:18:00Z cursor: Local green — run_stewardship + self-tests 2957 + markdownlint ← ECO-060 stewardship CI deepen after #161 (do not revive #158/#113)
 
 2026-09-14T04:18:31Z cursor: Draft PR #165 opened (stewardship CI deepen after #161; 2957 cases) — awaiting CI; do not revive #158/#113; distinct from schema #164
+
+### [ECO-061] TOKENMAXX deepen stewardship-schema third-pass after #165 — 2026-09-14T04:25:00Z
+- [x] cursor: Read live tree post-#165 (2957 cases; stewardship CI deepen saturated; #163/#153/#147/#142 CLOSED — do not revive; leave open #166 actionlint-path alone)
+- [x] cursor: Fail-close schema third-pass + deepen — future annotations / Path parent / yaml=None / five live docs / true+false / null+~ / fullmatch / split+strip / FENCED search / nested reject / ACTIVE / EXPECTED get / closes scope / path.is_file / block.strip / Exception as exc / STRING_KEYS / engine PyYAML / BLE001 / got != want / DATE_KEYS
+- [x] cursor: Expand self-tests 2957 → 3145 (schema leftover slice only; not docs-lint / actionlint / wiki / stewardship-CI / workflow spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING stewardship-schema integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #163 leftover on post-#165 main; do not revive #142/#147/#153/#163
+- Branch: cursor/tokenmaxx-schema-third-pass-after-161-a627
+2026-09-14T04:25:00Z

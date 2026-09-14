@@ -574,3 +574,5 @@ _None yet._
 - Scope: EXISTING governance fixture/harness only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #167 leftover on post-#165 main; do not revive #167/#168/#169; distinct from #164/#166
 - Branch: cursor/tokenmaxx-stewardship-schema-wiki-fixtures-after-165-4956
 2026-09-14T04:25:00Z
+
+2026-09-14T04:30:00Z cursor: Local green — run_stewardship + self-tests 3081 + markdownlint ← ECO-061 stewardship/CI/schema/wiki fixture deepen after #165 (do not revive #167/#168/#169; leave #164/#166 alone)

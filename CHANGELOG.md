@@ -11,6 +11,18 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX badge / relative / wiki / actionlint third-pass pins after #72:
+  expand self-tests to 1631 cases (was 1540) fail-closing live integrity —
+  badge Path constants / `BADGE_LINE_RE` named groups / MD013–MD060 /
+  lycheeignore `https://*` / per-label `check_badges` needles /
+  self-contract first; relative exact `SKIP_PARTS` / ATX MULTILINE /
+  slug docs / FAILED+OK banners / allow-tuple / unquote import; wiki WIKI
+  assign / README+badge hints / downloads+discord+twitter+x.com /
+  Home+PUBLISH fail strings / `WIKI.glob`+`removesuffix`; actionlint
+  workflow `name:`+concurrency group prefixes+job ids / `python-version`
+  `"3.12"` / Download actionlint step / `globs:`+`config:` / style
+  float+docker needles — third-pass slice only (not stewardship_common
+  second-pass spam); no invent-product; no fourth badge
 - TOKENMAXX stewardship_common second-pass pins after #65: expand self-tests to
   1540 cases (was 1468) fail-closing live shared-helper integrity — ROOT
   `parents[1]` / `FENCED_BLOCK_RE` DOTALL / helper doc pins / scan_secrets

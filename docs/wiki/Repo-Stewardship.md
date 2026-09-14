@@ -92,7 +92,16 @@ plus stewardship_common second-pass after #65: ROOT `parents[1]` /
 `password|passwd|token` / OPENSSH+EC / Public docs / invent-product
 surface / social chrome / Link schemes / `is_file`+`sorted` /
 workflows path / `return None` / exact `DANGEROUS_LINK_SCHEMES` +
-`SECRET_URL_HINTS` head).
+`SECRET_URL_HINTS` head,
+plus badge / relative / wiki / actionlint third-pass after #72: gate Path
+constants / `BADGE_LINE_RE` named groups / MD013–MD060 fail needles /
+lycheeignore `https://*` / per-label `check_badges` needles /
+self-contract first / exact `SKIP_PARTS` / ATX MULTILINE / slug docs /
+relative FAILED+OK banners / WIKI exact assign / README+badge hints /
+downloads+discord+twitter+x.com / Home+PUBLISH fail strings /
+workflow `name:`+concurrency group prefixes+job ids / `python-version`
+`"3.12"` / Download actionlint step / `globs:`+`config:` / actionlint
+style float+docker needles).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

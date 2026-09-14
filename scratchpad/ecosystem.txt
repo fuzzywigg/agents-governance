@@ -353,3 +353,12 @@ _None yet._
 2026-09-13T23:49:02Z
 
 2026-09-13T23:53:22Z cursor: PR #72 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-045 TOKENMAXX stewardship_common second-pass pins
+
+### [ECO-046] TOKENMAXX deepen badge/relative/wiki/actionlint third-pass pins after #72 — 2026-09-14T00:05:00Z
+- [x] cursor: Read live tree post-#72 (1540 cases; stewardship_common second-pass saturated)
+- [x] cursor: Fail-close badge/relative/wiki/actionlint third-pass — Path constants / BADGE_LINE_RE groups / MD013–MD060 / SKIP_PARTS / ATX / FAILED+OK / WIKI assign / social special-case / workflow name+group+job ids / python 3.12 / actionlint style float+docker
+- [x] cursor: Expand self-tests 1540 → 1631 (badge/relative/wiki/actionlint third-pass slice; not stewardship_common second-pass spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING badge-standard / relative-link / wiki-outline / actionlint integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-badge-rel-wiki-actionlint-2f98
+2026-09-14T00:05:00Z

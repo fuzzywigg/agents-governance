@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Enforce docs/badge-standard.md against README.md (executable gate).
 
-Fail-closed pins (live path after #48; second-pass after #61):
+Fail-closed pins (live path after #48; second-pass after #61; third-pass after #72):
 - REQUIRED_ORDER: Link Check → Markdown Lint → License (exactly MAX_BADGES = 3)
 - EXPECTED_REPO: fuzzywigg/agents-governance
 - REQUIRED_WORKFLOWS: link-check.yml / markdown-lint.yml / stewardship-checks.yml
@@ -11,6 +11,8 @@ Fail-closed pins (live path after #48; second-pass after #61):
 - Quiet stewardship: no Stewardship product/status badge; no fourth badge
 - Second-pass: path constants / exact REQUIRED_ORDER+EXPECTED_REPO assigns /
   actions/workflows/*.yml/badge.svg / fail needles / LICENSE link / FAILED+OK
+- Third-pass: gate Path constants / BADGE_LINE_RE named groups / MD013–MD060 /
+  lycheeignore shields / per-label check_badges needles / self-contract first
 """
 
 from __future__ import annotations
@@ -609,6 +611,179 @@ def check_workflow_hardening(errors: list[str]) -> None:
             errors,
         )
 
+    # Fail-closed after #72: third-pass actionlint / workflow identity pins
+    # (actionlint slice; not stewardship_common second-pass spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    stew_name = "name: Stewardship " + "Checks"
+    if stew_name not in stew:
+        fail(
+            "stewardship-checks.yml must set " + stew_name,
+            errors,
+        )
+    link_name = "name: Link " + "Check"
+    if link_name not in link:
+        fail(
+            "link-check.yml must set " + link_name,
+            errors,
+        )
+    lint_name = "name: Markdown " + "Lint"
+    if lint_name not in lint:
+        fail(
+            "markdown-lint.yml must set " + lint_name,
+            errors,
+        )
+    stew_group = "group: stewardship-checks" + "-"
+    if stew_group not in stew:
+        fail(
+            "stewardship-checks.yml concurrency must use " + stew_group,
+            errors,
+        )
+    link_group = "group: link-check" + "-"
+    if link_group not in link:
+        fail(
+            "link-check.yml concurrency must use " + link_group,
+            errors,
+        )
+    lint_group = "group: markdown-lint" + "-"
+    if lint_group not in lint:
+        fail(
+            "markdown-lint.yml concurrency must use " + lint_group,
+            errors,
+        )
+    if "stewardship:" not in stew:
+        fail(
+            "stewardship-checks.yml must declare job id stewardship:",
+            errors,
+        )
+    if "link-check:" not in link:
+        fail(
+            "link-check.yml must declare job id link-check:",
+            errors,
+        )
+    if not re.search(r"(?m)^\s+lint:\s*$", lint):
+        fail(
+            "markdown-lint.yml must declare job id lint:",
+            errors,
+        )
+    py312 = 'python-version: "3.' + '12"'
+    if py312 not in stew:
+        fail(
+            "stewardship-checks.yml must pin " + py312,
+            errors,
+        )
+    dl_step = "Download " + "actionlint"
+    if dl_step not in stew:
+        fail(
+            "stewardship-checks.yml must name " + dl_step + " step",
+            errors,
+        )
+    al_step = "actionlint existing workflow " + "paths"
+    if al_step not in stew:
+        fail(
+            "stewardship-checks.yml must name " + al_step + " step",
+            errors,
+        )
+    bash_run = "bash scripts/run_stewardship_" + "checks.sh"
+    if bash_run not in stew:
+        fail(
+            "stewardship-checks.yml must run " + bash_run,
+            errors,
+        )
+    py_tests = "python3 scripts/test_stewardship_" + "gates.py"
+    if py_tests not in stew:
+        fail(
+            "stewardship-checks.yml must run " + py_tests,
+            errors,
+        )
+    pip_q = "pip install --quiet " + "pyyaml"
+    if pip_q not in stew:
+        fail(
+            "stewardship-checks.yml must " + pip_q,
+            errors,
+        )
+    if "globs:" not in lint:
+        fail(
+            "markdown-lint.yml must pass globs: to markdownlint-cli2-action",
+            errors,
+        )
+    cfg = 'config: ".markdownlint' + '.json"'
+    if cfg not in lint:
+        fail(
+            "markdown-lint.yml must set " + cfg,
+            errors,
+        )
+    tok = "secrets.GITHUB_" + "TOKEN"
+    if tok not in link:
+        fail(
+            "link-check.yml must use " + tok,
+            errors,
+        )
+    if "args: >-" not in link:
+        fail(
+            "link-check.yml must pass lychee args: >-",
+            errors,
+        )
+    branches = 'branches: ["*' + '*"]'
+    if branches not in stew:
+        fail(
+            "stewardship-checks.yml push must use " + branches,
+            errors,
+        )
+    docs_path = '"docs/' + '**"'
+    if docs_path not in stew:
+        fail(
+            "stewardship-checks.yml push paths must include " + docs_path,
+            errors,
+        )
+    scripts_path = '"scripts/' + '**"'
+    if scripts_path not in stew:
+        fail(
+            "stewardship-checks.yml push paths must include " + scripts_path,
+            errors,
+        )
+    for wf_path in (
+        ".github/workflows/link-check.yml",
+        ".github/workflows/markdown-lint.yml",
+        ".github/workflows/stewardship-checks.yml",
+    ):
+        if wf_path not in stew:
+            fail(
+                f"stewardship-checks.yml actionlint must target {wf_path}",
+                errors,
+            )
+    style_src = BADGE_GATE.read_text(encoding="utf-8") if BADGE_GATE.is_file() else ""
+    style_needles = (
+        "actionlint-style requires top-level " + "name:",
+        "actionlint-style requires jobs.*." + "runs-on",
+        "actionlint-style requires jobs.*." + "steps",
+        "pull_request_target (actionlint " + "harden)",
+        "permissions: " + "write-all",
+        "contents: write is " + "forbidden",
+        "unpinned action " + "uses:",
+        "must not float on " + "@",
+        "actionlint-style requires timeout-minutes on " + "jobs",
+    )
+    for needle in style_needles:
+        if needle not in style_src:
+            fail(
+                "check_actionlint_style must emit " + needle,
+                errors,
+            )
+    float_set = '{"main", "master", "' + 'latest"}'
+    if float_set not in style_src:
+        fail(
+            "check_actionlint_style must reject float set main|master|" + "latest",
+            errors,
+        )
+    docker_pin = "docker:" + "//"
+    if docker_pin not in style_src:
+        fail(
+            "check_actionlint_style must skip " + docker_pin + " uses without pin",
+            errors,
+        )
+
+
+
 
 def check_badge_standard_doc(errors: list[str]) -> None:
     """Ensure docs/badge-standard.md still documents the same required order."""
@@ -999,6 +1174,186 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
             "check_badge_standard.py must reject link.startswith(http://)",
             errors,
         )
+
+
+    # Fail-closed after #72: third-pass helper / constant / needle pins
+    # (badge-standard slice; not stewardship_common second-pass spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    for gate_const in (
+        "RELATIVE_LINK_" + "GATE",
+        "WIKI_OUTLINE_" + "GATE",
+        "SCHEMA_" + "GATE",
+        "COMMON_" + "GATE",
+        "RUN_" + "STEWARDSHIP",
+        "WORK" + "FLOWS",
+    ):
+        if gate_const not in text:
+            fail(
+                "check_badge_standard.py must declare " + gate_const,
+                errors,
+            )
+    if 'ROOT / "scripts" / "check_relative_links.py"' not in text:
+        fail(
+            "check_badge_standard.py RELATIVE_LINK_GATE must pin check_relative_links.py",
+            errors,
+        )
+    if 'ROOT / "scripts" / "check_wiki_outline.py"' not in text:
+        fail(
+            "check_badge_standard.py WIKI_OUTLINE_GATE must pin check_wiki_outline.py",
+            errors,
+        )
+    if 'ROOT / ".github" / "workflows"' not in text:
+        fail(
+            "check_badge_standard.py WORKFLOWS must pin .github/workflows",
+            errors,
+        )
+    if "Path(__file__).resolve()" not in text:
+        fail(
+            "check_badge_standard.py BADGE_GATE must use Path(__file__).resolve()",
+            errors,
+        )
+    label_group = "(?P<" + "label>"
+    img_group = "(?P<" + "img>"
+    link_group = "(?P<" + "link>"
+    if label_group not in text:
+        fail(
+            "check_badge_standard.py BADGE_LINE_RE must capture " + label_group,
+            errors,
+        )
+    if img_group not in text:
+        fail(
+            "check_badge_standard.py BADGE_LINE_RE must capture " + img_group,
+            errors,
+        )
+    if link_group not in text:
+        fail(
+            "check_badge_standard.py BADGE_LINE_RE must capture " + link_group,
+            errors,
+        )
+    if r"https://github\.com/(?P<owner>" not in text and "github\\.com/(?P<owner>" not in text:
+        if "github.com/(?P<owner>" not in text and r"github\.com/(?P<owner>" not in text:
+            fail(
+                "check_badge_standard.py REPO_FROM_GITHUB_RE must capture github.com owner",
+                errors,
+            )
+    if r"img\.shields\.io/github/(?:license|actions)/" not in text and r"img\.shields\.io/github/(?:license|actions)/" not in text:
+        fail(
+            "check_badge_standard.py REPO_FROM_SHIELDS_RE must match shields license|actions",
+            errors,
+        )
+    h1_pin = "immediately under the " + "H1"
+    if h1_pin not in text:
+        fail(
+            "check_badge_standard.py must pin badge row " + h1_pin,
+            errors,
+        )
+    blank_pin = "after optional blank " + "lines"
+    if blank_pin not in text:
+        fail(
+            "check_badge_standard.py must pin badge row " + blank_pin,
+            errors,
+        )
+    md013 = "MD0" + "13"
+    if md013 not in text:
+        fail(
+            "check_badge_standard.py must pin markdownlint " + md013,
+            errors,
+        )
+    if "line_length" not in text:
+        fail(
+            "check_badge_standard.py must pin markdownlint line_length",
+            errors,
+        )
+    sib = "siblings_" + "only"
+    if sib not in text:
+        fail(
+            "check_badge_standard.py must pin markdownlint MD024 " + sib,
+            errors,
+        )
+    md033_msg = "must set MD033: " + "false"
+    if md033_msg not in text:
+        fail(
+            "check_badge_standard.py must emit markdownlint " + md033_msg,
+            errors,
+        )
+    md041_msg = "must set MD041: " + "false"
+    if md041_msg not in text:
+        fail(
+            "check_badge_standard.py must emit markdownlint " + md041_msg,
+            errors,
+        )
+    md060_msg = "must set MD060: " + "false"
+    if md060_msg not in text:
+        fail(
+            "check_badge_standard.py must emit markdownlint " + md060_msg,
+            errors,
+        )
+    if "img.shields.io" not in text and r"img\.shields\.io" not in text and r"img\.shields\.io" not in text:
+        fail(
+            "check_badge_standard.py lycheeignore must exclude img.shields.io",
+            errors,
+        )
+    https_star = "https://" + "*"
+    if https_star not in text:
+        fail(
+            "check_badge_standard.py lycheeignore must reject " + https_star + " blanket exclude",
+            errors,
+        )
+    badge_img_for = "Badge image " + "for"
+    if badge_img_for not in text:
+        fail(
+            "check_badge_standard.py must emit " + badge_img_for + " needle",
+            errors,
+        )
+    badge_link_for = "Badge link " + "for"
+    if badge_link_for not in text:
+        fail(
+            "check_badge_standard.py must emit " + badge_link_for + " needle",
+            errors,
+        )
+    repo_slug_n = "Badge URL repo slug must " + "be"
+    if repo_slug_n not in text:
+        fail(
+            "check_badge_standard.py must emit " + repo_slug_n + " needle",
+            errors,
+        )
+    lc_img = "Link Check image must " + "use"
+    if lc_img not in text:
+        fail(
+            "check_badge_standard.py must emit " + lc_img + " needle",
+            errors,
+        )
+    md_img = "Markdown Lint image must " + "use"
+    if md_img not in text:
+        fail(
+            "check_badge_standard.py must emit " + md_img + " needle",
+            errors,
+        )
+    lic_img = "License image must use img.shields." + "io"
+    if lic_img not in text:
+        fail(
+            "check_badge_standard.py must emit " + lic_img + " needle",
+            errors,
+        )
+    lic_set = '{"LICENSE", "./' + 'LICENSE"}'
+    if lic_set not in text and "{'LICENSE', './LICENSE'}" not in text:
+        fail(
+            "check_badge_standard.py must accept LICENSE and ./LICENSE link set",
+            errors,
+        )
+    self_first = "self-contract " + "first"
+    if self_first not in text:
+        fail(
+            "check_badge_standard.py must run " + self_first,
+            errors,
+        )
+    readme_miss = "FAIL: README.md " + "missing"
+    if readme_miss not in text:
+        fail(
+            "check_badge_standard.py must print " + readme_miss,
+            errors,
+        )
+
 
 
 def check_stewardship_common_contract(errors: list[str]) -> None:
@@ -1500,7 +1855,7 @@ def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
 
 
 def check_wiki_outline_gate_contract(errors: list[str]) -> None:
-    """Fail-close live wiki-outline gate wiring (after #59; deepen after #43)."""
+    """Fail-close live wiki-outline gate wiring (after #72; deepen after #59/#43)."""
     if not WIKI_OUTLINE_GATE.is_file():
         fail("Missing scripts/check_wiki_outline.py (wiki-outline gate)", errors)
         return
@@ -1744,9 +2099,152 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
             errors,
         )
 
+    # Fail-closed after #72: third-pass helper / constant / needle pins
+    # (wiki-outline slice; not stewardship_common / schema spam).
+    wiki_eq = 'WIKI = ROOT / "docs" / "wiki"'
+    if wiki_eq not in text and "WIKI = ROOT / 'docs' / 'wiki'" not in text:
+        fail(
+            'check_wiki_outline.py must set WIKI = ROOT / "docs" / "wiki"',
+            errors,
+        )
+    if '"../../README.md"' not in text and "'../../README.md'" not in text:
+        fail(
+            "check_wiki_outline.py README_LINK_HINTS must pin ../../README.md",
+            errors,
+        )
+    if '"../README.md"' not in text and "'../README.md'" not in text:
+        fail(
+            "check_wiki_outline.py README_LINK_HINTS must pin ../README.md",
+            errors,
+        )
+    if '"docs/badge-standard.md"' not in text and "'docs/badge-standard.md'" not in text:
+        fail(
+            "check_wiki_outline.py BADGE_STANDARD_HINTS must pin docs/badge-standard.md",
+            errors,
+        )
+    badge_blob = "blob/main/docs/badge-standard" + ".md"
+    if badge_blob not in text:
+        fail(
+            "check_wiki_outline.py BADGE_STANDARD_HINTS must pin " + badge_blob,
+            errors,
+        )
+    for social in ("downloads", "discord", "twitter", "x.com"):
+        if f'"{social}"' not in text and f"'{social}'" not in text:
+            fail(
+                f"check_wiki_outline.py invent-chrome special-case must pin {social}",
+                errors,
+            )
+    if "shields.io" not in text:
+        fail(
+            "check_wiki_outline.py invent gate must check shields.io",
+            errors,
+        )
+    if "[![" not in text:
+        fail(
+            "check_wiki_outline.py invent gate must check [![ badge chrome",
+            errors,
+        )
+    if "Missing operator page" not in text:
+        fail(
+            "check_wiki_outline.py must fail Missing operator page",
+            errors,
+        )
+    if "FAIL: docs/wiki/ missing" not in text:
+        fail(
+            "check_wiki_outline.py must print FAIL: docs/wiki/ missing",
+            errors,
+        )
+    if "acceptance checks must mention Link Check" not in text:
+        fail(
+            "check_wiki_outline.py must require PUBLISH Link Check acceptance",
+            errors,
+        )
+    if "acceptance checks must mention Markdown Lint" not in text:
+        fail(
+            "check_wiki_outline.py must require PUBLISH Markdown Lint acceptance",
+            errors,
+        )
+    if "acceptance checks must mention secrets prohibition" not in text:
+        fail(
+            "check_wiki_outline.py must require PUBLISH secrets acceptance",
+            errors,
+        )
+    home_readme = "Home.md must link back to the repository " + "README"
+    if home_readme not in text:
+        fail(
+            "check_wiki_outline.py must require " + home_readme,
+            errors,
+        )
+    if "Home.md must link to the badge standard" not in text:
+        fail(
+            "check_wiki_outline.py must require Home badge-standard link",
+            errors,
+        )
+    if "Home.md must link to publishable page" not in text:
+        fail(
+            "check_wiki_outline.py must require Home publishable page links",
+            errors,
+        )
+    if "invent-product out-of-scope wording" not in text:
+        fail(
+            "check_wiki_outline.py must require invent-product out-of-scope wording",
+            errors,
+        )
+    if "secrets out-of-scope wording" not in text:
+        fail(
+            "check_wiki_outline.py must require secrets out-of-scope wording",
+            errors,
+        )
+    if "kill-switch security callout" not in text:
+        fail(
+            "check_wiki_outline.py must require kill-switch security callout",
+            errors,
+        )
+    if "must mention stewardship CI workflows" not in text:
+        fail(
+            "check_wiki_outline.py must require stewardship CI workflow mention",
+            errors,
+        )
+    if "bash scripts/run_stewardship_checks.sh" not in text:
+        fail(
+            "check_wiki_outline.py must document bash scripts/run_stewardship_checks.sh",
+            errors,
+        )
+    if "relative-link gate coverage" not in text:
+        fail(
+            "check_wiki_outline.py must mention relative-link gate coverage",
+            errors,
+        )
+    if "no-invent-product stewardship wording" not in text:
+        fail(
+            "check_wiki_outline.py must retain no-invent-product stewardship wording",
+            errors,
+        )
+    if "actionlint on existing workflow paths" not in text:
+        fail(
+            "check_wiki_outline.py must mention actionlint on existing workflow paths",
+            errors,
+        )
+    if "pages + operator PUBLISH.md" not in text:
+        fail(
+            "check_wiki_outline.py OK banner must say pages + operator PUBLISH.md",
+            errors,
+        )
+    if "WIKI.glob" not in text:
+        fail(
+            "check_wiki_outline.py must WIKI.glob(*.md) present pages",
+            errors,
+        )
+    if "removesuffix" not in text:
+        fail(
+            "check_wiki_outline.py must removesuffix(.md) for PUBLISH stems",
+            errors,
+        )
+
+
 
 def check_relative_link_gate_contract(errors: list[str]) -> None:
-    """Fail-close live relative-link gate wiring (after #55; deepen after #41)."""
+    """Fail-close live relative-link gate wiring (after #72; deepen after #55/#41)."""
     if not RELATIVE_LINK_GATE.is_file():
         fail("Missing scripts/check_relative_links.py (relative-link gate)", errors)
         return
@@ -1926,6 +2424,151 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
             "check_relative_links.py must rglob markdown files under ROOT",
             errors,
         )
+
+    # Fail-closed after #72: third-pass helper / constant / needle pins
+    # (relative-link slice; not stewardship_common / schema spam).
+    skip_parts_eq = 'SKIP_PARTS = {".git", "node_modules"}'
+    if skip_parts_eq not in text and "SKIP_PARTS = {'.git', 'node_modules'}" not in text:
+        fail(
+            'check_relative_links.py must set SKIP_PARTS = {".git", "node_modules"}',
+            errors,
+        )
+    if "^(#{1,6})" not in text:
+        fail(
+            "check_relative_links.py ATX_HEADING_RE must match ^(#{1,6}) headings",
+            errors,
+        )
+    if "re.MULTILINE" not in text:
+        fail(
+            "check_relative_links.py ATX_HEADING_RE must use re.MULTILINE",
+            errors,
+        )
+    if "as_posix()" not in text:
+        fail(
+            "check_relative_links.py should_skip must use as_posix()",
+            errors,
+        )
+    if "replace(" not in text or '"/"' not in text:
+        fail(
+            "check_relative_links.py should_skip must normalize path separators",
+            errors,
+        )
+    if "Percent-decode until stable" not in text:
+        fail(
+            "check_relative_links.py fully_unquote must Percent-decode until stable",
+            errors,
+        )
+    nested_2e = "nested %2e traversal fail-" + "closes"
+    if nested_2e not in text:
+        fail(
+            "check_relative_links.py fully_unquote must mention " + nested_2e,
+            errors,
+        )
+    if "Approximate GitHub heading anchors" not in text:
+        fail(
+            "check_relative_links.py github_slug must Approximate GitHub heading anchors",
+            errors,
+        )
+    if "space with '-'" not in text and 'space with "-"' not in text:
+        fail(
+            "check_relative_links.py github_slug must replace each space with '-'",
+            errors,
+        )
+    if "empty relative link target" not in text:
+        fail(
+            "check_relative_links.py must emit empty relative link target needle",
+            errors,
+        )
+    if "dangerous link scheme '" not in text:
+        fail(
+            "check_relative_links.py must emit dangerous link scheme needle",
+            errors,
+        )
+    if "insecure http:// link (use https://)" not in text:
+        fail(
+            "check_relative_links.py must emit insecure http:// link (use https://) needle",
+            errors,
+        )
+    if "protocol-relative link not allowed" not in text:
+        fail(
+            "check_relative_links.py must emit protocol-relative link not allowed needle",
+            errors,
+        )
+    if "NUL in link target" not in text:
+        fail(
+            "check_relative_links.py must emit NUL in link target needle",
+            errors,
+        )
+    if "empty fragment in relative link" not in text:
+        fail(
+            "check_relative_links.py must emit empty fragment in relative link needle",
+            errors,
+        )
+    if "relative link must not include query string" not in text:
+        fail(
+            "check_relative_links.py must emit query string reject needle",
+            errors,
+        )
+    if "relative link escapes repo:" not in text:
+        fail(
+            "check_relative_links.py must emit relative link escapes repo: needle",
+            errors,
+        )
+    if "broken relative link →" not in text:
+        fail(
+            "check_relative_links.py must emit broken relative link → needle",
+            errors,
+        )
+    if "missing heading #" not in text:
+        fail(
+            "check_relative_links.py must emit missing heading # needle",
+            errors,
+        )
+    allow_tuple = 'startswith(("http://", "https://", "mailto:", "tel:"' + '))'
+    if allow_tuple not in text:
+        fail(
+            "check_relative_links.py must allow http/https/mailto/tel startswith tuple",
+            errors,
+        )
+    if "dest.exists()" not in text:
+        fail(
+            "check_relative_links.py must check dest.exists() for relative targets",
+            errors,
+        )
+    if 'dest.suffix.lower() == ".md"' not in text:
+        fail(
+            "check_relative_links.py must fragment-check .md destinations only",
+            errors,
+        )
+    unquote_imp = "from urllib.parse import " + "unquote"
+    if unquote_imp not in text:
+        fail(
+            "check_relative_links.py must " + unquote_imp,
+            errors,
+        )
+    if "Relative link check FAILED" not in text:
+        fail(
+            "check_relative_links.py must print Relative link check FAILED",
+            errors,
+        )
+    if "OK: relative markdown links resolve" not in text:
+        fail(
+            "check_relative_links.py must OK relative markdown links resolve",
+            errors,
+        )
+    if "files scanned" not in text:
+        fail(
+            "check_relative_links.py OK banner must say files scanned",
+            errors,
+        )
+    if "complements lychee" not in text.lower():
+        fail(
+            "check_relative_links.py docstring must say complements lychee",
+            errors,
+        )
+
+
+
     if "no markdown files found" not in text:
         fail(
             "check_relative_links.py must fail closed when no markdown files found",

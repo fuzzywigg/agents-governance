@@ -763,3 +763,4 @@ _None yet._
 2026-09-14T08:10:00Z
 
 2026-09-14T08:25:00Z cursor: Local green — run_stewardship + self-tests 4542 + markdownlint ← ECO-075 schema+common leftover after #233 (leave draft; do not revive #229)
+2026-09-14T08:30:00Z cursor: Draft PR #241 opened (cursor/tokenmaxx-schema-common-leftover-after-233-fc08); leave draft / do-not-merge; awaiting CI ← ECO-075 schema+common leftover after #233 (do not revive #229)

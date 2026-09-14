@@ -11,6 +11,17 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX markdown-lint/link-check residual exact layouts after #227 tip:
+  expand self-tests to 4278 cases (was 4230) fail-closing DISTINCT leftover
+  markdown-lint / link-check residual exact layouts — contiguous `args: >-`
+  flag block / contiguous `on:` push/PR/schedule/workflow_dispatch for
+  link+lint / contiguous markdown-lint `with:` globs|+config / contiguous
+  link-check `with:` token commentary — md/link residual slice only (not
+  wiki-index/badge leftover #227 / not path-edges #225 / not Pass-2 leftover +
+  md/link #220 core / not stewardship-badge lint #208 / not schema
+  #216/#191 / not path-order #189); no invent-product; no fourth badge.
+  Lands closed #221 leftover residual on post-#227 tip (do **not** revive
+  #221/#219/#214/#207/#201). Distinct from merged #227/#225/#220/#216/#208.
 - TOKENMAXX wiki-index/badge leftover deepen after #225 tip: expand self-tests
   to 4230 cases (was 4116) fail-closing unsaturated wiki-index/badge leftover —
   exact PUBLISHABLE_PAGES contiguous order / Home TOC loop+skip+link forms /

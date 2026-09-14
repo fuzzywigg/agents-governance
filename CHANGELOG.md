@@ -11,6 +11,22 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-schema leftover deepen after #244 tip: expand
+  self-tests to 4976 cases (was 4792) fail-closing unsaturated schema +
+  `stewardship_common` leftover helpers on existing modules only —
+  leftover parse/load needles (`if ":" not in line` / `if yaml is not None:` /
+  `if not match:` / `value is None or` / `status is not None` /
+  `raw = str(data[date_key])` / `ver = str(data["version"])` /
+  `closes = str(data["closes"])`) / leftover invalid status stubs
+  DRAFT|EXPERIMENTAL|OBSOLETE|DISABLED|INACTIVE|STAGED / leftover invalid
+  surface stubs cursor|linear|notion|discord|zapier / common leftover
+  `elif hint in text` / `for pattern in globs` / `found: set[Path] = set()` /
+  `if not path.is_file():` — schema leftover slice only (not path-edges
+  residual #244 / not wiki outline/PUBLISH leftover #243 / not md/link
+  residual #239 / not stewardship-checks/schema residual #233 / not
+  wiki-index/badge #227); no invent-product; no fourth badge. Lands leftover
+  after #243 tip on post-#244 main. Distinct from merged
+  #244/#243/#239/#233/#227/#225/#220/#216/#208.
 - TOKENMAXX actionlint path-filter/path-order residual deepen after #243 tip:
   expand self-tests to 4792 cases (was 4646) fail-closing DISTINCT residual
   actionlint path-filter / path-order edges on existing workflow modules —

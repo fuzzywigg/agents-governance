@@ -533,3 +533,5 @@ _None yet._
 2026-09-14T03:20:00Z
 
 2026-09-14T03:25:00Z cursor: Local gates green — run_stewardship + self-tests 2761 + markdownlint ← ECO-058 actionlint deepen after #141 (do not revive #144/#145/#139)
+
+2026-09-14T03:27:00Z cursor: PR #151 CI green (lint + link-check + stewardship/actionlint) MERGEABLE ← complete ECO-058 TOKENMAXX actionlint deepen after #141 (replaces closed #144/#145)

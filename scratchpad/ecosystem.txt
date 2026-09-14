@@ -849,3 +849,5 @@ _None yet._
 2026-09-14T09:41:05Z cursor: Draft PR #256 opened (cursor/tokenmaxx-pass2-residual-templates-after-244-linkflake-84bf); leave draft / do-not-merge; awaiting CI ← ECO-078 (do not revive #251/#250/#246/#245/#240)
 
 2026-09-14T09:42:59Z cursor: Tip-push CHANGELOG track #256 to fire PR CI on head (scratchpad-only tip lacked path triggers); leave draft; do not revive #251/#250 ← ECO-078
+
+2026-09-14T09:43:28Z cursor: Touch docs/badge-standard.md so stewardship path filter runs on #256 tip ← ECO-078

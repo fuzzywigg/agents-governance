@@ -10288,7 +10288,7 @@ def check_run_stewardship_gate_contract(errors: list[str]) -> None:
 
     # Pass-2 residual / templates leftover after #299 tip contract pins.
     leftover_299 = (
-        "Pass-2 residual / templates leftover after " + "#297 tip"
+        "Pass-2 residual / templates leftover after " + "#299 tip"
     )
     if leftover_299 not in text:
         fail(

@@ -134,7 +134,11 @@ exact / `REQUIRED_WORKFLOWS` exact / `group(label|img|link)` / `sys.exit` /
 stewardship_common / `BADGE_GATE` / utf-8 / Strict row / H1 startswith /
 FAIL README / https image+link needles / absolute workflow URL / License
 point / Unexpected label / extract+check_badges / `contract(errors)` /
-IGNORECASE / `blob.lower` / `EXPECTED_REPO.lower`).
+IGNORECASE / `blob.lower` / `EXPECTED_REPO.lower`,
+plus actionlint-style third-pass after #108: `concurrency:` +
+`cancel-in-progress:` / `permissions:` present / reject
+`actions|packages|pull-requests: write` / `re.finditer` / docker continue /
+`rsplit[-1]` / third-pass docstring).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

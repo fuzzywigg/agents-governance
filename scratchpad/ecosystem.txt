@@ -431,3 +431,14 @@ _None yet._
 2026-09-14T01:39:03Z
 
 2026-09-14T01:44:00Z cursor: PR #108 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-052 TOKENMAXX badge-standard third-pass pins
+
+### [ECO-053] TOKENMAXX deepen actionlint-style third-pass pins after #108 — 2026-09-14T01:50:00Z
+- [x] cursor: Read live tree post-#108 (2151 cases; badge third-pass saturated; #109 closed CONFLICTING — retarget; lands closed #105 leftover)
+- [x] cursor: Fail-close actionlint third-pass — concurrency:+cancel-in-progress: / permissions: / reject actions|packages|pull-requests write / finditer / docker continue / rsplit[-1] / third-pass docstring
+- [x] cursor: Expand self-tests 2151 → 2223 (actionlint third-pass reversible CI slice; not badge/docs-lint/wiki/relative spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING actionlint-style reversible CI pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #105/#109 leftover
+- Branch: cursor/tokenmaxx-actionlint-third-pass-v2-0c77
+2026-09-14T01:50:00Z
+
+2026-09-14T01:55:00Z cursor: PR #111 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-053 TOKENMAXX actionlint-style third-pass pins

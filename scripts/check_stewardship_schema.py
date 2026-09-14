@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Validate YAML metadata blocks on stewardship docs already described in-repo.
 
-Fail-closed pins (live path after #53):
+Fail-closed pins (live path after #79; deepen after #53):
 - DOC_SCHEMAS covers badge-standard / PUBLISH / issue-backlog / AGENTS / CLAUDE
 - EXPECTED_VALUES pin ACTIVE / tier / owner / surface / parent_governance /
   maintainer / scope / purpose / closes already present on live YAML front matter
@@ -11,6 +11,12 @@ Fail-closed pins (live path after #53):
 - Semver X.Y.Z on AGENTS version; ISO-8601 on DATE_KEYS; closes #N issue refs
 - Badge edit_policy retains invent-product wording; scan_secrets on every schema doc
 - issue-backlog owner pinned to copilot (live metadata; not invent-product)
+- Second-pass helper/constant/needle pins: DATE_KEYS exact assign /
+  SEMVER_RE+ISO_DATE_RE+ISSUE_REF_RE patterns / FENCED_YAML_RE MULTILINE+DOTALL /
+  parse_simple_yaml+load_yaml+first_yaml_block+reject_non_scalar+main /
+  scalar+non-empty+string+ACTIVE+autonomy+tier+ISO+invent+semver+closes needles /
+  FAILED+OK banners / PyYAML+stdlib-subset / bool-int both sides /
+  level not in (0,1,2,3) / tier < 1 / dict+list reject / ROOT+fail+scan_secrets import
 """
 
 from __future__ import annotations

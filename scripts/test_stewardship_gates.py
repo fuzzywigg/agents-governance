@@ -83,6 +83,16 @@ name: / jobs.*.runs-on / jobs.*.steps / timeout-minutes / no
 pull_request_target / no write-all / no contents: write / no id-token: write /
 @-pin float set main|master|latest / docker:// skip / unpinned reject
 (not CI workflow / common / relative-link / schema-scalar / badge / wiki spam).
+Deepened after #79: stewardship-schema second-pass — DATE_KEYS exact /
+SEMVER+ISO+ISSUE patterns / FENCED_YAML MULTILINE+DOTALL /
+parse_simple_yaml+load_yaml+first_yaml_block+reject_non_scalar+main /
+scalar+non-empty+string+ACTIVE+autonomy+tier+ISO+invent+semver+closes /
+FAILED+OK / PyYAML+stdlib-subset / bool-int both / level 0..3 / tier < 1 /
+dict+list / ROOT+fail+scan_secrets / second-pass docstring / #79 live path /
+missing keys / scan call / five docs / not invent fields / null~+truefalse /
+autonomy:1 / STRING_KEYS frozenset / safe_load / mapping / empty block /
+docs/ prefix / -?\\d+ (not actionlint / common / relative / badge / wiki /
+CI workflow pin spam).
 """
 
 from __future__ import annotations
@@ -25305,6 +25315,1109 @@ def test_actionlint_rejects_float_master_link_after_75() -> None:
             'float on @master',
         )
 
+# --- TOKENMAXX stewardship-schema second-pass pins after #79 (+79) ---
+
+def test_schema_gate_requires_date_keys_eq_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('DATE_KEYS = ("created", "last_updated")', 'DATE_KEYS = ("created", "updated")')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'DATE_KEYS =',
+        )
+
+def test_schema_gate_requires_semver_pat_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('^\\d+\\.\\d+\\.\\d+$', '^\\d+\\.\\d+$')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'X.Y.Z pattern',
+        )
+
+def test_schema_gate_requires_iso_pat_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('^\\d{4}-\\d{2}-\\d{2}', '^\\d{4}/\\d{2}/\\d{2}')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'YYYY-MM-DD pattern',
+        )
+
+def test_schema_gate_requires_issue_pat_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('#\\d+', '#\\w+')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '#N pattern',
+        )
+
+def test_schema_gate_requires_multiline_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('re.MULTILINE', 're.M')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            're.MULTILINE',
+        )
+
+def test_schema_gate_requires_dotall_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('re.DOTALL', 're.S')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            're.DOTALL',
+        )
+
+def test_schema_gate_requires_parse_simple_yaml_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('def parse_simple_yaml(', 'def parse_yaml_simple(')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'parse_simple_yaml()',
+        )
+
+def test_schema_gate_requires_load_yaml_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('def load_yaml(', 'def load_meta(')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'load_yaml()',
+        )
+
+def test_schema_gate_requires_first_yaml_block_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('def first_yaml_block(', 'def first_yaml(')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'first_yaml_block()',
+        )
+
+def test_schema_gate_requires_reject_non_scalar_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('def reject_non_scalar(', 'def reject_nested(')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'reject_non_scalar()',
+        )
+
+def test_schema_gate_requires_main_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('def main(', 'def run_main(')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'main()',
+        )
+
+def test_schema_gate_requires_scalar_needle_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('must be a scalar', 'must be a value')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'must be a scalar',
+        )
+
+def test_schema_gate_requires_nonempty_needle_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('must be non-empty', 'must be present')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'must be non-empty',
+        )
+
+def test_schema_gate_requires_string_needle_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('must be a string', 'must be a text')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'must be a string',
+        )
+
+def test_schema_gate_requires_active_needle_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('status must be ACTIVE', 'status must be LIVE')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'status must be ACTIVE',
+        )
+
+def test_schema_gate_requires_autonomy_needle_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('autonomy_level must be int', 'autonomy_level must be number')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'autonomy_level must be int',
+        )
+
+def test_schema_gate_requires_tier_needle_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('tier must be a positive int', 'tier must be a positive number')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'tier must be a positive int',
+        )
+
+def test_schema_gate_requires_iso_needle_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('must be ISO-8601', 'must be ISO8601')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'must be ISO-8601',
+        )
+
+def test_schema_gate_requires_invent_needle_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('no-invent-product wording', 'no-invent wording')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'no-invent-product wording',
+        )
+
+def test_schema_gate_requires_semver_needle_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('version must be semver', 'version must be versioned')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'version must be semver',
+        )
+
+def test_schema_gate_requires_closes_needle_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('closes must reference an issue', 'closes must reference a ticket')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'closes must reference an issue',
+        )
+
+def test_schema_gate_requires_no_fence_needle_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('no fenced ```yaml metadata block found', 'no fenced yaml metadata block found')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'no fenced ```yaml metadata block found',
+        )
+
+def test_schema_gate_requires_failed_banner_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('Stewardship schema check FAILED', 'Stewardship schema check ERROR')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Stewardship schema check FAILED',
+        )
+
+def test_schema_gate_requires_ok_banner_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('OK: stewardship metadata schemas valid', 'OK: stewardship metadata schemas ok')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'OK: stewardship metadata schemas valid',
+        )
+
+def test_schema_gate_requires_pyyaml_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('PyYAML', 'pyyaml')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'PyYAML',
+        )
+
+def test_schema_gate_requires_stdlib_subset_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('stdlib-subset', 'stdlib-fallback')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stdlib-subset',
+        )
+
+def test_schema_gate_requires_level_bool_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('isinstance(level, bool)', 'isinstance(level, int)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'isinstance(level, bool)',
+        )
+
+def test_schema_gate_requires_tier_bool_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('isinstance(tier, bool)', 'isinstance(tier, int)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'isinstance(tier, bool)',
+        )
+
+def test_schema_gate_requires_level_range_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('level not in (0, 1, 2, 3)', 'level not in (0, 1, 2)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'level not in (0, 1, 2, 3)',
+        )
+
+def test_schema_gate_requires_tier_pos_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('tier < 1', 'tier < 0')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'tier < 1',
+        )
+
+def test_schema_gate_requires_dict_list_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('isinstance(value, (dict, list))', 'isinstance(value, (dict, tuple))')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'isinstance(value, (dict, list))',
+        )
+
+def test_schema_gate_requires_import_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('from stewardship_common import ROOT, fail, scan_secrets', 'from stewardship_common import ROOT, fail, scan_secret')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ROOT, fail, scan_secrets',
+        )
+
+def test_schema_gate_requires_second_pass_doc_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('Second-pass helper/constant/needle pins', 'Second-pass helper/constant pins')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Second-pass helper/constant/needle pins',
+        )
+
+def test_schema_gate_requires_live_path_79_doc_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('Fail-closed pins (live path after #79', 'Fail-closed pins (live path after #53')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Fail-closed pins (live path after #79',
+        )
+
+def test_schema_gate_requires_missing_keys_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('missing metadata keys', 'missing metadata fields')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'missing metadata keys',
+        )
+
+def test_schema_gate_requires_scan_call_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('scan_secrets(path, errors)', 'scan_secrets(path, errs)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'scan_secrets(path, errors)',
+        )
+
+def test_schema_gate_requires_five_docs_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('five live stewardship docs only', 'five live stewardship docs')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'five live stewardship docs only',
+        )
+
+def test_schema_gate_requires_not_invent_fields_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('not invent fields', 'not invent keys')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'not invent fields',
+        )
+
+def test_schema_gate_requires_null_tilde_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('{"null", "~"}', '{"null", "None"}')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'null/~',
+        )
+
+def test_schema_gate_requires_true_false_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('{"true", "false"}', '{"true", "yes"}')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'true/false',
+        )
+
+def test_schema_gate_requires_autonomy_eq_1_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('"autonomy_level": 1', '"autonomy_level": 2')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'autonomy_level: 1',
+        )
+
+def test_schema_gate_requires_string_keys_frozenset_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('STRING_KEYS = frozenset', 'STRING_KEYS = set')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'STRING_KEYS = frozenset',
+        )
+
+def test_schema_gate_requires_safe_load_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('yaml.safe_load', 'yaml.load')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'yaml.safe_load',
+        )
+
+def test_schema_gate_requires_mapping_needle_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('metadata YAML must be a mapping', 'metadata YAML must be a dict')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'metadata YAML must be a mapping',
+        )
+
+def test_schema_gate_requires_empty_block_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('empty yaml metadata block', 'empty yaml metadata section')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'empty yaml metadata block',
+        )
+
+def test_schema_gate_requires_docs_prefix_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('rel.startswith("docs/")', 'rel.startswith("doc/")')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'rel.startswith("docs/")',
+        )
+
+def test_schema_gate_requires_int_re_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('-?\\d+', '\\d+')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'int -?\\d+',
+        )
+
+def test_schema_gate_requires_doc_schemas_still_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('DOC_SCHEMAS', 'DOC_SCHEMA')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'DOC_SCHEMAS',
+        )
+
+def test_schema_gate_requires_expected_values_still_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('EXPECTED_VALUES', 'EXPECTED_VALUE')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'EXPECTED_VALUES',
+        )
+
+def test_schema_gate_requires_smtp_still_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('smtp.eth', 'smtp-eth')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'smtp.eth',
+        )
+
+def test_schema_gate_requires_closes_16_still_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('"#16"', '"#15"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'closes #16',
+        )
+
+def test_schema_gate_requires_front_door_still_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('public governance front-door repos', 'public governance front door repos')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'front-door',
+        )
+
+def test_schema_gate_requires_date_keys_name_still_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('DATE_KEYS', 'DATE_KEY')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'DATE_KEYS',
+        )
+
+def test_schema_gate_requires_semver_re_still_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('SEMVER_RE', 'SEMVER')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'SEMVER_RE',
+        )
+
+def test_schema_gate_requires_fenced_yaml_re_still_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('FENCED_YAML_RE', 'FENCED_YAML')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'FENCED_YAML_RE',
+        )
+
+def test_schema_gate_requires_string_keys_still_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('STRING_KEYS', 'STRING_KEY')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'STRING_KEYS',
+        )
+
+def test_schema_gate_requires_reject_non_scalar_still_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('reject_non_scalar', 'reject_scalar')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'reject_non_scalar',
+        )
+
+def test_schema_gate_requires_reversible_still_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('Reversible publish path for docs/wiki', 'Publish path for docs/wiki')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Reversible publish path',
+        )
+
+def test_schema_gate_requires_agents_ecosystem_still_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('AGENTS-ECOSYSTEM.md', 'AGENTS-ECOSYSTEM')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'AGENTS-ECOSYSTEM.md',
+        )
+
+def test_schema_gate_requires_copilot_still_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('copilot', 'assistant')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'copilot',
+        )
+
+def test_schema_gate_requires_active_still_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('ACTIVE', 'Active')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ACTIVE',
+        )
+
+def test_schema_gate_requires_zero_to_three_still_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('0..3', '0-3')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '0..3',
+        )
+
+def test_schema_gate_requires_live_backlog_still_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('live backlog owner is copilot', 'live backlog owner is smtp')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'issue-backlog owner copilot',
+        )
+
+def test_schema_rejects_nested_list_metadata_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(tmp_path)
+        path = tmp_path / "docs" / "badge-standard.md"
+        path.write_text(
+            "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+            "owner:\n  - copilot\nscope: \"public governance front-door repos\"\n"
+            "edit_policy: \"do not invent product badges\"\n"
+            "closes: \"#16\"\n```\n",
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "scalar",
+        )
+
+
+def test_schema_rejects_empty_string_status_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: \"\"\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "non-empty",
+        )
+
+
+def test_schema_rejects_bool_autonomy_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: true\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "autonomy_level",
+        )
+
+
+def test_schema_rejects_bool_tier_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: true\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "tier",
+        )
+
+
+def test_schema_rejects_bad_semver_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "semver",
+        )
+
+
+def test_schema_rejects_closes_without_hash_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "closes",
+        )
+
+
+def test_schema_rejects_edit_policy_without_invent_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"agent-editable under docs\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "invent",
+        )
+
+
+def test_schema_rejects_non_iso_date_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"09/13/2026\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "ISO-8601",
+        )
+
+
+def test_schema_passes_good_fixture_still_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(tmp_path)
+        assert_pass_script(scripts / "check_stewardship_schema.py", tmp_path)
+
+
+def test_schema_rejects_tier_zero_still_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 0\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "tier",
+        )
+
+
+def test_schema_rejects_autonomy_four_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 4\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "autonomy_level",
+        )
+
+
+def test_schema_rejects_missing_yaml_fence_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge="# B\n\nNo yaml here.\n",
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "yaml",
+        )
+
+
+def test_schema_rejects_empty_yaml_block_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge="# B\n\n```yaml\n\n```\n",
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "empty",
+        )
+
+
+def test_schema_rejects_string_autonomy_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: \"1\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "autonomy_level",
+        )
+
+
+def test_schema_rejects_null_status_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: null\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "non-empty",
+        )
+
+
+def test_schema_rejects_inactive_status_after_79() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: DRAFT\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "ACTIVE",
+        )
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -27026,6 +28139,88 @@ def main() -> int:
         test_actionlint_rejects_write_all_link_still_after_75,
         test_actionlint_rejects_prt_link_still_after_75,
         test_actionlint_rejects_float_master_link_after_75,
+
+
+        # TOKENMAXX stewardship-schema second-pass pins after #79 (+79)
+        test_schema_gate_requires_date_keys_eq_after_79,
+        test_schema_gate_requires_semver_pat_after_79,
+        test_schema_gate_requires_iso_pat_after_79,
+        test_schema_gate_requires_issue_pat_after_79,
+        test_schema_gate_requires_multiline_after_79,
+        test_schema_gate_requires_dotall_after_79,
+        test_schema_gate_requires_parse_simple_yaml_after_79,
+        test_schema_gate_requires_load_yaml_after_79,
+        test_schema_gate_requires_first_yaml_block_after_79,
+        test_schema_gate_requires_reject_non_scalar_after_79,
+        test_schema_gate_requires_main_after_79,
+        test_schema_gate_requires_scalar_needle_after_79,
+        test_schema_gate_requires_nonempty_needle_after_79,
+        test_schema_gate_requires_string_needle_after_79,
+        test_schema_gate_requires_active_needle_after_79,
+        test_schema_gate_requires_autonomy_needle_after_79,
+        test_schema_gate_requires_tier_needle_after_79,
+        test_schema_gate_requires_iso_needle_after_79,
+        test_schema_gate_requires_invent_needle_after_79,
+        test_schema_gate_requires_semver_needle_after_79,
+        test_schema_gate_requires_closes_needle_after_79,
+        test_schema_gate_requires_no_fence_needle_after_79,
+        test_schema_gate_requires_failed_banner_after_79,
+        test_schema_gate_requires_ok_banner_after_79,
+        test_schema_gate_requires_pyyaml_after_79,
+        test_schema_gate_requires_stdlib_subset_after_79,
+        test_schema_gate_requires_level_bool_after_79,
+        test_schema_gate_requires_tier_bool_after_79,
+        test_schema_gate_requires_level_range_after_79,
+        test_schema_gate_requires_tier_pos_after_79,
+        test_schema_gate_requires_dict_list_after_79,
+        test_schema_gate_requires_import_after_79,
+        test_schema_gate_requires_second_pass_doc_after_79,
+        test_schema_gate_requires_live_path_79_doc_after_79,
+        test_schema_gate_requires_missing_keys_after_79,
+        test_schema_gate_requires_scan_call_after_79,
+        test_schema_gate_requires_five_docs_after_79,
+        test_schema_gate_requires_not_invent_fields_after_79,
+        test_schema_gate_requires_null_tilde_after_79,
+        test_schema_gate_requires_true_false_after_79,
+        test_schema_gate_requires_autonomy_eq_1_after_79,
+        test_schema_gate_requires_string_keys_frozenset_after_79,
+        test_schema_gate_requires_safe_load_after_79,
+        test_schema_gate_requires_mapping_needle_after_79,
+        test_schema_gate_requires_empty_block_after_79,
+        test_schema_gate_requires_docs_prefix_after_79,
+        test_schema_gate_requires_int_re_after_79,
+        test_schema_gate_requires_doc_schemas_still_after_79,
+        test_schema_gate_requires_expected_values_still_after_79,
+        test_schema_gate_requires_smtp_still_after_79,
+        test_schema_gate_requires_closes_16_still_after_79,
+        test_schema_gate_requires_front_door_still_after_79,
+        test_schema_gate_requires_date_keys_name_still_after_79,
+        test_schema_gate_requires_semver_re_still_after_79,
+        test_schema_gate_requires_fenced_yaml_re_still_after_79,
+        test_schema_gate_requires_string_keys_still_after_79,
+        test_schema_gate_requires_reject_non_scalar_still_after_79,
+        test_schema_gate_requires_reversible_still_after_79,
+        test_schema_gate_requires_agents_ecosystem_still_after_79,
+        test_schema_gate_requires_copilot_still_after_79,
+        test_schema_gate_requires_active_still_after_79,
+        test_schema_gate_requires_zero_to_three_still_after_79,
+        test_schema_gate_requires_live_backlog_still_after_79,
+        test_schema_rejects_nested_list_metadata_after_79,
+        test_schema_rejects_empty_string_status_after_79,
+        test_schema_rejects_bool_autonomy_after_79,
+        test_schema_rejects_bool_tier_after_79,
+        test_schema_rejects_bad_semver_after_79,
+        test_schema_rejects_closes_without_hash_after_79,
+        test_schema_rejects_edit_policy_without_invent_after_79,
+        test_schema_rejects_non_iso_date_after_79,
+        test_schema_passes_good_fixture_still_after_79,
+        test_schema_rejects_tier_zero_still_after_79,
+        test_schema_rejects_autonomy_four_after_79,
+        test_schema_rejects_missing_yaml_fence_after_79,
+        test_schema_rejects_empty_yaml_block_after_79,
+        test_schema_rejects_string_autonomy_after_79,
+        test_schema_rejects_null_status_after_79,
+        test_schema_rejects_inactive_status_after_79,
 
         test_stewardship_requires_raw_githubusercontent_still_after_72,
         test_stewardship_requires_curl_fssl_still_after_72,

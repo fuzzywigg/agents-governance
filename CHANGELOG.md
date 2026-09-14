@@ -11,6 +11,19 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX run_stewardship Pass-2 residual after #191: expand self-tests to
+  3660 cases (was 3590) fail-closing unsaturated Pass-2 residual /
+  stewardship-checks integrity — gates-only runner (no
+  `test_stewardship_gates.py` inside `.sh`) / no `BASH_SOURCE` ROOT drift /
+  no bare `python scripts/` / no `set +u|+o pipefail` soft-fail /
+  back-to-back gates→self-tests named block / no inline `check_*.py` in
+  stewardship-checks.yml / self-tests before actionlint — Pass-2 residual
+  slice only (not schema third-pass #191 / path-order #189 / Pass-2 core
+  #179 / wiki-index #181 / path-filter #176 / badge-lint #195); no
+  invent-product; no fourth badge. Lands closed #193/#178 leftover on
+  post-#191 tip (do **not** revive #193/#178/#175/#140). Distinct from
+  merged schema third-pass #191 and open CONFLICTING badge-lint #195.
+
 - TOKENMAXX stewardship-schema third-pass + deepen pins after #189: expand
   self-tests to 3590 cases (was 3402) fail-closing live schema integrity —
   future annotations / Path parent / yaml=None / five live docs / true+false /

@@ -201,7 +201,13 @@ plus stewardship-schema third-pass + deepen after #189: future annotations /
 Path parent / yaml=None / five live docs / parse pins / path.is_file /
 block.strip / STRING_KEYS / BLE001 / DATE_KEYS / deepen docstring
 (lands closed #187/#188 leftover; do not revive #187/#188/#183/#164;
-distinct from path-order #189)).
+distinct from path-order #189),
+plus run_stewardship Pass-2 residual after #191: gates-only runner /
+no BASH_SOURCE / no bare python / no set +u|+o pipefail /
+back-to-back gates→self-tests block / no inline check_*.py /
+self-tests before actionlint (lands closed #193/#178 leftover; do not
+revive #193/#178/#175/#140; distinct from schema third-pass #191 and
+path-order #189)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

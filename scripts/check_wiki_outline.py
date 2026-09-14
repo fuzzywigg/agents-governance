@@ -22,6 +22,9 @@ Fail-closed pins (live path after #59; deepen after #43; third-pass after #90):
 - After #132 wiki-badge posture: status badges cover Link Check+Markdown Lint /
   product badge refusal / reject stewardship-checks.yml/badge.svg invent /
   reject embedded markdown badge images / PUBLISH Link Check+Markdown Lint exactly
+- Wiki-index after #176: Home TOC empty-index reject / publishable page index stubs /
+  Home.md must link to publishable page needle
+  (not wiki-badge #141 / fixtures #173 / path-filter #176 spam)
 """
 
 from __future__ import annotations
@@ -159,6 +162,7 @@ def main() -> int:
             fail("Home.md must link back to the repository README", errors)
         if not any(hint in home_text for hint in BADGE_STANDARD_HINTS):
             fail("Home.md must link to the badge standard", errors)
+        # Wiki-index: Home is the TOC — empty index (no publishable page links) fails.
         for page in PUBLISHABLE_PAGES:
             if page == "Home.md":
                 continue

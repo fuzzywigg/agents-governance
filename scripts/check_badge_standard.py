@@ -45,6 +45,7 @@ Fail-closed CI workflow pins (live path after #39/#72; third-pass after #111):
 
 from __future__ import annotations
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -226,6 +227,81 @@ def check_workflows_and_license(errors: list[str]) -> None:
                 '.markdownlint.json must pin "MD024": { "siblings_only": true }',
                 errors,
             )
+        # Second-pass after #132: exact live markdownlint layout + key set.
+        expected_md = (
+            "{\n"
+            '  "default": true,\n'
+            '  "MD013": { "line_length": 200 },\n'
+            '  "MD024": { "siblings_only": true },\n'
+            '  "MD033": false,\n'
+            '  "MD041": false,\n'
+            '  "MD060": false\n'
+            "}\n"
+        )
+        if md_cfg != expected_md:
+            fail(
+                ".markdownlint.json must match exact live docs-lint second-pass layout",
+                errors,
+            )
+        try:
+            md_obj = json.loads(md_cfg)
+        except json.JSONDecodeError:
+            fail(
+                ".markdownlint.json must be valid JSON "
+                "(docs-lint second-pass)",
+                errors,
+            )
+            md_obj = {}
+        allowed_keys = {
+            "default",
+            "MD013",
+            "MD024",
+            "MD033",
+            "MD041",
+            "MD060",
+        }
+        if set(md_obj) != allowed_keys:
+            fail(
+                ".markdownlint.json must keep exact live docs-lint key set "
+                "(default/MD013/MD024/MD033/MD041/MD060)",
+                errors,
+            )
+        if md_obj.get("default") is not True:
+            fail(
+                ".markdownlint.json default must be JSON true "
+                "(docs-lint second-pass)",
+                errors,
+            )
+        if md_obj.get("MD033") is not False:
+            fail(
+                ".markdownlint.json MD033 must be JSON false "
+                "(docs-lint second-pass)",
+                errors,
+            )
+        if md_obj.get("MD041") is not False:
+            fail(
+                ".markdownlint.json MD041 must be JSON false "
+                "(docs-lint second-pass)",
+                errors,
+            )
+        if md_obj.get("MD060") is not False:
+            fail(
+                ".markdownlint.json MD060 must be JSON false "
+                "(docs-lint second-pass)",
+                errors,
+            )
+        if md_obj.get("MD013") != {"line_length": 200}:
+            fail(
+                ".markdownlint.json MD013 must be {line_length: 200} object "
+                "(docs-lint second-pass)",
+                errors,
+            )
+        if md_obj.get("MD024") != {"siblings_only": True}:
+            fail(
+                ".markdownlint.json MD024 must be {siblings_only: true} object "
+                "(docs-lint second-pass)",
+                errors,
+            )
 
 
 def check_lycheeignore(errors: list[str]) -> None:
@@ -235,6 +311,8 @@ def check_lycheeignore(errors: list[str]) -> None:
     escaped img\.shields\.io; modelcontextprotocol.io + linuxfoundation.org
     live excludes; stewardship/license-badge commentary; reject https://* /
     http://* / bare *; not wiki / relative pin spam.
+    Second-pass after #132: exact live exclude URLs + CDN/false-positive
+    commentary (docs-lint second-pass; not actionlint / stewardship_common spam).
     """
     if not LYCHEEIGNORE.is_file():
         return
@@ -292,6 +370,69 @@ def check_lycheeignore(errors: list[str]) -> None:
             "(https://* / http://* / bare *)",
             errors,
         )
+    # Second-pass after #132: exact live exclude URLs (docs-lint; not actionlint spam).
+    if "https://modelcontextprotocol.io/" not in text:
+        fail(
+            ".lycheeignore must pin https://modelcontextprotocol.io/ "
+            "(live docs-lint second-pass URL)",
+            errors,
+        )
+    if "https://www.linuxfoundation.org/" not in text:
+        fail(
+            ".lycheeignore must pin https://www.linuxfoundation.org/ "
+            "(live docs-lint second-pass URL)",
+            errors,
+        )
+    # Second-pass after #132: live shields CDN flaky rationale commentary.
+    if "Connection reset by peer" not in text:
+        fail(
+            ".lycheeignore must note Connection reset by peer "
+            "(live shields CDN flaky rationale)",
+            errors,
+        )
+    if "RST" not in text:
+        fail(
+            ".lycheeignore must note RST "
+            "(live shields CDN flaky rationale)",
+            errors,
+        )
+    if "not a broken URL" not in text:
+        fail(
+            ".lycheeignore must note not a broken URL "
+            "(live shields CDN flaky rationale)",
+            errors,
+        )
+    if "false-positive" not in text:
+        fail(
+            ".lycheeignore must note false-positive "
+            "(live lychee exclude rationale)",
+            errors,
+        )
+    if "early hints" not in text:
+        fail(
+            ".lycheeignore must note early hints "
+            "(live lychee exclude rationale)",
+            errors,
+        )
+    if "valid site" not in text:
+        fail(
+            ".lycheeignore must note valid site "
+            "(live lychee exclude rationale)",
+            errors,
+        )
+    if "check_badge_standard.py" not in text:
+        fail(
+            ".lycheeignore must reference check_badge_standard.py "
+            "(stewardship license-badge enforcement path)",
+            errors,
+        )
+    if "License badge presence remains enforced" not in text:
+        fail(
+            ".lycheeignore must note License badge presence remains enforced "
+            "(CDN exclude is not a missing License badge)",
+            errors,
+        )
+
 
 def check_actionlint_style(errors: list[str]) -> None:
     """Static actionlint-like checks on existing workflow paths only.
@@ -1631,7 +1772,12 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
 
 
 def check_docs_lint_gate_contract(errors: list[str]) -> None:
-    """Fail-close live docs-lint wiring (after #100; not CI workflow spam)."""
+    """Fail-close live docs-lint wiring (after #100; second-pass after #132).
+
+    Second-pass: exact live exclude URLs + CDN commentary + markdownlint
+    layout/key-set pins (docs-lint second-pass; not actionlint /
+    stewardship_common / badge spam).
+    """
     if not BADGE_GATE.is_file():
         fail("Missing scripts/check_badge_standard.py (docs-lint host)", errors)
         return
@@ -1841,6 +1987,127 @@ def check_docs_lint_gate_contract(errors: list[str]) -> None:
     if call_workflows not in text:
         fail(
             "main must call " + call_workflows,
+            errors,
+        )
+    # Second-pass after #132: docs-lint exact URL + commentary + layout pins.
+    second_pass = "Second-pass after " + "#132"
+    if second_pass not in text:
+        fail(
+            "docs-lint must keep " + second_pass + " docstring pin",
+            errors,
+        )
+    docs_second = "docs-lint " + "second-pass"
+    if docs_second not in text:
+        fail(
+            "docs-lint contract must keep " + docs_second + " wording",
+            errors,
+        )
+    mcp_url = "https://modelcontextprotocol" + ".io/"
+    if mcp_url not in text:
+        fail(
+            "check_lycheeignore must pin " + mcp_url,
+            errors,
+        )
+    lfs_url = "https://www.linuxfoundation" + ".org/"
+    if lfs_url not in text:
+        fail(
+            "check_lycheeignore must pin " + lfs_url,
+            errors,
+        )
+    peer_reset = "Connection reset by " + "peer"
+    if peer_reset not in text:
+        fail(
+            "check_lycheeignore must keep " + peer_reset + " needle",
+            errors,
+        )
+    rst_needle = "must note " + "RST"
+    if rst_needle not in text:
+        fail(
+            "check_lycheeignore must keep " + rst_needle + " needle",
+            errors,
+        )
+    broken_url = "not a broken " + "URL"
+    if broken_url not in text:
+        fail(
+            "check_lycheeignore must keep " + broken_url + " needle",
+            errors,
+        )
+    false_pos = "false-" + "positive"
+    if false_pos not in text:
+        fail(
+            "check_lycheeignore must keep " + false_pos + " needle",
+            errors,
+        )
+    early_hints = "early " + "hints"
+    if early_hints not in text:
+        fail(
+            "check_lycheeignore must keep " + early_hints + " needle",
+            errors,
+        )
+    valid_site = "valid " + "site"
+    if valid_site not in text:
+        fail(
+            "check_lycheeignore must keep " + valid_site + " needle",
+            errors,
+        )
+    badge_ref = "check_badge_standard" + ".py"
+    if "must reference " + badge_ref not in text:
+        fail(
+            "check_lycheeignore must keep must reference " + badge_ref + " needle",
+            errors,
+        )
+    license_enforced = "License badge presence remains " + "enforced"
+    if license_enforced not in text:
+        fail(
+            "check_lycheeignore must keep " + license_enforced + " needle",
+            errors,
+        )
+    exact_layout = "exact live docs-lint second-pass " + "layout"
+    if exact_layout not in text:
+        fail(
+            "check_workflows_and_license must keep " + exact_layout + " needle",
+            errors,
+        )
+    key_set = "exact live docs-lint key " + "set"
+    if key_set not in text:
+        fail(
+            "check_workflows_and_license must keep " + key_set + " needle",
+            errors,
+        )
+    json_true = "JSON " + "true"
+    if json_true not in text:
+        fail(
+            "check_workflows_and_license must keep " + json_true + " needle",
+            errors,
+        )
+    json_false = "JSON " + "false"
+    if json_false not in text:
+        fail(
+            "check_workflows_and_license must keep " + json_false + " needle",
+            errors,
+        )
+    import_json = "import " + "json"
+    if import_json not in text:
+        fail(
+            "check_badge_standard.py must " + import_json + " for docs-lint second-pass",
+            errors,
+        )
+    json_loads = "json." + "loads"
+    if json_loads not in text:
+        fail(
+            "check_workflows_and_license must use " + json_loads,
+            errors,
+        )
+    not_common = "not actionlint / stewardship_common " + "spam"
+    if not_common not in text:
+        fail(
+            "docs-lint second-pass must keep " + not_common + " wording",
+            errors,
+        )
+    not_badge = "stewardship_common / badge " + "spam"
+    if not_badge not in text:
+        fail(
+            "docs-lint contract must keep " + not_badge + " wording",
             errors,
         )
 
@@ -3957,6 +4224,107 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
     if "third-pass after #90" not in text and contract_third not in text:
         fail(
             "check_wiki_outline.py docstring must keep third-pass after #90 pin",
+            errors,
+        )
+
+
+
+    # Fail-closed after #132: wiki-badge posture pins (Link Check + Markdown Lint only;
+    # no stewardship-checks.yml/badge.svg invent; lands closed #120 leftover;
+    # not stewardship_common #117 / run_stewardship #127 / CI workflow #132 / docs-lint first-pass #104).
+    wiki_text = (
+        WIKI_OUTLINE_GATE.read_text(encoding="utf-8")
+        if WIKI_OUTLINE_GATE.is_file()
+        else ""
+    )
+    status_badges = "status badges " + "cover"
+    if status_badges not in wiki_text:
+        fail(
+            "check_wiki_outline.py must keep status badges cover wording",
+            errors,
+        )
+    product_badge = "product " + "badge"
+    if product_badge not in wiki_text:
+        fail(
+            "check_wiki_outline.py must keep product badge refusal wording",
+            errors,
+        )
+    no_fourth_svg = "stewardship-checks.yml/" + "badge.svg"
+    if no_fourth_svg not in wiki_text:
+        fail(
+            "check_wiki_outline.py must reject stewardship-checks.yml/badge.svg invent",
+            errors,
+        )
+    no_embed = "must not embed markdown badge " + "images"
+    if no_embed not in wiki_text:
+        fail(
+            "check_wiki_outline.py must reject embedded markdown badge images",
+            errors,
+        )
+    if "Link Check exactly" not in wiki_text:
+        fail(
+            "check_wiki_outline.py must require PUBLISH.md Link Check exactly",
+            errors,
+        )
+    if "Markdown Lint exactly" not in wiki_text:
+        fail(
+            "check_wiki_outline.py must require PUBLISH.md Markdown Lint exactly",
+            errors,
+        )
+    after_132_wiki = "after " + "#132"
+    if after_132_wiki not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must pin after #132 wiki-badge deepen",
+            errors,
+        )
+    home_no_embed = "Home.md must not embed markdown badge " + "images"
+    if home_no_embed not in wiki_text:
+        fail(
+            "check_wiki_outline.py must reject Home.md badge-row embeds",
+            errors,
+        )
+    status_badges_names = "must name Link Check and Markdown Lint " + "status badges"
+    if status_badges_names not in wiki_text:
+        fail(
+            "check_wiki_outline.py must require Repo-Stewardship Link Check+Markdown Lint names",
+            errors,
+        )
+    product_refuse = "must refuse stewardship as a product " + "badge"
+    if product_refuse not in wiki_text:
+        fail(
+            "check_wiki_outline.py must emit product badge refusal fail needle",
+            errors,
+        )
+    no_fourth_paren = "(no fourth " + "badge)"
+    if no_fourth_paren not in wiki_text:
+        fail(
+            "check_wiki_outline.py must keep no fourth badge invent parenthetical",
+            errors,
+        )
+    narrative_not_row = "wiki is narrative, not badge " + "row"
+    if narrative_not_row not in wiki_text:
+        fail(
+            "check_wiki_outline.py must keep wiki is narrative, not badge row wording",
+            errors,
+        )
+    wiki_badge_doc = "wiki-badge " + "posture"
+    if wiki_badge_doc not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep wiki-badge posture pin",
+            errors,
+        )
+    badge_open = '"[!["'
+    badge_open_sq = "'[!['"
+    if badge_open not in wiki_text and badge_open_sq not in wiki_text:
+        fail(
+            "check_wiki_outline.py must match markdown badge open [![ for embeds",
+            errors,
+        )
+    badge_svg_lower = '"badge.svg" in ' + "text.lower()"
+    badge_svg_lower_sq = "'badge.svg' in " + "text.lower()"
+    if badge_svg_lower not in wiki_text and badge_svg_lower_sq not in wiki_text:
+        fail(
+            "check_wiki_outline.py must gate embeds via badge.svg in text.lower()",
             errors,
         )
 

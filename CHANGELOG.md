@@ -11,6 +11,20 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki-badge posture + docs-lint second-pass pins after #132: expand
+  self-tests to 2689 cases (was 2491) fail-closing live wiki badge posture and
+  docs-lint leftovers — status badges cover Link Check+Markdown Lint / product
+  badge refusal / reject stewardship-checks.yml/badge.svg invent / reject
+  embedded markdown badge images / PUBLISH Link Check+Markdown Lint exactly /
+  Home no badge-row embeds / exact live `.lycheeignore` URLs+Connection-reset/
+  RST/false-positive/early-hints/valid-site commentary /
+  `check_badge_standard.py` reference / exact `.markdownlint.json` layout+
+  key-set+`json.loads` true/false object pins, plus wiki-badge + docs-lint
+  gate-contract pins in `check_badge_standard.py` — wiki-badge/docs-lint slice
+  only (not common/run_stewardship/actionlint/relative/CI workflow spam); no
+  invent-product; no fourth badge. Lands closed #120/#125/#131/#133 leftovers
+  on post-#132 main (do not revive CONFLICTING drafts).
+
 - TOKENMAXX CI workflow third-pass pins after #111/#117/#127: expand self-tests to
   2491 cases (was 2419) fail-closing live reversible CI workflow integrity —
   exact concurrency group templates / markdown-lint+stewardship cron+timeout /

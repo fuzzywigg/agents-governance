@@ -153,7 +153,12 @@ CI / `python3 scripts/<gate>` ×4 / badge→wiki→schema→relative order /
 revive #119)).
 plus CI workflow third-pass after #111/#117/#127: concurrency templates /
 cron+timeout / DavidAnson@v24 / setup-python@v5 / lychee verbose+
-concurrency+timeout+retries / fail:true / get_actionlint / curl -fsSL).
+concurrency+timeout+retries / fail:true / get_actionlint / curl -fsSL,
+plus wiki-badge posture + docs-lint second-pass after #132: status badges cover
+Link Check+Markdown Lint / product badge refusal / reject stewardship-checks
+workflow badge invent / reject embedded markdown badge images / PUBLISH Link
+Check+Markdown Lint exactly / Home no badge-row embeds / exact live
+`.lycheeignore` URLs+commentary / exact `.markdownlint.json` layout+key-set).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

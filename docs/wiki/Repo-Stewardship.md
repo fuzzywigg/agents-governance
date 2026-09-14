@@ -128,7 +128,13 @@ plus docs-lint pins after #100: `.lycheeignore` escaped `img\.shields\.io` /
 commentary / reject `https://*`+`http://*`+`*` / exact MD013+MD024 objects /
 MD033+MD041+MD060 false / `default: true` / ROOT path assigns /
 `check_workflows_and_license` + CDN-exclude needle /
-`check_docs_lint_gate_contract`).
+`check_docs_lint_gate_contract`,
+plus badge-standard third-pass after #104: `BADGE_LINE_RE`+`REPO_FROM_*`
+exact / `REQUIRED_WORKFLOWS` exact / `group(label|img|link)` / `sys.exit` /
+stewardship_common / `BADGE_GATE` / utf-8 / Strict row / H1 startswith /
+FAIL README / https image+link needles / absolute workflow URL / License
+point / Unexpected label / extract+check_badges / `contract(errors)` /
+IGNORECASE / `blob.lower` / `EXPECTED_REPO.lower`).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

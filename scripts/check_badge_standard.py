@@ -181,6 +181,20 @@ lands closed #222/#215/#196 leftover after #225 tip):
   markdown-lint.yml/badge.svg image pins / no Stewardship product badge
 
 
+
+Fail-closed schema residual CI deepen after #258 tip (schema residual CI slice only;
+NOT schema leftover #258 / NOT open leftover #263 / NOT wiki/mdlink leftover #252 /
+NOT path-edges residual #244 / NOT schema residual (pass-5) #233 spam):
+- residual CI helper needles (if errors / return 1|0 / DOC_SCHEMAS.items /
+  for key in required_keys / path.is_file / block.strip /
+  STRING_KEYS isinstance / autonomy_level in data / edit_policy in data /
+  date_key not in data / ISO_DATE_RE.match / SEMVER_RE.match /
+  ISSUE_REF_RE.search / re.fullmatch digit / value[1:-1] /
+  expected.items / autonomy_level get / err print / splitlines /
+  line+key strip / nonempty compound / ROOT/rel)
+- residual CI invalid status stubs SHELVED|SUPERSEDED|HOLD|STALE|ALPHA|NIGHTLY
+- residual CI invalid surface stubs chatgpt|vertex|groq|together|mistral
+
 Fail-closed markdown-lint/link-check residual exact layouts after #227 tip
 (lands closed #221 leftover residual; NOT Pass-2 leftover + md/link #220 core /
 NOT path-edges #225 / NOT wiki-index/badge leftover #227 / NOT stewardship-badge lint #208):
@@ -5722,7 +5736,7 @@ def check_stewardship_common_contract(errors: list[str]) -> None:
 
 
 def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
-    """Fail-close live stewardship-schema gate wiring (after #72/#75; third-pass after #132; deepen after #189; policy-schema pass-4 after #208; schema residual after #225; leftover after #252)."""
+    """Fail-close live stewardship-schema gate wiring (after #72/#75; third-pass after #132; deepen after #189; policy-schema pass-4 after #208; schema residual after #225; leftover after #252; residual CI deepen after #258)."""
     if not SCHEMA_GATE.is_file():
         fail("Missing scripts/check_stewardship_schema.py (schema gate)", errors)
         return
@@ -6835,6 +6849,246 @@ def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
 
 
 
+
+
+    # Fail-closed after #258: schema residual CI helper / constant / needle pins
+    # (schema residual CI slice only; not schema leftover #258 / not open leftover #263 /
+    # not wiki/mdlink leftover #252 / not path-edges residual #244 /
+    # not schema residual (pass-5) #233 spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    residual_ci_258_doc = "Residual CI deepen after " + "#258 (schema residual CI"
+    if residual_ci_258_doc not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + residual_ci_258_doc,
+            errors,
+        )
+    not_schema_258 = "NOT schema leftover " + "#258"
+    if not_schema_258 not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + not_schema_258,
+            errors,
+        )
+    not_open_263 = "NOT open leftover " + "#263"
+    if not_open_263 not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + not_open_263,
+            errors,
+        )
+    not_wiki_252 = "NOT wiki/mdlink leftover " + "#252"
+    if not_wiki_252 not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + not_wiki_252,
+            errors,
+        )
+    not_path_244 = "NOT path-edges residual " + "#244"
+    if not_path_244 not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + not_path_244,
+            errors,
+        )
+    not_pass5_233 = "NOT schema residual (pass-5) " + "#233"
+    if not_pass5_233 not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + not_pass5_233,
+            errors,
+        )
+    if_errors = "if errors" + ":"
+    if if_errors not in text:
+        fail(
+            "check_stewardship_schema.py FAILED path must keep if errors:",
+            errors,
+        )
+    ret_one = "return " + "1"
+    if ret_one not in text:
+        fail(
+            "check_stewardship_schema.py FAILED path must keep return 1",
+            errors,
+        )
+    ret_zero = "return " + "0"
+    if ret_zero not in text:
+        fail(
+            "check_stewardship_schema.py OK path must keep return 0",
+            errors,
+        )
+    for_rel = "for rel, required_keys in DOC_SCHEMAS.items(" + "):"
+    if for_rel not in text:
+        fail(
+            "check_stewardship_schema.py must iterate for rel, required_keys in DOC_SCHEMAS.items():",
+            errors,
+        )
+    for_key_req = "for key in required_keys" + ":"
+    if for_key_req not in text:
+        fail(
+            "check_stewardship_schema.py must iterate for key in required_keys:",
+            errors,
+        )
+    not_path_file = "if not path.is_file(" + "):"
+    if not_path_file not in text:
+        fail(
+            "check_stewardship_schema.py must keep if not path.is_file():",
+            errors,
+        )
+    not_block_strip = "if not block.strip(" + "):"
+    if not_block_strip not in text:
+        fail(
+            "check_stewardship_schema.py must keep if not block.strip():",
+            errors,
+        )
+    string_keys_isinstance = (
+        "if key in STRING_KEYS and not isinstance(value, str)" + ":"
+    )
+    if string_keys_isinstance not in text:
+        fail(
+            "check_stewardship_schema.py must keep "
+            "if key in STRING_KEYS and not isinstance(value, str):",
+            errors,
+        )
+    autonomy_in = 'if "autonomy_level" in ' + "data:"
+    if autonomy_in not in text and "if 'autonomy_level' in data:" not in text:
+        fail(
+            'check_stewardship_schema.py must keep if "autonomy_level" in data:',
+            errors,
+        )
+    edit_policy_in = 'if "edit_policy" in ' + "data:"
+    if edit_policy_in not in text and "if 'edit_policy' in data:" not in text:
+        fail(
+            'check_stewardship_schema.py must keep if "edit_policy" in data:',
+            errors,
+        )
+    date_key_missing = "if date_key not in " + "data:"
+    if date_key_missing not in text:
+        fail(
+            "check_stewardship_schema.py must keep if date_key not in data:",
+            errors,
+        )
+    iso_match = "if not ISO_DATE_RE.match(" + "raw):"
+    if iso_match not in text:
+        fail(
+            "check_stewardship_schema.py must keep if not ISO_DATE_RE.match(raw):",
+            errors,
+        )
+    semver_match = "if not SEMVER_RE.match(" + "ver):"
+    if semver_match not in text:
+        fail(
+            "check_stewardship_schema.py must keep if not SEMVER_RE.match(ver):",
+            errors,
+        )
+    issue_search = "if not ISSUE_REF_RE.search(" + "closes):"
+    if issue_search not in text:
+        fail(
+            "check_stewardship_schema.py must keep if not ISSUE_REF_RE.search(closes):",
+            errors,
+        )
+    re_fullmatch_digit = 'elif re.fullmatch(r"-?\\d+", ' + "value):"
+    if re_fullmatch_digit not in text:
+        fail(
+            "check_stewardship_schema.py must keep "
+            'elif re.fullmatch(r"-?\\d+", value):',
+            errors,
+        )
+    value_slice = "value = value[1:" + "-1]"
+    if value_slice not in text:
+        fail(
+            "check_stewardship_schema.py must keep value = value[1:-1] quote strip",
+            errors,
+        )
+    expected_items = "for key, want in expected.items(" + "):"
+    if expected_items not in text:
+        fail(
+            "check_stewardship_schema.py must iterate for key, want in expected.items():",
+            errors,
+        )
+    level_get = 'level = data["autonomy_level"]'
+    if level_get not in text and "level = data['autonomy_level']" not in text:
+        fail(
+            'check_stewardship_schema.py must keep level = data["autonomy_level"]',
+            errors,
+        )
+    err_print = 'print(f"  - {err}"'
+    if err_print not in text:
+        fail(
+            'check_stewardship_schema.py FAILED path must print(f"  - {err}"',
+            errors,
+        )
+    splitlines_pin = "for raw in text.splitlines(" + "):"
+    if splitlines_pin not in text:
+        fail(
+            "check_stewardship_schema.py parse_simple_yaml must iterate for raw in text.splitlines():",
+            errors,
+        )
+    line_strip = "line = raw.strip(" + ")"
+    if line_strip not in text:
+        fail(
+            "check_stewardship_schema.py parse_simple_yaml must keep line = raw.strip()",
+            errors,
+        )
+    key_strip = "key = key.strip(" + ")"
+    if key_strip not in text:
+        fail(
+            "check_stewardship_schema.py parse_simple_yaml must keep key = key.strip()",
+            errors,
+        )
+    nonempty_compound = "isinstance(value, str) and not value.strip(" + ")"
+    if nonempty_compound not in text:
+        fail(
+            "check_stewardship_schema.py must keep isinstance(value, str) and not value.strip()",
+            errors,
+        )
+    root_rel = "path = ROOT / " + "rel"
+    if root_rel not in text:
+        fail(
+            "check_stewardship_schema.py must resolve docs via path = ROOT / rel",
+            errors,
+        )
+    for stub in (
+        "SHELVED",
+        "SUPERSEDED",
+        "HOLD",
+        "STALE",
+        "ALPHA",
+        "NIGHTLY",
+    ):
+        if stub not in text:
+            fail(
+                "check_stewardship_schema.py docstring must pin residual CI status "
+                f"enum stub {stub}",
+                errors,
+            )
+    for stub in (
+        "chatgpt",
+        "vertex",
+        "groq",
+        "together",
+        "mistral",
+    ):
+        if stub not in text:
+            fail(
+                "check_stewardship_schema.py docstring must pin residual CI surface "
+                f"enum stub {stub}",
+                errors,
+            )
+    residual_ci_host = "schema residual CI deepen after " + "#258"
+    self_text6 = BADGE_GATE.read_text(encoding="utf-8")
+    if residual_ci_host not in self_text6:
+        fail(
+            "check_badge_standard.py must keep " + residual_ci_host + " host pin",
+            errors,
+        )
+    residual_ci_slice = "schema residual CI " + "slice"
+    if residual_ci_slice not in self_text6:
+        fail(
+            "check_badge_standard.py schema residual CI must keep "
+            + residual_ci_slice
+            + " pin",
+            errors,
+        )
+    contract_residual_ci = "residual CI deepen after " + "#258"
+    if contract_residual_ci not in self_text6:
+        fail(
+            "check_stewardship_schema_gate_contract docstring must pin "
+            + contract_residual_ci,
+            errors,
+        )
 
 def check_wiki_outline_gate_contract(errors: list[str]) -> None:
     """Fail-close live wiki-outline gate wiring (after #90; deepen after #59/#43)."""

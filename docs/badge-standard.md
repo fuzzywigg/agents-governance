@@ -318,6 +318,16 @@ leftover #252 / not path-edges residual #244 / not wiki outline/PUBLISH
 leftover #243 / not md/link residual #239 / not stewardship-checks/schema
 residual #233 / not wiki-index/badge leftover #227; do not revive
 closed #253/#248/#241)).
+plus schema residual CI deepen after #258 tip: residual CI helper
+needles (if errors / return 1|0 / DOC_SCHEMAS.items / for key in required_keys /
+path.is_file / block.strip / STRING_KEYS isinstance / autonomy+edit_policy in
+data / date_key / ISO+SEMVER+ISSUE match / re.fullmatch digit / value[1:-1] /
+expected.items / err print / splitlines / strip / nonempty / ROOT/rel) plus
+residual CI status stubs SHELVED|SUPERSEDED|HOLD|STALE|ALPHA|NIGHTLY /
+residual CI surface stubs chatgpt|vertex|groq|together|mistral — DISTINCT
+residual CI only (not schema leftover #258 / not open leftover #263 / not
+wiki/mdlink leftover #252 / not path-edges #244 / not schema pass-5 #233;
+do not revive #259/#257/#253/#248/#241)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

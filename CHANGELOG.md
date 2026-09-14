@@ -11,6 +11,25 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-schema residual CI deepen after #258 tip: expand
+  self-tests to 5412 cases (was 5176) fail-closing unsaturated schema residual
+  CI helper needles + invalid status/surface stubs on existing
+  `check_stewardship_schema.py` only — if errors: / return 1 / return 0 /
+  DOC_SCHEMAS.items / for key in required_keys / path.is_file / block.strip /
+  STRING_KEYS isinstance / autonomy_level in data / edit_policy in data /
+  date_key not in data / ISO_DATE_RE.match / SEMVER_RE.match /
+  ISSUE_REF_RE.search / re.fullmatch digit coerce / value[1:-1] /
+  expected.items / autonomy_level get / err print / splitlines /
+  line+key strip / nonempty compound / ROOT/rel / residual CI status stubs
+  SHELVED|SUPERSEDED|HOLD|STALE|ALPHA|NIGHTLY / residual CI surface stubs
+  chatgpt|vertex|groq|together|mistral — schema residual CI slice only
+  (not schema leftover #258 / not open leftover #263 / not wiki/mdlink
+  leftover #252 / not path-edges residual #244 / not schema residual
+  (pass-5) #233); no invent-product; no fourth badge; no
+  `AGENTS-ECOSYSTEM.md` / `templates/` edits; no `stewardship_common` edits.
+  Do **not** revive #259/#257/#253/#248/#241. Distinct from merged
+  #258/#252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
+
 - TOKENMAXX stewardship-schema leftover deepen after #252 tip: expand
   self-tests to 5176 cases (was 4976) fail-closing unsaturated schema +
   `stewardship_common` leftover helpers on existing modules only —

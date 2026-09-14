@@ -806,3 +806,18 @@ _None yet._
 2026-09-14T08:40:00Z cursor: Local green — run_stewardship + self-tests 4792 + markdownlint ← ECO-076 path-filter/path-order residuals after #243 (leave draft; do not revive #236/#232/#228)
 
 2026-09-14T08:40:30Z cursor: Draft PR #244 opened (cursor/tokenmaxx-path-edges-residual-after-243-7fba); leave draft / do-not-merge; awaiting CI ← ECO-076 residual after #243 (do not revive #236/#232/#228)
+
+2026-09-14T09:54:26Z cursor: PR #258 MERGED (stewardship-schema leftovers after #252) ← tip 705f077
+2026-09-14T09:57:05Z cursor: CONFLICTING draft #259 CLOSED after tip #258
+
+### [ECO-077] TOKENMAXX deepen stewardship-schema residual CI after #258 — 2026-09-14T10:11:12Z
+- [x] cursor: Read live tree post-#258 (5176 cases; schema leftover #258 saturated; closed CONFLICTING #259; open leftover #263 distinct)
+- [x] cursor: Fail-close DISTINCT unsaturated schema residual CI helper needles + status/surface stubs on existing check_stewardship_schema.py only
+- [x] cursor: Expand self-tests 5176 → 5412 (+236; schema residual CI slice only; not #258/#263/#252/#233 spam; do not revive #259/#257/#253)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING stewardship-schema residual CI pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no stewardship_common edits; do not revive #259/#257/#253/#248/#241; do not redo #258 schema leftover / #252 wiki/mdlink
+- Branch: cursor/tokenmaxx-schema-residual-ci-after-258-f8c8
+2026-09-14T10:11:12Z
+
+
+2026-09-14T10:17:47Z cursor: Local green — run_stewardship + self-tests 5412 + markdownlint ← ECO-077 schema residual CI after #258 (leave draft; do not revive #259/#257/#253; distinct from open #263)

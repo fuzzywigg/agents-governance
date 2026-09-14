@@ -819,3 +819,5 @@ _None yet._
 2026-09-14T09:36:58Z cursor: Local green pending — run_stewardship + self-tests 5028 + markdownlint ← ECO-077 schema residual after #244 (leave draft; do not revive #248/#241; leave #253 alone)
 
 2026-09-14T09:43:24Z cursor: Local green — run_stewardship + self-tests 5028 + markdownlint ← ECO-077 schema residual after #244 (leave draft; do not revive #248/#241; leave #253 alone)
+
+2026-09-14T09:43:59Z cursor: Draft PR #257 opened (cursor/tokenmaxx-schema-residual-after-244-f46e); leave draft / do-not-merge; awaiting CI ← ECO-077 schema residual after #244 (do not revive #248/#241; leave #253 alone)

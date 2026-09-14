@@ -316,8 +316,9 @@ not wiki outline/PUBLISH leftover #243 / not md/link residual #239 /
 not stewardship-checks/schema residual #233 / not wiki-index/badge #227 /
 not path-edges #225 / not Pass-2 leftover + md/link #220 /
 not Pass-2 residual #199/#203 / not badge-lint #208 / not schema #216;
-lands closed #246/#245/#240 leftover on post-#244 tip; do not revive #246/#245/#240/#235/#230;
-do not invent new templates).
+lands closed #251/#250/#246/#245/#240 leftover on post-#244 tip;
+do not revive #251/#250/#246/#245/#240/#235/#230;
+prior #251/#250 RED was transient GitHub 503; do not invent new templates).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

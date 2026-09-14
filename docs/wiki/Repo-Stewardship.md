@@ -292,8 +292,9 @@ not wiki outline/PUBLISH leftover #243 / not md/link residual #239 /
 not stewardship-checks/schema residual #233 / not wiki-index/badge #227 /
 not path-edges #225 / not Pass-2 leftover + md/link #220 /
 not Pass-2 residual #199/#203 / not badge-lint #208 / not schema #216;
-lands closed #246/#245/#240 leftover on post-#244 tip; do not revive #246/#245/#240/#235/#230;
-do not invent new templates).
+lands closed #251/#250/#246/#245/#240 leftover on post-#244 tip;
+do not revive #251/#250/#246/#245/#240/#235/#230;
+prior #251/#250 RED was transient GitHub 503; do not invent new templates).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

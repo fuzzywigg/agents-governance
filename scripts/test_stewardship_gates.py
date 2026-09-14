@@ -12,7 +12,7 @@ not actionlint path-filter/path-order residual #244 /
 not wiki outline/PUBLISH leftover #243 / not md/link residual #239 /
 stewardship-checks/schema residual #233 / wiki-index/badge #227 /
 path-edges #225 / Pass-2 leftover+md/link #220 / Pass-2 residual #199/#203 spam).
-Lands closed #246/#245/#240 leftover (do not revive).
+Lands closed #251/#250/#246/#245/#240 leftover (do not revive; prior #251/#250 RED was transient GitHub 503).
 Deepened after #216 tip: Pass-2 leftovers + markdown-lint/link-check edges —
 shebang-first / reject || exit 0 / args: >- / externally-broken commentary /
 without-it private-404 / reject continue-on-error / exact job permissions /

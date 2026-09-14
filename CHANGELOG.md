@@ -26,9 +26,10 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   not stewardship-checks/schema residual #233 / not wiki-index/badge #227 /
   not path-edges #225 / not Pass-2 leftover and md/link #220 / not Pass-2 residual
   #199/#203 / not badge-lint #208 / not schema #216); no invent-product; no fourth
-  badge; no new templates. Lands closed #246/#245/#240 leftover on post-#244 tip (do
-  **not** revive #246/#245/#240/#235/#230). Distinct from merged
-  #244/#243/#239/#233/#227/#225/#220/#216/#208.
+  badge; no new templates. Lands closed #251/#250/#246/#245/#240 leftover on
+  post-#244 tip (do **not** revive #251/#250/#246/#245/#240/#235/#230; prior
+  #251/#250 RED was transient GitHub 503 on existing wiki absolute same-repo
+  links). Distinct from merged #244/#243/#239/#233/#227/#225/#220/#216/#208.
 - TOKENMAXX actionlint path-filter/path-order residual deepen after #243 tip:
   expand self-tests to 4792 cases (was 4646) fail-closing DISTINCT residual
   actionlint path-filter / path-order edges on existing workflow modules —

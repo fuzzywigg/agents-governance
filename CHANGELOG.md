@@ -25,7 +25,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   outline/PUBLISH leftover #243 / not md/link residual #239 / not
   stewardship-checks/schema residual #233 / not wiki-index/badge #227);
   no invent-product; no fourth badge. Lands leftover after #243 tip.
-  Distinct from merged #243/#239/#233/#227/#225/#220/#216.
+  Distinct from merged #243/#239/#233/#227/#225/#220/#216/#208.
 - TOKENMAXX wiki outline/PUBLISH leftover deepen after #239 tip: expand
   self-tests to 4646 cases (was 4462) fail-closing unsaturated wiki outline /
   PUBLISH.md leftover on existing `docs/wiki` pages only — Pages to publish

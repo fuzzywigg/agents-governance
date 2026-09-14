@@ -3699,9 +3699,9 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
             errors,
         )
     module_edge = "markdown-lint/link-check edges after " + "#189"
-    if module_edge not in text and "Markdown-lint/link-check workflow edges after #189" not in text:
+    if module_edge not in text:
         fail(
-            "check_badge_standard.py must pin markdown-lint/link-check edges after #189",
+            "check_badge_standard.py must pin " + module_edge,
             errors,
         )
     edge_pins = (

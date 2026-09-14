@@ -830,3 +830,5 @@ _None yet._
 2026-09-14T08:55:00Z cursor: Rebased ECO-077 onto post-#244 tip (c38ae7b); leave draft / do-not-merge; do not revive #246/#245/#240; do not redo #244 path-edges / #243 wiki/PUBLISH / #239 md/link
 
 2026-09-14T09:02:00Z cursor: Local green — run_stewardship + self-tests 5016 + markdownlint ← ECO-077 Pass-2 residual leftover + existing templates/AGENTS-REPO.md after #244 (leave draft; do not revive #246/#245/#240)
+
+2026-09-14T09:05:00Z cursor: Closed #250 RED — link-check flake GitHub 503 on same-repo blob/main wiki URLs (not leftover content regression); open fresh draft on tip without reviving #250/#246/#245/#240 ← ECO-077

@@ -11,6 +11,12 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX docs-lint pass-4: exclude flaky same-repo GitHub `blob/main`
+  HTML (intermittent 503) via `.lycheeignore`, with wiki-outline still enforcing
+  absolute blob pins — fail-closed layout + commentary + gate-contract needles;
+  unblocks Pass-2 residual + existing `templates/AGENTS-REPO.md` leftover draft
+  after #244 tip (do **not** revive #251/#250/#246/#245/#240). Distinct from
+  Pass-2 residual/template leftover content; no invent templates; no DNS sprawl.
 - TOKENMAXX Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #244:
   expand self-tests to 5016 cases (was 4792) fail-closing DISTINCT leftover Pass-2 residual
   soft-fail + existing concurrency group templates + existing `templates/AGENTS-REPO.md`

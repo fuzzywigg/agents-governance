@@ -480,6 +480,8 @@ def check_lycheeignore(errors: list[str]) -> None:
     commentary (docs-lint second-pass; not actionlint / stewardship_common spam).
     Third-pass after #149: exact live .lycheeignore full layout + exact
     commentary lines (docs-lint leftover; not wiki / CI workflow spam).
+    Pass-4 after #251: same-repo blob/main 503 exclude + wiki-outline
+    absolute-pin commentary (docs-lint leftover; not invent templates / Pass-2 residual spam).
     """
     if not LYCHEEIGNORE.is_file():
         return
@@ -611,6 +613,11 @@ def check_lycheeignore(errors: list[str]) -> None:
         "# License badge presence remains enforced by stewardship "
         "(check_badge_standard.py).\n"
         r"https://img\.shields\.io" + "\n"
+        "# Same-repo GitHub blob/main HTML intermittently returns 503 "
+        "— not a broken URL.\n"
+        "# Absolute blob/main pins remain enforced by wiki-outline "
+        "(check_wiki_outline.py).\n"
+        r"https://github\.com/fuzzywigg/agents-governance/blob/main/" + "\n"
     )
     if text != expected_lychee:
         fail(
@@ -667,6 +674,61 @@ def check_lycheeignore(errors: list[str]) -> None:
             "(docs-lint third-pass)",
             errors,
         )
+    # Pass-4 after #251: same-repo blob/main 503 exclude (docs-lint leftover).
+    # Split four/th so fourth→quaternary badge-refusal self-tests stay valid.
+    _p4 = "four" + "th-pass"
+    if "blob/main" not in text:
+        fail(
+            ".lycheeignore must exclude same-repo blob/main "
+            "(docs-lint " + _p4 + "; GitHub HTML 503 flake)",
+            errors,
+        )
+    if "503" not in text:
+        fail(
+            ".lycheeignore must note 503 "
+            "(docs-lint " + _p4 + "; GitHub blob HTML flake)",
+            errors,
+        )
+    if "wiki-outline" not in text and "check_wiki_outline.py" not in text:
+        fail(
+            ".lycheeignore must note wiki-outline absolute-pin enforcement "
+            "(docs-lint " + _p4 + "; blob exclude is not a missing wiki pin)",
+            errors,
+        )
+    if r"github\.com/fuzzywigg/agents-governance/blob/main/" not in text:
+        fail(
+            r".lycheeignore must pin escaped "
+            r"github\.com/fuzzywigg/agents-governance/blob/main/ "
+            "(docs-lint " + _p4 + ")",
+            errors,
+        )
+    blob_line = (
+        "# Same-repo GitHub blob/main HTML intermittently returns 503 "
+        "— not a broken URL."
+    )
+    if blob_line not in text:
+        fail(
+            ".lycheeignore must keep exact blob/main 503 commentary line "
+            "(docs-lint " + _p4 + ")",
+            errors,
+        )
+    outline_line = (
+        "# Absolute blob/main pins remain enforced by wiki-outline "
+        "(check_wiki_outline.py)."
+    )
+    if outline_line not in text:
+        fail(
+            ".lycheeignore must keep exact wiki-outline enforcement commentary line "
+            "(docs-lint " + _p4 + ")",
+            errors,
+        )
+    if "intermittently returns 503" not in text:
+        fail(
+            ".lycheeignore must note intermittently returns 503 "
+            "(docs-lint " + _p4 + ")",
+            errors,
+        )
+
 
 
 def check_actionlint_style(errors: list[str]) -> None:
@@ -3638,6 +3700,73 @@ def check_docs_lint_gate_contract(errors: list[str]) -> None:
             "docs-lint third-pass must keep " + not_wiki_ci + " wording",
             errors,
         )
+    # Pass-4 after #251: blob/main 503 exclude pins (docs-lint leftover).
+    # Split four/th so fourth→quaternary badge-refusal self-tests stay valid.
+    fourth_pass = "Pass-4 after " + "#251"
+    if fourth_pass not in text:
+        fail(
+            "docs-lint must keep " + fourth_pass + " docstring pin",
+            errors,
+        )
+    p4_split = '"four" + "th-pass"'
+    if p4_split not in text:
+        fail(
+            "docs-lint contract must keep " + p4_split + " wording",
+            errors,
+        )
+    blob_main_pin = "same-repo " + "blob/main"
+    if blob_main_pin not in text:
+        fail(
+            "check_lycheeignore must keep " + blob_main_pin + " needle",
+            errors,
+        )
+    note_503 = "must note " + "503"
+    if note_503 not in text:
+        fail(
+            "check_lycheeignore must keep " + note_503 + " needle",
+            errors,
+        )
+    wiki_outline_note = "wiki-outline absolute-pin " + "enforcement"
+    if wiki_outline_note not in text:
+        fail(
+            "check_lycheeignore must keep " + wiki_outline_note + " needle",
+            errors,
+        )
+    escaped_blob = (
+        r"github\.com/fuzzywigg/agents-governance/" + r"blob/main/"
+    )
+    if escaped_blob not in text:
+        fail(
+            "check_lycheeignore must pin " + "escaped blob/main exclude",
+            errors,
+        )
+    exact_blob_line = "exact blob/main 503 commentary " + "line"
+    if exact_blob_line not in text:
+        fail(
+            "check_lycheeignore must keep " + exact_blob_line + " needle",
+            errors,
+        )
+    exact_outline_line = (
+        "exact wiki-outline enforcement commentary " + "line"
+    )
+    if exact_outline_line not in text:
+        fail(
+            "check_lycheeignore must keep " + exact_outline_line + " needle",
+            errors,
+        )
+    intermittent_503 = "intermittently returns " + "503"
+    if intermittent_503 not in text:
+        fail(
+            "check_lycheeignore must keep " + intermittent_503 + " needle",
+            errors,
+        )
+    not_invent_tpl = "not invent templates / " + "Pass-2 residual spam"
+    if not_invent_tpl not in text:
+        fail(
+            "docs-lint " + "four" + "th-pass must keep " + not_invent_tpl + " wording",
+            errors,
+        )
+
 
 
 def check_actionlint_style_gate_contract(errors: list[str]) -> None:

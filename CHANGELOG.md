@@ -11,6 +11,18 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX run_stewardship Pass-2 pins after #176: expand self-tests to
+  3258 cases (was 3175) fail-closing live local runner / CI reliability leftovers —
+  exact `ROOT="$(cd "$(dirname "$0")/.." && pwd)"` / exactly four `python3 scripts/`
+  lines / no `|| true` or `set +e` soft-fail / `dirname "$0")/..` fragment /
+  doc gates locally commentary / stewardship-checks.yml runs
+  `run_stewardship_checks.sh` before `test_stewardship_gates.py`, plus
+  `check_run_stewardship_gate_contract` Pass-2 pins after #176 —
+  run_stewardship slice only (not path-filter #176 / fixtures #173 /
+  stewardship-CI #165 / schema / badge spam); no invent-product; no fourth
+  badge. Lands closed #175/#140 leftover on post-#176 main (do **not** revive
+  #175/#140/#122).
+
 - TOKENMAXX actionlint path-filter leftovers after #173: expand self-tests to
   3175 cases (was 3081) fail-closing residual push `paths:` layouts /
   stewardship residual path entries (AGENTS/CLAUDE/LICENSE/CONTRIBUTING/

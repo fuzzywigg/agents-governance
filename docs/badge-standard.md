@@ -207,7 +207,12 @@ closed #167/#168/#169,
 plus actionlint path-filter leftovers after #173: exact push `paths:` layouts /
 residual stewardship path entries / reject `paths-ignore:` / ignore-glob
 exactness — empty stubs already handled; distinct from path-order/badge and
-stewardship-badge lint; lands closed #166 leftover; do not revive #166/#157).
+stewardship-badge lint; lands closed #166 leftover; do not revive #166/#157,
+plus run_stewardship Pass-2 after #176: exact ROOT assign / exactly four
+`python3 scripts/` / no `|| true` soft-fail / `dirname "$0")/..` fragment /
+doc gates locally / CI runner before self-tests /
+`check_run_stewardship_gate_contract` Pass-2 (lands closed #175/#140 leftover;
+do not revive #175/#140/#122)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

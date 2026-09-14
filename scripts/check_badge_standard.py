@@ -63,6 +63,7 @@ Fail-closed stewardship-badge lint deepen after #161 (NOT docs-lint leftover
 - missing badge fixtures for invent svg / wrong badge.svg / glob+paths drift
 """
 
+# CI re-trigger for draft PR #172 (scratchpad-only follow-ups; deepen commit already green).
 from __future__ import annotations
 
 import json

@@ -806,3 +806,27 @@ _None yet._
 2026-09-14T08:40:00Z cursor: Local green — run_stewardship + self-tests 4792 + markdownlint ← ECO-076 path-filter/path-order residuals after #243 (leave draft; do not revive #236/#232/#228)
 
 2026-09-14T08:40:30Z cursor: Draft PR #244 opened (cursor/tokenmaxx-path-edges-residual-after-243-7fba); leave draft / do-not-merge; awaiting CI ← ECO-076 residual after #243 (do not revive #236/#232/#228)
+
+### [ECO-077] TOKENMAXX deepen path-filter/path-order residual leftover after #244 — 2026-09-14T09:31:45Z
+- [x] cursor: Read live tree post-#244 (4792 cases; path-filter/path-order residual saturated via #244; closed CONFLICTING #247 sibling)
+- [x] cursor: Fail-close residual leftover path-edges on post-#244 tip — push/PR adjacency / schedule/dispatch adjacency / PR branches-unfiltered / reject tags-ignore / reject workflow_call / five-step actionlint path-order / on:/push: header
+- [x] cursor: Expand self-tests 4792 → 4938 (path-edges residual leftover slice only; not #244/#243/#239/#233/#227/#225 spam; do not revive #247/#244/#236/#232/#228)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING actionlint path-filter/path-order residual leftover edge pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; do not revive #247/#244/#236/#232/#228/#226/#223/#217/#213/#198; do not redo #244/#243/#239/#233/#227/#225
+- Branch: cursor/tokenmaxx-path-edges-leftover-after-244-4b32
+2026-09-14T09:31:45Z
+
+2026-09-14T09:38:28Z cursor: Local green — run_stewardship + self-tests 4938 + markdownlint ← ECO-077 path-filter/path-order residual leftover after #244 (leave draft; do not revive #247/#244/#236/#232/#228)
+
+2026-09-14T09:45:14Z cursor: CONFLICTING sibling #255 path-edges leftover CLOSED after tip move to #252 (wiki/mdlink)
+2026-09-14T09:45:16Z cursor: CONFLICTING sibling #256 Pass-2/blob CLOSED after tip move to #252
+2026-09-14T09:45:19Z cursor: CONFLICTING sibling #257 schema residual CLOSED after tip move to #252
+
+### [ECO-078] TOKENMAXX deepen path-filter/path-order residual leftover after #244 on tip #252 — 2026-09-14T09:50:00Z
+- [x] cursor: Read live tree post-#252 (4976 cases; wiki/mdlink leftover saturated via #252; path residual #244 saturated; closed CONFLICTING #255 path-edges leftover)
+- [x] cursor: Rebase closed #255 leftover edges onto tip a279fe6 — push/PR adjacency / schedule/dispatch adjacency / PR branches-unfiltered / reject tags-ignore / reject workflow_call / five-step actionlint path-order / on:/push: header
+- [x] cursor: Expand self-tests 4976 → 5122 (path-edges residual leftover slice only; not #252/#244/#243/#239/#233/#227/#225 spam; do not revive #255/#247/#244/#236/#232/#228)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING actionlint path-filter/path-order residual leftover edge pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; do not revive #255/#247/#244/#236/#232/#228/#226/#223/#217/#213/#198; do not redo #252/#244/#243/#239/#233/#227/#225
+- Branch: cursor/tokenmaxx-path-edges-leftover-after-252-2a53
+2026-09-14T09:50:00Z

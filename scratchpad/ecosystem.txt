@@ -667,6 +667,8 @@ _None yet._
 - [x] cursor: Fail-close md/link edges — args: >- / externally-broken commentary / without-it private-404 / reject continue-on-error / exact job permissions / checkout adjacency / contract pins
 - [x] cursor: Expand self-tests 3590 → 3654 (md/link slice only; not Pass-2 residual #199 / schema #191 / path-order #189 / Pass-2 core #179 / wiki-index #181)
 - [x] cursor: Local green — run_stewardship + self-tests 3654 + markdownlint ← ECO-068 md/link edges after #199 (do not revive #192/#197/#201/#202)
-- [ ] cursor: Draft PR opened; awaiting CI ← ECO-068 markdown-lint/link-check edges after #199
+- [x] cursor: Draft PR opened; awaiting CI ← ECO-068 markdown-lint/link-check edges after #199
 
 2026-09-14T06:20:00Z cursor: Local green — run_stewardship + self-tests 3654 + markdownlint ← ECO-068 markdown-lint/link-check edges after #199 (do not revive #192/#197/#201/#202; leave #202 alone)
+
+2026-09-14T06:22:00Z cursor: Draft PR #207 opened (cursor/tokenmaxx-mdlink-ci-edges-after-199-f199); awaiting CI ← ECO-068 markdown-lint/link-check edges after #199 (do not revive #192/#197/#201/#202)

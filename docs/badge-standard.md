@@ -162,7 +162,14 @@ IGNORECASE / `blob.lower` / `EXPECTED_REPO.lower`,
 plus actionlint-style third-pass after #108: `concurrency:` +
 `cancel-in-progress:` / `permissions:` present / reject
 `actions|packages|pull-requests: write` / `re.finditer` / docker continue /
-`rsplit[-1]` / third-pass docstring).
+`rsplit[-1]` / third-pass docstring,
+plus stewardship_common third-pass after #111: future annotations / exact
+SECRET regexes / helper contracts / utf-8 reads / FORBIDDEN head / URL hints
+(lands closed #112),
+plus actionlint leftovers after #111: `contents: read` /
+`cancel-in-progress: true` / `ubuntu-latest` / fourth-pass docstring,
+plus docs-lint leftovers after #111: exact exclude URLs / Connection reset+RST /
+exact pretty `.markdownlint.json` (lands closed #114 conflict leftover)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

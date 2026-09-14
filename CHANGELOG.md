@@ -11,6 +11,16 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship_common third-pass + actionlint/docs-lint leftovers after
+  #111: expand self-tests to 2386 cases (was 2223) fail-closing
+  stewardship_common third-pass (future annotations / exact SECRET regexes /
+  helper contracts / utf-8 reads / FORBIDDEN head / URL hints; lands closed
+  #112) plus actionlint leftovers (`contents: read` /
+  `cancel-in-progress: true` / `ubuntu-latest` / fourth-pass docstring) and
+  docs-lint leftovers (exact exclude URLs / Connection reset+RST /
+  exact pretty `.markdownlint.json`; lands closed #114 conflict leftover) —
+  no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates.
+
 - TOKENMAXX actionlint-style third-pass pins after #108: expand self-tests to
   2223 cases (was 2151) fail-closing live reversible CI workflow integrity —
   `concurrency:` + `cancel-in-progress:` / `permissions:` present /

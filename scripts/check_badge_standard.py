@@ -28,6 +28,8 @@ Fail-closed actionlint-style pins (live path after #75; second-pass after #83/#8
 - Third-pass after #108: concurrency:+cancel-in-progress: / permissions: present /
   reject actions|packages|pull-requests: write / finditer uses / docker continue /
   rsplit[-1] / third-pass docstring
+- Leftover deepen after #111: contents: read / cancel-in-progress: true /
+  ubuntu-latest / fourth-pass docstring
 """
 
 from __future__ import annotations
@@ -213,6 +215,22 @@ def check_workflows_and_license(errors: list[str]) -> None:
                 '.markdownlint.json must pin "MD024": { "siblings_only": true }',
                 errors,
             )
+        # Leftover deepen after #111: exact live markdownlint pretty JSON.
+        canonical_md = (
+            "{\n"
+            '  "default": true,\n'
+            '  "MD013": { "line_length": 200 },\n'
+            '  "MD024": { "siblings_only": true },\n'
+            '  "MD033": false,\n'
+            '  "MD041": false,\n'
+            '  "MD060": false\n'
+            "}"
+        )
+        if md_cfg.strip() != canonical_md.strip():
+            fail(
+                ".markdownlint.json must match exact live docs-lint pretty JSON",
+                errors,
+            )
 
 
 def check_lycheeignore(errors: list[str]) -> None:
@@ -222,6 +240,8 @@ def check_lycheeignore(errors: list[str]) -> None:
     escaped img\.shields\.io; modelcontextprotocol.io + linuxfoundation.org
     live excludes; stewardship/license-badge commentary; reject https://* /
     http://* / bare *; not wiki / relative pin spam.
+    Leftover deepen after #111: exact exclude URLs / RST rationale /
+    exact markdownlint JSON block / docs-lint leftover docstring.
     """
     if not LYCHEEIGNORE.is_file():
         return
@@ -279,6 +299,32 @@ def check_lycheeignore(errors: list[str]) -> None:
             "(https://* / http://* / bare *)",
             errors,
         )
+    # Leftover deepen after #111: exact live exclude URL lines (docs-lint leftovers).
+    if "https://modelcontextprotocol.io/" not in text:
+        fail(
+            ".lycheeignore must pin exact https://modelcontextprotocol.io/ exclude",
+            errors,
+        )
+    if "https://www.linuxfoundation.org/" not in text:
+        fail(
+            ".lycheeignore must pin exact https://www.linuxfoundation.org/ exclude",
+            errors,
+        )
+    if r"https://img\.shields\.io" not in text:
+        fail(
+            r".lycheeignore must pin exact https://img\.shields\.io exclude line",
+            errors,
+        )
+    if "Connection reset" not in text:
+        fail(
+            ".lycheeignore must note Connection reset flaky CDN rationale",
+            errors,
+        )
+    if "RST" not in text:
+        fail(
+            ".lycheeignore must note RST flaky CDN rationale",
+            errors,
+        )
 
 def check_actionlint_style(errors: list[str]) -> None:
     """Static actionlint-like checks on existing workflow paths only.
@@ -295,6 +341,8 @@ def check_actionlint_style(errors: list[str]) -> None:
     Third-pass after #108: concurrency:+cancel-in-progress: / permissions: present /
     reject actions|packages|pull-requests: write / finditer uses /
     docker continue / rsplit[-1] / third-pass docstring.
+    Leftover deepen after #111: contents: read / cancel-in-progress: true /
+    ubuntu-latest / fourth-pass docstring (actionlint leftovers; not invent-product).
     """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
@@ -342,6 +390,18 @@ def check_actionlint_style(errors: list[str]) -> None:
             ref = uses.rsplit("@", 1)[-1]
             if ref in {"main", "master", "latest"}:
                 fail(f"{name}: action must not float on @{ref}: {uses}", errors)
+        # Leftover deepen after #111: contents: read must be present (least privilege).
+        if "contents: read" not in text:
+            fail(f"{name}: actionlint-style requires contents: read", errors)
+        # Leftover deepen after #111: cancel-in-progress must be true (not false).
+        if not re.search(r"(?m)^\s*cancel-in-progress:\s*true\s*$", text):
+            fail(
+                f"{name}: actionlint-style requires cancel-in-progress: true",
+                errors,
+            )
+        # Leftover deepen after #111: ubuntu-latest runner pin on docs CI paths.
+        if "ubuntu-latest" not in text:
+            fail(f"{name}: actionlint-style requires ubuntu-latest", errors)
         # jobs must declare timeout (already checked globally; keep local needle).
         if "timeout-minutes:" not in text:
             fail(f"{name}: actionlint-style requires timeout-minutes on jobs", errors)
@@ -1803,6 +1863,71 @@ def check_docs_lint_gate_contract(errors: list[str]) -> None:
             errors,
         )
 
+    # Fail-closed after #111: docs-lint leftover deepen pins
+    # (docs-lint slice only; not actionlint / common / wiki spam).
+    docs_leftover = "Leftover deepen after #111: exact exclude " + "URLs"
+    if docs_leftover not in text:
+        fail(
+            "check_lycheeignore docstring must pin " + docs_leftover,
+            errors,
+        )
+    mcp_url = "https://modelcontextprotocol.io/"
+    if mcp_url not in text:
+        fail(
+            "check_lycheeignore must pin exact " + mcp_url + " exclude",
+            errors,
+        )
+    lfs_url = "https://www.linuxfoundation.org/"
+    if lfs_url not in text:
+        fail(
+            "check_lycheeignore must pin exact " + lfs_url + " exclude",
+            errors,
+        )
+    shields_exact = r"https://img\.shields\.io"
+    if shields_exact not in text:
+        fail(
+            r"check_lycheeignore must pin exact https://img\.shields\.io line",
+            errors,
+        )
+    rst_pin = "Connection reset"
+    if rst_pin not in text:
+        fail(
+            "check_lycheeignore must keep Connection reset / RST rationale pin",
+            errors,
+        )
+    pretty_json = '"MD060": false'
+    if "exact live docs-lint pretty JSON" not in text:
+        fail(
+            "check_workflows_and_license must keep exact live docs-lint pretty JSON pin",
+            errors,
+        )
+    docs_leftover_word = "docs-lint left" + "over"
+    if docs_leftover_word not in text:
+        fail(
+            "check_lycheeignore docstring must keep " + docs_leftover_word + " wording",
+            errors,
+        )
+    # docstring uses "docs-lint leftover docstring" — pin leftover + docstring
+    docs_leftover_doc = "docs-lint leftover " + "docstring"
+    if docs_leftover_doc not in text:
+        fail(
+            "check_lycheeignore docstring must keep " + docs_leftover_doc,
+            errors,
+        )
+    canonical_assign = 'canonical_md = ('
+    if canonical_assign not in text:
+        fail(
+            "check_workflows_and_license must assign canonical_md for pretty JSON pin",
+            errors,
+        )
+    self_docs = BADGE_GATE.read_text(encoding="utf-8")
+    docs_host_pin = "Fail-closed after #111: docs-lint leftover " + "deepen pins"
+    if docs_host_pin not in self_docs:
+        fail(
+            "check_docs_lint_gate_contract must keep " + docs_host_pin,
+            errors,
+        )
+
 
 def check_actionlint_style_gate_contract(errors: list[str]) -> None:
     """Fail-close live actionlint-style gate wiring (after #75; not relative-pin spam)."""
@@ -2274,8 +2399,81 @@ def check_actionlint_style_gate_contract(errors: list[str]) -> None:
             errors,
         )
 
+    # Fail-closed after #111: actionlint leftover deepen pins
+    # (actionlint-style slice only; not docs-lint / common / wiki spam).
+    leftover_doc = "Leftover deepen after #111: contents: " + "read"
+    if leftover_doc not in text:
+        fail(
+            "check_actionlint_style docstring must pin " + leftover_doc,
+            errors,
+        )
+    fail_contents_read = "actionlint-style requires contents: " + "read"
+    if fail_contents_read not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_contents_read + " fail needle",
+            errors,
+        )
+    fail_cancel_true = "actionlint-style requires cancel-in-progress: " + "true"
+    if fail_cancel_true not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_cancel_true + " fail needle",
+            errors,
+        )
+    fail_ubuntu = "actionlint-style requires ubuntu-" + "latest"
+    if fail_ubuntu not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_ubuntu + " fail needle",
+            errors,
+        )
+    contents_read_membership = '"contents: read" not in ' + "text"
+    contents_read_membership_sq = "'contents: read' not in " + "text"
+    if contents_read_membership not in text and contents_read_membership_sq not in text:
+        fail(
+            "check_actionlint_style must require contents: read via membership",
+            errors,
+        )
+    ubuntu_membership = '"ubuntu-latest" not in ' + "text"
+    ubuntu_membership_sq = "'ubuntu-latest' not in " + "text"
+    if ubuntu_membership not in text and ubuntu_membership_sq not in text:
+        fail(
+            "check_actionlint_style must require ubuntu-latest via membership",
+            errors,
+        )
+    cancel_true_frag = "cancel-in-progress:" + "\\s*true"
+    if cancel_true_frag not in text:
+        fail(
+            "check_actionlint_style must keep exact cancel-in-progress: true regex",
+            errors,
+        )
+    fourth_pass_doc = "fourth-pass " + "docstring"
+    if fourth_pass_doc not in text:
+        fail(
+            "check_actionlint_style docstring must pin " + fourth_pass_doc,
+            errors,
+        )
+    not_invent = "not invent-" + "product"
+    if not_invent not in text:
+        fail(
+            "check_actionlint_style leftover deepen must keep " + not_invent + " pin",
+            errors,
+        )
+    leftover_slice = "actionlint left" + "overs"
+    if leftover_slice not in text:
+        fail(
+            "check_actionlint_style docstring must keep " + leftover_slice + " wording",
+            errors,
+        )
+    # Unique host self-pin for leftover deepen section (mutate-safe).
+    self_al = BADGE_GATE.read_text(encoding="utf-8")
+    al_host_pin = "Fail-closed after #111: actionlint leftover " + "deepen pins"
+    if al_host_pin not in self_al:
+        fail(
+            "check_actionlint_style_gate_contract must keep " + al_host_pin,
+            errors,
+        )
+
 def check_stewardship_common_contract(errors: list[str]) -> None:
-    """Fail-close live stewardship_common wiring (after #65; deepen after #46)."""
+    """Fail-close live stewardship_common wiring (after #111; deepen after #65/#46)."""
     if not COMMON_GATE.is_file():
         fail("Missing scripts/stewardship_common.py (shared gate helpers)", errors)
         return
@@ -2576,6 +2774,292 @@ def check_stewardship_common_contract(errors: list[str]) -> None:
             'stewardship_common.py must set SECRET_URL_HINTS starting with "token="',
             errors,
         )
+
+    # Fail-closed after #111: third-pass helper / constant / needle pins
+    # (stewardship_common slice only; not docs-lint / wiki / relative /
+    # actionlint / schema / badge / CI workflow pin spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    future_pin = "from __future__ import " + "annotations"
+    if future_pin not in text:
+        fail(
+            "stewardship_common.py must keep from __future__ import annotations",
+            errors,
+        )
+    if "import re" not in text:
+        fail(
+            "stewardship_common.py must import re",
+            errors,
+        )
+    path_import = "from pathlib import " + "Path"
+    if path_import not in text:
+        fail(
+            "stewardship_common.py must import Path from pathlib",
+            errors,
+        )
+    priv_key = "-----BEGIN (?:RSA |OPENSSH |EC )?PRIVATE " + "KEY-----"
+    if priv_key not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact PRIVATE KEY pattern",
+            errors,
+        )
+    ghp_group = r"\b(ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9]{20,}\b"
+    if ghp_group not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact ghp|gho|ghu|ghs|ghr group",
+            errors,
+        )
+    github_pat_exact = r"\bgithub_pat_[A-Za-z0-9_]{20,}\b"
+    if github_pat_exact not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact github_pat_ pattern",
+            errors,
+        )
+    sk_rk_exact = r"\b(sk|rk)-[A-Za-z0-9]{20,}\b"
+    if sk_rk_exact not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact sk|rk pattern",
+            errors,
+        )
+    tuple_typing = "tuple[re.Pattern[str], " + "...]"
+    if tuple_typing not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must use tuple[re.Pattern[str], ...] typing",
+            errors,
+        )
+    secret_tuple_assign = "SECRET_PATTERNS: tuple"
+    if secret_tuple_assign not in text:
+        fail(
+            "stewardship_common.py must declare SECRET_PATTERNS: tuple",
+            errors,
+        )
+    fence_sub = "FENCED_BLOCK_RE.sub(" + '"", text)'
+    fence_sub_sq = "FENCED_BLOCK_RE.sub(" + "'', text)"
+    if fence_sub not in text and fence_sub_sq not in text:
+        fail(
+            "stewardship_common.py strip_fenced_code must FENCED_BLOCK_RE.sub(\"\", text)",
+            errors,
+        )
+    label_or = "label or str(path.relative_to(" + "ROOT))"
+    if label_or not in text:
+        fail(
+            "stewardship_common.py scan_secrets must use label or str(path.relative_to(ROOT))",
+            errors,
+        )
+    search_pin = "pattern.search(" + "text)"
+    if search_pin not in text:
+        fail(
+            "stewardship_common.py scan_secrets must call pattern.search(text)",
+            errors,
+        )
+    lowered_pin = "lowered = text." + "lower()"
+    if lowered_pin not in text:
+        fail(
+            "stewardship_common.py scan_secrets must set lowered = text.lower()",
+            errors,
+        )
+    escape_pin = "re.escape(" + "hint)"
+    if escape_pin not in text:
+        fail(
+            "stewardship_common.py scan_secrets must re.escape(hint) for URL-ish hints",
+            errors,
+        )
+    urlish_re = r"https?://[^\s)]*"
+    if urlish_re not in text:
+        fail(
+            "stewardship_common.py scan_secrets must match https?://[^\\s)]* URL-ish pattern",
+            errors,
+        )
+    glob_pin = "ROOT.glob(" + "pattern)"
+    if glob_pin not in text:
+        fail(
+            "stewardship_common.py markdown_files must ROOT.glob(pattern)",
+            errors,
+        )
+    update_pin = "found.update("
+    if update_pin not in text:
+        fail(
+            "stewardship_common.py markdown_files must found.update(...)",
+            errors,
+        )
+    set_path = "set[Path]"
+    if set_path not in text:
+        fail(
+            "stewardship_common.py markdown_files must type found as set[Path]",
+            errors,
+        )
+    wf_join = 'ROOT / ".github" / "workflows" / name'
+    wf_join_sq = "ROOT / '.github' / 'workflows' / name"
+    if wf_join not in text and wf_join_sq not in text:
+        fail(
+            'stewardship_common.py load_workflow_text must join ROOT / ".github" / "workflows" / name',
+            errors,
+        )
+    for_scheme = "for scheme in DANGEROUS_" + "LINK_SCHEMES"
+    if for_scheme not in text:
+        fail(
+            "stewardship_common.py has_dangerous_scheme must iterate DANGEROUS_LINK_SCHEMES",
+            errors,
+        )
+    for_pattern = "for pattern in SECRET_" + "PATTERNS"
+    if for_pattern not in text:
+        fail(
+            "stewardship_common.py scan_secrets must iterate SECRET_PATTERNS",
+            errors,
+        )
+    for_hint = "for hint in SECRET_URL_" + "HINTS"
+    if for_hint not in text:
+        fail(
+            "stewardship_common.py scan_secrets must iterate SECRET_URL_HINTS",
+            errors,
+        )
+    shared_helpers = "Shared helpers for stewardship doc " + "gates"
+    if shared_helpers not in text:
+        fail(
+            "stewardship_common.py must keep Shared helpers for stewardship doc gates pin",
+            errors,
+        )
+    endswith_eq = 'hint.endswith("=")'
+    endswith_eq_sq = "hint.endswith('=')"
+    if endswith_eq not in text and endswith_eq_sq not in text:
+        fail(
+            'stewardship_common.py scan_secrets must call hint.endswith("=")',
+            errors,
+        )
+    memory_dumps = "MEMORY " + "dumps"
+    if memory_dumps not in text:
+        fail(
+            "stewardship_common.py must keep MEMORY dumps comment pin",
+            errors,
+        )
+    str_none = "str | " + "None"
+    if str_none not in text:
+        fail(
+            "stewardship_common.py has_dangerous_scheme must annotate str | None",
+            errors,
+        )
+    list_path = "list[" + "Path]"
+    if list_path not in text:
+        fail(
+            "stewardship_common.py markdown_files must annotate list[Path]",
+            errors,
+        )
+    forbidden_head = (
+        "FORBIDDEN_BADGE_HINTS = (\n"
+        '    "coverage",\n'
+        '    "codecov",\n'
+        '    "coveralls",'
+    )
+    forbidden_head_sq = forbidden_head.replace('"', "'")
+    if forbidden_head not in text and forbidden_head_sq not in text:
+        fail(
+            'stewardship_common.py must set FORBIDDEN_BADGE_HINTS starting with coverage/codecov/coveralls',
+            errors,
+        )
+    # SECRET_URL_HINTS token-prefix members (live path; distinct from SECRET_PATTERNS).
+    for prefix in ('"ghp_"', '"gho_"', '"github_pat_"'):
+        if prefix not in text and prefix.replace('"', "'") not in text:
+            fail(
+                f"stewardship_common.py SECRET_URL_HINTS must pin {prefix}",
+                errors,
+            )
+    third_pass_doc = "Third-pass: future annotations / import re+" + "Path"
+    if third_pass_doc not in text:
+        fail(
+            "stewardship_common.py docstring must pin Third-pass future annotations / import re+Path",
+            errors,
+        )
+    module_third = "third-pass after " + "#111"
+    if module_third not in text and "third-pass after #111" not in text:
+        fail(
+            "stewardship_common.py docstring must keep third-pass after #111 pin",
+            errors,
+        )
+    # load_workflow_text must read with utf-8 when present.
+    load_utf8 = 'return path.read_text(encoding="utf-8")'
+    load_utf8_sq = "return path.read_text(encoding='utf-8')"
+    if load_utf8 not in text and load_utf8_sq not in text:
+        fail(
+            'stewardship_common.py load_workflow_text must return path.read_text(encoding="utf-8")',
+            errors,
+        )
+    scan_utf8 = 'text = path.read_text(encoding="utf-8")'
+    scan_utf8_sq = "text = path.read_text(encoding='utf-8')"
+    if scan_utf8 not in text and scan_utf8_sq not in text:
+        fail(
+            'stewardship_common.py scan_secrets must path.read_text(encoding="utf-8")',
+            errors,
+        )
+    # Exact aws / slack / npm / AIza regex fragments still live.
+    aws_re = r"aws_secret_access_key\s*[:=]\s*['\"]?[A-Za-z0-9/+=]{20,}"
+    if aws_re not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact aws_secret_access_key pattern",
+            errors,
+        )
+    xox_re = r"\bxox[baprs]-[A-Za-z0-9-]{10,}\b"
+    if xox_re not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact xox[baprs] pattern",
+            errors,
+        )
+    npm_re = r"\bnpm_[A-Za-z0-9]{20,}\b"
+    if npm_re not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact npm_ pattern",
+            errors,
+        )
+    aiza_re = r"\bAIza[0-9A-Za-z\-_]{20,}\b"
+    if aiza_re not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact AIza pattern",
+            errors,
+        )
+    api_key_re = r"(?i)api[_-]?key\s*[:=]\s*['\"]?[A-Za-z0-9_\-]{16,}"
+    if api_key_re not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact api[_-]?key pattern",
+            errors,
+        )
+    secret_assign_re = r"(?i)secret\s*[:=]\s*['\"]?[A-Za-z0-9_\-]{16,}"
+    if secret_assign_re not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact secret assign pattern",
+            errors,
+        )
+    passwd_re = r"(?i)(?:password|passwd|token)\s*[:=]\s*['\"][^'\"]{8,}['\"]"
+    if passwd_re not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact password|passwd|token assign pattern",
+            errors,
+        )
+
+
+    # Self-pins for third-pass docstring / slice commentary (host module).
+    self_host = BADGE_GATE.read_text(encoding="utf-8")
+    after_111_doc = "after #111; deepen after #65/" + "#46"
+    if after_111_doc not in self_host:
+        fail(
+            "check_stewardship_common_contract docstring must keep " + after_111_doc,
+            errors,
+        )
+    slice_only = "stewardship_common slice " + "only"
+    if slice_only not in self_host:
+        fail(
+            "check_stewardship_common_contract must keep " + slice_only + " pin",
+            errors,
+        )
+    spam_docs = "not docs-lint / wiki / relative " + "/"
+    if spam_docs not in self_host:
+        fail(
+            "check_stewardship_common_contract must keep not docs-lint / wiki / relative / spam pin",
+            errors,
+        )
+    if "Second-pass: ROOT parents[1]" not in text:
+        fail(
+            "stewardship_common.py docstring must keep Second-pass: ROOT parents[1] pin",
+            errors,
+        )
+
     contract_fn = "check_stewardship_common_" + "contract"
     # Self-pin: this contract helper name must remain reachable from main.
     self_text = BADGE_GATE.read_text(encoding="utf-8")

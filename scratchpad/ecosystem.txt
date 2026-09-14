@@ -631,3 +631,12 @@ _None yet._
 - Scope: EXISTING actionlint path-order leftover pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #157 leftover on post-#181 main; do not revive #157/#182/#143/#120
 - Branch: cursor/tokenmaxx-actionlint-path-order-after-181-3e1c
 2026-09-14T05:25:00Z
+
+### [ECO-066] TOKENMAXX deepen stewardship-schema third-pass after #189 — 2026-09-14T05:45:00Z
+- [x] cursor: Abandon closed CONFLICTING #183/#188; read live tree post-#189 (3402 cases; path-order saturated; schema still unsaturated)
+- [x] cursor: Fail-close schema third-pass + deepen on NEW branch — future annotations / Path parent / yaml=None / five live docs / true+false / null+~ / fullmatch / split+strip / FENCED search / nested reject / ACTIVE / EXPECTED get / closes scope / path.is_file / block.strip / Exception as exc / STRING_KEYS / engine PyYAML / BLE001 / got != want / DATE_KEYS
+- [x] cursor: Expand self-tests 3402 → 3590 (schema leftover slice only; not actionlint path-order #189 / wiki-index #181 / run_stewardship #179 / path-filter #176 spam)
+- [ ] cursor: Green draft PR with CI
+- Scope: EXISTING stewardship-schema integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #164 leftover on post-#189 main; do not revive #164/#163/#142/#183/#187/#188
+- Branch: cursor/tokenmaxx-schema-third-pass-after-189-d189
+2026-09-14T05:45:00Z

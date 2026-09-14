@@ -196,7 +196,15 @@ do not revive #177/#168/#170; distinct from path-filter #176 and run_stewardship
 plus actionlint path-order leftover after #181: contiguous three-path
 actionlint order / exact bash <(curl -fsSL) download /
 reject continue-on-error: true / Download actionlint + actionlint existing
-workflow paths step names / path-order leftover docstring).
+workflow paths step names / path-order leftover docstring),
+plus stewardship-schema third-pass + deepen after #189: future annotations /
+Path parent / yaml=None / five live docs / true+false / null+~ / fullmatch /
+split+strip quotes / FENCED search / nested reject / ACTIVE / EXPECTED get /
+closes scope / path.is_file / block.strip / Exception as exc / STRING_KEYS /
+engine PyYAML / BLE001 / got != want / DATE_KEYS / deepen docstring
+(schema leftover slice only; lands closed #164/#163/#142/#183/#187/#188 leftover;
+do not revive #164/#163/#142/#147/#153/#171/#183/#187/#188; distinct from
+actionlint path-order #189).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

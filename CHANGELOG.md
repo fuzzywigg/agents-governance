@@ -11,6 +11,19 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-schema third-pass + deepen pins after #189: expand
+  self-tests to 3590 cases (was 3402) fail-closing live schema integrity —
+  future annotations / Path parent / yaml=None / five live docs / true+false /
+  null+~ / fullmatch / split+strip quotes / FENCED search / nested reject /
+  ACTIVE / EXPECTED get / closes scope / path.is_file / block.strip /
+  Exception as exc / STRING_KEYS / engine PyYAML / BLE001 / got != want /
+  DATE_KEYS / deepen docstring — schema leftover slice only (not
+  actionlint path-order #189 / wiki-index #181 / run_stewardship Pass-2 #179 /
+  path-filter #176 spam); no invent-product; no fourth badge. Lands closed
+  #164/#163/#142/#183/#187/#188 leftover on post-#189 main (do **not** revive
+  #164/#163/#142/#147/#153/#171/#183/#187/#188). Distinct from merged
+  actionlint path-order (#189). Abandons closed CONFLICTING #183/#188.
+
 - TOKENMAXX actionlint path-order leftover after #181: expand self-tests to
   3402 cases (was 3330) fail-closing live actionlint path-order leftovers —
   contiguous three-path actionlint order (`link-check` → `markdown-lint` →

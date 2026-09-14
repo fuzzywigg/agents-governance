@@ -783,3 +783,5 @@ _None yet._
 2026-09-14T08:28:00Z
 
 2026-09-14T08:28:00Z cursor: Rebased ECO-076 onto post-#239 tip (54b2105); leave draft / do-not-merge; do not revive #240/#235/#230; do not redo #239 md/link / #233 schema
+
+2026-09-14T08:35:00Z cursor: Local green — run_stewardship + self-tests 4686 + markdownlint ← ECO-076 Pass-2 residual leftover + existing templates/AGENTS-REPO.md after #239 (leave draft; do not revive #240/#235/#230)

@@ -387,4 +387,4 @@ _None yet._
 - Branch: cursor/tokenmaxx-docs-ci-config-pins-5eb1
 2026-09-14T00:38:48Z
 
-2026-09-14T00:56:00Z cursor: PR #95 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-048 TOKENMAXX docs CI config pins
+2026-09-14T00:56:27Z cursor: PR #95 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-048 TOKENMAXX docs CI config pins

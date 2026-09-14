@@ -11,6 +11,28 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-schema residual CI deepen after #293 tip: expand
+  self-tests to 6228 cases (was 5992) fail-closing unsaturated schema-only
+  residual CI helper needles on existing `check_stewardship_schema.py` —
+  `if errors:` / `return 1` / `return 0` / `DOC_SCHEMAS.items()` /
+  `for key in required_keys:` / `path.is_file` / `block.strip` /
+  `STRING_KEYS isinstance` / `autonomy_level in data` / `edit_policy in data` /
+  `date_key not in data` / `ISO_DATE_RE.match` / `SEMVER_RE.match` /
+  `ISSUE_REF_RE.search` / `re.fullmatch digit` / `value[1:-1]` /
+  `expected.items` / `level = data["autonomy_level"]` / err print /
+  `splitlines` / line+key strip / nonempty compound / `path = ROOT / rel` /
+  residual CI status stubs SHELVED|SUPERSEDED|HOLD|STALE|ALPHA|NIGHTLY /
+  residual CI surface stubs chatgpt|vertex|groq|together|mistral — schema
+  residual CI slice only (not wiki/mdlink leftover residual
+  #293 / not schema leftover residual #282 / not
+  lychee/blob-503 leftover #278 / not Pass-2 residual leftover #272 /
+  not path-filter/path-order leftover #262 / not schema leftover #258 /
+  not wiki/mdlink leftover #252 / not path-edges residual #244 / not
+  stewardship-checks/schema residual #233); no invent-product; no fourth
+  badge; no stewardship_common invent. Distinct from merged PRs
+  #293/#282/#278/#272/#262/#258/#252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
+  Lands closed #290/#268 leftover on post-#293 tip (do **not** revive
+  #290/#268/#259/#257/#253/#248/#241).
 - TOKENMAXX wiki/mdlink leftover residual deepen after #282 tip: expand
   self-tests to 5992 cases (was 5792) fail-closing unsaturated wiki outline /
   PUBLISH.md residual plus markdown-lint / link-check residual harden plus

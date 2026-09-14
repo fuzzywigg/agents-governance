@@ -872,3 +872,13 @@ _None yet._
 2026-09-14T10:44:39Z cursor: Cherry-pick in progress on post-#272 tip; local verify next ← ECO-081 (do not revive #246/#273/#266/#261/#260/#256/#251/#250)
 
 2026-09-14T10:51:26Z cursor: Local green — run_stewardship + self-tests 5592 + markdownlint on post-#272 tip ← ECO-081 lychee/blob-503 leftover only (leave draft; do not revive #246/#273/#266/#261/#260/#256/#251/#250)
+
+### [ECO-082] TOKENMAXX deepen stewardship-schema leftover residual after #278 — 2026-09-14T11:07:56Z
+- [x] cursor: Tip advanced — #278 merged lychee/blob-503 harden after #272; abandon closed #279/#276/#275/#269
+- [x] cursor: Re-land schema leftover residual (lint-clean MD018-safe docs) onto post-#278 tip
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING schema + stewardship_common leftover residual only; no invent templates; no DNS; no secrets; do not redo #278 lychee / #272 Pass-2 / #262 path-edges / #258 schema leftover / #252 wiki-mdlink
+- Branch: cursor/tokenmaxx-schema-residual-after-278-8f01
+2026-09-14T11:07:56Z
+
+2026-09-14T11:07:56Z cursor: Cherry-pick #279 onto post-#278 tip; local verify next ← ECO-082 (do not revive #279/#276/#275/#269/#263/#257/#253/#248/#241; prior #269 RED was MD018)

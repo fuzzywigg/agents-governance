@@ -208,6 +208,10 @@ back-to-back gates→self-tests block / no inline check_*.py /
 self-tests before actionlint (lands closed #193/#178 leftover; do not
 revive #193/#178/#175/#140; distinct from schema third-pass #191 and
 path-order #189)).
+plus stewardship-schema fourth-pass after #199 tip: nested policy refs /
+invalid status+surface enum stubs / whitespace-only / nested+list rejects /
+pass-4 contract pins (lands closed #171/#200 leftover; do not revive closed
+closed #171/#200/#194/#190/#188/#187/#183),
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

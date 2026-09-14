@@ -279,6 +279,11 @@ not Pass-2 leftover + md/link #220 / not wiki-badge leftover #227 /
 not stewardship-checks/schema leftover #233 / not md/link residual #239 /
 not stewardship-badge lint #208; do not revive
 closed #236/#232/#228/#226/#223/#217/#213/#198/#186/#166/#157)).
+plus stewardship-schema residual deepen after #244 tip: leftover parse/load
+helper needles + leftover status/surface stubs — DISTINCT residual edges only
+(not path-edges residual #244 / not wiki outline/PUBLISH leftover #243 /
+not md/link residual #239 / not stewardship-checks/schema residual #233 /
+not open leftover #253; do not revive #248/#241)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

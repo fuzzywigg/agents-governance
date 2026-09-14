@@ -806,3 +806,16 @@ _None yet._
 2026-09-14T08:40:00Z cursor: Local green — run_stewardship + self-tests 4792 + markdownlint ← ECO-076 path-filter/path-order residuals after #243 (leave draft; do not revive #236/#232/#228)
 
 2026-09-14T08:40:30Z cursor: Draft PR #244 opened (cursor/tokenmaxx-path-edges-residual-after-243-7fba); leave draft / do-not-merge; awaiting CI ← ECO-076 residual after #243 (do not revive #236/#232/#228)
+
+### [ECO-077] TOKENMAXX deepen stewardship-schema residual after #244 — 2026-09-14T09:36:58Z
+- [x] cursor: Read live tree post-#244 (4792 cases; path-edges residual saturated; open leftover #253 schema+common)
+- [x] cursor: Fail-close DISTINCT schema-only residual parse/load helper needles + leftover status/surface stubs on post-#244 tip
+- [x] cursor: Expand self-tests 4792 → 5028 (schema residual slice only; not #244/#243/#239/#233/#253 spam; do not revive #248/#241)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING check_stewardship_schema.py residual edge pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no stewardship_common; do not revive #248/#241; do not redo #244/#243/#239/#233; leave open #253 alone
+- Branch: cursor/tokenmaxx-schema-residual-after-244-f46e
+2026-09-14T09:36:58Z
+
+2026-09-14T09:36:58Z cursor: Local green pending — run_stewardship + self-tests 5028 + markdownlint ← ECO-077 schema residual after #244 (leave draft; do not revive #248/#241; leave #253 alone)
+
+2026-09-14T09:43:24Z cursor: Local green — run_stewardship + self-tests 5028 + markdownlint ← ECO-077 schema residual after #244 (leave draft; do not revive #248/#241; leave #253 alone)

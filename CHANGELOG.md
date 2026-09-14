@@ -11,6 +11,23 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-schema residual deepen after #244 tip: expand
+  self-tests to 5028 cases (was 4792) fail-closing DISTINCT leftover schema
+  parse/load helper needles on existing `check_stewardship_schema.py` only —
+  `for raw in text.splitlines():` / `line = raw.strip()` / `key = key.strip()` /
+  `value = value.strip()` / `if not line or` / `value.startswith('"')` /
+  `value.endswith('"')` / `return parse_simple_yaml(text)` / `path = ROOT / rel` /
+  `got = data.get(key)` / `for key, want in expected.items():` /
+  `level = data["autonomy_level"]` / `tier = data["tier"]` /
+  `if str(_SCRIPTS) not in sys.path:` / `print(f"  - {err}"` /
+  `isinstance(value, str) and not value.strip()` — plus leftover invalid status
+  stubs PAUSED|QUARANTINE|PREVIEW|SUNSET|DORMANT|ABANDONED and leftover invalid
+  surface stubs gemini|bedrock|ollama|huggingface|replicate — schema residual
+  slice only (not path-edges residual #244 / not wiki outline/PUBLISH leftover
+  #243 / not md/link residual #239 / not stewardship-checks/schema residual #233 /
+  not open leftover #253); no invent-product; no fourth badge; no
+  `stewardship_common` / templates / AGENTS-ECOSYSTEM edits. Do **not** revive
+  #248/#241. Distinct from merged #244/#243/#239/#233/#227/#225 and open #253.
 - TOKENMAXX actionlint path-filter/path-order residual deepen after #243 tip:
   expand self-tests to 4792 cases (was 4646) fail-closing DISTINCT residual
   actionlint path-filter / path-order edges on existing workflow modules —

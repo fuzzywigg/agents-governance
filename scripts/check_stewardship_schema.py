@@ -46,6 +46,20 @@ Fail-closed pins (live path after #53; second-pass after #72/#75):
   stubs WIP|BETA|LEGACY|FROZEN|CANCELLED|PROTOTYPE / residual invalid surface stubs
   openai|anthropic|slack|auto|agents / "status" in required_keys / loaded is None /
   value.lower() == "true" / int(value) / if not text.strip() / residual docstring
+- Residual deepen after #244 (schema residual; NOT path-edges residual #244 /
+  NOT wiki outline/PUBLISH leftover #243 / NOT md/link residual #239 /
+  NOT stewardship-checks/schema residual #233 / NOT open leftover #253):
+  leftover parse/load helper needles for raw in text.splitlines(): /
+  line = raw.strip() / key = key.strip() / value = value.strip() /
+  if not line or / value.startswith('"') / value.endswith('"') /
+  return parse_simple_yaml(text) / path = ROOT / rel /
+  got = data.get(key) / for key, want in expected.items(): /
+  level = data["autonomy_level"] / tier = data["tier"] /
+  if str(_SCRIPTS) not in sys.path: / print(f"  - {err}" /
+  isinstance(value, str) and not value.strip() /
+  leftover invalid status stubs PAUSED|QUARANTINE|PREVIEW|SUNSET|DORMANT|ABANDONED /
+  leftover invalid surface stubs gemini|bedrock|ollama|huggingface|replicate /
+  residual deepen docstring
 """
 
 from __future__ import annotations

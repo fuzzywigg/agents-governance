@@ -697,3 +697,7 @@ _None yet._
   do not revive #198/#186/#166/#157; distinct from open #206/#207
 - Branch: cursor/tokenmaxx-actionlint-path-edges-after-203-e7ec
 2026-09-14T06:24:40Z
+
+2026-09-14T06:30:00Z cursor: Local green — run_stewardship + self-tests 3806 + markdownlint ← ECO-070 actionlint path-edges after #203 (do not revive #198/#186/#166/#157; leave open #206/#207 alone)
+
+2026-09-14T06:30:00Z cursor: Draft PR #215 opened (cursor/tokenmaxx-actionlint-path-edges-after-203-e7ec); awaiting CI ← ECO-070 actionlint path-edges after #203 tip (lands closed #198 leftover; distinct from open md/link #206/#207)

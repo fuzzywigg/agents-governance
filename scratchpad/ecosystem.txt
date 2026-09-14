@@ -863,3 +863,5 @@ _None yet._
 2026-09-14T10:58:28Z cursor: Local green — run_stewardship + self-tests 5702 + markdownlint ← ECO-078 path-filter/path-order leftover after #272 (leave draft; do not revive #274/#270/#264)
 
 2026-09-14T10:58:54Z cursor: Draft PR opened (cursor/tokenmaxx-path-edges-leftover-after-272-9af1); leave draft / do-not-merge; awaiting CI ← ECO-078 path-filter/path-order leftover after #272 (do not revive #274/#270/#264; do not redo #272/#262/#258/#252)
+
+2026-09-14T10:59:01Z cursor: Draft PR #280 opened (cursor/tokenmaxx-path-edges-leftover-after-272-9af1); leave draft / do-not-merge; awaiting CI ← ECO-078 path-filter/path-order leftover after #272 (do not revive #274/#270/#264)

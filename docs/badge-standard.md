@@ -216,7 +216,11 @@ do not revive #175/#140/#122),
 plus wiki-index validators after #176: Home TOC empty-index / publishable
 page index stubs / broken internal stub links / empty markdown index /
 duplicate slug `headings_in` set collapse — lands closed #177/#168/#170 leftover;
-do not revive #177/#168/#170; distinct from path-filter #176 and run_stewardship #179).
+do not revive #177/#168/#170; distinct from path-filter #176 and run_stewardship #179,
+plus stewardship-schema third-pass + deepen after #179 tip: future annotations /
+Path parent / yaml=None / five live docs / parse pins / path.is_file /
+block.strip / STRING_KEYS / BLE001 / DATE_KEYS / deepen docstring (lands
+closed #183/#164 leftover; do not revive closed #183/#164/#163/#142/#147/#153/#171)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

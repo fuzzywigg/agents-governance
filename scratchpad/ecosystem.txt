@@ -622,3 +622,19 @@ _None yet._
 2026-09-14T05:28:00Z cursor: Draft PR #181 opened (rebased wiki-index after #176 onto post-#179 tip; 3330 cases) — awaiting CI; do not revive #177/#180
 
 2026-09-14T05:30:00Z cursor: PR #181 CI green (lint + link-check + stewardship) ← complete ECO-064 TOKENMAXX wiki-index validators after #176 (does not revive #177/#180)
+2026-09-14T05:16:57Z cursor: PR #181 MERGED (wiki-index validators after #176; 3330 cases) ← complete ECO-064 wiki-index (do not revive #180/#177/#168/#170)
+
+2026-09-14T05:22:00Z cursor: PR #185 CLOSED CONFLICTING (wiki-index after #179 tip raced #181) — do not revive; pivot to unsaturated schema third-pass leftover
+
+2026-09-14T05:22:00Z cursor: PR #183 CLOSED CONFLICTING (schema third-pass after #179) — unsaturated leftover for post-#181 tip
+
+### [ECO-065] TOKENMAXX deepen stewardship-schema third-pass after #179 tip — 2026-09-14T05:25:00Z
+- [x] cursor: Read live tree post-#181 (3330 cases; wiki-index saturated via #181; run_stewardship saturated via #179; #183 CLOSED CONFLICTING — do not revive; pick unsaturated schema third-pass leftover)
+- [x] cursor: Fail-close schema third-pass + deepen — future annotations / Path parent / yaml=None / five docs / parse pins / path.is_file / block.strip / STRING_KEYS / BLE001 / DATE_KEYS / contract pins
+- [x] cursor: Expand self-tests 3330 → 3518 (schema leftover slice; not wiki-index #181 / run_stewardship #179 / path-filter #176 / fixtures #173 spam)
+- [ ] cursor: Green draft PR with CI
+- Scope: EXISTING check_stewardship_schema.py + schema gate-contract integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #183/#164 leftover on post-#181 tip; do not revive #183/#164/#163/#142/#147/#153/#171
+- Branch: cursor/tokenmaxx-schema-third-pass-after-179-57e2
+2026-09-14T05:25:00Z
+
+2026-09-14T05:30:00Z cursor: Local green — run_stewardship + self-tests 3518 + markdownlint ← ECO-065 stewardship-schema third-pass after #179 tip (do not revive #183/#164/#163/#142; distinct from wiki-index #181 / run_stewardship #179 / path-filter #176)

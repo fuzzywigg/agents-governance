@@ -3,6 +3,10 @@
 
 Runs in CI after the live-tree gates so regressions in checkers fail closed.
 Does not invent product surface — only validates gate behavior.
+Deepened after #176: wiki-index validators — Home TOC empty-index /
+publishable page index stubs / broken internal stub links / empty markdown
+index / duplicate slug headings_in set collapse (not wiki-badge #141 /
+fixtures #173 / path-filter #176 / run_stewardship #179 spam).
 TOKENMAXX coverage: badge / wiki / schema / relative / workflow / secrets /
 lycheeignore shields / actionlint-style / markdown-link edges.
 Deepened after #100: docs-lint (.lycheeignore + .markdownlint.json) exact
@@ -46710,6 +46714,1081 @@ def test_run_stewardship_gate_requires_exact_root_pin_still_after_176() -> None:
 
 
 
+def test_wiki_index_gate_doc_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert "Wiki-index after #176" in text
+        path.write_text(
+            text.replace("Wiki-index after #176", "Wiki-outline after #176"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Wiki-index after #176",
+        )
+
+def test_wiki_index_gate_doc_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert "Wiki-index after #176" in text
+        path.write_text(
+            text.replace("Wiki-index after #176", "Wiki-outline after #176"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Wiki-index after #176",
+        )
+
+def test_wiki_index_gate_empty_index_doc_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert "Home TOC empty-index" in text
+        path.write_text(
+            text.replace("Home TOC empty-index", "Home TOC blank-index"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Home TOC empty-index",
+        )
+
+def test_wiki_index_gate_empty_index_doc_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert "Home TOC empty-index" in text
+        path.write_text(
+            text.replace("Home TOC empty-index", "Home TOC blank-index"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Home TOC empty-index",
+        )
+
+def test_wiki_index_gate_publishable_stubs_doc_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert "publishable page index stubs" in text
+        path.write_text(
+            text.replace("publishable page index stubs", "publishable page index hints"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "publishable page index stubs",
+        )
+
+def test_wiki_index_gate_publishable_stubs_doc_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert "publishable page index stubs" in text
+        path.write_text(
+            text.replace("publishable page index stubs", "publishable page index hints"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "publishable page index stubs",
+        )
+
+def test_wiki_index_gate_link_publishable_needle_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert "Home.md must link to publishable page" in text
+        path.write_text(
+            text.replace(
+                "Home.md must link to publishable page",
+                "Home.md must link to publishable leaf",
+            ),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Home.md must link to publishable page",
+        )
+
+def test_wiki_index_gate_link_publishable_needle_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert "Home.md must link to publishable page" in text
+        path.write_text(
+            text.replace(
+                "Home.md must link to publishable page",
+                "Home.md must link to publishable leaf",
+            ),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Home.md must link to publishable page",
+        )
+
+def test_wiki_index_gate_toc_comment_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert "Wiki-index: Home is the TOC" in text
+        path.write_text(
+            text.replace("Wiki-index: Home is the TOC", "Wiki-index: Home is the map"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Wiki-index Home is the TOC",
+        )
+
+def test_wiki_index_gate_toc_comment_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert "Wiki-index: Home is the TOC" in text
+        path.write_text(
+            text.replace("Wiki-index: Home is the TOC", "Wiki-index: Home is the map"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Wiki-index Home is the TOC",
+        )
+
+def test_wiki_index_gate_not_badge_spam_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert "not wiki-badge #141" in text
+        path.write_text(
+            text.replace("not wiki-badge #141", "not wiki-badge #999"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "not wiki-badge #141",
+        )
+
+def test_wiki_index_gate_not_badge_spam_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert "not wiki-badge #141" in text
+        path.write_text(
+            text.replace("not wiki-badge #141", "not wiki-badge #999"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "not wiki-badge #141",
+        )
+
+def test_wiki_index_rejects_empty_home_toc_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Home.md"] = (
+                "# Home\n\n"
+                "[README](https://github.com/fuzzywigg/agents-governance/blob/main/README.md)\n"
+                "[Badge](../badge-standard.md)\n\n"
+                "## Out of scope\n\nSecrets and invent product frameworks.\n"
+                "Kill switch blocks agent writes.\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "Home.md must link to publishable page",
+        )
+
+def test_wiki_index_rejects_empty_home_toc_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Home.md"] = (
+                "# Home\n\n"
+                "[README](https://github.com/fuzzywigg/agents-governance/blob/main/README.md)\n"
+                "[Badge](../badge-standard.md)\n\n"
+                "## Out of scope\n\nSecrets and invent product frameworks.\n"
+                "Kill switch blocks agent writes.\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "Home.md must link to publishable page",
+        )
+
+def test_wiki_index_rejects_blank_home_body_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Home.md"] = "# Home\n\n"
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "Home.md must link",
+        )
+
+def test_wiki_index_rejects_blank_home_body_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Home.md"] = "# Home\n\n"
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "Home.md must link",
+        )
+
+def test_wiki_index_rejects_home_missing_overview_stub_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Home.md"] = pages["Home.md"].replace(
+                "[Overview](Overview.md)\n", ""
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "Home.md must link to publishable page Overview.md",
+        )
+
+def test_wiki_index_rejects_home_missing_overview_stub_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Home.md"] = pages["Home.md"].replace(
+                "[Overview](Overview.md)\n", ""
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "Home.md must link to publishable page Overview.md",
+        )
+
+def test_wiki_index_rejects_home_missing_security_stub_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Home.md"] = pages["Home.md"].replace(
+                "[Security-Boundaries](Security-Boundaries.md)\n", ""
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "Home.md must link to publishable page Security-Boundaries.md",
+        )
+
+def test_wiki_index_rejects_home_missing_security_stub_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Home.md"] = pages["Home.md"].replace(
+                "[Security-Boundaries](Security-Boundaries.md)\n", ""
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "Home.md must link to publishable page Security-Boundaries.md",
+        )
+
+def test_wiki_index_rejects_home_missing_routing_stub_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Home.md"] = pages["Home.md"].replace(
+                "[Agent-Routing](Agent-Routing.md)\n", ""
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "Home.md must link to publishable page Agent-Routing.md",
+        )
+
+def test_wiki_index_rejects_home_missing_routing_stub_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Home.md"] = pages["Home.md"].replace(
+                "[Agent-Routing](Agent-Routing.md)\n", ""
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "Home.md must link to publishable page Agent-Routing.md",
+        )
+
+def test_relative_wiki_index_gate_doc_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8")
+        assert "Wiki-index after #176" in text
+        path.write_text(
+            text.replace("Wiki-index after #176", "Wiki-links after #176"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Wiki-index after #176",
+        )
+
+def test_relative_wiki_index_gate_doc_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8")
+        assert "Wiki-index after #176" in text
+        path.write_text(
+            text.replace("Wiki-index after #176", "Wiki-links after #176"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Wiki-index after #176",
+        )
+
+def test_relative_wiki_index_broken_stub_doc_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8")
+        assert "broken internal stub links" in text
+        path.write_text(
+            text.replace("broken internal stub links", "broken internal leaf links"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "broken internal stub links",
+        )
+
+def test_relative_wiki_index_broken_stub_doc_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8")
+        assert "broken internal stub links" in text
+        path.write_text(
+            text.replace("broken internal stub links", "broken internal leaf links"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "broken internal stub links",
+        )
+
+def test_relative_wiki_index_empty_md_doc_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8")
+        assert "empty markdown index" in text
+        path.write_text(
+            text.replace("empty markdown index", "empty markdown catalog"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "empty markdown index",
+        )
+
+def test_relative_wiki_index_empty_md_doc_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8")
+        assert "empty markdown index" in text
+        path.write_text(
+            text.replace("empty markdown index", "empty markdown catalog"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "empty markdown index",
+        )
+
+def test_relative_wiki_index_dup_slug_doc_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8")
+        assert "duplicate slug headings_in set" in text
+        path.write_text(
+            text.replace(
+                "duplicate slug headings_in set",
+                "duplicate slug headings_in list",
+            ),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "duplicate slug headings_in set",
+        )
+
+def test_relative_wiki_index_dup_slug_doc_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8")
+        assert "duplicate slug headings_in set" in text
+        path.write_text(
+            text.replace(
+                "duplicate slug headings_in set",
+                "duplicate slug headings_in list",
+            ),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "duplicate slug headings_in set",
+        )
+
+def test_relative_wiki_index_set_collapse_pin_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8")
+        assert "{github_slug(match.group(2))" in text
+        path.write_text(
+            text.replace(
+                "{github_slug(match.group(2))",
+                "[github_slug(match.group(2))",
+            ),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "collapse duplicate slugs via set",
+        )
+
+def test_relative_wiki_index_set_collapse_pin_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8")
+        assert "{github_slug(match.group(2))" in text
+        path.write_text(
+            text.replace(
+                "{github_slug(match.group(2))",
+                "[github_slug(match.group(2))",
+            ),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "collapse duplicate slugs via set",
+        )
+
+def test_relative_wiki_index_dup_docstring_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8")
+        assert "duplicate headings collapse to one slug" in text
+        path.write_text(
+            text.replace(
+                "duplicate headings collapse to one slug",
+                "duplicate headings collapse to one anchor",
+            ),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "duplicate slug collapse",
+        )
+
+def test_relative_wiki_index_dup_docstring_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8")
+        assert "duplicate headings collapse to one slug" in text
+        path.write_text(
+            text.replace(
+                "duplicate headings collapse to one slug",
+                "duplicate headings collapse to one anchor",
+            ),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "duplicate slug collapse",
+        )
+
+def test_relative_wiki_index_dup_comment_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8")
+        assert "Duplicate slug edge: set collapse" in text
+        path.write_text(
+            text.replace(
+                "Duplicate slug edge: set collapse",
+                "Duplicate slug edge: list collapse",
+            ),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Duplicate slug edge set collapse",
+        )
+
+def test_relative_wiki_index_dup_comment_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8")
+        assert "Duplicate slug edge: set collapse" in text
+        path.write_text(
+            text.replace(
+                "Duplicate slug edge: set collapse",
+                "Duplicate slug edge: list collapse",
+            ),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Duplicate slug edge set collapse",
+        )
+
+def test_relative_wiki_index_empty_index_needle_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8")
+        assert "no markdown files found" in text
+        path.write_text(
+            text.replace("no markdown files found", "no markdown files present"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "empty markdown index",
+        )
+
+def test_relative_wiki_index_empty_index_needle_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_relative_links.py"
+        text = path.read_text(encoding="utf-8")
+        assert "no markdown files found" in text
+        path.write_text(
+            text.replace("no markdown files found", "no markdown files present"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "empty markdown index",
+        )
+
+def test_relative_rejects_wiki_home_stub_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(
+            tmp_path / "docs" / "wiki" / "Home.md",
+            "# Home\n\nSee [missing stub](Missing-Stub.md).\n",
+        )
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "broken relative link",
+        )
+
+def test_relative_rejects_wiki_home_stub_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(
+            tmp_path / "docs" / "wiki" / "Home.md",
+            "# Home\n\nSee [missing stub](Missing-Stub.md).\n",
+        )
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "broken relative link",
+        )
+
+def test_relative_rejects_wiki_overview_stub_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(
+            tmp_path / "docs" / "wiki" / "Overview.md",
+            "# O\n\n[Home](Home.md)\n\nSee [stub](./Ghost-Page.md).\n",
+        )
+        _write(tmp_path / "docs" / "wiki" / "Home.md", "# Home\n\nOk.\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "broken relative link",
+        )
+
+def test_relative_rejects_wiki_overview_stub_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(
+            tmp_path / "docs" / "wiki" / "Overview.md",
+            "# O\n\n[Home](Home.md)\n\nSee [stub](./Ghost-Page.md).\n",
+        )
+        _write(tmp_path / "docs" / "wiki" / "Home.md", "# Home\n\nOk.\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "broken relative link",
+        )
+
+def test_relative_rejects_wiki_image_stub_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(
+            tmp_path / "docs" / "wiki" / "Home.md",
+            "# Home\n\n![alt](./missing-diagram.md)\n",
+        )
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "broken relative link",
+        )
+
+def test_relative_rejects_wiki_image_stub_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(
+            tmp_path / "docs" / "wiki" / "Home.md",
+            "# Home\n\n![alt](./missing-diagram.md)\n",
+        )
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "broken relative link",
+        )
+
+def test_relative_rejects_wiki_angle_stub_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(
+            tmp_path / "docs" / "wiki" / "Home.md",
+            "# Home\n\nSee [x](<Absent-Stub.md>).\n",
+        )
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "broken relative link",
+        )
+
+def test_relative_rejects_wiki_angle_stub_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(
+            tmp_path / "docs" / "wiki" / "Home.md",
+            "# Home\n\nSee [x](<Absent-Stub.md>).\n",
+        )
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "broken relative link",
+        )
+
+def test_relative_rejects_wiki_title_stub_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(
+            tmp_path / "docs" / "wiki" / "Home.md",
+            '# Home\n\nSee [x](No-Such.md "title").\n',
+        )
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "broken relative link",
+        )
+
+def test_relative_rejects_wiki_title_stub_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(
+            tmp_path / "docs" / "wiki" / "Home.md",
+            '# Home\n\nSee [x](No-Such.md "title").\n',
+        )
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "broken relative link",
+        )
+
+def test_relative_rejects_wiki_nested_stub_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(
+            tmp_path / "docs" / "wiki" / "Repo-Stewardship.md",
+            "# R\n\nSee [stub](../missing-ops.md).\n",
+        )
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "broken relative link",
+        )
+
+def test_relative_rejects_wiki_nested_stub_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(
+            tmp_path / "docs" / "wiki" / "Repo-Stewardship.md",
+            "# R\n\nSee [stub](../missing-ops.md).\n",
+        )
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "broken relative link",
+        )
+
+def test_relative_rejects_empty_markdown_index_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "no markdown files found",
+        )
+
+def test_relative_rejects_empty_markdown_index_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "no markdown files found",
+        )
+
+def test_relative_dup_slug_collapse_helper_after_176() -> None:
+    import sys as _sys
+
+    if str(SCRIPTS) not in _sys.path:
+        _sys.path.insert(0, str(SCRIPTS))
+    from check_relative_links import github_slug, headings_in  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / "dup.md"
+        path.write_text(
+            "# Title\n\n## Section\n\nbody\n\n## Section\n\nmore\n",
+            encoding="utf-8",
+        )
+        slugs = headings_in(path)
+        if "section" not in slugs:
+            raise AssertionError(f"expected section slug, got {slugs!r}")
+        if len(slugs & {"section"}) != 1:
+            raise AssertionError("duplicate slug must collapse in set")
+        if github_slug("Section") != "section":
+            raise AssertionError("github_slug Section")
+
+def test_relative_dup_slug_collapse_helper_still_after_176() -> None:
+    import sys as _sys
+
+    if str(SCRIPTS) not in _sys.path:
+        _sys.path.insert(0, str(SCRIPTS))
+    from check_relative_links import github_slug, headings_in  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / "dup.md"
+        path.write_text(
+            "# Title\n\n## Section\n\nbody\n\n## Section\n\nmore\n",
+            encoding="utf-8",
+        )
+        slugs = headings_in(path)
+        if "section" not in slugs:
+            raise AssertionError(f"expected section slug, got {slugs!r}")
+        if len(slugs & {"section"}) != 1:
+            raise AssertionError("duplicate slug must collapse in set")
+        if github_slug("Section") != "section":
+            raise AssertionError("github_slug Section")
+
+def test_relative_dup_slug_fragment_resolves_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(
+            tmp_path / "README.md",
+            "# Title\n\n## Section\n\nA\n\n## Section\n\nB\n\n"
+            "See [x](#section).\n",
+        )
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+def test_relative_dup_slug_fragment_resolves_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(
+            tmp_path / "README.md",
+            "# Title\n\n## Section\n\nA\n\n## Section\n\nB\n\n"
+            "See [x](#section).\n",
+        )
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+def test_relative_dup_slug_cross_file_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "a.md", "# A\n\nSee [b](b.md#section).\n")
+        _write(
+            tmp_path / "b.md",
+            "# B\n\n## Section\n\none\n\n## Section\n\ntwo\n",
+        )
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+def test_relative_dup_slug_cross_file_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "a.md", "# A\n\nSee [b](b.md#section).\n")
+        _write(
+            tmp_path / "b.md",
+            "# B\n\n## Section\n\none\n\n## Section\n\ntwo\n",
+        )
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+def test_relative_dup_slug_wiki_path_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(
+            tmp_path / "docs" / "wiki" / "Home.md",
+            "# Home\n\n## Topic\n\nA\n\n## Topic\n\nB\n\n"
+            "See [x](#topic).\n",
+        )
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+def test_relative_dup_slug_wiki_path_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(
+            tmp_path / "docs" / "wiki" / "Home.md",
+            "# Home\n\n## Topic\n\nA\n\n## Topic\n\nB\n\n"
+            "See [x](#topic).\n",
+        )
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+def test_relative_dup_slug_ampersand_collapse_after_176() -> None:
+    import sys as _sys
+
+    if str(SCRIPTS) not in _sys.path:
+        _sys.path.insert(0, str(SCRIPTS))
+    from check_relative_links import github_slug, headings_in  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / "x.md"
+        path.write_text(
+            "# T\n\n## A & B\n\nx\n\n## A & B\n\ny\n",
+            encoding="utf-8",
+        )
+        slugs = headings_in(path)
+        expected = github_slug("A & B")
+        if expected not in slugs:
+            raise AssertionError(f"expected {expected!r} in {slugs!r}")
+        if len(slugs) != 2:
+            raise AssertionError(f"unexpected slug set size: {slugs!r}")
+
+def test_relative_dup_slug_ampersand_collapse_still_after_176() -> None:
+    import sys as _sys
+
+    if str(SCRIPTS) not in _sys.path:
+        _sys.path.insert(0, str(SCRIPTS))
+    from check_relative_links import github_slug, headings_in  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / "x.md"
+        path.write_text(
+            "# T\n\n## A & B\n\nx\n\n## A & B\n\ny\n",
+            encoding="utf-8",
+        )
+        slugs = headings_in(path)
+        expected = github_slug("A & B")
+        if expected not in slugs:
+            raise AssertionError(f"expected {expected!r} in {slugs!r}")
+        if len(slugs) != 2:
+            raise AssertionError(f"unexpected slug set size: {slugs!r}")
+
+def test_relative_dup_slug_missing_still_fails_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(
+            tmp_path / "README.md",
+            "# Title\n\n## Section\n\nA\n\n## Section\n\nB\n\n"
+            "See [x](#absent).\n",
+        )
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "missing heading",
+        )
+
+def test_relative_dup_slug_missing_still_fails_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(
+            tmp_path / "README.md",
+            "# Title\n\n## Section\n\nA\n\n## Section\n\nB\n\n"
+            "See [x](#absent).\n",
+        )
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "missing heading",
+        )
+
+def test_wiki_index_passes_seed_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_wiki_tree(tmp_path)
+        assert_pass_script(scripts / "check_wiki_outline.py", tmp_path)
+
+def test_wiki_index_passes_seed_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_wiki_tree(tmp_path)
+        assert_pass_script(scripts / "check_wiki_outline.py", tmp_path)
+
+def test_wiki_index_passes_live_outline_after_176() -> None:
+    assert_pass_live("check_wiki_outline.py")
+
+def test_wiki_index_passes_live_outline_still_after_176() -> None:
+    assert_pass_live("check_wiki_outline.py")
+
+def test_wiki_index_passes_live_relative_after_176() -> None:
+    assert_pass_live("check_relative_links.py")
+
+def test_wiki_index_passes_live_relative_still_after_176() -> None:
+    assert_pass_live("check_relative_links.py")
+
+def test_wiki_index_passes_badge_with_contracts_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+def test_wiki_index_passes_badge_with_contracts_still_after_176() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -50206,6 +51285,80 @@ def main() -> int:
     test_run_stewardship_gate_requires_host_pad4_after_176,
     test_run_stewardship_gate_requires_host_pad5_after_176,
     test_run_stewardship_accepts_live_seed_still_after_176,
+
+    # TOKENMAXX wiki-index validators after #176 (+72)
+    test_wiki_index_gate_doc_after_176,
+    test_wiki_index_gate_doc_still_after_176,
+    test_wiki_index_gate_empty_index_doc_after_176,
+    test_wiki_index_gate_empty_index_doc_still_after_176,
+    test_wiki_index_gate_publishable_stubs_doc_after_176,
+    test_wiki_index_gate_publishable_stubs_doc_still_after_176,
+    test_wiki_index_gate_link_publishable_needle_after_176,
+    test_wiki_index_gate_link_publishable_needle_still_after_176,
+    test_wiki_index_gate_toc_comment_after_176,
+    test_wiki_index_gate_toc_comment_still_after_176,
+    test_wiki_index_gate_not_badge_spam_after_176,
+    test_wiki_index_gate_not_badge_spam_still_after_176,
+    test_wiki_index_rejects_empty_home_toc_after_176,
+    test_wiki_index_rejects_empty_home_toc_still_after_176,
+    test_wiki_index_rejects_blank_home_body_after_176,
+    test_wiki_index_rejects_blank_home_body_still_after_176,
+    test_wiki_index_rejects_home_missing_overview_stub_after_176,
+    test_wiki_index_rejects_home_missing_overview_stub_still_after_176,
+    test_wiki_index_rejects_home_missing_security_stub_after_176,
+    test_wiki_index_rejects_home_missing_security_stub_still_after_176,
+    test_wiki_index_rejects_home_missing_routing_stub_after_176,
+    test_wiki_index_rejects_home_missing_routing_stub_still_after_176,
+    test_relative_wiki_index_gate_doc_after_176,
+    test_relative_wiki_index_gate_doc_still_after_176,
+    test_relative_wiki_index_broken_stub_doc_after_176,
+    test_relative_wiki_index_broken_stub_doc_still_after_176,
+    test_relative_wiki_index_empty_md_doc_after_176,
+    test_relative_wiki_index_empty_md_doc_still_after_176,
+    test_relative_wiki_index_dup_slug_doc_after_176,
+    test_relative_wiki_index_dup_slug_doc_still_after_176,
+    test_relative_wiki_index_set_collapse_pin_after_176,
+    test_relative_wiki_index_set_collapse_pin_still_after_176,
+    test_relative_wiki_index_dup_docstring_after_176,
+    test_relative_wiki_index_dup_docstring_still_after_176,
+    test_relative_wiki_index_dup_comment_after_176,
+    test_relative_wiki_index_dup_comment_still_after_176,
+    test_relative_wiki_index_empty_index_needle_after_176,
+    test_relative_wiki_index_empty_index_needle_still_after_176,
+    test_relative_rejects_wiki_home_stub_after_176,
+    test_relative_rejects_wiki_home_stub_still_after_176,
+    test_relative_rejects_wiki_overview_stub_after_176,
+    test_relative_rejects_wiki_overview_stub_still_after_176,
+    test_relative_rejects_wiki_image_stub_after_176,
+    test_relative_rejects_wiki_image_stub_still_after_176,
+    test_relative_rejects_wiki_angle_stub_after_176,
+    test_relative_rejects_wiki_angle_stub_still_after_176,
+    test_relative_rejects_wiki_title_stub_after_176,
+    test_relative_rejects_wiki_title_stub_still_after_176,
+    test_relative_rejects_wiki_nested_stub_after_176,
+    test_relative_rejects_wiki_nested_stub_still_after_176,
+    test_relative_rejects_empty_markdown_index_after_176,
+    test_relative_rejects_empty_markdown_index_still_after_176,
+    test_relative_dup_slug_collapse_helper_after_176,
+    test_relative_dup_slug_collapse_helper_still_after_176,
+    test_relative_dup_slug_fragment_resolves_after_176,
+    test_relative_dup_slug_fragment_resolves_still_after_176,
+    test_relative_dup_slug_cross_file_after_176,
+    test_relative_dup_slug_cross_file_still_after_176,
+    test_relative_dup_slug_wiki_path_after_176,
+    test_relative_dup_slug_wiki_path_still_after_176,
+    test_relative_dup_slug_ampersand_collapse_after_176,
+    test_relative_dup_slug_ampersand_collapse_still_after_176,
+    test_relative_dup_slug_missing_still_fails_after_176,
+    test_relative_dup_slug_missing_still_fails_still_after_176,
+    test_wiki_index_passes_seed_after_176,
+    test_wiki_index_passes_seed_still_after_176,
+    test_wiki_index_passes_live_outline_after_176,
+    test_wiki_index_passes_live_outline_still_after_176,
+    test_wiki_index_passes_live_relative_after_176,
+    test_wiki_index_passes_live_relative_still_after_176,
+    test_wiki_index_passes_badge_with_contracts_after_176,
+    test_wiki_index_passes_badge_with_contracts_still_after_176,
     test_run_stewardship_gate_contract_live_empty_still_after_176,
     test_run_stewardship_rejects_missing_exact_root_still_after_176,
     test_run_stewardship_rejects_soft_true_still_after_176,

@@ -5151,6 +5151,47 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
             errors,
         )
 
+    # Fail-closed after #176: wiki-index validators (Home TOC empty-index /
+    # publishable page index stubs) — distinct from wiki-badge after #141 /
+    # fixtures #173 / path-filter #176 spam.
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    wiki_index_doc = "Wiki-index after " + "#176"
+    if wiki_index_doc not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep Wiki-index after #176 pin",
+            errors,
+        )
+    empty_index = "Home TOC empty-" + "index"
+    if empty_index not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep Home TOC empty-index pin",
+            errors,
+        )
+    publishable_stub = "publishable page " + "index stubs"
+    if publishable_stub not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep publishable page index stubs pin",
+            errors,
+        )
+    link_publishable = "Home.md must link to publishable " + "page"
+    if link_publishable not in wiki_text:
+        fail(
+            "check_wiki_outline.py must emit Home.md must link to publishable page needle",
+            errors,
+        )
+    toc_comment = "Wiki-index: Home is the " + "TOC"
+    if toc_comment not in wiki_text:
+        fail(
+            "check_wiki_outline.py must keep Wiki-index Home is the TOC comment",
+            errors,
+        )
+    not_badge_spam = "not wiki-badge " + "#141"
+    if not_badge_spam not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep not wiki-badge #141 spam pin",
+            errors,
+        )
+
 
 
 def check_relative_link_gate_contract(errors: list[str]) -> None:
@@ -5339,6 +5380,60 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
             "check_relative_links.py must fail closed when no markdown files found",
             errors,
         )
+
+    # Fail-closed after #176: wiki-index validators — broken internal stub
+    # links / empty markdown index / duplicate slug headings_in set collapse
+    # (not wiki-badge #141 / fixtures #173 / path-filter #176 spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    rel_wiki_index = "Wiki-index after " + "#176"
+    if rel_wiki_index not in text:
+        fail(
+            "check_relative_links.py docstring must keep Wiki-index after #176 pin",
+            errors,
+        )
+    broken_stub = "broken internal stub " + "links"
+    if broken_stub not in text:
+        fail(
+            "check_relative_links.py docstring must keep broken internal stub links pin",
+            errors,
+        )
+    empty_md_index = "empty markdown " + "index"
+    if empty_md_index not in text:
+        fail(
+            "check_relative_links.py docstring must keep empty markdown index pin",
+            errors,
+        )
+    dup_slug = "duplicate slug headings_in " + "set"
+    if dup_slug not in text:
+        fail(
+            "check_relative_links.py docstring must keep duplicate slug headings_in set pin",
+            errors,
+        )
+    set_collapse = "{github_slug(match.group(2))"
+    if set_collapse not in text:
+        fail(
+            "check_relative_links.py headings_in must collapse duplicate slugs via set",
+            errors,
+        )
+    dup_doc = "duplicate headings collapse to one " + "slug"
+    if dup_doc not in text:
+        fail(
+            "check_relative_links.py headings_in must document duplicate slug collapse",
+            errors,
+        )
+    dup_comment = "Duplicate slug edge: set " + "collapse"
+    if dup_comment not in text:
+        fail(
+            "check_relative_links.py must keep Duplicate slug edge set collapse comment",
+            errors,
+        )
+    no_md_found = "no markdown files " + "found"
+    if no_md_found not in text:
+        fail(
+            "check_relative_links.py must fail closed on empty markdown index",
+            errors,
+        )
+
     # Fail-closed after #83: third-pass helper / constant / needle pins
     # (relative-link slice only; not schema / badge / wiki / common / CI
     # workflow / actionlint pin spam).

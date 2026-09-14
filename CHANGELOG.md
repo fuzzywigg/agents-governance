@@ -11,6 +11,15 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki-index validators after #176: expand self-tests to 3330 cases
+  (was 3258) fail-closing live wiki-index integrity — Home TOC empty-index /
+  publishable page index stubs / broken internal stub links / empty markdown
+  index / duplicate slug `headings_in` set collapse, plus
+  `check_wiki_outline_gate_contract` + `check_relative_link_gate_contract`
+  wiki-index pins — wiki-index slice only (not fixtures #173 / path-filter
+  #176 / wiki-badge #141 / run_stewardship Pass-2 spam); no invent-product; no
+  fourth badge. Lands closed #177/#168/#170 leftover on post-#176 main (do
+  **not** revive #177/#168/#170). Distinct from merged run_stewardship #179 (closed #178 leftover).
 - TOKENMAXX run_stewardship Pass-2 pins after #176: expand self-tests to
   3258 cases (was 3175) fail-closing live local runner / CI reliability leftovers —
   exact `ROOT="$(cd "$(dirname "$0")/.." && pwd)"` / exactly four `python3 scripts/`

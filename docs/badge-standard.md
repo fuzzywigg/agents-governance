@@ -239,10 +239,17 @@ globs block / exact live markdown-lint+link-check push paths filters
 (stewardship-badge lint slice only; lands closed #172 leftover; do not
 revive #172/#169/#195/#190; leave path-order #189, schema third-pass #191,
 and run_stewardship residual #199 alone)).
-plus stewardship-schema fourth-pass after #208 tip: nested policy refs /
+plus stewardship-schema fourth-pass after #216 tip: nested policy refs /
 invalid status+surface enum stubs / whitespace-only / nested+list rejects /
 pass-4 contract pins (lands closed #171/#209 leftover; do not revive closed
 closed #171/#209/#204/#200/#194/#190/#188/#187/#183),
+and run_stewardship residual #199 alone,
+plus Pass-2 leftover + markdown-lint/link-check edges after #203 tip:
+shebang-first / reject `|| exit 0` / `args: >-` /
+externally-broken commentary / without-it private-404 /
+reject continue-on-error / exact job permissions / checkout adjacency
+(lands closed #202/#192 leftover; do not revive #202/#192;
+distinct from Pass-2 residual #199 and merged badge-lint #208)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

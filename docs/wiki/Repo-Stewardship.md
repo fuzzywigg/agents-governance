@@ -234,7 +234,15 @@ order / contiguous Download/id/run/shell block / reject uses: rhysd/actionlint@
 — DISTINCT leftover edges only (not saturated #189 / not #176 layouts /
 not schema #191 / not Pass-2 residual #199/#203 / not Pass-2 leftover + md/link #220 /
 not wiki-badge / not stewardship-badge lint #208 / not schema fourth-pass #216;
-lands closed #223/#217/#213/#198 leftover; do not revive #223/#217/#213/#198/#186/#166/#157)).
+lands closed #223/#217/#213/#198 leftover; do not revive #223/#217/#213/#198/#186/#166/#157),
+plus wiki-index/badge leftover deepen after #189: exact PUBLISHABLE_PAGES
+contiguous order / Home TOC loop+skip+link forms / empty-index comment /
+relative broken-link+empty-index+duplicate-slug needles / README invent
+stewardship-checks badge refuse leftover framing — DISTINCT leftover only
+(not path-filter/path-order #225 / not Pass-2 leftover + md/link #220 /
+not schema fourth-pass #216 / not stewardship-badge lint #208;
+lands closed #222/#215/#196 leftover on post-#225 tip; do not revive
+closed #222/#215/#196/#185/#172)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

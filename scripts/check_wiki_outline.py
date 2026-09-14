@@ -25,6 +25,13 @@ Fail-closed pins (live path after #59; deepen after #43; third-pass after #90):
 - Wiki-index after #176: Home TOC empty-index reject / publishable page index stubs /
   Home.md must link to publishable page needle
   (not wiki-badge #141 / fixtures #173 / path-filter #176 spam)
+- Deepen after #189: wiki-index/badge leftover — exact PUBLISHABLE_PAGES contiguous
+  order / for page in PUBLISHABLE_PAGES TOC loop / skip Home.md /
+  ]({page})+]({stem}) link forms / empty index (no publishable page links) comment /
+  NOT path-order #189 / NOT stewardship-schema sibling / NOT path-filter #176 spam
+  (lands closed #185/#172 leftover on tip; not schema #191; distinct from
+  stewardship-badge lint #208 / path-filter/path-order #225 / Pass-2 leftover + md/link #220 /
+  schema fourth-pass #216; lands closed #222/#215/#196 leftover after #225 tip)
 """
 
 from __future__ import annotations

@@ -11,6 +11,17 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki-index/badge leftover deepen after #225 tip: expand self-tests
+  to 4230 cases (was 4116) fail-closing unsaturated wiki-index/badge leftover —
+  exact PUBLISHABLE_PAGES contiguous order / Home TOC loop+skip+link forms /
+  empty-index comment / relative broken-link+empty-index+duplicate-slug needles /
+  README invent stewardship-checks badge refuse leftover framing / exact
+  link-check+markdown-lint badge.svg pins — wiki-index/badge leftover slice
+  only (not path-filter/path-order #225 / Pass-2 leftover + md/link #220 /
+  schema fourth-pass #216 / stewardship-badge lint #208 / Pass-2 #199/#203 /
+  schema #191 / path-order #189); no invent-product; no fourth badge. Lands
+  closed #222/#215/#196 leftover on post-#225 tip (do **not** revive
+  #222/#215/#196/#185/#172). Distinct from merged #225/#220/#216/#208.
 - TOKENMAXX actionlint path-filter/path-order deepen leftovers after #220: expand
   self-tests to 4116 cases (was 3970) fail-closing DISTINCT leftover actionlint
   path-filter / path-order edges on existing workflow modules — contiguous

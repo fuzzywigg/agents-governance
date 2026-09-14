@@ -231,7 +231,14 @@ no BASH_SOURCE / no bare python / no set +u|+o pipefail /
 back-to-back gates→self-tests block / no inline check_*.py /
 self-tests before actionlint (lands closed #193/#178 leftover; do not
 revive #193/#178/#175/#140; distinct from schema third-pass #191 and
-path-order #189)).
+path-order #189),
+plus markdown-lint/link-check edges after #189: args: >- /
+externally-broken-links commentary / without-it private-404 /
+reject continue-on-error / exact job permissions: contents: read /
+checkout adjacency before Check links and Run markdownlint
+(lands closed PR #192/#197/#201/#207 leftover; do not revive
+PR #192/#197/#201/#202/#207; distinct from Pass-2 register #203 /
+Pass-2 residual #199 / schema third-pass #191 / path-order #189)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

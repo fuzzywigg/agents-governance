@@ -66,6 +66,12 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   Home (landing) row aligned. Distinct from merged
   #244/#243/#239/#233/#227/#225/#220/#216/#208. Do **not** revive
   #238/#234/#231/#221/#249.
+- TOKENMAXX docs-lint pass-4: exclude flaky same-repo GitHub `blob/main`
+  HTML (intermittent 503) via `.lycheeignore`, with wiki-outline still enforcing
+  absolute blob pins — fail-closed layout + commentary + gate-contract needles;
+  unblocks Pass-2 residual + existing `templates/AGENTS-REPO.md` leftover draft
+  after #258 tip (do **not** revive #251/#250/#246/#245/#240). Distinct from
+  Pass-2 residual/template leftover content; no invent templates; no DNS sprawl.
 - TOKENMAXX Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #244:
   expand self-tests to 5016 cases (was 4792) fail-closing DISTINCT leftover Pass-2 residual
   soft-fail + existing concurrency group templates + existing `templates/AGENTS-REPO.md`
@@ -81,7 +87,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   not stewardship-checks/schema residual #233 / not wiki-index/badge #227 /
   not path-edges #225 / not Pass-2 leftover and md/link #220 / not Pass-2 residual
   #199/#203 / not badge-lint #208 / not schema #216); no invent-product; no fourth
-  badge; no new templates. Lands closed #246/#245/#240 leftover on post-#244 tip (do
+  badge; no new templates. Lands closed #246/#245/#240 leftover on post-#258 tip (do
   **not** revive #246/#245/#240/#235/#230). Distinct from merged
   #244/#243/#239/#233/#227/#225/#220/#216/#208.
 - TOKENMAXX actionlint path-filter/path-order residual deepen after #243 tip:

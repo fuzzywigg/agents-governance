@@ -113,7 +113,13 @@ needles / utf-8 / `as_posix` / `.md` suffix / `ValueError` / `sorted` /
 UNICODE / space-dash / Percent-decode+Cap / empty () / `sys.exit` /
 `urllib.unquote` / `group(2)` / `startswith#` / `split#` / files scanned /
 stewardship_common / title / `#{1,6}` / slug punct / Offline+lychee /
-`path.parent`).
+`path.parent`),
+plus badge-standard third-pass after #94: `BADGE_LINE_RE`+`REPO_FROM_*`
+exact / `REQUIRED_WORKFLOWS` exact / `group(label|img|link)` / `sys.exit` /
+stewardship_common / `BADGE_GATE` / utf-8 / Strict row / H1 startswith /
+FAIL README / https image+link needles / absolute workflow URL /
+License point / Unexpected label / extract+check_badges / contract(errors) /
+IGNORECASE / blob.lower / EXPECTED_REPO.lower).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

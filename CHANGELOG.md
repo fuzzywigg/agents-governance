@@ -11,6 +11,18 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX badge-standard third-pass pins after #94: expand self-tests
+  to 1971 cases (was 1899) fail-closing live badge-standard integrity —
+  `BADGE_LINE_RE`+`REPO_FROM_*` exact / `REQUIRED_WORKFLOWS` exact /
+  `group(label|img|link)` / `sys.exit` / stewardship_common / `BADGE_GATE` /
+  utf-8 / Strict row / H1 startswith / FAIL README / https image+link needles /
+  absolute workflow URL / License point / Unexpected label /
+  extract+check_badges / contract(errors) / IGNORECASE / blob.lower /
+  EXPECTED_REPO.lower, plus badge-standard gate contract pins in
+  `check_badge_standard.py` — badge-standard third-pass slice only (not wiki /
+  relative / schema / common / CI workflow / actionlint pin spam); no
+  invent-product; no fourth badge
+
 - TOKENMAXX relative-link third-pass pins after #90: expand self-tests
   to 1899 cases (was 1827) fail-closing live relative-link integrity —
   `MD_LINK_RE`+`ATX_HEADING_RE` exact / `SKIP_*` exact assigns /

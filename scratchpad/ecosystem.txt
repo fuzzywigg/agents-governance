@@ -397,3 +397,12 @@ _None yet._
 2026-09-14T00:51:09Z
 
 2026-09-14T00:55:30Z cursor: PR #94 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-049 TOKENMAXX relative-link third-pass pins
+
+### [ECO-050] TOKENMAXX deepen badge-standard third-pass pins after #94 — 2026-09-14T01:05:00Z
+- [x] cursor: Read live tree post-#94 (1899 cases; relative third-pass saturated; #95–#98 closed conflict)
+- [x] cursor: Fail-close badge-standard third-pass — BADGE_LINE_RE+REPO_FROM_* exact / REQUIRED_WORKFLOWS exact / group(label|img|link) / sys.exit / stewardship_common / BADGE_GATE / utf-8 / Strict row / H1 / FAIL README / https needles / absolute workflow URL / License point / Unexpected label / extract+check_badges / contract(errors) / IGNORECASE / blob.lower / EXPECTED_REPO.lower
+- [x] cursor: Expand self-tests 1899 → 1971 (badge-standard third-pass slice; not relative / wiki / run_stewardship / docs-CI / schema / common / CI workflow / actionlint pin spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING badge-standard integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-badge-third-pass-2d9c
+2026-09-14T01:05:00Z

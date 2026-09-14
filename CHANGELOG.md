@@ -11,6 +11,22 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX actionlint path-filter/path-order residual deepen after #243 tip:
+  expand self-tests to 4792 cases (was 4646) fail-closing DISTINCT residual
+  actionlint path-filter / path-order edges on existing workflow modules —
+  contiguous pull_request:/schedule: adjacency (bare PR) / reject
+  branches-ignore: / pull_request type-unfiltered / reject
+  tj-actions/changed-files / contiguous four-step actionlint path-order
+  (gates → self-tests → Download → actionlint run) / schedule before
+  workflow_dispatch / contiguous shell-less actionlint run step / residual
+  docstring + gate-contract needles — path-filter/path-order residual slice
+  only (not wiki outline/PUBLISH leftover #243 / not md/link residual #239 /
+  not stewardship-checks/schema leftover #233 / not wiki-badge leftover #227 /
+  not saturated deepen #225/#203 / not #189 path-order / not #176 layouts /
+  not schema #191/#216 / not Pass-2 residual #199/#203 / not Pass-2 leftover +
+  md/link #220 / not stewardship-badge lint #208); no invent-product; no
+  fourth badge. Do **not** revive #236/#232/#228/#226/#223/#217/#213/#198/#186/#166/#157.
+  Distinct from merged #243/#239/#233/#227/#225/#220/#216/#208.
 - TOKENMAXX wiki outline/PUBLISH leftover deepen after #239 tip: expand
   self-tests to 4646 cases (was 4462) fail-closing unsaturated wiki outline /
   PUBLISH.md leftover on existing `docs/wiki` pages only — Pages to publish

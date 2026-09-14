@@ -11,6 +11,11 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX register Pass-2 residual after_191 self-tests after #199: wire
+  orphaned +70 `*_after_191` defs into `main()` so the suite reports 3660
+  (was still 3590 with pins live but cases unregistered). Tests/CI only;
+  no pin logic redo. Do **not** revive #193; leave CONFLICTING #195 alone.
+
 - TOKENMAXX run_stewardship Pass-2 residual after #191: expand self-tests to
   3660 cases (was 3590) fail-closing unsaturated Pass-2 residual /
   stewardship-checks integrity — gates-only runner (no

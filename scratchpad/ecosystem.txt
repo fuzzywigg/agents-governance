@@ -661,3 +661,17 @@ _None yet._
 - Scope: EXISTING run_stewardship_checks.sh + stewardship-checks.yml residual integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #193/#178 leftover on post-#191 tip; do not revive #193/#178/#175/#140; leave open CONFLICTING #195 alone; do not redo #191
 - Branch: cursor/tokenmaxx-run-stewardship-pass2-residual-after-191-ebbb
 2026-09-14T05:55:00Z
+
+2026-09-14T06:02:00Z cursor: PR #199 MERGED (Pass-2 residual pins after #191) — but main() registration of +70 after_191 self-tests missed on merge HEAD ← ECO-067 partial; follow-up register draft
+
+### [ECO-068] Register Pass-2 residual after_191 self-tests after #199 — 2026-09-14T06:08:00Z
+- [x] cursor: Confirm tip post-#199 has Pass-2 residual pins + 70 orphaned after_191 defs (suite still reports 3590)
+- [x] cursor: Register +70 after_191 cases in main() tests list (3590 → 3660)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING test registration only; no invent-product; no AGENTS-ECOSYSTEM/templates; no secrets; do not redo #191/#199 pin logic; leave CONFLICTING #195 alone
+- Branch: cursor/tokenmaxx-register-pass2-residual-tests-after-199-ebbb
+2026-09-14T06:08:00Z
+
+2026-09-14T06:12:00Z cursor: Local green — run_stewardship + self-tests 3660 + markdownlint ← ECO-068 register Pass-2 residual after_191 after #199 (leave draft; leave CONFLICTING #195 alone; do not redo #191)
+
+2026-09-14T06:08:00Z cursor: Draft PR #203 opened (cursor/tokenmaxx-register-pass2-residual-tests-after-199-ebbb); leave draft / do-not-merge; awaiting CI ← ECO-068 register after #199 (leave CONFLICTING #202 alone; do not redo #191/#199)

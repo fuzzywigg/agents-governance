@@ -251,7 +251,15 @@ status+surface stubs + helper needles — DISTINCT leftover only
 (not wiki-index/badge #227 / not path-filter/path-order #225 /
 not Pass-2 leftover + md/link #220 / not schema fourth-pass #216 /
 not stewardship-badge lint #208; lands closed #229 leftover on post-#227
-tip; do not revive closed #229/#228/#230/#231)).
+tip; do not revive closed #229/#228/#230/#231),
+plus markdown-lint/link-check residual exact layouts after #233 tip: exact
+contiguous link-check `args: >-` flag block / exact contiguous `on:`
+push/PR/schedule/workflow_dispatch for link+lint / exact contiguous
+markdown-lint `with:` globs|+config / exact contiguous link-check `with:`
+token commentary — DISTINCT residual edges only (not leftover #233 schema /
+not wiki-index/badge #227 / not path-edges #225 / not Pass-2 leftover +
+md/link #220 core / not stewardship-badge lint #208; lands closed #221 leftover
+residual; do not revive #221/#219/#214/#207/#201/#231)).
 plus actionlint path-filter/path-order residual deepen after #225: contiguous
 pull_request:/schedule: adjacency / reject branches-ignore: /
 pull_request type-unfiltered / reject tj-actions/changed-files /
@@ -260,7 +268,7 @@ contiguous shell-less actionlint run step — DISTINCT residual edges only
 (not saturated deepen #225/#203 / not #189 / not #176 / not schema #191/#216 /
 not Pass-2 residual #199/#203 / not Pass-2 leftover + md/link #220 /
 not wiki-badge leftover #227 / not stewardship-checks/schema leftover #233 /
-not stewardship-badge lint #208; do not revive
+not md/link residual #239 / not stewardship-badge lint #208; do not revive
 closed #232/#228/#226/#223/#217/#213/#198/#186/#166/#157)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 

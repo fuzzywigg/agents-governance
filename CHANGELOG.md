@@ -11,8 +11,8 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-- TOKENMAXX actionlint path-filter/path-order residual deepen after #233 tip:
-  expand self-tests to 4560 cases (was 4414) fail-closing DISTINCT residual
+- TOKENMAXX actionlint path-filter/path-order residual deepen after #239 tip:
+  expand self-tests to 4608 cases (was 4462) fail-closing DISTINCT residual
   actionlint path-filter / path-order edges on existing workflow modules —
   contiguous pull_request:/schedule: adjacency (bare PR) / reject
   branches-ignore: / pull_request type-unfiltered / reject
@@ -23,10 +23,22 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   only (not saturated deepen #225/#203 / not #189 path-order / not #176
   layouts / not schema #191/#216 / not Pass-2 residual #199/#203 / not Pass-2
   leftover + md/link #220 / not wiki-badge leftover #227 / not
-  stewardship-checks/schema leftover #233 / not stewardship-badge lint #208);
-  no invent-product; no fourth badge. Do **not** revive
-  #232/#228/#226/#223/#217/#213/#198/#186/#166/#157. Distinct from merged
-  #233/#227/#225/#220/#216/#208/#203/#199/#191/#189.
+  stewardship-checks/schema leftover #233 / not md/link residual #239 /
+  not stewardship-badge lint #208); no invent-product; no fourth badge. Do
+  **not** revive #232/#228/#226/#223/#217/#213/#198/#186/#166/#157. Distinct
+  from merged #239/#233/#227/#225/#220/#216/#208/#203/#199/#191/#189.
+- TOKENMAXX markdown-lint/link-check residual exact layouts after #233 tip:
+  expand self-tests to 4462 cases (was 4414) fail-closing DISTINCT leftover
+  markdown-lint / link-check residual exact layouts — contiguous `args: >-`
+  flag block / contiguous `on:` push/PR/schedule/workflow_dispatch for
+  link+lint / contiguous markdown-lint `with:` globs|+config / contiguous
+  link-check `with:` token commentary — md/link residual slice only (not
+  stewardship-checks/schema leftover #233 / not wiki-index/badge leftover #227 /
+  not path-edges #225 / not Pass-2 leftover + md/link #220 core / not
+  stewardship-badge lint #208 / not schema #216/#191 / not path-order #189);
+  no invent-product; no fourth badge. Lands closed #221 leftover residual on
+  post-#233 tip (do **not** revive #221/#219/#214/#207/#201/#231). Distinct
+  from merged #233/#227/#225/#220/#216/#208.
 - TOKENMAXX stewardship-checks + schema residual deepen leftovers after #227 tip: expand
   self-tests to 4414 cases (was 4230) fail-closing unsaturated stewardship-checks contiguous
   layout edges (exact Set up Python / Install PyYAML / checkout adjacency / full push paths /

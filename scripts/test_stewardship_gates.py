@@ -22,6 +22,9 @@ TOC loop+skip+link forms / empty-index / relative broken-link needles /
 invent refuse leftover framing (wiki-index/badge leftover slice only;
 not path-filter/path-order #225 / Pass-2+md/link #220 / schema fourth #216 /
 badge-lint #208 spam). Lands closed #222/#215/#196 leftover (do not revive).
+Deepened after #227 tip: markdown-lint/link-check residual exact layouts
+(lands closed #221 leftover residual; not wiki-index/badge #227 /
+path-edges #225 / Pass-2 leftover + md/link #220 spam).
 TOKENMAXX coverage: badge / wiki / schema / relative / workflow / secrets /
 lycheeignore shields / actionlint-style / markdown-link edges.
 Deepened after #100: docs-lint (.lycheeignore + .markdownlint.json) exact
@@ -270,9 +273,14 @@ jobs:
           # without it, private repos return 404 and fail the check
           token: ${{ secrets.GITHUB_TOKEN }}
           args: >-
-            --verbose --no-progress --max-concurrency 8 --timeout 20
-            --max-retries 3 --exclude-loopback --exclude-path .github/agents
+            --verbose
+            --no-progress
+            --exclude-loopback
+            --max-concurrency 8
+            --timeout 20
+            --max-retries 3
             --github-token ${{ secrets.GITHUB_TOKEN }}
+            --exclude-path .github/agents
             "**/*.md"
           fail: true
 """
@@ -63911,6 +63919,805 @@ def test_path_edges_rejects_stew_shell_invent_after_225() -> None:
         assert '      - name: actionlint existing workflow paths\n        run:' in text
         path.write_text(text.replace('      - name: actionlint existing workflow paths\n        run:', '      - name: actionlint existing workflow paths\n        shell: bash\n        run:', 1), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'shell-less actionlint run step')
+def test_mdlink_residual_doc_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts/check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'markdown-lint/link-check residual exact layouts after #227' in text
+        path.write_text(text.replace('markdown-lint/link-check residual exact layouts after #227', 'markdown-lint/link-check residual exact layouts after #224', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'markdown-lint/link-check residual exact layouts after #227',
+        )
+
+
+
+
+def test_mdlink_residual_doc_still_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts/check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'markdown-lint/link-check residual exact layouts after #227' in text
+        path.write_text(text.replace('markdown-lint/link-check residual exact layouts after #227', 'markdown-lint/link-check residual exact layouts AFTER #225', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'markdown-lint/link-check residual exact layouts after #227',
+        )
+
+
+
+
+def test_mdlink_residual_args_block_pin_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts/check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact contiguous args: >- flag block' in text
+        path.write_text(text.replace('exact contiguous args: >- flag block', 'exact contiguous args: >- flags block', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous args: >- flag block',
+        )
+
+
+
+
+def test_mdlink_residual_args_block_pin_still_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts/check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact contiguous args: >- flag block' in text
+        path.write_text(text.replace('exact contiguous args: >- flag block', 'exact contiguous ARGS: >- flag block', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous args: >- flag block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_args_block_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'args: >-\n            --verbose' in text
+        path.write_text(text.replace('args: >-\n            --verbose', 'args: |-\n            --verbose', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous args: >- flag block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_args_block_still_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '--max-concurrency 8' in text
+        path.write_text(text.replace('--max-concurrency 8', '--max-concurrency 9', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous args: >- flag block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_args_pad0_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '--verbose' in text
+        path.write_text(text.replace('--verbose', '--Verbose', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous args: >- flag block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_args_pad1_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '--no-progress' in text
+        path.write_text(text.replace('--no-progress', '--no-Progress', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous args: >- flag block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_args_pad2_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '--exclude-loopback' in text
+        path.write_text(text.replace('--exclude-loopback', '--exclude-Loopback', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous args: >- flag block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_args_pad3_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '--timeout 20' in text
+        path.write_text(text.replace('--timeout 20', '--timeout 21', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous args: >- flag block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_args_pad4_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '--max-retries 3' in text
+        path.write_text(text.replace('--max-retries 3', '--max-retries 4', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous args: >- flag block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_args_pad5_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '--exclude-path .github/agents' in text
+        path.write_text(text.replace('--exclude-path .github/agents', '--exclude-path .github/Agents', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous args: >- flag block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_args_pad6_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        needle = '--exclude-path .github/agents\n            "**/*.md"'
+        assert needle in text
+        path.write_text(
+            text.replace(
+                needle,
+                '--exclude-path .github/agents\n            "**/*.MD"',
+                1,
+            ),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous args: >- flag block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_args_pad7_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'args: >-' in text
+        path.write_text(text.replace('args: >-', 'args: >', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous args: >- flag block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_on_block_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'workflow_dispatch:' in text
+        path.write_text(text.replace('workflow_dispatch:', 'workflow_call:', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous on:',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_on_block_still_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'Run weekly to catch externally broken links' in text
+        path.write_text(text.replace('Run weekly to catch externally broken links', 'Run weekly to catch externally Broken links', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous on:',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_on_pad0_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'cron: "0 6 * * 1"' in text
+        path.write_text(text.replace('cron: "0 6 * * 1"', 'cron: "0 7 * * 1"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous on:',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_on_pad1_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '.lycheeignore' in text
+        path.write_text(text.replace('.lycheeignore', '.Lycheeignore', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous on:',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_on_pad2_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'pull_request:' in text
+        path.write_text(text.replace('pull_request:', 'pull_request_target:', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous on:',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_on_pad3_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'branches: ["**"]' in text
+        path.write_text(text.replace('branches: ["**"]', 'branches: ["main"]', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous on:',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_on_pad4_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        needle = 'paths:\n      - "**/*.md"\n      - ".lycheeignore"'
+        assert needle in text
+        path.write_text(
+            text.replace(
+                needle,
+                'paths:\n      - "**/*.*"\n      - ".lycheeignore"',
+                1,
+            ),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous on:',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_on_pad5_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'link-check.yml"' in text
+        path.write_text(text.replace('link-check.yml"', 'link-check.YML"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous on:',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_lint_on_block_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/markdown-lint.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'workflow_dispatch:' in text
+        path.write_text(text.replace('workflow_dispatch:', 'workflow_call:', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous on:',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_lint_on_block_still_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/markdown-lint.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'Weekly drift catch aligned with link/stewardship schedules' in text
+        path.write_text(text.replace('Weekly drift catch aligned with link/stewardship schedules', 'Weekly Drift catch aligned with link/stewardship schedules', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous on:',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_lint_on_pad0_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/markdown-lint.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'cron: "30 6 * * 1"' in text
+        path.write_text(text.replace('cron: "30 6 * * 1"', 'cron: "30 7 * * 1"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous on:',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_lint_on_pad1_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/markdown-lint.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '.markdownlint.json' in text
+        path.write_text(text.replace('.markdownlint.json', '.Markdownlint.json', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous on:',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_lint_on_pad2_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/markdown-lint.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'pull_request:' in text
+        path.write_text(text.replace('pull_request:', 'pull_request_target:', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous on:',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_lint_on_pad3_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/markdown-lint.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'branches: ["**"]' in text
+        path.write_text(text.replace('branches: ["**"]', 'branches: ["main"]', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous on:',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_lint_on_pad4_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/markdown-lint.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'markdown-lint.yml"' in text
+        path.write_text(text.replace('markdown-lint.yml"', 'markdown-lint.YML"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous on:',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_lint_on_pad5_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/markdown-lint.yml"
+        text = path.read_text(encoding="utf-8")
+        needle = 'paths:\n      - "**/*.md"\n      - ".markdownlint.json"'
+        assert needle in text
+        path.write_text(
+            text.replace(
+                needle,
+                'paths:\n      - "docs/**/*.md"\n      - ".markdownlint.json"',
+                1,
+            ),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous on:',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_lint_with_block_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/markdown-lint.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'config: ".markdownlint.json"' in text
+        path.write_text(text.replace('config: ".markdownlint.json"', 'config: ".markdownlint.JSON"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous with: globs|+config block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_lint_with_block_still_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/markdown-lint.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '!.github/agents/**' in text
+        path.write_text(text.replace('!.github/agents/**', '!.github/Agents/**', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous with: globs|+config block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_lint_with_pad0_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/markdown-lint.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'globs: |' in text
+        path.write_text(text.replace('globs: |', 'globs: >', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous with: globs|+config block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_lint_with_pad1_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/markdown-lint.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '!OWASP-AGENTIC.md' in text
+        path.write_text(text.replace('!OWASP-AGENTIC.md', '!owasp-agentic.md', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous with: globs|+config block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_lint_with_pad2_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/markdown-lint.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '**/*.md\n            !.github' in text
+        path.write_text(text.replace('**/*.md\n            !.github', '**/*.*\n            !.github', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous with: globs|+config block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_lint_with_pad3_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/markdown-lint.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'config: ".markdownlint.json"' in text
+        path.write_text(text.replace('config: ".markdownlint.json"', "config: '.markdownlint.json'", 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous with: globs|+config block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_lint_with_pad4_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/markdown-lint.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'with:\n          globs:' in text
+        path.write_text(text.replace('with:\n          globs:', 'with:\n          Globs:', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous with: globs|+config block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_lint_with_pad5_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/markdown-lint.yml"
+        text = path.read_text(encoding="utf-8")
+        assert '!.github/agents/**' in text
+        path.write_text(text.replace('!.github/agents/**', '!.github/agent/**', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous with: globs|+config block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_token_with_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'GITHUB_TOKEN allows lychee to authenticate private GitHub repos' in text
+        path.write_text(text.replace('GITHUB_TOKEN allows lychee to authenticate private GitHub repos', 'GITHUB_TOKEN allows lychee to Authenticate private GitHub repos', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous with: token commentary block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_token_with_still_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'without it, private repos return 404 and fail the check' in text
+        path.write_text(text.replace('without it, private repos return 404 and fail the check', 'without it, private repos return 404 and Fail the check', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous with: token commentary block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_token_pad0_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'token: ${{ secrets.GITHUB_TOKEN }}' in text
+        path.write_text(text.replace('token: ${{ secrets.GITHUB_TOKEN }}', 'token: ${{ secrets.github_token }}', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous with: token commentary block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_token_pad1_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'with:\n          # GITHUB_TOKEN' in text
+        path.write_text(text.replace('with:\n          # GITHUB_TOKEN', 'with:\n          # github_token', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous with: token commentary block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_token_pad2_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'private GitHub repos' in text
+        path.write_text(text.replace('private GitHub repos', 'Private GitHub repos', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous with: token commentary block',
+        )
+
+
+
+
+def test_mdlink_residual_rejects_link_token_pad3_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows/link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert 'fail the check' in text
+        path.write_text(text.replace('fail the check', 'fail The check', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact contiguous with: token commentary block',
+        )
+
+
+
+
+def test_mdlink_residual_accepts_live_seed_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+
+
+
+def test_mdlink_residual_accepts_live_seed_still_after_227() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+
+
+
+def test_mdlink_residual_passes_live_badge_after_227() -> None:
+    assert_pass_live("check_badge_standard.py")
+
+
+
+
+def test_mdlink_residual_passes_live_badge_still_after_227() -> None:
+    assert_pass_live("check_badge_standard.py")
+
 
 def main() -> int:
     tests = [
@@ -68729,6 +69536,55 @@ def main() -> int:
         test_path_edges_rejects_stew_shell_invent_pad5_after_225,
         test_path_edges_rejects_stew_shell_invent_still_after_225,
         test_path_edges_rejects_stew_shell_invent_after_225,
+        # TOKENMAXX after #233 tip: md/link residual exact layouts
+        test_mdlink_residual_doc_after_227,
+        test_mdlink_residual_doc_still_after_227,
+        test_mdlink_residual_args_block_pin_after_227,
+        test_mdlink_residual_args_block_pin_still_after_227,
+        test_mdlink_residual_rejects_link_args_block_after_227,
+        test_mdlink_residual_rejects_link_args_block_still_after_227,
+        test_mdlink_residual_rejects_link_args_pad0_after_227,
+        test_mdlink_residual_rejects_link_args_pad1_after_227,
+        test_mdlink_residual_rejects_link_args_pad2_after_227,
+        test_mdlink_residual_rejects_link_args_pad3_after_227,
+        test_mdlink_residual_rejects_link_args_pad4_after_227,
+        test_mdlink_residual_rejects_link_args_pad5_after_227,
+        test_mdlink_residual_rejects_link_args_pad6_after_227,
+        test_mdlink_residual_rejects_link_args_pad7_after_227,
+        test_mdlink_residual_rejects_link_on_block_after_227,
+        test_mdlink_residual_rejects_link_on_block_still_after_227,
+        test_mdlink_residual_rejects_link_on_pad0_after_227,
+        test_mdlink_residual_rejects_link_on_pad1_after_227,
+        test_mdlink_residual_rejects_link_on_pad2_after_227,
+        test_mdlink_residual_rejects_link_on_pad3_after_227,
+        test_mdlink_residual_rejects_link_on_pad4_after_227,
+        test_mdlink_residual_rejects_link_on_pad5_after_227,
+        test_mdlink_residual_rejects_lint_on_block_after_227,
+        test_mdlink_residual_rejects_lint_on_block_still_after_227,
+        test_mdlink_residual_rejects_lint_on_pad0_after_227,
+        test_mdlink_residual_rejects_lint_on_pad1_after_227,
+        test_mdlink_residual_rejects_lint_on_pad2_after_227,
+        test_mdlink_residual_rejects_lint_on_pad3_after_227,
+        test_mdlink_residual_rejects_lint_on_pad4_after_227,
+        test_mdlink_residual_rejects_lint_on_pad5_after_227,
+        test_mdlink_residual_rejects_lint_with_block_after_227,
+        test_mdlink_residual_rejects_lint_with_block_still_after_227,
+        test_mdlink_residual_rejects_lint_with_pad0_after_227,
+        test_mdlink_residual_rejects_lint_with_pad1_after_227,
+        test_mdlink_residual_rejects_lint_with_pad2_after_227,
+        test_mdlink_residual_rejects_lint_with_pad3_after_227,
+        test_mdlink_residual_rejects_lint_with_pad4_after_227,
+        test_mdlink_residual_rejects_lint_with_pad5_after_227,
+        test_mdlink_residual_rejects_link_token_with_after_227,
+        test_mdlink_residual_rejects_link_token_with_still_after_227,
+        test_mdlink_residual_rejects_link_token_pad0_after_227,
+        test_mdlink_residual_rejects_link_token_pad1_after_227,
+        test_mdlink_residual_rejects_link_token_pad2_after_227,
+        test_mdlink_residual_rejects_link_token_pad3_after_227,
+        test_mdlink_residual_accepts_live_seed_after_227,
+        test_mdlink_residual_accepts_live_seed_still_after_227,
+        test_mdlink_residual_passes_live_badge_after_227,
+        test_mdlink_residual_passes_live_badge_still_after_227,
 ]
 
 

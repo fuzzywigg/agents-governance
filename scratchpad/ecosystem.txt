@@ -494,3 +494,12 @@ _None yet._
 - [ ] cursor: Draft PR + CI green (do not revive #113)
 - Branch: cursor/tokenmaxx-actionlint-pins-after-132-f041
 2026-09-14T03:12:00Z
+
+### [ECO-057d] Rebase onto post-#135 main + reopen as new draft — 2026-09-14T03:25:00Z
+- [x] cursor: Rebase actionlint deepen onto origin/main after #135 (docs-lint 2491→2593); self-tests now 2665 (2593+72 actionlint deepen)
+- [x] cursor: #139 CLOSED unmerged — do not revive; open NEW draft PR; do not revive #113
+- [x] cursor: Local gates green after rebase (stewardship checks + 2665 self-tests)
+- [ ] cursor: New draft PR CI green
+- Scope: EXISTING actionlint-style reversible CI reliability pin wiring only; no invent-product; no fourth badge; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-actionlint-deepen-after-135-f041
+2026-09-14T03:25:00Z

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Run all stewardship doc gates locally (same set as CI).
+# docs CI config pins after #83
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"

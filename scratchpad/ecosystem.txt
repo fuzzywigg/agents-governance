@@ -478,7 +478,9 @@ _None yet._
 - [x] cursor: Read live tree post-#132 (2491 cases; workflow third-pass saturated; #120 CLOSED — do not revive)
 - [x] cursor: Fail-close docs-lint second-pass + actionlint path-order + badge CI leftovers (distinct from #111/#127/#132)
 - [x] cursor: Expand self-tests 2491 → 2543
-- [ ] cursor: Green draft PR with CI
+- [x] cursor: Green draft PR with CI (#138)
 - Scope: EXISTING docs-lint/actionlint-path/badge-CI integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; NOT closed #120 revive
 - Branch: cursor/tokenmaxx-docs-lint-pins-after-132-4a67
 2026-09-14T02:45:00Z
+
+2026-09-14T02:59:00Z cursor: PR #138 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-057 TOKENMAXX docs-lint pins after #132

@@ -166,6 +166,13 @@ actionlint path-order #189 / wiki-index #181 / run_stewardship #179 /
 path-filter #176 / fixtures #173 spam; lands closed #187/#188/#183/#164
 leftover on post-#189 tip; do not revive #187/#188/#183/#164).
 Deepened after #191: run_stewardship Pass-2 residual / stewardship-checks integrity (lands closed #193/#178) — gates-only runner / no BASH_SOURCE / no bare python / no set +u|+o pipefail / back-to-back gates→self-tests block / no inline check_*.py / self-tests before actionlint (not schema third-pass #191 / path-order #189 / Pass-2 core #179 / wiki-index #181 / path-filter #176 / fixtures #173 / badge-lint #195 spam). Do not revive #193/#178/#175/#140.
+Deepened after #225: actionlint path-filter/path-order residual deepen — contiguous
+pull_request:/schedule: adjacency / reject branches-ignore: / pull_request
+type-unfiltered / reject tj-actions/changed-files / contiguous four-step
+actionlint path-order / schedule before workflow_dispatch / contiguous
+shell-less actionlint run step (not saturated deepen #225/#203 / path-order
+#189 / path-filter #176 / schema #191/#216 / Pass-2 #199/#203/#220 /
+badge-lint #208 spam). Do not revive #226/#223/#217/#213/#198/#186/#166/#157.
 """
 
 from __future__ import annotations

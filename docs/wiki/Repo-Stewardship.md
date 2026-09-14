@@ -211,7 +211,7 @@ path-order #189),
 plus stewardship-schema fourth-pass after #199/#203 tip: nested policy refs /
 invalid status+surface enum stubs / whitespace-only / nested+list rejects /
 pass-4 contract pins (lands closed #171/#200/#204 leftover; do not revive
-#171/#200/#204/#194/#190/#188/#187/#183; leave open md/link #206 alone).
+closed #171/#200/#204/#194/#190/#188/#187/#183; leave open md/link #206 alone).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

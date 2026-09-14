@@ -566,3 +566,5 @@ _None yet._
 2026-09-14T04:20:41Z cursor: Local green — run_stewardship + self-tests 2953 + markdownlint ← ECO-060 stewardship-badge lint after #161 (do not revive #157/#123/#143)
 
 2026-09-14T04:26:13Z cursor: PR #169 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-060 TOKENMAXX stewardship-badge lint after #161 (does not revive #157/#123/#143; draft — do not merge)
+
+2026-09-14T04:27:21Z cursor: Reopened as draft PR #172 (same branch; #169 closed without merge) — deepen commit CI green; waiting #172 CI; do not merge

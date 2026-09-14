@@ -675,3 +675,17 @@ _None yet._
 2026-09-14T06:12:00Z cursor: Local green — run_stewardship + self-tests 3660 + markdownlint ← ECO-068 register Pass-2 residual after_191 after #199 (leave draft; leave CONFLICTING #195 alone; do not redo #191)
 
 2026-09-14T06:08:00Z cursor: Draft PR #203 opened (cursor/tokenmaxx-register-pass2-residual-tests-after-199-ebbb); leave draft / do-not-merge; awaiting CI ← ECO-068 register after #199 (leave CONFLICTING #202 alone; do not redo #191/#199)
+
+### [ECO-069] TOKENMAXX deepen actionlint path-filter/path-order edges after #203 — 2026-09-14T06:20:00Z
+- [x] cursor: Read live tree post-#203 (3660 cases; Pass-2 residual registered; open CONFLICTING #204 schema-fourth / #205 badge-lint — leave alone; pick unsaturated path-filter/path-order deepen leftover from closed #198)
+- [x] cursor: Fail-close path-filter/path-order deepen — contiguous push/branches/paths / pull_request path-unfiltered / reject dorny / self-workflow path lists / exact contiguous actionlint run / Download block + order / self-tests-before-Download / reject rhysd/actionlint@ uses
+- [x] cursor: Expand self-tests 3660 → 3806 (path-edges deepen slice only; not #203/#199/#191/#189 / not #204/#205 spam)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING actionlint path-filter/path-order leftover edge pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; lands closed #198 leftover on post-#203 tip; do not revive #198/#186/#166/#157; leave CONFLICTING #204/#205 alone
+- Branch: cursor/tokenmaxx-path-edges-deepen-after-203-1bd1
+2026-09-14T06:20:00Z
+
+2026-09-14T06:25:00Z cursor: Local green — run_stewardship + self-tests 3806 + markdownlint ← ECO-069 path-filter/path-order deepen after #203 (leave draft; leave CONFLICTING #204/#205 alone; do not revive #198/#186)
+
+2026-09-14T06:25:00Z cursor: Draft PR opening (cursor/tokenmaxx-path-edges-deepen-after-203-1bd1); leave draft / do-not-merge; awaiting CI ← ECO-069 path-filter/path-order deepen after #203 (leave CONFLICTING #204/#205 alone)
+

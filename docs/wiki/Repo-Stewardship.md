@@ -207,7 +207,16 @@ no BASH_SOURCE / no bare python / no set +u|+o pipefail /
 back-to-back gates→self-tests block / no inline check_*.py /
 self-tests before actionlint (lands closed #193/#178 leftover; do not
 revive #193/#178/#175/#140; distinct from schema third-pass #191 and
-path-order #189)).
+path-order #189),
+plus actionlint path-filter/path-order deepen after #203: contiguous
+push/branches/paths headers / pull_request path-unfiltered /
+reject dorny/paths-filter / residual self-workflow path lists / exact
+contiguous actionlint run / Download-before-run + self-tests-before-Download
+order / contiguous Download/id/run/shell block / reject uses: rhysd/actionlint@
+— DISTINCT leftover edges only (not saturated #189 / not #176 layouts /
+not schema #191 / not Pass-2 residual #199/#203 / not Pass-2+md/link #192 /
+not wiki-badge / not stewardship-badge lint #205 / not schema fourth-pass #204;
+lands closed #198 leftover; do not revive #198/#186/#166/#157)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

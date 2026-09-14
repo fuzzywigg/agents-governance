@@ -688,3 +688,17 @@ _None yet._
 2026-09-14T06:13:48Z cursor: NEW draft PR #205 opened (cursor/tokenmaxx-stewardship-badge-lint-after-199-7653) — awaiting CI ← ECO-066 stewardship-badge lint after #199 tip (does not revive #195/#172/#190; leave #199/#191/#189 alone)
 
 2026-09-14T06:23:03Z cursor: NEW draft PR #208 opened (replaces closed #205; tip after #203; 3728 cases) — awaiting CI ← ECO-066 stewardship-badge lint (do not revive #205/#195/#172/#190)
+
+### [ECO-069] TOKENMAXX deepen actionlint path-filter/path-order edges after #203 — 2026-09-14T06:35:00Z
+- [x] cursor: Read live tree post-#208 (3728 cases; badge-lint saturated via #208; open CONFLICTING #214 md/link — leave alone; pick unsaturated path-filter/path-order deepen leftover from closed #198)
+- [x] cursor: Fail-close path-filter/path-order deepen — contiguous push/branches/paths / pull_request path-unfiltered / reject dorny / self-workflow path lists / exact contiguous actionlint run / Download block + order / self-tests-before-Download / reject rhysd/actionlint@ uses
+- [x] cursor: Expand self-tests 3728 → 3874 (path-edges deepen slice only; not #208/#203/#199/#191/#189 / not #214 spam)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING actionlint path-filter/path-order leftover edge pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; lands closed #198 leftover on post-#208 tip; do not revive #198/#186/#166/#157; leave CONFLICTING #214 alone
+- Branch: cursor/tokenmaxx-path-edges-deepen-after-203-1bd1
+2026-09-14T06:35:00Z
+
+2026-09-14T06:35:00Z cursor: Rebased onto post-#208 tip after #208 merged mid-flight; path-edges slice still unsaturated ← ECO-069
+2026-09-14T06:40:00Z cursor: Local green — run_stewardship + self-tests 3874 + markdownlint ← ECO-069 path-filter/path-order deepen after #203 on post-#208 tip (leave draft; leave CONFLICTING #214 alone)
+
+2026-09-14T06:40:00Z cursor: Draft PR #213 force-updated onto post-#208 tip; leave draft / do-not-merge; awaiting CI ← ECO-069

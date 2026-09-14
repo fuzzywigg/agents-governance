@@ -11,6 +11,21 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX actionlint path-filter/path-order deepen after #203: expand
+  self-tests to 3874 cases (was 3728) fail-closing DISTINCT leftover
+  actionlint path-filter / path-order edges on existing workflow modules —
+  contiguous push/branches/paths headers / pull_request path-unfiltered /
+  reject dorny/paths-filter / residual self-workflow path lists / exact
+  contiguous actionlint run / Download-before-run + self-tests-before-Download
+  order / contiguous Download/id/run/shell block / reject uses: rhysd/actionlint@
+  invent / deepen docstring + gate-contract needles — path-filter/path-order
+  deepen slice only (not saturated #189 path-order / not #176 layouts /
+  not schema #191 / not Pass-2 residual #199/#203 / not Pass-2+md/link #192 /
+  not wiki-badge / not merged stewardship-badge lint #208 / not schema
+  fourth-pass); no invent-product; no fourth badge. Lands closed #198/#186
+  leftover on post-#208 tip (do **not** revive #198/#186/#166/#157). Distinct
+  from merged #208/#203/#199/#191/#189. Leaves open CONFLICTING #214 alone.
+
 - TOKENMAXX register Pass-2 residual after_191 self-tests after #199: wire
   orphaned +70 `*_after_191` defs into `main()` so the suite reports 3660
   (was still 3590 with pins live but cases unregistered). Tests/CI only;

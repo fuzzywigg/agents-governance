@@ -662,3 +662,5 @@ _None yet._
 2026-09-14T06:00:00Z
 
 2026-09-14T06:10:00Z cursor: Local green — run_stewardship + self-tests 3466 + markdownlint ← ECO-066 Pass-2 leftover + md/link edges after #189 (do not revive #192; leave #199 alone)
+
+2026-09-14T06:20:00Z cursor: Draft PR #202 opened (cursor/tokenmaxx-mdlint-link-edges-after-189-12d5); CI green (lint + link-check + stewardship) ← ECO-066 Pass-2 leftover + md/link edges after #191 (do not revive #192; leave Pass-2 residual set+u alone)

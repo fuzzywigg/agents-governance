@@ -589,3 +589,18 @@ _None yet._
 2026-09-14T04:45:00Z cursor: Local green — run_stewardship + self-tests 3175 + markdownlint ← ECO-062 actionlint path-filter leftovers after #173 (do not revive #166/#157; leave #172/#175/#164/#170/#174 alone)
 
 2026-09-14T04:46:00Z cursor: Draft PR #176 opened (cursor/tokenmaxx-path-filter-leftovers-after-173-d040); awaiting CI ← ECO-062 actionlint path-filter leftovers after #173 (do not revive #166/#157)
+
+2026-09-14T04:46:56Z cursor: PR #176 MERGED (path-filter leftovers after #173; 3175 cases) ← complete ECO-062 (do not revive #166/#157)
+
+### [ECO-063] TOKENMAXX deepen run_stewardship Pass-2 pins after #176 — 2026-09-14T04:55:00Z
+- [x] cursor: Read live tree post-#176 (3175 cases; path-filter saturated; #175 CLOSED CONFLICTING — do not revive; pick unsaturated run_stewardship Pass-2 leftover)
+- [x] cursor: Fail-close run_stewardship Pass-2 — exact ROOT / four python3 scripts/ / no || true|set +e / parent fragment / doc gates locally / CI runner-before-self-tests / contract Pass-2
+- [x] cursor: Expand self-tests 3175 → 3258 (run_stewardship CI reliability leftover slice; not path-filter #176 / fixtures #173 / stewardship-CI #165 / schema / badge spam)
+- [ ] cursor: Green draft PR with CI
+- Scope: EXISTING run_stewardship_checks.sh + stewardship-checks.yml order integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #175/#140 leftover on post-#176 main; do not revive #175/#140/#122
+- Branch: cursor/tokenmaxx-run-stewardship-pass2-after-176-d318
+2026-09-14T04:55:00Z
+
+2026-09-14T05:00:00Z cursor: Local green — run_stewardship + self-tests 3258 + markdownlint ← ECO-063 run_stewardship Pass-2 after #176 (do not revive #175/#140/#122; distinct from path-filter #176 / fixtures #173 / stewardship-CI #165)
+
+2026-09-14T05:02:00Z cursor: Draft PR #179 opened (cursor/tokenmaxx-run-stewardship-pass2-after-176-d318); awaiting CI ← ECO-063 run_stewardship Pass-2 after #176 (do not revive #175/#140/#122)

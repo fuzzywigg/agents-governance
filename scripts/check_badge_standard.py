@@ -32,12 +32,18 @@ Fail-closed actionlint-style pins (live path after #75; second-pass after #83/#8
   ubuntu-latest / workflow_dispatch: / reject security-events|attestations|
   statuses|deployments: write / deepen docstring
 
-Fail-closed run_stewardship runner pins (live path after #117; lands closed #96):
+Fail-closed run_stewardship runner pins (live path after #117; Pass-2 after #176;
+lands closed #175 leftover; lands closed #140; lands closed #96):
 - shebang #!/usr/bin/env bash / set -euo pipefail
 - dirname "$0" ROOT resolve / cd "$ROOT"
 - same set as CI commentary / python3 scripts/<gate> for four gates
 - gate order badge → wiki → schema → relative
 - check_run_stewardship_gate_contract self-pins
+- Pass-2 after #176: exact ROOT="$(cd "$(dirname "$0")/.." && pwd)" /
+  exactly four python3 scripts/ lines / no || true soft-fail /
+  dirname "$0")/.." fragment / doc gates locally commentary /
+  CI runs run_stewardship_checks.sh before test_stewardship_gates.py;
+  CI runner-before-self-tests order pin
 Fail-closed CI workflow pins (live path after #39/#72; third-pass after #111; deepen after #161;
 path-filter leftovers after #173):
 - Third-pass after #111: exact concurrency group templates /
@@ -1156,6 +1162,16 @@ def check_workflow_hardening(errors: list[str]) -> None:
     if "python3 scripts/test_stewardship_gates.py" not in stew:
         fail(
             "stewardship-checks.yml must run python3 scripts/test_stewardship_gates.py",
+            errors,
+        )
+    # Fail-closed after #176: runner before self-tests (CI reliability leftover).
+    run_i = stew.find("bash scripts/run_stewardship_checks.sh")
+    test_i = stew.find("python3 scripts/test_stewardship_gates.py")
+    # Reconstruct so contract can pin the concatenation form.
+    order_msg = "run_stewardship_checks.sh before " + "test_stewardship_gates.py"
+    if run_i < 0 or test_i < 0 or not (run_i < test_i):
+        fail(
+            "stewardship-checks.yml must run " + order_msg,
             errors,
         )
     if 'config: ".markdownlint.json"' not in lint and "config: '.markdownlint.json'" not in lint:
@@ -5636,6 +5652,39 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
                 "run_stewardship_checks.sh must keep Run all stewardship doc gates note",
                 errors,
             )
+        # Fail-closed after #176: exactly four python3 scripts/ gate lines.
+        py_prefix = "python3 scripts/"
+        if run_text.count(py_prefix) != 4:
+            fail(
+                "run_stewardship_checks.sh must invoke exactly four python3 scripts/ gates",
+                errors,
+            )
+        # Fail-closed after #176: no soft-fail softening of runner posture.
+        if "|| true" in run_text or "||true" in run_text:
+            fail(
+                "run_stewardship_checks.sh must not soft-fail with || true",
+                errors,
+            )
+        if "set +e" in run_text:
+            fail(
+                "run_stewardship_checks.sh must not disable errexit with set +e",
+                errors,
+            )
+        # Fail-closed after #176: parent-dir fragment from live ROOT assign.
+        # Checked before exact-ROOT leftover so parent-frag mutations get this needle.
+        parent_frag = 'dirname "$0")/..'
+        if parent_frag not in run_text:
+            fail(
+                "run_stewardship_checks.sh must keep parent-dir ROOT fragment",
+                errors,
+            )
+        # Fail-closed after #176: locally commentary (same set as CI path).
+        locally_pin = "doc gates " + "locally"
+        if locally_pin not in run_text:
+            fail(
+                "run_stewardship_checks.sh must keep locally commentary pin",
+                errors,
+            )
         # Leftover after #149: exact ROOT assign + blank line (before full layout).
         root_assign = 'ROOT="$(cd "$(dirname "$0")/.." && pwd)"'
         if root_assign not in run_text:
@@ -5648,6 +5697,14 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
             fail(
                 "run_stewardship_checks.sh must keep blank line after cd "
                 "(stewardship leftover after #149)",
+                errors,
+            )
+        # Fail-closed after #176: exact ROOT assign (CI reliability leftover).
+        exact_root = 'ROOT="$(cd "$(dirname "$0")/.." && pwd)"'
+        if exact_root not in run_text:
+            fail(
+                "run_stewardship_checks.sh must use exact ROOT assign "
+                '(ROOT="$(cd "$(dirname "$0")/.." && pwd)")',
                 errors,
             )
         # Leftover after #149: exact live run_stewardship_checks.sh full layout.
@@ -5671,7 +5728,7 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
 
 
 def check_run_stewardship_gate_contract(errors: list[str]) -> None:
-    """Fail-close live run_stewardship_checks.sh wiring (after #117; not lychee/mdlint spam)."""
+    """Fail-close live run_stewardship_checks.sh wiring (after #117/#176; not lychee/mdlint spam)."""
     if not BADGE_GATE.is_file():
         fail("Missing scripts/check_badge_standard.py (run_stewardship host)", errors)
         return
@@ -5822,6 +5879,67 @@ def check_run_stewardship_gate_contract(errors: list[str]) -> None:
     if leftover_after not in text:
         fail(
             "run_stewardship contract must keep " + leftover_after + " wording",
+            errors,
+        )
+    # Fail-closed after #176 deepen: exact ROOT / four-gate / soft-fail / CI order.
+    live_176 = "Fail-closed after " + "#176"
+    if live_176 not in text:
+        fail(
+            "run_stewardship pins must keep " + live_176 + " marker",
+            errors,
+        )
+    closed_140 = "lands closed " + "#140"
+    if closed_140 not in text:
+        fail(
+            "run_stewardship docstring must note " + closed_140,
+            errors,
+        )
+    closed_175 = "lands closed " + "#175"
+    if closed_175 not in text:
+        fail(
+            "run_stewardship docstring must note " + closed_175 + " leftover",
+            errors,
+        )
+    exact_root_pin = 'ROOT="$(cd "$(dirname "$0")/.." && pwd)"'
+    if exact_root_pin not in text:
+        fail(
+            "run_stewardship contract must require exact ROOT assign",
+            errors,
+        )
+    four_pin = "exactly four python3 " + "scripts/"
+    if four_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + four_pin + " pin",
+            errors,
+        )
+    soft_pin = "soft-fail with || " + "true"
+    if soft_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + soft_pin + " pin",
+            errors,
+        )
+    parent_marker = "parent-dir ROOT " + "fragment"
+    if parent_marker not in text:
+        fail(
+            "run_stewardship contract must keep " + parent_marker,
+            errors,
+        )
+    locally_c_pin = "doc gates " + "locally"
+    if locally_c_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + locally_c_pin + " pin",
+            errors,
+        )
+    order_joined = "run_stewardship_checks.sh before " + "test_stewardship_gates.py"
+    if order_joined not in text:
+        fail(
+            "run_stewardship contract must keep " + order_joined,
+            errors,
+        )
+    order_marker = "CI runner-before-self-tests " + "order pin"
+    if order_marker not in text:
+        fail(
+            "run_stewardship contract must keep " + order_marker,
             errors,
         )
 

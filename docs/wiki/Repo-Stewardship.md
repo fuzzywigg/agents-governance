@@ -287,6 +287,14 @@ omit-when-copying plus exact contiguous link+lint concurrency / job headers /
 `**/*.md` then `fail: true` adjacency — DISTINCT leftover only (not #243
 wiki/PUBLISH saturated pins / not md/link residual #239 / not path-filter
 residual #244 / not schema #233; no extra wiki files)).
+plus wiki/mdlink leftover path deepen after #252 tip: PUBLISH H1 / in-repo
+source / Settings→Wikis / When copying rewrite / clean worktree / or main /
+never initialized / create any page once / Acceptance README+MEMORY+editable+
+stay-green / Fallback Until `.wiki.git` landing / Home public wiki H1 /
+Canonical public governance front door plus exact name/blank-line/on adjacency /
+Check links/lychee/with / Run markdownlint/cli2/with — DISTINCT leftover path
+only (not #252 saturated pins / not #243 / not md/link residual #239 /
+not path-filter #244 / not schema #233; no extra wiki files)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

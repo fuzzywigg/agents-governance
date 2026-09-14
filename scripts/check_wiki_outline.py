@@ -51,6 +51,16 @@ Fail-closed pins (live path after #59; deepen after #43; third-pass after #90):
   (NOT wiki outline/PUBLISH leftover #243 saturated pins / NOT md/link residual layouts #239 /
   NOT path-filter/path-order leftover #244 / NOT stewardship-checks/schema #233 /
   NOT wiki-index/badge leftover #227; existing pages only — do not invent extra wiki files)
+- Wiki/mdlink leftover after #252: PUBLISH H1 / in-repo source prose /
+  Settings → Features → Wikis / When copying Home/Repo-Stewardship rewrite /
+  From a clean worktree / or main — match default branch /
+  never been initialized / create any page once re-run clone /
+  Acceptance README+MEMORY+editable+stay-green bullets /
+  Fallback Until .wiki.git Home.md landing contiguous /
+  Home agents-governance public wiki H1 / Canonical public governance front door
+  (NOT wiki/mdlink leftover #252 saturated pins / NOT wiki outline/PUBLISH leftover #243 /
+  NOT md/link residual layouts #239 / NOT path-filter/path-order leftover #244 /
+  NOT stewardship-checks/schema #233; existing pages only — do not invent extra wiki files)
 """
 
 from __future__ import annotations
@@ -321,6 +331,96 @@ def main() -> int:
                 "PUBLISH.md pages table must keep Home (landing) cell",
                 errors,
             )
+        # Wiki/mdlink leftover after #252 (existing pages only; residual vs #252).
+        if "# Publishing this wiki outline to GitHub Wiki" not in publish_text:
+            fail(
+                "PUBLISH.md must keep Publishing this wiki outline H1",
+                errors,
+            )
+        if "The Markdown under `docs/wiki/` is the **in-repo source**" not in publish_text:
+            fail(
+                "PUBLISH.md must keep in-repo source prose",
+                errors,
+            )
+        if "Settings → Features → Wikis" not in publish_text:
+            fail(
+                "PUBLISH.md must keep Settings → Features → Wikis init path",
+                errors,
+            )
+        if (
+            "When copying `Home.md` / `Repo-Stewardship.md` to the wiki, rewrite relative"
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md must keep When copying Home/Repo-Stewardship rewrite relative",
+                errors,
+            )
+        if "# From a clean worktree of agents-governance" not in publish_text:
+            fail(
+                "PUBLISH.md one-shot must keep From a clean worktree commentary",
+                errors,
+            )
+        if "# or main — match the wiki default branch" not in publish_text:
+            fail(
+                "PUBLISH.md one-shot must keep or main — match the wiki default branch",
+                errors,
+            )
+        if (
+            'If clone fails with "Repository not found", the wiki has never been initialized:'
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md fallback must keep never been initialized sentence",
+                errors,
+            )
+        if "create any page once in the GitHub UI, then re-run the clone." not in publish_text:
+            fail(
+                "PUBLISH.md fallback must keep create any page once / re-run the clone",
+                errors,
+            )
+        acceptance_readme = (
+            "- [ ] Wiki Home links back to the repository "
+            "[README](https://github.com/fuzzywigg/agents-governance/blob/main/README.md)"
+        )
+        if acceptance_readme not in publish_text:
+            fail(
+                "PUBLISH.md acceptance must keep Wiki Home links back README bullet",
+                errors,
+            )
+        if (
+            "- [ ] No secrets, private MEMORY, or private-template internals in published pages"
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md acceptance must keep No secrets, private MEMORY bullet",
+                errors,
+            )
+        if (
+            "- [ ] In-repo `docs/wiki/` remains the editable source; wiki push is a copy"
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md acceptance must keep editable source; wiki push is a copy",
+                errors,
+            )
+        if (
+            "- [ ] Link Check and Markdown Lint stay green on the PR that updates sources"
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md acceptance must keep stay green on the PR bullet",
+                errors,
+            )
+        fallback_landing = (
+            "Until the `.wiki.git` remote exists, treat\n"
+            "[Home.md](./Home.md) in this directory as the public landing page "
+            "linked from the README."
+        )
+        if fallback_landing not in publish_text:
+            fail(
+                "PUBLISH.md Fallback must keep Until .wiki.git Home.md public landing contiguous",
+                errors,
+            )
 
     home = WIKI / "Home.md"
     if home.is_file():
@@ -369,6 +469,20 @@ def main() -> int:
             fail(
                 "Home.md must keep operator PUBLISH.md link "
                 "(omit when copying pages to GitHub Wiki)",
+                errors,
+            )
+        # Wiki/mdlink leftover after #252: Home residual path wording.
+        if "# Home — agents-governance public wiki" not in home_text:
+            fail(
+                "Home.md must keep agents-governance public wiki H1",
+                errors,
+            )
+        if (
+            "Canonical public governance front door for the smtp.eth / fuzzywigg ecosystem."
+            not in home_text
+        ):
+            fail(
+                "Home.md must keep Canonical public governance front door wording",
                 errors,
             )
 

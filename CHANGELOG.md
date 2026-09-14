@@ -11,6 +11,25 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki/mdlink leftover path deepen after #252 tip: expand
+  self-tests to 5160 cases (was 4976) fail-closing unsaturated wiki outline /
+  PUBLISH.md leftover plus markdown-lint / link-check residual path layouts on
+  existing modules only — PUBLISH H1 / in-repo source prose /
+  Settings → Features → Wikis / When copying Home/Repo-Stewardship rewrite /
+  From a clean worktree / or main — match default branch /
+  never been initialized / create any page once re-run clone /
+  Acceptance README+MEMORY+editable+stay-green bullets /
+  Fallback Until `.wiki.git` Home.md landing contiguous /
+  Home agents-governance public wiki H1 / Canonical public governance front door /
+  exact name/blank-line/on adjacency / exact Check links→lychee-action@v2→with:
+  contiguous / exact Run markdownlint/cli2-action@v24/with contiguous —
+  wiki/mdlink leftover path slice only (not wiki/mdlink leftover #252 saturated
+  pins / not wiki outline/PUBLISH leftover #243 / not md/link residual layouts
+  #239 / not path-filter/path-order leftover #244 / not stewardship-checks/schema
+  residual #233 / not wiki-index/badge leftover #227); no invent-product; no
+  fourth badge; no extra wiki files. Distinct from merged
+  #252/#244/#243/#239/#233/#227/#225/#220/#216/#208. Do **not** revive
+  #249/#238/#234/#231/#221.
 - TOKENMAXX wiki/mdlink leftover deepen after #243 tip (post-#244 rebase): expand
   self-tests to 4976 cases (was 4792) fail-closing unsaturated wiki outline /
   PUBLISH.md leftover plus markdown-lint / link-check residual layouts on

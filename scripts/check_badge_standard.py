@@ -199,6 +199,20 @@ NOT wiki-index/badge leftover #227):
   exact contiguous link-check + markdown-lint job headers /
   exact "**/*.md" then fail: true adjacency
 
+Fail-closed wiki/mdlink leftover after #252 (residual vs saturated #252 wiki/mdlink
+leftover + #243 wiki outline/PUBLISH leftover + #239 md/link residual layouts;
+NOT path-filter/path-order leftover #244 /
+NOT stewardship-checks/schema #233 /
+NOT wiki-index/badge leftover #227):
+- wiki: PUBLISH H1 / in-repo source / Settings → Features → Wikis /
+  When copying rewrite / clean worktree / or main default branch /
+  never initialized / create any page once / Acceptance README+MEMORY+
+  editable+stay-green / Fallback Until .wiki.git landing /
+  Home public wiki H1 / Canonical public governance front door
+- md/link leftover path layouts: exact name/blank-line/on adjacency /
+  exact Check links/lychee-action@v2/with contiguous /
+  exact Run markdownlint/cli2-action@v24/with contiguous
+
 
 """
 
@@ -2247,6 +2261,44 @@ def check_workflow_hardening(errors: list[str]) -> None:
             errors,
         )
 
+    # Wiki/mdlink leftover after #252: residual path layouts beyond #243/#239.
+    link_name_on = "name: Link Check\n\non:"
+    if link_name_on not in link:
+        fail(
+            "link-check.yml must keep exact name/blank-line/on adjacency "
+            "(wiki/mdlink leftover after #252)",
+            errors,
+        )
+    lint_name_on = "name: Markdown Lint\n\non:"
+    if lint_name_on not in lint:
+        fail(
+            "markdown-lint.yml must keep exact name/blank-line/on adjacency "
+            "(wiki/mdlink leftover after #252)",
+            errors,
+        )
+    link_check_uses_with = (
+        "      - name: Check links\n"
+        "        uses: lycheeverse/lychee-action@v2\n"
+        "        with:"
+    )
+    if link_check_uses_with not in link:
+        fail(
+            "link-check.yml must keep exact Check links/lychee-action@v2/with contiguous "
+            "(wiki/mdlink leftover after #252)",
+            errors,
+        )
+    lint_run_uses_with = (
+        "      - name: Run markdownlint\n"
+        "        uses: DavidAnson/markdownlint-cli2-action@v24\n"
+        "        with:"
+    )
+    if lint_run_uses_with not in lint:
+        fail(
+            "markdown-lint.yml must keep exact Run markdownlint/cli2-action@v24/with contiguous "
+            "(wiki/mdlink leftover after #252)",
+            errors,
+        )
+
 
 def check_badge_standard_doc(errors: list[str]) -> None:
     """Ensure docs/badge-standard.md still documents the same required order."""
@@ -3223,6 +3275,30 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
     if fail_true_adj_pin not in text:
         fail(
             "check_badge_standard.py must keep " + fail_true_adj_pin + " leftover pin",
+            errors,
+        )
+    leftover_252_doc = "wiki/mdlink leftover after " + "#252"
+    if leftover_252_doc not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + leftover_252_doc + " pin",
+            errors,
+        )
+    mdlink_name_on_pin = "exact name/blank-line/on " + "adjacency"
+    if mdlink_name_on_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + mdlink_name_on_pin + " leftover pin",
+            errors,
+        )
+    mdlink_lychee_with_pin = "exact Check links/lychee-action@v2/with " + "contiguous"
+    if mdlink_lychee_with_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + mdlink_lychee_with_pin + " leftover pin",
+            errors,
+        )
+    mdlink_cli2_with_pin = "exact Run markdownlint/cli2-action@v24/with " + "contiguous"
+    if mdlink_cli2_with_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + mdlink_cli2_with_pin + " leftover pin",
             errors,
         )
 
@@ -7595,6 +7671,42 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
     if home_omit not in wiki_text:
         fail(
             "check_wiki_outline.py must pin Home omit-when-copying PUBLISH.md wording",
+            errors,
+        )
+    leftover_252_wiki = "Wiki/mdlink leftover after " + "#252"
+    if leftover_252_wiki not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + leftover_252_wiki + " pin",
+            errors,
+        )
+    not_saturated_252 = "NOT wiki/mdlink leftover " + "#252 saturated pins"
+    if not_saturated_252 not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_saturated_252 + " pin",
+            errors,
+        )
+    publish_h1_pin = "Publishing this wiki outline " + "H1"
+    if publish_h1_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin PUBLISH.md Publishing this wiki outline H1",
+            errors,
+        )
+    clean_worktree_pin = "From a clean worktree " + "commentary"
+    if clean_worktree_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin From a clean worktree commentary",
+            errors,
+        )
+    memory_bullet_pin = "No secrets, private MEMORY " + "bullet"
+    if memory_bullet_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin No secrets, private MEMORY acceptance bullet",
+            errors,
+        )
+    home_h1_pin = "agents-governance public wiki " + "H1"
+    if home_h1_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Home agents-governance public wiki H1",
             errors,
         )
 

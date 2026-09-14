@@ -409,3 +409,12 @@ _None yet._
 
 
 2026-09-14T01:13:00Z cursor: PR #100 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-050 TOKENMAXX wiki-outline third-pass pins
+
+### [ECO-051] TOKENMAXX deepen docs-lint pins after #100 — 2026-09-14T01:25:00Z
+- [x] cursor: Read live tree post-#100 (1971 cases; wiki-outline third-pass saturated; closed #101 docs-lint leftover)
+- [x] cursor: Fail-close docs-lint — lycheeignore escaped shields + MCP/LF + stewardship/308/103 / reject https://*+http://*+* / exact MD013+MD024 objects / MD033+041+060 false / default true / ROOT assigns / workflows helper + CDN needle / check_docs_lint_gate_contract
+- [x] cursor: Expand self-tests 1971 → 2079 (docs-lint slice + deepen; not wiki / relative / actionlint / schema / badge / common / CI workflow pin spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING docs-lint (.lycheeignore + .markdownlint.json) integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #101 leftover
+- Branch: cursor/tokenmaxx-docs-lint-after-100-d867
+2026-09-14T01:25:00Z

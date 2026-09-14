@@ -806,3 +806,26 @@ _None yet._
 2026-09-14T08:40:00Z cursor: Local green — run_stewardship + self-tests 4792 + markdownlint ← ECO-076 path-filter/path-order residuals after #243 (leave draft; do not revive #236/#232/#228)
 
 2026-09-14T08:40:30Z cursor: Draft PR #244 opened (cursor/tokenmaxx-path-edges-residual-after-243-7fba); leave draft / do-not-merge; awaiting CI ← ECO-076 residual after #243 (do not revive #236/#232/#228)
+
+### [ECO-079] TOKENMAXX Pass-2 residual + templates leftover + lychee blob/503 harden after #252 — 2026-09-14T09:59:34Z
+- [x] cursor: Read live tree post-#252 tip a279fe6 (4976 cases; wiki/mdlink leftover saturated; closed CONFLICTING #256/#254/#251/#250 Pass-2 residual + lychee harden)
+- [x] cursor: Fail-close Pass-2 residual leftover + existing templates/AGENTS-REPO.md validation (no invent templates)
+- [x] cursor: Docs-lint pass-4 `.lycheeignore` exclude same-repo blob/main 503 + wiki-outline enforcement commentary
+- [x] cursor: Expand self-tests 4976 → 5242 (+224 Pass-2/template +42 lychee pass-4; not #252/#244/#243/#239 spam)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING run_stewardship Pass-2 residual + existing templates/AGENTS-REPO.md leftover + lychee blob/503 harden only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates invent; do not revive #256/#254/#251/#250/#246/#245/#240; do not redo #252 wiki/mdlink / #244 path-edges / #243 wiki/PUBLISH / #239 md/link
+- Branch: cursor/tokenmaxx-pass2-residual-templates-lychee-after-252-6390
+2026-09-14T09:59:34Z
+
+2026-09-14T10:02:37Z cursor: Draft PR #261 opened (cursor/tokenmaxx-pass2-residual-templates-lychee-after-252-6390); leave draft / do-not-merge; awaiting CI ← ECO-079 (do not revive #256/#254/#251/#250/#246/#245/#240)
+
+2026-09-14T10:13:09Z cursor: Local green — run_stewardship + self-tests 5242 + markdownlint ← ECO-079 Pass-2 residual + template leftover + lychee blob/503 after #252 (leave draft; do not revive #256/#254/#251/#250)
+
+### [ECO-080] TOKENMAXX Pass-2 residual + templates leftover + lychee blob/503 harden after #258 — 2026-09-14T10:15:25Z
+- [x] cursor: Tip moved #258 schema leftover; closed CONFLICTING #261 on post-#252 tip; rebase Pass-2 residual + lychee harden onto 705f077
+- [x] cursor: Expand self-tests 5176 → 5442 (+224 Pass-2/template +42 lychee pass-4; not #258/#252/#244 spam)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge; do not revive #266/#265/#261/#256/#254/#251/#250
+- Scope: EXISTING Pass-2 residual + existing templates/AGENTS-REPO.md leftover + lychee blob/503 harden only; no invent templates; no invent-product; no fourth badge
+- Branch: cursor/tokenmaxx-pass2-residual-templates-lychee-after-258-6390
+2026-09-14T10:15:25Z
+

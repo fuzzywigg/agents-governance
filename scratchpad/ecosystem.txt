@@ -848,3 +848,25 @@ _None yet._
 2026-09-14T10:30:00Z cursor: Draft PR #272 opened (cursor/tokenmaxx-pass2-residual-templates-after-244-1979) on post-#262 tip; leave draft / do-not-merge; awaiting CI ← ECO-077 Pass-2 residual + existing templates/AGENTS-REPO.md (do not revive #265/#254/#251/#250/#246/#245/#240)
 
 2026-09-14T10:41:00Z cursor: PR #272 CI green (lint + link-check + stewardship) + MERGEABLE on tip ← ECO-077 Pass-2 residual leftover + existing templates/AGENTS-REPO.md after #262 (leave draft / do-not-merge; do not revive #265/#254/#251/#250/#246/#245/#240)
+### [ECO-078] Harden lycheeignore against same-repo blob/main 503 flake after #251/#250 RED — 2026-09-14T09:20:10Z
+- [x] cursor: Confirm #251/#250 CLOSED RED on GitHub blob/main 503 (not Pass-2 content regression)
+- [x] cursor: Pass-4 `.lycheeignore` exclude for `github.com/fuzzywigg/agents-governance/blob/main/` + wiki-outline enforcement commentary
+- [x] cursor: Update docs-lint expected layout + contract needles + after_251 self-tests; keep Pass-2 residual/template leftover slice
+- [ ] cursor: Green draft PR on tip — leave draft / do-not-merge; do not revive #251/#250/#246/#245/#240
+- Scope: docs-lint pass-4 blob/503 flake harden only (plus existing Pass-2 residual/template leftover already on branch); no invent templates; no DNS; no secrets
+- Branch: cursor/tokenmaxx-pass2-residual-templates-after-244-linkflake-84bf
+2026-09-14T09:20:10Z
+
+2026-09-14T09:20:10Z cursor: Local docs-lint pass-4 + Pass-2 residual leftover on post-#244 tip; awaiting full self-test + draft PR ← ECO-078 (do not revive #251/#250/#246/#245/#240)
+
+2026-09-14T09:40:17Z cursor: Local green — run_stewardship + self-tests 5058 + markdownlint ← ECO-078 docs-lint pass-4 blob/503 + Pass-2 residual leftover after #244 (leave draft; do not revive #251/#250/#246/#245/#240)
+
+### [ECO-081] TOKENMAXX deepen remaining lychee/blob-503 leftover after #272 — 2026-09-14T10:44:39Z
+- [x] cursor: Tip advanced — #272 merged Pass-2/template leftovers; abandon closed #246/#273/#266/#261/#260/#256/#251/#250
+- [x] cursor: Cherry-pick docs-lint pass-4 `.lycheeignore` blob/main 503 harden onto post-#272 tip only
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING docs-lint / `.lycheeignore` / blob-503 CI leftover only; no invent templates; no DNS; no secrets; do not redo #272 Pass-2/templates / #262 path-edges / #258 schema / #252 wiki-mdlink
+- Branch: cursor/tokenmaxx-lychee-blob503-harden-after-272-84bf
+2026-09-14T10:44:39Z
+
+2026-09-14T10:44:39Z cursor: Cherry-pick in progress on post-#272 tip; local verify next ← ECO-081 (do not revive #246/#273/#266/#261/#260/#256/#251/#250)

@@ -17,6 +17,13 @@ Deepened after #176: wiki-index validators — Home TOC empty-index /
 publishable page index stubs / broken internal stub links / empty markdown
 index / duplicate slug headings_in set collapse (not wiki-badge #141 /
 fixtures #173 / path-filter #176 / run_stewardship #179 spam).
+Deepened after #233 tip: wiki outline/PUBLISH leftover — existing docs/wiki pages
+only / PUBLISH.md pages-table order / Pages to publish / wiki.git clone /
+cp docs/wiki/{page} (no operator PUBLISH.md) / git add six pages / purpose+closes
+#16 / Fallback .wiki.git / badge-standard blob rewrite (wiki outline/PUBLISH leftover
+slice only; not wiki-index/badge #227 / not stewardship-checks/schema #233 /
+not path-filter/path-order #225 / not Pass-2 leftover + md/link #220).
+Lands leftover after #233 tip (do not revive #232/#234/#235).
 Deepened after #225 tip: wiki-index/badge leftover — exact PUBLISHABLE_PAGES /
 TOC loop+skip+link forms / empty-index / relative broken-link needles /
 invent refuse leftover framing (wiki-index/badge leftover slice only;
@@ -545,12 +552,23 @@ def _seed_wiki_tree(tmp: Path, *, extra_pages: tuple[str, ...] = (), mutate=None
         "PUBLISH.md": (
             "# PUBLISH\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
             "purpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\ncloses: \"#16\"\n```\n\n"
+            "## Pages to publish\n\n"
             "| `Home.md` | Home |\n| `Overview.md` | Overview |\n"
             "| `Autonomy-Levels.md` | Autonomy-Levels |\n"
             "| `Repo-Stewardship.md` | Repo-Stewardship |\n"
             "| `Agent-Routing.md` | Agent-Routing |\n"
             "| `Security-Boundaries.md` | Security-Boundaries |\n\n"
             "Do **not** push `PUBLISH.md`.\n"
+            "drop the in-repo `PUBLISH.md` bullet from Home\n"
+            "https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge-standard.md\n"
+            "git clone https://github.com/fuzzywigg/agents-governance.wiki.git /tmp/wiki\n"
+            "cp docs/wiki/Home.md docs/wiki/Overview.md docs/wiki/Autonomy-Levels.md "
+            "docs/wiki/Repo-Stewardship.md docs/wiki/Agent-Routing.md "
+            "docs/wiki/Security-Boundaries.md /tmp/wiki/\n"
+            "git add Home.md Overview.md Autonomy-Levels.md "
+            "Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md\n"
+            "git push origin master\n"
+            "Until the `.wiki.git` remote exists\n"
             "Link Check and Markdown Lint. No secrets.\n"
         ),
         "Repo-Stewardship.md": (
@@ -62158,6 +62176,2009 @@ def test_schema_gate_requires_anthropic_stub_after_225() -> None:
         path.write_text(text.replace('anthropic', 'claude_api'), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'anthropic')
 
+
+# --- TOKENMAXX wiki outline/PUBLISH leftover after #233 ---
+
+def test_wiki_publish_rejects_heading_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("## Pages to publish", "## Pages to copy")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Pages to publish')
+
+def test_wiki_publish_rejects_heading_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("## Pages to publish", "## Pages to copy")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Pages to publish')
+
+def test_wiki_publish_rejects_heading_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("## Pages to publish", "## Pages to copy")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Pages to publish')
+
+def test_wiki_publish_rejects_heading_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("## Pages to publish", "## Pages to copy")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Pages to publish')
+
+def test_wiki_publish_rejects_heading_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("## Pages to publish", "## Pages to copy")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Pages to publish')
+
+def test_wiki_publish_rejects_heading_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("## Pages to publish", "## Pages to copy")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Pages to publish')
+
+def test_wiki_publish_rejects_heading_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("## Pages to publish", "## Pages to copy")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Pages to publish')
+
+def test_wiki_publish_rejects_heading_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("## Pages to publish", "## Pages to copy")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Pages to publish')
+
+def test_wiki_publish_rejects_table_order_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home |\n")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'publishable page order')
+
+def test_wiki_publish_rejects_table_order_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home |\n")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'publishable page order')
+
+def test_wiki_publish_rejects_table_order_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home |\n")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'publishable page order')
+
+def test_wiki_publish_rejects_table_order_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home |\n")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'publishable page order')
+
+def test_wiki_publish_rejects_table_order_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home |\n")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'publishable page order')
+
+def test_wiki_publish_rejects_table_order_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home |\n")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'publishable page order')
+
+def test_wiki_publish_rejects_table_order_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home |\n")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'publishable page order')
+
+def test_wiki_publish_rejects_table_order_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home |\n")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'publishable page order')
+
+def test_wiki_publish_rejects_wiki_git_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("agents-governance.wiki.git", "agents-governance.git")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'agents-governance.wiki.git')
+
+def test_wiki_publish_rejects_wiki_git_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("agents-governance.wiki.git", "agents-governance.git")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'agents-governance.wiki.git')
+
+def test_wiki_publish_rejects_wiki_git_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("agents-governance.wiki.git", "agents-governance.git")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'agents-governance.wiki.git')
+
+def test_wiki_publish_rejects_wiki_git_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("agents-governance.wiki.git", "agents-governance.git")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'agents-governance.wiki.git')
+
+def test_wiki_publish_rejects_wiki_git_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("agents-governance.wiki.git", "agents-governance.git")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'agents-governance.wiki.git')
+
+def test_wiki_publish_rejects_wiki_git_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("agents-governance.wiki.git", "agents-governance.git")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'agents-governance.wiki.git')
+
+def test_wiki_publish_rejects_wiki_git_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("agents-governance.wiki.git", "agents-governance.git")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'agents-governance.wiki.git')
+
+def test_wiki_publish_rejects_wiki_git_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("agents-governance.wiki.git", "agents-governance.git")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'agents-governance.wiki.git')
+
+def test_wiki_publish_rejects_cp_operator_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"] + "\ncp docs/wiki/PUBLISH.md /tmp/wiki/\n"
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'must not copy operator PUBLISH.md')
+
+def test_wiki_publish_rejects_cp_operator_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"] + "\ncp docs/wiki/PUBLISH.md /tmp/wiki/\n"
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'must not copy operator PUBLISH.md')
+
+def test_wiki_publish_rejects_cp_operator_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"] + "\ncp docs/wiki/PUBLISH.md /tmp/wiki/\n"
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'must not copy operator PUBLISH.md')
+
+def test_wiki_publish_rejects_cp_operator_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"] + "\ncp docs/wiki/PUBLISH.md /tmp/wiki/\n"
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'must not copy operator PUBLISH.md')
+
+def test_wiki_publish_rejects_cp_operator_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"] + "\ncp docs/wiki/PUBLISH.md /tmp/wiki/\n"
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'must not copy operator PUBLISH.md')
+
+def test_wiki_publish_rejects_cp_operator_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"] + "\ncp docs/wiki/PUBLISH.md /tmp/wiki/\n"
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'must not copy operator PUBLISH.md')
+
+def test_wiki_publish_rejects_cp_operator_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"] + "\ncp docs/wiki/PUBLISH.md /tmp/wiki/\n"
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'must not copy operator PUBLISH.md')
+
+def test_wiki_publish_rejects_cp_operator_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"] + "\ncp docs/wiki/PUBLISH.md /tmp/wiki/\n"
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'must not copy operator PUBLISH.md')
+
+def test_wiki_publish_rejects_copy_home_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("docs/wiki/Home.md", "docs/wiki/home.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'docs/wiki/Home.md')
+
+def test_wiki_publish_rejects_copy_home_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("docs/wiki/Home.md", "docs/wiki/home.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'docs/wiki/Home.md')
+
+def test_wiki_publish_rejects_copy_home_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("docs/wiki/Home.md", "docs/wiki/home.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'docs/wiki/Home.md')
+
+def test_wiki_publish_rejects_copy_home_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("docs/wiki/Home.md", "docs/wiki/home.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'docs/wiki/Home.md')
+
+def test_wiki_publish_rejects_copy_home_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("docs/wiki/Home.md", "docs/wiki/home.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'docs/wiki/Home.md')
+
+def test_wiki_publish_rejects_copy_home_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("docs/wiki/Home.md", "docs/wiki/home.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'docs/wiki/Home.md')
+
+def test_wiki_publish_rejects_copy_home_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("docs/wiki/Home.md", "docs/wiki/home.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'docs/wiki/Home.md')
+
+def test_wiki_publish_rejects_copy_home_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("docs/wiki/Home.md", "docs/wiki/home.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'docs/wiki/Home.md')
+
+def test_wiki_publish_rejects_git_add_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md", "git add Home.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git add the six publishable pages')
+
+def test_wiki_publish_rejects_git_add_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md", "git add Home.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git add the six publishable pages')
+
+def test_wiki_publish_rejects_git_add_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md", "git add Home.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git add the six publishable pages')
+
+def test_wiki_publish_rejects_git_add_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md", "git add Home.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git add the six publishable pages')
+
+def test_wiki_publish_rejects_git_add_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md", "git add Home.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git add the six publishable pages')
+
+def test_wiki_publish_rejects_git_add_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md", "git add Home.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git add the six publishable pages')
+
+def test_wiki_publish_rejects_git_add_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md", "git add Home.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git add the six publishable pages')
+
+def test_wiki_publish_rejects_git_add_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md", "git add Home.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git add the six publishable pages')
+
+def test_wiki_publish_rejects_git_push_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("git push origin", "git push wiki")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git push origin')
+
+def test_wiki_publish_rejects_git_push_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("git push origin", "git push wiki")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git push origin')
+
+def test_wiki_publish_rejects_git_push_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("git push origin", "git push wiki")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git push origin')
+
+def test_wiki_publish_rejects_git_push_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("git push origin", "git push wiki")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git push origin')
+
+def test_wiki_publish_rejects_git_push_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("git push origin", "git push wiki")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git push origin')
+
+def test_wiki_publish_rejects_git_push_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("git push origin", "git push wiki")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git push origin')
+
+def test_wiki_publish_rejects_git_push_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("git push origin", "git push wiki")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git push origin')
+
+def test_wiki_publish_rejects_git_push_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("git push origin", "git push wiki")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git push origin')
+
+def test_wiki_publish_rejects_purpose_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("Reversible publish path for docs/wiki", "One-way publish path for docs/wiki")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Reversible publish path')
+
+def test_wiki_publish_rejects_purpose_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("Reversible publish path for docs/wiki", "One-way publish path for docs/wiki")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Reversible publish path')
+
+def test_wiki_publish_rejects_purpose_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("Reversible publish path for docs/wiki", "One-way publish path for docs/wiki")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Reversible publish path')
+
+def test_wiki_publish_rejects_purpose_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("Reversible publish path for docs/wiki", "One-way publish path for docs/wiki")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Reversible publish path')
+
+def test_wiki_publish_rejects_purpose_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("Reversible publish path for docs/wiki", "One-way publish path for docs/wiki")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Reversible publish path')
+
+def test_wiki_publish_rejects_purpose_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("Reversible publish path for docs/wiki", "One-way publish path for docs/wiki")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Reversible publish path')
+
+def test_wiki_publish_rejects_purpose_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("Reversible publish path for docs/wiki", "One-way publish path for docs/wiki")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Reversible publish path')
+
+def test_wiki_publish_rejects_purpose_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("Reversible publish path for docs/wiki", "One-way publish path for docs/wiki")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Reversible publish path')
+
+def test_wiki_publish_rejects_closes_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace('closes: "#16"', 'closes: "16"')
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'closes: "#16"')
+
+def test_wiki_publish_rejects_closes_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace('closes: "#16"', 'closes: "16"')
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'closes: "#16"')
+
+def test_wiki_publish_rejects_closes_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace('closes: "#16"', 'closes: "16"')
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'closes: "#16"')
+
+def test_wiki_publish_rejects_closes_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace('closes: "#16"', 'closes: "16"')
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'closes: "#16"')
+
+def test_wiki_publish_rejects_closes_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace('closes: "#16"', 'closes: "16"')
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'closes: "#16"')
+
+def test_wiki_publish_rejects_closes_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace('closes: "#16"', 'closes: "16"')
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'closes: "#16"')
+
+def test_wiki_publish_rejects_closes_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace('closes: "#16"', 'closes: "16"')
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'closes: "#16"')
+
+def test_wiki_publish_rejects_closes_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace('closes: "#16"', 'closes: "16"')
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'closes: "#16"')
+
+def test_wiki_publish_rejects_fallback_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace(".wiki.git", ".wiki-remote")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '.wiki.git')
+
+def test_wiki_publish_rejects_fallback_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace(".wiki.git", ".wiki-remote")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '.wiki.git')
+
+def test_wiki_publish_rejects_fallback_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace(".wiki.git", ".wiki-remote")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '.wiki.git')
+
+def test_wiki_publish_rejects_fallback_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace(".wiki.git", ".wiki-remote")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '.wiki.git')
+
+def test_wiki_publish_rejects_fallback_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace(".wiki.git", ".wiki-remote")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '.wiki.git')
+
+def test_wiki_publish_rejects_fallback_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace(".wiki.git", ".wiki-remote")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '.wiki.git')
+
+def test_wiki_publish_rejects_fallback_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace(".wiki.git", ".wiki-remote")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '.wiki.git')
+
+def test_wiki_publish_rejects_fallback_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace(".wiki.git", ".wiki-remote")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '.wiki.git')
+
+def test_wiki_publish_rejects_badge_blob_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge-standard.md", "https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'badge-standard blob')
+
+def test_wiki_publish_rejects_badge_blob_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge-standard.md", "https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'badge-standard blob')
+
+def test_wiki_publish_rejects_badge_blob_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge-standard.md", "https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'badge-standard blob')
+
+def test_wiki_publish_rejects_badge_blob_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge-standard.md", "https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'badge-standard blob')
+
+def test_wiki_publish_rejects_badge_blob_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge-standard.md", "https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'badge-standard blob')
+
+def test_wiki_publish_rejects_badge_blob_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge-standard.md", "https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'badge-standard blob')
+
+def test_wiki_publish_rejects_badge_blob_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge-standard.md", "https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'badge-standard blob')
+
+def test_wiki_publish_rejects_badge_blob_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge-standard.md", "https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge.md")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'badge-standard blob')
+
+def test_wiki_publish_rejects_drop_bullet_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("drop the in-repo `PUBLISH.md` bullet from Home", "keep the in-repo PUBLISH.md bullet on Home")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'drop the in-repo')
+
+def test_wiki_publish_rejects_drop_bullet_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("drop the in-repo `PUBLISH.md` bullet from Home", "keep the in-repo PUBLISH.md bullet on Home")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'drop the in-repo')
+
+def test_wiki_publish_rejects_drop_bullet_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("drop the in-repo `PUBLISH.md` bullet from Home", "keep the in-repo PUBLISH.md bullet on Home")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'drop the in-repo')
+
+def test_wiki_publish_rejects_drop_bullet_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("drop the in-repo `PUBLISH.md` bullet from Home", "keep the in-repo PUBLISH.md bullet on Home")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'drop the in-repo')
+
+def test_wiki_publish_rejects_drop_bullet_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("drop the in-repo `PUBLISH.md` bullet from Home", "keep the in-repo PUBLISH.md bullet on Home")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'drop the in-repo')
+
+def test_wiki_publish_rejects_drop_bullet_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("drop the in-repo `PUBLISH.md` bullet from Home", "keep the in-repo PUBLISH.md bullet on Home")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'drop the in-repo')
+
+def test_wiki_publish_rejects_drop_bullet_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("drop the in-repo `PUBLISH.md` bullet from Home", "keep the in-repo PUBLISH.md bullet on Home")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'drop the in-repo')
+
+def test_wiki_publish_rejects_drop_bullet_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("drop the in-repo `PUBLISH.md` bullet from Home", "keep the in-repo PUBLISH.md bullet on Home")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'drop the in-repo')
+
+def test_wiki_publish_rejects_operator_in_pages_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_wiki_tree(tmp_path)
+        text = (scripts / "check_wiki_outline.py").read_text(encoding="utf-8")
+        old = (
+            "PUBLISHABLE_PAGES = (\n"
+            '    "Home.md",\n'
+            '    "Overview.md",\n'
+            '    "Autonomy-Levels.md",\n'
+            '    "Repo-Stewardship.md",\n'
+            '    "Agent-Routing.md",\n'
+            '    "Security-Boundaries.md",\n'
+            ")"
+        )
+        new = (
+            "PUBLISHABLE_PAGES = (\n"
+            '    "Home.md",\n'
+            '    "Overview.md",\n'
+            '    "Autonomy-Levels.md",\n'
+            '    "Repo-Stewardship.md",\n'
+            '    "Agent-Routing.md",\n'
+            '    "Security-Boundaries.md",\n'
+            '    "PUBLISH.md",\n'
+            ")"
+        )
+        assert old in text
+        (scripts / "check_wiki_outline.py").write_text(text.replace(old, new), encoding="utf-8")
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, "must not be in PUBLISHABLE_PAGES")
+
+def test_wiki_publish_rejects_operator_in_pages_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_wiki_tree(tmp_path)
+        text = (scripts / "check_wiki_outline.py").read_text(encoding="utf-8")
+        old = (
+            "PUBLISHABLE_PAGES = (\n"
+            '    "Home.md",\n'
+            '    "Overview.md",\n'
+            '    "Autonomy-Levels.md",\n'
+            '    "Repo-Stewardship.md",\n'
+            '    "Agent-Routing.md",\n'
+            '    "Security-Boundaries.md",\n'
+            ")"
+        )
+        new = (
+            "PUBLISHABLE_PAGES = (\n"
+            '    "Home.md",\n'
+            '    "Overview.md",\n'
+            '    "Autonomy-Levels.md",\n'
+            '    "Repo-Stewardship.md",\n'
+            '    "Agent-Routing.md",\n'
+            '    "Security-Boundaries.md",\n'
+            '    "PUBLISH.md",\n'
+            ")"
+        )
+        assert old in text
+        (scripts / "check_wiki_outline.py").write_text(text.replace(old, new), encoding="utf-8")
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, "must not be in PUBLISHABLE_PAGES")
+
+def test_wiki_publish_rejects_operator_in_pages_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_wiki_tree(tmp_path)
+        text = (scripts / "check_wiki_outline.py").read_text(encoding="utf-8")
+        old = (
+            "PUBLISHABLE_PAGES = (\n"
+            '    "Home.md",\n'
+            '    "Overview.md",\n'
+            '    "Autonomy-Levels.md",\n'
+            '    "Repo-Stewardship.md",\n'
+            '    "Agent-Routing.md",\n'
+            '    "Security-Boundaries.md",\n'
+            ")"
+        )
+        new = (
+            "PUBLISHABLE_PAGES = (\n"
+            '    "Home.md",\n'
+            '    "Overview.md",\n'
+            '    "Autonomy-Levels.md",\n'
+            '    "Repo-Stewardship.md",\n'
+            '    "Agent-Routing.md",\n'
+            '    "Security-Boundaries.md",\n'
+            '    "PUBLISH.md",\n'
+            ")"
+        )
+        assert old in text
+        (scripts / "check_wiki_outline.py").write_text(text.replace(old, new), encoding="utf-8")
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, "must not be in PUBLISHABLE_PAGES")
+
+def test_wiki_publish_rejects_operator_in_pages_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_wiki_tree(tmp_path)
+        text = (scripts / "check_wiki_outline.py").read_text(encoding="utf-8")
+        old = (
+            "PUBLISHABLE_PAGES = (\n"
+            '    "Home.md",\n'
+            '    "Overview.md",\n'
+            '    "Autonomy-Levels.md",\n'
+            '    "Repo-Stewardship.md",\n'
+            '    "Agent-Routing.md",\n'
+            '    "Security-Boundaries.md",\n'
+            ")"
+        )
+        new = (
+            "PUBLISHABLE_PAGES = (\n"
+            '    "Home.md",\n'
+            '    "Overview.md",\n'
+            '    "Autonomy-Levels.md",\n'
+            '    "Repo-Stewardship.md",\n'
+            '    "Agent-Routing.md",\n'
+            '    "Security-Boundaries.md",\n'
+            '    "PUBLISH.md",\n'
+            ")"
+        )
+        assert old in text
+        (scripts / "check_wiki_outline.py").write_text(text.replace(old, new), encoding="utf-8")
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, "must not be in PUBLISHABLE_PAGES")
+
+def test_wiki_publish_rejects_operator_in_pages_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_wiki_tree(tmp_path)
+        text = (scripts / "check_wiki_outline.py").read_text(encoding="utf-8")
+        old = (
+            "PUBLISHABLE_PAGES = (\n"
+            '    "Home.md",\n'
+            '    "Overview.md",\n'
+            '    "Autonomy-Levels.md",\n'
+            '    "Repo-Stewardship.md",\n'
+            '    "Agent-Routing.md",\n'
+            '    "Security-Boundaries.md",\n'
+            ")"
+        )
+        new = (
+            "PUBLISHABLE_PAGES = (\n"
+            '    "Home.md",\n'
+            '    "Overview.md",\n'
+            '    "Autonomy-Levels.md",\n'
+            '    "Repo-Stewardship.md",\n'
+            '    "Agent-Routing.md",\n'
+            '    "Security-Boundaries.md",\n'
+            '    "PUBLISH.md",\n'
+            ")"
+        )
+        assert old in text
+        (scripts / "check_wiki_outline.py").write_text(text.replace(old, new), encoding="utf-8")
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, "must not be in PUBLISHABLE_PAGES")
+
+def test_wiki_publish_rejects_operator_in_pages_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_wiki_tree(tmp_path)
+        text = (scripts / "check_wiki_outline.py").read_text(encoding="utf-8")
+        old = (
+            "PUBLISHABLE_PAGES = (\n"
+            '    "Home.md",\n'
+            '    "Overview.md",\n'
+            '    "Autonomy-Levels.md",\n'
+            '    "Repo-Stewardship.md",\n'
+            '    "Agent-Routing.md",\n'
+            '    "Security-Boundaries.md",\n'
+            ")"
+        )
+        new = (
+            "PUBLISHABLE_PAGES = (\n"
+            '    "Home.md",\n'
+            '    "Overview.md",\n'
+            '    "Autonomy-Levels.md",\n'
+            '    "Repo-Stewardship.md",\n'
+            '    "Agent-Routing.md",\n'
+            '    "Security-Boundaries.md",\n'
+            '    "PUBLISH.md",\n'
+            ")"
+        )
+        assert old in text
+        (scripts / "check_wiki_outline.py").write_text(text.replace(old, new), encoding="utf-8")
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, "must not be in PUBLISHABLE_PAGES")
+
+def test_wiki_publish_rejects_operator_in_pages_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_wiki_tree(tmp_path)
+        text = (scripts / "check_wiki_outline.py").read_text(encoding="utf-8")
+        old = (
+            "PUBLISHABLE_PAGES = (\n"
+            '    "Home.md",\n'
+            '    "Overview.md",\n'
+            '    "Autonomy-Levels.md",\n'
+            '    "Repo-Stewardship.md",\n'
+            '    "Agent-Routing.md",\n'
+            '    "Security-Boundaries.md",\n'
+            ")"
+        )
+        new = (
+            "PUBLISHABLE_PAGES = (\n"
+            '    "Home.md",\n'
+            '    "Overview.md",\n'
+            '    "Autonomy-Levels.md",\n'
+            '    "Repo-Stewardship.md",\n'
+            '    "Agent-Routing.md",\n'
+            '    "Security-Boundaries.md",\n'
+            '    "PUBLISH.md",\n'
+            ")"
+        )
+        assert old in text
+        (scripts / "check_wiki_outline.py").write_text(text.replace(old, new), encoding="utf-8")
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, "must not be in PUBLISHABLE_PAGES")
+
+def test_wiki_publish_rejects_operator_in_pages_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_wiki_tree(tmp_path)
+        text = (scripts / "check_wiki_outline.py").read_text(encoding="utf-8")
+        old = (
+            "PUBLISHABLE_PAGES = (\n"
+            '    "Home.md",\n'
+            '    "Overview.md",\n'
+            '    "Autonomy-Levels.md",\n'
+            '    "Repo-Stewardship.md",\n'
+            '    "Agent-Routing.md",\n'
+            '    "Security-Boundaries.md",\n'
+            ")"
+        )
+        new = (
+            "PUBLISHABLE_PAGES = (\n"
+            '    "Home.md",\n'
+            '    "Overview.md",\n'
+            '    "Autonomy-Levels.md",\n'
+            '    "Repo-Stewardship.md",\n'
+            '    "Agent-Routing.md",\n'
+            '    "Security-Boundaries.md",\n'
+            '    "PUBLISH.md",\n'
+            ")"
+        )
+        assert old in text
+        (scripts / "check_wiki_outline.py").write_text(text.replace(old, new), encoding="utf-8")
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, "must not be in PUBLISHABLE_PAGES")
+
+def test_wiki_publish_gate_leftover_doc_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Wiki outline/PUBLISH leftover after #233' in text
+        path.write_text(text.replace('Wiki outline/PUBLISH leftover after #233', 'Wiki outline/PUBLISH leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki outline/PUBLISH leftover after #233')
+
+def test_wiki_publish_gate_leftover_doc_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Wiki outline/PUBLISH leftover after #233' in text
+        path.write_text(text.replace('Wiki outline/PUBLISH leftover after #233', 'Wiki outline/PUBLISH leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki outline/PUBLISH leftover after #233')
+
+def test_wiki_publish_gate_leftover_doc_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Wiki outline/PUBLISH leftover after #233' in text
+        path.write_text(text.replace('Wiki outline/PUBLISH leftover after #233', 'Wiki outline/PUBLISH leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki outline/PUBLISH leftover after #233')
+
+def test_wiki_publish_gate_leftover_doc_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Wiki outline/PUBLISH leftover after #233' in text
+        path.write_text(text.replace('Wiki outline/PUBLISH leftover after #233', 'Wiki outline/PUBLISH leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki outline/PUBLISH leftover after #233')
+
+def test_wiki_publish_gate_leftover_doc_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Wiki outline/PUBLISH leftover after #233' in text
+        path.write_text(text.replace('Wiki outline/PUBLISH leftover after #233', 'Wiki outline/PUBLISH leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki outline/PUBLISH leftover after #233')
+
+def test_wiki_publish_gate_leftover_doc_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Wiki outline/PUBLISH leftover after #233' in text
+        path.write_text(text.replace('Wiki outline/PUBLISH leftover after #233', 'Wiki outline/PUBLISH leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki outline/PUBLISH leftover after #233')
+
+def test_wiki_publish_gate_leftover_doc_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Wiki outline/PUBLISH leftover after #233' in text
+        path.write_text(text.replace('Wiki outline/PUBLISH leftover after #233', 'Wiki outline/PUBLISH leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki outline/PUBLISH leftover after #233')
+
+def test_wiki_publish_gate_leftover_doc_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Wiki outline/PUBLISH leftover after #233' in text
+        path.write_text(text.replace('Wiki outline/PUBLISH leftover after #233', 'Wiki outline/PUBLISH leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki outline/PUBLISH leftover after #233')
+
+def test_wiki_publish_gate_not_wiki_index_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki-index/badge leftover #227' in text
+        path.write_text(text.replace('NOT wiki-index/badge leftover #227', 'NOT wiki-index/badge leftover #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT wiki-index/badge leftover #227')
+
+def test_wiki_publish_gate_not_wiki_index_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki-index/badge leftover #227' in text
+        path.write_text(text.replace('NOT wiki-index/badge leftover #227', 'NOT wiki-index/badge leftover #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT wiki-index/badge leftover #227')
+
+def test_wiki_publish_gate_not_wiki_index_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki-index/badge leftover #227' in text
+        path.write_text(text.replace('NOT wiki-index/badge leftover #227', 'NOT wiki-index/badge leftover #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT wiki-index/badge leftover #227')
+
+def test_wiki_publish_gate_not_wiki_index_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki-index/badge leftover #227' in text
+        path.write_text(text.replace('NOT wiki-index/badge leftover #227', 'NOT wiki-index/badge leftover #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT wiki-index/badge leftover #227')
+
+def test_wiki_publish_gate_not_wiki_index_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki-index/badge leftover #227' in text
+        path.write_text(text.replace('NOT wiki-index/badge leftover #227', 'NOT wiki-index/badge leftover #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT wiki-index/badge leftover #227')
+
+def test_wiki_publish_gate_not_wiki_index_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki-index/badge leftover #227' in text
+        path.write_text(text.replace('NOT wiki-index/badge leftover #227', 'NOT wiki-index/badge leftover #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT wiki-index/badge leftover #227')
+
+def test_wiki_publish_gate_not_wiki_index_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki-index/badge leftover #227' in text
+        path.write_text(text.replace('NOT wiki-index/badge leftover #227', 'NOT wiki-index/badge leftover #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT wiki-index/badge leftover #227')
+
+def test_wiki_publish_gate_not_wiki_index_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki-index/badge leftover #227' in text
+        path.write_text(text.replace('NOT wiki-index/badge leftover #227', 'NOT wiki-index/badge leftover #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT wiki-index/badge leftover #227')
+
+def test_wiki_publish_gate_not_stew_schema_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema residual #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema residual #233', 'NOT stewardship-checks/schema residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT stewardship-checks/schema residual #233')
+
+def test_wiki_publish_gate_not_stew_schema_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema residual #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema residual #233', 'NOT stewardship-checks/schema residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT stewardship-checks/schema residual #233')
+
+def test_wiki_publish_gate_not_stew_schema_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema residual #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema residual #233', 'NOT stewardship-checks/schema residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT stewardship-checks/schema residual #233')
+
+def test_wiki_publish_gate_not_stew_schema_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema residual #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema residual #233', 'NOT stewardship-checks/schema residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT stewardship-checks/schema residual #233')
+
+def test_wiki_publish_gate_not_stew_schema_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema residual #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema residual #233', 'NOT stewardship-checks/schema residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT stewardship-checks/schema residual #233')
+
+def test_wiki_publish_gate_not_stew_schema_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema residual #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema residual #233', 'NOT stewardship-checks/schema residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT stewardship-checks/schema residual #233')
+
+def test_wiki_publish_gate_not_stew_schema_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema residual #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema residual #233', 'NOT stewardship-checks/schema residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT stewardship-checks/schema residual #233')
+
+def test_wiki_publish_gate_not_stew_schema_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema residual #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema residual #233', 'NOT stewardship-checks/schema residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT stewardship-checks/schema residual #233')
+
+def test_wiki_publish_gate_existing_pages_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'existing pages only — do not invent extra wiki files' in text
+        path.write_text(text.replace('existing pages only — do not invent extra wiki files', 'existing pages only — invent extra wiki files'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'existing pages only — do not invent extra wiki files')
+
+def test_wiki_publish_gate_existing_pages_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'existing pages only — do not invent extra wiki files' in text
+        path.write_text(text.replace('existing pages only — do not invent extra wiki files', 'existing pages only — invent extra wiki files'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'existing pages only — do not invent extra wiki files')
+
+def test_wiki_publish_gate_existing_pages_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'existing pages only — do not invent extra wiki files' in text
+        path.write_text(text.replace('existing pages only — do not invent extra wiki files', 'existing pages only — invent extra wiki files'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'existing pages only — do not invent extra wiki files')
+
+def test_wiki_publish_gate_existing_pages_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'existing pages only — do not invent extra wiki files' in text
+        path.write_text(text.replace('existing pages only — do not invent extra wiki files', 'existing pages only — invent extra wiki files'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'existing pages only — do not invent extra wiki files')
+
+def test_wiki_publish_gate_existing_pages_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'existing pages only — do not invent extra wiki files' in text
+        path.write_text(text.replace('existing pages only — do not invent extra wiki files', 'existing pages only — invent extra wiki files'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'existing pages only — do not invent extra wiki files')
+
+def test_wiki_publish_gate_existing_pages_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'existing pages only — do not invent extra wiki files' in text
+        path.write_text(text.replace('existing pages only — do not invent extra wiki files', 'existing pages only — invent extra wiki files'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'existing pages only — do not invent extra wiki files')
+
+def test_wiki_publish_gate_existing_pages_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'existing pages only — do not invent extra wiki files' in text
+        path.write_text(text.replace('existing pages only — do not invent extra wiki files', 'existing pages only — invent extra wiki files'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'existing pages only — do not invent extra wiki files')
+
+def test_wiki_publish_gate_existing_pages_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'existing pages only — do not invent extra wiki files' in text
+        path.write_text(text.replace('existing pages only — do not invent extra wiki files', 'existing pages only — invent extra wiki files'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'existing pages only — do not invent extra wiki files')
+
+def test_wiki_publish_gate_pages_heading_pin_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert '## Pages to publish' in text
+        path.write_text(text.replace('## Pages to publish', '## Pages to copy'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Pages to publish heading')
+
+def test_wiki_publish_gate_pages_heading_pin_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert '## Pages to publish' in text
+        path.write_text(text.replace('## Pages to publish', '## Pages to copy'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Pages to publish heading')
+
+def test_wiki_publish_gate_pages_heading_pin_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert '## Pages to publish' in text
+        path.write_text(text.replace('## Pages to publish', '## Pages to copy'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Pages to publish heading')
+
+def test_wiki_publish_gate_pages_heading_pin_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert '## Pages to publish' in text
+        path.write_text(text.replace('## Pages to publish', '## Pages to copy'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Pages to publish heading')
+
+def test_wiki_publish_gate_pages_heading_pin_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert '## Pages to publish' in text
+        path.write_text(text.replace('## Pages to publish', '## Pages to copy'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Pages to publish heading')
+
+def test_wiki_publish_gate_pages_heading_pin_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert '## Pages to publish' in text
+        path.write_text(text.replace('## Pages to publish', '## Pages to copy'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Pages to publish heading')
+
+def test_wiki_publish_gate_pages_heading_pin_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert '## Pages to publish' in text
+        path.write_text(text.replace('## Pages to publish', '## Pages to copy'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Pages to publish heading')
+
+def test_wiki_publish_gate_pages_heading_pin_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert '## Pages to publish' in text
+        path.write_text(text.replace('## Pages to publish', '## Pages to copy'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Pages to publish heading')
+
+def test_wiki_publish_gate_wiki_git_pin_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'agents-governance.wiki.git' in text
+        path.write_text(text.replace('agents-governance.wiki.git', 'agents-governance.git'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'agents-governance.wiki.git')
+
+def test_wiki_publish_gate_wiki_git_pin_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'agents-governance.wiki.git' in text
+        path.write_text(text.replace('agents-governance.wiki.git', 'agents-governance.git'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'agents-governance.wiki.git')
+
+def test_wiki_publish_gate_wiki_git_pin_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'agents-governance.wiki.git' in text
+        path.write_text(text.replace('agents-governance.wiki.git', 'agents-governance.git'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'agents-governance.wiki.git')
+
+def test_wiki_publish_gate_wiki_git_pin_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'agents-governance.wiki.git' in text
+        path.write_text(text.replace('agents-governance.wiki.git', 'agents-governance.git'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'agents-governance.wiki.git')
+
+def test_wiki_publish_gate_wiki_git_pin_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'agents-governance.wiki.git' in text
+        path.write_text(text.replace('agents-governance.wiki.git', 'agents-governance.git'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'agents-governance.wiki.git')
+
+def test_wiki_publish_gate_wiki_git_pin_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'agents-governance.wiki.git' in text
+        path.write_text(text.replace('agents-governance.wiki.git', 'agents-governance.git'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'agents-governance.wiki.git')
+
+def test_wiki_publish_gate_wiki_git_pin_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'agents-governance.wiki.git' in text
+        path.write_text(text.replace('agents-governance.wiki.git', 'agents-governance.git'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'agents-governance.wiki.git')
+
+def test_wiki_publish_gate_wiki_git_pin_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'agents-governance.wiki.git' in text
+        path.write_text(text.replace('agents-governance.wiki.git', 'agents-governance.git'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'agents-governance.wiki.git')
+
+def test_wiki_publish_gate_git_add_pin_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md' in text
+        path.write_text(text.replace('git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md', 'git add Home.md Overview.md'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'git add of six publishable pages')
+
+def test_wiki_publish_gate_git_add_pin_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md' in text
+        path.write_text(text.replace('git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md', 'git add Home.md Overview.md'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'git add of six publishable pages')
+
+def test_wiki_publish_gate_git_add_pin_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md' in text
+        path.write_text(text.replace('git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md', 'git add Home.md Overview.md'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'git add of six publishable pages')
+
+def test_wiki_publish_gate_git_add_pin_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md' in text
+        path.write_text(text.replace('git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md', 'git add Home.md Overview.md'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'git add of six publishable pages')
+
+def test_wiki_publish_gate_git_add_pin_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md' in text
+        path.write_text(text.replace('git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md', 'git add Home.md Overview.md'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'git add of six publishable pages')
+
+def test_wiki_publish_gate_git_add_pin_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md' in text
+        path.write_text(text.replace('git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md', 'git add Home.md Overview.md'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'git add of six publishable pages')
+
+def test_wiki_publish_gate_git_add_pin_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md' in text
+        path.write_text(text.replace('git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md', 'git add Home.md Overview.md'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'git add of six publishable pages')
+
+def test_wiki_publish_gate_git_add_pin_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md' in text
+        path.write_text(text.replace('git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md', 'git add Home.md Overview.md'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'git add of six publishable pages')
+
+def test_wiki_publish_gate_drop_bullet_pin_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'drop the in-repo `PUBLISH.md` bullet' in text
+        path.write_text(text.replace('drop the in-repo `PUBLISH.md` bullet', 'keep the in-repo `PUBLISH.md` bullet'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'drop the in-repo PUBLISH.md bullet')
+
+def test_wiki_publish_gate_drop_bullet_pin_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'drop the in-repo `PUBLISH.md` bullet' in text
+        path.write_text(text.replace('drop the in-repo `PUBLISH.md` bullet', 'keep the in-repo `PUBLISH.md` bullet'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'drop the in-repo PUBLISH.md bullet')
+
+def test_wiki_publish_gate_drop_bullet_pin_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'drop the in-repo `PUBLISH.md` bullet' in text
+        path.write_text(text.replace('drop the in-repo `PUBLISH.md` bullet', 'keep the in-repo `PUBLISH.md` bullet'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'drop the in-repo PUBLISH.md bullet')
+
+def test_wiki_publish_gate_drop_bullet_pin_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'drop the in-repo `PUBLISH.md` bullet' in text
+        path.write_text(text.replace('drop the in-repo `PUBLISH.md` bullet', 'keep the in-repo `PUBLISH.md` bullet'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'drop the in-repo PUBLISH.md bullet')
+
+def test_wiki_publish_gate_drop_bullet_pin_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'drop the in-repo `PUBLISH.md` bullet' in text
+        path.write_text(text.replace('drop the in-repo `PUBLISH.md` bullet', 'keep the in-repo `PUBLISH.md` bullet'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'drop the in-repo PUBLISH.md bullet')
+
+def test_wiki_publish_gate_drop_bullet_pin_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'drop the in-repo `PUBLISH.md` bullet' in text
+        path.write_text(text.replace('drop the in-repo `PUBLISH.md` bullet', 'keep the in-repo `PUBLISH.md` bullet'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'drop the in-repo PUBLISH.md bullet')
+
+def test_wiki_publish_gate_drop_bullet_pin_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'drop the in-repo `PUBLISH.md` bullet' in text
+        path.write_text(text.replace('drop the in-repo `PUBLISH.md` bullet', 'keep the in-repo `PUBLISH.md` bullet'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'drop the in-repo PUBLISH.md bullet')
+
+def test_wiki_publish_gate_drop_bullet_pin_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'drop the in-repo `PUBLISH.md` bullet' in text
+        path.write_text(text.replace('drop the in-repo `PUBLISH.md` bullet', 'keep the in-repo `PUBLISH.md` bullet'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'drop the in-repo PUBLISH.md bullet')
+
+def test_wiki_publish_gate_operator_pin_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'OPERATOR_ONLY in PUBLISHABLE_PAGES' in text
+        path.write_text(text.replace('OPERATOR_ONLY in PUBLISHABLE_PAGES', 'OPERATOR_ONLY not in PUBLISHABLE_PAGES'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'OPERATOR_ONLY in PUBLISHABLE_PAGES')
+
+def test_wiki_publish_gate_operator_pin_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'OPERATOR_ONLY in PUBLISHABLE_PAGES' in text
+        path.write_text(text.replace('OPERATOR_ONLY in PUBLISHABLE_PAGES', 'OPERATOR_ONLY not in PUBLISHABLE_PAGES'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'OPERATOR_ONLY in PUBLISHABLE_PAGES')
+
+def test_wiki_publish_gate_operator_pin_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'OPERATOR_ONLY in PUBLISHABLE_PAGES' in text
+        path.write_text(text.replace('OPERATOR_ONLY in PUBLISHABLE_PAGES', 'OPERATOR_ONLY not in PUBLISHABLE_PAGES'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'OPERATOR_ONLY in PUBLISHABLE_PAGES')
+
+def test_wiki_publish_gate_operator_pin_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'OPERATOR_ONLY in PUBLISHABLE_PAGES' in text
+        path.write_text(text.replace('OPERATOR_ONLY in PUBLISHABLE_PAGES', 'OPERATOR_ONLY not in PUBLISHABLE_PAGES'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'OPERATOR_ONLY in PUBLISHABLE_PAGES')
+
+def test_wiki_publish_gate_operator_pin_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'OPERATOR_ONLY in PUBLISHABLE_PAGES' in text
+        path.write_text(text.replace('OPERATOR_ONLY in PUBLISHABLE_PAGES', 'OPERATOR_ONLY not in PUBLISHABLE_PAGES'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'OPERATOR_ONLY in PUBLISHABLE_PAGES')
+
+def test_wiki_publish_gate_operator_pin_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'OPERATOR_ONLY in PUBLISHABLE_PAGES' in text
+        path.write_text(text.replace('OPERATOR_ONLY in PUBLISHABLE_PAGES', 'OPERATOR_ONLY not in PUBLISHABLE_PAGES'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'OPERATOR_ONLY in PUBLISHABLE_PAGES')
+
+def test_wiki_publish_gate_operator_pin_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'OPERATOR_ONLY in PUBLISHABLE_PAGES' in text
+        path.write_text(text.replace('OPERATOR_ONLY in PUBLISHABLE_PAGES', 'OPERATOR_ONLY not in PUBLISHABLE_PAGES'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'OPERATOR_ONLY in PUBLISHABLE_PAGES')
+
+def test_wiki_publish_gate_operator_pin_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'OPERATOR_ONLY in PUBLISHABLE_PAGES' in text
+        path.write_text(text.replace('OPERATOR_ONLY in PUBLISHABLE_PAGES', 'OPERATOR_ONLY not in PUBLISHABLE_PAGES'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'OPERATOR_ONLY in PUBLISHABLE_PAGES')
+
+def test_wiki_publish_gate_table_order_pin_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pages table must keep publishable page order' in text
+        path.write_text(text.replace('pages table must keep publishable page order', 'pages table must keep publishable page list'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'PUBLISH.md pages table order')
+
+def test_wiki_publish_gate_table_order_pin_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pages table must keep publishable page order' in text
+        path.write_text(text.replace('pages table must keep publishable page order', 'pages table must keep publishable page list'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'PUBLISH.md pages table order')
+
+def test_wiki_publish_gate_table_order_pin_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pages table must keep publishable page order' in text
+        path.write_text(text.replace('pages table must keep publishable page order', 'pages table must keep publishable page list'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'PUBLISH.md pages table order')
+
+def test_wiki_publish_gate_table_order_pin_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pages table must keep publishable page order' in text
+        path.write_text(text.replace('pages table must keep publishable page order', 'pages table must keep publishable page list'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'PUBLISH.md pages table order')
+
+def test_wiki_publish_gate_table_order_pin_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pages table must keep publishable page order' in text
+        path.write_text(text.replace('pages table must keep publishable page order', 'pages table must keep publishable page list'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'PUBLISH.md pages table order')
+
+def test_wiki_publish_gate_table_order_pin_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pages table must keep publishable page order' in text
+        path.write_text(text.replace('pages table must keep publishable page order', 'pages table must keep publishable page list'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'PUBLISH.md pages table order')
+
+def test_wiki_publish_gate_table_order_pin_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pages table must keep publishable page order' in text
+        path.write_text(text.replace('pages table must keep publishable page order', 'pages table must keep publishable page list'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'PUBLISH.md pages table order')
+
+def test_wiki_publish_gate_table_order_pin_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pages table must keep publishable page order' in text
+        path.write_text(text.replace('pages table must keep publishable page order', 'pages table must keep publishable page list'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'PUBLISH.md pages table order')
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -66829,6 +68850,190 @@ def main() -> int:
         test_schema_gate_requires_beta_stub_after_225,
         test_schema_gate_requires_anthropic_stub_still_after_225,
         test_schema_gate_requires_anthropic_stub_after_225,
+        test_wiki_publish_rejects_heading_pad0_after_233,
+        test_wiki_publish_rejects_heading_pad1_after_233,
+        test_wiki_publish_rejects_heading_pad2_after_233,
+        test_wiki_publish_rejects_heading_pad3_after_233,
+        test_wiki_publish_rejects_heading_pad4_after_233,
+        test_wiki_publish_rejects_heading_pad5_after_233,
+        test_wiki_publish_rejects_heading_still_after_233,
+        test_wiki_publish_rejects_heading_after_233,
+        test_wiki_publish_rejects_table_order_pad0_after_233,
+        test_wiki_publish_rejects_table_order_pad1_after_233,
+        test_wiki_publish_rejects_table_order_pad2_after_233,
+        test_wiki_publish_rejects_table_order_pad3_after_233,
+        test_wiki_publish_rejects_table_order_pad4_after_233,
+        test_wiki_publish_rejects_table_order_pad5_after_233,
+        test_wiki_publish_rejects_table_order_still_after_233,
+        test_wiki_publish_rejects_table_order_after_233,
+        test_wiki_publish_rejects_wiki_git_pad0_after_233,
+        test_wiki_publish_rejects_wiki_git_pad1_after_233,
+        test_wiki_publish_rejects_wiki_git_pad2_after_233,
+        test_wiki_publish_rejects_wiki_git_pad3_after_233,
+        test_wiki_publish_rejects_wiki_git_pad4_after_233,
+        test_wiki_publish_rejects_wiki_git_pad5_after_233,
+        test_wiki_publish_rejects_wiki_git_still_after_233,
+        test_wiki_publish_rejects_wiki_git_after_233,
+        test_wiki_publish_rejects_cp_operator_pad0_after_233,
+        test_wiki_publish_rejects_cp_operator_pad1_after_233,
+        test_wiki_publish_rejects_cp_operator_pad2_after_233,
+        test_wiki_publish_rejects_cp_operator_pad3_after_233,
+        test_wiki_publish_rejects_cp_operator_pad4_after_233,
+        test_wiki_publish_rejects_cp_operator_pad5_after_233,
+        test_wiki_publish_rejects_cp_operator_still_after_233,
+        test_wiki_publish_rejects_cp_operator_after_233,
+        test_wiki_publish_rejects_copy_home_pad0_after_233,
+        test_wiki_publish_rejects_copy_home_pad1_after_233,
+        test_wiki_publish_rejects_copy_home_pad2_after_233,
+        test_wiki_publish_rejects_copy_home_pad3_after_233,
+        test_wiki_publish_rejects_copy_home_pad4_after_233,
+        test_wiki_publish_rejects_copy_home_pad5_after_233,
+        test_wiki_publish_rejects_copy_home_still_after_233,
+        test_wiki_publish_rejects_copy_home_after_233,
+        test_wiki_publish_rejects_git_add_pad0_after_233,
+        test_wiki_publish_rejects_git_add_pad1_after_233,
+        test_wiki_publish_rejects_git_add_pad2_after_233,
+        test_wiki_publish_rejects_git_add_pad3_after_233,
+        test_wiki_publish_rejects_git_add_pad4_after_233,
+        test_wiki_publish_rejects_git_add_pad5_after_233,
+        test_wiki_publish_rejects_git_add_still_after_233,
+        test_wiki_publish_rejects_git_add_after_233,
+        test_wiki_publish_rejects_git_push_pad0_after_233,
+        test_wiki_publish_rejects_git_push_pad1_after_233,
+        test_wiki_publish_rejects_git_push_pad2_after_233,
+        test_wiki_publish_rejects_git_push_pad3_after_233,
+        test_wiki_publish_rejects_git_push_pad4_after_233,
+        test_wiki_publish_rejects_git_push_pad5_after_233,
+        test_wiki_publish_rejects_git_push_still_after_233,
+        test_wiki_publish_rejects_git_push_after_233,
+        test_wiki_publish_rejects_purpose_pad0_after_233,
+        test_wiki_publish_rejects_purpose_pad1_after_233,
+        test_wiki_publish_rejects_purpose_pad2_after_233,
+        test_wiki_publish_rejects_purpose_pad3_after_233,
+        test_wiki_publish_rejects_purpose_pad4_after_233,
+        test_wiki_publish_rejects_purpose_pad5_after_233,
+        test_wiki_publish_rejects_purpose_still_after_233,
+        test_wiki_publish_rejects_purpose_after_233,
+        test_wiki_publish_rejects_closes_pad0_after_233,
+        test_wiki_publish_rejects_closes_pad1_after_233,
+        test_wiki_publish_rejects_closes_pad2_after_233,
+        test_wiki_publish_rejects_closes_pad3_after_233,
+        test_wiki_publish_rejects_closes_pad4_after_233,
+        test_wiki_publish_rejects_closes_pad5_after_233,
+        test_wiki_publish_rejects_closes_still_after_233,
+        test_wiki_publish_rejects_closes_after_233,
+        test_wiki_publish_rejects_fallback_pad0_after_233,
+        test_wiki_publish_rejects_fallback_pad1_after_233,
+        test_wiki_publish_rejects_fallback_pad2_after_233,
+        test_wiki_publish_rejects_fallback_pad3_after_233,
+        test_wiki_publish_rejects_fallback_pad4_after_233,
+        test_wiki_publish_rejects_fallback_pad5_after_233,
+        test_wiki_publish_rejects_fallback_still_after_233,
+        test_wiki_publish_rejects_fallback_after_233,
+        test_wiki_publish_rejects_badge_blob_pad0_after_233,
+        test_wiki_publish_rejects_badge_blob_pad1_after_233,
+        test_wiki_publish_rejects_badge_blob_pad2_after_233,
+        test_wiki_publish_rejects_badge_blob_pad3_after_233,
+        test_wiki_publish_rejects_badge_blob_pad4_after_233,
+        test_wiki_publish_rejects_badge_blob_pad5_after_233,
+        test_wiki_publish_rejects_badge_blob_still_after_233,
+        test_wiki_publish_rejects_badge_blob_after_233,
+        test_wiki_publish_rejects_drop_bullet_pad0_after_233,
+        test_wiki_publish_rejects_drop_bullet_pad1_after_233,
+        test_wiki_publish_rejects_drop_bullet_pad2_after_233,
+        test_wiki_publish_rejects_drop_bullet_pad3_after_233,
+        test_wiki_publish_rejects_drop_bullet_pad4_after_233,
+        test_wiki_publish_rejects_drop_bullet_pad5_after_233,
+        test_wiki_publish_rejects_drop_bullet_still_after_233,
+        test_wiki_publish_rejects_drop_bullet_after_233,
+        test_wiki_publish_rejects_operator_in_pages_pad0_after_233,
+        test_wiki_publish_rejects_operator_in_pages_pad1_after_233,
+        test_wiki_publish_rejects_operator_in_pages_pad2_after_233,
+        test_wiki_publish_rejects_operator_in_pages_pad3_after_233,
+        test_wiki_publish_rejects_operator_in_pages_pad4_after_233,
+        test_wiki_publish_rejects_operator_in_pages_pad5_after_233,
+        test_wiki_publish_rejects_operator_in_pages_still_after_233,
+        test_wiki_publish_rejects_operator_in_pages_after_233,
+        test_wiki_publish_gate_leftover_doc_pad0_after_233,
+        test_wiki_publish_gate_leftover_doc_pad1_after_233,
+        test_wiki_publish_gate_leftover_doc_pad2_after_233,
+        test_wiki_publish_gate_leftover_doc_pad3_after_233,
+        test_wiki_publish_gate_leftover_doc_pad4_after_233,
+        test_wiki_publish_gate_leftover_doc_pad5_after_233,
+        test_wiki_publish_gate_leftover_doc_still_after_233,
+        test_wiki_publish_gate_leftover_doc_after_233,
+        test_wiki_publish_gate_not_wiki_index_pad0_after_233,
+        test_wiki_publish_gate_not_wiki_index_pad1_after_233,
+        test_wiki_publish_gate_not_wiki_index_pad2_after_233,
+        test_wiki_publish_gate_not_wiki_index_pad3_after_233,
+        test_wiki_publish_gate_not_wiki_index_pad4_after_233,
+        test_wiki_publish_gate_not_wiki_index_pad5_after_233,
+        test_wiki_publish_gate_not_wiki_index_still_after_233,
+        test_wiki_publish_gate_not_wiki_index_after_233,
+        test_wiki_publish_gate_not_stew_schema_pad0_after_233,
+        test_wiki_publish_gate_not_stew_schema_pad1_after_233,
+        test_wiki_publish_gate_not_stew_schema_pad2_after_233,
+        test_wiki_publish_gate_not_stew_schema_pad3_after_233,
+        test_wiki_publish_gate_not_stew_schema_pad4_after_233,
+        test_wiki_publish_gate_not_stew_schema_pad5_after_233,
+        test_wiki_publish_gate_not_stew_schema_still_after_233,
+        test_wiki_publish_gate_not_stew_schema_after_233,
+        test_wiki_publish_gate_existing_pages_pad0_after_233,
+        test_wiki_publish_gate_existing_pages_pad1_after_233,
+        test_wiki_publish_gate_existing_pages_pad2_after_233,
+        test_wiki_publish_gate_existing_pages_pad3_after_233,
+        test_wiki_publish_gate_existing_pages_pad4_after_233,
+        test_wiki_publish_gate_existing_pages_pad5_after_233,
+        test_wiki_publish_gate_existing_pages_still_after_233,
+        test_wiki_publish_gate_existing_pages_after_233,
+        test_wiki_publish_gate_pages_heading_pin_pad0_after_233,
+        test_wiki_publish_gate_pages_heading_pin_pad1_after_233,
+        test_wiki_publish_gate_pages_heading_pin_pad2_after_233,
+        test_wiki_publish_gate_pages_heading_pin_pad3_after_233,
+        test_wiki_publish_gate_pages_heading_pin_pad4_after_233,
+        test_wiki_publish_gate_pages_heading_pin_pad5_after_233,
+        test_wiki_publish_gate_pages_heading_pin_still_after_233,
+        test_wiki_publish_gate_pages_heading_pin_after_233,
+        test_wiki_publish_gate_wiki_git_pin_pad0_after_233,
+        test_wiki_publish_gate_wiki_git_pin_pad1_after_233,
+        test_wiki_publish_gate_wiki_git_pin_pad2_after_233,
+        test_wiki_publish_gate_wiki_git_pin_pad3_after_233,
+        test_wiki_publish_gate_wiki_git_pin_pad4_after_233,
+        test_wiki_publish_gate_wiki_git_pin_pad5_after_233,
+        test_wiki_publish_gate_wiki_git_pin_still_after_233,
+        test_wiki_publish_gate_wiki_git_pin_after_233,
+        test_wiki_publish_gate_git_add_pin_pad0_after_233,
+        test_wiki_publish_gate_git_add_pin_pad1_after_233,
+        test_wiki_publish_gate_git_add_pin_pad2_after_233,
+        test_wiki_publish_gate_git_add_pin_pad3_after_233,
+        test_wiki_publish_gate_git_add_pin_pad4_after_233,
+        test_wiki_publish_gate_git_add_pin_pad5_after_233,
+        test_wiki_publish_gate_git_add_pin_still_after_233,
+        test_wiki_publish_gate_git_add_pin_after_233,
+        test_wiki_publish_gate_drop_bullet_pin_pad0_after_233,
+        test_wiki_publish_gate_drop_bullet_pin_pad1_after_233,
+        test_wiki_publish_gate_drop_bullet_pin_pad2_after_233,
+        test_wiki_publish_gate_drop_bullet_pin_pad3_after_233,
+        test_wiki_publish_gate_drop_bullet_pin_pad4_after_233,
+        test_wiki_publish_gate_drop_bullet_pin_pad5_after_233,
+        test_wiki_publish_gate_drop_bullet_pin_still_after_233,
+        test_wiki_publish_gate_drop_bullet_pin_after_233,
+        test_wiki_publish_gate_operator_pin_pad0_after_233,
+        test_wiki_publish_gate_operator_pin_pad1_after_233,
+        test_wiki_publish_gate_operator_pin_pad2_after_233,
+        test_wiki_publish_gate_operator_pin_pad3_after_233,
+        test_wiki_publish_gate_operator_pin_pad4_after_233,
+        test_wiki_publish_gate_operator_pin_pad5_after_233,
+        test_wiki_publish_gate_operator_pin_still_after_233,
+        test_wiki_publish_gate_operator_pin_after_233,
+        test_wiki_publish_gate_table_order_pin_pad0_after_233,
+        test_wiki_publish_gate_table_order_pin_pad1_after_233,
+        test_wiki_publish_gate_table_order_pin_pad2_after_233,
+        test_wiki_publish_gate_table_order_pin_pad3_after_233,
+        test_wiki_publish_gate_table_order_pin_pad4_after_233,
+        test_wiki_publish_gate_table_order_pin_pad5_after_233,
+        test_wiki_publish_gate_table_order_pin_still_after_233,
+        test_wiki_publish_gate_table_order_pin_after_233,
 ]
 
 

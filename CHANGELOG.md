@@ -11,6 +11,20 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki outline/PUBLISH leftover deepen after #233 tip: expand
+  self-tests to 4598 cases (was 4414) fail-closing unsaturated wiki outline /
+  PUBLISH.md leftover on existing `docs/wiki` pages only — Pages to publish
+  heading / pages-table row order / one-shot `agents-governance.wiki.git`
+  clone / `cp docs/wiki/{page}` list (no operator `PUBLISH.md`) / git add of
+  the six publishable files / `git push origin` / purpose + closes `#16` YAML /
+  Fallback `.wiki.git` / badge-standard blob rewrite / drop in-repo PUBLISH.md
+  bullet / `OPERATOR_ONLY` not in `PUBLISHABLE_PAGES` — wiki outline/PUBLISH
+  leftover slice only (not wiki-index/badge leftover #227 / not
+  stewardship-checks/schema residual #233 / not path-filter/path-order #225 /
+  not Pass-2 leftover + md/link #220 / not schema fourth-pass #216 /
+  stewardship-badge lint #208); no invent-product; no fourth badge; no extra
+  wiki files. Distinct from merged #233/#227/#225/#220/#216/#208. Do **not**
+  revive open draft leftovers #232/#234/#235.
 - TOKENMAXX stewardship-checks + schema residual deepen leftovers after #227 tip: expand
   self-tests to 4414 cases (was 4230) fail-closing unsaturated stewardship-checks contiguous
   layout edges (exact Set up Python / Install PyYAML / checkout adjacency / full push paths /

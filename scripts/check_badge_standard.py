@@ -133,6 +133,10 @@ lands closed #229 leftover on post-#227 tip — do not revive #229):
 - exact jobs.stewardship runs-on/timeout/permissions header
 - reject strategy: / matrix: / services: invent on stewardship-checks.yml
 - schema residual (pass-5) invalid status+surface stubs + residual helper needles
+- Wiki outline/PUBLISH leftover after #233: existing docs/wiki pages only —
+  PUBLISH.md pages-table order / Pages to publish / wiki.git clone /
+  cp docs/wiki/{page} (no operator PUBLISH.md) / git add six pages /
+  purpose+closes #16 / Fallback .wiki.git / badge-standard blob rewrite
 
 Fail-closed stewardship-badge lint deepen after #189 (NOT docs-lint leftover
 #161 / NOT wiki-badge #141 / NOT path-order #189 / NOT schema third-pass #191 /
@@ -6966,6 +6970,117 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
     if not_schema_191 not in wiki_text:
         fail(
             "check_wiki_outline.py docstring must keep " + not_schema_191 + " distinctness pin",
+            errors,
+        )
+
+    # Wiki outline/PUBLISH leftover after #233 (existing docs/wiki pages only;
+    # NOT wiki-index/badge leftover #227 / NOT stewardship-checks/schema residual #233).
+    leftover_233_doc = "Wiki outline/PUBLISH leftover after " + "#233"
+    if leftover_233_doc not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + leftover_233_doc + " pin",
+            errors,
+        )
+    not_wiki_index_227 = "NOT wiki-index/badge leftover " + "#227"
+    if not_wiki_index_227 not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_wiki_index_227 + " pin",
+            errors,
+        )
+    not_stew_schema_233 = "NOT stewardship-checks/schema residual " + "#233"
+    if not_stew_schema_233 not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_stew_schema_233 + " pin",
+            errors,
+        )
+    existing_pages_only = "existing pages only — do not invent extra wiki " + "files"
+    if existing_pages_only not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + existing_pages_only + " pin",
+            errors,
+        )
+    pages_heading_needle = "## Pages to " + "publish"
+    if pages_heading_needle not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin PUBLISH.md ## Pages to publish heading",
+            errors,
+        )
+    wiki_git_clone = "agents-governance.wiki" + ".git"
+    if wiki_git_clone not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin one-shot agents-governance.wiki.git clone",
+            errors,
+        )
+    no_cp_operator = "cp docs/wiki/" + "PUBLISH.md"
+    if no_cp_operator not in wiki_text:
+        fail(
+            "check_wiki_outline.py must refuse one-shot cp of operator PUBLISH.md",
+            errors,
+        )
+    git_add_six_pin = (
+        "git add Home.md Overview.md Autonomy-Levels.md "
+        "Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md"
+    )
+    if git_add_six_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin git add of six publishable pages",
+            errors,
+        )
+    git_push_origin = "git push " + "origin"
+    if git_push_origin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin PUBLISH.md git push origin",
+            errors,
+        )
+    purpose_path = "Reversible publish path for " + "docs/wiki"
+    if purpose_path not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin PUBLISH.md Reversible publish path purpose",
+            errors,
+        )
+    closes_16 = 'closes: "#16"'
+    closes_16_sq = "closes: '#16'"
+    if closes_16 not in wiki_text and closes_16_sq not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin PUBLISH.md closes: \"#16\"",
+            errors,
+        )
+    wiki_git_fallback = ".wiki" + ".git"
+    if wiki_git_fallback not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin PUBLISH.md .wiki.git fallback",
+            errors,
+        )
+    badge_blob = (
+        "https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge-standard.md"
+    )
+    if badge_blob not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin PUBLISH.md badge-standard blob rewrite URL",
+            errors,
+        )
+    drop_bullet = "drop the in-repo `PUBLISH.md` " + "bullet"
+    if drop_bullet not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin drop the in-repo PUBLISH.md bullet",
+            errors,
+        )
+    operator_not_pages = "OPERATOR_ONLY in PUBLISHABLE_" + "PAGES"
+    if operator_not_pages not in wiki_text:
+        fail(
+            "check_wiki_outline.py must refuse OPERATOR_ONLY in PUBLISHABLE_PAGES",
+            errors,
+        )
+    copy_existing = "one-shot must copy existing " + "page"
+    if copy_existing not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin one-shot copy existing page needles",
+            errors,
+        )
+    table_order = "pages table must keep publishable page " + "order"
+    if table_order not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin PUBLISH.md pages table order",
             errors,
         )
 

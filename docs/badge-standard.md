@@ -231,7 +231,14 @@ no BASH_SOURCE / no bare python / no set +u|+o pipefail /
 back-to-back gates→self-tests block / no inline check_*.py /
 self-tests before actionlint (lands closed #193/#178 leftover; do not
 revive #193/#178/#175/#140; distinct from schema third-pass #191 and
-path-order #189)).
+path-order #189),
+plus stewardship-badge lint deepen after #189/#199 tip: README invent
+stewardship-checks workflow `badge.svg` refuse / exact
+link-check+markdown-lint badge.svg paths / exact live markdown-lint
+globs block / exact live markdown-lint+link-check push paths filters
+(stewardship-badge lint slice only; lands closed #172 leftover; do not
+revive #172/#169/#195/#190; leave path-order #189, schema third-pass #191,
+and run_stewardship residual #199 alone)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

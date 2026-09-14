@@ -675,3 +675,12 @@ _None yet._
 2026-09-14T06:12:00Z cursor: Local green — run_stewardship + self-tests 3660 + markdownlint ← ECO-068 register Pass-2 residual after_191 after #199 (leave draft; leave CONFLICTING #195 alone; do not redo #191)
 
 2026-09-14T06:08:00Z cursor: Draft PR #203 opened (cursor/tokenmaxx-register-pass2-residual-tests-after-199-ebbb); leave draft / do-not-merge; awaiting CI ← ECO-068 register after #199 (leave CONFLICTING #202 alone; do not redo #191/#199)
+### [ECO-066] TOKENMAXX deepen stewardship-badge lint after #189/#199 tip — 2026-09-14T06:09:40Z
+- [x] cursor: Read live tree post-#199; #195 CLOSED — reopen NEW draft on tip with distinct stewardship-badge lint leftover
+- [x] cursor: Fail-close stewardship-badge lint pins (Exact needles; no Contiguous trap)
+- [x] cursor: Expand self-tests +68
+- [ ] cursor: Green NEW draft PR with CI
+- Branch: cursor/tokenmaxx-stewardship-badge-lint-after-199-7653
+2026-09-14T06:09:40Z
+
+2026-09-14T06:13:04Z cursor: Local green — run_stewardship + self-tests 3728 + markdownlint ← ECO-066 stewardship-badge lint after #189/#199 tip (NEW draft; do not revive #195/#172/#190)

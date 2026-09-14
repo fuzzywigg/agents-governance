@@ -121,7 +121,12 @@ plus actionlint-style gate contract pins after #75: top-level `name:` /
 `jobs.*.runs-on` / `jobs.*.steps` / `timeout-minutes` / no
 `pull_request_target` / no `write-all` / no `contents: write` / no
 `id-token: write` / `@`-pin float set `main|master|latest` / `docker://`
-skip / unpinned reject).
+skip / unpinned reject,
+plus docs-lint second-pass after #79: `.markdownlint.json` MD013/MD024/
+default/MD033/MD041/MD060 + `MARKDOWNLINT_CONFIG.name` / `.lycheeignore`
+modelcontextprotocol.io+linuxfoundation.org+License badge+
+`check_badge_standard.py` / `run_stewardship_checks.sh` set -euo pipefail+
+dirname+python3 gates / `check_docs_lint_gate_contract`).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

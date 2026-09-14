@@ -97,7 +97,12 @@ plus actionlint-style gate contract pins after #75: top-level `name:` /
 `jobs.*.runs-on` / `jobs.*.steps` / `timeout-minutes` / no
 `pull_request_target` / no `write-all` / no `contents: write` / no
 `id-token: write` / `@`-pin float set `main|master|latest` / `docker://`
-skip / unpinned reject).
+skip / unpinned reject,
+plus docs-lint second-pass after #79: `.markdownlint.json` MD013/MD024/
+default/MD033/MD041/MD060 + `MARKDOWNLINT_CONFIG.name` / `.lycheeignore`
+modelcontextprotocol.io+linuxfoundation.org+License badge+
+`check_badge_standard.py` / `run_stewardship_checks.sh` set -euo pipefail+
+dirname+python3 gates / `check_docs_lint_gate_contract`).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

@@ -158,7 +158,10 @@ plus docs-lint second-pass after #132: exact live exclude URLs /
 Connection-reset+RST+false-positive+early-hints+valid-site commentary /
 `check_badge_standard.py` reference / License badge presence remains enforced /
 exact `.markdownlint.json` layout+key-set+`json.loads` pins /
-`check_docs_lint_gate_contract` second-pass).
+`check_docs_lint_gate_contract` second-pass,
+plus actionlint-style deepen after #135: `cancel-in-progress: true` /
+`contents: read` / `ubuntu-latest` / `workflow_dispatch:` / reject
+`security-events|attestations|statuses|deployments: write` / deepen docstring).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

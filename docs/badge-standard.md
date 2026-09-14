@@ -182,7 +182,10 @@ plus docs-lint second-pass after #132: exact live exclude URLs /
 Connection-reset+RST+false-positive+early-hints+valid-site commentary /
 `check_badge_standard.py` reference / License badge presence remains enforced /
 exact `.markdownlint.json` layout+key-set+`json.loads` pins /
-`check_docs_lint_gate_contract` second-pass).
+`check_docs_lint_gate_contract` second-pass,
+plus actionlint-style deepen after #135: `cancel-in-progress: true` /
+`contents: read` / `ubuntu-latest` / `workflow_dispatch:` / reject
+`security-events|attestations|statuses|deployments: write` / deepen docstring).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

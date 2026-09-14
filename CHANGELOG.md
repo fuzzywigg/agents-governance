@@ -11,6 +11,19 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX actionlint path-filter/path-order deepen edges after #203 tip:
+  expand self-tests to 3806 cases (was 3660) fail-closing DISTINCT unsaturated
+  path-filter/path-order edges — contiguous push/branches/paths headers /
+  pull_request path-unfiltered / reject dorny/paths-filter / residual
+  self-workflow path lists / exact contiguous actionlint run /
+  Download-before-run + self-tests-before-Download / contiguous
+  Download/id/run/shell block / reject uses: rhysd/actionlint@ — path-edges
+  slice only (not saturated path-order #189 / path-filter layouts #176 /
+  Pass-2 residual #199/#203 / schema third-pass #191 / open md/link
+  #206/#207 / wiki-badge); no invent-product; no fourth badge. Lands closed
+  #198 leftover on post-#203 tip (do **not** revive #198/#186/#166/#157).
+  Distinct from open md/link CI edges #206/#207.
+
 - TOKENMAXX register Pass-2 residual after_191 self-tests after #199: wire
   orphaned +70 `*_after_191` defs into `main()` so the suite reports 3660
   (was still 3590 with pins live but cases unregistered). Tests/CI only;

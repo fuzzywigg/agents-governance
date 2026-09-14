@@ -675,3 +675,25 @@ _None yet._
 2026-09-14T06:12:00Z cursor: Local green — run_stewardship + self-tests 3660 + markdownlint ← ECO-068 register Pass-2 residual after_191 after #199 (leave draft; leave CONFLICTING #195 alone; do not redo #191)
 
 2026-09-14T06:08:00Z cursor: Draft PR #203 opened (cursor/tokenmaxx-register-pass2-residual-tests-after-199-ebbb); leave draft / do-not-merge; awaiting CI ← ECO-068 register after #199 (leave CONFLICTING #202 alone; do not redo #191/#199)
+
+### [ECO-070] TOKENMAXX deepen actionlint path-edges after #203 — 2026-09-14T06:24:40Z
+
+- [x] cursor: Read live tree post-#203 (3660 cases; Pass-2 residual registered;
+  open #206/#207 claim md/link CI edges — leave alone; pick unsaturated
+  actionlint path-edges leftover from closed #198)
+- [x] cursor: Fail-close path-edges — contiguous push/branches/paths /
+  pull_request path-unfiltered / reject dorny/paths-filter / residual
+  self-workflow path lists / exact contiguous actionlint run /
+  Download-before-run + self-tests-before-Download / contiguous
+  Download/id/run/shell / reject uses: rhysd/actionlint@ /
+  docstring + gate contract
+- [x] cursor: Expand self-tests 3660 → 3806 (path-edges slice only; not
+  md/link #206/#207 / Pass-2 #199/#203 / schema #191 / path-order #189 /
+  path-filter #176 spam)
+- [ ] cursor: Green draft PR with CI
+- Scope: EXISTING actionlint path-filter/path-order deepen edge pin wiring
+  only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates;
+  no secrets; no DNS/history; lands closed #198 leftover on post-#203 tip;
+  do not revive #198/#186/#166/#157; distinct from open #206/#207
+- Branch: cursor/tokenmaxx-actionlint-path-edges-after-203-e7ec
+2026-09-14T06:24:40Z

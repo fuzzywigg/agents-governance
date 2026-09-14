@@ -5,4 +5,3 @@ https://www.linuxfoundation.org/
 # img.shields.io badge CDN is flaky (Connection reset by peer / RST) — not a broken URL.
 # License badge presence remains enforced by stewardship (check_badge_standard.py).
 https://img\.shields\.io
-

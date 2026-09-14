@@ -10,6 +10,7 @@ on:
   pull_request:
   schedule:
     # Run weekly to catch externally broken links
+    # docs CI config pins stay wired after #83
     - cron: "0 6 * * 1"
   workflow_dispatch:
 

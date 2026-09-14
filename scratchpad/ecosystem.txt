@@ -667,7 +667,7 @@ _None yet._
 ### [ECO-068] Register Pass-2 residual after_191 self-tests after #199 — 2026-09-14T06:08:00Z
 - [x] cursor: Confirm tip post-#199 has Pass-2 residual pins + 70 orphaned after_191 defs (suite still reports 3590)
 - [x] cursor: Register +70 after_191 cases in main() tests list (3590 → 3660)
-- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- [x] cursor: Green draft PR with CI — leave draft / do-not-merge
 - Scope: EXISTING test registration only; no invent-product; no AGENTS-ECOSYSTEM/templates; no secrets; do not redo #191/#199 pin logic; leave CONFLICTING #195 alone
 - Branch: cursor/tokenmaxx-register-pass2-residual-tests-after-199-ebbb
 2026-09-14T06:08:00Z
@@ -886,3 +886,4 @@ _None yet._
 
 2026-09-14T22:43:22Z cursor: Local green — run_stewardship + self-tests 6228 + markdownlint ← ECO-084 schema residual CI after #293 (leave draft; do not revive #290/#268; do not redo #293/#282/#278/#272)
 2026-09-14T22:43:22Z cursor: Draft PR #295 opened (cursor/tokenmaxx-schema-residual-ci-after-293-bc82); awaiting CI ← ECO-084 stewardship-schema residual CI after #293 (do not revive #290/#268/#259)
+2026-09-14T22:56:11Z cursor: PR #295 CI green (lint + link-check + stewardship) ← complete ECO-084 TOKENMAXX stewardship-schema residual CI after #293 (leave draft / do-not-merge; do not revive #290/#268/#259)

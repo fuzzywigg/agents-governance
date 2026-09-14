@@ -11,6 +11,15 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX CI workflow third-pass pins after #111: expand self-tests to
+  2295 cases (was 2223) fail-closing live reversible CI workflow integrity —
+  exact concurrency group templates / markdown-lint+stewardship cron+timeout /
+  DavidAnson@v24 / setup-python@v5 / lychee verbose+no-progress+max-concurrency 8+
+  timeout 20+max-retries 3 / fail: true / get_actionlint id+outputs /
+  curl -fsSL / `check_workflow_hardening_gate_contract` — CI workflow third-pass
+  slice only (not badge/wiki/relative/schema/actionlint spam); no invent-product;
+  no fourth badge. New draft after merged #111 actionlint third-pass.
+
 - TOKENMAXX actionlint-style third-pass pins after #108: expand self-tests to
   2223 cases (was 2151) fail-closing live reversible CI workflow integrity —
   `concurrency:` + `cancel-in-progress:` / `permissions:` present /

@@ -163,6 +163,7 @@ plus actionlint-style third-pass after #108: `concurrency:` +
 `cancel-in-progress:` / `permissions:` present / reject
 `actions|packages|pull-requests: write` / `re.finditer` / docker continue /
 `rsplit[-1]` / third-pass docstring).
+plus CI workflow third-pass after #111: concurrency templates / cron+timeout / DavidAnson@v24 / setup-python@v5 / lychee verbose+concurrency+timeout+retries / fail:true / get_actionlint / curl -fsSL).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

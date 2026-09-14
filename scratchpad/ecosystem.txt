@@ -750,3 +750,17 @@ _None yet._
 2026-09-14T07:35:00Z cursor: Draft PR #227 opened (cursor/tokenmaxx-wiki-badge-leftover-after-225-5367); leave draft / do-not-merge; awaiting CI ← ECO-073 wiki-index/badge leftover after #225 (do not revive #222/#215/#196)
 
 2026-09-14T07:40:00Z cursor: PR #227 CI green (lint + link-check + stewardship) + MERGEABLE on tip ← ECO-073 wiki-index/badge leftover after #225 (leave draft / do-not-merge; do not revive #222/#215/#196)
+
+2026-09-14T07:48:05Z cursor: PR #227 MERGED (wiki-index/badge leftover after #225) ← tip; ECO-073 complete via #227
+
+### [ECO-074] TOKENMAXX deepen md/link residual exact layouts after #227 — 2026-09-14T07:50:30Z
+- [x] cursor: Read live tree post-#227 (4230 cases; wiki-index/badge saturated via #227; unsaturated md/link residual exact layouts beyond #220 core)
+- [x] cursor: Fail-close md/link residual exact layouts on tip — contiguous args: >- flag block / contiguous on: blocks / contiguous with: globs+config / contiguous with: token commentary
+- [x] cursor: Expand self-tests 4230 → 4278 (+48; md/link residual slice only; not wiki #227 / path-edges #225 / md/link core #220 spam; do not revive #221)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING markdown-lint.yml + link-check.yml residual exact layouts only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; lands closed #221 leftover residual on post-#227 tip; do not revive #221/#219/#214; do not redo #227 wiki / #225 path-edges / #220 md/link core
+- Branch: cursor/tokenmaxx-mdlink-wiki-leftover-after-225-9959
+2026-09-14T07:50:30Z
+
+
+2026-09-14T07:56:33Z cursor: Local green — run_stewardship + self-tests 4278 + markdownlint ← ECO-074 md/link residual exact layouts after #227 (leave draft; do not revive #221; do not redo #227 wiki / #225 path-edges)

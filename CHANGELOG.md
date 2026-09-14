@@ -67,7 +67,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   #220); no invent-product; no fourth badge; no extra wiki files; wiki seed
   Home (landing) row aligned. Distinct from merged
   #244/#243/#239/#233/#227/#225/#220/#216/#208. Do **not** revive
-  #238/#234/#231/#221/#249.>>>>>>> b970099 (docs: note #251 RED flake; retry Pass-2/templates leftover on tip)
+  #238/#234/#231/#221/#249.
 - TOKENMAXX actionlint path-filter/path-order residual deepen after #243 tip:
   expand self-tests to 4792 cases (was 4646) fail-closing DISTINCT residual
   actionlint path-filter / path-order edges on existing workflow modules —

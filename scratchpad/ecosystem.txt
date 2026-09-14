@@ -842,3 +842,5 @@ _None yet._
 2026-09-14T09:32:00Z cursor: Draft PR #254 opened (cursor/tokenmaxx-pass2-residual-templates-after-244-1979); leave draft / do-not-merge; awaiting CI ← ECO-077 Pass-2 residual + existing templates/AGENTS-REPO.md after #244 (do not revive #251/#250/#246/#245/#240; leave open sibling #252 alone)
 
 2026-09-14T09:50:00Z cursor: Rebased ECO-077 onto post-#258 tip (705f077); self-tests 5176 → 5400 (+224 Pass-2/templates leftover); #254 CLOSED during tip move — open fresh draft; leave CONFLICTING/open siblings #260/#259 alone; do not revive #254/#251/#250/#246/#245/#240; do not redo #258 schema / #252 wiki/mdlink / #244 path-edges
+
+2026-09-14T10:00:00Z cursor: Local green — run_stewardship + self-tests 5400 + markdownlint ← ECO-077 Pass-2 residual leftover + existing templates/AGENTS-REPO.md after #258 (leave draft; do not revive #254/#251/#250/#246/#245/#240; leave #260/#259 alone)

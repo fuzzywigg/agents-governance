@@ -377,3 +377,12 @@ _None yet._
 2026-09-14T00:21:26Z
 
 2026-09-14T00:27:11Z cursor: PR #83 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-047 TOKENMAXX stewardship-schema second-pass pins
+
+### [ECO-048] TOKENMAXX deepen relative-link third-pass pins after #83 — 2026-09-14T00:43:31Z
+- [x] cursor: Read live tree post-#83 (1755 cases; schema second-pass saturated)
+- [x] cursor: Fail-close relative-link third-pass — MD_LINK_RE+ATX exact / SKIP_* exact / OK+FAILED / empty+http+proto+dangerous / utf-8 / as_posix / .md / ValueError / sorted / UNICODE / space-dash / Percent-decode+Cap / empty () / sys.exit / urllib.unquote / group(2) / startswith# / split# / files scanned / stewardship_common / title / #{1,6} / slug punct / Offline+lychee / path.parent
+- [x] cursor: Expand self-tests 1755 → 1827 (relative-link third-pass slice; not schema / badge / wiki / common / CI workflow / actionlint pin spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING relative-link integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-relative-third-pass-6661
+2026-09-14T00:43:31Z

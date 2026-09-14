@@ -102,7 +102,14 @@ plus stewardship-schema second-pass after #72/#75: `FENCED_YAML_RE` exact /
 `ISO_DATE_RE` / `SEMVER_RE` / `ISSUE_REF_RE` / `DATE_KEYS` / Tiny YAML /
 scalar+non-empty+string / ACTIVE / tier / 0..3 / ISO-8601 / invent /
 semver / closes #N / FAILED+OK / stdlib-subset+PyYAML / bool subclass /
-`match.group(1)` / missing keys / utf-8 / `STRING_KEYS` members).
+`match.group(1)` / missing keys / utf-8 / `STRING_KEYS` members),
+plus relative-link third-pass after #83: `MD_LINK_RE`+`ATX_HEADING_RE`
+exact / `SKIP_*` exact / OK+FAILED banners / empty+http+proto+dangerous
+needles / utf-8 / `as_posix` / `.md` suffix / `ValueError` / `sorted` /
+UNICODE / space-dash / Percent-decode+Cap / empty () / `sys.exit` /
+`urllib.unquote` / `group(2)` / `startswith#` / `split#` / files scanned /
+stewardship_common / title / `#{1,6}` / slug punct / Offline+lychee /
+`path.parent`).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

@@ -561,3 +561,5 @@ _None yet._
 - Scope: EXISTING governance fixture/harness only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands after #161; do not revive #163
 - Branch: cursor/overnight-governance-fixture-deepen-52cd
 2026-09-14T04:18:42Z
+
+2026-09-14T04:21:55Z cursor: Local green — run_stewardship + self-tests 3009 + markdownlint ← ECO-060 overnight governance-fixture deepen after #161 (do not revive #163)

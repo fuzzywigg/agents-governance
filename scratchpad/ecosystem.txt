@@ -548,3 +548,5 @@ _None yet._
 2026-09-14T03:40:00Z
 
 2026-09-14T03:55:00Z cursor: Local gates green — run_stewardship + self-tests 2885 + markdownlint ← ECO-059 leftover docs-lint/stewardship/actionlint after #149 (do not revive #150/#154/#151/#152)
+
+2026-09-14T03:47:00Z cursor: PR #159 CI green (lint + link-check + stewardship/actionlint) MERGEABLE ← complete ECO-059 TOKENMAXX leftover docs-lint/stewardship/actionlint after #149 (replaces closed #150/#154/#151)

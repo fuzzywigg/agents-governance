@@ -11,6 +11,16 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX actionlint-style second-pass pins after #83/#86: expand self-tests
+  to 1827 cases (was 1755) fail-closing live actionlint-style integrity —
+  exact `name:` / `uses:` regexes / write-all+contents+id-token regexes /
+  `startswith("docker://")` / `"@" not in uses` / `rsplit("@", 1)` /
+  `match.group(1).strip()` / fail needles / least-privilege+OIDC+majors
+  comments / `REQUIRED_WORKFLOWS` loop, plus actionlint-style gate contract
+  pins in `check_badge_standard.py` — actionlint-style second-pass slice only
+  (not schema / badge / wiki / relative / common / CI workflow pin spam); no
+  invent-product; no fourth badge
+
 - TOKENMAXX stewardship-schema second-pass pins after #79: expand self-tests
   to 1755 cases (was 1683) fail-closing live schema integrity —
   `FENCED_YAML_RE` exact / `ISO_DATE_RE` / `SEMVER_RE` / `ISSUE_REF_RE` /

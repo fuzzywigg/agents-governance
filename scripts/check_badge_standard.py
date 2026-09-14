@@ -12,11 +12,14 @@ Fail-closed pins (live path after #48; second-pass after #61):
 - Second-pass: path constants / exact REQUIRED_ORDER+EXPECTED_REPO assigns /
   actions/workflows/*.yml/badge.svg / fail needles / LICENSE link / FAILED+OK
 
-Fail-closed actionlint-style pins (live path after #75):
+Fail-closed actionlint-style pins (live path after #75; second-pass after #83/#86):
 - top-level name: / jobs.*.runs-on / jobs.*.steps / timeout-minutes
 - no pull_request_target / no permissions: write-all / no contents: write
 - no id-token: write / actions must be @-pinned (not main|master|latest)
 - docker:// uses skipped; unpinned uses rejected
+- Second-pass: exact name/uses regexes / write-all+contents+id-token regexes /
+  docker startswith / @ not in uses / rsplit / group(1).strip() /
+  fail needles / least-privilege+OIDC+majors comments / REQUIRED_WORKFLOWS loop
 """
 
 from __future__ import annotations
@@ -221,6 +224,10 @@ def check_actionlint_style(errors: list[str]) -> None:
     reject pull_request_target / permissions: write-all / contents: write /
     id-token: write; @-pin actions (not main|master|latest); skip docker://;
     reject unpinned action uses.
+    Second-pass after #83/#86: exact name/uses regexes /
+    write-all+contents+id-token regexes / docker startswith /
+    @ not in uses / rsplit / group(1).strip() / fail needles /
+    least-privilege+OIDC+majors comments / REQUIRED_WORKFLOWS loop.
     """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
@@ -1313,6 +1320,222 @@ def check_actionlint_style_gate_contract(errors: list[str]) -> None:
             "main must call " + call_pin,
             errors,
         )
+    # Fail-closed after #83/#86: second-pass helper / constant / needle pins
+    # (actionlint-style slice only; not schema / badge / wiki / relative /
+    # common / CI workflow pin spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    name_re = 'r"(?m)^name:' + '\\s*\\S"'
+    name_re_sq = "r'(?m)^name:" + "\\s*\\S'"
+    if name_re not in text and name_re_sq not in text:
+        fail(
+            "check_actionlint_style must keep exact top-level name: regex",
+            errors,
+        )
+    uses_re = 'r"(?m)^\\s*-\\s*uses:\\s*(' + '[^\\s#]+)"'
+    uses_re_sq = "r'(?m)^\\s*-\\s*uses:\\s*(" + "[^\\s#]+)'"
+    if uses_re not in text and uses_re_sq not in text:
+        fail(
+            "check_actionlint_style must keep exact uses: capture regex",
+            errors,
+        )
+    write_all_re = 'r"(?m)^\\s*permissions:\\s*write-' + 'all\\s*$"'
+    write_all_re_sq = "r'(?m)^\\s*permissions:\\s*write-" + "all\\s*$'"
+    if write_all_re not in text and write_all_re_sq not in text:
+        fail(
+            "check_actionlint_style must keep exact permissions: write-all regex",
+            errors,
+        )
+    contents_write_re = 'r"(?m)^\\s*contents:\\s*' + 'write\\s*$"'
+    contents_write_re_sq = "r'(?m)^\\s*contents:\\s*" + "write\\s*$'"
+    if contents_write_re not in text and contents_write_re_sq not in text:
+        fail(
+            "check_actionlint_style must keep exact contents: write regex",
+            errors,
+        )
+    id_token_re = 'r"(?m)^\\s*id-token:\\s*' + 'write\\s*$"'
+    id_token_re_sq = "r'(?m)^\\s*id-token:\\s*" + "write\\s*$'"
+    if id_token_re not in text and id_token_re_sq not in text:
+        fail(
+            "check_actionlint_style must keep exact id-token: write regex",
+            errors,
+        )
+    docker_startswith = "startswith(" + '"docker://"' + ")"
+    docker_startswith_sq = "startswith(" + "'docker://'" + ")"
+    if docker_startswith not in text and docker_startswith_sq not in text:
+        fail(
+            "check_actionlint_style must skip uses via " + docker_startswith,
+            errors,
+        )
+    at_not_in = '"@" not in ' + "uses"
+    at_not_in_sq = "'@' not in " + "uses"
+    if at_not_in not in text and at_not_in_sq not in text:
+        fail(
+            "check_actionlint_style must reject unpinned via " + at_not_in,
+            errors,
+        )
+    rsplit_pin = 'rsplit("@", ' + "1)"
+    rsplit_pin_sq = "rsplit('@', " + "1)"
+    if rsplit_pin not in text and rsplit_pin_sq not in text:
+        fail(
+            "check_actionlint_style must split action refs via " + rsplit_pin,
+            errors,
+        )
+    group_strip = "match.group(1)" + ".strip()"
+    if group_strip not in text:
+        fail(
+            "check_actionlint_style must take uses via " + group_strip,
+            errors,
+        )
+    runs_membership = '"runs-on:" not in ' + "text"
+    runs_membership_sq = "'runs-on:' not in " + "text"
+    if runs_membership not in text and runs_membership_sq not in text:
+        fail(
+            "check_actionlint_style must require runs-on: via membership check",
+            errors,
+        )
+    steps_membership = '"steps:" not in ' + "text"
+    steps_membership_sq = "'steps:' not in " + "text"
+    if steps_membership not in text and steps_membership_sq not in text:
+        fail(
+            "check_actionlint_style must require steps: via membership check",
+            errors,
+        )
+    prt_membership = '"pull_request_target:" in ' + "text"
+    prt_membership_sq = "'pull_request_target:' in " + "text"
+    if prt_membership not in text and prt_membership_sq not in text:
+        fail(
+            "check_actionlint_style must reject pull_request_target: via membership",
+            errors,
+        )
+    timeout_membership = '"timeout-minutes:" not in ' + "text"
+    timeout_membership_sq = "'timeout-minutes:' not in " + "text"
+    if timeout_membership not in text and timeout_membership_sq not in text:
+        fail(
+            "check_actionlint_style must require timeout-minutes: via membership",
+            errors,
+        )
+    none_continue = "if text is " + "None:"
+    if none_continue not in text:
+        fail(
+            "check_actionlint_style must continue when load_workflow_text returns None",
+            errors,
+        )
+    required_loop = "for name in REQUIRED_" + "WORKFLOWS:"
+    if required_loop not in text:
+        fail(
+            "check_actionlint_style must iterate REQUIRED_WORKFLOWS",
+            errors,
+        )
+    least_priv = "Prefer least " + "privilege"
+    if least_priv not in text:
+        fail(
+            "check_actionlint_style must keep " + least_priv + " comment",
+            errors,
+        )
+    oidc_pin = "OIDC write not needed for docs CI " + "paths"
+    if oidc_pin not in text:
+        fail(
+            "check_actionlint_style must keep " + oidc_pin + " comment",
+            errors,
+        )
+    majors_pin = "Pin GitHub Actions " + "majors"
+    if majors_pin not in text:
+        fail(
+            "check_actionlint_style must keep " + majors_pin + " comment",
+            errors,
+        )
+    timeout_comment = "jobs must declare " + "timeout"
+    if timeout_comment not in text:
+        fail(
+            "check_actionlint_style must keep " + timeout_comment + " comment",
+            errors,
+        )
+    fail_top_name = "actionlint-style requires top-level " + "name:"
+    if fail_top_name not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_top_name + " fail needle",
+            errors,
+        )
+    fail_runs = "actionlint-style requires jobs.*.runs-" + "on"
+    if fail_runs not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_runs + " fail needle",
+            errors,
+        )
+    fail_steps = "actionlint-style requires jobs.*." + "steps"
+    if fail_steps not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_steps + " fail needle",
+            errors,
+        )
+    fail_prt = "must not use pull_request_target (actionlint " + "harden)"
+    if fail_prt not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_prt + " fail needle",
+            errors,
+        )
+    fail_write_all = "must not set permissions: write-" + "all"
+    if fail_write_all not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_write_all + " fail needle",
+            errors,
+        )
+    fail_contents = "contents: write is forbidden on stewardship " + "workflows"
+    if fail_contents not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_contents + " fail needle",
+            errors,
+        )
+    fail_id_token = "id-token: write is forbidden on stewardship " + "workflows"
+    if fail_id_token not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_id_token + " fail needle",
+            errors,
+        )
+    fail_unpinned = "unpinned action " + "uses:"
+    if fail_unpinned not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_unpinned + " fail needle",
+            errors,
+        )
+    fail_float = "action must not float on " + "@"
+    if fail_float not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_float + " fail needle",
+            errors,
+        )
+    fail_timeout = "actionlint-style requires timeout-minutes on " + "jobs"
+    if fail_timeout not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_timeout + " fail needle",
+            errors,
+        )
+    second_pass_doc = "Second-pass after #83/#86: exact name/" + "uses"
+    if second_pass_doc not in text:
+        fail(
+            "check_actionlint_style docstring must pin " + second_pass_doc,
+            errors,
+        )
+    module_second = "second-pass after #83/" + "#86"
+    if module_second not in text:
+        fail(
+            "check_badge_standard.py module docstring must pin actionlint "
+            + module_second,
+            errors,
+        )
+    contract_fn = "check_actionlint_style_gate_" + "contract"
+    self_text = BADGE_GATE.read_text(encoding="utf-8")
+    if f"def {contract_fn}(" not in self_text:
+        fail(
+            "check_badge_standard.py must provide " + contract_fn + "()",
+            errors,
+        )
+    if contract_fn + "(" not in self_text.replace(f"def {contract_fn}(", "", 1):
+        fail(
+            "check_badge_standard.py main must call " + contract_fn + "()",
+            errors,
+        )
+
 
 
 def check_stewardship_common_contract(errors: list[str]) -> None:

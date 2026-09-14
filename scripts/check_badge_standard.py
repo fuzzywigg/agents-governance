@@ -41,10 +41,18 @@ Fail-closed CI workflow pins (live path after #39/#72; third-pass after #111):
   setup-python@v5 / lychee --verbose/--no-progress/--max-concurrency 8 /
   --timeout 20/--max-retries 3 / fail: true / get_actionlint id+outputs /
   curl -fsSL download / third-pass docstring
+
+Fail-closed after #132 (docs-lint second-pass + actionlint path-order +
+badge CI leftovers; not closed #120; NOT #111 concurrency):
+- exact three-path actionlint order / bash <(curl -fsSL) download form /
+  no continue-on-error: true / Download actionlint + existing workflow paths
+- lycheeignore exact URL lines / markdownlint exact key set via json.loads
+- badge CI: no stewardship-checks.yml/badge.svg invent / exact badge.svg paths
 """
 
 from __future__ import annotations
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -226,6 +234,29 @@ def check_workflows_and_license(errors: list[str]) -> None:
                 '.markdownlint.json must pin "MD024": { "siblings_only": true }',
                 errors,
             )
+        # Fail-closed after #132: exact live markdownlint key set (docs-lint second-pass).
+        try:
+            md_data = json.loads(md_cfg)
+        except json.JSONDecodeError:
+            fail(".markdownlint.json must be valid JSON", errors)
+            md_data = None
+        if isinstance(md_data, dict):
+            expected_keys = {
+                "default",
+                "MD013",
+                "MD024",
+                "MD033",
+                "MD041",
+                "MD060",
+            }
+            if set(md_data.keys()) != expected_keys:
+                fail(
+                    ".markdownlint.json must pin exactly "
+                    "default+MD013+MD024+MD033+MD041+MD060 keys",
+                    errors,
+                )
+        elif md_data is not None:
+            fail(".markdownlint.json must be a JSON object", errors)
 
 
 def check_lycheeignore(errors: list[str]) -> None:
@@ -290,6 +321,24 @@ def check_lycheeignore(errors: list[str]) -> None:
         fail(
             ".lycheeignore must not exclude all http(s) targets "
             "(https://* / http://* / bare *)",
+            errors,
+        )
+    # Fail-closed after #132: exact live exclude URL lines (docs-lint second-pass).
+    if "https://modelcontextprotocol.io/" not in text:
+        fail(
+            ".lycheeignore must pin exact https://modelcontextprotocol.io/ "
+            "exclude line",
+            errors,
+        )
+    if "https://www.linuxfoundation.org/" not in text:
+        fail(
+            ".lycheeignore must pin exact https://www.linuxfoundation.org/ "
+            "exclude line",
+            errors,
+        )
+    if r"https://img\.shields\.io" not in text:
+        fail(
+            r".lycheeignore must pin exact https://img\.shields\.io exclude line",
             errors,
         )
 
@@ -916,6 +965,46 @@ def check_workflow_hardening(errors: list[str]) -> None:
             "stewardship-checks.yml must pass actionlint version 1.7.7 to download script",
             errors,
         )
+    # Fail-closed after #132: exact contiguous three-path actionlint order
+    # (distinct from #111 concurrency third-pass; not closed #120 revive).
+    ordered_paths = (
+        ".github/workflows/link-check.yml "
+        ".github/workflows/markdown-lint.yml "
+        ".github/workflows/stewardship-checks.yml"
+    )
+    if ordered_paths not in stew:
+        fail(
+            "stewardship-checks.yml actionlint must list three workflow paths "
+            "in order: link-check → markdown-lint → stewardship-checks",
+            errors,
+        )
+    download_form = (
+        "bash <(curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/"
+        "v1.7.7/scripts/download-actionlint.bash) 1.7.7"
+    )
+    if download_form not in stew:
+        fail(
+            "stewardship-checks.yml must use exact bash <(curl -fsSL …/v1.7.7/"
+            "…download-actionlint.bash) 1.7.7 form",
+            errors,
+        )
+    if re.search(r"(?m)^\s*continue-on-error:\s*true\s*$", stew):
+        fail(
+            "stewardship-checks.yml must not set continue-on-error: true "
+            "(actionlint / gates must fail closed)",
+            errors,
+        )
+    if "Download actionlint" not in stew:
+        fail(
+            "stewardship-checks.yml must name the download step 'Download actionlint'",
+            errors,
+        )
+    if "actionlint existing workflow paths" not in stew:
+        fail(
+            "stewardship-checks.yml must name the run step "
+            "'actionlint existing workflow paths'",
+            errors,
+        )
 
 
 def check_badge_standard_doc(errors: list[str]) -> None:
@@ -964,6 +1053,25 @@ def check_readme_consistency(text: str, errors: list[str]) -> None:
     # No quiet stewardship marketed as a fourth README badge.
     if re.search(r"\[!\[.*[Ss]tewardship", text):
         fail("README.md must not add a Stewardship product/status badge", errors)
+    # Fail-closed after #132: badge CI leftover — no stewardship-checks invent badge.
+    if "stewardship-checks.yml/badge.svg" in text:
+        fail(
+            "README.md must not invent stewardship-checks.yml/badge.svg "
+            "(no fourth badge)",
+            errors,
+        )
+    link_badge = "link-check.yml/" + "badge.svg"
+    md_badge = "markdown-lint.yml/" + "badge.svg"
+    if link_badge not in text:
+        fail(
+            "README.md must keep exact link-check.yml/badge.svg image path",
+            errors,
+        )
+    if md_badge not in text:
+        fail(
+            "README.md must keep exact markdown-lint.yml/badge.svg image path",
+            errors,
+        )
 
 
 def check_contributing_and_agents(errors: list[str]) -> None:
@@ -1843,6 +1951,74 @@ def check_docs_lint_gate_contract(errors: list[str]) -> None:
             "main must call " + call_workflows,
             errors,
         )
+    # Fail-closed after #132: docs-lint second-pass contract pins.
+    after_132 = "after " + "#132"
+    if after_132 not in text:
+        fail(
+            "check_badge_standard.py must pin " + after_132 + " deepen",
+            errors,
+        )
+    exact_mcp = "https://modelcontextprotocol." + "io/"
+    if exact_mcp not in text:
+        fail(
+            "check_lycheeignore must pin exact " + exact_mcp,
+            errors,
+        )
+    exact_lfs = "https://www.linuxfoundation." + "org/"
+    if exact_lfs not in text:
+        fail(
+            "check_lycheeignore must pin exact " + exact_lfs,
+            errors,
+        )
+    # Split so self-mutation of contiguous fail text cannot neutralize the pin.
+    shields_frag = "pin exact https://" + "img"
+    if shields_frag not in text:
+        fail(
+            "check_lycheeignore must keep " + shields_frag + " fail needle",
+            errors,
+        )
+    md_keys = "default+MD013+MD024+MD033+MD041+" + "MD060"
+    if md_keys not in text:
+        fail(
+            "check_workflows_and_license must pin " + md_keys + " keys",
+            errors,
+        )
+    json_loads = "json.loads(" + "md_cfg)"
+    if json_loads not in text:
+        fail(
+            "check_workflows_and_license must parse markdownlint via json.loads",
+            errors,
+        )
+    not_120 = "not closed " + "#120"
+    if not_120 not in text:
+        fail(
+            "module docstring must keep " + not_120 + " distinctness pin",
+            errors,
+        )
+    not_111 = "NOT #111 " + "concurrency"
+    if not_111 not in text:
+        fail(
+            "module docstring must keep " + not_111 + " distinctness pin",
+            errors,
+        )
+    invent_badge = "stewardship-checks.yml/" + "badge.svg"
+    if invent_badge not in text:
+        fail(
+            "badge CI leftover must reject " + invent_badge + " invent",
+            errors,
+        )
+    link_badge_pin = "link-check.yml/" + "badge.svg"
+    md_badge_pin = "markdown-lint.yml/" + "badge.svg"
+    if link_badge_pin not in text:
+        fail(
+            "badge CI leftover must keep exact " + link_badge_pin,
+            errors,
+        )
+    if md_badge_pin not in text:
+        fail(
+            "badge CI leftover must keep exact " + md_badge_pin,
+            errors,
+        )
 
 
 def check_actionlint_style_gate_contract(errors: list[str]) -> None:
@@ -2387,6 +2563,52 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
     if def_pin not in text:
         fail(
             "check_badge_standard.py must define workflow hardening gate contract",
+            errors,
+        )
+    # Fail-closed after #132: actionlint path-order / download / step-name contract pins
+    # (distinct from #111 concurrency third-pass; not closed #120 revive).
+    path_a = ".github/workflows/link-check.yml "
+    path_b = ".github/workflows/markdown-lint.yml "
+    path_c = ".github/workflows/stewardship-checks.yml"
+    if path_a not in text or path_b not in text or path_c not in text:
+        fail(
+            "after-#132 actionlint pins must keep three .github/workflows path pins",
+            errors,
+        )
+    order_fail = "in order: " + "link-check"
+    if order_fail not in text:
+        fail(
+            "after-#132 actionlint pins must emit three-path order fail needle",
+            errors,
+        )
+    download_bash = "bash <(curl -fsSL https://raw.githubusercontent.com/"
+    if download_bash not in text:
+        fail(
+            "after-#132 actionlint pins must keep exact bash <(curl -fsSL) form",
+            errors,
+        )
+    continue_fail = "must not set continue-on-error: " + "true"
+    if continue_fail not in text:
+        fail(
+            "after-#132 actionlint pins must emit continue-on-error: true fail needle",
+            errors,
+        )
+    download_step = "Download " + "actionlint"
+    if download_step not in text:
+        fail(
+            "after-#132 actionlint pins must require " + download_step + " step name",
+            errors,
+        )
+    run_step = "actionlint existing workflow " + "paths"
+    if run_step not in text:
+        fail(
+            "after-#132 actionlint pins must require " + run_step,
+            errors,
+        )
+    distinct_111 = "distinct from #111 " + "concurrency"
+    if distinct_111 not in text:
+        fail(
+            "after-#132 actionlint pins must keep " + distinct_111 + " wording",
             errors,
         )
 

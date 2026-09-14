@@ -11,6 +11,17 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX docs-lint second-pass pins after #132: expand self-tests to
+  2543 cases (was 2491) fail-closing live docs-lint / actionlint path-order /
+  badge CI leftovers — exact `.lycheeignore` URL lines /
+  `.markdownlint.json` exact key set via `json.loads` / contiguous three-path
+  actionlint order / `bash <(curl -fsSL)` download form / no
+  `continue-on-error: true` / Download actionlint + existing workflow paths /
+  no `stewardship-checks.yml/badge.svg` invent / exact `badge.svg` paths —
+  docs-lint slice lead (actionlint path-order + badge CI leftovers only; not
+  #111 concurrency / #127 runner / #132 workflow third-pass spam); no
+  invent-product; no fourth badge. New draft after #132 (do **not** revive #120).
+
 - TOKENMAXX CI workflow third-pass pins after #111/#117/#127: expand self-tests to
   2491 cases (was 2419) fail-closing live reversible CI workflow integrity —
   exact concurrency group templates / markdown-lint+stewardship cron+timeout /

@@ -154,6 +154,13 @@ revive #119)).
 plus CI workflow third-pass after #111/#117/#127: concurrency templates /
 cron+timeout / DavidAnson@v24 / setup-python@v5 / lychee verbose+
 concurrency+timeout+retries / fail:true / get_actionlint / curl -fsSL).
+plus docs-lint second-pass after #132: exact `.lycheeignore` URL lines /
+`.markdownlint.json` exact key set via `json.loads` / contiguous three-path
+actionlint order / `bash <(curl -fsSL)` form / no `continue-on-error: true` /
+step names / no `stewardship-checks.yml/badge.svg` invent / exact `badge.svg`
+paths — distinct from closed #120 and from #111 concurrency / #132 workflow
+third-pass).
+
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

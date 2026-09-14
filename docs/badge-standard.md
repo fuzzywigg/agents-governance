@@ -323,7 +323,6 @@ leftover #252 / not path-edges residual #244 / not wiki outline/PUBLISH
 leftover #243 / not md/link residual #239 / not stewardship-checks/schema
 residual #233 / not wiki-index/badge leftover #227; do not revive
 closed #253/#248/#241)).
-<<<<<<< HEAD
 plus actionlint path-filter/path-order residual leftover deepen after #258:
 contiguous push:/pull_request: adjacency / contiguous
 schedule:/workflow_dispatch: adjacency / pull_request branches-unfiltered /
@@ -337,7 +336,6 @@ not wiki-badge leftover #227 / not #189 / not #176 / not schema #191/#216 /
 not Pass-2 residual #199/#203 / not Pass-2 leftover + md/link #220 /
 not stewardship-badge lint #208; do not revive
 closed #255/#247/#244/#236/#232/#228/#226/#223/#217/#213/#198/#186/#166/#157)).
-=======
 plus Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #244:
 soft-fail with `|| :` / `|| return 0` / `set +o errexit` / `set +o nounset` /
 invent `python3 -m` for gates / must not source env files / must not dot-source paths /
@@ -353,7 +351,6 @@ not path-edges #225 / not Pass-2 leftover + md/link #220 /
 not Pass-2 residual #199/#203 / not badge-lint #208 / not schema #216;
 lands closed #246/#245/#240 leftover on post-#244 tip; do not revive #246/#245/#240/#235/#230;
 do not invent new templates).
->>>>>>> ab9c7a7 (ci: TOKENMAXX deepen Pass-2 residual + template leftover after #233)
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

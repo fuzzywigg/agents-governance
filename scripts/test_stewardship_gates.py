@@ -80871,8 +80871,6 @@ def main() -> int:
         test_gate_requires_no_invent_tpl_pad5_after_233,
         test_gate_requires_no_invent_tpl_still_after_233,
         test_gate_requires_no_invent_tpl_after_233,
-<<<<<<< HEAD
-=======
         test_lycheeignore_accepts_blob_exclude_after_251,
         test_lycheeignore_accepts_blob_exclude_pad0_after_251,
         test_lycheeignore_accepts_blob_exclude_still_after_251,
@@ -80915,7 +80913,6 @@ def main() -> int:
         test_docs_lint_gate_requires_not_invent_tpl_wording_after_251,
         test_docs_lint_gate_requires_not_invent_tpl_wording_pad0_after_251,
         test_docs_lint_gate_requires_not_invent_tpl_wording_still_after_251,
->>>>>>> b237dde (ci: harden lycheeignore against same-repo blob/main 503 flake)
 ]
 
 

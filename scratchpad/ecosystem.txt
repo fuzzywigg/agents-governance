@@ -858,3 +858,12 @@ _None yet._
 2026-09-14T10:06:08Z cursor: Rebased onto post-#258 tip (705f077); local verify next ← ECO-079 (do not revive #261/#260/#256)
 
 2026-09-14T10:12:20Z cursor: Local green — run_stewardship + self-tests 5442 + markdownlint on post-#258 tip ← ECO-079 (leave draft; do not revive #261/#260/#256/#251/#250)
+
+### [ECO-080] TOKENMAXX Pass-2 residual + blob/503 harden after #262 — 2026-09-14T10:24:28Z
+- [x] cursor: Rebase Pass-2 residual + lycheeignore blob/main 503 harden onto post-#262 tip (#266 closed CONFLICTING after #262)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING Pass-2 residual + templates/AGENTS-REPO.md leftover + docs-lint pass-4 blob/503 harden; no invent templates; do not revive #267/#266/#261/#260/#256/#251/#250; do not redo #262 path leftover / #258 schema / #252 wiki-mdlink / #244 path-edges
+- Branch: cursor/tokenmaxx-pass2-residual-templates-after-262-linkflake-84bf
+2026-09-14T10:24:28Z
+
+2026-09-14T10:24:28Z cursor: Rebased onto post-#262 tip; local verify next ← ECO-080

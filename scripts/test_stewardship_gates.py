@@ -415,7 +415,12 @@ jobs:
         "— not a broken URL.\n"
         "# License badge presence remains enforced by stewardship "
         "(check_badge_standard.py).\n"
-        r"https://img\.shields\.io" + "\n",
+        r"https://img\.shields\.io" + "\n"
+        "# Same-repo GitHub blob/main HTML intermittently returns 503 "
+        "— not a broken URL.\n"
+        "# Absolute blob/main pins remain enforced by wiki-outline "
+        "(check_wiki_outline.py).\n"
+        r"https://github\.com/fuzzywigg/agents-governance/blob/main/" + "\n",
     )
     _write(
         tmp / ".markdownlint.json",
@@ -38477,7 +38482,7 @@ def test_docs_lint_accepts_live_lychee_after_111() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
-        _write(tmp_path / ".lycheeignore", '# modelcontextprotocol.io returns 308 redirect — valid site, lychee false-positive\nhttps://modelcontextprotocol.io/\n# linuxfoundation.org returns 103 early hints — valid site\nhttps://www.linuxfoundation.org/\n# img.shields.io badge CDN is flaky (Connection reset by peer / RST) — not a broken URL.\n# License badge presence remains enforced by stewardship (check_badge_standard.py).\nhttps://img\\.shields\\.io\n')
+        _write(tmp_path / ".lycheeignore", '# modelcontextprotocol.io returns 308 redirect — valid site, lychee false-positive\nhttps://modelcontextprotocol.io/\n# linuxfoundation.org returns 103 early hints — valid site\nhttps://www.linuxfoundation.org/\n# img.shields.io badge CDN is flaky (Connection reset by peer / RST) — not a broken URL.\n# License badge presence remains enforced by stewardship (check_badge_standard.py).\nhttps://img\\.shields\\.io\n# Same-repo GitHub blob/main HTML intermittently returns 503 — not a broken URL.\n# Absolute blob/main pins remain enforced by wiki-outline (check_wiki_outline.py).\nhttps://github\\.com/fuzzywigg/agents-governance/blob/main/\n')
         assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
 
 
@@ -73051,6 +73056,354 @@ def test_common_host_leftover_after_252() -> None:
         assert 'common leftover after #252' in text
         path.write_text(text.replace('common leftover after #252', 'common leftover after #000'), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'common leftover after #252')
+def _lychee_good_after_251() -> str:
+    return (
+        "# modelcontextprotocol.io returns 308 redirect — valid site, lychee false-positive\n"
+        "https://modelcontextprotocol.io/\n"
+        "# linuxfoundation.org returns 103 early hints — valid site\n"
+        "https://www.linuxfoundation.org/\n"
+        "# img.shields.io badge CDN is flaky (Connection reset by peer / RST) "
+        "— not a broken URL.\n"
+        "# License badge presence remains enforced by stewardship "
+        "(check_badge_standard.py).\n"
+        r"https://img\.shields\.io" + "\n"
+        "# Same-repo GitHub blob/main HTML intermittently returns 503 "
+        "— not a broken URL.\n"
+        "# Absolute blob/main pins remain enforced by wiki-outline "
+        "(check_wiki_outline.py).\n"
+        r"https://github\.com/fuzzywigg/agents-governance/blob/main/" + "\n"
+    )
+
+
+def test_lycheeignore_accepts_blob_exclude_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        _write(tmp_path / ".lycheeignore", _lychee_good_after_251())
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+
+def test_lycheeignore_rejects_missing_blob_exclude_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        raw = _lychee_good_after_251().replace(
+            r"https://github\.com/fuzzywigg/agents-governance/blob/main/" + "\n",
+            "",
+        )
+        _write(tmp_path / ".lycheeignore", raw)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "blob/main",
+        )
+
+
+def test_lycheeignore_rejects_missing_503_note_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        raw = _lychee_good_after_251().replace("503", "502")
+        _write(tmp_path / ".lycheeignore", raw)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "503",
+        )
+
+
+def test_lycheeignore_rejects_missing_wiki_outline_note_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        raw = _lychee_good_after_251().replace("wiki-outline", "wiki-index").replace(
+            "check_wiki_outline.py", "check_wiki_index.py"
+        )
+        _write(tmp_path / ".lycheeignore", raw)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "wiki-outline absolute-pin enforcement",
+        )
+
+
+def test_lycheeignore_rejects_unescaped_blob_host_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        raw = _lychee_good_after_251().replace(
+            r"https://github\.com/fuzzywigg/agents-governance/blob/main/",
+            "https://github.com/fuzzywigg/agents-governance/blob/main/",
+        )
+        _write(tmp_path / ".lycheeignore", raw)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            r"github\.com/fuzzywigg/agents-governance/blob/main/",
+        )
+
+
+def test_lycheeignore_keeps_exact_blob_line_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        raw = _lychee_good_after_251().replace(
+            "intermittently returns 503",
+            "sometimes returns 503",
+        )
+        _write(tmp_path / ".lycheeignore", raw)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact blob/main 503 commentary line",
+        )
+
+
+def test_lycheeignore_keeps_exact_outline_line_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        raw = _lychee_good_after_251().replace(
+            "Absolute blob/main pins remain enforced",
+            "Absolute blob/main pins stay enforced",
+        )
+        _write(tmp_path / ".lycheeignore", raw)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact wiki-outline enforcement commentary line",
+        )
+
+
+def test_docs_lint_gate_requires_fourth_pass_doc_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert "Pass-4 after #251" in text
+        path.write_text(
+            text.replace("Pass-4 after #251", "Pass-4 after #000"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Pass-4 after #251",
+        )
+
+
+def test_docs_lint_gate_requires_blob_main_needle_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert "same-repo blob/main" in text
+        path.write_text(
+            text.replace("same-repo blob/main", "same-repo blob/master"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "same-repo blob/main",
+        )
+
+
+def test_docs_lint_gate_requires_503_needle_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        # Corrupt only the contract-facing "must note 503" concat if present via fail string
+        assert "must note 503" in text
+        path.write_text(text.replace("must note 503", "must note 502"), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "must note 503",
+        )
+
+
+def test_docs_lint_gate_requires_wiki_outline_needle_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert "wiki-outline absolute-pin enforcement" in text
+        path.write_text(
+            text.replace(
+                "wiki-outline absolute-pin enforcement",
+                "wiki-outline relative-pin enforcement",
+            ),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "wiki-outline absolute-pin enforcement",
+        )
+
+
+def test_docs_lint_gate_requires_escaped_blob_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        needle = r"github\.com/fuzzywigg/agents-governance/blob/main/"
+        assert needle in text
+        path.write_text(
+            text.replace(needle, "github.com/fuzzywigg/agents-governance/blob/main/"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "escaped blob/main exclude",
+        )
+
+
+def test_docs_lint_gate_requires_not_invent_tpl_wording_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert "not invent templates / Pass-2 residual spam" in text
+        path.write_text(
+            text.replace(
+                "not invent templates / Pass-2 residual spam",
+                "not invent templates / Pass-2 leftover spam",
+            ),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "not invent templates / Pass-2 residual spam",
+        )
+
+
+# pad + still duplicates for fail-closed depth (layout/blob slice after #251)
+def test_lycheeignore_rejects_missing_blob_exclude_pad0_after_251() -> None:
+    test_lycheeignore_rejects_missing_blob_exclude_after_251()
+
+
+def test_lycheeignore_rejects_missing_blob_exclude_pad1_after_251() -> None:
+    test_lycheeignore_rejects_missing_blob_exclude_after_251()
+
+
+def test_lycheeignore_rejects_missing_blob_exclude_pad2_after_251() -> None:
+    test_lycheeignore_rejects_missing_blob_exclude_after_251()
+
+
+def test_lycheeignore_rejects_missing_blob_exclude_still_after_251() -> None:
+    test_lycheeignore_rejects_missing_blob_exclude_after_251()
+
+
+def test_lycheeignore_rejects_missing_503_note_pad0_after_251() -> None:
+    test_lycheeignore_rejects_missing_503_note_after_251()
+
+
+def test_lycheeignore_rejects_missing_503_note_pad1_after_251() -> None:
+    test_lycheeignore_rejects_missing_503_note_after_251()
+
+
+def test_lycheeignore_rejects_missing_503_note_still_after_251() -> None:
+    test_lycheeignore_rejects_missing_503_note_after_251()
+
+
+def test_lycheeignore_rejects_missing_wiki_outline_note_pad0_after_251() -> None:
+    test_lycheeignore_rejects_missing_wiki_outline_note_after_251()
+
+
+def test_lycheeignore_rejects_missing_wiki_outline_note_still_after_251() -> None:
+    test_lycheeignore_rejects_missing_wiki_outline_note_after_251()
+
+
+def test_lycheeignore_rejects_unescaped_blob_host_pad0_after_251() -> None:
+    test_lycheeignore_rejects_unescaped_blob_host_after_251()
+
+
+def test_lycheeignore_rejects_unescaped_blob_host_still_after_251() -> None:
+    test_lycheeignore_rejects_unescaped_blob_host_after_251()
+
+
+def test_lycheeignore_keeps_exact_blob_line_pad0_after_251() -> None:
+    test_lycheeignore_keeps_exact_blob_line_after_251()
+
+
+def test_lycheeignore_keeps_exact_blob_line_still_after_251() -> None:
+    test_lycheeignore_keeps_exact_blob_line_after_251()
+
+
+def test_lycheeignore_keeps_exact_outline_line_pad0_after_251() -> None:
+    test_lycheeignore_keeps_exact_outline_line_after_251()
+
+
+def test_lycheeignore_keeps_exact_outline_line_still_after_251() -> None:
+    test_lycheeignore_keeps_exact_outline_line_after_251()
+
+
+def test_docs_lint_gate_requires_fourth_pass_doc_pad0_after_251() -> None:
+    test_docs_lint_gate_requires_fourth_pass_doc_after_251()
+
+
+def test_docs_lint_gate_requires_fourth_pass_doc_still_after_251() -> None:
+    test_docs_lint_gate_requires_fourth_pass_doc_after_251()
+
+
+def test_docs_lint_gate_requires_blob_main_needle_pad0_after_251() -> None:
+    test_docs_lint_gate_requires_blob_main_needle_after_251()
+
+
+def test_docs_lint_gate_requires_blob_main_needle_still_after_251() -> None:
+    test_docs_lint_gate_requires_blob_main_needle_after_251()
+
+
+def test_docs_lint_gate_requires_503_needle_pad0_after_251() -> None:
+    test_docs_lint_gate_requires_503_needle_after_251()
+
+
+def test_docs_lint_gate_requires_503_needle_still_after_251() -> None:
+    test_docs_lint_gate_requires_503_needle_after_251()
+
+
+def test_docs_lint_gate_requires_wiki_outline_needle_pad0_after_251() -> None:
+    test_docs_lint_gate_requires_wiki_outline_needle_after_251()
+
+
+def test_docs_lint_gate_requires_wiki_outline_needle_still_after_251() -> None:
+    test_docs_lint_gate_requires_wiki_outline_needle_after_251()
+
+
+def test_docs_lint_gate_requires_escaped_blob_pad0_after_251() -> None:
+    test_docs_lint_gate_requires_escaped_blob_after_251()
+
+
+def test_docs_lint_gate_requires_escaped_blob_still_after_251() -> None:
+    test_docs_lint_gate_requires_escaped_blob_after_251()
+
+
+def test_docs_lint_gate_requires_not_invent_tpl_wording_pad0_after_251() -> None:
+    test_docs_lint_gate_requires_not_invent_tpl_wording_after_251()
+
+
+def test_docs_lint_gate_requires_not_invent_tpl_wording_still_after_251() -> None:
+    test_docs_lint_gate_requires_not_invent_tpl_wording_after_251()
+
+
+def test_lycheeignore_accepts_blob_exclude_pad0_after_251() -> None:
+    test_lycheeignore_accepts_blob_exclude_after_251()
+
+
+def test_lycheeignore_accepts_blob_exclude_still_after_251() -> None:
+    test_lycheeignore_accepts_blob_exclude_after_251()
+
 
 # --- TOKENMAXX path-filter/path-order residual leftover deepen after #258 (+150) -----
 
@@ -80293,6 +80646,7 @@ def main() -> int:
         test_path_edges_rejects_stew_workflow_call_pad5_after_258,
         test_path_edges_rejects_stew_workflow_call_still_after_258,
         test_path_edges_rejects_stew_workflow_call_after_258,
+
         test_pass2_rejects_or_colon_pad0_after_233,
         test_pass2_rejects_or_colon_pad1_after_233,
         test_pass2_rejects_or_colon_pad2_after_233,
@@ -80517,6 +80871,48 @@ def main() -> int:
         test_gate_requires_no_invent_tpl_pad5_after_233,
         test_gate_requires_no_invent_tpl_still_after_233,
         test_gate_requires_no_invent_tpl_after_233,
+        test_lycheeignore_accepts_blob_exclude_after_251,
+        test_lycheeignore_accepts_blob_exclude_pad0_after_251,
+        test_lycheeignore_accepts_blob_exclude_still_after_251,
+        test_lycheeignore_rejects_missing_blob_exclude_after_251,
+        test_lycheeignore_rejects_missing_blob_exclude_pad0_after_251,
+        test_lycheeignore_rejects_missing_blob_exclude_pad1_after_251,
+        test_lycheeignore_rejects_missing_blob_exclude_pad2_after_251,
+        test_lycheeignore_rejects_missing_blob_exclude_still_after_251,
+        test_lycheeignore_rejects_missing_503_note_after_251,
+        test_lycheeignore_rejects_missing_503_note_pad0_after_251,
+        test_lycheeignore_rejects_missing_503_note_pad1_after_251,
+        test_lycheeignore_rejects_missing_503_note_still_after_251,
+        test_lycheeignore_rejects_missing_wiki_outline_note_after_251,
+        test_lycheeignore_rejects_missing_wiki_outline_note_pad0_after_251,
+        test_lycheeignore_rejects_missing_wiki_outline_note_still_after_251,
+        test_lycheeignore_rejects_unescaped_blob_host_after_251,
+        test_lycheeignore_rejects_unescaped_blob_host_pad0_after_251,
+        test_lycheeignore_rejects_unescaped_blob_host_still_after_251,
+        test_lycheeignore_keeps_exact_blob_line_after_251,
+        test_lycheeignore_keeps_exact_blob_line_pad0_after_251,
+        test_lycheeignore_keeps_exact_blob_line_still_after_251,
+        test_lycheeignore_keeps_exact_outline_line_after_251,
+        test_lycheeignore_keeps_exact_outline_line_pad0_after_251,
+        test_lycheeignore_keeps_exact_outline_line_still_after_251,
+        test_docs_lint_gate_requires_fourth_pass_doc_after_251,
+        test_docs_lint_gate_requires_fourth_pass_doc_pad0_after_251,
+        test_docs_lint_gate_requires_fourth_pass_doc_still_after_251,
+        test_docs_lint_gate_requires_blob_main_needle_after_251,
+        test_docs_lint_gate_requires_blob_main_needle_pad0_after_251,
+        test_docs_lint_gate_requires_blob_main_needle_still_after_251,
+        test_docs_lint_gate_requires_503_needle_after_251,
+        test_docs_lint_gate_requires_503_needle_pad0_after_251,
+        test_docs_lint_gate_requires_503_needle_still_after_251,
+        test_docs_lint_gate_requires_wiki_outline_needle_after_251,
+        test_docs_lint_gate_requires_wiki_outline_needle_pad0_after_251,
+        test_docs_lint_gate_requires_wiki_outline_needle_still_after_251,
+        test_docs_lint_gate_requires_escaped_blob_after_251,
+        test_docs_lint_gate_requires_escaped_blob_pad0_after_251,
+        test_docs_lint_gate_requires_escaped_blob_still_after_251,
+        test_docs_lint_gate_requires_not_invent_tpl_wording_after_251,
+        test_docs_lint_gate_requires_not_invent_tpl_wording_pad0_after_251,
+        test_docs_lint_gate_requires_not_invent_tpl_wording_still_after_251,
 ]
 
 

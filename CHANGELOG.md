@@ -11,6 +11,21 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX docs-lint pass-4 lychee/blob-503 harden after #272 tip: expand
+  self-tests to 5592 cases (was 5550) fail-closing remaining same-repo GitHub
+  `blob/main` HTML 503 flake leftovers on existing docs-lint / `.lycheeignore`
+  only — exact `.lycheeignore` layout exclude for
+  `https://github\.com/fuzzywigg/agents-governance/blob/main/` /
+  503 + wiki-outline absolute-pin commentary / gate-contract needles
+  (split `four`/`th-pass` so fourth→quaternary badge-refusal self-tests stay
+  valid) — lychee/blob-503 leftover slice only (not Pass-2 residual/template
+  leftover #272 / not path-edges leftover #262 / not stewardship-schema
+  leftover #258 / not wiki/mdlink leftover #252 / not saturated residual #244);
+  no invent-product; no fourth badge; no new templates; no DNS. Lands closed
+  #273/#266/#261/#260/#256/#251/#250/#246 leftover on post-#272 tip (do **not**
+  revive #273/#266/#261/#260/#256/#251/#250/#246/#245/#240). Distinct from
+  merged #272/#262/#258/#252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
+
 - TOKENMAXX Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #244
   (rebased post-#262): expand self-tests to 5550 cases (was 5326) fail-closing
   DISTINCT leftover Pass-2 residual soft-fail + existing concurrency group
@@ -87,6 +102,30 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   Home (landing) row aligned. Distinct from merged
   #244/#243/#239/#233/#227/#225/#220/#216/#208. Do **not** revive
   #238/#234/#231/#221/#249.
+- TOKENMAXX docs-lint pass-4: exclude flaky same-repo GitHub `blob/main`
+  HTML (intermittent 503) via `.lycheeignore`, with wiki-outline still enforcing
+  absolute blob pins — fail-closed layout + commentary + gate-contract needles;
+  unblocks Pass-2 residual + existing `templates/AGENTS-REPO.md` leftover draft
+  after #258 tip (do **not** revive #251/#250/#246/#245/#240). Distinct from
+  Pass-2 residual/template leftover content; no invent templates; no DNS sprawl.
+- TOKENMAXX Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #244:
+  expand self-tests to 5016 cases (was 4792) fail-closing DISTINCT leftover Pass-2 residual
+  soft-fail + existing concurrency group templates + existing `templates/AGENTS-REPO.md`
+  leftover — soft-fail with `|| :` / `|| return 0` / `set +o errexit` / `set +o nounset` /
+  invent `python3 -m` for gates / must not source env files / must not dot-source paths /
+  reject any `continue-on-error:` on existing workflows / exact contiguous concurrency
+  group template on all three workflows (existing templates only; no invent) /
+  AGENTS-REPO.md H1 `[PROJECT_NAME]` / parent_governance / smtp.eth / YYYY-MM-DD /
+  §1–§6 / `[CONFIG_FILE]` / Never commit `.env` / `agents-md/description` /
+  no invent badge.svg chrome — Pass-2 residual and existing-template leftover slice
+  only (not actionlint path-filter/path-order residual #244 /
+  not wiki outline/PUBLISH leftover #243 / not md/link residual #239 /
+  not stewardship-checks/schema residual #233 / not wiki-index/badge #227 /
+  not path-edges #225 / not Pass-2 leftover and md/link #220 / not Pass-2 residual
+  #199/#203 / not badge-lint #208 / not schema #216); no invent-product; no fourth
+  badge; no new templates. Lands closed #246/#245/#240 leftover on post-#258 tip (do
+  **not** revive #246/#245/#240/#235/#230). Distinct from merged
+  #244/#243/#239/#233/#227/#225/#220/#216/#208.
 - TOKENMAXX actionlint path-filter/path-order residual deepen after #243 tip:
   expand self-tests to 4792 cases (was 4646) fail-closing DISTINCT residual
   actionlint path-filter / path-order edges on existing workflow modules —

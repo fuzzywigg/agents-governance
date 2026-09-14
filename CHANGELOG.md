@@ -23,7 +23,6 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   #164/#163/#142/#183 leftover on post-#181 main (do **not** revive
   #164/#163/#142/#147/#153/#171/#183). Distinct from merged wiki-index (#181).
 
-
 - TOKENMAXX wiki-index validators after #176: expand self-tests to 3330 cases
   (was 3258) fail-closing live wiki-index integrity — Home TOC empty-index /
   publishable page index stubs / broken internal stub links / empty markdown

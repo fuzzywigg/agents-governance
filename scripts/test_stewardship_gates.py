@@ -62647,12 +62647,18 @@ def test_path_edges_gate_wording_after_233() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'path-filter/path-order residual deepen after #233' in text
-        path.write_text(text.replace('path-filter/path-order residual deepen after #233', 'path-filter/path-order residual deepen after #000'), encoding="utf-8")
+        assert "residual-after-233 wording" in text
+        path.write_text(
+            text.replace(
+                "residual-after-233 wording",
+                "residual-after-000 wording",
+            ),
+            encoding="utf-8",
+        )
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'residual-after-225 wording pin',
+            "path residual wording fail needle",
         )
 
 
@@ -62662,12 +62668,18 @@ def test_path_edges_gate_wording_still_after_233() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'path-filter/path-order residual deepen after #233' in text
-        path.write_text(text.replace('path-filter/path-order residual deepen after #233', 'path-filter/path-order residual deepen after #000'), encoding="utf-8")
+        assert "residual-after-233 wording" in text
+        path.write_text(
+            text.replace(
+                "residual-after-233 wording",
+                "residual-after-000 wording",
+            ),
+            encoding="utf-8",
+        )
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'residual-after-225 wording pin',
+            "path residual wording fail needle",
         )
 
 

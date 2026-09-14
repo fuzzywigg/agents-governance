@@ -125,7 +125,7 @@ Fail-closed actionlint path-filter/path-order residual deepen after #233
 NOT schema #191/#216 / NOT Pass-2 residual #199/#203 / NOT Pass-2 leftover +
 md/link #220 / NOT wiki-badge leftover #227 / NOT stewardship-checks/schema #233 /
 NOT stewardship-badge lint #208; lands closed #232 leftover on post-#233 tip —
-do not revive #232/#234/#235):
+do not revive #232/#234/#235; residual-after-233 wording):
 - contiguous pull_request:/schedule: adjacency (bare PR form) on all three
 - reject branches-ignore: invent
 - pull_request stays type-unfiltered (no nested types:)
@@ -4657,8 +4657,8 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
             "shell-less actionlint run step fail needle",
         ),
         (
-            "path-filter/path-order residual deepen after " + "#233",
-            "residual-after-233 wording pin",
+            "residual-after-233 " + "wording",
+            "path residual wording fail needle",
         ),
     )
     for needle, label in residual_233_pins:

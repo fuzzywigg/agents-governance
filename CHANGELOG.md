@@ -11,6 +11,28 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-schema leftover residual deepen after #262 tip: expand
+  self-tests to 5526 cases (was 5326) fail-closing unsaturated schema +
+  `stewardship_common` leftover residual helpers on existing modules only —
+  leftover residual parse/load needles (`if not key:` / `data[key] = value` /
+  `raise ValueError("metadata YAML must be a mapping")` /
+  `return match.group(1)` / `block = first_yaml_block(path)` /
+  `data = load_yaml(block)` / `if missing:` / `got = data.get(key)` /
+  `policy = str(data["edit_policy"]).lower()` /
+  `print("Stewardship schema check FAILED:")` / leftover residual invalid
+  status stubs REJECTED|UNKNOWN|ORPHANED|QUARANTINE|SHADOW|PREVIEW /
+  leftover residual invalid surface stubs telegram|matrix|irc|email|webhook /
+  common leftover residual `errors.append(msg)` /
+  `lowered = target.strip().lower()` / `for scheme in DANGEROUS_LINK_SCHEMES:` /
+  `found.update(ROOT.glob(pattern))` — schema leftover residual slice only
+  (not path-filter/path-order leftover #262 / not schema leftover #258 /
+  not wiki/mdlink leftover #252 / not path-edges residual #244 / not wiki
+  outline/PUBLISH leftover #243 / not md/link residual #239 / not
+  stewardship-checks/schema residual #233 / not wiki-index/badge #227); no
+  invent-product; no fourth badge. Distinct from merged
+  #262/#258/#252/#244/#243/#239/#233/#227/#225/#220/#216/#208. Do **not**
+  revive #263/#257/#253/#248/#241.
+
 - TOKENMAXX actionlint path-filter/path-order residual leftover deepen after
   #258 tip: expand self-tests to 5326 cases (was 5176) fail-closing DISTINCT
   residual leftover actionlint path-filter / path-order edges on existing

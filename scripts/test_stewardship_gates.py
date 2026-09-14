@@ -51304,6 +51304,844 @@ def test_schema_passes_live_badge_with_schema_contract_after_189() -> None:
 def test_schema_passes_live_badge_with_schema_contract_still_after_189() -> None:
     assert_pass_live(ROOT / "scripts" / "check_badge_standard.py")
 
+
+# --- TOKENMAXX Pass-2 leftover + markdown-lint/link-check edges after #189 ---
+def test_mdlink_edge_gate_requires_args_form_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'args: >-',
+            'args: |-',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'lychee args multiline form pin',
+        )
+def test_mdlink_edge_gate_requires_args_form_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'args: >-',
+            'args: |-',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'lychee args multiline form pin',
+        )
+def test_mdlink_edge_gate_requires_externally_broken_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'externally broken links commentary',
+            'internally broken links commentary',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check externally-broken commentary pin',
+        )
+def test_mdlink_edge_gate_requires_externally_broken_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'externally broken links commentary',
+            'internally broken links commentary',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check externally-broken commentary pin',
+        )
+def test_mdlink_edge_gate_requires_without_it_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'without-it private-404 commentary',
+            'with-it private-404 commentary',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check without-it private-404 pin',
+        )
+def test_mdlink_edge_gate_requires_without_it_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'without-it private-404 commentary',
+            'with-it private-404 commentary',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check without-it private-404 pin',
+        )
+def test_mdlink_edge_gate_requires_continue_on_error_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'must not set continue-on-error',
+            'must allow set continue-on-error',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'continue-on-error reject pin',
+        )
+def test_mdlink_edge_gate_requires_continue_on_error_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'must not set continue-on-error',
+            'must allow set continue-on-error',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'continue-on-error reject pin',
+        )
+def test_mdlink_edge_gate_requires_job_perms_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'exact job permissions: contents: read',
+            'exact job permissions: contents: write',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'job permissions exact pin',
+        )
+def test_mdlink_edge_gate_requires_job_perms_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'exact job permissions: contents: read',
+            'exact job permissions: contents: write',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'job permissions exact pin',
+        )
+def test_mdlink_edge_gate_requires_link_adj_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'checkout before Check links adjacency',
+            'checkout after Check links adjacency',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check checkout adjacency pin',
+        )
+def test_mdlink_edge_gate_requires_link_adj_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'checkout before Check links adjacency',
+            'checkout after Check links adjacency',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check checkout adjacency pin',
+        )
+def test_mdlink_edge_gate_requires_lint_adj_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'checkout before Run markdownlint adjacency',
+            'checkout after Run markdownlint adjacency',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'markdown-lint checkout adjacency pin',
+        )
+def test_mdlink_edge_gate_requires_lint_adj_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'checkout before Run markdownlint adjacency',
+            'checkout after Run markdownlint adjacency',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'markdown-lint checkout adjacency pin',
+        )
+def test_mdlink_edge_gate_requires_edge_doc_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'Markdown-lint/link-check workflow edges after #189',
+            'Markdown-lint/link-check workflow edges after #000',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Markdown-lint/link-check workflow edges after #189',
+        )
+def test_mdlink_edge_gate_requires_edge_doc_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'Markdown-lint/link-check workflow edges after #189',
+            'Markdown-lint/link-check workflow edges after #000',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Markdown-lint/link-check workflow edges after #189',
+        )
+def test_mdlink_edge_gate_requires_module_edge_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'markdown-lint/link-check edges after #189',
+            'markdown-lint/link-check edges after #000',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'markdown-lint/link-check edges after #189',
+        )
+def test_mdlink_edge_gate_requires_module_edge_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'markdown-lint/link-check edges after #189',
+            'markdown-lint/link-check edges after #000',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'markdown-lint/link-check edges after #189',
+        )
+def test_run_stewardship_gate_requires_leftover_189_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'Pass-2 leftovers after #189',
+            'Pass-2 leftovers after #000',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Pass-2 leftovers after #189',
+        )
+def test_run_stewardship_gate_requires_leftover_189_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'Pass-2 leftovers after #189',
+            'Pass-2 leftovers after #000',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Pass-2 leftovers after #189',
+        )
+def test_run_stewardship_gate_requires_exit0_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'soft-fail with || exit 0',
+            'soft-fail with || exit 1',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'soft-fail with || exit 0',
+        )
+def test_run_stewardship_gate_requires_exit0_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'soft-fail with || exit 0',
+            'soft-fail with || exit 1',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'soft-fail with || exit 0',
+        )
+def test_run_stewardship_gate_requires_shebang_first_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'shebang as first line',
+            'shebang as second line',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'shebang as first line',
+        )
+def test_run_stewardship_gate_requires_shebang_first_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'shebang as first line',
+            'shebang as second line',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'shebang as first line',
+        )
+def test_mdlink_edge_rejects_link_args_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            'args: >-',
+            'args: |-',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'args: >-',
+        )
+def test_mdlink_edge_rejects_link_args_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            'args: >-',
+            'args: |-',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'args: >-',
+        )
+def test_mdlink_edge_rejects_link_externally_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            'Run weekly to catch externally broken links',
+            'Run weekly to catch internally broken links',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'externally broken links',
+        )
+def test_mdlink_edge_rejects_link_externally_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            'Run weekly to catch externally broken links',
+            'Run weekly to catch internally broken links',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'externally broken links',
+        )
+def test_mdlink_edge_rejects_link_without_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            'without it, private repos return 404 and fail the check',
+            'without it, private repos return 403 and fail the check',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'without-it private-404',
+        )
+def test_mdlink_edge_rejects_link_without_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            'without it, private repos return 404 and fail the check',
+            'without it, private repos return 403 and fail the check',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'without-it private-404',
+        )
+def test_mdlink_edge_rejects_link_continue_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            'fail: true\n',
+            'continue-on-error: true\n          fail: true\n',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'continue-on-error',
+        )
+def test_mdlink_edge_rejects_link_continue_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            'fail: true\n',
+            'continue-on-error: true\n          fail: true\n',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'continue-on-error',
+        )
+def test_mdlink_edge_rejects_link_perms_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            '    permissions:\n      contents: read',
+            '    permissions:\n      contents: write',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact job permissions',
+        )
+def test_mdlink_edge_rejects_link_perms_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            '    permissions:\n      contents: read',
+            '    permissions:\n      contents: write',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact job permissions',
+        )
+def test_mdlink_edge_rejects_link_adj_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            '      - uses: actions/checkout@v7\n      - name: Check links',
+            '      - name: Check links\n      - uses: actions/checkout@v7',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'checkout before Check links',
+        )
+def test_mdlink_edge_rejects_link_adj_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            '      - uses: actions/checkout@v7\n      - name: Check links',
+            '      - name: Check links\n      - uses: actions/checkout@v7',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'checkout before Check links',
+        )
+def test_mdlink_edge_rejects_lint_continue_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            'timeout-minutes: 10\n',
+            'timeout-minutes: 10\n    continue-on-error: true\n',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'continue-on-error',
+        )
+def test_mdlink_edge_rejects_lint_continue_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            'timeout-minutes: 10\n',
+            'timeout-minutes: 10\n    continue-on-error: true\n',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'continue-on-error',
+        )
+def test_mdlink_edge_rejects_lint_perms_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            '    permissions:\n      contents: read',
+            '    permissions:\n      contents: write',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact job permissions',
+        )
+def test_mdlink_edge_rejects_lint_perms_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            '    permissions:\n      contents: read',
+            '    permissions:\n      contents: write',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact job permissions',
+        )
+def test_mdlink_edge_rejects_lint_adj_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            '      - uses: actions/checkout@v7\n      - name: Run markdownlint',
+            '      - name: Run markdownlint\n      - uses: actions/checkout@v7',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'checkout before Run markdownlint',
+        )
+def test_mdlink_edge_rejects_lint_adj_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            '      - uses: actions/checkout@v7\n      - name: Run markdownlint',
+            '      - name: Run markdownlint\n      - uses: actions/checkout@v7',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'checkout before Run markdownlint',
+        )
+def test_run_stewardship_rejects_exit0_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'python3 scripts/check_relative_links.py',
+            'python3 scripts/check_relative_links.py || exit 0',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '|| exit 0',
+        )
+def test_run_stewardship_rejects_exit0_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'python3 scripts/check_relative_links.py',
+            'python3 scripts/check_relative_links.py || exit 0',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '|| exit 0',
+        )
+def test_run_stewardship_rejects_shebang_first_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            '#!/usr/bin/env bash\n',
+            '\n#!/usr/bin/env bash\n',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'shebang as first line',
+        )
+def test_run_stewardship_rejects_shebang_first_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            '#!/usr/bin/env bash\n',
+            '\n#!/usr/bin/env bash\n',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'shebang as first line',
+        )
+def test_mdlink_edge_rejects_link_args_pad0_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace("args: >-", "args: |-")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "args: >-")
+def test_mdlink_edge_rejects_link_args_pad1_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace("args: >-", "args: |-")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "args: >-")
+def test_mdlink_edge_rejects_link_args_pad2_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace("args: >-", "args: |-")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "args: >-")
+def test_mdlink_edge_rejects_link_args_pad3_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace("args: >-", "args: |-")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "args: >-")
+def test_mdlink_edge_rejects_link_args_pad4_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace("args: >-", "args: |-")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "args: >-")
+def test_mdlink_edge_rejects_link_args_pad5_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace("args: >-", "args: |-")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "args: >-")
+def test_mdlink_edge_rejects_link_args_pad6_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace("args: >-", "args: |-")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "args: >-")
+def test_mdlink_edge_rejects_link_args_pad7_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace("args: >-", "args: |-")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "args: >-")
+def test_run_stewardship_rejects_exit0_pad0_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "python3 scripts/check_relative_links.py",
+            "python3 scripts/check_relative_links.py || exit 0",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "|| exit 0")
+def test_run_stewardship_rejects_exit0_pad1_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "python3 scripts/check_relative_links.py",
+            "python3 scripts/check_relative_links.py || exit 0",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "|| exit 0")
+def test_run_stewardship_rejects_exit0_pad2_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "python3 scripts/check_relative_links.py",
+            "python3 scripts/check_relative_links.py || exit 0",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "|| exit 0")
+def test_run_stewardship_rejects_exit0_pad3_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "python3 scripts/check_relative_links.py",
+            "python3 scripts/check_relative_links.py || exit 0",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "|| exit 0")
+def test_run_stewardship_rejects_exit0_pad4_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "python3 scripts/check_relative_links.py",
+            "python3 scripts/check_relative_links.py || exit 0",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "|| exit 0")
+def test_run_stewardship_rejects_exit0_pad5_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "python3 scripts/check_relative_links.py",
+            "python3 scripts/check_relative_links.py || exit 0",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "|| exit 0")
+def test_mdlink_edge_accepts_live_seed_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+def test_mdlink_edge_passes_live_badge_after_189() -> None:
+    assert_pass_live("check_badge_standard.py")
+def test_mdlink_edge_accepts_live_seed_still_after_189() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+def test_mdlink_edge_passes_live_badge_still_after_189() -> None:
+    assert_pass_live("check_badge_standard.py")
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -55144,6 +55982,72 @@ def main() -> int:
     test_schema_passes_live_still_after_189,
     test_schema_passes_live_badge_with_schema_contract_after_189,
     test_schema_passes_live_badge_with_schema_contract_still_after_189,
+
+    # TOKENMAXX Pass-2 leftover + md/link edges after #189 (+64)
+    test_mdlink_edge_gate_requires_args_form_after_189,
+    test_mdlink_edge_gate_requires_args_form_still_after_189,
+    test_mdlink_edge_gate_requires_externally_broken_after_189,
+    test_mdlink_edge_gate_requires_externally_broken_still_after_189,
+    test_mdlink_edge_gate_requires_without_it_after_189,
+    test_mdlink_edge_gate_requires_without_it_still_after_189,
+    test_mdlink_edge_gate_requires_continue_on_error_after_189,
+    test_mdlink_edge_gate_requires_continue_on_error_still_after_189,
+    test_mdlink_edge_gate_requires_job_perms_after_189,
+    test_mdlink_edge_gate_requires_job_perms_still_after_189,
+    test_mdlink_edge_gate_requires_link_adj_after_189,
+    test_mdlink_edge_gate_requires_link_adj_still_after_189,
+    test_mdlink_edge_gate_requires_lint_adj_after_189,
+    test_mdlink_edge_gate_requires_lint_adj_still_after_189,
+    test_mdlink_edge_gate_requires_edge_doc_after_189,
+    test_mdlink_edge_gate_requires_edge_doc_still_after_189,
+    test_mdlink_edge_gate_requires_module_edge_after_189,
+    test_mdlink_edge_gate_requires_module_edge_still_after_189,
+    test_run_stewardship_gate_requires_leftover_189_after_189,
+    test_run_stewardship_gate_requires_leftover_189_still_after_189,
+    test_run_stewardship_gate_requires_exit0_after_189,
+    test_run_stewardship_gate_requires_exit0_still_after_189,
+    test_run_stewardship_gate_requires_shebang_first_after_189,
+    test_run_stewardship_gate_requires_shebang_first_still_after_189,
+    test_mdlink_edge_rejects_link_args_after_189,
+    test_mdlink_edge_rejects_link_args_still_after_189,
+    test_mdlink_edge_rejects_link_externally_after_189,
+    test_mdlink_edge_rejects_link_externally_still_after_189,
+    test_mdlink_edge_rejects_link_without_after_189,
+    test_mdlink_edge_rejects_link_without_still_after_189,
+    test_mdlink_edge_rejects_link_continue_after_189,
+    test_mdlink_edge_rejects_link_continue_still_after_189,
+    test_mdlink_edge_rejects_link_perms_after_189,
+    test_mdlink_edge_rejects_link_perms_still_after_189,
+    test_mdlink_edge_rejects_link_adj_after_189,
+    test_mdlink_edge_rejects_link_adj_still_after_189,
+    test_mdlink_edge_rejects_lint_continue_after_189,
+    test_mdlink_edge_rejects_lint_continue_still_after_189,
+    test_mdlink_edge_rejects_lint_perms_after_189,
+    test_mdlink_edge_rejects_lint_perms_still_after_189,
+    test_mdlink_edge_rejects_lint_adj_after_189,
+    test_mdlink_edge_rejects_lint_adj_still_after_189,
+    test_run_stewardship_rejects_exit0_after_189,
+    test_run_stewardship_rejects_exit0_still_after_189,
+    test_run_stewardship_rejects_shebang_first_after_189,
+    test_run_stewardship_rejects_shebang_first_still_after_189,
+    test_mdlink_edge_rejects_link_args_pad0_after_189,
+    test_mdlink_edge_rejects_link_args_pad1_after_189,
+    test_mdlink_edge_rejects_link_args_pad2_after_189,
+    test_mdlink_edge_rejects_link_args_pad3_after_189,
+    test_mdlink_edge_rejects_link_args_pad4_after_189,
+    test_mdlink_edge_rejects_link_args_pad5_after_189,
+    test_mdlink_edge_rejects_link_args_pad6_after_189,
+    test_mdlink_edge_rejects_link_args_pad7_after_189,
+    test_run_stewardship_rejects_exit0_pad0_after_189,
+    test_run_stewardship_rejects_exit0_pad1_after_189,
+    test_run_stewardship_rejects_exit0_pad2_after_189,
+    test_run_stewardship_rejects_exit0_pad3_after_189,
+    test_run_stewardship_rejects_exit0_pad4_after_189,
+    test_run_stewardship_rejects_exit0_pad5_after_189,
+    test_mdlink_edge_accepts_live_seed_after_189,
+    test_mdlink_edge_passes_live_badge_after_189,
+    test_mdlink_edge_accepts_live_seed_still_after_189,
+    test_mdlink_edge_passes_live_badge_still_after_189,
 
 ]
 

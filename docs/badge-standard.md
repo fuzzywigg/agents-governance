@@ -226,6 +226,12 @@ Path parent / yaml=None / five live docs / parse pins / path.is_file /
 block.strip / STRING_KEYS / BLE001 / DATE_KEYS / deepen docstring
 (lands closed #187/#188 leftover; do not revive #187/#188/#183/#164;
 distinct from path-order #189)).
+plus Pass-2 leftover + markdown-lint/link-check workflow edges after #189:
+`|| exit 0` / shebang-first-line / `args: >-` / externally-broken
+commentary / without-it private-404 / reject `continue-on-error` on
+link+lint / exact job permissions / checkout adjacency — distinct
+leftover after tip #191; not fixtures / path-filter / Pass-2 main /
+wiki-index / path-order / open Pass-2 residual / schema spam).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

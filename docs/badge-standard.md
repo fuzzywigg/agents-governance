@@ -116,7 +116,14 @@ plus stewardship_common second-pass after #65: ROOT `parents[1]` /
 `password|passwd|token` / OPENSSH+EC / Public docs / invent-product
 surface / social chrome / Link schemes / `is_file`+`sorted` /
 workflows path / `return None` / exact `DANGEROUS_LINK_SCHEMES` +
-`SECRET_URL_HINTS` head).
+`SECRET_URL_HINTS` head,
+plus stewardship-schema second-pass after #72: `FENCED_YAML_RE`
+MULTILINE|DOTALL / ISO+SEMVER+ISSUE REs / `DATE_KEYS` exact /
+parse_simple_yaml doc+null/bool/int / missing-fence /
+scalar+non-empty+string needles / ACTIVE `docs/` / autonomy 0..3 /
+tier positive / ISO-8601 / invent edit_policy / semver / closes `#N` /
+OK+stdlib-subset / ImportError / sys.path+common import /
+`is_file`+missing keys / `autonomy_level: 1`).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

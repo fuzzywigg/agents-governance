@@ -3720,10 +3720,17 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
             errors,
         )
 
-    leftover_293_doc = "wiki/mdlink leftover residual after " + "#293"
-    if leftover_293_doc not in text:
+    leftover_297_doc = "wiki/mdlink leftover residual after " + "#297"
+    if leftover_297_doc not in text:
         fail(
-            "check_badge_standard.py docstring must keep " + leftover_293_doc + " pin",
+            "check_badge_standard.py docstring must keep " + leftover_297_doc + " pin",
+            errors,
+        )
+    not_schema_297 = "NOT stewardship-schema residual CI " + "#297"
+    if not_schema_297 not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + not_schema_297
+            + " distinctness pin",
             errors,
         )
     not_wiki_mdlink_293 = "NOT wiki/mdlink leftover residual " + "#293"
@@ -9059,10 +9066,16 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
             errors,
         )
 
-    leftover_293_wiki = "Wiki/mdlink leftover residual after " + "#293"
-    if leftover_293_wiki not in wiki_text:
+    leftover_297_wiki = "Wiki/mdlink leftover residual after " + "#297"
+    if leftover_297_wiki not in wiki_text:
         fail(
-            "check_wiki_outline.py docstring must keep " + leftover_293_wiki + " pin",
+            "check_wiki_outline.py docstring must keep " + leftover_297_wiki + " pin",
+            errors,
+        )
+    not_schema_297_w = "NOT stewardship-schema residual CI " + "#297"
+    if not_schema_297_w not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_schema_297_w + " pin",
             errors,
         )
     not_wiki_mdlink_293_w = "NOT wiki/mdlink leftover residual " + "#293"

@@ -83817,9 +83817,9 @@ def test_wiki_mdlink_rejects_gate_leftover_doc_pad0_after_297() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts/check_wiki_outline.py"
         text = path.read_text(encoding="utf-8")
-        assert 'Wiki/mdlink leftover residual after #293' in text
-        path.write_text(text.replace('Wiki/mdlink leftover residual after #293', 'Wiki/mdlink leftover residual after #000'), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover residual after #293')
+        assert 'Wiki/mdlink leftover residual after #297' in text
+        path.write_text(text.replace('Wiki/mdlink leftover residual after #297', 'Wiki/mdlink leftover residual after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover residual after #297')
 
 def test_wiki_mdlink_rejects_gate_leftover_doc_pad1_after_297() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -83827,9 +83827,9 @@ def test_wiki_mdlink_rejects_gate_leftover_doc_pad1_after_297() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts/check_wiki_outline.py"
         text = path.read_text(encoding="utf-8")
-        assert 'Wiki/mdlink leftover residual after #293' in text
-        path.write_text(text.replace('Wiki/mdlink leftover residual after #293', 'Wiki/mdlink leftover residual after #000'), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover residual after #293')
+        assert 'Wiki/mdlink leftover residual after #297' in text
+        path.write_text(text.replace('Wiki/mdlink leftover residual after #297', 'Wiki/mdlink leftover residual after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover residual after #297')
 
 def test_wiki_mdlink_rejects_gate_leftover_doc_pad2_after_297() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -83837,9 +83837,9 @@ def test_wiki_mdlink_rejects_gate_leftover_doc_pad2_after_297() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts/check_wiki_outline.py"
         text = path.read_text(encoding="utf-8")
-        assert 'Wiki/mdlink leftover residual after #293' in text
-        path.write_text(text.replace('Wiki/mdlink leftover residual after #293', 'Wiki/mdlink leftover residual after #000'), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover residual after #293')
+        assert 'Wiki/mdlink leftover residual after #297' in text
+        path.write_text(text.replace('Wiki/mdlink leftover residual after #297', 'Wiki/mdlink leftover residual after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover residual after #297')
 
 def test_wiki_mdlink_rejects_gate_leftover_doc_pad3_after_297() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -83847,9 +83847,9 @@ def test_wiki_mdlink_rejects_gate_leftover_doc_pad3_after_297() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts/check_wiki_outline.py"
         text = path.read_text(encoding="utf-8")
-        assert 'Wiki/mdlink leftover residual after #293' in text
-        path.write_text(text.replace('Wiki/mdlink leftover residual after #293', 'Wiki/mdlink leftover residual after #000'), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover residual after #293')
+        assert 'Wiki/mdlink leftover residual after #297' in text
+        path.write_text(text.replace('Wiki/mdlink leftover residual after #297', 'Wiki/mdlink leftover residual after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover residual after #297')
 
 def test_wiki_mdlink_rejects_gate_leftover_doc_pad4_after_297() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -83857,9 +83857,9 @@ def test_wiki_mdlink_rejects_gate_leftover_doc_pad4_after_297() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts/check_wiki_outline.py"
         text = path.read_text(encoding="utf-8")
-        assert 'Wiki/mdlink leftover residual after #293' in text
-        path.write_text(text.replace('Wiki/mdlink leftover residual after #293', 'Wiki/mdlink leftover residual after #000'), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover residual after #293')
+        assert 'Wiki/mdlink leftover residual after #297' in text
+        path.write_text(text.replace('Wiki/mdlink leftover residual after #297', 'Wiki/mdlink leftover residual after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover residual after #297')
 
 def test_wiki_mdlink_rejects_gate_leftover_doc_pad5_after_297() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -83867,9 +83867,9 @@ def test_wiki_mdlink_rejects_gate_leftover_doc_pad5_after_297() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts/check_wiki_outline.py"
         text = path.read_text(encoding="utf-8")
-        assert 'Wiki/mdlink leftover residual after #293' in text
-        path.write_text(text.replace('Wiki/mdlink leftover residual after #293', 'Wiki/mdlink leftover residual after #000'), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover residual after #293')
+        assert 'Wiki/mdlink leftover residual after #297' in text
+        path.write_text(text.replace('Wiki/mdlink leftover residual after #297', 'Wiki/mdlink leftover residual after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover residual after #297')
 
 def test_wiki_mdlink_rejects_gate_leftover_doc_still_after_297() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -83877,9 +83877,9 @@ def test_wiki_mdlink_rejects_gate_leftover_doc_still_after_297() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts/check_wiki_outline.py"
         text = path.read_text(encoding="utf-8")
-        assert 'Wiki/mdlink leftover residual after #293' in text
-        path.write_text(text.replace('Wiki/mdlink leftover residual after #293', 'Wiki/mdlink leftover residual after #000'), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover residual after #293')
+        assert 'Wiki/mdlink leftover residual after #297' in text
+        path.write_text(text.replace('Wiki/mdlink leftover residual after #297', 'Wiki/mdlink leftover residual after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover residual after #297')
 
 def test_wiki_mdlink_rejects_gate_leftover_doc_after_297() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -83887,9 +83887,9 @@ def test_wiki_mdlink_rejects_gate_leftover_doc_after_297() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts/check_wiki_outline.py"
         text = path.read_text(encoding="utf-8")
-        assert 'Wiki/mdlink leftover residual after #293' in text
-        path.write_text(text.replace('Wiki/mdlink leftover residual after #293', 'Wiki/mdlink leftover residual after #000'), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover residual after #293')
+        assert 'Wiki/mdlink leftover residual after #297' in text
+        path.write_text(text.replace('Wiki/mdlink leftover residual after #297', 'Wiki/mdlink leftover residual after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover residual after #297')
 
 def main() -> int:
     tests = [
@@ -90381,7 +90381,7 @@ def main() -> int:
         test_schema_gate_requires_surface_mistral_still_after_293,
         test_schema_rejects_surface_mistral_after_293,
         test_schema_gate_requires_surface_mistral_after_293,
-        # Wiki/mdlink leftover residual after #293 (+200)
+        # Wiki/mdlink leftover residual after #297 (+200)
         test_wiki_mdlink_rejects_publish_h1_pad0_after_297,
         test_wiki_mdlink_rejects_publish_h1_pad1_after_297,
         test_wiki_mdlink_rejects_publish_h1_pad2_after_297,

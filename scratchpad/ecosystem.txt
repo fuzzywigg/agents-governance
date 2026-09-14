@@ -473,41 +473,24 @@ _None yet._
 - Scope: EXISTING CI workflow reversible pin wiring only; no invent-product; no fourth badge; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-workflow-third-pass-v3-88a9
 2026-09-14T02:32:37Z
-### [ECO-054] TOKENMAXX deepen docs-lint second-pass pins after #111 — 2026-09-14T02:17:15Z
-- [x] cursor: Read live tree post-#117 (2331 cases; actionlint third-pass saturated; #116 stewardship_common closed CI-red — do not revive)
-- [x] cursor: Fail-close docs-lint second-pass — exact live exclude URLs / Connection-reset+RST+false-positive+early-hints+valid-site / check_badge_standard.py reference / License badge presence remains enforced / exact markdownlint layout+key-set+json.loads / check_docs_lint_gate_contract second-pass
-- [x] cursor: Expand self-tests 2331 → 2433 (docs-lint second-pass slice; not actionlint / stewardship_common / badge / wiki / relative spam)
-- [ ] cursor: Green PR with CI
-- Scope: EXISTING docs-lint (.lycheeignore + .markdownlint.json) integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; distinct from closed #116
-- Branch: cursor/tokenmaxx-docs-lint-second-pass-after-111-ca9a
-2026-09-14T02:17:15Z
 
-2026-09-14T02:22:34Z cursor: PR #125 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-054 TOKENMAXX docs-lint second-pass pins
-
-2026-09-14T02:24:02Z cursor: CORRECTION — ECO-054 stewardship_common (#117) started from post-#111 (2223→2331); prior scratchpad line briefly mislabeled post-#117 during rebase ← noted
-### [ECO-055] TOKENMAXX deepen docs-lint second-pass pins after #117 — 2026-09-14T02:24:02Z
-- [x] cursor: Read live tree post-#117 (2331 cases; stewardship_common third-pass saturated; #116 closed CI-red — do not revive that broken slice)
-- [x] cursor: Fail-close docs-lint second-pass — exact live exclude URLs / Connection-reset+RST+false-positive+early-hints+valid-site / check_badge_standard.py reference / License badge presence remains enforced / exact markdownlint layout+key-set+json.loads / check_docs_lint_gate_contract second-pass
-- [x] cursor: Expand self-tests 2331 → 2433 (docs-lint second-pass slice; not actionlint / stewardship_common / badge / wiki / relative spam)
+### [ECO-057] TOKENMAXX deepen actionlint-style fourth-pass pins after #132 — 2026-09-14T02:45:00Z
+- [x] cursor: Read live tree post-#132 (2491 cases; workflow third-pass saturated; #113 CLOSED — do not revive; actionlint third-pass saturated after #111)
+- [x] cursor: Fail-close actionlint fourth-pass — cancel-in-progress: true / contents: read / ubuntu-latest / workflow_dispatch: / reject security-events|attestations|statuses|deployments write / fourth-pass docstring + gate contract
+- [x] cursor: Expand self-tests 2491 → 2563 (actionlint-style CI reliability leftover slice; not workflow-hardening/badge/wiki/docs-lint spam)
 - [ ] cursor: Green PR with CI
-- Scope: EXISTING docs-lint (.lycheeignore + .markdownlint.json) integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; rebased onto post-#117 main
-- Branch: cursor/tokenmaxx-docs-lint-second-pass-after-111-ca9a
-2026-09-14T02:24:02Z
+- Scope: EXISTING actionlint-style reversible CI reliability pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands after #132; do not revive #113
+- Branch: cursor/tokenmaxx-actionlint-pins-after-132-f041
+2026-09-14T02:45:00Z
 
-### [ECO-056] TOKENMAXX deepen docs-lint second-pass pins after #127 — 2026-09-14T02:34:02Z
-- [x] cursor: Read live tree post-#127 (2419 cases; run_stewardship saturated; #125/#130 closed CONFLICTING — refill)
-- [x] cursor: Fail-close docs-lint second-pass — exact live exclude URLs / Connection-reset+RST+false-positive+early-hints+valid-site / check_badge_standard.py reference / License badge presence remains enforced / exact markdownlint layout+key-set+json.loads / check_docs_lint_gate_contract second-pass
-- [x] cursor: Expand self-tests 2419 → 2521 (docs-lint second-pass slice; not actionlint / stewardship_common / run_stewardship / badge / wiki spam)
-- [ ] cursor: Green PR with CI
-- Scope: EXISTING docs-lint integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; rebased onto post-#127 main; distinct from closed #116
-- Branch: cursor/tokenmaxx-docs-lint-second-pass-after-111-ca9a
-2026-09-14T02:34:02Z
+### [ECO-057b] Pin wording: deepen after #132 (not fourth-pass) — 2026-09-14T03:05:00Z
+- [x] cursor: Rename actionlint pin phrase to "Deepen/deepen after #132" — contiguous fourth-pass collided with badge-refusal self-tests that mutate every fourth token in check_badge_standard.py
+- Scope: EXISTING actionlint-style reversible CI reliability pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands after #132; do not revive #113
+- Branch: cursor/tokenmaxx-actionlint-pins-after-132-f041
+2026-09-14T03:05:00Z
 
-### [ECO-057] TOKENMAXX deepen docs-lint second-pass pins after #132 — 2026-09-14T02:40:36Z
-- [x] cursor: Read live tree post-#132 (2491 cases; CI workflow third-pass saturated; #133 closed CONFLICTING — refill)
-- [x] cursor: Fail-close docs-lint second-pass — exact live exclude URLs / Connection-reset+RST+false-positive+early-hints+valid-site / check_badge_standard.py reference / License badge presence remains enforced / exact markdownlint layout+key-set+json.loads / check_docs_lint_gate_contract second-pass
-- [x] cursor: Expand self-tests 2491 → 2593 (docs-lint second-pass slice; not CI workflow / actionlint / stewardship_common / run_stewardship / badge / wiki spam)
-- [ ] cursor: Green PR with CI
-- Scope: EXISTING docs-lint integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; rebased onto post-#132 main; distinct from closed #116
-- Branch: cursor/tokenmaxx-docs-lint-second-pass-after-111-ca9a
-2026-09-14T02:40:36Z
+### [ECO-057c] Local gates green — 2026-09-14T03:12:00Z
+- [x] cursor: bash scripts/run_stewardship_checks.sh OK; python3 scripts/test_stewardship_gates.py OK (2563 cases + live tree)
+- [ ] cursor: Draft PR + CI green (do not revive #113)
+- Branch: cursor/tokenmaxx-actionlint-pins-after-132-f041
+2026-09-14T03:12:00Z

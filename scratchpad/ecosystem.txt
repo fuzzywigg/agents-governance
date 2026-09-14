@@ -511,3 +511,4 @@ _None yet._
 - Scope: EXISTING docs-lint integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; rebased onto post-#132 main; distinct from closed #116
 - Branch: cursor/tokenmaxx-docs-lint-second-pass-after-111-ca9a
 2026-09-14T02:40:36Z
+2026-09-14T02:48:53Z cursor: PR #135 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-057 TOKENMAXX docs-lint after #132

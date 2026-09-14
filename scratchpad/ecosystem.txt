@@ -700,3 +700,5 @@ _None yet._
 - Scope: EXISTING schema fourth-pass only; lands #171/#209 leftover; do not revive #171/#209/#204/#200
 - Branch: cursor/tokenmaxx-schema-fourth-pass-after-208-57e2
 2026-09-14T06:30:00Z
+
+2026-09-14T06:35:00Z cursor: Local green — run_stewardship + self-tests 3906 + markdownlint ← ECO-070 schema fourth-pass after #208 tip

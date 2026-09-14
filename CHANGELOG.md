@@ -22,7 +22,17 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   stewardship-CI #165 / schema / badge spam); no invent-product; no fourth
   badge. Lands closed #175/#140 leftover on post-#176 main (do **not** revive
   #175/#140/#122).
-
+- TOKENMAXX actionlint path-order leftover pins after #179: expand self-tests to
+  3330 cases (was 3258) fail-closing live actionlint path-order leftovers —
+  contiguous three-path actionlint order (`link-check` → `markdown-lint` →
+  `stewardship-checks`) / exact `bash <(curl -fsSL …/download-actionlint.bash) 1.7.7`
+  form / reject `continue-on-error: true` / `Download actionlint` +
+  `actionlint existing workflow paths` step names / path-order leftover
+  docstring + gate-contract needles — actionlint path-order leftover slice only
+  (not #165 stewardship CI / not fixtures #173 / not path-filter #176 / not
+  badge-lint / not #149 cancel-in-progress); no invent-product; no fourth badge.
+  Lands closed #157 leftover on post-#179 main (do **not** revive #157/#143/#120).
+  Distinct from path-filter (#176), run_stewardship Pass-2 (#179), and fixture deepen (#173).
 - TOKENMAXX actionlint path-filter leftovers after #173: expand self-tests to
   3175 cases (was 3081) fail-closing residual push `paths:` layouts /
   stewardship residual path entries (AGENTS/CLAUDE/LICENSE/CONTRIBUTING/

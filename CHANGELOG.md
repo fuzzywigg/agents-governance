@@ -11,6 +11,19 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-schema fourth-pass pins after #199/#203 tip: expand
+  self-tests to 3838 cases (was 3660) fail-closing live schema integrity —
+  nested/list edit_policy+parent_governance policy refs / invalid status enum
+  stubs DEPRECATED|ARCHIVED|PENDING|RETIRED|SUSPENDED / invalid surface stubs
+  geryon|playwright|browser-claude|claude-cowork / whitespace-only non-empty /
+  nested version+autonomy+maintainer+status / list surface+closes+purpose+autonomy /
+  pass-4 contract pins — schema fourth-pass leftover slice only (not
+  Pass-2 residual #199/#203 / third-pass #191 / path-order #189 /
+  wiki-index #181 / md-link #206 spam); no invent-product; no fourth badge.
+  Lands closed #171/#200/#204 leftover on post-#203 tip (do **not** revive
+  #171/#200/#204/#194/#190/#188/#187/#183). Distinct from merged Pass-2
+  residual #199/#203, schema third-pass #191, and open md/link edges #206.
+
 - TOKENMAXX register Pass-2 residual after_191 self-tests after #199: wire
   orphaned +70 `*_after_191` defs into `main()` so the suite reports 3660
   (was still 3590 with pins live but cases unregistered). Tests/CI only;

@@ -565,3 +565,5 @@ _None yet._
 2026-09-14T04:18:00Z cursor: Local green — run_stewardship + self-tests 2957 + markdownlint ← ECO-060 stewardship CI deepen after #161 (do not revive #158/#113)
 
 2026-09-14T04:18:31Z cursor: Draft PR #165 opened (stewardship CI deepen after #161; 2957 cases) — awaiting CI; do not revive #158/#113; distinct from schema #164
+
+2026-09-14T04:22:17Z cursor: PR #165 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-060 TOKENMAXX stewardship CI deepen after #161 (does not revive #158/#113; distinct from schema #164)

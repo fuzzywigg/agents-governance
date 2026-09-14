@@ -763,3 +763,5 @@ _None yet._
 2026-09-14T07:54:04Z cursor: Local green pending — Pass-2 residual deepen + template validation residual after #227 (leave draft; do not revive #230)
 
 2026-09-14T07:58:29Z cursor: Local green — run_stewardship + self-tests 4350 + markdownlint ← ECO-074 Pass-2 residual deepen + template validation residual after #227 (leave draft; do not revive #230)
+
+2026-09-14T07:58:51Z cursor: Draft PR #235 opened (cursor/tokenmaxx-pass2-residual-templates-after-227-89ec); leave draft / do-not-merge; awaiting CI ← ECO-074 Pass-2 residual + template validation residual after #227 (do not revive #230)

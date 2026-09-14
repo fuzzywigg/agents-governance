@@ -650,3 +650,5 @@ _None yet._
 2026-09-14T05:42:00Z cursor: Draft PR opening (cursor/tokenmaxx-schema-third-pass-after-189-f568); awaiting CI ← ECO-066 stewardship-schema third-pass after #189 (do not revive #187/#188/#183/#164)
 
 2026-09-14T05:43:00Z cursor: Draft PR #191 opened (cursor/tokenmaxx-schema-third-pass-after-189-f568); awaiting CI ← ECO-066 stewardship-schema third-pass after #189 (do not revive #187/#188/#183/#164)
+
+2026-09-14T05:42:00Z cursor: PR #191 CI green (lint + link-check + stewardship) ← complete ECO-066 TOKENMAXX stewardship-schema third-pass after #189 (does not revive #187/#188/#183/#164)

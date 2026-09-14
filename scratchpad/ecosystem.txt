@@ -671,3 +671,5 @@ _None yet._
 2026-09-14T06:09:40Z
 
 2026-09-14T06:13:04Z cursor: Local green — run_stewardship + self-tests 3728 + markdownlint ← ECO-066 stewardship-badge lint after #189/#199 tip (NEW draft; do not revive #195/#172/#190)
+
+2026-09-14T06:13:48Z cursor: NEW draft PR #205 opened (cursor/tokenmaxx-stewardship-badge-lint-after-199-7653) — awaiting CI ← ECO-066 stewardship-badge lint after #199 tip (does not revive #195/#172/#190; leave #199/#191/#189 alone)

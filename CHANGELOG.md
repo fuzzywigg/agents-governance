@@ -11,6 +11,21 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX overnight governance-fixture deepen after #161: expand self-tests
+  to 3009 cases (was 2885) covering residual policy/stewardship edge fixtures —
+  schema bool/nested/list/string/edit_policy/DRAFT/parent/surface/closes/semver/
+  ISO/empty/autonomy/tier/maintainer/scope/backlog-owner/claude-repo /
+  wiki unexpected/kill/invent/producthunt/buymeacoffee/credential/stewardship
+  svg/badge-embed/http/javascript/Home-backlink/PUBLISH-table /
+  relative NUL/query/empty-frag/vbscript/file/javascript/nested-escape/
+  protocol-relative/broken/missing-heading /
+  common ghr_/AIza/npm_/aws/OPENSSH/client_secret URL + forbidden/dangerous
+  membership / badge fourth/coverage/order/stars/http-image/secret-token —
+  governance-fixture slice only (not actionlint / docs-lint / CI workflow /
+  run_stewardship pin spam); no invent-product; no fourth badge live tree.
+  Distinct from leftover pin #161 and closed schema-third-pass #163.
+  Does **not** revive closed #163.
+
 - TOKENMAXX leftover docs-lint/stewardship/actionlint pins after #149: expand
   self-tests to 2885 cases (was 2761) fail-closing live leftover integrity —
   docs-lint third-pass exact `.lycheeignore` full layout + commentary lines /

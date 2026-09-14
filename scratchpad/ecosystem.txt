@@ -680,5 +680,7 @@ _None yet._
 - [x] cursor: Read live tree post-#203 (3660 cases; Pass-2 residual registered via #203; #207/#201/#197 CLOSED CONFLICTING md/link — unsaturated leftover; open schema-fourth / badge-lint drafts — leave alone / do not revive)
 - [x] cursor: Fail-close md/link edges — args: >- / externally-broken commentary / without-it private-404 / reject continue-on-error / exact job permissions / checkout adjacency / contract pins
 - [x] cursor: Expand self-tests 3660 → 3724 (md/link slice only; not Pass-2 register #203 / Pass-2 residual #199 / schema #191 / path-order #189)
-- [ ] cursor: Local green — run_stewardship + self-tests 3724 + markdownlint ← ECO-069 md/link edges after #203 (do not revive #192/#197/#201/#202/#207)
+- [x] cursor: Local green — run_stewardship + self-tests 3724 + markdownlint ← ECO-069 md/link edges after #203 (do not revive #192/#197/#201/#202/#207)
 - [ ] cursor: Draft PR opened; awaiting CI ← ECO-069 markdown-lint/link-check edges after #203
+
+2026-09-14T06:35:00Z cursor: Local green — run_stewardship + self-tests 3724 + markdownlint ← ECO-069 markdown-lint/link-check edges after #203 (do not revive #192/#197/#201/#202/#207)

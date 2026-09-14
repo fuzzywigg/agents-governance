@@ -537,3 +537,12 @@ _None yet._
 2026-09-14T03:30:00Z cursor: Rebased onto post-#141 main; local gates green expected 2761 (2689+72); do not revive #139/#145
 
 2026-09-14T03:35:00Z cursor: Local green 2761 on post-#141; new draft branch cursor/tokenmaxx-actionlint-after-141-114e (do not revive #145/#148/#139)
+
+### [ECO-059] TOKENMAXX deepen docs-lint/stewardship leftovers after #149 — 2026-09-14T03:46:05Z
+- [x] cursor: Read live tree post-#149 (2761 cases; actionlint deepen saturated via #149; #152 CONFLICTING duplicate — supersede; #150/#154 closed leftovers — do not revive as-is)
+- [x] cursor: Fail-close docs-lint third-pass — exact live .lycheeignore full layout + exact commentary lines; stewardship leftover — exact live run_stewardship_checks.sh full layout + ROOT assign + blank after cd; seed fixture newline aligned
+- [x] cursor: Expand self-tests 2761 → 2846 (docs-lint third-pass + stewardship leftover slice; not actionlint #149 / wiki-badge #141 / CI workflow spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING docs-lint + stewardship runner leftover pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #150/#154 leftover on post-#149 main; do not revive #152/#150/#154
+- Branch: cursor/tokenmaxx-docs-lint-after-149-cdb2
+2026-09-14T03:46:05Z

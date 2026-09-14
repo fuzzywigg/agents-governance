@@ -464,3 +464,12 @@ _None yet._
 2026-09-14T02:20:00Z
 
 2026-09-14T02:28:00Z cursor: PR #127 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-055 TOKENMAXX run_stewardship runner pins after #117
+
+### [ECO-056] TOKENMAXX deepen wiki-badge posture pins after #117/#127 — 2026-09-14T02:35:00Z
+- [x] cursor: Read live tree post-#127 (2419 cases; run_stewardship saturated; #124/#125 CONFLICTING closed; #126 docs-lint closed/superseded — pick DIFFERENT leftover)
+- [x] cursor: Fail-close wiki-badge posture — status badges cover Link Check+Markdown Lint / product badge refusal / reject stewardship-checks.yml/badge.svg invent / reject embedded markdown badge images / PUBLISH Link Check+Markdown Lint exactly / Home no badge-row embeds
+- [x] cursor: Expand self-tests 2419 → 2515 (wiki-badge slice; not common / docs-lint / run_stewardship / actionlint / relative / CI workflow pin spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING wiki-badge posture integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #120 wiki-badge leftover on post-#127 main
+- Branch: cursor/tokenmaxx-wiki-badge-after-117-cdb2
+2026-09-14T02:35:00Z

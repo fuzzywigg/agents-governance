@@ -11,6 +11,17 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki-badge posture pins after #117/#127: expand self-tests to
+  2515 cases (was 2419) fail-closing live wiki badge posture — status badges
+  cover Link Check+Markdown Lint / product badge refusal / reject stewardship
+  workflow badge invent / reject embedded markdown badge images / PUBLISH
+  Link Check+Markdown Lint exactly / Home no badge-row embeds,
+  plus `check_wiki_outline_gate_contract` wiki-badge pins in
+  `check_badge_standard.py` — wiki-badge slice only (not stewardship_common /
+  docs-lint / run_stewardship / actionlint / relative / CI workflow spam); no
+  invent-product; no fourth badge. Lands closed #120 wiki-badge leftover on
+  post-#127 main (do not revive #124/#125/#126 docs-lint / CI workflow).
+
 - TOKENMAXX run_stewardship runner pins after #117: expand self-tests to
   2419 cases (was 2331) fail-closing live local runner integrity —
   `#!/usr/bin/env bash` / `set -euo pipefail` / `dirname "$0"` + `pwd` ROOT /

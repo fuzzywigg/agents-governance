@@ -174,7 +174,11 @@ plus run_stewardship runner pins after #117: `#!/usr/bin/env bash` /
 `set -euo pipefail` / `dirname "$0"`+`pwd` ROOT / `cd "$ROOT"` / same set as
 CI / `python3 scripts/<gate>` ×4 / badge→wiki→schema→relative order /
 `check_run_stewardship_gate_contract` (lands closed #122/#96 leftover; do not
-revive #119)).
+revive #119),
+plus wiki-badge posture after #117/#127: status badges cover Link Check+Markdown
+Lint / product badge refusal / reject stewardship-checks workflow badge invent /
+reject embedded markdown badge images / PUBLISH Link Check+Markdown
+Lint exactly / Home no badge-row embeds).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

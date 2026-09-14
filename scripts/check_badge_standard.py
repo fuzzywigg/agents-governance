@@ -85,6 +85,17 @@ NOT #165 stewardship CI / NOT #149 cancel-in-progress):
 - no continue-on-error: true
 - Download actionlint + actionlint existing workflow paths step names
 - path-order leftover docstring
+
+Fail-closed stewardship-badge lint deepen after #189 (NOT docs-lint leftover
+#161 / NOT wiki-badge #141 / NOT path-order #189 / NOT schema third-pass #191;
+residual uncovered only):
+- README: reject invent stewardship-checks.yml/badge.svg (no fourth badge)
+- README: exact link-check.yml/badge.svg + markdown-lint.yml/badge.svg paths
+- exact live markdown-lint globs block (**/*.md + bang excludes)
+- exact live markdown-lint push paths filter (.markdownlint.json + self path)
+- exact live link-check push paths filter (.lycheeignore + self path)
+- missing badge fixtures for invent svg / wrong badge.svg / glob+paths drift
+
 """
 
 from __future__ import annotations
@@ -1204,6 +1215,60 @@ def check_workflow_hardening(errors: list[str]) -> None:
             "markdown-lint.yml globs must exclude !OWASP-AGENTIC.md",
             errors,
         )
+
+    # Contiguous needles for stewardship-badge lint deepen after #189 contracts:
+    # exact live stewardship-badge lint globs block
+    # exact live stewardship-badge lint push paths filter
+    # Stewardship-badge lint deepen after #189: exact live markdown-lint globs
+    # block (residual exact layout; NOT path-order #189 / NOT schema third-pass #191).
+    expected_globs = (
+        "          globs: |\n"
+        "            **/*.md\n"
+        "            !.github/agents/**\n"
+        "            !OWASP-AGENTIC.md\n"
+    )
+    if expected_globs not in lint:
+        fail(
+            "markdown-lint.yml must match exact live stewardship-badge lint globs block "
+            "after #189",
+            errors,
+        )
+    expected_md_paths = (
+        '    paths:\n'
+        '      - "**/*.md"\n'
+        '      - ".markdownlint.json"\n'
+        '      - ".github/workflows/markdown-lint.yml"\n'
+    )
+    if expected_md_paths not in lint:
+        fail(
+            "markdown-lint.yml must match exact live stewardship-badge lint push paths filter "
+            "after #189",
+            errors,
+        )
+    expected_link_paths = (
+        '    paths:\n'
+        '      - "**/*.md"\n'
+        '      - ".lycheeignore"\n'
+        '      - ".github/workflows/link-check.yml"\n'
+    )
+    if expected_link_paths not in link:
+        fail(
+            "link-check.yml must match exact live stewardship-badge lint push paths filter "
+            "after #189",
+            errors,
+        )
+    if '".markdownlint.json"' not in lint and "'.markdownlint.json'" not in lint:
+        fail(
+            'markdown-lint.yml paths filter must include ".markdownlint.json" '
+            "(stewardship-badge lint after #189)",
+            errors,
+        )
+    if '".lycheeignore"' not in link and "'.lycheeignore'" not in link:
+        fail(
+            'link-check.yml paths filter must include ".lycheeignore" '
+            "(stewardship-badge lint after #189)",
+            errors,
+        )
     # actionlint must list all three workflow paths in one run step.
     if (
         ".github/workflows/link-check.yml" not in stew
@@ -1543,6 +1608,29 @@ def check_readme_consistency(text: str, errors: list[str]) -> None:
     # No quiet stewardship marketed as a fourth README badge.
     if re.search(r"\[!\[.*[Ss]tewardship", text):
         fail("README.md must not add a Stewardship product/status badge", errors)
+
+    # Stewardship-badge lint deepen after #189: no invent workflow badge.svg
+    # (residual vs wiki-badge #141; NOT schema third-pass #191 / NOT path-order #189).
+    if "stewardship-checks.yml/badge.svg" in text:
+        fail(
+            "README.md must not invent stewardship-checks.yml/badge.svg "
+            "(no fourth badge; stewardship-badge lint after #189)",
+            errors,
+        )
+    link_badge = "link-check.yml/" + "badge.svg"
+    md_badge = "markdown-lint.yml/" + "badge.svg"
+    if link_badge not in text:
+        fail(
+            "README.md must keep exact link-check.yml/badge.svg image path "
+            "(stewardship-badge lint after #189)",
+            errors,
+        )
+    if md_badge not in text:
+        fail(
+            "README.md must keep exact markdown-lint.yml/badge.svg image path "
+            "(stewardship-badge lint after #189)",
+            errors,
+        )
 
 
 def check_contributing_and_agents(errors: list[str]) -> None:
@@ -2208,6 +2296,77 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
 
 
 
+
+
+    # Stewardship-badge lint deepen after #189 (NOT docs-lint leftover /
+    # NOT wiki-badge / NOT path-order #189 / NOT schema third-pass #191;
+    # residual README invent + exact badge.svg paths).
+    after_189 = "after " + "#189"
+    if after_189 not in text:
+        fail(
+            "check_badge_standard.py must pin stewardship-badge lint " + after_189,
+            errors,
+        )
+    badge_lint_slice = "stewardship-badge " + "lint"
+    if badge_lint_slice not in text:
+        fail(
+            "check_badge_standard.py must keep " + badge_lint_slice + " slice wording",
+            errors,
+        )
+    not_docs_leftover = "NOT docs-lint " + "leftover"
+    if not_docs_leftover not in text:
+        fail(
+            "module docstring must keep " + not_docs_leftover + " distinctness pin",
+            errors,
+        )
+    not_wiki_badge = "NOT wiki-badge " + "#141"
+    if not_wiki_badge not in text:
+        fail(
+            "module docstring must keep " + not_wiki_badge + " distinctness pin",
+            errors,
+        )
+    not_path_order = "NOT path-order " + "#189"
+    if not_path_order not in text:
+        fail(
+            "module docstring must keep " + not_path_order + " distinctness pin",
+            errors,
+        )
+    not_schema_tp = "NOT schema " + "third-pass"
+    if not_schema_tp not in text:
+        fail(
+            "module docstring must keep " + not_schema_tp + " distinctness pin",
+            errors,
+        )
+    invent_svg = "stewardship-checks.yml/" + "badge.svg"
+    if invent_svg not in text:
+        fail(
+            "check_readme_consistency must reject invent " + invent_svg,
+            errors,
+        )
+    invent_fail = "must not invent stewardship-checks.yml/" + "badge.svg"
+    if invent_fail not in text:
+        fail(
+            "check_readme_consistency must emit " + invent_fail + " needle",
+            errors,
+        )
+    link_exact = "exact link-check.yml/" + "badge.svg"
+    if link_exact not in text:
+        fail(
+            "check_readme_consistency must keep " + link_exact + " path pin",
+            errors,
+        )
+    md_exact = "exact markdown-lint.yml/" + "badge.svg"
+    if md_exact not in text:
+        fail(
+            "check_readme_consistency must keep " + md_exact + " path pin",
+            errors,
+        )
+    residual_pin = "residual uncovered " + "only"
+    if residual_pin not in text:
+        fail(
+            "module docstring must keep " + residual_pin + " wording",
+            errors,
+        )
 
 def check_docs_lint_gate_contract(errors: list[str]) -> None:
     """Fail-close live docs-lint wiring (after #100; second-pass after #111).
@@ -3635,6 +3794,63 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
             errors,
         )
 
+
+
+    # Stewardship-badge lint deepen after #189: exact globs + paths contract.
+    after_189_wf = "after " + "#189"
+    if after_189_wf not in text:
+        fail(
+            "workflow hardening must pin stewardship-badge lint " + after_189_wf,
+            errors,
+        )
+    exact_globs = "exact live stewardship-badge lint " + "globs block"
+    if exact_globs not in text:
+        fail(
+            "check_workflow_hardening must keep " + exact_globs + " needle",
+            errors,
+        )
+    exact_md_paths = "exact live stewardship-badge lint " + "push paths filter"
+    if exact_md_paths not in text:
+        fail(
+            "check_workflow_hardening must keep " + exact_md_paths + " needle",
+            errors,
+        )
+    globs_pipe = "globs: " + "|"
+    if globs_pipe not in text:
+        fail(
+            "check_workflow_hardening must pin exact " + globs_pipe + " layout",
+            errors,
+        )
+    bang_agents = "!.github/agents/" + "**"
+    if bang_agents not in text:
+        fail(
+            "check_workflow_hardening must keep " + bang_agents + " glob pin",
+            errors,
+        )
+    bang_owasp = "!OWASP-AGENTIC" + ".md"
+    if bang_owasp not in text:
+        fail(
+            "check_workflow_hardening must keep " + bang_owasp + " glob pin",
+            errors,
+        )
+    md_json_paths = '".markdownlint' + '.json"'
+    if md_json_paths not in text:
+        fail(
+            "check_workflow_hardening must pin paths " + md_json_paths,
+            errors,
+        )
+    lychee_paths = '".lychee' + 'ignore"'
+    if lychee_paths not in text:
+        fail(
+            "check_workflow_hardening must pin paths " + lychee_paths,
+            errors,
+        )
+    not_docs_189 = "NOT docs-lint " + "leftover"
+    if not_docs_189 not in text:
+        fail(
+            "stewardship-badge lint must keep " + not_docs_189 + " distinctness",
+            errors,
+        )
 
 def check_stewardship_common_contract(errors: list[str]) -> None:
     """Fail-close live stewardship_common wiring (after #111; deepen after #65/#46)."""

@@ -201,7 +201,14 @@ plus stewardship-schema third-pass + deepen after #189: future annotations /
 Path parent / yaml=None / five live docs / parse pins / path.is_file /
 block.strip / STRING_KEYS / BLE001 / DATE_KEYS / deepen docstring
 (lands closed #187/#188 leftover; do not revive #187/#188/#183/#164;
-distinct from path-order #189)).
+distinct from path-order #189),
+plus stewardship-badge lint deepen after #189/#191 tip: README invent
+stewardship-checks workflow `badge.svg` refuse / exact
+link-check+markdown-lint badge.svg paths / exact live markdown-lint
+globs block / exact live markdown-lint+link-check push paths filters
+(stewardship-badge lint slice only; lands closed #172 leftover; do not
+revive #172/#169/#190; leave path-order #189 and schema third-pass #191
+alone)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

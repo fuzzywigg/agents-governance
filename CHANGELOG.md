@@ -11,6 +11,16 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-badge lint deepen after #189/#191 tip: expand self-tests
+  to 3658 cases (was 3590) fail-closing residual README invent
+  `stewardship-checks.yml/badge.svg` refuse / exact `link-check.yml/badge.svg` +
+  `markdown-lint.yml/badge.svg` paths / exact live markdown-lint globs block /
+  exact live markdown-lint + link-check push paths filters — stewardship-badge
+  lint slice only (not path-order #189 / not schema third-pass #191 / not
+  wiki-index #181 / not path-filter #176); no invent-product; no fourth badge.
+  Lands closed #172 leftover on post-#191 main (do **not** revive
+  #172/#169/#190). Distinct from merged schema third-pass #191 and path-order #189.
+
 - TOKENMAXX stewardship-schema third-pass + deepen pins after #189: expand
   self-tests to 3590 cases (was 3402) fail-closing live schema integrity —
   future annotations / Path parent / yaml=None / five live docs / true+false /

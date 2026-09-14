@@ -2688,11 +2688,14 @@ def check_stewardship_common_contract(errors: list[str]) -> None:
             "stewardship_common.py markdown_files must type found as set[Path]",
             errors,
         )
-    wf_join = 'ROOT / ".github" / "workflows" / name'
-    wf_join_sq = "ROOT / '.github' / 'workflows' / name"
+    # Split so badge third-pass replace of ROOT/".github"/"workflows" cannot
+    # neutralize this stewardship_common pin (see workflows_path_after_104).
+    wf_join = "ROOT / " + '".github" / "workflows" / name'
+    wf_join_sq = "ROOT / " + "'.github' / 'workflows' / name"
     if wf_join not in text and wf_join_sq not in text:
         fail(
-            'stewardship_common.py load_workflow_text must join ROOT / ".github" / "workflows" / name',
+            "stewardship_common.py load_workflow_text must join ROOT / "
+            '".github" / "workflows" / name',
             errors,
         )
     for_scheme = "for scheme in DANGEROUS_" + "LINK_SCHEMES"

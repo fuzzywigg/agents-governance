@@ -198,7 +198,12 @@ plus stewardship CI deepen after #161: Check links / Run markdownlint /
 Set up Python / Install PyYAML (schema parser) / Stewardship gates+self-tests
 step names / exact token+`--github-token` forms / `--exclude-path .github/agents` /
 `globs: |` / AGENTS+CLAUDE+LICENSE+CONTRIBUTING+`.github/workflows/**` paths /
-Weekly drift + GITHUB_TOKEN commentary / deepen docstring).
+Weekly drift + GITHUB_TOKEN commentary / deepen docstring,
+plus run_stewardship Pass-2 after #165: exact ROOT assign / exactly four
+`python3 scripts/` / no `|| true` soft-fail / `dirname "$0")/..` fragment /
+doc gates locally / CI runner before self-tests /
+`check_run_stewardship_gate_contract` Pass-2 (lands closed #140 leftover; do not
+revive #140/#122)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

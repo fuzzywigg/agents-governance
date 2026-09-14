@@ -19,6 +19,9 @@ Fail-closed pins (live path after #59; deepen after #43; third-pass after #90):
   README+badge hint paths / pages+operator OK / update PUBLISH.md intentional /
   PAGE_TOPIC_HINTS keys / PAGE_TOPIC_HINTS.get / strip_fenced_code(text) /
   has_dangerous_scheme(target) / scan_secrets calls
+- After #132 wiki-badge posture: status badges cover Link Check+Markdown Lint /
+  product badge refusal / reject stewardship-checks.yml/badge.svg invent /
+  reject embedded markdown badge images / PUBLISH Link Check+Markdown Lint exactly
 """
 
 from __future__ import annotations
@@ -135,6 +138,17 @@ def main() -> int:
             fail("PUBLISH.md acceptance checks must mention Link Check", errors)
         if "Markdown Lint" not in publish_text and "markdown" not in publish_text.lower():
             fail("PUBLISH.md acceptance checks must mention Markdown Lint", errors)
+        # Fail-closed after #132: exact badge-name phrases (wiki-badge posture).
+        if "Link Check" not in publish_text:
+            fail(
+                "PUBLISH.md acceptance checks must mention Link Check exactly",
+                errors,
+            )
+        if "Markdown Lint" not in publish_text:
+            fail(
+                "PUBLISH.md acceptance checks must mention Markdown Lint exactly",
+                errors,
+            )
         if "No secrets" not in publish_text and "secrets" not in publish_text.lower():
             fail("PUBLISH.md acceptance checks must mention secrets prohibition", errors)
 
@@ -171,6 +185,12 @@ def main() -> int:
                 "Home.md must retain kill-switch security callout",
                 errors,
             )
+        # Fail-closed after #132: Home is narrative — no badge-row embeds.
+        if "[![" in home_text:
+            fail(
+                "Home.md must not embed markdown badge images",
+                errors,
+            )
 
     stewardship = WIKI / "Repo-Stewardship.md"
     if stewardship.is_file():
@@ -194,6 +214,22 @@ def main() -> int:
                 "Repo-Stewardship.md must mention actionlint on existing workflow paths",
                 errors,
             )
+        # Fail-closed after #132: wiki-badge posture (Link Check + Markdown Lint only).
+        if "Link Check" not in ste_text or "Markdown Lint" not in ste_text:
+            fail(
+                "Repo-Stewardship.md must name Link Check and Markdown Lint status badges",
+                errors,
+            )
+        if "status badges cover" not in ste_text.lower():
+            fail(
+                "Repo-Stewardship.md must keep status badges cover wording",
+                errors,
+            )
+        if "product badge" not in ste_text.lower():
+            fail(
+                "Repo-Stewardship.md must refuse stewardship as a product badge",
+                errors,
+            )
 
     for name in PUBLISHABLE_PAGES:
         path = WIKI / name
@@ -206,6 +242,19 @@ def main() -> int:
             if topic.lower() not in text.lower():
                 fail(f"{name} must retain topic hint '{topic}'", errors)
         _reject_invent_badge_chrome(name, text, errors)
+        # Fail-closed after #132: no fourth-badge invent / no badge-row embeds on wiki.
+        if "stewardship-checks.yml/badge.svg" in text:
+            fail(
+                f"{name}: must not invent stewardship-checks.yml/badge.svg "
+                "(no fourth badge)",
+                errors,
+            )
+        if "[![" in text and "badge.svg" in text.lower():
+            fail(
+                f"{name}: must not embed markdown badge images "
+                "(wiki is narrative, not badge row)",
+                errors,
+            )
         # Public wiki: no insecure http://, protocol-relative, or dangerous
         # schemes outside fences (strip fences so publish/bash examples pass).
         scan_text = strip_fenced_code(text)

@@ -182,7 +182,11 @@ plus docs-lint second-pass after #132: exact live exclude URLs /
 Connection-reset+RST+false-positive+early-hints+valid-site commentary /
 `check_badge_standard.py` reference / License badge presence remains enforced /
 exact `.markdownlint.json` layout+key-set+`json.loads` pins /
-`check_docs_lint_gate_contract` second-pass).
+`check_docs_lint_gate_contract` second-pass,
+plus wiki-badge posture after #132/#135: status badges cover Link Check+Markdown
+Lint / product badge refusal / reject stewardship-checks workflow badge invent /
+reject embedded markdown badge images / PUBLISH Link Check+Markdown Lint
+exactly / Home no badge-row embeds).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

@@ -642,3 +642,5 @@ _None yet._
 2026-09-14T05:45:00Z
 
 2026-09-14T05:52:00Z cursor: Local green — run_stewardship + self-tests 3516 + markdownlint ← ECO-067 wiki-index/badge leftover deepen after #189 (do not revive #185/#172; leave #191 schema alone)
+
+2026-09-14T05:53:00Z cursor: Draft PR #196 opened (cursor/tokenmaxx-wiki-index-badge-after-189-eb44); awaiting CI ← ECO-067 wiki-index/badge leftover after #189 (do not revive #185/#172; leave #191 alone)

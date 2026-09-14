@@ -353,6 +353,23 @@ not path-edges leftover #262 / not wiki/mdlink leftover #252 /
 not stewardship-schema leftover #258 / not path-filter residual #244 /
 not wiki outline/PUBLISH leftover #243 / not md/link residual layouts #239;
 no extra wiki files)).
+plus stewardship-schema residual CI deepen after #293 tip: residual CI helper
+needles (`if errors:` / `return 1` / `return 0` / `DOC_SCHEMAS.items()` /
+`for key in required_keys:` / `path.is_file` / `block.strip` /
+`STRING_KEYS isinstance` / `autonomy_level in data` / `edit_policy in data` /
+`date_key not in data` / `ISO_DATE_RE.match` / `SEMVER_RE.match` /
+`ISSUE_REF_RE.search` / `re.fullmatch digit` / `value[1:-1]` /
+`expected.items` / `level = data["autonomy_level"]` / err print /
+`splitlines` / line+key strip / nonempty compound / `path = ROOT / rel`) /
+residual CI status stubs SHELVED|SUPERSEDED|HOLD|STALE|ALPHA|NIGHTLY /
+residual CI surface stubs chatgpt|vertex|groq|together|mistral — DISTINCT
+schema residual CI only (lands closed #290/#268 leftover; not wiki/mdlink
+leftover residual #293 / not schema leftover residual #282 /
+not lychee/blob-503 leftover #278 / not Pass-2 residual leftover #272 /
+not path-filter/path-order leftover #262 / not schema leftover #258 /
+not wiki/mdlink leftover #252 / not path-edges residual #244 /
+not stewardship-checks/schema residual #233; no stewardship_common invent;
+do not revive closed PR #290/#268/#259/#257/#253/#248/#241)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

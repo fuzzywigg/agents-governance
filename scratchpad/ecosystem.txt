@@ -398,3 +398,7 @@ _None yet._
 - Scope: EXISTING run_stewardship_checks.sh integrity / runner pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-run-stewardship-pins-88a9
 2026-09-14T00:55:02Z
+
+2026-09-14T01:00:00Z cursor: PR #96 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-050 TOKENMAXX run_stewardship runner pins
+
+2026-09-14T00:58:57Z cursor: PR #96 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-050 TOKENMAXX run_stewardship runner pins

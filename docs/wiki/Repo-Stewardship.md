@@ -214,18 +214,18 @@ link-check+markdown-lint badge.svg paths / exact live markdown-lint
 globs block / exact live markdown-lint+link-check push paths filters
 (stewardship-badge lint slice only; lands closed #172 leftover; do not
 revive #172/#169/#195/#190; leave path-order #189, schema third-pass #191,
-and run_stewardship residual #199 alone)).
+and run_stewardship residual #199 alone),
 plus stewardship-schema fourth-pass after #208 tip: nested policy refs /
 invalid status+surface enum stubs / whitespace-only / nested+list rejects /
-pass-4 contract pins (lands closed #171/#209 leftover; do not revive closed
-closed #171/#209/#204/#200/#194/#190/#188/#187/#183),,
-and run_stewardship residual #199 alone),
+pass-4 contract pins (lands closed #171/#209 leftover; do not revive
+closed #171/#209/#204/#200/#194/#190/#188/#187/#183),
 plus wiki-index/badge leftover deepen after #189: exact PUBLISHABLE_PAGES
 contiguous order / Home TOC loop+skip+link forms / empty-index comment /
 relative broken-link+empty-index+duplicate-slug needles / README invent
 stewardship-checks badge refuse leftover framing — DISTINCT leftover only
-(not schema fourth-pass #216 / not stewardship-badge lint #208 / not path-edges #213 / not md/link #214;
-lands closed #196 leftover on post-#208 tip)).
+(not schema fourth-pass #216 / not stewardship-badge lint #208 / not
+path-edges #213 / not md/link #214; lands closed #196 leftover on
+post-#216 tip)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

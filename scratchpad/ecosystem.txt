@@ -770,3 +770,5 @@ _None yet._
 2026-09-14T07:57:54Z cursor: Draft PR #234 opened (cursor/tokenmaxx-mdlink-wiki-leftover-after-225-9959) replacing closed CONFLICTING #231; leave draft / do-not-merge; awaiting CI ← ECO-074 md/link residual exact layouts after #227 (do not revive #231/#221; do not redo #227 wiki)
 
 2026-09-14T08:12:29Z cursor: Rebased ECO-074 onto post-#233 tip (82b7d98); self-tests 4414 → 4462; local green (gates + 4462 + markdownlint); leave draft / do-not-merge; do not revive #231/#221; do not redo #233 schema / #227 wiki / #225 path-edges
+
+2026-09-14T08:13:45Z cursor: Draft PR #239 opened (cursor/tokenmaxx-mdlink-wiki-leftover-after-225-9959) replacing closed CONFLICTING #234; leave draft / do-not-merge; awaiting CI ← ECO-074 md/link residual after #233 (do not revive #234/#231/#221; do not redo #233/#227/#225)

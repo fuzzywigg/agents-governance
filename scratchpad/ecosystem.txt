@@ -427,3 +427,5 @@ _None yet._
 - Scope: EXISTING actionlint-style reversible CI pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #105 leftover
 - Branch: cursor/tokenmaxx-actionlint-third-pass-0c77
 2026-09-14T01:40:00Z
+
+2026-09-14T01:45:00Z cursor: PR #109 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-052 TOKENMAXX actionlint-style third-pass pins

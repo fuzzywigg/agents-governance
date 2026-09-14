@@ -311,6 +311,16 @@ omit-when-copying plus exact contiguous link+lint concurrency / job headers /
 `**/*.md` then `fail: true` adjacency — DISTINCT leftover only (not #243
 wiki/PUBLISH saturated pins / not md/link residual #239 / not path-filter
 residual #244 / not schema #233; no extra wiki files)).
+plus schema residual leftover deepen after #252 tip: leftover
+parse/load helper needles (if not key / data[key]=value / first_yaml_block /
+load_yaml / if errors / return 1|0 / DOC_SCHEMAS.items / if missing /
+for key in required_keys / path.is_file / block.strip / STRING_KEYS isinstance /
+autonomy_level in data / edit_policy in data / re.fullmatch digit) plus
+leftover status stubs SHELVED|SUPERSEDED|UNKNOWN|HOLD|SHADOW|STALE /
+leftover surface stubs chatgpt|vertex|groq|together|mistral — DISTINCT leftover
+only (not wiki/mdlink leftover #252 / not path-filter/path-order residual #244 /
+not stewardship-checks/schema residual #233 / not schema residual (pass-5) #225 /
+not closed residual #257; do not revive #257/#253/#248/#241)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

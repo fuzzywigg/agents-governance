@@ -11,6 +11,24 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-schema residual leftover deepen after #252 tip: expand
+  self-tests to 5212 cases (was 4976) fail-closing unsaturated schema residual
+  leftover helper needles + invalid status/surface stubs on existing
+  `check_stewardship_schema.py` only — if not key: / data[key] = value /
+  block = first_yaml_block(path) / data = load_yaml(block) / if errors: /
+  return 1 / return 0 / DOC_SCHEMAS.items / if missing: /
+  for key in required_keys: / path.is_file / block.strip /
+  STRING_KEYS isinstance / autonomy_level in data / edit_policy in data /
+  re.fullmatch digit coerce / leftover status stubs
+  SHELVED|SUPERSEDED|UNKNOWN|HOLD|SHADOW|STALE / leftover surface stubs
+  chatgpt|vertex|groq|together|mistral — schema residual leftover slice only
+  (not wiki/mdlink leftover #252 / not path-filter/path-order residual #244 /
+  not stewardship-checks/schema residual #233 / not schema residual (pass-5)
+  #225 / not closed residual #257); no invent-product; no fourth badge; no
+  `AGENTS-ECOSYSTEM.md` / `templates/` edits; no `stewardship_common` edits.
+  Do **not** revive #257/#253/#248/#241. Distinct from merged
+  #252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
+
 - TOKENMAXX wiki/mdlink leftover deepen after #243 tip (post-#244 rebase): expand
   self-tests to 4976 cases (was 4792) fail-closing unsaturated wiki outline /
   PUBLISH.md leftover plus markdown-lint / link-check residual layouts on

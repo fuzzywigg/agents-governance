@@ -46,6 +46,21 @@ Fail-closed pins (live path after #53; second-pass after #72/#75):
   stubs WIP|BETA|LEGACY|FROZEN|CANCELLED|PROTOTYPE / residual invalid surface stubs
   openai|anthropic|slack|auto|agents / "status" in required_keys / loaded is None /
   value.lower() == "true" / int(value) / if not text.strip() / residual docstring
+- Residual leftover after #252 (schema residual; NOT wiki/mdlink leftover #252 /
+  NOT path-filter/path-order residual #244 / NOT stewardship-checks/schema residual #233 /
+  NOT schema residual (pass-5) #225 / NOT closed residual #257):
+  leftover helper needles if not key: / data[key] = value /
+  block = first_yaml_block(path) / data = load_yaml(block) /
+  if errors: / return 1 / return 0 /
+  for rel, required_keys in DOC_SCHEMAS.items(): / if missing: /
+  for key in required_keys: / if not path.is_file(): /
+  if not block.strip(): /
+  if key in STRING_KEYS and not isinstance(value, str): /
+  if "autonomy_level" in data: / if "edit_policy" in data: /
+  elif re.fullmatch digit coerce / value = value[1:-1] /
+  leftover invalid status stubs SHELVED|SUPERSEDED|UNKNOWN|HOLD|SHADOW|STALE /
+  leftover invalid surface stubs chatgpt|vertex|groq|together|mistral /
+  residual leftover docstring
 """
 
 from __future__ import annotations

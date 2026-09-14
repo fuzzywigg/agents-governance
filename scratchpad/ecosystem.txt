@@ -528,3 +528,5 @@ _None yet._
 - Scope: EXISTING stewardship-schema integrity only; no invent-product; no fourth badge; no secrets/DNS/history; do not revive #85/#142
 - Branch: cursor/tokenmaxx-stewardship-schema-third-pass-v3-88a9
 2026-09-14T03:20:00Z
+
+2026-09-14T03:25:00Z cursor: PR #147 CI green (lint + link-check + stewardship) ← complete ECO-058 TOKENMAXX stewardship-schema third-pass after #135

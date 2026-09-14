@@ -11,6 +11,17 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX badge-standard third-pass pins after #104: expand self-tests to
+  2151 cases (was 2079) fail-closing live badge-standard integrity —
+  `BADGE_LINE_RE`+`REPO_FROM_*` exact / `REQUIRED_WORKFLOWS` exact /
+  `group(label|img|link)` / `sys.exit` / stewardship_common / `BADGE_GATE` /
+  utf-8 / Strict row / H1 startswith / FAIL README / https image+link needles /
+  absolute workflow URL / License point / Unexpected label /
+  extract+check_badges / `contract(errors)` / IGNORECASE / `blob.lower` /
+  `EXPECTED_REPO.lower` — badge-standard third-pass slice only (not docs-lint /
+  wiki / relative / actionlint / schema / common / CI workflow pin spam); no
+  invent-product; no fourth badge; lands closed #103 leftover on post-#104 main
+
 - TOKENMAXX docs-lint pins after #100: expand self-tests to 2079 cases (was 1971)
   fail-closing live docs-lint integrity — `.lycheeignore` escaped
   `img\.shields\.io` / `modelcontextprotocol.io` / `linuxfoundation.org` /

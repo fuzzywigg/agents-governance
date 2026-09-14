@@ -2275,7 +2275,7 @@ def check_actionlint_style_gate_contract(errors: list[str]) -> None:
         )
 
 def check_stewardship_common_contract(errors: list[str]) -> None:
-    """Fail-close live stewardship_common wiring (after #65; deepen after #46)."""
+    """Fail-close live stewardship_common wiring (after #104; deepen after #65/#46)."""
     if not COMMON_GATE.is_file():
         fail("Missing scripts/stewardship_common.py (shared gate helpers)", errors)
         return
@@ -2576,6 +2576,291 @@ def check_stewardship_common_contract(errors: list[str]) -> None:
             'stewardship_common.py must set SECRET_URL_HINTS starting with "token="',
             errors,
         )
+
+    # Fail-closed after #104: third-pass helper / constant / needle pins
+    # (stewardship_common slice only; not docs-lint / wiki / relative /
+    # actionlint / schema / badge / CI workflow pin spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    future_pin = "from __future__ import " + "annotations"
+    if future_pin not in text:
+        fail(
+            "stewardship_common.py must keep from __future__ import annotations",
+            errors,
+        )
+    if "import re" not in text:
+        fail(
+            "stewardship_common.py must import re",
+            errors,
+        )
+    path_import = "from pathlib import " + "Path"
+    if path_import not in text:
+        fail(
+            "stewardship_common.py must import Path from pathlib",
+            errors,
+        )
+    priv_key = "-----BEGIN (?:RSA |OPENSSH |EC )?PRIVATE " + "KEY-----"
+    if priv_key not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact PRIVATE KEY pattern",
+            errors,
+        )
+    ghp_group = r"\b(ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9]{20,}\b"
+    if ghp_group not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact ghp|gho|ghu|ghs|ghr group",
+            errors,
+        )
+    github_pat_exact = r"\bgithub_pat_[A-Za-z0-9_]{20,}\b"
+    if github_pat_exact not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact github_pat_ pattern",
+            errors,
+        )
+    sk_rk_exact = r"\b(sk|rk)-[A-Za-z0-9]{20,}\b"
+    if sk_rk_exact not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact sk|rk pattern",
+            errors,
+        )
+    tuple_typing = "tuple[re.Pattern[str], " + "...]"
+    if tuple_typing not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must use tuple[re.Pattern[str], ...] typing",
+            errors,
+        )
+    secret_tuple_assign = "SECRET_PATTERNS: tuple"
+    if secret_tuple_assign not in text:
+        fail(
+            "stewardship_common.py must declare SECRET_PATTERNS: tuple",
+            errors,
+        )
+    fence_sub = "FENCED_BLOCK_RE.sub(" + '"", text)'
+    fence_sub_sq = "FENCED_BLOCK_RE.sub(" + "'', text)"
+    if fence_sub not in text and fence_sub_sq not in text:
+        fail(
+            'stewardship_common.py strip_fenced_code must FENCED_BLOCK_RE.sub("", text)',
+            errors,
+        )
+    label_or = "label or str(path.relative_to(" + "ROOT))"
+    if label_or not in text:
+        fail(
+            "stewardship_common.py scan_secrets must use label or str(path.relative_to(ROOT))",
+            errors,
+        )
+    search_pin = "pattern.search(" + "text)"
+    if search_pin not in text:
+        fail(
+            "stewardship_common.py scan_secrets must call pattern.search(text)",
+            errors,
+        )
+    lowered_pin = "lowered = text." + "lower()"
+    if lowered_pin not in text:
+        fail(
+            "stewardship_common.py scan_secrets must set lowered = text.lower()",
+            errors,
+        )
+    escape_pin = "re.escape(" + "hint)"
+    if escape_pin not in text:
+        fail(
+            "stewardship_common.py scan_secrets must re.escape(hint) for URL-ish hints",
+            errors,
+        )
+    urlish_re = r"https?://[^\s)]*"
+    if urlish_re not in text:
+        fail(
+            "stewardship_common.py scan_secrets must match https?://[^\\s)]* URL-ish pattern",
+            errors,
+        )
+    glob_pin = "ROOT.glob(" + "pattern)"
+    if glob_pin not in text:
+        fail(
+            "stewardship_common.py markdown_files must ROOT.glob(pattern)",
+            errors,
+        )
+    update_pin = "found.update("
+    if update_pin not in text:
+        fail(
+            "stewardship_common.py markdown_files must found.update(...)",
+            errors,
+        )
+    set_path = "set[Path]"
+    if set_path not in text:
+        fail(
+            "stewardship_common.py markdown_files must type found as set[Path]",
+            errors,
+        )
+    # Split so badge-standard workflows-path self-tests cannot neutralize this pin.
+    wf_join = 'ROOT / ".github" / "' + 'workflows" / name'
+    wf_join_sq = "ROOT / '.github' / '" + "workflows' / name"
+    if wf_join not in text and wf_join_sq not in text:
+        fail(
+            'stewardship_common.py load_workflow_text must join ROOT / ".github" / "'
+            + 'workflows" / name',
+            errors,
+        )
+    for_scheme = "for scheme in DANGEROUS_" + "LINK_SCHEMES"
+    if for_scheme not in text:
+        fail(
+            "stewardship_common.py has_dangerous_scheme must iterate DANGEROUS_LINK_SCHEMES",
+            errors,
+        )
+    for_pattern = "for pattern in SECRET_" + "PATTERNS"
+    if for_pattern not in text:
+        fail(
+            "stewardship_common.py scan_secrets must iterate SECRET_PATTERNS",
+            errors,
+        )
+    for_hint = "for hint in SECRET_URL_" + "HINTS"
+    if for_hint not in text:
+        fail(
+            "stewardship_common.py scan_secrets must iterate SECRET_URL_HINTS",
+            errors,
+        )
+    shared_helpers = "Shared helpers for stewardship doc " + "gates"
+    if shared_helpers not in text:
+        fail(
+            "stewardship_common.py must keep Shared helpers for stewardship doc gates pin",
+            errors,
+        )
+    endswith_eq = 'hint.endswith("=")'
+    endswith_eq_sq = "hint.endswith('=')"
+    if endswith_eq not in text and endswith_eq_sq not in text:
+        fail(
+            'stewardship_common.py scan_secrets must call hint.endswith("=")',
+            errors,
+        )
+    memory_dumps = "MEMORY " + "dumps"
+    if memory_dumps not in text:
+        fail(
+            "stewardship_common.py must keep MEMORY dumps comment pin",
+            errors,
+        )
+    str_none = "str | " + "None"
+    if str_none not in text:
+        fail(
+            "stewardship_common.py has_dangerous_scheme must annotate str | None",
+            errors,
+        )
+    list_path = "list[" + "Path]"
+    if list_path not in text:
+        fail(
+            "stewardship_common.py markdown_files must annotate list[Path]",
+            errors,
+        )
+    forbidden_head = (
+        "FORBIDDEN_BADGE_HINTS = (\n"
+        '    "coverage",\n'
+        '    "codecov",\n'
+        '    "coveralls",'
+    )
+    forbidden_head_sq = forbidden_head.replace('"', "'")
+    if forbidden_head not in text and forbidden_head_sq not in text:
+        fail(
+            "stewardship_common.py must set FORBIDDEN_BADGE_HINTS starting with coverage/codecov/coveralls",
+            errors,
+        )
+    for prefix in ('"ghp_"', '"gho_"', '"github_pat_"'):
+        if prefix not in text and prefix.replace('"', "'") not in text:
+            fail(
+                f"stewardship_common.py SECRET_URL_HINTS must pin {prefix}",
+                errors,
+            )
+    third_pass_doc = "Third-pass: future annotations / import re+" + "Path"
+    if third_pass_doc not in text:
+        fail(
+            "stewardship_common.py docstring must pin Third-pass future annotations / import re+Path",
+            errors,
+        )
+    module_third = "third-pass after " + "#104"
+    if module_third not in text and "third-pass after #104" not in text:
+        fail(
+            "stewardship_common.py docstring must keep third-pass after #104 pin",
+            errors,
+        )
+    load_utf8 = 'return path.read_text(encoding="utf-8")'
+    load_utf8_sq = "return path.read_text(encoding='utf-8')"
+    if load_utf8 not in text and load_utf8_sq not in text:
+        fail(
+            'stewardship_common.py load_workflow_text must return path.read_text(encoding="utf-8")',
+            errors,
+        )
+    scan_utf8 = 'text = path.read_text(encoding="utf-8")'
+    scan_utf8_sq = "text = path.read_text(encoding='utf-8')"
+    if scan_utf8 not in text and scan_utf8_sq not in text:
+        fail(
+            'stewardship_common.py scan_secrets must path.read_text(encoding="utf-8")',
+            errors,
+        )
+    aws_re = r"aws_secret_access_key\s*[:=]\s*['\"]?[A-Za-z0-9/+=]{20,}"
+    if aws_re not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact aws_secret_access_key pattern",
+            errors,
+        )
+    xox_re = r"\bxox[baprs]-[A-Za-z0-9-]{10,}\b"
+    if xox_re not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact xox[baprs] pattern",
+            errors,
+        )
+    npm_re = r"\bnpm_[A-Za-z0-9]{20,}\b"
+    if npm_re not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact npm_ pattern",
+            errors,
+        )
+    aiza_re = r"\bAIza[0-9A-Za-z\-_]{20,}\b"
+    if aiza_re not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact AIza pattern",
+            errors,
+        )
+    api_key_re = r"(?i)api[_-]?key\s*[:=]\s*['\"]?[A-Za-z0-9_\-]{16,}"
+    if api_key_re not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact api[_-]?key pattern",
+            errors,
+        )
+    secret_assign_re = r"(?i)secret\s*[:=]\s*['\"]?[A-Za-z0-9_\-]{16,}"
+    if secret_assign_re not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact secret assign pattern",
+            errors,
+        )
+    passwd_re = r"(?i)(?:password|passwd|token)\s*[:=]\s*['\"][^'\"]{8,}['\"]"
+    if passwd_re not in text:
+        fail(
+            "stewardship_common.py SECRET_PATTERNS must pin exact password|passwd|token assign pattern",
+            errors,
+        )
+
+    # Self-pins for third-pass docstring / slice commentary (host module).
+    self_host = BADGE_GATE.read_text(encoding="utf-8")
+    after_104_doc = "after #104; deepen after #65/" + "#46"
+    if after_104_doc not in self_host:
+        fail(
+            "check_stewardship_common_contract docstring must keep " + after_104_doc,
+            errors,
+        )
+    slice_only = "stewardship_common slice " + "only"
+    if slice_only not in self_host:
+        fail(
+            "check_stewardship_common_contract must keep " + slice_only + " pin",
+            errors,
+        )
+    spam_docs = "not docs-lint / wiki / relative " + "/"
+    if spam_docs not in self_host:
+        fail(
+            "check_stewardship_common_contract must keep not docs-lint / wiki / relative / spam pin",
+            errors,
+        )
+    if "Second-pass: ROOT parents[1]" not in text:
+        fail(
+            "stewardship_common.py docstring must keep Second-pass: ROOT parents[1] pin",
+            errors,
+        )
+
+
     contract_fn = "check_stewardship_common_" + "contract"
     # Self-pin: this contract helper name must remain reachable from main.
     self_text = BADGE_GATE.read_text(encoding="utf-8")

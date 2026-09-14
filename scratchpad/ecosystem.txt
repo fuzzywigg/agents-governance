@@ -375,3 +375,5 @@ _None yet._
 2026-09-14T00:25:00Z
 
 2026-09-14T00:18:25Z cursor: PR #79 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-046 TOKENMAXX actionlint-style gate pins
+
+2026-09-14T00:30:00Z cursor: PR #87 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-047 TOKENMAXX stewardship-schema second-pass pins

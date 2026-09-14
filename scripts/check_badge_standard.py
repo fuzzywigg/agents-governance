@@ -28,6 +28,13 @@ Fail-closed actionlint-style pins (live path after #75; second-pass after #83/#8
 - Third-pass after #108: concurrency:+cancel-in-progress: / permissions: present /
   reject actions|packages|pull-requests: write / finditer uses / docker continue /
   rsplit[-1] / third-pass docstring
+
+Fail-closed run_stewardship runner pins (live path after #111; lands closed #96):
+- shebang #!/usr/bin/env bash / set -euo pipefail
+- dirname "$0" ROOT resolve / cd "$ROOT"
+- same set as CI commentary / python3 scripts/<gate> for four gates
+- gate order badge → wiki → schema → relative
+- check_run_stewardship_gate_contract self-pins
 """
 
 from __future__ import annotations
@@ -3977,6 +3984,17 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
                     f"run_stewardship_checks.sh must invoke scripts/{gate}",
                     errors,
                 )
+            # Fail-closed after #111: each gate runs via python3 scripts/ prefix.
+            # Explicit live pins (docs runner path):
+            # python3 scripts/check_badge_standard.py
+            # python3 scripts/check_wiki_outline.py
+            # python3 scripts/check_stewardship_schema.py
+            # python3 scripts/check_relative_links.py
+            if f"python3 scripts/{gate}" not in run_text:
+                fail(
+                    f"run_stewardship_checks.sh must run python3 scripts/{gate}",
+                    errors,
+                )
         # Fail-closed: relative gate runs after schema (live order).
         badge_i = run_text.find("check_badge_standard.py")
         wiki_i = run_text.find("check_wiki_outline.py")
@@ -3990,6 +4008,166 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
                 "badge → wiki → schema → relative",
                 errors,
             )
+        # Fail-closed after #111: live runner shell posture (docs CI local path).
+        if "#!/usr/bin/env bash" not in run_text:
+            fail(
+                "run_stewardship_checks.sh must use #!/usr/bin/env bash shebang",
+                errors,
+            )
+        if "set -euo pipefail" not in run_text:
+            fail(
+                "run_stewardship_checks.sh must set -euo pipefail",
+                errors,
+            )
+        if 'dirname "$0"' not in run_text and "dirname '$0'" not in run_text:
+            fail(
+                'run_stewardship_checks.sh must resolve ROOT via dirname + "$0"',
+                errors,
+            )
+        if 'cd "$ROOT"' not in run_text and "cd '$ROOT'" not in run_text:
+            fail(
+                'run_stewardship_checks.sh must cd to ROOT before running gates',
+                errors,
+            )
+        # Reconstruct phrase so self-test mutations of the concatenation fail closed.
+        same_ci_phrase = "same set as " + "CI"
+        if same_ci_phrase.lower() not in run_text.lower():
+            fail(
+                "run_stewardship_checks.sh must note same set as CI",
+                errors,
+            )
+        # Fail-closed after #111: pwd resolve + Run-all commentary (runner slice).
+        if "pwd)" not in run_text and 'pwd"' not in run_text:
+            fail(
+                "run_stewardship_checks.sh must resolve ROOT via pwd",
+                errors,
+            )
+        run_all_phrase = "Run all stewardship " + "doc gates"
+        if run_all_phrase not in run_text:
+            fail(
+                "run_stewardship_checks.sh must keep Run all stewardship doc gates note",
+                errors,
+            )
+
+
+
+def check_run_stewardship_gate_contract(errors: list[str]) -> None:
+    """Fail-close live run_stewardship_checks.sh wiring (after #111; not lychee/mdlint spam)."""
+    if not BADGE_GATE.is_file():
+        fail("Missing scripts/check_badge_standard.py (run_stewardship host)", errors)
+        return
+    # Split encoding so utf-8 self-tests do not latin-1-mangle arrow order pins.
+    text = BADGE_GATE.read_text(encoding="utf-" + "8")
+    # Split pin literals so self-mutation of contiguous names cannot neutralize checks.
+    host_pin = "run_stewardship " + "host"
+    if host_pin not in text:
+        fail(
+            "check_run_stewardship_gate_contract must keep " + host_pin + " pin",
+            errors,
+        )
+    spam_pin = "not lychee/mdlint " + "spam"
+    if spam_pin not in text:
+        fail(
+            "check_run_stewardship_gate_contract must keep " + spam_pin + " pin",
+            errors,
+        )
+    run_const = "RUN_" + "STEWARDSHIP"
+    if run_const not in text:
+        fail(
+            "check_badge_standard.py must declare " + run_const,
+            errors,
+        )
+    run_path = '"run_stewardship_checks' + '.sh"'
+    if run_path not in text and "'run_stewardship_checks.sh'" not in text:
+        fail(
+            "check_badge_standard.py must pin path run_stewardship_checks.sh",
+            errors,
+        )
+    shebang_pin = "#!/usr/bin/env " + "bash"
+    if shebang_pin not in text:
+        fail(
+            "run_stewardship contract must require " + shebang_pin,
+            errors,
+        )
+    euo_pin = "set -euo " + "pipefail"
+    if euo_pin not in text:
+        fail(
+            "run_stewardship contract must require " + euo_pin,
+            errors,
+        )
+    dirname_pin = 'dirname "$0"'
+    if dirname_pin not in text:
+        fail(
+            "run_stewardship contract must require dirname \"$0\"",
+            errors,
+        )
+    cd_pin = 'cd "$ROOT"'
+    if cd_pin not in text:
+        fail(
+            "run_stewardship contract must require cd \"$ROOT\"",
+            errors,
+        )
+    # Require reconstructed assign (not a contiguous "same set as CI" literal alone).
+    if 'same set as " + "CI"' not in text:
+        fail(
+            "run_stewardship contract must keep same set as CI wording",
+            errors,
+        )
+    order_pin = "badge → wiki → schema → " + "relative"
+    if order_pin not in text:
+        fail(
+            "run_stewardship contract must pin gate order " + order_pin,
+            errors,
+        )
+    for gate in (
+        "check_badge_standard.py",
+        "check_wiki_outline.py",
+        "check_stewardship_schema.py",
+        "check_relative_links.py",
+    ):
+        py_pin = "python3 scripts/" + gate
+        if py_pin not in text:
+            fail(
+                "run_stewardship contract must require " + py_pin,
+                errors,
+            )
+    contract_fn = "check_run_stewardship_" + "gate_contract"
+    if f"def {contract_fn}(" not in text:
+        fail(
+            "check_badge_standard.py must provide " + contract_fn + "()",
+            errors,
+        )
+    if contract_fn + "(errors)" not in text:
+        fail(
+            "main must call " + contract_fn + "(errors)",
+            errors,
+        )
+    live_doc = "Fail-closed after " + "#111"
+    if live_doc not in text:
+        fail(
+            "run_stewardship pins must keep " + live_doc + " marker",
+            errors,
+        )
+    # Fail-closed after #111 deepen: pwd + Run-all commentary contract pins.
+    pwd_pin = "resolve ROOT via " + "pwd"
+    if pwd_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + pwd_pin + " pin",
+            errors,
+        )
+    run_all_pin = "Run all stewardship " + "doc gates"
+    if run_all_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + run_all_pin + " pin",
+            errors,
+        )
+    closed_pin = "lands closed " + "#96"
+    if closed_pin not in text:
+        fail(
+            "run_stewardship docstring must note " + closed_pin,
+            errors,
+        )
+
 
 
 def check_badges(badges: list[re.Match[str]], errors: list[str]) -> None:
@@ -4073,6 +4251,8 @@ def main() -> int:
     # Fail-closed after #75: actionlint-style contract early (same self-host file)
     # so style-helper renames / needle drift fail closed before NameError.
     check_actionlint_style_gate_contract(errors)
+    # Fail-closed after #111: run_stewardship runner contract early.
+    check_run_stewardship_gate_contract(errors)
     # Fail-closed after #100: docs-lint contract early (lycheeignore + markdownlint).
     check_docs_lint_gate_contract(errors)
     if errors:

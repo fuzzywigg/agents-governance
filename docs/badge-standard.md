@@ -162,7 +162,12 @@ IGNORECASE / `blob.lower` / `EXPECTED_REPO.lower`,
 plus actionlint-style third-pass after #108: `concurrency:` +
 `cancel-in-progress:` / `permissions:` present / reject
 `actions|packages|pull-requests: write` / `re.finditer` / docker continue /
-`rsplit[-1]` / third-pass docstring).
+`rsplit[-1]` / third-pass docstring,
+plus run_stewardship runner pins after #111: shebang /
+`set -euo pipefail` / `dirname "$0"` / `cd "$ROOT"` / `pwd` /
+same set as CI / Run all stewardship doc gates /
+`python3 scripts/*` gate order badge→wiki→schema→relative /
+`check_run_stewardship_gate_contract` (lands closed #96 leftover)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

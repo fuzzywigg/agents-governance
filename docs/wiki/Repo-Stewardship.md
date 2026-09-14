@@ -287,6 +287,26 @@ omit-when-copying plus exact contiguous link+lint concurrency / job headers /
 `**/*.md` then `fail: true` adjacency — DISTINCT leftover only (not #243
 wiki/PUBLISH saturated pins / not md/link residual #239 / not path-filter
 residual #244 / not schema #233; no extra wiki files)).
+plus Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #252:
+soft-fail with `|| :` / `|| return 0` / `set +o errexit` / `set +o nounset` /
+invent `python3 -m` for gates / must not source env files / must not dot-source paths /
+reject any `continue-on-error:` on existing workflows / exact contiguous concurrency
+group template on all three workflows (existing templates only; no invent) /
+existing `templates/AGENTS-REPO.md` H1 `[PROJECT_NAME]` / parent_governance /
+maintainer smtp.eth / YYYY-MM-DD placeholder / §1–§6 / `[CONFIG_FILE]` /
+Never commit `.env` / `agents-md/description` / no invent badge.svg chrome —
+DISTINCT leftover edges only (not wiki/mdlink leftover #252 /
+not actionlint path-filter/path-order residual #244 /
+not wiki outline/PUBLISH leftover #243 / not md/link residual #239 /
+not stewardship-checks/schema residual #233 / not wiki-index/badge #227 /
+not path-edges #225 / not Pass-2 leftover + md/link #220 /
+not Pass-2 residual #199/#203 / not badge-lint #208 / not schema #216;
+lands closed #256/#254/#251/#250/#246/#245/#240 leftover on post-#252 tip;
+do not revive #256/#254/#251/#250/#246/#245/#240/#235/#230;
+do not invent new templates).
+plus docs-lint pass-4 lychee harden: exclude same-repo GitHub `blob/main` HTML
+(intermittent 503) via `.lycheeignore` while wiki-outline keeps absolute blob pins
+(do not revive #256/#251/#250; no invent templates; no DNS sprawl).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

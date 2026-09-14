@@ -3,6 +3,19 @@
 
 Runs in CI after the live-tree gates so regressions in checkers fail closed.
 Does not invent product surface — only validates gate behavior.
+Deepened after #252 tip: Pass-2 residual + existing templates/AGENTS-REPO.md leftover —
+|| : / || return 0 / set +o errexit / set +o nounset / python3 -m refuse /
+source + dot-source refuse / reject continue-on-error on existing workflows /
+exact contiguous concurrency group templates (existing only) /
+AGENTS-REPO.md H1+parent_governance+placeholders (do not invent new templates;
+not wiki/mdlink leftover #252 / not actionlint path-filter/path-order residual #244 /
+not wiki outline/PUBLISH leftover #243 / not md/link residual #239 /
+stewardship-checks/schema residual #233 / wiki-index/badge #227 /
+path-edges #225 / Pass-2 leftover+md/link #220 / Pass-2 residual #199/#203 spam).
+Lands closed #256/#254/#251/#250 leftover (do not revive).
+Deepened after #252 tip: docs-lint pass-4 lychee blob/main 503 harden —
+.lycheeignore exclude escaped same-repo blob/main + wiki-outline commentary
+(do not revive #256/#251/#250; no invent templates; no DNS sprawl).
 Deepened after #216 tip: Pass-2 leftovers + markdown-lint/link-check edges —
 shebang-first / reject || exit 0 / args: >- / externally-broken commentary /
 without-it private-404 / reject continue-on-error / exact job permissions /
@@ -501,7 +514,33 @@ def _seed_badge_tree(tmp: Path, readme: str) -> Path:
         "Stewardship standards (badge / wiki / schema / relative links).\n",
     )
     _write(tmp / "README.md", readme)
+    live_agents_repo = ROOT / "templates" / "AGENTS-REPO.md"
+    if live_agents_repo.is_file():
+        _write(
+            tmp / "templates" / "AGENTS-REPO.md",
+            live_agents_repo.read_text(encoding="utf-8"),
+        )
     return scripts
+
+
+
+def _lychee_good_after_251() -> str:
+    return (
+        "# modelcontextprotocol.io returns 308 redirect — valid site, lychee false-positive\n"
+        "https://modelcontextprotocol.io/\n"
+        "# linuxfoundation.org returns 103 early hints — valid site\n"
+        "https://www.linuxfoundation.org/\n"
+        "# img.shields.io badge CDN is flaky (Connection reset by peer / RST) "
+        "— not a broken URL.\n"
+        "# License badge presence remains enforced by stewardship "
+        "(check_badge_standard.py).\n"
+        r"https://img\.shields\.io" + "\n"
+        "# Same-repo GitHub blob/main HTML intermittently returns 503 "
+        "— not a broken URL.\n"
+        "# Absolute blob/main pins remain enforced by wiki-outline "
+        "(check_wiki_outline.py).\n"
+        r"https://github\.com/fuzzywigg/agents-governance/blob/main/" + "\n"
+    )
 
 
 def _seed_schema_tree(
@@ -68606,6 +68645,2790 @@ def test_wiki_mdlink_rejects_fail_true_adj_after_243() -> None:
         path.write_text(text.replace('            "**/*.md"\n          fail: true', '            "**/*.md"\n\n          fail: true', 1), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact **/*.md then fail: true adjacency')
 
+# --- TOKENMAXX Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #252 tip (lands closed #256/#254/#251/#250 leftover; +224) ---
+
+def test_gate_requires_agents_repo_pin_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'templates/AGENTS-REPO.md' in text
+        path.write_text(text.replace('templates/AGENTS-REPO.md', 'templates/AGENTS-OTHER.md'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'templates/AGENTS-REPO.md')
+
+
+def test_gate_requires_agents_repo_pin_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'templates/AGENTS-REPO.md' in text
+        path.write_text(text.replace('templates/AGENTS-REPO.md', 'templates/AGENTS-OTHER.md'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'templates/AGENTS-REPO.md')
+
+
+def test_gate_requires_agents_repo_pin_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'templates/AGENTS-REPO.md' in text
+        path.write_text(text.replace('templates/AGENTS-REPO.md', 'templates/AGENTS-OTHER.md'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'templates/AGENTS-REPO.md')
+
+
+def test_gate_requires_agents_repo_pin_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'templates/AGENTS-REPO.md' in text
+        path.write_text(text.replace('templates/AGENTS-REPO.md', 'templates/AGENTS-OTHER.md'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'templates/AGENTS-REPO.md')
+
+
+def test_gate_requires_agents_repo_pin_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'templates/AGENTS-REPO.md' in text
+        path.write_text(text.replace('templates/AGENTS-REPO.md', 'templates/AGENTS-OTHER.md'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'templates/AGENTS-REPO.md')
+
+
+def test_gate_requires_agents_repo_pin_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'templates/AGENTS-REPO.md' in text
+        path.write_text(text.replace('templates/AGENTS-REPO.md', 'templates/AGENTS-OTHER.md'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'templates/AGENTS-REPO.md')
+
+
+def test_gate_requires_agents_repo_pin_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'templates/AGENTS-REPO.md' in text
+        path.write_text(text.replace('templates/AGENTS-REPO.md', 'templates/AGENTS-OTHER.md'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'templates/AGENTS-REPO.md')
+
+
+def test_gate_requires_agents_repo_pin_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'templates/AGENTS-REPO.md' in text
+        path.write_text(text.replace('templates/AGENTS-REPO.md', 'templates/AGENTS-OTHER.md'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'templates/AGENTS-REPO.md')
+
+
+def test_gate_requires_leftover_233_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Pass-2 residual / template validation leftover after #233' in text
+        path.write_text(text.replace('Pass-2 residual / template validation leftover after #233', 'Pass-2 residual / template validation leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Pass-2 residual / template validation leftover after #233')
+
+
+def test_gate_requires_leftover_233_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Pass-2 residual / template validation leftover after #233' in text
+        path.write_text(text.replace('Pass-2 residual / template validation leftover after #233', 'Pass-2 residual / template validation leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Pass-2 residual / template validation leftover after #233')
+
+
+def test_gate_requires_leftover_233_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Pass-2 residual / template validation leftover after #233' in text
+        path.write_text(text.replace('Pass-2 residual / template validation leftover after #233', 'Pass-2 residual / template validation leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Pass-2 residual / template validation leftover after #233')
+
+
+def test_gate_requires_leftover_233_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Pass-2 residual / template validation leftover after #233' in text
+        path.write_text(text.replace('Pass-2 residual / template validation leftover after #233', 'Pass-2 residual / template validation leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Pass-2 residual / template validation leftover after #233')
+
+
+def test_gate_requires_leftover_233_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Pass-2 residual / template validation leftover after #233' in text
+        path.write_text(text.replace('Pass-2 residual / template validation leftover after #233', 'Pass-2 residual / template validation leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Pass-2 residual / template validation leftover after #233')
+
+
+def test_gate_requires_leftover_233_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Pass-2 residual / template validation leftover after #233' in text
+        path.write_text(text.replace('Pass-2 residual / template validation leftover after #233', 'Pass-2 residual / template validation leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Pass-2 residual / template validation leftover after #233')
+
+
+def test_gate_requires_leftover_233_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Pass-2 residual / template validation leftover after #233' in text
+        path.write_text(text.replace('Pass-2 residual / template validation leftover after #233', 'Pass-2 residual / template validation leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Pass-2 residual / template validation leftover after #233')
+
+
+def test_gate_requires_leftover_233_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Pass-2 residual / template validation leftover after #233' in text
+        path.write_text(text.replace('Pass-2 residual / template validation leftover after #233', 'Pass-2 residual / template validation leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Pass-2 residual / template validation leftover after #233')
+
+
+def test_gate_requires_no_invent_tpl_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'do not invent new templates' in text
+        path.write_text(text.replace('do not invent new templates', 'do not invent new workflows'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'do not invent new templates')
+
+
+def test_gate_requires_no_invent_tpl_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'do not invent new templates' in text
+        path.write_text(text.replace('do not invent new templates', 'do not invent new workflows'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'do not invent new templates')
+
+
+def test_gate_requires_no_invent_tpl_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'do not invent new templates' in text
+        path.write_text(text.replace('do not invent new templates', 'do not invent new workflows'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'do not invent new templates')
+
+
+def test_gate_requires_no_invent_tpl_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'do not invent new templates' in text
+        path.write_text(text.replace('do not invent new templates', 'do not invent new workflows'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'do not invent new templates')
+
+
+def test_gate_requires_no_invent_tpl_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'do not invent new templates' in text
+        path.write_text(text.replace('do not invent new templates', 'do not invent new workflows'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'do not invent new templates')
+
+
+def test_gate_requires_no_invent_tpl_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'do not invent new templates' in text
+        path.write_text(text.replace('do not invent new templates', 'do not invent new workflows'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'do not invent new templates')
+
+
+def test_gate_requires_no_invent_tpl_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'do not invent new templates' in text
+        path.write_text(text.replace('do not invent new templates', 'do not invent new workflows'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'do not invent new templates')
+
+
+def test_gate_requires_no_invent_tpl_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'do not invent new templates' in text
+        path.write_text(text.replace('do not invent new templates', 'do not invent new workflows'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'do not invent new templates')
+
+
+def test_gate_requires_not_schema_233_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema residual #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema residual #233', 'NOT stewardship-checks/schema residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT stewardship-checks/schema residual #233')
+
+
+def test_gate_requires_not_schema_233_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema residual #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema residual #233', 'NOT stewardship-checks/schema residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT stewardship-checks/schema residual #233')
+
+
+def test_gate_requires_not_schema_233_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema residual #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema residual #233', 'NOT stewardship-checks/schema residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT stewardship-checks/schema residual #233')
+
+
+def test_gate_requires_not_schema_233_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema residual #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema residual #233', 'NOT stewardship-checks/schema residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT stewardship-checks/schema residual #233')
+
+
+def test_gate_requires_not_schema_233_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema residual #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema residual #233', 'NOT stewardship-checks/schema residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT stewardship-checks/schema residual #233')
+
+
+def test_gate_requires_not_schema_233_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema residual #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema residual #233', 'NOT stewardship-checks/schema residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT stewardship-checks/schema residual #233')
+
+
+def test_gate_requires_not_schema_233_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema residual #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema residual #233', 'NOT stewardship-checks/schema residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT stewardship-checks/schema residual #233')
+
+
+def test_gate_requires_not_schema_233_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema residual #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema residual #233', 'NOT stewardship-checks/schema residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT stewardship-checks/schema residual #233')
+
+
+def test_gate_requires_or_colon_pin_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'soft-fail with || :' in text
+        path.write_text(text.replace('soft-fail with || :', 'soft-fail with || SKIP'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || :')
+
+
+def test_gate_requires_or_colon_pin_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'soft-fail with || :' in text
+        path.write_text(text.replace('soft-fail with || :', 'soft-fail with || SKIP'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || :')
+
+
+def test_gate_requires_or_colon_pin_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'soft-fail with || :' in text
+        path.write_text(text.replace('soft-fail with || :', 'soft-fail with || SKIP'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || :')
+
+
+def test_gate_requires_or_colon_pin_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'soft-fail with || :' in text
+        path.write_text(text.replace('soft-fail with || :', 'soft-fail with || SKIP'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || :')
+
+
+def test_gate_requires_or_colon_pin_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'soft-fail with || :' in text
+        path.write_text(text.replace('soft-fail with || :', 'soft-fail with || SKIP'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || :')
+
+
+def test_gate_requires_or_colon_pin_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'soft-fail with || :' in text
+        path.write_text(text.replace('soft-fail with || :', 'soft-fail with || SKIP'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || :')
+
+
+def test_gate_requires_or_colon_pin_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'soft-fail with || :' in text
+        path.write_text(text.replace('soft-fail with || :', 'soft-fail with || SKIP'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || :')
+
+
+def test_gate_requires_or_colon_pin_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'soft-fail with || :' in text
+        path.write_text(text.replace('soft-fail with || :', 'soft-fail with || SKIP'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || :')
+
+
+def test_pass2_rejects_dot_source_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'cd "$ROOT"\n' in text
+        path.write_text(text.replace('cd "$ROOT"\n', 'cd "$ROOT"\n. ./env.sh\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not dot-source paths')
+
+
+def test_pass2_rejects_dot_source_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'cd "$ROOT"\n' in text
+        path.write_text(text.replace('cd "$ROOT"\n', 'cd "$ROOT"\n. ./env.sh\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not dot-source paths')
+
+
+def test_pass2_rejects_dot_source_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'cd "$ROOT"\n' in text
+        path.write_text(text.replace('cd "$ROOT"\n', 'cd "$ROOT"\n. ./env.sh\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not dot-source paths')
+
+
+def test_pass2_rejects_dot_source_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'cd "$ROOT"\n' in text
+        path.write_text(text.replace('cd "$ROOT"\n', 'cd "$ROOT"\n. ./env.sh\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not dot-source paths')
+
+
+def test_pass2_rejects_dot_source_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'cd "$ROOT"\n' in text
+        path.write_text(text.replace('cd "$ROOT"\n', 'cd "$ROOT"\n. ./env.sh\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not dot-source paths')
+
+
+def test_pass2_rejects_dot_source_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'cd "$ROOT"\n' in text
+        path.write_text(text.replace('cd "$ROOT"\n', 'cd "$ROOT"\n. ./env.sh\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not dot-source paths')
+
+
+def test_pass2_rejects_dot_source_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'cd "$ROOT"\n' in text
+        path.write_text(text.replace('cd "$ROOT"\n', 'cd "$ROOT"\n. ./env.sh\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not dot-source paths')
+
+
+def test_pass2_rejects_dot_source_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'cd "$ROOT"\n' in text
+        path.write_text(text.replace('cd "$ROOT"\n', 'cd "$ROOT"\n. ./env.sh\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not dot-source paths')
+
+
+def test_pass2_rejects_errexit_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'set -euo pipefail' in text
+        path.write_text(text.replace('set -euo pipefail', 'set -euo pipefail\nset +o errexit', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'set +o errexit')
+
+
+def test_pass2_rejects_errexit_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'set -euo pipefail' in text
+        path.write_text(text.replace('set -euo pipefail', 'set -euo pipefail\nset +o errexit', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'set +o errexit')
+
+
+def test_pass2_rejects_errexit_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'set -euo pipefail' in text
+        path.write_text(text.replace('set -euo pipefail', 'set -euo pipefail\nset +o errexit', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'set +o errexit')
+
+
+def test_pass2_rejects_errexit_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'set -euo pipefail' in text
+        path.write_text(text.replace('set -euo pipefail', 'set -euo pipefail\nset +o errexit', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'set +o errexit')
+
+
+def test_pass2_rejects_errexit_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'set -euo pipefail' in text
+        path.write_text(text.replace('set -euo pipefail', 'set -euo pipefail\nset +o errexit', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'set +o errexit')
+
+
+def test_pass2_rejects_errexit_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'set -euo pipefail' in text
+        path.write_text(text.replace('set -euo pipefail', 'set -euo pipefail\nset +o errexit', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'set +o errexit')
+
+
+def test_pass2_rejects_errexit_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'set -euo pipefail' in text
+        path.write_text(text.replace('set -euo pipefail', 'set -euo pipefail\nset +o errexit', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'set +o errexit')
+
+
+def test_pass2_rejects_errexit_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'set -euo pipefail' in text
+        path.write_text(text.replace('set -euo pipefail', 'set -euo pipefail\nset +o errexit', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'set +o errexit')
+
+
+def test_pass2_rejects_link_concurrency_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency group template')
+
+
+def test_pass2_rejects_link_concurrency_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency group template')
+
+
+def test_pass2_rejects_link_concurrency_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency group template')
+
+
+def test_pass2_rejects_link_concurrency_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency group template')
+
+
+def test_pass2_rejects_link_concurrency_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency group template')
+
+
+def test_pass2_rejects_link_concurrency_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency group template')
+
+
+def test_pass2_rejects_link_concurrency_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency group template')
+
+
+def test_pass2_rejects_link_concurrency_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency group template')
+
+
+def test_pass2_rejects_link_continue_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - uses: actions/checkout@v7' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7', '      - uses: actions/checkout@v7\n        continue-on-error: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not set continue-on-error')
+
+
+def test_pass2_rejects_link_continue_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - uses: actions/checkout@v7' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7', '      - uses: actions/checkout@v7\n        continue-on-error: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not set continue-on-error')
+
+
+def test_pass2_rejects_link_continue_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - uses: actions/checkout@v7' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7', '      - uses: actions/checkout@v7\n        continue-on-error: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not set continue-on-error')
+
+
+def test_pass2_rejects_link_continue_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - uses: actions/checkout@v7' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7', '      - uses: actions/checkout@v7\n        continue-on-error: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not set continue-on-error')
+
+
+def test_pass2_rejects_link_continue_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - uses: actions/checkout@v7' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7', '      - uses: actions/checkout@v7\n        continue-on-error: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not set continue-on-error')
+
+
+def test_pass2_rejects_link_continue_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - uses: actions/checkout@v7' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7', '      - uses: actions/checkout@v7\n        continue-on-error: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not set continue-on-error')
+
+
+def test_pass2_rejects_link_continue_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - uses: actions/checkout@v7' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7', '      - uses: actions/checkout@v7\n        continue-on-error: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not set continue-on-error')
+
+
+def test_pass2_rejects_link_continue_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - uses: actions/checkout@v7' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7', '      - uses: actions/checkout@v7\n        continue-on-error: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not set continue-on-error')
+
+
+def test_pass2_rejects_lint_concurrency_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency group template')
+
+
+def test_pass2_rejects_lint_concurrency_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency group template')
+
+
+def test_pass2_rejects_lint_concurrency_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency group template')
+
+
+def test_pass2_rejects_lint_concurrency_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency group template')
+
+
+def test_pass2_rejects_lint_concurrency_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency group template')
+
+
+def test_pass2_rejects_lint_concurrency_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency group template')
+
+
+def test_pass2_rejects_lint_concurrency_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency group template')
+
+
+def test_pass2_rejects_lint_concurrency_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency group template')
+
+
+def test_pass2_rejects_lint_continue_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - uses: actions/checkout@v7' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7', '      - uses: actions/checkout@v7\n        continue-on-error: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not set continue-on-error')
+
+
+def test_pass2_rejects_lint_continue_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - uses: actions/checkout@v7' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7', '      - uses: actions/checkout@v7\n        continue-on-error: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not set continue-on-error')
+
+
+def test_pass2_rejects_lint_continue_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - uses: actions/checkout@v7' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7', '      - uses: actions/checkout@v7\n        continue-on-error: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not set continue-on-error')
+
+
+def test_pass2_rejects_lint_continue_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - uses: actions/checkout@v7' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7', '      - uses: actions/checkout@v7\n        continue-on-error: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not set continue-on-error')
+
+
+def test_pass2_rejects_lint_continue_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - uses: actions/checkout@v7' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7', '      - uses: actions/checkout@v7\n        continue-on-error: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not set continue-on-error')
+
+
+def test_pass2_rejects_lint_continue_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - uses: actions/checkout@v7' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7', '      - uses: actions/checkout@v7\n        continue-on-error: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not set continue-on-error')
+
+
+def test_pass2_rejects_lint_continue_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - uses: actions/checkout@v7' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7', '      - uses: actions/checkout@v7\n        continue-on-error: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not set continue-on-error')
+
+
+def test_pass2_rejects_lint_continue_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github/workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '      - uses: actions/checkout@v7' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7', '      - uses: actions/checkout@v7\n        continue-on-error: false', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not set continue-on-error')
+
+
+def test_pass2_rejects_nounset_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'set -euo pipefail' in text
+        path.write_text(text.replace('set -euo pipefail', 'set -euo pipefail\nset +o nounset', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'set +o nounset')
+
+
+def test_pass2_rejects_nounset_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'set -euo pipefail' in text
+        path.write_text(text.replace('set -euo pipefail', 'set -euo pipefail\nset +o nounset', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'set +o nounset')
+
+
+def test_pass2_rejects_nounset_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'set -euo pipefail' in text
+        path.write_text(text.replace('set -euo pipefail', 'set -euo pipefail\nset +o nounset', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'set +o nounset')
+
+
+def test_pass2_rejects_nounset_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'set -euo pipefail' in text
+        path.write_text(text.replace('set -euo pipefail', 'set -euo pipefail\nset +o nounset', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'set +o nounset')
+
+
+def test_pass2_rejects_nounset_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'set -euo pipefail' in text
+        path.write_text(text.replace('set -euo pipefail', 'set -euo pipefail\nset +o nounset', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'set +o nounset')
+
+
+def test_pass2_rejects_nounset_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'set -euo pipefail' in text
+        path.write_text(text.replace('set -euo pipefail', 'set -euo pipefail\nset +o nounset', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'set +o nounset')
+
+
+def test_pass2_rejects_nounset_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'set -euo pipefail' in text
+        path.write_text(text.replace('set -euo pipefail', 'set -euo pipefail\nset +o nounset', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'set +o nounset')
+
+
+def test_pass2_rejects_nounset_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'set -euo pipefail' in text
+        path.write_text(text.replace('set -euo pipefail', 'set -euo pipefail\nset +o nounset', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'set +o nounset')
+
+
+def test_pass2_rejects_or_colon_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_relative_links.py' in text
+        path.write_text(text.replace('python3 scripts/check_relative_links.py', 'python3 scripts/check_relative_links.py || :', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || :')
+
+
+def test_pass2_rejects_or_colon_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_relative_links.py' in text
+        path.write_text(text.replace('python3 scripts/check_relative_links.py', 'python3 scripts/check_relative_links.py || :', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || :')
+
+
+def test_pass2_rejects_or_colon_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_relative_links.py' in text
+        path.write_text(text.replace('python3 scripts/check_relative_links.py', 'python3 scripts/check_relative_links.py || :', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || :')
+
+
+def test_pass2_rejects_or_colon_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_relative_links.py' in text
+        path.write_text(text.replace('python3 scripts/check_relative_links.py', 'python3 scripts/check_relative_links.py || :', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || :')
+
+
+def test_pass2_rejects_or_colon_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_relative_links.py' in text
+        path.write_text(text.replace('python3 scripts/check_relative_links.py', 'python3 scripts/check_relative_links.py || :', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || :')
+
+
+def test_pass2_rejects_or_colon_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_relative_links.py' in text
+        path.write_text(text.replace('python3 scripts/check_relative_links.py', 'python3 scripts/check_relative_links.py || :', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || :')
+
+
+def test_pass2_rejects_or_colon_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_relative_links.py' in text
+        path.write_text(text.replace('python3 scripts/check_relative_links.py', 'python3 scripts/check_relative_links.py || :', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || :')
+
+
+def test_pass2_rejects_or_colon_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_relative_links.py' in text
+        path.write_text(text.replace('python3 scripts/check_relative_links.py', 'python3 scripts/check_relative_links.py || :', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || :')
+
+
+def test_pass2_rejects_or_return_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_relative_links.py' in text
+        path.write_text(text.replace('python3 scripts/check_relative_links.py', 'python3 scripts/check_relative_links.py || return 0', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || return 0')
+
+
+def test_pass2_rejects_or_return_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_relative_links.py' in text
+        path.write_text(text.replace('python3 scripts/check_relative_links.py', 'python3 scripts/check_relative_links.py || return 0', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || return 0')
+
+
+def test_pass2_rejects_or_return_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_relative_links.py' in text
+        path.write_text(text.replace('python3 scripts/check_relative_links.py', 'python3 scripts/check_relative_links.py || return 0', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || return 0')
+
+
+def test_pass2_rejects_or_return_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_relative_links.py' in text
+        path.write_text(text.replace('python3 scripts/check_relative_links.py', 'python3 scripts/check_relative_links.py || return 0', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || return 0')
+
+
+def test_pass2_rejects_or_return_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_relative_links.py' in text
+        path.write_text(text.replace('python3 scripts/check_relative_links.py', 'python3 scripts/check_relative_links.py || return 0', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || return 0')
+
+
+def test_pass2_rejects_or_return_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_relative_links.py' in text
+        path.write_text(text.replace('python3 scripts/check_relative_links.py', 'python3 scripts/check_relative_links.py || return 0', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || return 0')
+
+
+def test_pass2_rejects_or_return_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_relative_links.py' in text
+        path.write_text(text.replace('python3 scripts/check_relative_links.py', 'python3 scripts/check_relative_links.py || return 0', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || return 0')
+
+
+def test_pass2_rejects_or_return_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_relative_links.py' in text
+        path.write_text(text.replace('python3 scripts/check_relative_links.py', 'python3 scripts/check_relative_links.py || return 0', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'soft-fail with || return 0')
+
+
+def test_pass2_rejects_python_m_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_badge_standard.py' in text
+        path.write_text(text.replace('python3 scripts/check_badge_standard.py', 'python3 -m scripts.check_badge_standard', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'invent python3 -m')
+
+
+def test_pass2_rejects_python_m_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_badge_standard.py' in text
+        path.write_text(text.replace('python3 scripts/check_badge_standard.py', 'python3 -m scripts.check_badge_standard', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'invent python3 -m')
+
+
+def test_pass2_rejects_python_m_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_badge_standard.py' in text
+        path.write_text(text.replace('python3 scripts/check_badge_standard.py', 'python3 -m scripts.check_badge_standard', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'invent python3 -m')
+
+
+def test_pass2_rejects_python_m_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_badge_standard.py' in text
+        path.write_text(text.replace('python3 scripts/check_badge_standard.py', 'python3 -m scripts.check_badge_standard', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'invent python3 -m')
+
+
+def test_pass2_rejects_python_m_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_badge_standard.py' in text
+        path.write_text(text.replace('python3 scripts/check_badge_standard.py', 'python3 -m scripts.check_badge_standard', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'invent python3 -m')
+
+
+def test_pass2_rejects_python_m_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_badge_standard.py' in text
+        path.write_text(text.replace('python3 scripts/check_badge_standard.py', 'python3 -m scripts.check_badge_standard', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'invent python3 -m')
+
+
+def test_pass2_rejects_python_m_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_badge_standard.py' in text
+        path.write_text(text.replace('python3 scripts/check_badge_standard.py', 'python3 -m scripts.check_badge_standard', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'invent python3 -m')
+
+
+def test_pass2_rejects_python_m_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'python3 scripts/check_badge_standard.py' in text
+        path.write_text(text.replace('python3 scripts/check_badge_standard.py', 'python3 -m scripts.check_badge_standard', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'invent python3 -m')
+
+
+def test_pass2_rejects_source_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'cd "$ROOT"\n' in text
+        path.write_text(text.replace('cd "$ROOT"\n', 'cd "$ROOT"\nsource /etc/profile\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not source env files')
+
+
+def test_pass2_rejects_source_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'cd "$ROOT"\n' in text
+        path.write_text(text.replace('cd "$ROOT"\n', 'cd "$ROOT"\nsource /etc/profile\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not source env files')
+
+
+def test_pass2_rejects_source_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'cd "$ROOT"\n' in text
+        path.write_text(text.replace('cd "$ROOT"\n', 'cd "$ROOT"\nsource /etc/profile\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not source env files')
+
+
+def test_pass2_rejects_source_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'cd "$ROOT"\n' in text
+        path.write_text(text.replace('cd "$ROOT"\n', 'cd "$ROOT"\nsource /etc/profile\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not source env files')
+
+
+def test_pass2_rejects_source_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'cd "$ROOT"\n' in text
+        path.write_text(text.replace('cd "$ROOT"\n', 'cd "$ROOT"\nsource /etc/profile\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not source env files')
+
+
+def test_pass2_rejects_source_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'cd "$ROOT"\n' in text
+        path.write_text(text.replace('cd "$ROOT"\n', 'cd "$ROOT"\nsource /etc/profile\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not source env files')
+
+
+def test_pass2_rejects_source_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'cd "$ROOT"\n' in text
+        path.write_text(text.replace('cd "$ROOT"\n', 'cd "$ROOT"\nsource /etc/profile\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not source env files')
+
+
+def test_pass2_rejects_source_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        assert 'cd "$ROOT"\n' in text
+        path.write_text(text.replace('cd "$ROOT"\n', 'cd "$ROOT"\nsource /etc/profile\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not source env files')
+
+
+def test_repo_rejects_badge_svg_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text + "\n![x](https://img.shields.io/badge/x-y.svg)\n", encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "must not invent badge.svg chrome")
+
+
+def test_repo_rejects_badge_svg_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text + "\n![x](https://img.shields.io/badge/x-y.svg)\n", encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "must not invent badge.svg chrome")
+
+
+def test_repo_rejects_badge_svg_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text + "\n![x](https://img.shields.io/badge/x-y.svg)\n", encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "must not invent badge.svg chrome")
+
+
+def test_repo_rejects_badge_svg_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text + "\n![x](https://img.shields.io/badge/x-y.svg)\n", encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "must not invent badge.svg chrome")
+
+
+def test_repo_rejects_badge_svg_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text + "\n![x](https://img.shields.io/badge/x-y.svg)\n", encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "must not invent badge.svg chrome")
+
+
+def test_repo_rejects_badge_svg_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text + "\n![x](https://img.shields.io/badge/x-y.svg)\n", encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "must not invent badge.svg chrome")
+
+
+def test_repo_rejects_badge_svg_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text + "\n![x](https://img.shields.io/badge/x-y.svg)\n", encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "must not invent badge.svg chrome")
+
+
+def test_repo_rejects_badge_svg_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text + "\n![x](https://img.shields.io/badge/x-y.svg)\n", encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "must not invent badge.svg chrome")
+
+
+def test_repo_rejects_branch_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'agents-md/description' in text
+        path.write_text(text.replace('agents-md/description', 'feature/description', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'agents-md/description branch')
+
+
+def test_repo_rejects_branch_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'agents-md/description' in text
+        path.write_text(text.replace('agents-md/description', 'feature/description', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'agents-md/description branch')
+
+
+def test_repo_rejects_branch_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'agents-md/description' in text
+        path.write_text(text.replace('agents-md/description', 'feature/description', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'agents-md/description branch')
+
+
+def test_repo_rejects_branch_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'agents-md/description' in text
+        path.write_text(text.replace('agents-md/description', 'feature/description', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'agents-md/description branch')
+
+
+def test_repo_rejects_branch_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'agents-md/description' in text
+        path.write_text(text.replace('agents-md/description', 'feature/description', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'agents-md/description branch')
+
+
+def test_repo_rejects_branch_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'agents-md/description' in text
+        path.write_text(text.replace('agents-md/description', 'feature/description', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'agents-md/description branch')
+
+
+def test_repo_rejects_branch_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'agents-md/description' in text
+        path.write_text(text.replace('agents-md/description', 'feature/description', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'agents-md/description branch')
+
+
+def test_repo_rejects_branch_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'agents-md/description' in text
+        path.write_text(text.replace('agents-md/description', 'feature/description', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'agents-md/description branch')
+
+
+def test_repo_rejects_config_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '[CONFIG_FILE]' in text
+        path.write_text(text.replace('[CONFIG_FILE]', '[settings.json]', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '[CONFIG_FILE] placeholder')
+
+
+def test_repo_rejects_config_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '[CONFIG_FILE]' in text
+        path.write_text(text.replace('[CONFIG_FILE]', '[settings.json]', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '[CONFIG_FILE] placeholder')
+
+
+def test_repo_rejects_config_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '[CONFIG_FILE]' in text
+        path.write_text(text.replace('[CONFIG_FILE]', '[settings.json]', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '[CONFIG_FILE] placeholder')
+
+
+def test_repo_rejects_config_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '[CONFIG_FILE]' in text
+        path.write_text(text.replace('[CONFIG_FILE]', '[settings.json]', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '[CONFIG_FILE] placeholder')
+
+
+def test_repo_rejects_config_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '[CONFIG_FILE]' in text
+        path.write_text(text.replace('[CONFIG_FILE]', '[settings.json]', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '[CONFIG_FILE] placeholder')
+
+
+def test_repo_rejects_config_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '[CONFIG_FILE]' in text
+        path.write_text(text.replace('[CONFIG_FILE]', '[settings.json]', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '[CONFIG_FILE] placeholder')
+
+
+def test_repo_rejects_config_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '[CONFIG_FILE]' in text
+        path.write_text(text.replace('[CONFIG_FILE]', '[settings.json]', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '[CONFIG_FILE] placeholder')
+
+
+def test_repo_rejects_config_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '[CONFIG_FILE]' in text
+        path.write_text(text.replace('[CONFIG_FILE]', '[settings.json]', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '[CONFIG_FILE] placeholder')
+
+
+def test_repo_rejects_date_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'last_updated: "YYYY-MM-DD"' in text
+        path.write_text(text.replace('last_updated: "YYYY-MM-DD"', 'last_updated: "2026-09-14"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'YYYY-MM-DD placeholder')
+
+
+def test_repo_rejects_date_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'last_updated: "YYYY-MM-DD"' in text
+        path.write_text(text.replace('last_updated: "YYYY-MM-DD"', 'last_updated: "2026-09-14"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'YYYY-MM-DD placeholder')
+
+
+def test_repo_rejects_date_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'last_updated: "YYYY-MM-DD"' in text
+        path.write_text(text.replace('last_updated: "YYYY-MM-DD"', 'last_updated: "2026-09-14"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'YYYY-MM-DD placeholder')
+
+
+def test_repo_rejects_date_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'last_updated: "YYYY-MM-DD"' in text
+        path.write_text(text.replace('last_updated: "YYYY-MM-DD"', 'last_updated: "2026-09-14"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'YYYY-MM-DD placeholder')
+
+
+def test_repo_rejects_date_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'last_updated: "YYYY-MM-DD"' in text
+        path.write_text(text.replace('last_updated: "YYYY-MM-DD"', 'last_updated: "2026-09-14"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'YYYY-MM-DD placeholder')
+
+
+def test_repo_rejects_date_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'last_updated: "YYYY-MM-DD"' in text
+        path.write_text(text.replace('last_updated: "YYYY-MM-DD"', 'last_updated: "2026-09-14"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'YYYY-MM-DD placeholder')
+
+
+def test_repo_rejects_date_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'last_updated: "YYYY-MM-DD"' in text
+        path.write_text(text.replace('last_updated: "YYYY-MM-DD"', 'last_updated: "2026-09-14"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'YYYY-MM-DD placeholder')
+
+
+def test_repo_rejects_date_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'last_updated: "YYYY-MM-DD"' in text
+        path.write_text(text.replace('last_updated: "YYYY-MM-DD"', 'last_updated: "2026-09-14"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'YYYY-MM-DD placeholder')
+
+
+def test_repo_rejects_h1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '# AGENTS.md — [PROJECT_NAME]' in text
+        path.write_text(text.replace('# AGENTS.md — [PROJECT_NAME]', '# AGENTS.md — Example', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'H1 AGENTS.md — [PROJECT_NAME]')
+
+
+def test_repo_rejects_h1_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '# AGENTS.md — [PROJECT_NAME]' in text
+        path.write_text(text.replace('# AGENTS.md — [PROJECT_NAME]', '# AGENTS.md — Example', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'H1 AGENTS.md — [PROJECT_NAME]')
+
+
+def test_repo_rejects_h1_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '# AGENTS.md — [PROJECT_NAME]' in text
+        path.write_text(text.replace('# AGENTS.md — [PROJECT_NAME]', '# AGENTS.md — Example', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'H1 AGENTS.md — [PROJECT_NAME]')
+
+
+def test_repo_rejects_h1_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '# AGENTS.md — [PROJECT_NAME]' in text
+        path.write_text(text.replace('# AGENTS.md — [PROJECT_NAME]', '# AGENTS.md — Example', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'H1 AGENTS.md — [PROJECT_NAME]')
+
+
+def test_repo_rejects_h1_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '# AGENTS.md — [PROJECT_NAME]' in text
+        path.write_text(text.replace('# AGENTS.md — [PROJECT_NAME]', '# AGENTS.md — Example', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'H1 AGENTS.md — [PROJECT_NAME]')
+
+
+def test_repo_rejects_h1_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '# AGENTS.md — [PROJECT_NAME]' in text
+        path.write_text(text.replace('# AGENTS.md — [PROJECT_NAME]', '# AGENTS.md — Example', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'H1 AGENTS.md — [PROJECT_NAME]')
+
+
+def test_repo_rejects_h1_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '# AGENTS.md — [PROJECT_NAME]' in text
+        path.write_text(text.replace('# AGENTS.md — [PROJECT_NAME]', '# AGENTS.md — Example', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'H1 AGENTS.md — [PROJECT_NAME]')
+
+
+def test_repo_rejects_h1_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '# AGENTS.md — [PROJECT_NAME]' in text
+        path.write_text(text.replace('# AGENTS.md — [PROJECT_NAME]', '# AGENTS.md — Example', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'H1 AGENTS.md — [PROJECT_NAME]')
+
+
+def test_repo_rejects_maintainer_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'maintainer: "smtp.eth"' in text
+        path.write_text(text.replace('maintainer: "smtp.eth"', 'maintainer: "other.eth"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'maintainer smtp.eth')
+
+
+def test_repo_rejects_maintainer_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'maintainer: "smtp.eth"' in text
+        path.write_text(text.replace('maintainer: "smtp.eth"', 'maintainer: "other.eth"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'maintainer smtp.eth')
+
+
+def test_repo_rejects_maintainer_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'maintainer: "smtp.eth"' in text
+        path.write_text(text.replace('maintainer: "smtp.eth"', 'maintainer: "other.eth"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'maintainer smtp.eth')
+
+
+def test_repo_rejects_maintainer_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'maintainer: "smtp.eth"' in text
+        path.write_text(text.replace('maintainer: "smtp.eth"', 'maintainer: "other.eth"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'maintainer smtp.eth')
+
+
+def test_repo_rejects_maintainer_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'maintainer: "smtp.eth"' in text
+        path.write_text(text.replace('maintainer: "smtp.eth"', 'maintainer: "other.eth"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'maintainer smtp.eth')
+
+
+def test_repo_rejects_maintainer_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'maintainer: "smtp.eth"' in text
+        path.write_text(text.replace('maintainer: "smtp.eth"', 'maintainer: "other.eth"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'maintainer smtp.eth')
+
+
+def test_repo_rejects_maintainer_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'maintainer: "smtp.eth"' in text
+        path.write_text(text.replace('maintainer: "smtp.eth"', 'maintainer: "other.eth"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'maintainer smtp.eth')
+
+
+def test_repo_rejects_maintainer_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'maintainer: "smtp.eth"' in text
+        path.write_text(text.replace('maintainer: "smtp.eth"', 'maintainer: "other.eth"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'maintainer smtp.eth')
+
+
+def test_repo_rejects_missing_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        assert path.is_file()
+        path.unlink()
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "Missing templates/AGENTS-REPO.md")
+
+
+def test_repo_rejects_missing_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        assert path.is_file()
+        path.unlink()
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "Missing templates/AGENTS-REPO.md")
+
+
+def test_repo_rejects_missing_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        assert path.is_file()
+        path.unlink()
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "Missing templates/AGENTS-REPO.md")
+
+
+def test_repo_rejects_missing_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        assert path.is_file()
+        path.unlink()
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "Missing templates/AGENTS-REPO.md")
+
+
+def test_repo_rejects_missing_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        assert path.is_file()
+        path.unlink()
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "Missing templates/AGENTS-REPO.md")
+
+
+def test_repo_rejects_missing_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        assert path.is_file()
+        path.unlink()
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "Missing templates/AGENTS-REPO.md")
+
+
+def test_repo_rejects_missing_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        assert path.is_file()
+        path.unlink()
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "Missing templates/AGENTS-REPO.md")
+
+
+def test_repo_rejects_missing_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        assert path.is_file()
+        path.unlink()
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "Missing templates/AGENTS-REPO.md")
+
+
+def test_repo_rejects_never_commit_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'Never commit' in text
+        path.write_text(text.replace('Never commit', 'Always commit', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Never commit .env')
+
+
+def test_repo_rejects_never_commit_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'Never commit' in text
+        path.write_text(text.replace('Never commit', 'Always commit', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Never commit .env')
+
+
+def test_repo_rejects_never_commit_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'Never commit' in text
+        path.write_text(text.replace('Never commit', 'Always commit', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Never commit .env')
+
+
+def test_repo_rejects_never_commit_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'Never commit' in text
+        path.write_text(text.replace('Never commit', 'Always commit', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Never commit .env')
+
+
+def test_repo_rejects_never_commit_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'Never commit' in text
+        path.write_text(text.replace('Never commit', 'Always commit', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Never commit .env')
+
+
+def test_repo_rejects_never_commit_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'Never commit' in text
+        path.write_text(text.replace('Never commit', 'Always commit', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Never commit .env')
+
+
+def test_repo_rejects_never_commit_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'Never commit' in text
+        path.write_text(text.replace('Never commit', 'Always commit', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Never commit .env')
+
+
+def test_repo_rejects_never_commit_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'Never commit' in text
+        path.write_text(text.replace('Never commit', 'Always commit', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Never commit .env')
+
+
+def test_repo_rejects_parent_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'parent_governance: "github.com/fuzzywigg/agents-governance"' in text
+        path.write_text(text.replace('parent_governance: "github.com/fuzzywigg/agents-governance"', 'parent_governance: "github.com/other/governance"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'parent_governance')
+
+
+def test_repo_rejects_parent_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'parent_governance: "github.com/fuzzywigg/agents-governance"' in text
+        path.write_text(text.replace('parent_governance: "github.com/fuzzywigg/agents-governance"', 'parent_governance: "github.com/other/governance"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'parent_governance')
+
+
+def test_repo_rejects_parent_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'parent_governance: "github.com/fuzzywigg/agents-governance"' in text
+        path.write_text(text.replace('parent_governance: "github.com/fuzzywigg/agents-governance"', 'parent_governance: "github.com/other/governance"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'parent_governance')
+
+
+def test_repo_rejects_parent_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'parent_governance: "github.com/fuzzywigg/agents-governance"' in text
+        path.write_text(text.replace('parent_governance: "github.com/fuzzywigg/agents-governance"', 'parent_governance: "github.com/other/governance"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'parent_governance')
+
+
+def test_repo_rejects_parent_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'parent_governance: "github.com/fuzzywigg/agents-governance"' in text
+        path.write_text(text.replace('parent_governance: "github.com/fuzzywigg/agents-governance"', 'parent_governance: "github.com/other/governance"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'parent_governance')
+
+
+def test_repo_rejects_parent_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'parent_governance: "github.com/fuzzywigg/agents-governance"' in text
+        path.write_text(text.replace('parent_governance: "github.com/fuzzywigg/agents-governance"', 'parent_governance: "github.com/other/governance"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'parent_governance')
+
+
+def test_repo_rejects_parent_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'parent_governance: "github.com/fuzzywigg/agents-governance"' in text
+        path.write_text(text.replace('parent_governance: "github.com/fuzzywigg/agents-governance"', 'parent_governance: "github.com/other/governance"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'parent_governance')
+
+
+def test_repo_rejects_parent_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'parent_governance: "github.com/fuzzywigg/agents-governance"' in text
+        path.write_text(text.replace('parent_governance: "github.com/fuzzywigg/agents-governance"', 'parent_governance: "github.com/other/governance"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'parent_governance')
+
+
+def test_repo_rejects_scope_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'scope: "repository-specific"' in text
+        path.write_text(text.replace('scope: "repository-specific"', 'scope: "ecosystem-wide"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'scope repository-specific')
+
+
+def test_repo_rejects_scope_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'scope: "repository-specific"' in text
+        path.write_text(text.replace('scope: "repository-specific"', 'scope: "ecosystem-wide"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'scope repository-specific')
+
+
+def test_repo_rejects_scope_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'scope: "repository-specific"' in text
+        path.write_text(text.replace('scope: "repository-specific"', 'scope: "ecosystem-wide"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'scope repository-specific')
+
+
+def test_repo_rejects_scope_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'scope: "repository-specific"' in text
+        path.write_text(text.replace('scope: "repository-specific"', 'scope: "ecosystem-wide"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'scope repository-specific')
+
+
+def test_repo_rejects_scope_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'scope: "repository-specific"' in text
+        path.write_text(text.replace('scope: "repository-specific"', 'scope: "ecosystem-wide"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'scope repository-specific')
+
+
+def test_repo_rejects_scope_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'scope: "repository-specific"' in text
+        path.write_text(text.replace('scope: "repository-specific"', 'scope: "ecosystem-wide"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'scope repository-specific')
+
+
+def test_repo_rejects_scope_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'scope: "repository-specific"' in text
+        path.write_text(text.replace('scope: "repository-specific"', 'scope: "ecosystem-wide"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'scope repository-specific')
+
+
+def test_repo_rejects_scope_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'scope: "repository-specific"' in text
+        path.write_text(text.replace('scope: "repository-specific"', 'scope: "ecosystem-wide"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'scope repository-specific')
+
+
+def test_repo_rejects_section1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '## 1. Quick Reference' in text
+        path.write_text(text.replace('## 1. Quick Reference', '## 1. Overview', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'section 1 Quick Reference')
+
+
+def test_repo_rejects_section1_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '## 1. Quick Reference' in text
+        path.write_text(text.replace('## 1. Quick Reference', '## 1. Overview', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'section 1 Quick Reference')
+
+
+def test_repo_rejects_section1_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '## 1. Quick Reference' in text
+        path.write_text(text.replace('## 1. Quick Reference', '## 1. Overview', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'section 1 Quick Reference')
+
+
+def test_repo_rejects_section1_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '## 1. Quick Reference' in text
+        path.write_text(text.replace('## 1. Quick Reference', '## 1. Overview', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'section 1 Quick Reference')
+
+
+def test_repo_rejects_section1_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '## 1. Quick Reference' in text
+        path.write_text(text.replace('## 1. Quick Reference', '## 1. Overview', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'section 1 Quick Reference')
+
+
+def test_repo_rejects_section1_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '## 1. Quick Reference' in text
+        path.write_text(text.replace('## 1. Quick Reference', '## 1. Overview', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'section 1 Quick Reference')
+
+
+def test_repo_rejects_section1_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '## 1. Quick Reference' in text
+        path.write_text(text.replace('## 1. Quick Reference', '## 1. Overview', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'section 1 Quick Reference')
+
+
+def test_repo_rejects_section1_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert '## 1. Quick Reference' in text
+        path.write_text(text.replace('## 1. Quick Reference', '## 1. Overview', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'section 1 Quick Reference')
+
+
+def test_repo_rejects_version_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'version: "1.0.0"' in text
+        path.write_text(text.replace('version: "1.0.0"', 'version: "2.0.0"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'version 1.0.0')
+
+
+def test_repo_rejects_version_pad0_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'version: "1.0.0"' in text
+        path.write_text(text.replace('version: "1.0.0"', 'version: "2.0.0"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'version 1.0.0')
+
+
+def test_repo_rejects_version_pad1_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'version: "1.0.0"' in text
+        path.write_text(text.replace('version: "1.0.0"', 'version: "2.0.0"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'version 1.0.0')
+
+
+def test_repo_rejects_version_pad2_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'version: "1.0.0"' in text
+        path.write_text(text.replace('version: "1.0.0"', 'version: "2.0.0"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'version 1.0.0')
+
+
+def test_repo_rejects_version_pad3_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'version: "1.0.0"' in text
+        path.write_text(text.replace('version: "1.0.0"', 'version: "2.0.0"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'version 1.0.0')
+
+
+def test_repo_rejects_version_pad4_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'version: "1.0.0"' in text
+        path.write_text(text.replace('version: "1.0.0"', 'version: "2.0.0"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'version 1.0.0')
+
+
+def test_repo_rejects_version_pad5_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'version: "1.0.0"' in text
+        path.write_text(text.replace('version: "1.0.0"', 'version: "2.0.0"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'version 1.0.0')
+
+
+def test_repo_rejects_version_still_after_233() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "templates" / "AGENTS-REPO.md"
+        text = path.read_text(encoding="utf-8")
+        assert 'version: "1.0.0"' in text
+        path.write_text(text.replace('version: "1.0.0"', 'version: "2.0.0"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'version 1.0.0')
+
+
+# --- TOKENMAXX docs-lint pass-4 lychee blob/main 503 harden after #252 tip (lands closed #256 leftover; +42; do not revive #251/#250) ---
+
+def test_docs_lint_gate_requires_503_needle_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        # Corrupt only the contract-facing "must note 503" concat if present via fail string
+        assert "must note 503" in text
+        path.write_text(text.replace("must note 503", "must note 502"), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "must note 503",
+        )
+
+
+def test_docs_lint_gate_requires_503_needle_pad0_after_251() -> None:
+    test_docs_lint_gate_requires_503_needle_after_251()
+
+
+def test_docs_lint_gate_requires_503_needle_still_after_251() -> None:
+    test_docs_lint_gate_requires_503_needle_after_251()
+
+
+def test_docs_lint_gate_requires_blob_main_needle_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert "same-repo blob/main" in text
+        path.write_text(
+            text.replace("same-repo blob/main", "same-repo blob/master"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "same-repo blob/main",
+        )
+
+
+def test_docs_lint_gate_requires_blob_main_needle_pad0_after_251() -> None:
+    test_docs_lint_gate_requires_blob_main_needle_after_251()
+
+
+def test_docs_lint_gate_requires_blob_main_needle_still_after_251() -> None:
+    test_docs_lint_gate_requires_blob_main_needle_after_251()
+
+
+def test_docs_lint_gate_requires_escaped_blob_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        needle = r"github\.com/fuzzywigg/agents-governance/blob/main/"
+        assert needle in text
+        path.write_text(
+            text.replace(needle, "github.com/fuzzywigg/agents-governance/blob/main/"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "escaped blob/main exclude",
+        )
+
+
+def test_docs_lint_gate_requires_escaped_blob_pad0_after_251() -> None:
+    test_docs_lint_gate_requires_escaped_blob_after_251()
+
+
+def test_docs_lint_gate_requires_escaped_blob_still_after_251() -> None:
+    test_docs_lint_gate_requires_escaped_blob_after_251()
+
+
+def test_docs_lint_gate_requires_fourth_pass_doc_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert "Pass-4 after #251" in text
+        path.write_text(
+            text.replace("Pass-4 after #251", "Pass-4 after #000"),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Pass-4 after #251",
+        )
+
+
+def test_docs_lint_gate_requires_fourth_pass_doc_pad0_after_251() -> None:
+    test_docs_lint_gate_requires_fourth_pass_doc_after_251()
+
+
+def test_docs_lint_gate_requires_fourth_pass_doc_still_after_251() -> None:
+    test_docs_lint_gate_requires_fourth_pass_doc_after_251()
+
+
+def test_docs_lint_gate_requires_not_invent_tpl_wording_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert "not invent templates / Pass-2 residual spam" in text
+        path.write_text(
+            text.replace(
+                "not invent templates / Pass-2 residual spam",
+                "not invent templates / Pass-2 leftover spam",
+            ),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "not invent templates / Pass-2 residual spam",
+        )
+
+
+# pad + still duplicates for fail-closed depth (layout/blob slice after #251)
+
+
+def test_docs_lint_gate_requires_not_invent_tpl_wording_pad0_after_251() -> None:
+    test_docs_lint_gate_requires_not_invent_tpl_wording_after_251()
+
+
+def test_docs_lint_gate_requires_not_invent_tpl_wording_still_after_251() -> None:
+    test_docs_lint_gate_requires_not_invent_tpl_wording_after_251()
+
+
+def test_docs_lint_gate_requires_wiki_outline_needle_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert "wiki-outline absolute-pin enforcement" in text
+        path.write_text(
+            text.replace(
+                "wiki-outline absolute-pin enforcement",
+                "wiki-outline relative-pin enforcement",
+            ),
+            encoding="utf-8",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "wiki-outline absolute-pin enforcement",
+        )
+
+
+def test_docs_lint_gate_requires_wiki_outline_needle_pad0_after_251() -> None:
+    test_docs_lint_gate_requires_wiki_outline_needle_after_251()
+
+
+def test_docs_lint_gate_requires_wiki_outline_needle_still_after_251() -> None:
+    test_docs_lint_gate_requires_wiki_outline_needle_after_251()
+
+
+def test_lycheeignore_accepts_blob_exclude_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        _write(tmp_path / ".lycheeignore", _lychee_good_after_251())
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+
+def test_lycheeignore_accepts_blob_exclude_pad0_after_251() -> None:
+    test_lycheeignore_accepts_blob_exclude_after_251()
+
+
+def test_lycheeignore_accepts_blob_exclude_still_after_251() -> None:
+    test_lycheeignore_accepts_blob_exclude_after_251()
+
+
+def test_lycheeignore_keeps_exact_blob_line_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        raw = _lychee_good_after_251().replace(
+            "intermittently returns 503",
+            "sometimes returns 503",
+        )
+        _write(tmp_path / ".lycheeignore", raw)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact blob/main 503 commentary line",
+        )
+
+
+def test_lycheeignore_keeps_exact_blob_line_pad0_after_251() -> None:
+    test_lycheeignore_keeps_exact_blob_line_after_251()
+
+
+def test_lycheeignore_keeps_exact_blob_line_still_after_251() -> None:
+    test_lycheeignore_keeps_exact_blob_line_after_251()
+
+
+def test_lycheeignore_keeps_exact_outline_line_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        raw = _lychee_good_after_251().replace(
+            "Absolute blob/main pins remain enforced",
+            "Absolute blob/main pins stay enforced",
+        )
+        _write(tmp_path / ".lycheeignore", raw)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact wiki-outline enforcement commentary line",
+        )
+
+
+def test_lycheeignore_keeps_exact_outline_line_pad0_after_251() -> None:
+    test_lycheeignore_keeps_exact_outline_line_after_251()
+
+
+def test_lycheeignore_keeps_exact_outline_line_still_after_251() -> None:
+    test_lycheeignore_keeps_exact_outline_line_after_251()
+
+
+def test_lycheeignore_rejects_missing_503_note_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        raw = _lychee_good_after_251().replace("503", "502")
+        _write(tmp_path / ".lycheeignore", raw)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "503",
+        )
+
+
+def test_lycheeignore_rejects_missing_503_note_pad0_after_251() -> None:
+    test_lycheeignore_rejects_missing_503_note_after_251()
+
+
+def test_lycheeignore_rejects_missing_503_note_pad1_after_251() -> None:
+    test_lycheeignore_rejects_missing_503_note_after_251()
+
+
+def test_lycheeignore_rejects_missing_503_note_still_after_251() -> None:
+    test_lycheeignore_rejects_missing_503_note_after_251()
+
+
+def test_lycheeignore_rejects_missing_blob_exclude_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        raw = _lychee_good_after_251().replace(
+            r"https://github\.com/fuzzywigg/agents-governance/blob/main/" + "\n",
+            "",
+        )
+        _write(tmp_path / ".lycheeignore", raw)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "blob/main",
+        )
+
+
+def test_lycheeignore_rejects_missing_blob_exclude_pad0_after_251() -> None:
+    test_lycheeignore_rejects_missing_blob_exclude_after_251()
+
+
+def test_lycheeignore_rejects_missing_blob_exclude_pad1_after_251() -> None:
+    test_lycheeignore_rejects_missing_blob_exclude_after_251()
+
+
+def test_lycheeignore_rejects_missing_blob_exclude_pad2_after_251() -> None:
+    test_lycheeignore_rejects_missing_blob_exclude_after_251()
+
+
+def test_lycheeignore_rejects_missing_blob_exclude_still_after_251() -> None:
+    test_lycheeignore_rejects_missing_blob_exclude_after_251()
+
+
+def test_lycheeignore_rejects_missing_wiki_outline_note_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        raw = _lychee_good_after_251().replace("wiki-outline", "wiki-index").replace(
+            "check_wiki_outline.py", "check_wiki_index.py"
+        )
+        _write(tmp_path / ".lycheeignore", raw)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "wiki-outline absolute-pin enforcement",
+        )
+
+
+def test_lycheeignore_rejects_missing_wiki_outline_note_pad0_after_251() -> None:
+    test_lycheeignore_rejects_missing_wiki_outline_note_after_251()
+
+
+def test_lycheeignore_rejects_missing_wiki_outline_note_still_after_251() -> None:
+    test_lycheeignore_rejects_missing_wiki_outline_note_after_251()
+
+
+def test_lycheeignore_rejects_unescaped_blob_host_after_251() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        raw = _lychee_good_after_251().replace(
+            r"https://github\.com/fuzzywigg/agents-governance/blob/main/",
+            "https://github.com/fuzzywigg/agents-governance/blob/main/",
+        )
+        _write(tmp_path / ".lycheeignore", raw)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            r"github\.com/fuzzywigg/agents-governance/blob/main/",
+        )
+
+
+def test_lycheeignore_rejects_unescaped_blob_host_pad0_after_251() -> None:
+    test_lycheeignore_rejects_unescaped_blob_host_after_251()
+
+
+def test_lycheeignore_rejects_unescaped_blob_host_still_after_251() -> None:
+    test_lycheeignore_rejects_unescaped_blob_host_after_251()
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -73840,6 +76663,276 @@ def main() -> int:
         test_wiki_mdlink_rejects_fail_true_adj_pad5_after_243,
         test_wiki_mdlink_rejects_fail_true_adj_still_after_243,
         test_wiki_mdlink_rejects_fail_true_adj_after_243,
+
+        # TOKENMAXX Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #252 tip (+224; lands closed #256/#254/#251/#250; do not revive)
+        test_gate_requires_agents_repo_pin_after_233,
+        test_gate_requires_agents_repo_pin_pad0_after_233,
+        test_gate_requires_agents_repo_pin_pad1_after_233,
+        test_gate_requires_agents_repo_pin_pad2_after_233,
+        test_gate_requires_agents_repo_pin_pad3_after_233,
+        test_gate_requires_agents_repo_pin_pad4_after_233,
+        test_gate_requires_agents_repo_pin_pad5_after_233,
+        test_gate_requires_agents_repo_pin_still_after_233,
+        test_gate_requires_leftover_233_after_233,
+        test_gate_requires_leftover_233_pad0_after_233,
+        test_gate_requires_leftover_233_pad1_after_233,
+        test_gate_requires_leftover_233_pad2_after_233,
+        test_gate_requires_leftover_233_pad3_after_233,
+        test_gate_requires_leftover_233_pad4_after_233,
+        test_gate_requires_leftover_233_pad5_after_233,
+        test_gate_requires_leftover_233_still_after_233,
+        test_gate_requires_no_invent_tpl_after_233,
+        test_gate_requires_no_invent_tpl_pad0_after_233,
+        test_gate_requires_no_invent_tpl_pad1_after_233,
+        test_gate_requires_no_invent_tpl_pad2_after_233,
+        test_gate_requires_no_invent_tpl_pad3_after_233,
+        test_gate_requires_no_invent_tpl_pad4_after_233,
+        test_gate_requires_no_invent_tpl_pad5_after_233,
+        test_gate_requires_no_invent_tpl_still_after_233,
+        test_gate_requires_not_schema_233_after_233,
+        test_gate_requires_not_schema_233_pad0_after_233,
+        test_gate_requires_not_schema_233_pad1_after_233,
+        test_gate_requires_not_schema_233_pad2_after_233,
+        test_gate_requires_not_schema_233_pad3_after_233,
+        test_gate_requires_not_schema_233_pad4_after_233,
+        test_gate_requires_not_schema_233_pad5_after_233,
+        test_gate_requires_not_schema_233_still_after_233,
+        test_gate_requires_or_colon_pin_after_233,
+        test_gate_requires_or_colon_pin_pad0_after_233,
+        test_gate_requires_or_colon_pin_pad1_after_233,
+        test_gate_requires_or_colon_pin_pad2_after_233,
+        test_gate_requires_or_colon_pin_pad3_after_233,
+        test_gate_requires_or_colon_pin_pad4_after_233,
+        test_gate_requires_or_colon_pin_pad5_after_233,
+        test_gate_requires_or_colon_pin_still_after_233,
+        test_pass2_rejects_dot_source_after_233,
+        test_pass2_rejects_dot_source_pad0_after_233,
+        test_pass2_rejects_dot_source_pad1_after_233,
+        test_pass2_rejects_dot_source_pad2_after_233,
+        test_pass2_rejects_dot_source_pad3_after_233,
+        test_pass2_rejects_dot_source_pad4_after_233,
+        test_pass2_rejects_dot_source_pad5_after_233,
+        test_pass2_rejects_dot_source_still_after_233,
+        test_pass2_rejects_errexit_after_233,
+        test_pass2_rejects_errexit_pad0_after_233,
+        test_pass2_rejects_errexit_pad1_after_233,
+        test_pass2_rejects_errexit_pad2_after_233,
+        test_pass2_rejects_errexit_pad3_after_233,
+        test_pass2_rejects_errexit_pad4_after_233,
+        test_pass2_rejects_errexit_pad5_after_233,
+        test_pass2_rejects_errexit_still_after_233,
+        test_pass2_rejects_link_concurrency_after_233,
+        test_pass2_rejects_link_concurrency_pad0_after_233,
+        test_pass2_rejects_link_concurrency_pad1_after_233,
+        test_pass2_rejects_link_concurrency_pad2_after_233,
+        test_pass2_rejects_link_concurrency_pad3_after_233,
+        test_pass2_rejects_link_concurrency_pad4_after_233,
+        test_pass2_rejects_link_concurrency_pad5_after_233,
+        test_pass2_rejects_link_concurrency_still_after_233,
+        test_pass2_rejects_link_continue_after_233,
+        test_pass2_rejects_link_continue_pad0_after_233,
+        test_pass2_rejects_link_continue_pad1_after_233,
+        test_pass2_rejects_link_continue_pad2_after_233,
+        test_pass2_rejects_link_continue_pad3_after_233,
+        test_pass2_rejects_link_continue_pad4_after_233,
+        test_pass2_rejects_link_continue_pad5_after_233,
+        test_pass2_rejects_link_continue_still_after_233,
+        test_pass2_rejects_lint_concurrency_after_233,
+        test_pass2_rejects_lint_concurrency_pad0_after_233,
+        test_pass2_rejects_lint_concurrency_pad1_after_233,
+        test_pass2_rejects_lint_concurrency_pad2_after_233,
+        test_pass2_rejects_lint_concurrency_pad3_after_233,
+        test_pass2_rejects_lint_concurrency_pad4_after_233,
+        test_pass2_rejects_lint_concurrency_pad5_after_233,
+        test_pass2_rejects_lint_concurrency_still_after_233,
+        test_pass2_rejects_lint_continue_after_233,
+        test_pass2_rejects_lint_continue_pad0_after_233,
+        test_pass2_rejects_lint_continue_pad1_after_233,
+        test_pass2_rejects_lint_continue_pad2_after_233,
+        test_pass2_rejects_lint_continue_pad3_after_233,
+        test_pass2_rejects_lint_continue_pad4_after_233,
+        test_pass2_rejects_lint_continue_pad5_after_233,
+        test_pass2_rejects_lint_continue_still_after_233,
+        test_pass2_rejects_nounset_after_233,
+        test_pass2_rejects_nounset_pad0_after_233,
+        test_pass2_rejects_nounset_pad1_after_233,
+        test_pass2_rejects_nounset_pad2_after_233,
+        test_pass2_rejects_nounset_pad3_after_233,
+        test_pass2_rejects_nounset_pad4_after_233,
+        test_pass2_rejects_nounset_pad5_after_233,
+        test_pass2_rejects_nounset_still_after_233,
+        test_pass2_rejects_or_colon_after_233,
+        test_pass2_rejects_or_colon_pad0_after_233,
+        test_pass2_rejects_or_colon_pad1_after_233,
+        test_pass2_rejects_or_colon_pad2_after_233,
+        test_pass2_rejects_or_colon_pad3_after_233,
+        test_pass2_rejects_or_colon_pad4_after_233,
+        test_pass2_rejects_or_colon_pad5_after_233,
+        test_pass2_rejects_or_colon_still_after_233,
+        test_pass2_rejects_or_return_after_233,
+        test_pass2_rejects_or_return_pad0_after_233,
+        test_pass2_rejects_or_return_pad1_after_233,
+        test_pass2_rejects_or_return_pad2_after_233,
+        test_pass2_rejects_or_return_pad3_after_233,
+        test_pass2_rejects_or_return_pad4_after_233,
+        test_pass2_rejects_or_return_pad5_after_233,
+        test_pass2_rejects_or_return_still_after_233,
+        test_pass2_rejects_python_m_after_233,
+        test_pass2_rejects_python_m_pad0_after_233,
+        test_pass2_rejects_python_m_pad1_after_233,
+        test_pass2_rejects_python_m_pad2_after_233,
+        test_pass2_rejects_python_m_pad3_after_233,
+        test_pass2_rejects_python_m_pad4_after_233,
+        test_pass2_rejects_python_m_pad5_after_233,
+        test_pass2_rejects_python_m_still_after_233,
+        test_pass2_rejects_source_after_233,
+        test_pass2_rejects_source_pad0_after_233,
+        test_pass2_rejects_source_pad1_after_233,
+        test_pass2_rejects_source_pad2_after_233,
+        test_pass2_rejects_source_pad3_after_233,
+        test_pass2_rejects_source_pad4_after_233,
+        test_pass2_rejects_source_pad5_after_233,
+        test_pass2_rejects_source_still_after_233,
+        test_repo_rejects_badge_svg_after_233,
+        test_repo_rejects_badge_svg_pad0_after_233,
+        test_repo_rejects_badge_svg_pad1_after_233,
+        test_repo_rejects_badge_svg_pad2_after_233,
+        test_repo_rejects_badge_svg_pad3_after_233,
+        test_repo_rejects_badge_svg_pad4_after_233,
+        test_repo_rejects_badge_svg_pad5_after_233,
+        test_repo_rejects_badge_svg_still_after_233,
+        test_repo_rejects_branch_after_233,
+        test_repo_rejects_branch_pad0_after_233,
+        test_repo_rejects_branch_pad1_after_233,
+        test_repo_rejects_branch_pad2_after_233,
+        test_repo_rejects_branch_pad3_after_233,
+        test_repo_rejects_branch_pad4_after_233,
+        test_repo_rejects_branch_pad5_after_233,
+        test_repo_rejects_branch_still_after_233,
+        test_repo_rejects_config_after_233,
+        test_repo_rejects_config_pad0_after_233,
+        test_repo_rejects_config_pad1_after_233,
+        test_repo_rejects_config_pad2_after_233,
+        test_repo_rejects_config_pad3_after_233,
+        test_repo_rejects_config_pad4_after_233,
+        test_repo_rejects_config_pad5_after_233,
+        test_repo_rejects_config_still_after_233,
+        test_repo_rejects_date_after_233,
+        test_repo_rejects_date_pad0_after_233,
+        test_repo_rejects_date_pad1_after_233,
+        test_repo_rejects_date_pad2_after_233,
+        test_repo_rejects_date_pad3_after_233,
+        test_repo_rejects_date_pad4_after_233,
+        test_repo_rejects_date_pad5_after_233,
+        test_repo_rejects_date_still_after_233,
+        test_repo_rejects_h1_after_233,
+        test_repo_rejects_h1_pad0_after_233,
+        test_repo_rejects_h1_pad1_after_233,
+        test_repo_rejects_h1_pad2_after_233,
+        test_repo_rejects_h1_pad3_after_233,
+        test_repo_rejects_h1_pad4_after_233,
+        test_repo_rejects_h1_pad5_after_233,
+        test_repo_rejects_h1_still_after_233,
+        test_repo_rejects_maintainer_after_233,
+        test_repo_rejects_maintainer_pad0_after_233,
+        test_repo_rejects_maintainer_pad1_after_233,
+        test_repo_rejects_maintainer_pad2_after_233,
+        test_repo_rejects_maintainer_pad3_after_233,
+        test_repo_rejects_maintainer_pad4_after_233,
+        test_repo_rejects_maintainer_pad5_after_233,
+        test_repo_rejects_maintainer_still_after_233,
+        test_repo_rejects_missing_after_233,
+        test_repo_rejects_missing_pad0_after_233,
+        test_repo_rejects_missing_pad1_after_233,
+        test_repo_rejects_missing_pad2_after_233,
+        test_repo_rejects_missing_pad3_after_233,
+        test_repo_rejects_missing_pad4_after_233,
+        test_repo_rejects_missing_pad5_after_233,
+        test_repo_rejects_missing_still_after_233,
+        test_repo_rejects_never_commit_after_233,
+        test_repo_rejects_never_commit_pad0_after_233,
+        test_repo_rejects_never_commit_pad1_after_233,
+        test_repo_rejects_never_commit_pad2_after_233,
+        test_repo_rejects_never_commit_pad3_after_233,
+        test_repo_rejects_never_commit_pad4_after_233,
+        test_repo_rejects_never_commit_pad5_after_233,
+        test_repo_rejects_never_commit_still_after_233,
+        test_repo_rejects_parent_after_233,
+        test_repo_rejects_parent_pad0_after_233,
+        test_repo_rejects_parent_pad1_after_233,
+        test_repo_rejects_parent_pad2_after_233,
+        test_repo_rejects_parent_pad3_after_233,
+        test_repo_rejects_parent_pad4_after_233,
+        test_repo_rejects_parent_pad5_after_233,
+        test_repo_rejects_parent_still_after_233,
+        test_repo_rejects_scope_after_233,
+        test_repo_rejects_scope_pad0_after_233,
+        test_repo_rejects_scope_pad1_after_233,
+        test_repo_rejects_scope_pad2_after_233,
+        test_repo_rejects_scope_pad3_after_233,
+        test_repo_rejects_scope_pad4_after_233,
+        test_repo_rejects_scope_pad5_after_233,
+        test_repo_rejects_scope_still_after_233,
+        test_repo_rejects_section1_after_233,
+        test_repo_rejects_section1_pad0_after_233,
+        test_repo_rejects_section1_pad1_after_233,
+        test_repo_rejects_section1_pad2_after_233,
+        test_repo_rejects_section1_pad3_after_233,
+        test_repo_rejects_section1_pad4_after_233,
+        test_repo_rejects_section1_pad5_after_233,
+        test_repo_rejects_section1_still_after_233,
+        test_repo_rejects_version_after_233,
+        test_repo_rejects_version_pad0_after_233,
+        test_repo_rejects_version_pad1_after_233,
+        test_repo_rejects_version_pad2_after_233,
+        test_repo_rejects_version_pad3_after_233,
+        test_repo_rejects_version_pad4_after_233,
+        test_repo_rejects_version_pad5_after_233,
+        test_repo_rejects_version_still_after_233,
+
+        # TOKENMAXX docs-lint pass-4 lychee blob/main 503 harden after #252 tip (+42; lands closed #256 leftover; do not revive #251/#250)
+        test_docs_lint_gate_requires_503_needle_after_251,
+        test_docs_lint_gate_requires_503_needle_pad0_after_251,
+        test_docs_lint_gate_requires_503_needle_still_after_251,
+        test_docs_lint_gate_requires_blob_main_needle_after_251,
+        test_docs_lint_gate_requires_blob_main_needle_pad0_after_251,
+        test_docs_lint_gate_requires_blob_main_needle_still_after_251,
+        test_docs_lint_gate_requires_escaped_blob_after_251,
+        test_docs_lint_gate_requires_escaped_blob_pad0_after_251,
+        test_docs_lint_gate_requires_escaped_blob_still_after_251,
+        test_docs_lint_gate_requires_fourth_pass_doc_after_251,
+        test_docs_lint_gate_requires_fourth_pass_doc_pad0_after_251,
+        test_docs_lint_gate_requires_fourth_pass_doc_still_after_251,
+        test_docs_lint_gate_requires_not_invent_tpl_wording_after_251,
+        test_docs_lint_gate_requires_not_invent_tpl_wording_pad0_after_251,
+        test_docs_lint_gate_requires_not_invent_tpl_wording_still_after_251,
+        test_docs_lint_gate_requires_wiki_outline_needle_after_251,
+        test_docs_lint_gate_requires_wiki_outline_needle_pad0_after_251,
+        test_docs_lint_gate_requires_wiki_outline_needle_still_after_251,
+        test_lycheeignore_accepts_blob_exclude_after_251,
+        test_lycheeignore_accepts_blob_exclude_pad0_after_251,
+        test_lycheeignore_accepts_blob_exclude_still_after_251,
+        test_lycheeignore_keeps_exact_blob_line_after_251,
+        test_lycheeignore_keeps_exact_blob_line_pad0_after_251,
+        test_lycheeignore_keeps_exact_blob_line_still_after_251,
+        test_lycheeignore_keeps_exact_outline_line_after_251,
+        test_lycheeignore_keeps_exact_outline_line_pad0_after_251,
+        test_lycheeignore_keeps_exact_outline_line_still_after_251,
+        test_lycheeignore_rejects_missing_503_note_after_251,
+        test_lycheeignore_rejects_missing_503_note_pad0_after_251,
+        test_lycheeignore_rejects_missing_503_note_pad1_after_251,
+        test_lycheeignore_rejects_missing_503_note_still_after_251,
+        test_lycheeignore_rejects_missing_blob_exclude_after_251,
+        test_lycheeignore_rejects_missing_blob_exclude_pad0_after_251,
+        test_lycheeignore_rejects_missing_blob_exclude_pad1_after_251,
+        test_lycheeignore_rejects_missing_blob_exclude_pad2_after_251,
+        test_lycheeignore_rejects_missing_blob_exclude_still_after_251,
+        test_lycheeignore_rejects_missing_wiki_outline_note_after_251,
+        test_lycheeignore_rejects_missing_wiki_outline_note_pad0_after_251,
+        test_lycheeignore_rejects_missing_wiki_outline_note_still_after_251,
+        test_lycheeignore_rejects_unescaped_blob_host_after_251,
+        test_lycheeignore_rejects_unescaped_blob_host_pad0_after_251,
+        test_lycheeignore_rejects_unescaped_blob_host_still_after_251,
 ]
 
 

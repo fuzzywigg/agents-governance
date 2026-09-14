@@ -340,6 +340,14 @@ not path-edges residual #244 / not wiki outline/PUBLISH leftover #243 /
 not md/link residual #239 / not stewardship-checks/schema residual #233 /
 not wiki-index/badge leftover #227; do not revive closed
 PR #279/#276/#275/#269/#263/#257/#253/#248/#241; prior #269 RED was MD018)).
+plus stewardship-schema residual CI deepen after #282 tip: residual CI
+helper needles / residual CI invalid status+surface stubs on existing
+`check_stewardship_schema.py` only — DISTINCT residual CI only (not schema
+leftover residual #282 / not lychee/blob-503 leftover #278 / not Pass-2
+residual leftover #272 / not path-filter/path-order leftover #262 / not
+schema leftover #258 / not wiki/mdlink leftover #252 / not path-edges
+residual #244 / not stewardship-checks/schema residual #233; do not revive
+closed PR #268/#259/#257/#253/#248/#241)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

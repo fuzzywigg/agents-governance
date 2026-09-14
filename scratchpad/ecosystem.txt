@@ -872,3 +872,15 @@ _None yet._
 2026-09-14T10:44:39Z cursor: Cherry-pick in progress on post-#272 tip; local verify next ← ECO-081 (do not revive #246/#273/#266/#261/#260/#256/#251/#250)
 
 2026-09-14T10:51:26Z cursor: Local green — run_stewardship + self-tests 5592 + markdownlint on post-#272 tip ← ECO-081 lychee/blob-503 leftover only (leave draft; do not revive #246/#273/#266/#261/#260/#256/#251/#250)
+
+### [ECO-083] TOKENMAXX deepen stewardship-schema residual CI after #282 — 2026-09-14T11:20:08Z
+- [x] cursor: Read live tree post-#282 (5792 cases; schema leftover residual saturated via #282; closed #283/#285/#284/#279 siblings; open #286 path-edges)
+- [x] cursor: Fail-close schema-only residual CI helper needles + SHELVED|chatgpt stubs on existing check_stewardship_schema.py only
+- [x] cursor: Expand self-tests 5792 → 6028 (+236 residual CI; not #282/#278/#272/#262 spam; do not revive #268/#259)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING stewardship-schema residual CI edge pin wiring only; no invent-product; no fourth badge; no stewardship_common invent; no AGENTS-ECOSYSTEM/templates; do not revive #268/#259/#257/#253/#248/#241; do not redo #282 schema residual / #278 lychee / #272 Pass-2 / #286 path-edges sibling
+- Branch: cursor/tokenmaxx-schema-residual-ci-after-282-5b47
+2026-09-14T11:20:08Z
+
+2026-09-14T11:20:08Z cursor: Local implementation — stewardship-schema residual CI after #282 tip; self-tests 5792 → 6028; lint-safe; leave draft / do-not-merge; do not revive #268; do not redo #282/#278/#272
+2026-09-14T11:28:29Z cursor: Local green — run_stewardship + self-tests 6028 + markdownlint ← ECO-083 schema residual CI after #282 (leave draft; do not revive #268/#259; do not redo #282/#278/#272; leave open #286 path-edges alone)

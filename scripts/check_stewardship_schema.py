@@ -70,6 +70,29 @@ Fail-closed pins (live path after #53; second-pass after #72/#75):
   leftover residual invalid status stubs REJECTED|UNKNOWN|ORPHANED|QUARANTINE|SHADOW|PREVIEW /
   leftover residual invalid surface stubs telegram|matrix|irc|email|webhook /
   leftover residual docstring
+- Residual CI deepen after #282 (schema residual CI; NOT schema leftover residual #282 /
+  NOT lychee/blob-503 leftover #278 / NOT Pass-2 residual leftover #272 /
+  NOT path-filter/path-order leftover #262 / NOT schema leftover #258 /
+  NOT wiki/mdlink leftover #252 / NOT path-edges residual #244 /
+  NOT schema residual (pass-5) #233):
+  residual CI helper needles if errors: / return 1 / return 0 /
+  for rel, required_keys in DOC_SCHEMAS.items(): /
+  for key in required_keys: / if not path.is_file(): /
+  if not block.strip(): /
+  if key in STRING_KEYS and not isinstance(value, str): /
+  if "autonomy_level" in data: / if "edit_policy" in data: /
+  if date_key not in data: /
+  if not ISO_DATE_RE.match(raw): / if not SEMVER_RE.match(ver): /
+  if not ISSUE_REF_RE.search(closes): /
+  elif re.fullmatch digit coerce / value = value[1:-1] /
+  for key, want in expected.items(): /
+  level = data["autonomy_level"] / print(f"  - {err}" /
+  for raw in text.splitlines(): / line = raw.strip() /
+  key = key.strip() /
+  isinstance(value, str) and not value.strip() / path = ROOT / rel /
+  residual CI invalid status stubs SHELVED|SUPERSEDED|HOLD|STALE|ALPHA|NIGHTLY /
+  residual CI invalid surface stubs chatgpt|vertex|groq|together|mistral /
+  residual CI docstring
 """
 
 from __future__ import annotations

@@ -137,7 +137,12 @@ needles / utf-8 / `as_posix` / `.md` suffix / `ValueError` / `sorted` /
 UNICODE / space-dash / Percent-decode+Cap / empty () / `sys.exit` /
 `urllib.unquote` / `group(2)` / `startswith#` / `split#` / files scanned /
 stewardship_common / title / `#{1,6}` / slug punct / Offline+lychee /
-`path.parent`).
+`path.parent`,
+plus docs-lint pins after #94: escaped `img\.shields\.io` /
+`modelcontextprotocol.io` / `linuxfoundation.org` /
+stewardship/license-badge note / reject `https://*`+`http://*`+`*` /
+exact MD013+MD024 objects / MD033+MD041+MD060 false / `default: true` /
+`check_docs_lint_gate_contract`).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

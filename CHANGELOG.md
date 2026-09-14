@@ -11,6 +11,17 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX docs-lint pins after #94: expand self-tests to 1971 cases
+  (was 1899) fail-closing live `.lycheeignore` + `.markdownlint.json`
+  integrity — escaped `img\.shields\.io` / `modelcontextprotocol.io` /
+  `linuxfoundation.org` / stewardship/license-badge note / reject
+  `https://*`+`http://*`+bare `*` / exact `"MD013": { "line_length": 200 }` /
+  `"MD024": { "siblings_only": true }` / MD033+MD041+MD060 false /
+  `default: true`, plus `check_docs_lint_gate_contract` in
+  `check_badge_standard.py` — docs-lint slice only (not actionlint /
+  relative / schema / CI workflow pin spam); no invent-product; no
+  fourth badge. New draft after closed #88 (do not revive).
+
 - TOKENMAXX relative-link third-pass pins after #90: expand self-tests
   to 1899 cases (was 1827) fail-closing live relative-link integrity —
   `MD_LINK_RE`+`ATX_HEADING_RE` exact / `SKIP_*` exact assigns /

@@ -393,7 +393,9 @@ _None yet._
 - [x] cursor: Read live tree post-#90 (1827 cases; actionlint second-pass saturated; open #93 is docs-lint/mdlint+lycheeignore — different slice)
 - [x] cursor: Fail-close relative-link third-pass — exact MD_LINK_RE / ATX_HEADING_RE / SKIP_* assigns / relative_to.as_posix / urllib.unquote / range(_MAX_UNQUOTE_PASSES) / slug strip+UNICODE+space-dash / rglob+sorted / group(2).strip / allowlist tuple / // membership / split("#",1) / ? in target / ROOT.resolve / exists / .md suffix / FAILED+OK banners / empty+http+protocol-relative+fragment+query fail needles
 - [x] cursor: Expand self-tests 1827 → 1899 (relative-link third-pass slice; not actionlint / docs-lint / schema / badge / wiki / common / CI workflow pin spam)
-- [ ] cursor: Green PR with CI
+- [x] cursor: Green PR with CI
 - Scope: EXISTING relative-link integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-relative-third-pass-51da
 2026-09-14T00:58:13Z
+
+2026-09-14T01:02:00Z cursor: PR #98 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-049 TOKENMAXX relative-link third-pass pins

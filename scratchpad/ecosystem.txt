@@ -581,8 +581,9 @@ _None yet._
 - [x] cursor: Read live tree post-#173 (3081 cases; fixtures saturated; path-filter #166 CLOSED unsaturated but wiki-index less covered — pick wiki-index)
 - [x] cursor: Fail-close wiki-index validators — Home TOC empty-index / publishable page index stubs / broken internal stub links / empty markdown index / duplicate slug headings_in set collapse / gate contracts
 - [x] cursor: Expand self-tests 3081 → 3153 (wiki-index slice only; not fixtures #173 / path-filter #166 / wiki-badge #141 / stewardship-CI spam)
-- [ ] cursor: Green PR with CI
+- [x] cursor: Green PR with CI
 - Scope: EXISTING wiki-index / TOC / relative-link integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #168/#170 leftover on post-#173 main; do not revive #168/#170; leave path-filter #166 alone
 - Branch: cursor/tokenmaxx-wiki-index-validators-after-173-6f86
 2026-09-14T04:45:00Z
 2026-09-14T04:50:00Z cursor: Local green — run_stewardship + self-tests 3153 + markdownlint ← ECO-062 wiki-index validators after #173 (do not revive #168/#170; leave path-filter #166 alone)
+2026-09-14T04:51:00Z cursor: PR #177 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-062 TOKENMAXX wiki-index validators after #173 (does not revive #168/#170; leave path-filter #166 alone)

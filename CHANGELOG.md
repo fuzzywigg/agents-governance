@@ -11,6 +11,23 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #243:
+  expand self-tests to 4870 cases (was 4646) fail-closing DISTINCT leftover Pass-2 residual
+  soft-fail + existing concurrency group templates + existing `templates/AGENTS-REPO.md`
+  leftover — soft-fail with `|| :` / `|| return 0` / `set +o errexit` / `set +o nounset` /
+  invent `python3 -m` for gates / must not source env files / must not dot-source paths /
+  reject any `continue-on-error:` on existing workflows / exact contiguous concurrency
+  group template on all three workflows (existing templates only; no invent) /
+  AGENTS-REPO.md H1 `[PROJECT_NAME]` / parent_governance / smtp.eth / YYYY-MM-DD /
+  §1–§6 / `[CONFIG_FILE]` / Never commit `.env` / `agents-md/description` /
+  no invent badge.svg chrome — Pass-2 residual and existing-template leftover slice
+  only (not wiki outline/PUBLISH leftover #243 / not md/link residual #239 /
+  not stewardship-checks/schema residual #233 / not wiki-index/badge #227 /
+  not path-edges #225 / not Pass-2 leftover and md/link #220 / not Pass-2 residual
+  #199/#203 / not badge-lint #208 / not schema #216); no invent-product; no fourth
+  badge; no new templates. Lands closed #240 leftover on post-#243 tip (do
+  **not** revive #240/#235/#230). Distinct from merged
+  #243/#239/#233/#227/#225/#220/#216/#208.
 - TOKENMAXX wiki outline/PUBLISH leftover deepen after #239 tip: expand
   self-tests to 4646 cases (was 4462) fail-closing unsaturated wiki outline /
   PUBLISH.md leftover on existing `docs/wiki` pages only — Pages to publish

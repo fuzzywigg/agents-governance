@@ -270,7 +270,7 @@ _None yet._
 - [x] cursor: Read live tree post-#45 (974 cases; wiki-outline pins saturated)
 - [x] cursor: Fail-close schema gate — DOC_SCHEMAS / EXPECTED_VALUES / SEMVER / ISO-8601 / closes #N / invent edit_policy / issue-backlog owner copilot / scan_secrets
 - [x] cursor: Expand self-tests 974 → 1045 (schema gate contract slice; not wiki-outline / relative-link / CI workflow pin / fixture-reject spam)
-- [ ] cursor: Green PR with CI
+- [x] cursor: Green PR with CI
 - Scope: EXISTING stewardship-schema integrity / metadata pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-schema-gate-pins-959b
 2026-09-13T21:50:50Z
@@ -371,7 +371,9 @@ _None yet._
 - [x] cursor: Read live tree post-#79 (1683 cases; actionlint-style saturated; different from sibling A actionlint)
 - [x] cursor: Fail-close schema second-pass — FENCED_YAML_RE / ISO_DATE_RE / SEMVER_RE / ISSUE_REF_RE / DATE_KEYS / Tiny YAML / scalar+non-empty+string / ACTIVE / tier / 0..3 / ISO-8601 / invent / semver / closes #N / FAILED+OK / stdlib-subset+PyYAML / bool subclass / match.group(1) / missing keys / utf-8 / STRING_KEYS
 - [x] cursor: Expand self-tests 1683 → 1755 (schema second-pass slice; not actionlint / badge / wiki / relative / common / CI workflow pin spam)
-- [ ] cursor: Green PR with CI
+- [x] cursor: Green PR with CI
 - Scope: EXISTING stewardship-schema integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-schema-second-pass-c6f7
 2026-09-14T00:21:26Z
+
+2026-09-14T00:27:11Z cursor: PR #83 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-047 TOKENMAXX stewardship-schema second-pass pins

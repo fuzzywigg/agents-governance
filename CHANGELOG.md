@@ -11,6 +11,15 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX actionlint-style third-pass pins after #108: expand self-tests to
+  2223 cases (was 2151) fail-closing live actionlint-style integrity —
+  `concurrency:`+`cancel-in-progress:` / `permissions:` present / reject
+  `actions`|`packages`|`pull-requests: write` / `finditer` uses / docker
+  continue / `rsplit[-1]` / third-pass docstring — actionlint-style
+  third-pass slice only (not badge / docs-lint / wiki / relative / schema /
+  common / CI workflow pin spam); no invent-product; no fourth badge; lands
+  closed #110 leftover on post-#108 main
+
 - TOKENMAXX badge-standard third-pass pins after #104: expand self-tests to
   2151 cases (was 2079) fail-closing live badge-standard integrity —
   `BADGE_LINE_RE`+`REPO_FROM_*` exact / `REQUIRED_WORKFLOWS` exact /

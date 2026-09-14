@@ -17,7 +17,7 @@ Fail-closed pins (live path after #48; second-pass after #61; third-pass after #
   absolute workflow URL / License point / Unexpected label / extract+check_badges /
   contract(errors) call / IGNORECASE / blob.lower / EXPECTED_REPO.lower
 
-Fail-closed actionlint-style pins (live path after #75; second-pass after #83/#86):
+Fail-closed actionlint-style pins (live path after #75; second-pass after #83/#86; third-pass after #94):
 - top-level name: / jobs.*.runs-on / jobs.*.steps / timeout-minutes
 - no pull_request_target / no permissions: write-all / no contents: write
 - no id-token: write / actions must be @-pinned (not main|master|latest)
@@ -25,6 +25,9 @@ Fail-closed actionlint-style pins (live path after #75; second-pass after #83/#8
 - Second-pass: exact name/uses regexes / write-all+contents+id-token regexes /
   docker startswith / @ not in uses / rsplit / group(1).strip() /
   fail needles / least-privilege+OIDC+majors comments / REQUIRED_WORKFLOWS loop
+- Third-pass after #94: concurrency:+cancel-in-progress: / permissions: present /
+  reject actions|packages|pull-requests: write / finditer uses / docker continue /
+  rsplit[-1] / third-pass docstring
 """
 
 from __future__ import annotations
@@ -289,6 +292,9 @@ def check_actionlint_style(errors: list[str]) -> None:
     write-all+contents+id-token regexes / docker startswith /
     @ not in uses / rsplit / group(1).strip() / fail needles /
     least-privilege+OIDC+majors comments / REQUIRED_WORKFLOWS loop.
+    Third-pass after #94: concurrency:+cancel-in-progress: / permissions: present /
+    reject actions|packages|pull-requests: write / finditer uses /
+    docker continue / rsplit[-1] / third-pass docstring.
     """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
@@ -310,6 +316,21 @@ def check_actionlint_style(errors: list[str]) -> None:
         # Fail-closed after #75: OIDC write not needed for docs CI paths.
         if re.search(r"(?m)^\s*id-token:\s*write\s*$", text):
             fail(f"{name}: id-token: write is forbidden on stewardship workflows", errors)
+        # Third-pass after #94: reversible CI concurrency cancel pins.
+        if "concurrency:" not in text:
+            fail(f"{name}: actionlint-style requires concurrency:", errors)
+        if "cancel-in-progress:" not in text:
+            fail(f"{name}: actionlint-style requires cancel-in-progress:", errors)
+        # Third-pass after #94: permissions block must be present (least privilege).
+        if "permissions:" not in text:
+            fail(f"{name}: actionlint-style requires permissions:", errors)
+        # Third-pass after #94: reject extra write scopes on docs CI paths.
+        if re.search(r"(?m)^\s*actions:\s*write\s*$", text):
+            fail(f"{name}: actions: write is forbidden on stewardship workflows", errors)
+        if re.search(r"(?m)^\s*packages:\s*write\s*$", text):
+            fail(f"{name}: packages: write is forbidden on stewardship workflows", errors)
+        if re.search(r"(?m)^\s*pull-requests:\s*write\s*$", text):
+            fail(f"{name}: pull-requests: write is forbidden on stewardship workflows", errors)
         # Pin GitHub Actions majors (actionlint / supply-chain hygiene).
         for match in re.finditer(r"(?m)^\s*-\s*uses:\s*([^\s#]+)", text):
             uses = match.group(1).strip()
@@ -2119,6 +2140,126 @@ def check_actionlint_style_gate_contract(errors: list[str]) -> None:
             + module_second,
             errors,
         )
+
+    # Fail-closed after #94: third-pass helper / constant / needle pins
+    # (actionlint-style reversible CI slice only; not lychee/mdlint/workflow spam).
+    third_pass_doc = "Third-pass after " + "#94"
+    if third_pass_doc not in text:
+        fail(
+            "check_actionlint_style docstring must pin " + third_pass_doc,
+            errors,
+        )
+    module_third = "third-pass after " + "#94"
+    if module_third not in text:
+        fail(
+            "check_badge_standard.py module docstring must pin actionlint "
+            + module_third,
+            errors,
+        )
+    concurrency_membership = '"concurrency:" not in ' + "text"
+    concurrency_membership_sq = "'concurrency:' not in " + "text"
+    if concurrency_membership not in text and concurrency_membership_sq not in text:
+        fail(
+            "check_actionlint_style must require concurrency: via membership",
+            errors,
+        )
+    cancel_membership = '"cancel-in-progress:" not in ' + "text"
+    cancel_membership_sq = "'cancel-in-progress:' not in " + "text"
+    if cancel_membership not in text and cancel_membership_sq not in text:
+        fail(
+            "check_actionlint_style must require cancel-in-progress: via membership",
+            errors,
+        )
+    permissions_membership = '"permissions:" not in ' + "text"
+    permissions_membership_sq = "'permissions:' not in " + "text"
+    if permissions_membership not in text and permissions_membership_sq not in text:
+        fail(
+            "check_actionlint_style must require permissions: via membership",
+            errors,
+        )
+    actions_write_re = 'r"(?m)^\\s*actions:\\s*' + 'write\\s*$"'
+    actions_write_re_sq = "r'(?m)^\\s*actions:\\s*" + "write\\s*$'"
+    if actions_write_re not in text and actions_write_re_sq not in text:
+        fail(
+            "check_actionlint_style must keep exact actions: write regex",
+            errors,
+        )
+    packages_write_re = 'r"(?m)^\\s*packages:\\s*' + 'write\\s*$"'
+    packages_write_re_sq = "r'(?m)^\\s*packages:\\s*" + "write\\s*$'"
+    if packages_write_re not in text and packages_write_re_sq not in text:
+        fail(
+            "check_actionlint_style must keep exact packages: write regex",
+            errors,
+        )
+    pr_write_re = 'r"(?m)^\\s*pull-requests:\\s*' + 'write\\s*$"'
+    pr_write_re_sq = "r'(?m)^\\s*pull-requests:\\s*" + "write\\s*$'"
+    if pr_write_re not in text and pr_write_re_sq not in text:
+        fail(
+            "check_actionlint_style must keep exact pull-requests: write regex",
+            errors,
+        )
+    finditer_pin = "re.finditer("
+    if finditer_pin not in text:
+        fail(
+            "check_actionlint_style must scan uses via re.finditer",
+            errors,
+        )
+    # Split construction keeps second-pass startswith/rsplit self-tests fail-closed.
+    docker_continue = 'if uses.startswith("docker:' + '//"):'
+    if docker_continue not in text:
+        fail(
+            "check_actionlint_style must continue after docker:// uses",
+            errors,
+        )
+    rsplit_tail = 'rsplit("@", 1)' + "[-1]"
+    if rsplit_tail not in text:
+        fail(
+            'check_actionlint_style must take ref via rsplit("@", 1)[-1]',
+            errors,
+        )
+    fail_concurrency = "actionlint-style requires concurrency:"
+    if fail_concurrency not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_concurrency + " fail needle",
+            errors,
+        )
+    fail_cancel = "actionlint-style requires cancel-in-progress:"
+    if fail_cancel not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_cancel + " fail needle",
+            errors,
+        )
+    fail_permissions = "actionlint-style requires permissions:"
+    if fail_permissions not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_permissions + " fail needle",
+            errors,
+        )
+    fail_actions = "actions: write is forbidden on stewardship " + "workflows"
+    if fail_actions not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_actions + " fail needle",
+            errors,
+        )
+    fail_packages = "packages: write is forbidden on stewardship " + "workflows"
+    if fail_packages not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_packages + " fail needle",
+            errors,
+        )
+    fail_prs = "pull-requests: write is forbidden on stewardship " + "workflows"
+    if fail_prs not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_prs + " fail needle",
+            errors,
+        )
+    reversible_pin = "reversible CI " + "concurrency"
+    if reversible_pin not in text:
+        fail(
+            "check_actionlint_style must keep " + reversible_pin + " wording",
+            errors,
+        )
+
     contract_fn = "check_actionlint_style_gate_" + "contract"
     self_text = BADGE_GATE.read_text(encoding="utf-8")
     if f"def {contract_fn}(" not in self_text:

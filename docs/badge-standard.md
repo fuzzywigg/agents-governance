@@ -162,7 +162,14 @@ IGNORECASE / `blob.lower` / `EXPECTED_REPO.lower`,
 plus actionlint-style third-pass after #108: `concurrency:` +
 `cancel-in-progress:` / `permissions:` present / reject
 `actions|packages|pull-requests: write` / `re.finditer` / docker continue /
-`rsplit[-1]` / third-pass docstring).
+`rsplit[-1]` / third-pass docstring,
+plus stewardship_common third-pass after #111: future annotations / import
+re+Path / exact PRIVATE KEY+gh-family+sk|rk patterns / SECRET_PATTERNS
+tuple typing / FENCED_BLOCK_RE.sub / label or relative_to / pattern.search /
+lowered=text.lower / re.escape / https? URL-ish / ROOT.glob+found.update /
+set[Path] / workflows path join / scheme+pattern+hint loops / Shared helpers
+doc / hint.endswith(=) / MEMORY dumps / str|None+list[Path] /
+FORBIDDEN_BADGE_HINTS head / SECRET_URL_HINTS gh-family prefix members).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

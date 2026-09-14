@@ -230,8 +230,7 @@ NOT path-order #189 / NOT md/link residual #239 /
 NOT wiki outline/PUBLISH leftover #243 /
 NOT actionlint path-filter/path-order residual #244;
 lands closed #251/#250/#246/#245/#240 leftover on post-#262 tip; do not invent new templates):
-- soft-fail with || : / soft-fail with || return 0 on run_stewardship_checks.sh
-- set +o errexit / set +o nounset soft-fail refuse
+- soft-fail with || : / soft-fail with || return 0 on run_stewardship_checks.sh- set +o errexit / set +o nounset soft-fail refuse
 - invent python3 -m for gates refuse
 - must not source env files / must not dot-source paths
 - reject any continue-on-error: on all three existing workflows

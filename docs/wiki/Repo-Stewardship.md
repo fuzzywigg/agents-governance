@@ -268,6 +268,16 @@ rewrite / OPERATOR_ONLY not in PUBLISHABLE_PAGES — DISTINCT leftover only
 (not md/link residual #239 / not stewardship-checks/schema #233 /
 not wiki-index/badge #227 / not path-filter/path-order #225;
 lands closed #238 leftover on post-#239 tip; do not revive #238)).
+plus actionlint path-filter/path-order residual deepen after #243 tip:
+contiguous pull_request:/schedule: adjacency / reject branches-ignore: /
+pull_request type-unfiltered / reject tj-actions/changed-files /
+contiguous four-step actionlint path-order /
+schedule before workflow_dispatch / contiguous shell-less actionlint run —
+DISTINCT residual edges only (not wiki outline/PUBLISH #243 / not md/link
+residual #239 / not stewardship-checks/schema #233 / not
+wiki-index/badge #227 / not path-edges deepen #225; lands closed
+PR #236/#242/#237/#232/#228 leftover on post-#243 tip; do not revive
+closed #236/#242/#237/#232/#228/#226/#223/#217/#213/#198)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

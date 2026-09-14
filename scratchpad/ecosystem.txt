@@ -750,3 +750,5 @@ _None yet._
 2026-09-14T07:42:00Z cursor: Local green — run_stewardship + self-tests 4262 + markdownlint ← ECO-073 path-filter/path-order residuals after #225 (leave draft; do not revive #226/#223/#217)
 
 2026-09-14T07:42:30Z cursor: Draft PR #228 opened (cursor/tokenmaxx-path-edges-residual-after-225-7fba); leave draft / do-not-merge; awaiting CI ← ECO-073 residual after #225 (do not revive #226/#223/#217/#213/#198)
+
+2026-09-14T07:50:41Z cursor: PR #228 CI green (markdown-lint + link-check + stewardship/actionlint) on tip 327fb52 ← ECO-073 path-filter/path-order residuals after #225 (leave draft / do-not-merge; do not revive #226/#223/#217/#213/#198)

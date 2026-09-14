@@ -484,3 +484,5 @@ _None yet._
 - Scope: EXISTING docs-lint (.lycheeignore + .markdownlint.json) integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; new draft after #132 (do not revive #133/#130/#125/#116)
 - Branch: cursor/tokenmaxx-docs-lint-second-pass-after-132-4216
 2026-09-14T02:45:00Z
+
+2026-09-14T02:56:00Z cursor: PR #137 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-057 TOKENMAXX docs-lint second-pass pins after #132

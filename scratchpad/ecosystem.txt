@@ -688,4 +688,4 @@ _None yet._
 2026-09-14T06:25:00Z cursor: Local green — run_stewardship + self-tests 3806 + markdownlint ← ECO-069 path-filter/path-order deepen after #203 (leave draft; leave CONFLICTING #204/#205 alone; do not revive #198/#186)
 
 2026-09-14T06:25:00Z cursor: Draft PR opening (cursor/tokenmaxx-path-edges-deepen-after-203-1bd1); leave draft / do-not-merge; awaiting CI ← ECO-069 path-filter/path-order deepen after #203 (leave CONFLICTING #204/#205 alone)
-
+2026-09-14T06:28:00Z cursor: Draft PR #213 opened (cursor/tokenmaxx-path-edges-deepen-after-203-1bd1); leave draft / do-not-merge; awaiting CI ← ECO-069 path-filter/path-order deepen after #203 (leave MERGEABLE #208–#212 alone; do not revive #198/#186)

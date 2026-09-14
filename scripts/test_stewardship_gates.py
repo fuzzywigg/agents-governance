@@ -291,7 +291,7 @@ def _write(path: Path, text: str) -> None:
 
 
 def _minimal_workflows(tmp: Path) -> None:
-    # Align with live path-filter leftover after #293: name:/on: + workflow_dispatch:/concurrency:; keep top-level permissions after concurrency for older pins; keep link fixture even-byte via comment pad for utf-16 BOM UnicodeError parity.
+    # Align with live path-filter leftover after #293: name:/on: + workflow_dispatch:/concurrency:; keep top-level permissions after concurrency for older pins; keep link fixture even-byte via trailing newline pad for utf-16 BOM UnicodeError parity.
     wf = tmp / ".github" / "workflows"
     wf.mkdir(parents=True, exist_ok=True)
     # Keep aligned with live CI second-pass pins after #72 (branches / concurrency /
@@ -307,7 +307,7 @@ on:
       - ".github/workflows/link-check.yml"
   pull_request:
   schedule:
-    # Run weekly to catch externally broken links 
+    # Run weekly to catch externally broken links
     - cron: "0 6 * * 1"
   workflow_dispatch:
 
@@ -341,6 +341,7 @@ jobs:
             --exclude-path .github/agents
             "**/*.md"
           fail: true
+
 """
     lint = """name: Markdown Lint
 

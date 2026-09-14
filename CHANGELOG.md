@@ -11,6 +11,29 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX actionlint path-filter/path-order residual leftover deepen after
+  #278 tip (lands closed #280/#274/#270 leftover; pins after #272 wording):
+  expand self-tests to 5744 cases (was 5592) fail-closing DISTINCT
+  residual leftover actionlint path-filter / path-order edges on existing
+  workflow modules — contiguous workflow_dispatch:/concurrency: adjacency /
+  contiguous name:/on: workflow header / reject workflow_run: /
+  reject repository_dispatch: / reject merge_group: / reject tags: (bare) /
+  contiguous six-step actionlint path-order (Set up Python → Install PyYAML →
+  gates → self-tests → Download → actionlint run) / leftover docstring +
+  gate-contract needles — path-filter/path-order residual leftover slice only
+  (not lychee/blob-503 harden #278 / not Pass-2 residual leftover #272 /
+  not saturated leftover #262 / not stewardship-schema leftover #258 /
+  not wiki/mdlink leftover #252 / not saturated residual #244 /
+  not saturated deepen #225/#203 / not wiki outline/PUBLISH leftover #243 /
+  not md/link residual #239 / not stewardship-checks/schema leftover #233 /
+  not wiki-badge leftover #227 / not #189 path-order / not #176 layouts /
+  not schema #191/#216 / not Pass-2 residual #199/#203 /
+  not Pass-2 leftover + md/link #220 / not stewardship-badge lint #208);
+  no invent-product; no fourth badge. Lands closed #280/#274/#270/#264 leftover
+  on post-#278 tip (do **not** revive
+  closed #280/#274/#270/#264/#255/#247/#244/#236/#232/#228/#226/#223/#217/#213/#198/#186/#166/#157).
+  Distinct from merged #278/#272/#262/#258/#252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
+
 - TOKENMAXX docs-lint pass-4 lychee/blob-503 harden after #272 tip: expand
   self-tests to 5592 cases (was 5550) fail-closing remaining same-repo GitHub
   `blob/main` HTML 503 flake leftovers on existing docs-lint / `.lycheeignore`

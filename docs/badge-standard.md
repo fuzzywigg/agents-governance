@@ -137,7 +137,11 @@ needles / utf-8 / `as_posix` / `.md` suffix / `ValueError` / `sorted` /
 UNICODE / space-dash / Percent-decode+Cap / empty () / `sys.exit` /
 `urllib.unquote` / `group(2)` / `startswith#` / `split#` / files scanned /
 stewardship_common / title / `#{1,6}` / slug punct / Offline+lychee /
-`path.parent`).
+`path.parent`,
+plus actionlint-style third-pass after #94: `concurrency:` +
+`cancel-in-progress:` / `permissions:` present / reject
+`actions|packages|pull-requests: write` / `re.finditer` / docker continue /
+`rsplit[-1]` / third-pass docstring).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

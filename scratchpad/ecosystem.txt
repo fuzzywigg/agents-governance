@@ -817,3 +817,4 @@ _None yet._
 - Branch: cursor/tokenmaxx-pass2-residual-templates-lychee-after-252-6390
 2026-09-14T09:59:34Z
 
+2026-09-14T10:02:37Z cursor: Draft PR #261 opened (cursor/tokenmaxx-pass2-residual-templates-lychee-after-252-6390); leave draft / do-not-merge; awaiting CI ← ECO-079 (do not revive #256/#254/#251/#250/#246/#245/#240)

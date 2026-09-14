@@ -26,7 +26,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   residual layouts #239 / not path-filter/path-order leftover #244 / not
   stewardship-checks/schema residual #233 / not wiki-index/badge leftover
   #227 / not path-filter/path-order #225 / not Pass-2 leftover + md/link
-  #220); no invent-product; no fourth badge; no extra wiki files. Distinct
+  #220); no invent-product; no fourth badge; no extra wiki files; wiki seed Home (landing) row aligned. Distinct
   from merged #243/#239/#233/#227/#225/#220/#216/#208. Do **not** revive
   #238/#234/#231/#221.
 - TOKENMAXX wiki outline/PUBLISH leftover deepen after #239 tip: expand

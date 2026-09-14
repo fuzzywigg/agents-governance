@@ -11,8 +11,18 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX Pass-2 leftover + markdown-lint/link-check edges after #216 tip: expand
+  self-tests to 3724 cases (was 3660) fail-closing residual run_stewardship soft-fail
+  posture beyond #199 (`|| exit 0` / shebang-first-line) and unsaturated markdown-lint /
+  link-check workflow edges (`args: >-` / externally-broken commentary / without-it
+  private-404 / reject continue-on-error / exact job permissions / checkout adjacency) —
+  Pass-2 leftover + md/link edges slice only (not Pass-2 residual #199 / register #203 /
+  schema third-pass #191 / path-order #189 / open badge-lint #205 / open schema fourth
+  #204); no invent-product; no fourth badge. Lands closed #202/#192 leftover on post-#203
+  tip (do **not** revive #202/#192/#175/#178). Distinct from merged Pass-2 residual #199
+  and merged badge-lint #208 / schema fourth #216.
 - TOKENMAXX stewardship-schema fourth-pass pins after #208 tip: expand
-  self-tests to 3906 cases (was 3728) fail-closing live schema integrity —
+  self-tests to 3970 cases (was 3906) fail-closing live schema integrity —
   nested/list edit_policy+parent_governance policy refs / invalid status enum
   stubs DEPRECATED|ARCHIVED|PENDING|RETIRED|SUSPENDED / invalid surface stubs
   geryon|playwright|browser-claude|claude-cowork / whitespace-only non-empty /

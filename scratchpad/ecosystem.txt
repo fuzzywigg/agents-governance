@@ -732,3 +732,16 @@ _None yet._
 2026-09-14T07:10:00Z cursor: Local green — run_stewardship + self-tests 4116 + markdownlint ← ECO-072 path-filter/path-order leftovers after #220 (leave draft; do not revive #223/#222/#221)
 
 2026-09-14T07:12:00Z cursor: Draft PR #225 opened (cursor/tokenmaxx-path-edges-leftover-after-220-74ac); leave draft / do-not-merge; awaiting CI ← ECO-072 path-filter/path-order leftovers after #220 (do not revive #223/#222/#221)
+
+### [ECO-073] TOKENMAXX deepen Pass-2 residual + template validation residual after #225 — 2026-09-14T07:38:55Z
+- [x] cursor: Read live tree post-#225 (4116 cases; path-edges saturated via #225; Pass-2 residual soft-fail + concurrency template residual unsaturated)
+- [x] cursor: Fail-close Pass-2 residual deepen + exact contiguous concurrency group templates (existing only)
+- [x] cursor: Expand self-tests 4116 → 4234 (Pass-2 residual + template validation residual slice only; not #225/#220/#216/#208/#203/#199 spam)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING run_stewardship Pass-2 residual + concurrency group template validation residual only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates invent; no secrets; do not redo #225 path-edges / #220 Pass-2 leftover+md/link / #199/#203 residual core
+- Branch: cursor/tokenmaxx-pass2-residual-templates-after-225-89ec
+2026-09-14T07:38:55Z
+
+2026-09-14T07:38:55Z cursor: Local green pending — Pass-2 residual deepen + template validation residual after #225 (leave draft; do not revive path-edges/mdlink siblings)
+
+2026-09-14T07:43:46Z cursor: Local green — run_stewardship + self-tests 4234 + markdownlint ← ECO-073 Pass-2 residual deepen + template validation residual after #225 (leave draft; do not redo #225/#220/#199)

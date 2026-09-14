@@ -130,6 +130,18 @@ NOT run_stewardship residual #199; residual uncovered only):
 - exact live link-check push paths filter (.lycheeignore + self path)
 - missing badge fixtures for invent svg / wrong badge.svg / glob+paths drift
 
+Fail-closed Pass-2 residual deepen + concurrency template validation residual
+after #225 tip (NOT Pass-2 residual #199/#203 / NOT Pass-2 leftover + md/link #220 /
+NOT path-edges #225 / NOT badge-lint #208 / NOT schema #216 / NOT path-order #189 /
+NOT path-filter #176):
+- soft-fail with || : / soft-fail with || return 0 on run_stewardship_checks.sh
+- set +o errexit / set +o nounset soft-fail refuse
+- invent python3 -m for gates refuse
+- must not source env files / must not dot-source paths
+- stewardship-checks must not set continue-on-error (Pass-2 residual deepen after #225)
+- exact contiguous concurrency group template on all three workflows
+  (group + cancel-in-progress: true block; existing templates only)
+
 """
 
 from __future__ import annotations
@@ -721,6 +733,14 @@ def check_workflow_hardening(errors: list[str]) -> None:
     args: >- / externally broken links commentary / without-it private-404 commentary /
     must not set continue-on-error / exact job permissions: contents: read /
     checkout before Check links adjacency / checkout before Run markdownlint adjacency.
+    Pass-2 residual deepen + concurrency template validation residual after #225 tip
+    (NOT Pass-2 residual #199/#203 / NOT Pass-2 leftover + md/link #220 /
+    NOT path-edges #225 / NOT badge-lint #208 / NOT schema #216):
+    soft-fail with || : / soft-fail with || return 0 /
+    set +o errexit / set +o nounset / invent python3 -m for gates /
+    must not source env files / must not dot-source paths /
+    stewardship-checks must not set continue-on-error (Pass-2 residual deepen after #225) /
+    exact contiguous concurrency group template (existing templates only).
     """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
@@ -765,6 +785,21 @@ def check_workflow_hardening(errors: list[str]) -> None:
         if not re.search(r"(?m)^\s*cancel-in-progress:\s*true\s*$", text):
             fail(
                 f"{name} concurrency must set cancel-in-progress: true",
+                errors,
+            )
+        # concurrency group template validation residual after #225 tip
+        # (exact contiguous existing templates only; NOT invent new templates /
+        # NOT path-edges #225 / NOT Pass-2 leftover #220 / NOT residual #199/#203).
+        prefix = name.removesuffix(".yml")
+        exact_concurrency = (
+            "concurrency:\n"
+            f"  group: {prefix}-${{{{ github.workflow }}}}-${{{{ github.ref }}}}\n"
+            "  cancel-in-progress: true"
+        )
+        if exact_concurrency not in text:
+            fail(
+                f"{name} must keep exact contiguous concurrency group template "
+                f"(Pass-2 residual / template validation residual after #225)",
                 errors,
             )
         if "timeout-minutes:" not in text:
@@ -1798,6 +1833,16 @@ def check_workflow_hardening(errors: list[str]) -> None:
     if lint_checkout_adj not in lint:
         fail(
             "markdown-lint.yml must keep checkout before Run markdownlint adjacency",
+            errors,
+        )
+
+    # Pass-2 residual deepen after #225 tip: stewardship-checks soft-continue refuse
+    # beyond path-order true-only pin (NOT path-edges #225 / NOT md/link #220 /
+    # NOT Pass-2 residual #199/#203 / NOT Pass-2 leftover #220).
+    if "continue-on-error:" in stew:
+        fail(
+            "stewardship-checks.yml must not set continue-on-error "
+            "(Pass-2 residual deepen after #225)",
             errors,
         )
 
@@ -7094,6 +7139,51 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
                 "run_stewardship_checks.sh must keep shebang as first line",
                 errors,
             )
+        # Pass-2 residual deepen after #225 tip (soft-fail leftovers beyond
+        # #199/#203 residual + #220 || exit 0 / shebang-first; NOT path-edges #225 /
+        # NOT md/link #220 / NOT badge-lint #208 / NOT schema #216).
+        if "|| :" in run_text or "||:" in run_text:
+            fail(
+                "run_stewardship_checks.sh must not soft-fail with || : "
+                "(Pass-2 residual deepen after #225)",
+                errors,
+            )
+        if "|| return 0" in run_text or "||return 0" in run_text:
+            fail(
+                "run_stewardship_checks.sh must not soft-fail with || return 0 "
+                "(Pass-2 residual deepen after #225)",
+                errors,
+            )
+        if "set +o errexit" in run_text:
+            fail(
+                "run_stewardship_checks.sh must not soft-fail with set +o errexit "
+                "(Pass-2 residual deepen after #225)",
+                errors,
+            )
+        if "set +o nounset" in run_text:
+            fail(
+                "run_stewardship_checks.sh must not soft-fail with set +o nounset "
+                "(Pass-2 residual deepen after #225)",
+                errors,
+            )
+        if "python3 -m " in run_text:
+            fail(
+                "run_stewardship_checks.sh must not invent python3 -m for gates "
+                "(Pass-2 residual deepen after #225)",
+                errors,
+            )
+        if re.search(r"(?m)^\s*source\s+", run_text):
+            fail(
+                "run_stewardship_checks.sh must not source env files "
+                "(Pass-2 residual deepen after #225)",
+                errors,
+            )
+        if re.search(r"(?m)^\s*\.\s+/", run_text):
+            fail(
+                "run_stewardship_checks.sh must not dot-source paths "
+                "(Pass-2 residual deepen after #225)",
+                errors,
+            )
         # Leftover after #149: exact live run_stewardship_checks.sh full layout.
         expected_run = (
             "#!/usr/bin/env bash\n"
@@ -7439,6 +7529,79 @@ def check_run_stewardship_gate_contract(errors: list[str]) -> None:
     if shebang_first not in text:
         fail(
             "run_stewardship contract must keep " + shebang_first + " pin",
+            errors,
+        )
+    # Pass-2 residual deepen + concurrency template validation residual after #225.
+    deepen_225 = "Pass-2 residual deepen after " + "#225"
+    if deepen_225 not in text:
+        fail(
+            "run_stewardship pins must keep " + deepen_225 + " marker",
+            errors,
+        )
+    template_residual = "concurrency group template validation residual after " + "#225"
+    if template_residual not in text:
+        fail(
+            "run_stewardship pins must keep " + template_residual + " marker",
+            errors,
+        )
+    colon_soft = "soft-fail with || " + ":"
+    if colon_soft not in text:
+        fail(
+            "run_stewardship contract must keep " + colon_soft + " pin",
+            errors,
+        )
+    return0_soft = "soft-fail with || return " + "0"
+    if return0_soft not in text:
+        fail(
+            "run_stewardship contract must keep " + return0_soft + " pin",
+            errors,
+        )
+    errexit_soft = "set +o " + "errexit"
+    if errexit_soft not in text:
+        fail(
+            "run_stewardship contract must keep " + errexit_soft + " pin",
+            errors,
+        )
+    nounset_soft = "set +o " + "nounset"
+    if nounset_soft not in text:
+        fail(
+            "run_stewardship contract must keep " + nounset_soft + " pin",
+            errors,
+        )
+    py_m_pin = "invent python3 -m " + "for gates"
+    if py_m_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + py_m_pin + " pin",
+            errors,
+        )
+    source_pin = "must not source env " + "files"
+    if source_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + source_pin + " pin",
+            errors,
+        )
+    dot_pin = "must not dot-source " + "paths"
+    if dot_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + dot_pin + " pin",
+            errors,
+        )
+    stew_coe = "must not set continue-on-error (Pass-2 residual deepen after " + "#225)"
+    if stew_coe not in text:
+        fail(
+            "run_stewardship contract must keep stewardship continue-on-error deepen pin",
+            errors,
+        )
+    exact_conc = "exact contiguous concurrency group " + "template"
+    if exact_conc not in text:
+        fail(
+            "run_stewardship contract must keep " + exact_conc + " pin",
+            errors,
+        )
+    not_path_edges = "NOT path-edges " + "#225"
+    if not_path_edges not in text:
+        fail(
+            "run_stewardship docstring must keep " + not_path_edges + " distinctness",
             errors,
         )
 

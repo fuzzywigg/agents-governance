@@ -38,7 +38,8 @@ Fail-closed run_stewardship runner pins (live path after #117; lands closed #96)
 - same set as CI commentary / python3 scripts/<gate> for four gates
 - gate order badge → wiki → schema → relative
 - check_run_stewardship_gate_contract self-pins
-Fail-closed CI workflow pins (live path after #39/#72; third-pass after #111; deepen after #161):
+Fail-closed CI workflow pins (live path after #39/#72; third-pass after #111; deepen after #161;
+path-filter leftovers after #173):
 - Third-pass after #111: exact concurrency group templates /
   markdown-lint+stewardship cron/timeout pins / DavidAnson@v24 /
   setup-python@v5 / lychee --verbose/--no-progress/--max-concurrency 8 /
@@ -49,6 +50,8 @@ Fail-closed CI workflow pins (live path after #39/#72; third-pass after #111; de
   exact token+--github-token forms / --exclude-path .github/agents /
   globs: | / AGENTS+CLAUDE+LICENSE+CONTRIBUTING+.github/workflows/** paths /
   Weekly drift + GITHUB_TOKEN commentary / deepen docstring
+- Path-filter leftovers after #173: exact push paths layouts / residual
+  stewardship path entries / reject paths-ignore / ignore-glob exactness
 
 Fail-closed leftover docs-lint/stewardship/actionlint pins after #149:
 - docs-lint third-pass: exact live .lycheeignore full layout + exact
@@ -57,6 +60,15 @@ Fail-closed leftover docs-lint/stewardship/actionlint pins after #149:
 - actionlint leftover: contents: read membership affirm (complement #149
   regex) / leftover docstring (not docs-lint / wiki spam)
 - stewardship leftover: exact live run_stewardship_checks.sh full layout
+
+Fail-closed actionlint path-filter leftovers after #173:
+- push paths: on all three workflows / reject paths-ignore:
+- exact link-check + markdown-lint + stewardship paths layouts
+- residual stewardship path entries (AGENTS/CLAUDE/LICENSE/CONTRIBUTING/
+  workflows/** / .lycheeignore / .markdownlint.json)
+- ignore globs: --exclude-path .github/agents + exact markdownlint bangs
+- empty workflow stubs already handled (load None continue); distinct from
+  path-order/badge, stewardship-badge lint, and stewardship CI deepen
 """
 
 from __future__ import annotations
@@ -626,6 +638,9 @@ def check_workflow_hardening(errors: list[str]) -> None:
     exact token+--github-token forms / --exclude-path .github/agents /
     globs: | / AGENTS+CLAUDE+LICENSE+CONTRIBUTING+.github/workflows/** paths /
     Weekly drift + GITHUB_TOKEN commentary / deepen docstring.
+    Path-filter leftovers after #173: exact push paths layouts / residual
+    stewardship path entries / reject paths-ignore / ignore-glob exactness
+    (empty workflow stubs already handled; not path-order/badge spam).
     """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
@@ -1264,6 +1279,142 @@ def check_workflow_hardening(errors: list[str]) -> None:
     if "Weekly drift catch for badge/wiki/schema/relative-link gates" not in stew:
         fail(
             "stewardship-checks.yml must keep Weekly drift catch commentary",
+            errors,
+        )
+
+    # Fail-closed after #173: actionlint path-filter leftovers (push paths /
+    # ignore globs). Distinct from path-order/badge (#157), stewardship-badge
+    # lint (#172), and stewardship CI deepen (#165); empty workflow stubs
+    # already handled via load None continue. Lands closed #166 leftover.
+    if "paths:" not in link:
+        fail("link-check.yml must declare push paths: filter", errors)
+    if "paths:" not in lint:
+        fail("markdown-lint.yml must declare push paths: filter", errors)
+    if "paths:" not in stew:
+        fail("stewardship-checks.yml must declare push paths: filter", errors)
+    if "paths-ignore:" in link:
+        fail(
+            "link-check.yml must not use paths-ignore: (path-filter leftovers)",
+            errors,
+        )
+    if "paths-ignore:" in lint:
+        fail(
+            "markdown-lint.yml must not use paths-ignore: (path-filter leftovers)",
+            errors,
+        )
+    if "paths-ignore:" in stew:
+        fail(
+            "stewardship-checks.yml must not use paths-ignore: "
+            "(path-filter leftovers)",
+            errors,
+        )
+    link_paths_exact = (
+        "    paths:\n"
+        '      - "**/*.md"\n'
+        '      - ".lycheeignore"\n'
+        '      - ".github/workflows/link-check.yml"'
+    )
+    if link_paths_exact not in link:
+        fail(
+            "link-check.yml must keep exact push paths filter layout",
+            errors,
+        )
+    lint_paths_exact = (
+        "    paths:\n"
+        '      - "**/*.md"\n'
+        '      - ".markdownlint.json"\n'
+        '      - ".github/workflows/markdown-lint.yml"'
+    )
+    if lint_paths_exact not in lint:
+        fail(
+            "markdown-lint.yml must keep exact push paths filter layout",
+            errors,
+        )
+    stew_paths_exact = (
+        "    paths:\n"
+        '      - "README.md"\n'
+        '      - "AGENTS.md"\n'
+        '      - "CLAUDE.md"\n'
+        '      - "LICENSE"\n'
+        '      - "CONTRIBUTING.md"\n'
+        '      - "docs/**"\n'
+        '      - "scripts/**"\n'
+        '      - ".github/workflows/**"\n'
+        '      - ".lycheeignore"\n'
+        '      - ".markdownlint.json"'
+    )
+    if stew_paths_exact not in stew:
+        fail(
+            "stewardship-checks.yml must keep exact push paths filter layout",
+            errors,
+        )
+    # Residual stewardship path-filter entries (after #72 only scripts/docs/README).
+    if '"AGENTS.md"' not in stew and "'AGENTS.md'" not in stew:
+        fail(
+            "stewardship-checks.yml paths filter must include AGENTS.md",
+            errors,
+        )
+    if '"CLAUDE.md"' not in stew and "'CLAUDE.md'" not in stew:
+        fail(
+            "stewardship-checks.yml paths filter must include CLAUDE.md",
+            errors,
+        )
+    if '"LICENSE"' not in stew and "'LICENSE'" not in stew:
+        fail(
+            "stewardship-checks.yml paths filter must include LICENSE",
+            errors,
+        )
+    if '"CONTRIBUTING.md"' not in stew and "'CONTRIBUTING.md'" not in stew:
+        fail(
+            "stewardship-checks.yml paths filter must include CONTRIBUTING.md",
+            errors,
+        )
+    if ".github/workflows/**" not in stew:
+        fail(
+            "stewardship-checks.yml paths filter must include .github/workflows/**",
+            errors,
+        )
+    if '- ".lycheeignore"' not in stew and "- '.lycheeignore'" not in stew:
+        fail(
+            "stewardship-checks.yml paths filter must list .lycheeignore",
+            errors,
+        )
+    if (
+        '- ".markdownlint.json"' not in stew
+        and "- '.markdownlint.json'" not in stew
+    ):
+        fail(
+            "stewardship-checks.yml paths filter must list .markdownlint.json",
+            errors,
+        )
+    if '- ".lycheeignore"' not in link and "- '.lycheeignore'" not in link:
+        fail(
+            "link-check.yml paths filter must list .lycheeignore",
+            errors,
+        )
+    if (
+        '- ".markdownlint.json"' not in lint
+        and "- '.markdownlint.json'" not in lint
+    ):
+        fail(
+            "markdown-lint.yml paths filter must list .markdownlint.json",
+            errors,
+        )
+    # Ignore-glob leftovers (exact contiguous; bangs already partially pinned).
+    if "--exclude-path .github/agents" not in link:
+        fail(
+            "link-check.yml must pass --exclude-path .github/agents ignore glob",
+            errors,
+        )
+    lint_globs_exact = (
+        "globs: |\n"
+        "            **/*.md\n"
+        "            !.github/agents/**\n"
+        "            !OWASP-AGENTIC.md"
+    )
+    if lint_globs_exact not in lint:
+        fail(
+            "markdown-lint.yml must keep exact ignore-glob globs layout",
             errors,
         )
 
@@ -3032,7 +3183,8 @@ def check_actionlint_style_gate_contract(errors: list[str]) -> None:
 
 
 def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
-    """Fail-close live CI workflow hardening wiring (third-pass after #111; deepen after #161)."""
+    """Fail-close live CI workflow hardening wiring (third-pass after #111; deepen after #161;
+    path-filter leftovers after #173)."""
     text = Path(__file__).read_text(encoding="utf-8")
     # Fail-closed after #111: third-pass helper / constant / needle pins
     # (CI workflow reversible slice only; not badge/wiki/relative/schema/actionlint spam).
@@ -3164,6 +3316,135 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
                 "check_workflow_hardening must keep " + label,
                 errors,
             )
+
+    # Fail-closed after #173: path-filter leftovers (not path-order/badge /
+    # stewardship-badge lint / stewardship CI deepen spam; empty stubs handled).
+    path_filter_doc = "Path-filter leftovers after " + "#173"
+    if path_filter_doc not in text:
+        fail(
+            "check_workflow_hardening docstring must pin " + path_filter_doc,
+            errors,
+        )
+    module_path_filter = "path-filter leftovers after " + "#173"
+    if module_path_filter not in text:
+        fail(
+            "check_badge_standard.py module docstring must pin "
+            + module_path_filter,
+            errors,
+        )
+    empty_stub_pin = "empty workflow stubs already " + "handled"
+    if empty_stub_pin not in text:
+        fail(
+            "check_workflow_hardening must note " + empty_stub_pin,
+            errors,
+        )
+    not_path_order = "not path-order/badge " + "spam"
+    if not_path_order not in text:
+        fail(
+            "check_workflow_hardening must keep " + not_path_order + " wording",
+            errors,
+        )
+    reject_paths_ignore = "must not use paths-ignore: " + "(path-filter leftovers)"
+    if reject_paths_ignore not in text:
+        fail(
+            "check_workflow_hardening must reject paths-ignore leftovers",
+            errors,
+        )
+    link_layout_pin = "link-check.yml must keep exact push paths " + "filter layout"
+    if link_layout_pin not in text:
+        fail(
+            "check_workflow_hardening must pin " + link_layout_pin,
+            errors,
+        )
+    lint_layout_pin = "markdown-lint.yml must keep exact push paths " + "filter layout"
+    if lint_layout_pin not in text:
+        fail(
+            "check_workflow_hardening must pin " + lint_layout_pin,
+            errors,
+        )
+    stew_layout_pin = (
+        "stewardship-checks.yml must keep exact push paths " + "filter layout"
+    )
+    if stew_layout_pin not in text:
+        fail(
+            "check_workflow_hardening must pin " + stew_layout_pin,
+            errors,
+        )
+    agents_path_pin = "paths filter must include " + "AGENTS.md"
+    if agents_path_pin not in text:
+        fail(
+            "check_workflow_hardening must pin stewardship AGENTS.md path",
+            errors,
+        )
+    claude_path_pin = "paths filter must include " + "CLAUDE.md"
+    if claude_path_pin not in text:
+        fail(
+            "check_workflow_hardening must pin stewardship CLAUDE.md path",
+            errors,
+        )
+    license_path_pin = "paths filter must include " + "LICENSE"
+    if license_path_pin not in text:
+        fail(
+            "check_workflow_hardening must pin stewardship LICENSE path",
+            errors,
+        )
+    contrib_path_pin = "paths filter must include " + "CONTRIBUTING.md"
+    if contrib_path_pin not in text:
+        fail(
+            "check_workflow_hardening must pin stewardship CONTRIBUTING.md path",
+            errors,
+        )
+    workflows_glob_pin = "paths filter must include " + ".github/workflows/**"
+    if workflows_glob_pin not in text:
+        fail(
+            "check_workflow_hardening must pin stewardship workflows/** path",
+            errors,
+        )
+    stew_lychee_pin = "stewardship-checks.yml paths filter must list " + ".lycheeignore"
+    if stew_lychee_pin not in text:
+        fail(
+            "check_workflow_hardening must pin stewardship .lycheeignore path",
+            errors,
+        )
+    stew_mdlint_pin = (
+        "stewardship-checks.yml paths filter must list " + ".markdownlint.json"
+    )
+    if stew_mdlint_pin not in text:
+        fail(
+            "check_workflow_hardening must pin stewardship .markdownlint.json path",
+            errors,
+        )
+    link_lychee_pin = "link-check.yml paths filter must list " + ".lycheeignore"
+    if link_lychee_pin not in text:
+        fail(
+            "check_workflow_hardening must pin link-check .lycheeignore path",
+            errors,
+        )
+    lint_md_pin = "markdown-lint.yml paths filter must list " + ".markdownlint.json"
+    if lint_md_pin not in text:
+        fail(
+            "check_workflow_hardening must pin markdown-lint .markdownlint.json path",
+            errors,
+        )
+    exclude_path_pin = "--exclude-path .github/" + "agents"
+    if exclude_path_pin not in text:
+        fail(
+            "check_workflow_hardening must pin link-check agents exclude-path",
+            errors,
+        )
+    ignore_glob_layout = "exact ignore-glob globs " + "layout"
+    if ignore_glob_layout not in text:
+        fail(
+            "check_workflow_hardening must pin " + ignore_glob_layout,
+            errors,
+        )
+    declare_paths_pin = "must declare push paths: " + "filter"
+    if declare_paths_pin not in text:
+        fail(
+            "check_workflow_hardening must require push paths: declaration",
+            errors,
+        )
+
     fn_pin = "def check_workflow_hardening" + "("
     if fn_pin not in text:
         fail(

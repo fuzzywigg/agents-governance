@@ -11,6 +11,17 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX actionlint path-filter leftovers after #173: expand self-tests to
+  3175 cases (was 3081) fail-closing residual push `paths:` layouts /
+  stewardship residual path entries (AGENTS/CLAUDE/LICENSE/CONTRIBUTING/
+  workflows/** / .lycheeignore / .markdownlint.json) / reject `paths-ignore:` /
+  ignore-glob exactness (`--exclude-path .github/agents` + markdownlint bang
+  layout) — path-filter leftovers slice only (not path-order/badge #157 /
+  stewardship-badge lint #172 / stewardship CI deepen #165 / fixture #173
+  spam); empty workflow stubs already handled; no invent-product; no fourth
+  badge. Lands closed #166 leftover on post-#173 main (do **not** revive
+  #166/#157).
+
 - TOKENMAXX overnight stewardship/CI/schema/wiki fixture deepen after #165:
   expand self-tests to 3081 cases (was 2957) covering residual policy/
   stewardship edge fixtures — schema bool/nested/list/string/edit_policy/

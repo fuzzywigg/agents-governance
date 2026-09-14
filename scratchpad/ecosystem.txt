@@ -818,3 +818,5 @@ _None yet._
 2026-09-14T09:59:34Z
 
 2026-09-14T10:02:37Z cursor: Draft PR #261 opened (cursor/tokenmaxx-pass2-residual-templates-lychee-after-252-6390); leave draft / do-not-merge; awaiting CI ← ECO-079 (do not revive #256/#254/#251/#250/#246/#245/#240)
+
+2026-09-14T10:13:09Z cursor: Local green — run_stewardship + self-tests 5242 + markdownlint ← ECO-079 Pass-2 residual + template leftover + lychee blob/503 after #252 (leave draft; do not revive #256/#254/#251/#250)

@@ -563,3 +563,5 @@ _None yet._
 2026-09-14T04:12:00Z
 
 2026-09-14T04:25:00Z cursor: Local green — run_stewardship + self-tests 2979 + markdownlint ← ECO-060 actionlint path-filter leftovers after #161 (distinct from #157 path-order/badge)
+
+2026-09-14T04:27:00Z cursor: Draft PR #166 opened (overnight-actionlint-path-filter-leftovers); awaiting CI ← ECO-060

@@ -631,3 +631,12 @@ _None yet._
 - Scope: EXISTING actionlint path-order leftover pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #157 leftover on post-#181 main; do not revive #157/#182/#143/#120
 - Branch: cursor/tokenmaxx-actionlint-path-order-after-181-3e1c
 2026-09-14T05:25:00Z
+
+### [ECO-066] TOKENMAXX deepen run_stewardship Pass-2 residual after #189 — 2026-09-14T05:41:10Z
+- [x] cursor: STOP prior closed CONFLICTING drafts; read tip post-#189 (3402 cases; path-order saturated; Pass-2 core #179 saturated; open queue empty)
+- [x] cursor: Fail-close Pass-2 residual / stewardship-checks integrity — gates-only / no BASH_SOURCE / no bare python / no set +u|+o pipefail / back-to-back gates→self-tests / no inline check_*.py / self-tests before actionlint (NOT path-order #189)
+- [x] cursor: Expand self-tests 3402 → 3470 (Pass-2 residual slice; not path-order #189 / Pass-2 core #179 / wiki-index #181 / path-filter #176 spam)
+- [ ] cursor: Green draft PR with CI
+- Scope: EXISTING run_stewardship_checks.sh + stewardship-checks.yml residual integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #178 leftover on post-#189 main; do not revive #178/#175/#140
+- Branch: cursor/tokenmaxx-run-stewardship-pass2-residual-after-189-f641
+2026-09-14T05:41:10Z

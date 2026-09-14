@@ -44,6 +44,14 @@ lands closed #175 leftover; lands closed #140; lands closed #96):
   dirname "$0")/.." fragment / doc gates locally commentary /
   CI runs run_stewardship_checks.sh before test_stewardship_gates.py;
   CI runner-before-self-tests order pin
+- Pass-2 residual after #189 (lands closed #178 leftover; NOT path-order #189 /
+  NOT Pass-2 core #179 / NOT wiki-index #181 / NOT path-filter #176):
+  gates-only runner (no test_stewardship_gates.py inside .sh) /
+  no BASH_SOURCE ROOT drift / no bare python scripts/ /
+  no set +u|+o pipefail soft-fail /
+  back-to-back gates→self-tests named block /
+  no inline check_*.py in stewardship-checks.yml /
+  self-tests before actionlint; CI gates-self-tests back-to-back block pin
 Fail-closed CI workflow pins (live path after #39/#72; third-pass after #111; deepen after #161;
 path-filter leftovers after #173):
 - Third-pass after #111: exact concurrency group templates /
@@ -1187,6 +1195,42 @@ def check_workflow_hardening(errors: list[str]) -> None:
     if run_i < 0 or test_i < 0 or not (run_i < test_i):
         fail(
             "stewardship-checks.yml must run " + order_msg,
+            errors,
+        )
+    # Fail-closed after #189: Pass-2 residual stewardship-checks integrity
+    # (NOT path-order #189 / NOT Pass-2 core #179).
+    back_to_back_block = (
+        "      - name: Stewardship gates (badge / wiki / schema / relative links)\n"
+        "        run: bash scripts/run_stewardship_checks.sh\n"
+        "      - name: Stewardship gate self-tests\n"
+        "        run: python3 scripts/test_stewardship_gates.py\n"
+    )
+    if back_to_back_block not in stew:
+        fail(
+            "stewardship-checks.yml must keep back-to-back gates→self-tests named block "
+            "(Pass-2 residual after #189)",
+            errors,
+        )
+    for inline_gate in (
+        "python3 scripts/check_badge_standard.py",
+        "python3 scripts/check_wiki_outline.py",
+        "python3 scripts/check_stewardship_schema.py",
+        "python3 scripts/check_relative_links.py",
+    ):
+        if inline_gate in stew:
+            fail(
+                "stewardship-checks.yml must not inline "
+                + inline_gate
+                + " (use run_stewardship_checks.sh; Pass-2 residual after #189)",
+                errors,
+            )
+    actionlint_i = stew.find("download-actionlint.bash")
+    if actionlint_i < 0:
+        actionlint_i = stew.find("get_actionlint")
+    if test_i >= 0 and actionlint_i >= 0 and not (test_i < actionlint_i):
+        fail(
+            "stewardship-checks.yml must run self-tests before actionlint "
+            "(Pass-2 residual after #189)",
             errors,
         )
     if 'config: ".markdownlint.json"' not in lint and "config: '.markdownlint.json'" not in lint:
@@ -5957,6 +6001,31 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
                 '(ROOT="$(cd "$(dirname "$0")/.." && pwd)")',
                 errors,
             )
+        # Fail-closed after #189: Pass-2 residual runner integrity.
+        if "test_stewardship_gates.py" in run_text:
+            fail(
+                "run_stewardship_checks.sh must remain gates-only "
+                "(no test_stewardship_gates.py; Pass-2 residual after #189)",
+                errors,
+            )
+        if "BASH_SOURCE" in run_text:
+            fail(
+                "run_stewardship_checks.sh must not use BASH_SOURCE ROOT drift "
+                "(Pass-2 residual after #189)",
+                errors,
+            )
+        if "python scripts/" in run_text:
+            fail(
+                "run_stewardship_checks.sh must not use bare python scripts/ "
+                "(Pass-2 residual after #189)",
+                errors,
+            )
+        if "set +u" in run_text or "set +o pipefail" in run_text:
+            fail(
+                "run_stewardship_checks.sh must not soft-fail with set +u/+o pipefail "
+                "(Pass-2 residual after #189)",
+                errors,
+            )
         # Leftover after #149: exact live run_stewardship_checks.sh full layout.
         expected_run = (
             "#!/usr/bin/env bash\n"
@@ -6190,6 +6259,92 @@ def check_run_stewardship_gate_contract(errors: list[str]) -> None:
     if order_marker not in text:
         fail(
             "run_stewardship contract must keep " + order_marker,
+            errors,
+        )
+    # Fail-closed after #189: Pass-2 residual contract pins.
+    live_189 = "Fail-closed after " + "#189"
+    if live_189 not in text:
+        fail(
+            "run_stewardship pins must keep " + live_189 + " marker",
+            errors,
+        )
+    # Comment marker used in live residual checks (split so utf-8 self-tests stay stable).
+    live_189_comment = "Fail-closed after " + "#189"
+    if live_189_comment not in text:
+        fail(
+            "run_stewardship residual checks must keep " + live_189_comment,
+            errors,
+        )
+    closed_178 = "lands closed " + "#178"
+    if closed_178 not in text:
+        fail(
+            "run_stewardship docstring must note " + closed_178 + " leftover",
+            errors,
+        )
+    residual_marker = "Pass-2 residual after " + "#189"
+    if residual_marker not in text:
+        fail(
+            "run_stewardship docstring must keep " + residual_marker,
+            errors,
+        )
+    not_path_order = "NOT path-order " + "#189"
+    if not_path_order not in text:
+        fail(
+            "run_stewardship docstring must keep " + not_path_order + " distinctness",
+            errors,
+        )
+    gates_only = "gates-only " + "runner"
+    if gates_only not in text:
+        fail(
+            "run_stewardship contract must keep " + gates_only + " pin",
+            errors,
+        )
+    no_self_doc = "no test_stewardship_gates.py " + "inside .sh"
+    if no_self_doc not in text:
+        fail(
+            "run_stewardship docstring must keep " + no_self_doc,
+            errors,
+        )
+    bash_source_pin = "no BASH_SOURCE ROOT " + "drift"
+    if bash_source_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + bash_source_pin,
+            errors,
+        )
+    bare_py_pin = "no bare python " + "scripts/"
+    if bare_py_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + bare_py_pin,
+            errors,
+        )
+    set_soft_pin = "no set +u|+o " + "pipefail"
+    if set_soft_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + set_soft_pin + " soft-fail pin",
+            errors,
+        )
+    back_to_back_pin = "back-to-back gates→self-tests " + "named block"
+    if back_to_back_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + back_to_back_pin,
+            errors,
+        )
+    inline_pin = "no inline check_*.py " + "in stewardship-checks.yml"
+    if inline_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + inline_pin,
+            errors,
+        )
+    actionlint_after = "self-tests before " + "actionlint"
+    if actionlint_after not in text:
+        fail(
+            "run_stewardship contract must keep " + actionlint_after,
+            errors,
+        )
+    block_marker = "CI gates-self-tests back-to-back " + "block pin"
+    if block_marker not in text:
+        fail(
+            "run_stewardship contract must keep " + block_marker,
             errors,
         )
 

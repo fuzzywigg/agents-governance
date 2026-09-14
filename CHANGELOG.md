@@ -11,6 +11,17 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX run_stewardship Pass-2 residual / stewardship-checks integrity after #189:
+  expand self-tests to 3470 cases (was 3402) fail-closing gates-only runner
+  (no `test_stewardship_gates.py` inside `.sh`) / no `BASH_SOURCE` ROOT drift /
+  no bare `python scripts/` / no `set +u|+o pipefail` soft-fail / back-to-back
+  stewardship-checks gates→self-tests named block / no inline `check_*.py` /
+  self-tests before actionlint — Pass-2 residual / stewardship-checks slice only
+  (not path-order #189 / not Pass-2 core #179 / not wiki-index #181 / not
+  path-filter #176 / not fixtures #173 spam); no invent-product; no fourth badge.
+  Lands closed #178 leftover on post-#189 main (do **not** revive #178/#175/#140).
+  New draft after tip; abandons prior closed CONFLICTING drafts.
+
 - TOKENMAXX actionlint path-order leftover after #181: expand self-tests to
   3402 cases (was 3330) fail-closing live actionlint path-order leftovers —
   contiguous three-path actionlint order (`link-check` → `markdown-lint` →

@@ -197,6 +197,9 @@ plus actionlint path-order leftover after #181: contiguous three-path
 actionlint order / exact bash <(curl -fsSL) download /
 reject continue-on-error: true / Download actionlint + actionlint existing
 workflow paths step names / path-order leftover docstring).
+plus run_stewardship Pass-2 residual after #189: gates-only runner / no BASH_SOURCE / no bare python / no set +u|+o pipefail /
+back-to-back gates→self-tests named block / no inline check_*.py / self-tests before actionlint (lands closed #178 leftover;
+do not revive #178/#175/#140; distinct from path-order #189),
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

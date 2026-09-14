@@ -17,8 +17,8 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   `sys.exit` / utf-8 / `group(2)` / `startswith("//")`+`http://` /
   Link Check+Markdown Lint+No secrets / `shields.io`+`[![` /
   stewardship_common import / `len(PUBLISHABLE_PAGES)` / Missing operator /
-  invent+secrets+Out of scope+kill-switch needles / relative coverage /
-  `sorted(unexpected)` / fail needles / discord+twitter+downloads /
+  invent+secrets+Out of scope+kill-switch needles / relative-link gate pin /
+  `sorted(unexpected)` / fail needles / extra social special-case pins /
   present-set arithmetic, plus wiki-outline gate contract pins in
   `check_badge_standard.py` — wiki-outline third-pass slice only (not
   relative / schema / badge / common / CI workflow / actionlint pin spam);

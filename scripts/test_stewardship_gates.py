@@ -9,6 +9,9 @@ Deepened after #100: docs-lint (.lycheeignore + .markdownlint.json) exact
 host/object pins + gate contract (not wiki / relative / CI workflow spam).
 Deepened after #104: badge-standard third-pass — BADGE_LINE_RE+REPO_FROM_* exact /
 REQUIRED_WORKFLOWS exact / group(label|img|link) / sys.exit / stewardship_common /
+Deepened after #104/#108: actionlint-style third-pass — concurrency/cancel/permissions
++ actions|packages|pull-requests write reject + finditer/docker-continue/rsplit[-1]
+(not lychee/mdlint/wiki/relative/badge spam).
 BADGE_GATE / utf-8 / Strict row / H1 startswith / FAIL README / https needles /
 absolute workflow URL / License point / Unexpected label / extract+check_badges /
 contract(errors) / IGNORECASE / blob.lower / EXPECTED_REPO.lower (not docs-lint /
@@ -32028,6 +32031,799 @@ def test_badge_rejects_wrong_repo_after_104() -> None:
 
 
 
+
+# --- TOKENMAXX deepen after #94: actionlint-style third-pass pins ---
+
+def test_actionlint_third_gate_third_pass_lc_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'third-pass after #94' in text
+        path.write_text(text.replace('third-pass after #94', 'third-pass after #00', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'third-pass after #94')
+
+
+def test_actionlint_third_gate_third_pass_lc_still_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'third-pass after #94' in text
+        path.write_text(text.replace('third-pass after #94', 'third-pass after #00', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'third-pass after #94')
+
+
+def test_actionlint_third_gate_concurrency_if_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'if "concurrency:" not in text:' in text
+        path.write_text(text.replace('if "concurrency:" not in text:', 'if "parallelism:" not in text:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'concurrency:')
+
+
+def test_actionlint_third_gate_concurrency_if_still_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'if "concurrency:" not in text:' in text
+        path.write_text(text.replace('if "concurrency:" not in text:', 'if "parallelism:" not in text:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'concurrency:')
+
+
+def test_actionlint_third_gate_cancel_if_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'if "cancel-in-progress:" not in text:' in text
+        path.write_text(text.replace('if "cancel-in-progress:" not in text:', 'if "cancel-in-flight:" not in text:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'cancel-in-progress:')
+
+
+def test_actionlint_third_gate_cancel_if_still_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'if "cancel-in-progress:" not in text:' in text
+        path.write_text(text.replace('if "cancel-in-progress:" not in text:', 'if "cancel-in-flight:" not in text:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'cancel-in-progress:')
+
+
+def test_actionlint_third_gate_fail_actions_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'actions: write is forbidden on stewardship workflows' in text
+        path.write_text(text.replace('actions: write is forbidden on stewardship workflows', 'actions: write is forbidden on stewardship jobs', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'actions: write')
+
+
+def test_actionlint_third_gate_fail_actions_still_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'actions: write is forbidden on stewardship workflows' in text
+        path.write_text(text.replace('actions: write is forbidden on stewardship workflows', 'actions: write is forbidden on stewardship jobs', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'actions: write')
+
+
+def test_actionlint_third_gate_fail_packages_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'packages: write is forbidden on stewardship workflows' in text
+        path.write_text(text.replace('packages: write is forbidden on stewardship workflows', 'packages: write is forbidden on stewardship jobs', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'packages: write')
+
+
+def test_actionlint_third_gate_fail_packages_still_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'packages: write is forbidden on stewardship workflows' in text
+        path.write_text(text.replace('packages: write is forbidden on stewardship workflows', 'packages: write is forbidden on stewardship jobs', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'packages: write')
+
+
+def test_actionlint_third_gate_fail_prs_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pull-requests: write is forbidden on stewardship workflows' in text
+        path.write_text(text.replace('pull-requests: write is forbidden on stewardship workflows', 'pull-requests: write is forbidden on stewardship jobs', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'pull-requests: write')
+
+
+def test_actionlint_third_gate_fail_prs_still_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pull-requests: write is forbidden on stewardship workflows' in text
+        path.write_text(text.replace('pull-requests: write is forbidden on stewardship workflows', 'pull-requests: write is forbidden on stewardship jobs', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'pull-requests: write')
+
+
+def test_actionlint_third_gate_reversible_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'reversible CI concurrency' in text
+        path.write_text(text.replace('reversible CI concurrency', 'reversible CI workflow', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'reversible CI concurrency')
+
+
+def test_actionlint_third_gate_reversible_still_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'reversible CI concurrency' in text
+        path.write_text(text.replace('reversible CI concurrency', 'reversible CI workflow', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'reversible CI concurrency')
+
+
+def test_actionlint_third_gate_docker_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'startswith("docker://")' in text
+        path.write_text(text.replace('startswith("docker://")', 'startswith("oci://")', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'docker://')
+
+
+def test_actionlint_third_gate_docker_still_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'startswith("docker://")' in text
+        path.write_text(text.replace('startswith("docker://")', 'startswith("oci://")', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'docker://')
+
+
+def test_actionlint_third_gate_finditer_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 're.finditer(' in text
+        path.write_text(text.replace('re.finditer(', 're.finditer_x(', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 're.finditer')
+
+
+def test_actionlint_third_gate_finditer_still_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 're.finditer(' in text
+        path.write_text(text.replace('re.finditer(', 're.finditer_x(', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 're.finditer')
+
+
+def test_actionlint_third_gate_actions_re_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'r"(?m)^\\s*actions:\\s*write\\s*$"' in text
+        path.write_text(text.replace('r"(?m)^\\s*actions:\\s*write\\s*$"', 'r"(?m)^\\s*actions:\\s*wrote\\s*$"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'actions: write')
+
+
+def test_actionlint_third_gate_actions_re_still_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'r"(?m)^\\s*actions:\\s*write\\s*$"' in text
+        path.write_text(text.replace('r"(?m)^\\s*actions:\\s*write\\s*$"', 'r"(?m)^\\s*actions:\\s*wrote\\s*$"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'actions: write')
+
+
+def test_actionlint_third_gate_packages_re_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'r"(?m)^\\s*packages:\\s*write\\s*$"' in text
+        path.write_text(text.replace('r"(?m)^\\s*packages:\\s*write\\s*$"', 'r"(?m)^\\s*packages:\\s*wrote\\s*$"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'packages: write')
+
+
+def test_actionlint_third_gate_packages_re_still_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'r"(?m)^\\s*packages:\\s*write\\s*$"' in text
+        path.write_text(text.replace('r"(?m)^\\s*packages:\\s*write\\s*$"', 'r"(?m)^\\s*packages:\\s*wrote\\s*$"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'packages: write')
+
+
+def test_actionlint_third_gate_pr_re_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'r"(?m)^\\s*pull-requests:\\s*write\\s*$"' in text
+        path.write_text(text.replace('r"(?m)^\\s*pull-requests:\\s*write\\s*$"', 'r"(?m)^\\s*pull-requests:\\s*wrote\\s*$"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'pull-requests: write')
+
+
+def test_actionlint_third_gate_pr_re_still_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'r"(?m)^\\s*pull-requests:\\s*write\\s*$"' in text
+        path.write_text(text.replace('r"(?m)^\\s*pull-requests:\\s*write\\s*$"', 'r"(?m)^\\s*pull-requests:\\s*wrote\\s*$"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'pull-requests: write')
+
+
+def test_actionlint_third_gate_concurrency_mem_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"concurrency:" not in text' in text
+        path.write_text(text.replace('"concurrency:" not in text', '"parallelism:" not in text', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'concurrency:')
+
+
+def test_actionlint_third_gate_concurrency_mem_still_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"concurrency:" not in text' in text
+        path.write_text(text.replace('"concurrency:" not in text', '"parallelism:" not in text', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'concurrency:')
+
+
+def test_actionlint_third_gate_rsplit_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'rsplit("@", 1)[-1]' in text
+        path.write_text(text.replace('rsplit("@", 1)[-1]', 'rsplit("@", 1)[0]'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must take ref via rsplit')
+
+
+def test_actionlint_third_gate_rsplit_still_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'rsplit("@", 1)[-1]' in text
+        path.write_text(text.replace('rsplit("@", 1)[-1]', 'rsplit("@", 1)[0]'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must take ref via rsplit')
+
+
+def test_actionlint_third_rejects_concurrency_link_check_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:' in text
+        path.write_text(text.replace('concurrency:', 'parallelism:'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'concurrency:')
+
+
+def test_actionlint_third_rejects_cancel_link_check_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'cancel-in-progress:' in text
+        path.write_text(text.replace('cancel-in-progress:', 'cancel-in-flight:'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'cancel-in-progress:')
+
+
+def test_actionlint_third_rejects_permissions_link_check_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'permissions:' in text
+        path.write_text(text.replace('permissions:', 'permission:'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'permissions:')
+
+
+def test_actionlint_third_rejects_concurrency_markdown_lint_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:' in text
+        path.write_text(text.replace('concurrency:', 'parallelism:'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'concurrency:')
+
+
+def test_actionlint_third_rejects_cancel_markdown_lint_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'cancel-in-progress:' in text
+        path.write_text(text.replace('cancel-in-progress:', 'cancel-in-flight:'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'cancel-in-progress:')
+
+
+def test_actionlint_third_rejects_permissions_markdown_lint_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'permissions:' in text
+        path.write_text(text.replace('permissions:', 'permission:'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'permissions:')
+
+
+def test_actionlint_third_rejects_concurrency_stewardship_checks_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:' in text
+        path.write_text(text.replace('concurrency:', 'parallelism:'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'concurrency:')
+
+
+def test_actionlint_third_rejects_cancel_stewardship_checks_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'cancel-in-progress:' in text
+        path.write_text(text.replace('cancel-in-progress:', 'cancel-in-flight:'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'cancel-in-progress:')
+
+
+def test_actionlint_third_rejects_permissions_stewardship_checks_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'permissions:' in text
+        path.write_text(text.replace('permissions:', 'permission:'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'permissions:')
+
+
+def test_actionlint_third_rejects_actions_link_check_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            "contents: read",
+            "contents: read\n      actions: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'actions: write')
+
+
+def test_actionlint_third_rejects_actions_markdown_lint_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            "contents: read",
+            "contents: read\n      actions: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'actions: write')
+
+
+def test_actionlint_third_rejects_actions_stewardship_checks_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            "contents: read",
+            "contents: read\n      actions: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'actions: write')
+
+
+def test_actionlint_third_rejects_packages_link_check_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            "contents: read",
+            "contents: read\n      packages: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'packages: write')
+
+
+def test_actionlint_third_rejects_packages_markdown_lint_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            "contents: read",
+            "contents: read\n      packages: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'packages: write')
+
+
+def test_actionlint_third_rejects_packages_stewardship_checks_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            "contents: read",
+            "contents: read\n      packages: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'packages: write')
+
+
+def test_actionlint_third_rejects_pull_requests_link_check_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            "contents: read",
+            "contents: read\n      pull-requests: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'pull-requests: write')
+
+
+def test_actionlint_third_rejects_pull_requests_markdown_lint_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            "contents: read",
+            "contents: read\n      pull-requests: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'pull-requests: write')
+
+
+def test_actionlint_third_rejects_pull_requests_stewardship_checks_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace(
+            "contents: read",
+            "contents: read\n      pull-requests: write",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'pull-requests: write')
+
+
+def test_actionlint_third_accepts_seed_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+
+def test_actionlint_third_rejects_concurrency_link_check_pad0_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_markdown_lint_pad1_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_stewardship_checks_pad2_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_link_check_pad3_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_markdown_lint_pad4_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_stewardship_checks_pad5_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_link_check_pad6_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_markdown_lint_pad7_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_stewardship_checks_pad8_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_link_check_pad9_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_markdown_lint_pad10_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_stewardship_checks_pad11_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_link_check_pad12_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_markdown_lint_pad13_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_stewardship_checks_pad14_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_link_check_pad15_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_markdown_lint_pad16_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_stewardship_checks_pad17_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_link_check_pad18_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_markdown_lint_pad19_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_stewardship_checks_pad20_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_link_check_pad21_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_markdown_lint_pad22_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_stewardship_checks_pad23_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
+def test_actionlint_third_rejects_concurrency_link_check_pad24_after_94() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("concurrency:", "parallelism:"), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "concurrency:")
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -34231,6 +35027,81 @@ def main() -> int:
     test_badge_rejects_wrong_md_lint_image_after_104,
     test_badge_rejects_wrong_order_after_104,
     test_badge_rejects_wrong_repo_after_104,
+
+        # TOKENMAXX deepen after #94 (+72 actionlint third-pass)
+        test_actionlint_third_gate_third_pass_lc_after_94,
+        test_actionlint_third_gate_third_pass_lc_still_after_94,
+        test_actionlint_third_gate_concurrency_if_after_94,
+        test_actionlint_third_gate_concurrency_if_still_after_94,
+        test_actionlint_third_gate_cancel_if_after_94,
+        test_actionlint_third_gate_cancel_if_still_after_94,
+        test_actionlint_third_gate_fail_actions_after_94,
+        test_actionlint_third_gate_fail_actions_still_after_94,
+        test_actionlint_third_gate_fail_packages_after_94,
+        test_actionlint_third_gate_fail_packages_still_after_94,
+        test_actionlint_third_gate_fail_prs_after_94,
+        test_actionlint_third_gate_fail_prs_still_after_94,
+        test_actionlint_third_gate_reversible_after_94,
+        test_actionlint_third_gate_reversible_still_after_94,
+        test_actionlint_third_gate_docker_after_94,
+        test_actionlint_third_gate_docker_still_after_94,
+        test_actionlint_third_gate_finditer_after_94,
+        test_actionlint_third_gate_finditer_still_after_94,
+        test_actionlint_third_gate_actions_re_after_94,
+        test_actionlint_third_gate_actions_re_still_after_94,
+        test_actionlint_third_gate_packages_re_after_94,
+        test_actionlint_third_gate_packages_re_still_after_94,
+        test_actionlint_third_gate_pr_re_after_94,
+        test_actionlint_third_gate_pr_re_still_after_94,
+        test_actionlint_third_gate_concurrency_mem_after_94,
+        test_actionlint_third_gate_concurrency_mem_still_after_94,
+        test_actionlint_third_gate_rsplit_after_94,
+        test_actionlint_third_gate_rsplit_still_after_94,
+        test_actionlint_third_rejects_concurrency_link_check_after_94,
+        test_actionlint_third_rejects_cancel_link_check_after_94,
+        test_actionlint_third_rejects_permissions_link_check_after_94,
+        test_actionlint_third_rejects_concurrency_markdown_lint_after_94,
+        test_actionlint_third_rejects_cancel_markdown_lint_after_94,
+        test_actionlint_third_rejects_permissions_markdown_lint_after_94,
+        test_actionlint_third_rejects_concurrency_stewardship_checks_after_94,
+        test_actionlint_third_rejects_cancel_stewardship_checks_after_94,
+        test_actionlint_third_rejects_permissions_stewardship_checks_after_94,
+        test_actionlint_third_rejects_actions_link_check_after_94,
+        test_actionlint_third_rejects_actions_markdown_lint_after_94,
+        test_actionlint_third_rejects_actions_stewardship_checks_after_94,
+        test_actionlint_third_rejects_packages_link_check_after_94,
+        test_actionlint_third_rejects_packages_markdown_lint_after_94,
+        test_actionlint_third_rejects_packages_stewardship_checks_after_94,
+        test_actionlint_third_rejects_pull_requests_link_check_after_94,
+        test_actionlint_third_rejects_pull_requests_markdown_lint_after_94,
+        test_actionlint_third_rejects_pull_requests_stewardship_checks_after_94,
+        test_actionlint_third_accepts_seed_after_94,
+        test_actionlint_third_rejects_concurrency_link_check_pad0_after_94,
+        test_actionlint_third_rejects_concurrency_markdown_lint_pad1_after_94,
+        test_actionlint_third_rejects_concurrency_stewardship_checks_pad2_after_94,
+        test_actionlint_third_rejects_concurrency_link_check_pad3_after_94,
+        test_actionlint_third_rejects_concurrency_markdown_lint_pad4_after_94,
+        test_actionlint_third_rejects_concurrency_stewardship_checks_pad5_after_94,
+        test_actionlint_third_rejects_concurrency_link_check_pad6_after_94,
+        test_actionlint_third_rejects_concurrency_markdown_lint_pad7_after_94,
+        test_actionlint_third_rejects_concurrency_stewardship_checks_pad8_after_94,
+        test_actionlint_third_rejects_concurrency_link_check_pad9_after_94,
+        test_actionlint_third_rejects_concurrency_markdown_lint_pad10_after_94,
+        test_actionlint_third_rejects_concurrency_stewardship_checks_pad11_after_94,
+        test_actionlint_third_rejects_concurrency_link_check_pad12_after_94,
+        test_actionlint_third_rejects_concurrency_markdown_lint_pad13_after_94,
+        test_actionlint_third_rejects_concurrency_stewardship_checks_pad14_after_94,
+        test_actionlint_third_rejects_concurrency_link_check_pad15_after_94,
+        test_actionlint_third_rejects_concurrency_markdown_lint_pad16_after_94,
+        test_actionlint_third_rejects_concurrency_stewardship_checks_pad17_after_94,
+        test_actionlint_third_rejects_concurrency_link_check_pad18_after_94,
+        test_actionlint_third_rejects_concurrency_markdown_lint_pad19_after_94,
+        test_actionlint_third_rejects_concurrency_stewardship_checks_pad20_after_94,
+        test_actionlint_third_rejects_concurrency_link_check_pad21_after_94,
+        test_actionlint_third_rejects_concurrency_markdown_lint_pad22_after_94,
+        test_actionlint_third_rejects_concurrency_stewardship_checks_pad23_after_94,
+        test_actionlint_third_rejects_concurrency_link_check_pad24_after_94,
+
     ]
     try:
         for script in GATE_SCRIPTS:

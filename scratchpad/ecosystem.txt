@@ -727,3 +727,4 @@ _None yet._
 2026-09-14T07:05:00Z
 
 2026-09-14T07:21:30Z cursor: Local green — run_stewardship + self-tests 4116 + markdownlint ← ECO-072 path-filter/path-order leftovers after #220 (leave draft; do not revive #223/#217/#213/#198; do not open scratchpad-only)
+2026-09-14T07:22:00Z cursor: Draft PR #226 opened (cursor/tokenmaxx-path-edges-leftover-after-220-3359); leave draft; awaiting CI ← ECO-072 path-filter/path-order leftovers after #220 (do not revive #223/#217/#213/#198)

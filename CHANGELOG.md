@@ -11,6 +11,17 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX docs-lint second-pass pins after #111: expand self-tests to
+  2295 cases (was 2223) fail-closing live docs-lint integrity — exact
+  `https://modelcontextprotocol.io/` + `https://www.linuxfoundation.org/` +
+  escaped `https://img\.shields\.io` URL lines / `check_badge_standard.py`
+  commentary / `308 redirect` + `103 early hints` wording / exact
+  `.markdownlint.json` body / utf-8 reads / `lowered = text.lower()` /
+  bare `*` reject / `check_docs_lint_gate_contract` second-pass pins —
+  docs-lint second-pass slice only (not actionlint / stewardship_common /
+  badge / wiki spam); no invent-product; no fourth badge. Distinct from
+  closed #115 stewardship_common CONFLICTING and open common third-pass.
+
 - TOKENMAXX actionlint-style third-pass pins after #108: expand self-tests to
   2223 cases (was 2151) fail-closing live reversible CI workflow integrity —
   `concurrency:` + `cancel-in-progress:` / `permissions:` present /

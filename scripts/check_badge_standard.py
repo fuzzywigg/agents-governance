@@ -213,6 +213,23 @@ def check_workflows_and_license(errors: list[str]) -> None:
                 '.markdownlint.json must pin "MD024": { "siblings_only": true }',
                 errors,
             )
+        # Fail-closed after #111: exact live markdownlint.json body (docs-lint second-pass).
+        expected_md = (
+            '{\n'
+            '  "default": true,\n'
+            '  "MD013": { "line_length": 200 },\n'
+            '  "MD024": { "siblings_only": true },\n'
+            '  "MD033": false,\n'
+            '  "MD041": false,\n'
+            '  "MD060": false\n'
+            '}'
+        )
+        if md_cfg.strip() != expected_md.strip():
+            fail(
+                ".markdownlint.json must match exact live docs-lint body "
+                "(default/MD013/MD024/MD033/MD041/MD060)",
+                errors,
+            )
 
 
 def check_lycheeignore(errors: list[str]) -> None:
@@ -222,6 +239,10 @@ def check_lycheeignore(errors: list[str]) -> None:
     escaped img\.shields\.io; modelcontextprotocol.io + linuxfoundation.org
     live excludes; stewardship/license-badge commentary; reject https://* /
     http://* / bare *; not wiki / relative pin spam.
+    Second-pass after #111: exact https URL lines for MCP/LF/escaped shields;
+    check_badge_standard.py commentary; 308 redirect + 103 early hints wording;
+    utf-8 read; lowered stewardship note; exact markdownlint.json body host;
+    second-pass docstring (docs-lint slice only; not actionlint/common spam).
     """
     if not LYCHEEIGNORE.is_file():
         return
@@ -277,6 +298,39 @@ def check_lycheeignore(errors: list[str]) -> None:
         fail(
             ".lycheeignore must not exclude all http(s) targets "
             "(https://* / http://* / bare *)",
+            errors,
+        )
+    # Fail-closed after #111: exact live https URL lines (docs-lint second-pass).
+    if "https://modelcontextprotocol.io/" not in text:
+        fail(
+            ".lycheeignore must pin exact https://modelcontextprotocol.io/ URL",
+            errors,
+        )
+    if "https://www.linuxfoundation.org/" not in text:
+        fail(
+            ".lycheeignore must pin exact https://www.linuxfoundation.org/ URL",
+            errors,
+        )
+    if r"https://img\.shields\.io" not in text:
+        fail(
+            r".lycheeignore must pin exact https://img\.shields\.io exclude line",
+            errors,
+        )
+    # Fail-closed after #111: commentary pins gate script + rationale wording.
+    if "check_badge_standard.py" not in text:
+        fail(
+            ".lycheeignore must mention check_badge_standard.py "
+            "(license badge stewardship gate)",
+            errors,
+        )
+    if "308 redirect" not in text:
+        fail(
+            ".lycheeignore must keep 308 redirect rationale wording",
+            errors,
+        )
+    if "103 early hints" not in text:
+        fail(
+            ".lycheeignore must keep 103 early hints rationale wording",
             errors,
         )
 
@@ -1800,6 +1854,141 @@ def check_docs_lint_gate_contract(errors: list[str]) -> None:
     if call_workflows not in text:
         fail(
             "main must call " + call_workflows,
+            errors,
+        )
+
+    # Fail-closed after #111: docs-lint second-pass helper / constant / needle pins
+    # (docs-lint slice only; not actionlint / stewardship_common / badge spam).
+    second_pass_doc = "Second-pass after " + "#111"
+    if second_pass_doc not in text:
+        fail(
+            "check_lycheeignore docstring must pin " + second_pass_doc,
+            errors,
+        )
+    mcp_url = "https://modelcontextprotocol" + ".io/"
+    if mcp_url not in text:
+        fail(
+            "check_lycheeignore must pin exact " + mcp_url + " URL",
+            errors,
+        )
+    lfs_url = "https://www.linuxfoundation" + ".org/"
+    if lfs_url not in text:
+        fail(
+            "check_lycheeignore must pin exact " + lfs_url + " URL",
+            errors,
+        )
+    shields_url = r"https://img\.shields" + r"\.io"
+    if shields_url not in text:
+        fail(
+            "check_lycheeignore must pin exact " + shields_url + " line",
+            errors,
+        )
+    gate_script = "check_badge_standard" + ".py"
+    if gate_script not in text:
+        fail(
+            "check_lycheeignore must keep " + gate_script + " commentary pin",
+            errors,
+        )
+    redirect_wording = "308 " + "redirect"
+    if redirect_wording not in text:
+        fail(
+            "check_lycheeignore must keep " + redirect_wording + " wording pin",
+            errors,
+        )
+    hints_wording = "103 early " + "hints"
+    if hints_wording not in text:
+        fail(
+            "check_lycheeignore must keep " + hints_wording + " wording pin",
+            errors,
+        )
+    utf8_pin = 'encoding="utf-' + '8"'
+    if utf8_pin not in text:
+        fail(
+            "docs-lint paths must read with " + utf8_pin,
+            errors,
+        )
+    lowered_pin = "lowered = text." + "lower()"
+    if lowered_pin not in text:
+        fail(
+            "check_lycheeignore must keep " + lowered_pin + " stewardship note",
+            errors,
+        )
+    strip_star = 'text.strip() == ' + '"*"'
+    if strip_star not in text:
+        fail(
+            "check_lycheeignore must reject bare * via " + strip_star,
+            errors,
+        )
+    exact_body = "exact live markdownlint" + ".json body"
+    if exact_body not in text:
+        fail(
+            "check_workflows_and_license must keep " + exact_body + " pin",
+            errors,
+        )
+    expected_md_assign = "expected_md = " + "("
+    if expected_md_assign not in text:
+        fail(
+            "check_workflows_and_license must build expected_md tuple/paren body",
+            errors,
+        )
+    md_strip = "md_cfg.strip() != expected_md" + ".strip()"
+    if md_strip not in text:
+        fail(
+            "check_workflows_and_license must compare " + md_strip,
+            errors,
+        )
+    default_first = '"default": ' + "true"
+    if default_first not in text:
+        fail(
+            "docs-lint expected_md must keep " + default_first,
+            errors,
+        )
+    md033_false = '"MD033": ' + "false"
+    if md033_false not in text:
+        fail(
+            "docs-lint expected_md must keep " + md033_false,
+            errors,
+        )
+    md041_false = '"MD041": ' + "false"
+    if md041_false not in text:
+        fail(
+            "docs-lint expected_md must keep " + md041_false,
+            errors,
+        )
+    md060_false = '"MD060": ' + "false"
+    if md060_false not in text:
+        fail(
+            "docs-lint expected_md must keep " + md060_false,
+            errors,
+        )
+    fail_mcp_url = "must pin exact https://modelcontextprotocol" + ".io/"
+    if fail_mcp_url not in text:
+        fail(
+            "check_lycheeignore must emit " + fail_mcp_url + " fail needle",
+            errors,
+        )
+    fail_lfs_url = "must pin exact https://www.linuxfoundation" + ".org/"
+    if fail_lfs_url not in text:
+        fail(
+            "check_lycheeignore must emit " + fail_lfs_url + " fail needle",
+            errors,
+        )
+    fail_exact_body = "must match exact live docs-lint " + "body"
+    if fail_exact_body not in text:
+        fail(
+            "check_workflows_and_license must emit " + fail_exact_body + " fail needle",
+            errors,
+        )
+    second_pass_slice = "docs-lint second-" + "pass"
+    if second_pass_slice not in text:
+        fail(
+            "docs-lint contract must keep " + second_pass_slice + " wording",
+            errors,
+        )
+    not_actionlint_spam = "not actionlint/common " + "spam"
+    if not_actionlint_spam not in text:
+        fail(
+            "docs-lint second-pass docstring must keep " + not_actionlint_spam,
             errors,
         )
 

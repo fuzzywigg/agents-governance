@@ -1216,7 +1216,7 @@ def check_workflow_hardening(errors: list[str]) -> None:
             errors,
         )
 
-    # Contiguous needles for stewardship-badge lint deepen after #189 contracts:
+    # Exact needles for stewardship-badge lint deepen after #189 contracts:
     # exact live stewardship-badge lint globs block
     # exact live stewardship-badge lint push paths filter
     # Stewardship-badge lint deepen after #189: exact live markdown-lint globs

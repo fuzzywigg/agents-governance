@@ -870,3 +870,5 @@ _None yet._
 2026-09-14T10:44:39Z
 
 2026-09-14T10:44:39Z cursor: Cherry-pick in progress on post-#272 tip; local verify next ← ECO-081 (do not revive #246/#273/#266/#261/#260/#256/#251/#250)
+
+2026-09-14T10:51:26Z cursor: Local green — run_stewardship + self-tests 5592 + markdownlint on post-#272 tip ← ECO-081 lychee/blob-503 leftover only (leave draft; do not revive #246/#273/#266/#261/#260/#256/#251/#250)

@@ -11,6 +11,20 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki outline/PUBLISH leftover deepen after #239 tip: expand
+  self-tests to 4646 cases (was 4462) fail-closing unsaturated wiki outline /
+  PUBLISH.md leftover on existing `docs/wiki` pages only — Pages to publish
+  heading / pages-table row order / one-shot `agents-governance.wiki.git`
+  clone / `cp docs/wiki/{page}` list (no operator `PUBLISH.md`) / git add of
+  the six publishable files / `git push origin` / purpose + closes `#16` YAML /
+  Fallback `.wiki.git` / badge-standard blob rewrite / drop in-repo PUBLISH.md
+  bullet / `OPERATOR_ONLY` not in `PUBLISHABLE_PAGES` — wiki outline/PUBLISH
+  leftover slice only (not md/link residual layouts #239 / not
+  stewardship-checks/schema residual #233 / not wiki-index/badge leftover #227 /
+  not path-filter/path-order #225 / not Pass-2 leftover + md/link #220);
+  no invent-product; no fourth badge; no extra wiki files. Lands closed #238
+  leftover on post-#239 tip (do **not** revive #238). Distinct from merged
+  #239/#233/#227/#225/#220/#216/#208.
 - TOKENMAXX markdown-lint/link-check residual exact layouts after #233 tip:
   expand self-tests to 4462 cases (was 4414) fail-closing DISTINCT leftover
   markdown-lint / link-check residual exact layouts — contiguous `args: >-`

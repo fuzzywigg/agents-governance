@@ -564,3 +564,5 @@ _None yet._
 
 
 2026-09-14T04:26:03Z cursor: Local green — run_stewardship + self-tests 3063 + markdownlint ← ECO-060 policy-schema fourth-pass after #161 (do not revive #163/#142/#147/#153)
+
+2026-09-14T04:31:02Z cursor: PR #171 CI green (lint + link-check + stewardship/actionlint) DRAFT ← complete ECO-060 TOKENMAXX policy-schema fourth-pass after #161 (do not revive #163/#142/#147/#153; leave #164/#166/#170 alone; do not merge)

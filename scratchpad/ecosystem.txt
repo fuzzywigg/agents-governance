@@ -552,3 +552,12 @@ _None yet._
 2026-09-14T03:55:00Z cursor: Local green — run_stewardship + self-tests 2885 + markdownlint ← ECO-059 leftover docs-lint/stewardship/actionlint after #149 (do not revive #150/#146/#154)
 
 2026-09-14T03:52:00Z cursor: PR #161 CI green (lint + link-check + stewardship/actionlint) MERGEABLE ← complete ECO-059 TOKENMAXX leftover stewardship/docs-lint/actionlint after #149 (does not revive #150/#146/#154/#151/#156)
+
+### [ECO-060] TOKENMAXX deepen actionlint path-filter leftovers after #161 — 2026-09-14T04:12:00Z
+- [x] cursor: Read live tree post-#161 (2885 cases; leftover docs-lint/stewardship/actionlint saturated; #157 path-order/badge OPEN — distinct slice)
+- [x] cursor: Fail-close path-filter leftovers — exact push paths layouts / residual stewardship path entries / reject paths-ignore / ignore-glob exactness (empty stubs already handled)
+- [x] cursor: Expand self-tests 2885 → 2979 (path-filter leftovers slice only; not path-order/badge / actionlint third-pass / docs-lint leftover spam)
+- [ ] cursor: Green draft PR with CI
+- Scope: EXISTING actionlint path-filter leftover pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; distinct from #157/#111 third-pass
+- Branch: overnight-actionlint-path-filter-leftovers
+2026-09-14T04:12:00Z

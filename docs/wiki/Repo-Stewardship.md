@@ -169,7 +169,10 @@ plus actionlint-style deepen after #135/#141: `cancel-in-progress: true` /
 plus leftover docs-lint/stewardship/actionlint pins after #149: docs-lint
 third-pass exact `.lycheeignore` full layout + commentary lines /
 actionlint leftover `contents: read` membership affirm (complement #149
-regex) / stewardship leftover exact `run_stewardship_checks.sh` full layout).
+regex) / stewardship leftover exact `run_stewardship_checks.sh` full layout,
+plus actionlint path-filter leftovers after #161: exact push `paths:` layouts /
+residual stewardship path entries / reject `paths-ignore:` / ignore-glob
+exactness — empty stubs already handled; distinct from path-order/badge).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

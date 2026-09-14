@@ -280,8 +280,8 @@ plus markdown-lint/link-check residual exact layouts after #233 tip: exact
 contiguous link-check `args: >-` flag block / exact contiguous `on:`
 push/PR/schedule/workflow_dispatch for link+lint / exact contiguous
 markdown-lint `with:` globs|+config / exact contiguous link-check `with:`
-token commentary — DISTINCT residual edges only (not stewardship-checks/schema
-#233 / not wiki-index/badge #227 / not path-edges #225 / not Pass-2 leftover +
+token commentary — DISTINCT residual edges only (not leftover #233 schema /
+not wiki-index/badge #227 / not path-edges #225 / not Pass-2 leftover +
 md/link #220 core / not stewardship-badge lint #208; lands closed #221 leftover
 residual; do not revive #221/#219/#214/#207/#201/#231)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet

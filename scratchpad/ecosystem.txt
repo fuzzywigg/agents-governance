@@ -552,3 +552,14 @@ _None yet._
 2026-09-14T03:55:00Z cursor: Local green — run_stewardship + self-tests 2885 + markdownlint ← ECO-059 leftover docs-lint/stewardship/actionlint after #149 (do not revive #150/#146/#154)
 
 2026-09-14T03:52:00Z cursor: PR #161 CI green (lint + link-check + stewardship/actionlint) MERGEABLE ← complete ECO-059 TOKENMAXX leftover stewardship/docs-lint/actionlint after #149 (does not revive #150/#146/#154/#151/#156)
+
+### [ECO-060] TOKENMAXX deepen stewardship CI pins after #161 — 2026-09-14T04:14:37Z
+- [x] cursor: Read live tree post-#161 (2885 cases; leftover docs-lint/stewardship/actionlint saturated; #158 CLOSED CONFLICTING_after_149 — do not revive; siblings racing actionlint-path/badge/wiki/schema/fixtures — pick stewardship CI leftovers)
+- [x] cursor: Fail-close stewardship CI deepen — Check links / Run markdownlint / Set up Python / Install PyYAML / Stewardship gates+self-tests / exact token+github-token / --exclude-path .github/agents / globs: | / AGENTS+CLAUDE+LICENSE+CONTRIBUTING+.github/workflows/** / Weekly drift + GITHUB_TOKEN commentary / named-step uses: scan / deepen docstring + gate contract
+- [x] cursor: Expand self-tests 2885 → 2957 (stewardship CI reliability leftover slice; not actionlint/badge/wiki/docs-lint/schema spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING stewardship CI workflow reversible pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #158 leftover on post-#161 main; do not revive #158/#113
+- Branch: cursor/tokenmaxx-stewardship-ci-deepen-after-161-21e9
+2026-09-14T04:14:37Z
+
+2026-09-14T04:18:00Z cursor: Local green — run_stewardship + self-tests 2957 + markdownlint ← ECO-060 stewardship CI deepen after #161 (do not revive #158/#113)

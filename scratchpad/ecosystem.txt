@@ -364,3 +364,12 @@ _None yet._
 - Scope: EXISTING actionlint-style integrity / static workflow-path pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-actionlint-style-pins-f660
 2026-09-14T00:15:00Z
+
+### [ECO-047] TOKENMAXX deepen stewardship-schema second-pass pins after #79 — 2026-09-14T00:22:12Z
+- [x] cursor: Read live tree post-#79 (1683 cases; actionlint-style saturated; open #80 is scratchpad-only)
+- [x] cursor: Fail-close stewardship-schema second-pass — exact ISO/SEMVER/ISSUE/FENCED regex assigns / DATE_KEYS / fail needles / helper docs / parse_simple_yaml true|false|null|int / PyYAML|stdlib-subset OK banner / autonomy_level+tier+status+surface+maintainer EXPECTED assigns / contract fn+call self-pin
+- [x] cursor: Expand self-tests 1683 → 1755 (schema second-pass slice; not actionlint / CI workflow / common / badge / wiki / relative spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING stewardship-schema integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-schema-second-pass-58b1
+2026-09-14T00:22:12Z

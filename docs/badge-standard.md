@@ -121,7 +121,12 @@ plus actionlint-style gate contract pins after #75: top-level `name:` /
 `jobs.*.runs-on` / `jobs.*.steps` / `timeout-minutes` / no
 `pull_request_target` / no `write-all` / no `contents: write` / no
 `id-token: write` / `@`-pin float set `main|master|latest` / `docker://`
-skip / unpinned reject).
+skip / unpinned reject,
+plus stewardship-schema second-pass after #79: exact ISO/SEMVER/ISSUE/
+FENCED regex assigns / `DATE_KEYS` / fail needles / helper docs /
+parse_simple_yaml true|false|null|int / PyYAML|stdlib-subset OK banner /
+autonomy_level+tier+status+surface+maintainer EXPECTED assigns /
+contract fn+call self-pin).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

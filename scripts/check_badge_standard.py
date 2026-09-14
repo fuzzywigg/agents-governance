@@ -120,6 +120,21 @@ NOT Pass-2 leftover + md/link #220):
 - Stewardship gate self-tests precedes Download actionlint
 - reject uses: rhysd/actionlint@ invent (keep download-actionlint.bash)
 
+Fail-closed actionlint path-filter/path-order residual deepen after #233
+(NOT saturated deepen #225/#203 / NOT #189 path-order / NOT #176 layouts /
+NOT schema #191/#216 / NOT Pass-2 residual #199/#203 / NOT Pass-2 leftover +
+md/link #220 / NOT wiki-badge leftover #227 / NOT stewardship-checks/schema #233 /
+NOT stewardship-badge lint #208; lands closed #232 leftover on post-#233 tip —
+do not revive #232/#234/#235):
+- contiguous pull_request:/schedule: adjacency (bare PR form) on all three
+- reject branches-ignore: invent
+- pull_request stays type-unfiltered (no nested types:)
+- reject tj-actions/changed-files invent
+- contiguous four-step actionlint path-order
+  (gates → self-tests → Download → actionlint run)
+- schedule: precedes workflow_dispatch: on all three
+- contiguous shell-less actionlint run step (no invent shell: on run step)
+
 Fail-closed stewardship-checks + schema residual deepen after #225 (NOT wiki-index/badge
 #227 / NOT path-edges #225 / NOT Pass-2 leftover+md/link #220 / NOT schema fourth-pass #216 /
 NOT badge-lint #208 / NOT Pass-2 residual #199/#203 / NOT path-order #189;
@@ -744,6 +759,15 @@ def check_workflow_hardening(errors: list[str]) -> None:
     exact contiguous actionlint run / Download precedes actionlint run /
     contiguous Download/id/run/shell block / self-tests precede Download /
     reject uses: rhysd/actionlint@ invent.
+    Path-filter/path-order residual deepen after #233 (NOT saturated deepen
+    #225/#203 / NOT #189 / NOT #176 / NOT schema #191/#216 /
+    NOT Pass-2 residual #199/#203 / NOT Pass-2 leftover + md/link #220 /
+    NOT wiki-badge leftover #227 / NOT stewardship-checks/schema #233 /
+    NOT stewardship-badge lint #208):
+    contiguous pull_request:/schedule: adjacency / reject branches-ignore: /
+    pull_request type-unfiltered / reject tj-actions/changed-files /
+    contiguous four-step actionlint path-order /
+    schedule before workflow_dispatch / contiguous shell-less actionlint run step.
     Markdown-lint/link-check workflow edges after #203 tip (lands closed #202/#192 leftover;
     NOT path-filter / Pass-2 / path-order / schema / badge-lint spam):
     args: >- / externally broken links commentary / without-it private-404 commentary /
@@ -1892,6 +1916,92 @@ def check_workflow_hardening(errors: list[str]) -> None:
         fail(
             "stewardship-checks.yml must not invent services: "
             "(stewardship-checks + schema residual after #225)",
+            errors,
+        )
+
+
+    # Path-filter/path-order residual deepen after #233 (DISTINCT leftover edges;
+    # NOT saturated deepen #225/#203 / NOT #189 path-order / NOT #176 layouts /
+    # NOT schema #191/#216 / NOT Pass-2 residual #199/#203 /
+    # NOT Pass-2 leftover + md/link #220 / NOT wiki-badge leftover #227 /
+    # NOT stewardship-checks/schema #233 / NOT stewardship-badge lint #208).
+    pr_schedule = "  pull_request:\n  schedule:"
+    for wf_name, body in (
+        ("link-check.yml", link),
+        ("markdown-lint.yml", lint),
+        ("stewardship-checks.yml", stew),
+    ):
+        if pr_schedule not in body:
+            fail(
+                f"{wf_name} must keep contiguous pull_request:/schedule: "
+                "adjacency (bare PR form; "
+                "path-filter/path-order residual deepen after #233)",
+                errors,
+            )
+        if "branches-ignore:" in body:
+            fail(
+                f"{wf_name} must not invent branches-ignore: "
+                "(path-filter/path-order residual deepen after #233)",
+                errors,
+            )
+        if "tj-actions/changed-files" in body:
+            fail(
+                f"{wf_name} must not invent tj-actions/changed-files "
+                "(path-filter/path-order residual deepen after #233)",
+                errors,
+            )
+        pr_match = re.search(
+            r"(?m)^  pull_request:\s*\n((?:    .*\n)*)",
+            body,
+        )
+        if pr_match and re.search(r"(?m)^    types:", pr_match.group(1)):
+            fail(
+                f"{wf_name} pull_request must stay type-unfiltered "
+                "(no nested types:; "
+                "path-filter/path-order residual deepen after #233)",
+                errors,
+            )
+        sched_idx = body.find("  schedule:")
+        dispatch_idx = body.find("  workflow_dispatch:")
+        if sched_idx < 0 or dispatch_idx < 0 or not (sched_idx < dispatch_idx):
+            fail(
+                f"{wf_name} schedule: must precede workflow_dispatch: "
+                "(path-filter/path-order residual deepen after #233)",
+                errors,
+            )
+    gates_name = (
+        "name: Stewardship gates (badge / wiki / schema / relative links)"
+    )
+    gates_idx = stew.find(gates_name)
+    self_tests_idx = stew.find("name: Stewardship gate self-tests")
+    dl_idx = stew.find("name: Download actionlint")
+    run_idx = stew.find("name: actionlint existing workflow paths")
+    if (
+        gates_idx < 0
+        or self_tests_idx < 0
+        or dl_idx < 0
+        or run_idx < 0
+        or not (gates_idx < self_tests_idx < dl_idx < run_idx)
+    ):
+        fail(
+            "stewardship-checks.yml must keep contiguous four-step "
+            "actionlint path-order "
+            "(gates → self-tests → Download → actionlint run; "
+            "path-filter/path-order residual deepen after #233)",
+            errors,
+        )
+    shell_less_run = (
+        "      - name: actionlint existing workflow paths\n"
+        "        run: ${{ steps.get_actionlint.outputs.executable }} -color "
+        ".github/workflows/link-check.yml "
+        ".github/workflows/markdown-lint.yml "
+        ".github/workflows/stewardship-checks.yml"
+    )
+    if shell_less_run not in stew:
+        fail(
+            "stewardship-checks.yml must keep contiguous shell-less "
+            "actionlint run step (no invent shell: on run step; "
+            "path-filter/path-order residual deepen after #233)",
             errors,
         )
 
@@ -3903,7 +4013,8 @@ def check_actionlint_style_gate_contract(errors: list[str]) -> None:
 def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
     """Fail-close live CI workflow hardening wiring (third-pass after #111; deepen after #161;
     path-filter leftovers after #173; path-order leftover after #181;
-    path-filter/path-order deepen after #203)."""
+    path-filter/path-order deepen after #203;
+    path-filter/path-order residual deepen after #233)."""
     text = Path(__file__).read_text(encoding="utf-8")
     # Fail-closed after #111: third-pass helper / constant / needle pins
     # (CI workflow reversible slice only; not badge/wiki/relative/schema/actionlint spam).
@@ -4447,6 +4558,110 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
         ),
     )
     for needle, label in residual_225_pins:
+        if needle not in text:
+            fail(
+                "check_workflow_hardening must keep " + label,
+                errors,
+            )
+
+
+    # Path-filter/path-order residual deepen after #233 (DISTINCT leftover edges).
+    residual_233_doc = "Path-filter/path-order residual deepen after " + "#233"
+    if residual_233_doc not in text:
+        fail(
+            "check_workflow_hardening docstring must pin " + residual_233_doc,
+            errors,
+        )
+    module_residual_233 = "path-filter/path-order residual deepen after " + "#233"
+    if module_residual_233 not in text:
+        fail(
+            "check_badge_standard.py module docstring must pin "
+            + module_residual_233,
+            errors,
+        )
+    not_saturated_225 = "NOT saturated deepen " + "#225"
+    if not_saturated_225 not in text:
+        fail(
+            "path residual must keep " + not_saturated_225 + " distinctness pin",
+            errors,
+        )
+    not_189_path_order = "NOT " + "#189"
+    if not_189_path_order not in text:
+        fail(
+            "path residual must keep " + not_189_path_order + " distinctness pin",
+            errors,
+        )
+    not_176_layouts = "NOT " + "#176"
+    if not_176_layouts not in text:
+        fail(
+            "path residual must keep " + not_176_layouts + " distinctness pin",
+            errors,
+        )
+    not_schema_216 = "NOT schema " + "#191/#216"
+    if not_schema_216 not in text:
+        fail(
+            "path residual must keep " + not_schema_216 + " distinctness pin",
+            errors,
+        )
+    not_pass2_220 = "NOT Pass-2 leftover + " + "md/link #220"
+    if not_pass2_220 not in text:
+        fail(
+            "path residual must keep " + not_pass2_220 + " distinctness pin",
+            errors,
+        )
+    not_wiki_227 = "NOT wiki-badge leftover " + "#227"
+    if not_wiki_227 not in text:
+        fail(
+            "path residual must keep " + not_wiki_227 + " distinctness pin",
+            errors,
+        )
+    not_stew_233 = "NOT stewardship-checks/schema " + "#233"
+    if not_stew_233 not in text:
+        fail(
+            "path residual must keep " + not_stew_233 + " distinctness pin",
+            errors,
+        )
+    not_badge_lint_208 = "NOT stewardship-badge lint " + "#208"
+    if not_badge_lint_208 not in text:
+        fail(
+            "path residual must keep " + not_badge_lint_208 + " distinctness pin",
+            errors,
+        )
+    residual_233_pins = (
+        (
+            "contiguous pull_request:/schedule: " + "adjacency",
+            "pull_request/schedule adjacency fail needle",
+        ),
+        (
+            "must not invent branches-" + "ignore:",
+            "branches-ignore invent reject needle",
+        ),
+        (
+            "pull_request must stay type-" + "unfiltered",
+            "pull_request type-unfiltered fail needle",
+        ),
+        (
+            "must not invent tj-actions/changed-" + "files",
+            "changed-files invent reject needle",
+        ),
+        (
+            "contiguous four-step " + "actionlint path-order",
+            "four-step actionlint path-order fail needle",
+        ),
+        (
+            "schedule: must precede " + "workflow_dispatch:",
+            "schedule-before-dispatch fail needle",
+        ),
+        (
+            "contiguous shell-less " + "actionlint run step",
+            "shell-less actionlint run step fail needle",
+        ),
+        (
+            "path-filter/path-order residual deepen after " + "#233",
+            "residual-after-233 wording pin",
+        ),
+    )
+    for needle, label in residual_233_pins:
         if needle not in text:
             fail(
                 "check_workflow_hardening must keep " + label,

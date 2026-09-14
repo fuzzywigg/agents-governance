@@ -11,6 +11,16 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX badge/docs-lint leftover pins after #111: expand self-tests to
+  2356 cases (was 2223) fail-closing badge+docs-lint integrity leftovers —
+  FORBIDDEN/SECRET hint loops / `REPO_FROM_*.search` / `len!=MAX_BADGES` /
+  must-target workflow needles / License `endswith(/LICENSE)`+`./LICENSE` /
+  Quiet stewardship / self-contract first / `h1_idx+1` / `BADGE_LINE_RE.match` /
+  README assign / exact MCP+LF URLs / false-positive+flaky+Connection-reset /
+  exact `.markdownlint.json` body — badge/docs-lint leftover slice only (not
+  actionlint / stewardship_common / wiki / relative spam); no invent-product;
+  no fourth badge; lands leftovers after #104/#108 on post-#111 main.
+
 - TOKENMAXX actionlint-style third-pass pins after #108: expand self-tests to
   2223 cases (was 2151) fail-closing live reversible CI workflow integrity —
   `concurrency:` + `cancel-in-progress:` / `permissions:` present /

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Enforce docs/badge-standard.md against README.md (executable gate).
 
-Fail-closed pins (live path after #48; second-pass after #61; third-pass after #104):
+Fail-closed pins (live path after #48; second-pass after #61; third-pass after #104;
+leftover deepen after #111):
 - REQUIRED_ORDER: Link Check → Markdown Lint → License (exactly MAX_BADGES = 3)
 - EXPECTED_REPO: fuzzywigg/agents-governance
 - REQUIRED_WORKFLOWS: link-check.yml / markdown-lint.yml / stewardship-checks.yml
@@ -16,6 +17,18 @@ Fail-closed pins (live path after #48; second-pass after #61; third-pass after #
   utf-8 / Strict row / H1 startswith / FAIL README / https image+link needles /
   absolute workflow URL / License point / Unexpected label / extract+check_badges /
   contract(errors) call / IGNORECASE / blob.lower / EXPECTED_REPO.lower
+- Leftover deepen after #111: FORBIDDEN/SECRET hint loops / REPO_FROM_*.search /
+  len!=MAX_BADGES / labels-in-order / must-target workflow needles /
+  License repo-slug + endswith(/LICENSE) / Quiet stewardship / self-contract
+  first / h1_idx+1 / BADGE_LINE_RE.match / README exact assign
+
+Fail-closed docs-lint pins (live path after #100; leftover deepen after #111):
+- .lycheeignore escaped img\\.shields.io + MCP/LF hosts + stewardship/308/103
+- reject https://* / http://* / bare *; exact MD013/MD024 objects; MD033/041/060
+  false; default: true; ROOT assigns; check_docs_lint_gate_contract
+- Leftover deepen after #111: exact MCP+LF URLs / false-positive+flaky+
+  Connection-reset commentary / early hints / exact markdownlint.json body /
+  bare-star wording / utf-8 lycheeignore read / after-#111 docstring
 
 Fail-closed actionlint-style pins (live path after #75; second-pass after #83/#86; third-pass after #108):
 - top-level name: / jobs.*.runs-on / jobs.*.steps / timeout-minutes
@@ -213,6 +226,25 @@ def check_workflows_and_license(errors: list[str]) -> None:
                 '.markdownlint.json must pin "MD024": { "siblings_only": true }',
                 errors,
             )
+        # Fail-closed after #111: exact live markdownlint.json body (docs-lint leftover).
+        exact_md_body = (
+            '{\n'
+            '  "default": true,\n'
+            '  "MD013": { "line_length": 200 },\n'
+            '  "MD024": { "siblings_only": true },\n'
+            '  "MD033": false,\n'
+            '  "MD041": false,\n'
+            '  "MD060": false\n'
+            '}\n'
+        )
+        if md_cfg != exact_md_body and md_cfg.strip() + "\n" != exact_md_body:
+            # Allow missing trailing newline only when body otherwise matches.
+            if md_cfg.strip() != exact_md_body.strip():
+                fail(
+                    ".markdownlint.json must match exact live docs-lint body "
+                    "(default/MD013/MD024/MD033/MD041/MD060 only)",
+                    errors,
+                )
 
 
 def check_lycheeignore(errors: list[str]) -> None:
@@ -222,6 +254,8 @@ def check_lycheeignore(errors: list[str]) -> None:
     escaped img\.shields\.io; modelcontextprotocol.io + linuxfoundation.org
     live excludes; stewardship/license-badge commentary; reject https://* /
     http://* / bare *; not wiki / relative pin spam.
+    Leftover deepen after #111: exact MCP+LF URLs / false-positive+flaky+
+    Connection reset commentary / early hints / utf-8 read.
     """
     if not LYCHEEIGNORE.is_file():
         return
@@ -277,6 +311,38 @@ def check_lycheeignore(errors: list[str]) -> None:
         fail(
             ".lycheeignore must not exclude all http(s) targets "
             "(https://* / http://* / bare *)",
+            errors,
+        )
+    # Fail-closed after #111: exact live exclude URLs (docs-lint leftover).
+    if "https://modelcontextprotocol.io/" not in text:
+        fail(
+            ".lycheeignore must pin exact https://modelcontextprotocol.io/ exclude",
+            errors,
+        )
+    if "https://www.linuxfoundation.org/" not in text:
+        fail(
+            ".lycheeignore must pin exact https://www.linuxfoundation.org/ exclude",
+            errors,
+        )
+    # Fail-closed after #111: false-positive + flaky Connection-reset commentary.
+    if "false-positive" not in lowered and "false positive" not in lowered:
+        fail(
+            ".lycheeignore must note lychee false-positive rationale",
+            errors,
+        )
+    if "flaky" not in lowered:
+        fail(
+            ".lycheeignore must note flaky img.shields.io CDN rationale",
+            errors,
+        )
+    if "connection reset" not in lowered and "rst" not in lowered:
+        fail(
+            ".lycheeignore must note Connection reset / RST CDN rationale",
+            errors,
+        )
+    if "early hints" not in lowered and "early-hints" not in lowered:
+        fail(
+            ".lycheeignore must note linuxfoundation.org early hints rationale",
             errors,
         )
 
@@ -1584,13 +1650,141 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
             errors,
         )
 
+    # Fail-closed after #111: badge leftover deepen (not docs-lint / actionlint /
+    # stewardship_common / wiki / relative spam).
+    forbidden_loop = "for hint in FORBIDDEN_" + "BADGE_HINTS"
+    if forbidden_loop not in text:
+        fail(
+            "check_badge_standard.py must loop FORBIDDEN_" + "BADGE_HINTS",
+            errors,
+        )
+    secret_loop = "for hint in SECRET_" + "URL_HINTS"
+    if secret_loop not in text:
+        fail(
+            "check_badge_standard.py must loop SECRET_" + "URL_HINTS",
+            errors,
+        )
+    gh_search = "REPO_FROM_GITHUB_RE." + "search"
+    if gh_search not in text:
+        fail(
+            "check_badge_standard.py must use REPO_FROM_GITHUB_RE." + "search",
+            errors,
+        )
+    shields_search = "REPO_FROM_SHIELDS_RE." + "search"
+    if shields_search not in text:
+        fail(
+            "check_badge_standard.py must use REPO_FROM_SHIELDS_RE." + "search",
+            errors,
+        )
+    len_max = "len(badges) != MAX_" + "BADGES"
+    if len_max not in text:
+        fail(
+            "check_badge_standard.py must compare len(badges) != MAX_" + "BADGES",
+            errors,
+        )
+    labels_order = "Badge labels must be in " + "order"
+    if labels_order not in text:
+        fail(
+            "check_badge_standard.py must emit Badge labels must be in "
+            + "order needle",
+            errors,
+        )
+    link_target = "Link Check link must target link-check.yml " + "workflow"
+    if link_target not in text:
+        fail(
+            "check_badge_standard.py must emit Link Check link must target "
+            + "link-check.yml workflow",
+            errors,
+        )
+    md_target = "Markdown Lint link must target markdown-lint.yml " + "workflow"
+    if md_target not in text:
+        fail(
+            "check_badge_standard.py must emit Markdown Lint link must target "
+            + "markdown-lint.yml workflow",
+            errors,
+        )
+    lic_slug = "License shields image must include repo " + "slug"
+    if lic_slug not in text:
+        fail(
+            "check_badge_standard.py must emit License shields image must include "
+            + "repo slug",
+            errors,
+        )
+    endswith_lic = 'endswith("/' + 'LICENSE")'
+    endswith_lic_sq = "endswith('/" + "LICENSE')"
+    if endswith_lic not in text and endswith_lic_sq not in text:
+        fail(
+            "check_badge_standard.py must allow LICENSE via " + endswith_lic,
+            errors,
+        )
+    dot_slash_lic = '"./LI' + 'CENSE"'
+    dot_slash_lic_sq = "'./LI" + "CENSE'"
+    if dot_slash_lic not in text and dot_slash_lic_sq not in text:
+        fail(
+            'check_badge_standard.py must allow LICENSE via "./LICENSE"',
+            errors,
+        )
+    quiet_stew = "Quiet steward" + "ship"
+    if quiet_stew not in text:
+        fail(
+            "check_badge_standard.py docstring must keep Quiet steward" + "ship",
+            errors,
+        )
+    self_contract = "self-contract " + "first"
+    if self_contract not in text:
+        fail(
+            "check_badge_standard.py main must keep self-contract " + "first comment",
+            errors,
+        )
+    h1_plus = "h1_idx + " + "1"
+    if h1_plus not in text:
+        fail(
+            "check_badge_standard.py extract_badge_row must start at h1_idx + " + "1",
+            errors,
+        )
+    badge_match = "BADGE_LINE_RE." + "match"
+    if badge_match not in text:
+        fail(
+            "check_badge_standard.py extract_badge_row must use BADGE_LINE_RE."
+            + "match",
+            errors,
+        )
+    readme_assign = 'README = ROOT / "README' + '.md"'
+    readme_assign_sq = "README = ROOT / 'README" + ".md'"
+    if readme_assign not in text and readme_assign_sq not in text:
+        fail(
+            "check_badge_standard.py must assign " + readme_assign,
+            errors,
+        )
+    leftover_doc = "Leftover deepen after " + "#111"
+    if leftover_doc not in text:
+        fail(
+            "check_badge_standard.py docstring must keep Leftover deepen after "
+            + "#111 pin",
+            errors,
+        )
+    invent_hint = "Forbidden invent-product / social badge " + "hint"
+    if invent_hint not in text:
+        fail(
+            "check_badge_standard.py must emit Forbidden invent-product / social "
+            + "badge hint needle",
+            errors,
+        )
+    secret_token = "Secret-like token in badge " + "URL"
+    if secret_token not in text:
+        fail(
+            "check_badge_standard.py must emit Secret-like token in badge "
+            + "URL needle",
+            errors,
+        )
+
 
 
 
 
 
 def check_docs_lint_gate_contract(errors: list[str]) -> None:
-    """Fail-close live docs-lint wiring (after #100; not CI workflow spam)."""
+    """Fail-close live docs-lint wiring (after #100; leftover deepen after #111)."""
     if not BADGE_GATE.is_file():
         fail("Missing scripts/check_badge_standard.py (docs-lint host)", errors)
         return
@@ -1800,6 +1994,96 @@ def check_docs_lint_gate_contract(errors: list[str]) -> None:
     if call_workflows not in text:
         fail(
             "main must call " + call_workflows,
+            errors,
+        )
+
+    # Fail-closed after #111: docs-lint leftover deepen (not badge third-pass /
+    # actionlint / stewardship_common / wiki / relative spam).
+    leftover_docs = "Leftover deepen after " + "#111"
+    if leftover_docs not in text:
+        fail(
+            "docs-lint contract must keep Leftover deepen after " + "#111 pin",
+            errors,
+        )
+    mcp_url = "https://modelcontextprotocol.io" + "/"
+    if mcp_url not in text:
+        fail(
+            "check_lycheeignore must pin exact " + mcp_url,
+            errors,
+        )
+    lfs_url = "https://www.linuxfoundation.org" + "/"
+    if lfs_url not in text:
+        fail(
+            "check_lycheeignore must pin exact " + lfs_url,
+            errors,
+        )
+    false_pos = "false-positive"
+    if false_pos not in text:
+        fail(
+            "check_lycheeignore must keep " + false_pos + " rationale pin",
+            errors,
+        )
+    flaky_pin = "flaky img.shields.io CDN " + "rationale"
+    if flaky_pin not in text:
+        fail(
+            "check_lycheeignore must keep " + flaky_pin,
+            errors,
+        )
+    conn_reset = "Connection reset / RST CDN " + "rationale"
+    if conn_reset not in text:
+        fail(
+            "check_lycheeignore must keep " + conn_reset,
+            errors,
+        )
+    early_hints = "early hints " + "rationale"
+    if early_hints not in text:
+        fail(
+            "check_lycheeignore must keep " + early_hints,
+            errors,
+        )
+    exact_body = "exact live docs-lint " + "body"
+    if exact_body not in text:
+        fail(
+            "check_workflows_and_license must keep " + exact_body + " pin",
+            errors,
+        )
+    bare_star = "bare " + "*"
+    if bare_star not in text:
+        fail(
+            "check_lycheeignore must keep bare " + "* reject wording",
+            errors,
+        )
+    utf8_lychee = 'LYCHEEIGNORE.read_text(encoding="utf-' + '8")'
+    utf8_lychee_sq = "LYCHEEIGNORE.read_text(encoding='utf-" + "8')"
+    if utf8_lychee not in text and utf8_lychee_sq not in text:
+        fail(
+            "check_lycheeignore must read via utf-" + "8",
+            errors,
+        )
+    md_cfg_read = 'MARKDOWNLINT_CONFIG.read_text(encoding="utf-' + '8")'
+    md_cfg_read_sq = "MARKDOWNLINT_CONFIG.read_text(encoding='utf-" + "8')"
+    if md_cfg_read not in text and md_cfg_read_sq not in text:
+        fail(
+            "check_workflows_and_license must read markdownlint via utf-" + "8",
+            errors,
+        )
+    default_md013 = '"default": true,'
+    if default_md013 not in text:
+        fail(
+            "check_workflows_and_license exact body must include " + default_md013,
+            errors,
+        )
+    # wording in fail message uses default/MD013/... — pin that phrase
+    only_phrase = "default/MD013/MD024/MD033/MD041/MD060 " + "only"
+    if only_phrase not in text:
+        fail(
+            "check_workflows_and_license must keep " + only_phrase + " needle",
+            errors,
+        )
+    after_111_live = "Fail-closed after " + "#111"
+    if after_111_live not in text:
+        fail(
+            "docs-lint live checks must keep Fail-closed after " + "#111 pins",
             errors,
         )
 

@@ -179,7 +179,12 @@ plus overnight stewardship/CI/schema/wiki fixture deepen after #165: residual
 schema/wiki/relative/common/badge policy edge fixtures via existing `_seed_*`
 harnesses only — not actionlint / docs-lint / stewardship-CI pin / path-filter /
 schema-third-pass pin spam; lands closed #167 leftover; do not revive
-closed #167/#168/#169).
+closed #167/#168/#169,
+plus run_stewardship Pass-2 after #173: exact ROOT assign / exactly four
+`python3 scripts/` / no `|| true` soft-fail / `dirname "$0")/..` fragment /
+doc gates locally / CI runner before self-tests /
+`check_run_stewardship_gate_contract` Pass-2 (lands closed #175/#140 leftover; do
+not revive #175/#140/#122; distinct from path-filter #176)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

@@ -11,6 +11,18 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX run_stewardship Pass-2 pins after #173: expand self-tests to
+  3164 cases (was 3081) fail-closing live local runner / CI reliability leftovers —
+  exact `ROOT="$(cd "$(dirname "$0")/.." && pwd)"` / exactly four `python3 scripts/`
+  lines / no `|| true` or `set +e` soft-fail / `dirname "$0")/..` fragment /
+  doc gates locally commentary / stewardship-checks.yml runs
+  `run_stewardship_checks.sh` before `test_stewardship_gates.py`, plus
+  `check_run_stewardship_gate_contract` Pass-2 pins after #165 —
+  run_stewardship slice only (not path-filter #176 / fixtures #173 /
+  stewardship-CI #165 / schema / badge-lint / wiki-index spam); no invent-product;
+  no fourth badge. Lands closed #175/#140 leftover on post-#173 main (do **not**
+  revive #175/#140/#122). Distinct from open path-filter (#176).
+
 - TOKENMAXX overnight stewardship/CI/schema/wiki fixture deepen after #165:
   expand self-tests to 3081 cases (was 2957) covering residual policy/
   stewardship edge fixtures — schema bool/nested/list/string/edit_policy/

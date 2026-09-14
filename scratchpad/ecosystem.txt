@@ -576,3 +576,14 @@ _None yet._
 2026-09-14T04:25:00Z
 
 2026-09-14T04:30:00Z cursor: Local green — run_stewardship + self-tests 3081 + markdownlint ← ECO-061 stewardship/CI/schema/wiki fixture deepen after #165 (do not revive #167/#168/#169; leave #164/#166 alone)
+
+### [ECO-062] TOKENMAXX deepen run_stewardship Pass-2 pins after #173 — 2026-09-14T04:45:00Z
+- [x] cursor: Read live tree post-#173 (3081 cases; fixtures saturated; #175 CLOSED — do not revive; open #176 path-filter — leave alone; pick run_stewardship Pass-2)
+- [x] cursor: Fail-close run_stewardship Pass-2 — exact ROOT / four python3 scripts/ / no || true|set +e / parent fragment / doc gates locally / CI runner-before-self-tests / contract Pass-2
+- [x] cursor: Expand self-tests 3081 → 3164 (run_stewardship CI reliability leftover slice; not path-filter #176 / fixtures #173 / badge-lint / wiki-index / schema spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING run_stewardship_checks.sh + stewardship-checks.yml order integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #175/#140 leftover on post-#173 main; do not revive #175/#140/#122; distinct from open #176
+- Branch: cursor/tokenmaxx-run-stewardship-pass2-after-173-f641
+2026-09-14T04:45:00Z
+
+2026-09-14T04:47:21Z cursor: Local green — run_stewardship + self-tests 3164 + markdownlint ← ECO-062 run_stewardship Pass-2 after #173 (do not revive #175/#140/#122; leave open #176 path-filter alone)

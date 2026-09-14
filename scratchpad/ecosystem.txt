@@ -576,3 +576,5 @@ _None yet._
 2026-09-14T04:30:00Z
 
 2026-09-14T04:35:00Z cursor: Local green — run_stewardship + self-tests 3040 + markdownlint ← ECO-061 run_stewardship Pass-2 after #165 (do not revive #140/#122; distinct from wiki-index #170 / schema #164 / path-filter #166)
+
+2026-09-14T04:36:00Z cursor: Draft PR #175 opened (run_stewardship Pass-2 after #165; 3040 cases) — awaiting CI; do not revive #140/#122; distinct from wiki-index #170 / schema #164 / path-filter #166

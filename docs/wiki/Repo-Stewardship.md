@@ -196,7 +196,14 @@ do not revive #177/#168/#170; distinct from path-filter #176 and run_stewardship
 plus actionlint path-order leftover after #181: contiguous three-path
 actionlint order / exact bash <(curl -fsSL) download /
 reject continue-on-error: true / Download actionlint + actionlint existing
-workflow paths step names / path-order leftover docstring).
+workflow paths step names / path-order leftover docstring,
+plus actionlint path-filter/path-order deepen after #189: contiguous
+push/branches/paths headers / pull_request path-unfiltered /
+reject dorny/paths-filter / residual self-workflow path lists / exact
+contiguous actionlint run / Download-before-run + self-tests-before-Download
+order / contiguous Download/id/run/shell block / reject uses: rhysd/actionlint@
+— DISTINCT leftover edges only (not saturated #189 / not #176 layouts /
+not schema #191 / not Pass-2+md/link #192 / not wiki-badge sibling).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

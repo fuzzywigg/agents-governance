@@ -631,3 +631,16 @@ _None yet._
 - Scope: EXISTING actionlint path-order leftover pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #157 leftover on post-#181 main; do not revive #157/#182/#143/#120
 - Branch: cursor/tokenmaxx-actionlint-path-order-after-181-3e1c
 2026-09-14T05:25:00Z
+
+2026-09-14T05:32:04Z cursor: PR #189 MERGED (actionlint path-order leftover after #181; 3402 cases) ← complete ECO-065 (do not revive #157/#182/#143/#120)
+
+### [ECO-067] TOKENMAXX deepen actionlint path-filter/path-order edges after #189 — 2026-09-14T05:49:50Z
+- [x] cursor: Read live tree post-#189 (3402 cases; path-order+#176 path-filter saturated; open #191 schema / #192 Pass-2+md/link — leave alone; pick DISTINCT unsaturated path-filter/path-order edges)
+- [x] cursor: Fail-close deepen edges — contiguous push/branches/paths headers / pull_request path-unfiltered / reject dorny/paths-filter / residual self-workflow path lists / exact contiguous actionlint run / Download-before-run + self-tests-before-Download / contiguous Download/id/run/shell block / reject uses: rhysd/actionlint@ / deepen docstring + gate contract
+- [x] cursor: Expand self-tests 3402 → 3548 (+146; path-filter/path-order deepen slice only; not saturated #189 / not #176 layouts / not schema #191 / not Pass-2+md/link #192 / not wiki-badge sibling)
+- [ ] cursor: Green draft PR with CI
+- Scope: EXISTING actionlint path-filter/path-order leftover edge pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; do not revive #166/#157/#182/#186; leave #191/#192 alone
+- Branch: cursor/tokenmaxx-actionlint-path-edges-after-189-95f2
+2026-09-14T05:49:50Z
+
+2026-09-14T05:55:41Z cursor: Local green — run_stewardship + self-tests 3548 + markdownlint ← ECO-067 actionlint path-filter/path-order deepen after #189 (do not revive #166/#157/#182/#186; leave #191/#192 alone)

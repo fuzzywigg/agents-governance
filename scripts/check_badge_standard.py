@@ -85,6 +85,19 @@ NOT #165 stewardship CI / NOT #149 cancel-in-progress):
 - no continue-on-error: true
 - Download actionlint + actionlint existing workflow paths step names
 - path-order leftover docstring
+
+Fail-closed actionlint path-filter/path-order deepen after #189 (NOT saturated
+#189 path-order / NOT #176 path-filter layouts / NOT schema #191 /
+NOT Pass-2+md/link #192 / NOT wiki-badge sibling):
+- contiguous push/branches/paths headers on all three workflows
+- pull_request stays path-unfiltered (no nested paths:)
+- reject dorny/paths-filter invent
+- residual link/lint self-workflow path list entries
+- exact contiguous actionlint run command (executable -color three paths)
+- Download actionlint precedes actionlint existing workflow paths
+- contiguous Download/id/run/shell download block
+- Stewardship gate self-tests precedes Download actionlint
+- reject uses: rhysd/actionlint@ invent (keep download-actionlint.bash)
 """
 
 from __future__ import annotations
@@ -662,6 +675,13 @@ def check_workflow_hardening(errors: list[str]) -> None:
     contiguous three-path actionlint order / exact bash <(curl -fsSL) download /
     no continue-on-error: true / Download actionlint + actionlint existing
     workflow paths step names / path-order leftover docstring.
+    Path-filter/path-order deepen after #189 (NOT saturated #189 / NOT #176
+    layouts / NOT schema #191 / NOT Pass-2+md/link #192 / NOT wiki-badge):
+    contiguous push/branches/paths headers / pull_request path-unfiltered /
+    reject dorny/paths-filter / residual self-workflow path list entries /
+    exact contiguous actionlint run / Download precedes actionlint run /
+    contiguous Download/id/run/shell block / self-tests precede Download /
+    reject uses: rhysd/actionlint@ invent.
     """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
@@ -1495,6 +1515,98 @@ def check_workflow_hardening(errors: list[str]) -> None:
             errors,
         )
 
+    # Path-filter/path-order deepen after #189 (DISTINCT leftover edges;
+    # NOT saturated #189 path-order / NOT #176 layouts / NOT schema #191 /
+    # NOT Pass-2+md/link #192 / NOT wiki-badge sibling).
+    push_header = (
+        "  push:\n"
+        '    branches: ["**"]\n'
+        "    paths:"
+    )
+    for wf_name, body in (
+        ("link-check.yml", link),
+        ("markdown-lint.yml", lint),
+        ("stewardship-checks.yml", stew),
+    ):
+        if push_header not in body:
+            fail(
+                f"{wf_name} must keep contiguous push/branches/paths header "
+                "(path-filter/path-order deepen after #189)",
+                errors,
+            )
+        pr_match = re.search(
+            r"(?m)^  pull_request:\s*\n((?:    .*\n)*)",
+            body,
+        )
+        if pr_match and re.search(r"(?m)^    paths:", pr_match.group(1)):
+            fail(
+                f"{wf_name} pull_request must stay path-unfiltered "
+                "(no nested paths:; path-filter/path-order deepen after #189)",
+                errors,
+            )
+        if "dorny/paths-filter" in body:
+            fail(
+                f"{wf_name} must not invent dorny/paths-filter "
+                "(path-filter/path-order deepen after #189)",
+                errors,
+            )
+    if '- ".github/workflows/link-check.yml"' not in link:
+        fail(
+            "link-check.yml paths filter must list self workflow path "
+            '(path-filter/path-order deepen after #189)',
+            errors,
+        )
+    if '- ".github/workflows/markdown-lint.yml"' not in lint:
+        fail(
+            "markdown-lint.yml paths filter must list self workflow path "
+            "(path-filter/path-order deepen after #189)",
+            errors,
+        )
+    exact_actionlint_run = (
+        "${{ steps.get_actionlint.outputs.executable }} -color "
+        ".github/workflows/link-check.yml "
+        ".github/workflows/markdown-lint.yml "
+        ".github/workflows/stewardship-checks.yml"
+    )
+    if exact_actionlint_run not in stew:
+        fail(
+            "stewardship-checks.yml must keep exact contiguous actionlint run "
+            "command (executable -color three paths; "
+            "path-filter/path-order deepen after #189)",
+            errors,
+        )
+    download_block = (
+        "      - name: Download actionlint\n"
+        "        id: get_actionlint\n"
+        "        run: bash <(curl -fsSL https://raw.githubusercontent.com/"
+        "rhysd/actionlint/v1.7.7/scripts/download-actionlint.bash) 1.7.7\n"
+        "        shell: bash"
+    )
+    if download_block not in stew:
+        fail(
+            "stewardship-checks.yml must keep contiguous Download/id/run/shell actionlint download block (path-filter/path-order deepen after #189)",
+            errors,
+        )
+    dl_idx = stew.find("name: Download actionlint")
+    run_idx = stew.find("name: actionlint existing workflow paths")
+    if dl_idx < 0 or run_idx < 0 or not (dl_idx < run_idx):
+        fail(
+            "stewardship-checks.yml Download actionlint must precede actionlint existing workflow paths (path-filter/path-order deepen after #189)",
+            errors,
+        )
+    self_tests_idx = stew.find("name: Stewardship gate self-tests")
+    if self_tests_idx < 0 or dl_idx < 0 or not (self_tests_idx < dl_idx):
+        fail(
+            "stewardship-checks.yml Stewardship gate self-tests must precede Download actionlint (path-filter/path-order deepen after #189)",
+            errors,
+        )
+    if re.search(r"(?m)^\s*uses:\s*rhysd/actionlint@", stew):
+        fail(
+            "stewardship-checks.yml must not invent uses: rhysd/actionlint@ "
+            "(keep download-actionlint.bash; "
+            "path-filter/path-order deepen after #189)",
+            errors,
+        )
 
 
 def check_badge_standard_doc(errors: list[str]) -> None:
@@ -3609,6 +3721,99 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
         ),
     )
     for needle, label in path_order_pins:
+        if needle not in text:
+            fail(
+                "check_workflow_hardening must keep " + label,
+                errors,
+            )
+
+    # Path-filter/path-order deepen after #189 (DISTINCT leftover edges).
+    deepen_189_doc = "Path-filter/path-order deepen after " + "#189"
+    if deepen_189_doc not in text:
+        fail(
+            "check_workflow_hardening docstring must pin " + deepen_189_doc,
+            errors,
+        )
+    module_deepen_189 = "path-filter/path-order deepen after " + "#189"
+    if module_deepen_189 not in text:
+        fail(
+            "check_badge_standard.py module docstring must pin "
+            + module_deepen_189,
+            errors,
+        )
+    not_saturated_189 = "NOT saturated " + "#189"
+    if not_saturated_189 not in text:
+        fail(
+            "path deepen must keep " + not_saturated_189 + " distinctness pin",
+            errors,
+        )
+    not_176_layouts = "NOT " + "#176"
+    if not_176_layouts not in text:
+        fail(
+            "path deepen must keep " + not_176_layouts + " distinctness pin",
+            errors,
+        )
+    not_schema_191 = "NOT schema " + "#191"
+    if not_schema_191 not in text:
+        fail(
+            "path deepen must keep " + not_schema_191 + " distinctness pin",
+            errors,
+        )
+    not_pass2_192 = "NOT Pass-2+md/link " + "#192"
+    if not_pass2_192 not in text:
+        fail(
+            "path deepen must keep " + not_pass2_192 + " distinctness pin",
+            errors,
+        )
+    not_wiki_badge = "NOT " + "wiki-badge"
+    if not_wiki_badge not in text:
+        fail(
+            "path deepen must keep " + not_wiki_badge + " distinctness pin",
+            errors,
+        )
+    deepen_189_pins = (
+        (
+            "contiguous push/branches/paths " + "header",
+            "push/branches/paths header fail needle",
+        ),
+        (
+            "pull_request must stay path-" + "unfiltered",
+            "pull_request path-unfiltered fail needle",
+        ),
+        (
+            "must not invent dorny/paths-" + "filter",
+            "dorny/paths-filter reject needle",
+        ),
+        (
+            "paths filter must list self workflow " + "path",
+            "self-workflow path list fail needle",
+        ),
+        (
+            "exact contiguous actionlint run " + "command",
+            "exact actionlint run fail needle",
+        ),
+        (
+            "contiguous Download/id/run/shell " + "actionlint download block",
+            "download block fail needle",
+        ),
+        (
+            "Download actionlint must precede " + "actionlint existing",
+            "Download-before-run order fail needle",
+        ),
+        (
+            "Stewardship gate self-tests must precede " + "Download actionlint",
+            "self-tests-before-Download order fail needle",
+        ),
+        (
+            "must not invent uses: rhysd/actionlint" + "@",
+            "rhysd/actionlint@ invent reject needle",
+        ),
+        (
+            "path-filter/path-order deepen after " + "#189",
+            "deepen-after-189 wording pin",
+        ),
+    )
+    for needle, label in deepen_189_pins:
         if needle not in text:
             fail(
                 "check_workflow_hardening must keep " + label,

@@ -11,6 +11,18 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX actionlint path-filter/path-order deepen after #189: expand
+  self-tests to 3548 cases (was 3402) fail-closing DISTINCT leftover
+  actionlint path-filter / path-order edges on existing workflow modules —
+  contiguous push/branches/paths headers / pull_request path-unfiltered /
+  reject dorny/paths-filter / residual self-workflow path lists / exact
+  contiguous actionlint run / Download-before-run + self-tests-before-Download
+  order / contiguous Download/id/run/shell block / reject uses: rhysd/actionlint@
+  invent / deepen docstring + gate-contract needles — path-filter/path-order
+  deepen slice only (not saturated #189 path-order / not #176 layouts /
+  not schema #191 / not Pass-2+md/link #192 / not wiki-badge sibling); no
+  invent-product; no fourth badge. Does **not** revive #166/#157/#182/#186.
+
 - TOKENMAXX actionlint path-order leftover after #181: expand self-tests to
   3402 cases (was 3330) fail-closing live actionlint path-order leftovers —
   contiguous three-path actionlint order (`link-check` → `markdown-lint` →

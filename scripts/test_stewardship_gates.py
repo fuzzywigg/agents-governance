@@ -3,6 +3,9 @@
 
 Runs in CI after the live-tree gates so regressions in checkers fail closed.
 Does not invent product surface — only validates gate behavior.
+Deepened after #191: stewardship-schema fourth-pass — nested policy refs /
+invalid status+surface enum stubs / whitespace-only / nested+list field rejects /
+pass-4 contract pins (not third-pass #191 / path-order #189 / wiki-index #181 spam).
 Deepened after #176: wiki-index validators — Home TOC empty-index /
 publishable page index stubs / broken internal stub links / empty markdown
 index / duplicate slug headings_in set collapse (not wiki-badge #141 /
@@ -51304,6 +51307,3340 @@ def test_schema_passes_live_badge_with_schema_contract_after_189() -> None:
 def test_schema_passes_live_badge_with_schema_contract_still_after_189() -> None:
     assert_pass_live(ROOT / "scripts" / "check_badge_standard.py")
 
+def test_schema_rejects_status_deprecated_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: DEPRECATED
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_status_deprecated_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: DEPRECATED
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_status_archived_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=("""# P
+
+```yaml
+status: ARCHIVED
+created: "2026-09-13"
+purpose: "Reversible publish path for docs/wiki → GitHub Wiki"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_status_archived_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=("""# P
+
+```yaml
+status: ARCHIVED
+created: "2026-09-13"
+purpose: "Reversible publish path for docs/wiki → GitHub Wiki"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_status_pending_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=("""# I
+
+```yaml
+status: PENDING
+tier: 1
+created: "2026-09-13"
+owner: copilot
+edit_policy: x
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_status_pending_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=("""# I
+
+```yaml
+status: PENDING
+tier: 1
+created: "2026-09-13"
+owner: copilot
+edit_policy: x
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_status_retired_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: RETIRED
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_status_retired_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: RETIRED
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_status_suspended_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=("""# I
+
+```yaml
+status: SUSPENDED
+tier: 1
+created: "2026-09-13"
+owner: copilot
+edit_policy: x
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_status_suspended_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=("""# I
+
+```yaml
+status: SUSPENDED
+tier: 1
+created: "2026-09-13"
+owner: copilot
+edit_policy: x
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_surface_geryon_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: geryon
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'expected')
+
+
+def test_schema_rejects_surface_geryon_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: geryon
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'expected')
+
+
+def test_schema_rejects_surface_playwright_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: playwright
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'expected')
+
+
+def test_schema_rejects_surface_playwright_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: playwright
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'expected')
+
+
+def test_schema_rejects_surface_browser_claude_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: browser-claude
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'expected')
+
+
+def test_schema_rejects_surface_browser_claude_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: browser-claude
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'expected')
+
+
+def test_schema_rejects_surface_claude_cowork_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: claude-cowork
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'expected')
+
+
+def test_schema_rejects_surface_claude_cowork_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: claude-cowork
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'expected')
+
+
+def test_schema_rejects_nested_edit_policy_dict_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy:
+  rule: invent
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_edit_policy_dict_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy:
+  rule: invent
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_edit_policy_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy:
+  - no invent
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_edit_policy_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy:
+  - no invent
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_parent_governance_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: copilot
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance:
+  - github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_parent_governance_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: copilot
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance:
+  - github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_parent_governance_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated: "2026-04-13"
+maintainer: smtp.eth
+scope: repository-specific
+parent_governance:
+  url: github.com/fuzzywigg/agents-governance
+autonomy_level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_parent_governance_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated: "2026-04-13"
+maintainer: smtp.eth
+scope: repository-specific
+parent_governance:
+  url: github.com/fuzzywigg/agents-governance
+autonomy_level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_edit_policy_backlog_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=("""# I
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+edit_policy:
+  note: x
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_edit_policy_backlog_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=("""# I
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+edit_policy:
+  note: x
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_edit_policy_backlog_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=("""# I
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+edit_policy:
+  - x
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_edit_policy_backlog_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=("""# I
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+edit_policy:
+  - x
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_version_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version:
+  major: 1
+last_updated: "2026-04-13"
+maintainer: smtp.eth
+scope: repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_version_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version:
+  major: 1
+last_updated: "2026-04-13"
+maintainer: smtp.eth
+scope: repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_autonomy_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated: "2026-04-13"
+maintainer: smtp.eth
+scope: repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level:
+  level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_autonomy_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated: "2026-04-13"
+maintainer: smtp.eth
+scope: repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level:
+  level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_maintainer_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated: "2026-04-13"
+maintainer:
+  name: smtp.eth
+scope: repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_maintainer_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated: "2026-04-13"
+maintainer:
+  name: smtp.eth
+scope: repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_status_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status:
+  state: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_status_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status:
+  state: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_surface_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface:
+  name: copilot
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_surface_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface:
+  name: copilot
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_closes_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes:
+  issue: 16
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_closes_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes:
+  issue: 16
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_tier_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier:
+  n: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_tier_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier:
+  n: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_surface_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface:
+  - copilot
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_surface_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface:
+  - copilot
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_closes_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=("""# P
+
+```yaml
+status: ACTIVE
+created: "2026-09-13"
+purpose: "Reversible publish path for docs/wiki → GitHub Wiki"
+closes:
+  - "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_closes_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=("""# P
+
+```yaml
+status: ACTIVE
+created: "2026-09-13"
+purpose: "Reversible publish path for docs/wiki → GitHub Wiki"
+closes:
+  - "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_purpose_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=("""# P
+
+```yaml
+status: ACTIVE
+created: "2026-09-13"
+purpose:
+  - reversible
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_purpose_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=("""# P
+
+```yaml
+status: ACTIVE
+created: "2026-09-13"
+purpose:
+  - reversible
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_autonomy_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated: "2026-04-13"
+maintainer: smtp.eth
+scope: repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level:
+  - 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_autonomy_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated: "2026-04-13"
+maintainer: smtp.eth
+scope: repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level:
+  - 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_tier_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=("""# I
+
+```yaml
+status: ACTIVE
+tier:
+  - 1
+created: "2026-09-13"
+owner: copilot
+edit_policy: x
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_tier_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=("""# I
+
+```yaml
+status: ACTIVE
+tier:
+  - 1
+created: "2026-09-13"
+owner: copilot
+edit_policy: x
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_purpose_publish_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=("""# P
+
+```yaml
+status: ACTIVE
+created: "2026-09-13"
+purpose:
+  text: "Reversible publish path for docs/wiki → GitHub Wiki"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_purpose_publish_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=("""# P
+
+```yaml
+status: ACTIVE
+created: "2026-09-13"
+purpose:
+  text: "Reversible publish path for docs/wiki → GitHub Wiki"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_repo_claude_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo:
+  name: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: copilot
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_repo_claude_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo:
+  name: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: copilot
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_whitespace_scope_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "   "
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
+def test_schema_rejects_whitespace_scope_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "   "
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
+def test_schema_rejects_whitespace_owner_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: "  "
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
+def test_schema_rejects_whitespace_owner_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: "  "
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
+def test_schema_rejects_whitespace_maintainer_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated: "2026-04-13"
+maintainer: "   "
+scope: repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
+def test_schema_rejects_whitespace_maintainer_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated: "2026-04-13"
+maintainer: "   "
+scope: repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
+def test_schema_rejects_whitespace_purpose_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=("""# P
+
+```yaml
+status: ACTIVE
+created: "2026-09-13"
+purpose: "  "
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
+def test_schema_rejects_whitespace_purpose_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=("""# P
+
+```yaml
+status: ACTIVE
+created: "2026-09-13"
+purpose: "  "
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
+def test_schema_rejects_whitespace_edit_policy_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "   "
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
+def test_schema_rejects_whitespace_edit_policy_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "   "
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
+def test_schema_rejects_whitespace_closes_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "  "
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
+def test_schema_rejects_whitespace_closes_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "  "
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
+def test_schema_rejects_status_draft_backlog_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=("""# I
+
+```yaml
+status: DRAFT
+tier: 1
+created: "2026-09-13"
+owner: copilot
+edit_policy: x
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_status_draft_backlog_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=("""# I
+
+```yaml
+status: DRAFT
+tier: 1
+created: "2026-09-13"
+owner: copilot
+edit_policy: x
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_status_inactive_publish_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=("""# P
+
+```yaml
+status: INACTIVE
+created: "2026-09-13"
+purpose: "Reversible publish path for docs/wiki → GitHub Wiki"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_status_inactive_publish_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=("""# P
+
+```yaml
+status: INACTIVE
+created: "2026-09-13"
+purpose: "Reversible publish path for docs/wiki → GitHub Wiki"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_surface_copilot_wrong_case_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: Copilot
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'expected')
+
+
+def test_schema_rejects_surface_copilot_wrong_case_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: Copilot
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'expected')
+
+
+def test_schema_rejects_bool_status_publish_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=("""# P
+
+```yaml
+status: true
+created: "2026-09-13"
+purpose: "Reversible publish path for docs/wiki → GitHub Wiki"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'string')
+
+
+def test_schema_rejects_bool_status_publish_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=("""# P
+
+```yaml
+status: true
+created: "2026-09-13"
+purpose: "Reversible publish path for docs/wiki → GitHub Wiki"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'string')
+
+
+def test_schema_rejects_int_status_badge_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: 1
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'string')
+
+
+def test_schema_rejects_int_status_badge_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: 1
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'string')
+
+
+def test_schema_rejects_float_autonomy_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated: "2026-04-13"
+maintainer: smtp.eth
+scope: repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level: 1.0
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, '0..3')
+
+
+def test_schema_rejects_float_autonomy_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated: "2026-04-13"
+maintainer: smtp.eth
+scope: repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level: 1.0
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, '0..3')
+
+
+def test_schema_rejects_nested_last_updated_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated:
+  day: "2026-04-13"
+maintainer: smtp.eth
+scope: repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_last_updated_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated:
+  day: "2026-04-13"
+maintainer: smtp.eth
+scope: repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_scope_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated: "2026-04-13"
+maintainer: smtp.eth
+scope:
+  - repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_scope_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated: "2026-04-13"
+maintainer: smtp.eth
+scope:
+  - repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_repo_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo:
+  - agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: copilot
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_repo_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo:
+  - agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: copilot
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_owner_backlog_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=("""# I
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner:
+  name: copilot
+edit_policy: x
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_owner_backlog_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=("""# I
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner:
+  name: copilot
+edit_policy: x
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_passes_backlog_without_invent_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=("""# I
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+edit_policy: steward-only
+```
+"""),
+        )
+        assert_pass_script(scripts / "check_stewardship_schema.py", tmp_path)
+
+
+def test_schema_passes_backlog_without_invent_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=("""# I
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+edit_policy: steward-only
+```
+"""),
+        )
+        assert_pass_script(scripts / "check_stewardship_schema.py", tmp_path)
+
+
+def test_schema_passes_good_tree_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(tmp_path)
+        assert_pass_script(scripts / "check_stewardship_schema.py", tmp_path)
+
+
+def test_schema_passes_good_tree_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(tmp_path)
+        assert_pass_script(scripts / "check_stewardship_schema.py", tmp_path)
+
+
+def test_schema_gate_requires_fourth_pass_doc_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'Fourth-pass after #191' in text
+        path.write_text(text.replace('Fourth-pass after #191', 'Fourth-pass after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Fourth-pass after #191',
+        )
+
+
+def test_schema_gate_requires_fourth_pass_doc_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'Fourth-pass after #191' in text
+        path.write_text(text.replace('Fourth-pass after #191', 'Fourth-pass after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Fourth-pass after #191',
+        )
+
+
+def test_schema_gate_requires_distinct_third_pass_pin_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'distinct from schema-third-pass after-149' in text
+        path.write_text(text.replace('distinct from schema-third-pass after-149', 'distinct from schema-second-pass after-83'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'distinct from schema-third-pass after-149',
+        )
+
+
+def test_schema_gate_requires_distinct_third_pass_pin_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'distinct from schema-third-pass after-149' in text
+        path.write_text(text.replace('distinct from schema-third-pass after-149', 'distinct from schema-second-pass after-83'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'distinct from schema-third-pass after-149',
+        )
+
+
+def test_schema_gate_requires_got_nested_list_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'got nested/list' in text
+        path.write_text(text.replace('got nested/list', 'got nested/map'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'got nested/list',
+        )
+
+
+def test_schema_gate_requires_got_nested_list_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'got nested/list' in text
+        path.write_text(text.replace('got nested/list', 'got nested/map'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'got nested/list',
+        )
+
+
+def test_schema_gate_requires_type_name_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'type(value).__name__' in text
+        path.write_text(text.replace('type(value).__name__', 'type(value).__class__'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'type(value).__name__',
+        )
+
+
+def test_schema_gate_requires_type_name_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'type(value).__name__' in text
+        path.write_text(text.replace('type(value).__name__', 'type(value).__class__'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'type(value).__name__',
+        )
+
+
+def test_schema_gate_requires_invent_not_in_policy_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert '"invent" not in policy' in text
+        path.write_text(text.replace('"invent" not in policy', '"invent" not in text'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '"invent" not in policy',
+        )
+
+
+def test_schema_gate_requires_invent_not_in_policy_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert '"invent" not in policy' in text
+        path.write_text(text.replace('"invent" not in policy', '"invent" not in text'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '"invent" not in policy',
+        )
+
+
+def test_schema_gate_requires_badge_invent_rel_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'rel == "docs/badge-standard.md"' in text
+        path.write_text(text.replace('rel == "docs/badge-standard.md"', 'rel == "docs/badge-policy.md"'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'docs/badge-standard.md',
+        )
+
+
+def test_schema_gate_requires_badge_invent_rel_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'rel == "docs/badge-standard.md"' in text
+        path.write_text(text.replace('rel == "docs/badge-standard.md"', 'rel == "docs/badge-policy.md"'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'docs/badge-standard.md',
+        )
+
+
+def test_schema_gate_requires_status_upper_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'str(status).upper()' in text
+        path.write_text(text.replace('str(status).upper()', 'str(status).lower()'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'str(status).upper()',
+        )
+
+
+def test_schema_gate_requires_status_upper_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'str(status).upper()' in text
+        path.write_text(text.replace('str(status).upper()', 'str(status).lower()'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'str(status).upper()',
+        )
+
+
+def test_schema_gate_requires_policy_lower_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'str(data["edit_policy"]).lower()' in text
+        path.write_text(text.replace('str(data["edit_policy"]).lower()', 'str(data["edit_policy"]).upper()'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'edit_policy',
+        )
+
+
+def test_schema_gate_requires_policy_lower_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'str(data["edit_policy"]).lower()' in text
+        path.write_text(text.replace('str(data["edit_policy"]).lower()', 'str(data["edit_policy"]).upper()'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'edit_policy',
+        )
+
+
+def test_schema_gate_requires_deprecated_stub_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'DEPRECATED' in text
+        path.write_text(text.replace('DEPRECATED', 'DEPRECATEX'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'DEPRECATED',
+        )
+
+
+def test_schema_gate_requires_deprecated_stub_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'DEPRECATED' in text
+        path.write_text(text.replace('DEPRECATED', 'DEPRECATEX'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'DEPRECATED',
+        )
+
+
+def test_schema_gate_requires_archived_stub_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'ARCHIVED' in text
+        path.write_text(text.replace('ARCHIVED', 'ARCHIVEZ'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ARCHIVED',
+        )
+
+
+def test_schema_gate_requires_archived_stub_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'ARCHIVED' in text
+        path.write_text(text.replace('ARCHIVED', 'ARCHIVEZ'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ARCHIVED',
+        )
+
+
+def test_schema_gate_requires_pending_stub_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'PENDING' in text
+        path.write_text(text.replace('PENDING', 'PENDINX'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'PENDING',
+        )
+
+
+def test_schema_gate_requires_pending_stub_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'PENDING' in text
+        path.write_text(text.replace('PENDING', 'PENDINX'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'PENDING',
+        )
+
+
+def test_schema_gate_requires_retired_stub_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'RETIRED' in text
+        path.write_text(text.replace('RETIRED', 'RETIREX'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'RETIRED',
+        )
+
+
+def test_schema_gate_requires_retired_stub_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'RETIRED' in text
+        path.write_text(text.replace('RETIRED', 'RETIREX'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'RETIRED',
+        )
+
+
+def test_schema_gate_requires_suspended_stub_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'SUSPENDED' in text
+        path.write_text(text.replace('SUSPENDED', 'SUSPENDX'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'SUSPENDED',
+        )
+
+
+def test_schema_gate_requires_suspended_stub_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'SUSPENDED' in text
+        path.write_text(text.replace('SUSPENDED', 'SUSPENDX'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'SUSPENDED',
+        )
+
+
+def test_schema_gate_requires_geryon_stub_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'geryon' in text
+        path.write_text(text.replace('geryon', 'geryox'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'geryon',
+        )
+
+
+def test_schema_gate_requires_geryon_stub_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'geryon' in text
+        path.write_text(text.replace('geryon', 'geryox'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'geryon',
+        )
+
+
+def test_schema_gate_requires_playwright_stub_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'playwright' in text
+        path.write_text(text.replace('playwright', 'playwrighx'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'playwright',
+        )
+
+
+def test_schema_gate_requires_playwright_stub_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'playwright' in text
+        path.write_text(text.replace('playwright', 'playwrighx'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'playwright',
+        )
+
+
+def test_schema_gate_requires_browser_claude_stub_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'browser-claude' in text
+        path.write_text(text.replace('browser-claude', 'browser-claudx'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'browser-claude',
+        )
+
+
+def test_schema_gate_requires_browser_claude_stub_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'browser-claude' in text
+        path.write_text(text.replace('browser-claude', 'browser-claudx'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'browser-claude',
+        )
+
+
+def test_schema_gate_requires_claude_cowork_stub_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'claude-cowork' in text
+        path.write_text(text.replace('claude-cowork', 'claude-coworx'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'claude-cowork',
+        )
+
+
+def test_schema_gate_requires_claude_cowork_stub_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'claude-cowork' in text
+        path.write_text(text.replace('claude-cowork', 'claude-coworx'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'claude-cowork',
+        )
+
+
+def test_schema_gate_requires_whitespace_pin_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'whitespace-only non-empty' in text
+        path.write_text(text.replace('whitespace-only non-empty', 'whitespace-only values'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'whitespace-only non-empty',
+        )
+
+
+def test_schema_gate_requires_whitespace_pin_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'whitespace-only non-empty' in text
+        path.write_text(text.replace('whitespace-only non-empty', 'whitespace-only values'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'whitespace-only non-empty',
+        )
+
+
+def test_schema_gate_requires_nested_policy_pin_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'nested/list edit_policy+parent_governance policy refs' in text
+        path.write_text(text.replace('nested/list edit_policy+parent_governance policy refs', 'nested/list edit_policy+parent_governance value refs'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'policy refs',
+        )
+
+
+def test_schema_gate_requires_nested_policy_pin_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'nested/list edit_policy+parent_governance policy refs' in text
+        path.write_text(text.replace('nested/list edit_policy+parent_governance policy refs', 'nested/list edit_policy+parent_governance value refs'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'policy refs',
+        )
+
+
+def test_schema_gate_requires_nested_version_pin_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'nested version+autonomy+maintainer+status' in text
+        path.write_text(text.replace('nested version+autonomy+maintainer+status', 'nested version+autonomy+maintainer+state'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'nested version+autonomy+maintainer+status',
+        )
+
+
+def test_schema_gate_requires_nested_version_pin_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'nested version+autonomy+maintainer+status' in text
+        path.write_text(text.replace('nested version+autonomy+maintainer+status', 'nested version+autonomy+maintainer+state'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'nested version+autonomy+maintainer+status',
+        )
+
+
+def test_schema_gate_requires_list_surface_pin_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'list surface+closes+purpose+autonomy' in text
+        path.write_text(text.replace('list surface+closes+purpose+autonomy', 'list surface+closes+purpose+owner'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'list surface+closes+purpose+autonomy',
+        )
+
+
+def test_schema_gate_requires_list_surface_pin_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_stewardship_schema.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'list surface+closes+purpose+autonomy' in text
+        path.write_text(text.replace('list surface+closes+purpose+autonomy', 'list surface+closes+purpose+owner'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'list surface+closes+purpose+autonomy',
+        )
+
+
+def test_schema_gate_requires_fourth_pass_slice_host_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_badge_standard.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'schema pass-4 slice' in text
+        path.write_text(text.replace('schema pass-4 slice', 'schema pass-4 body'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'schema pass-4 slice',
+        )
+
+
+def test_schema_gate_requires_fourth_pass_slice_host_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_badge_standard.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'schema pass-4 slice' in text
+        path.write_text(text.replace('schema pass-4 slice', 'schema pass-4 body'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'schema pass-4 slice',
+        )
+
+
+def test_schema_gate_requires_not_third_spam_host_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_badge_standard.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'not third-pass-after-149 / docs-lint / actionlint spam' in text
+        path.write_text(text.replace('not third-pass-after-149 / docs-lint / actionlint spam', 'not third-pass-after-149 / docs-lint / workflow spam'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'not third-pass-after-149',
+        )
+
+
+def test_schema_gate_requires_not_third_spam_host_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_badge_standard.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'not third-pass-after-149 / docs-lint / actionlint spam' in text
+        path.write_text(text.replace('not third-pass-after-149 / docs-lint / actionlint spam', 'not third-pass-after-149 / docs-lint / workflow spam'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'not third-pass-after-149',
+        )
+
+
+def test_schema_gate_requires_fourth_pass_contract_doc_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_badge_standard.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'policy-schema pass-4 after #191' in text
+        path.write_text(text.replace('policy-schema pass-4 after #191', 'policy-schema pass-4 after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'policy-schema pass-4 after #191',
+        )
+
+
+def test_schema_gate_requires_fourth_pass_contract_doc_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / 'check_badge_standard.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'policy-schema pass-4 after #191' in text
+        path.write_text(text.replace('policy-schema pass-4 after #191', 'policy-schema pass-4 after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'policy-schema pass-4 after #191',
+        )
+
+
+def test_schema_rejects_status_obsolete_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: OBSOLETE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_status_obsolete_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: OBSOLETE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_status_removed_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=("""# P
+
+```yaml
+status: REMOVED
+created: "2026-09-13"
+purpose: "Reversible publish path for docs/wiki → GitHub Wiki"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_status_removed_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=("""# P
+
+```yaml
+status: REMOVED
+created: "2026-09-13"
+purpose: "Reversible publish path for docs/wiki → GitHub Wiki"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_status_disabled_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=("""# I
+
+```yaml
+status: DISABLED
+tier: 1
+created: "2026-09-13"
+owner: copilot
+edit_policy: x
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_status_disabled_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=("""# I
+
+```yaml
+status: DISABLED
+tier: 1
+created: "2026-09-13"
+owner: copilot
+edit_policy: x
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_status_experimental_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: EXPERIMENTAL
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_status_experimental_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: EXPERIMENTAL
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'ACTIVE')
+
+
+def test_schema_rejects_surface_human_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: human
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'expected')
+
+
+def test_schema_rejects_surface_human_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: human
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'expected')
+
+
+def test_schema_rejects_surface_cursor_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: cursor
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'expected')
+
+
+def test_schema_rejects_surface_cursor_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: cursor
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'expected')
+
+
+def test_schema_rejects_surface_notion_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: notion
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'expected')
+
+
+def test_schema_rejects_surface_notion_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: notion
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'expected')
+
+
+def test_schema_rejects_surface_zapier_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: zapier
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'expected')
+
+
+def test_schema_rejects_surface_zapier_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: zapier
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'expected')
+
+
+def test_schema_rejects_nested_closes_publish_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=("""# P
+
+```yaml
+status: ACTIVE
+created: "2026-09-13"
+purpose: "Reversible publish path for docs/wiki → GitHub Wiki"
+closes:
+  id: 16
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_closes_publish_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=("""# P
+
+```yaml
+status: ACTIVE
+created: "2026-09-13"
+purpose: "Reversible publish path for docs/wiki → GitHub Wiki"
+closes:
+  id: 16
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_created_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created:
+  day: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_created_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created:
+  day: "2026-09-13"
+owner: copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_maintainer_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated: "2026-04-13"
+maintainer:
+  - smtp.eth
+scope: repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_maintainer_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated: "2026-04-13"
+maintainer:
+  - smtp.eth
+scope: repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_scope_badge_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope:
+  text: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_scope_badge_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner: copilot
+scope:
+  text: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_owner_badge_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner:
+  - copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_list_owner_badge_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=("""# B
+
+```yaml
+status: ACTIVE
+tier: 1
+created: "2026-09-13"
+owner:
+  - copilot
+scope: "public governance front-door repos"
+edit_policy: "do not invent product badges"
+closes: "#16"
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_owner_claude_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner:
+  name: "fuzzywigg (smtp.eth)"
+surface: copilot
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_nested_owner_claude_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner:
+  name: "fuzzywigg (smtp.eth)"
+surface: copilot
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'scalar')
+
+
+def test_schema_rejects_whitespace_surface_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: "  "
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
+def test_schema_rejects_whitespace_surface_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: agents-governance
+owner: "fuzzywigg (smtp.eth)"
+surface: "  "
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
+def test_schema_rejects_whitespace_version_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "   "
+last_updated: "2026-04-13"
+maintainer: smtp.eth
+scope: repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
+def test_schema_rejects_whitespace_version_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "   "
+last_updated: "2026-04-13"
+maintainer: smtp.eth
+scope: repository-specific
+parent_governance: github.com/fuzzywigg/agents-governance
+autonomy_level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
+def test_schema_rejects_whitespace_repo_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: "  "
+owner: "fuzzywigg (smtp.eth)"
+surface: copilot
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
+def test_schema_rejects_whitespace_repo_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=("""# CLAUDE
+
+```yaml
+repo: "  "
+owner: "fuzzywigg (smtp.eth)"
+surface: copilot
+autonomy_level: 1
+last_updated: "2026-04-13"
+parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
+def test_schema_rejects_whitespace_parent_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated: "2026-04-13"
+maintainer: smtp.eth
+scope: repository-specific
+parent_governance: "  "
+autonomy_level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
+def test_schema_rejects_whitespace_parent_still_fourth_pass() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=("""# AGENTS
+
+```yaml
+version: "1.0.0"
+last_updated: "2026-04-13"
+maintainer: smtp.eth
+scope: repository-specific
+parent_governance: "  "
+autonomy_level: 1
+```
+"""),
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, 'non-empty')
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -55145,6 +58482,184 @@ def main() -> int:
     test_schema_passes_live_badge_with_schema_contract_after_189,
     test_schema_passes_live_badge_with_schema_contract_still_after_189,
 
+    test_schema_rejects_status_deprecated_fourth_pass,
+    test_schema_rejects_status_deprecated_still_fourth_pass,
+    test_schema_rejects_status_archived_fourth_pass,
+    test_schema_rejects_status_archived_still_fourth_pass,
+    test_schema_rejects_status_pending_fourth_pass,
+    test_schema_rejects_status_pending_still_fourth_pass,
+    test_schema_rejects_status_retired_fourth_pass,
+    test_schema_rejects_status_retired_still_fourth_pass,
+    test_schema_rejects_status_suspended_fourth_pass,
+    test_schema_rejects_status_suspended_still_fourth_pass,
+    test_schema_rejects_surface_geryon_fourth_pass,
+    test_schema_rejects_surface_geryon_still_fourth_pass,
+    test_schema_rejects_surface_playwright_fourth_pass,
+    test_schema_rejects_surface_playwright_still_fourth_pass,
+    test_schema_rejects_surface_browser_claude_fourth_pass,
+    test_schema_rejects_surface_browser_claude_still_fourth_pass,
+    test_schema_rejects_surface_claude_cowork_fourth_pass,
+    test_schema_rejects_surface_claude_cowork_still_fourth_pass,
+    test_schema_rejects_nested_edit_policy_dict_fourth_pass,
+    test_schema_rejects_nested_edit_policy_dict_still_fourth_pass,
+    test_schema_rejects_list_edit_policy_fourth_pass,
+    test_schema_rejects_list_edit_policy_still_fourth_pass,
+    test_schema_rejects_list_parent_governance_fourth_pass,
+    test_schema_rejects_list_parent_governance_still_fourth_pass,
+    test_schema_rejects_nested_parent_governance_fourth_pass,
+    test_schema_rejects_nested_parent_governance_still_fourth_pass,
+    test_schema_rejects_nested_edit_policy_backlog_fourth_pass,
+    test_schema_rejects_nested_edit_policy_backlog_still_fourth_pass,
+    test_schema_rejects_list_edit_policy_backlog_fourth_pass,
+    test_schema_rejects_list_edit_policy_backlog_still_fourth_pass,
+    test_schema_rejects_nested_version_fourth_pass,
+    test_schema_rejects_nested_version_still_fourth_pass,
+    test_schema_rejects_nested_autonomy_fourth_pass,
+    test_schema_rejects_nested_autonomy_still_fourth_pass,
+    test_schema_rejects_nested_maintainer_fourth_pass,
+    test_schema_rejects_nested_maintainer_still_fourth_pass,
+    test_schema_rejects_nested_status_fourth_pass,
+    test_schema_rejects_nested_status_still_fourth_pass,
+    test_schema_rejects_nested_surface_fourth_pass,
+    test_schema_rejects_nested_surface_still_fourth_pass,
+    test_schema_rejects_nested_closes_fourth_pass,
+    test_schema_rejects_nested_closes_still_fourth_pass,
+    test_schema_rejects_nested_tier_fourth_pass,
+    test_schema_rejects_nested_tier_still_fourth_pass,
+    test_schema_rejects_list_surface_fourth_pass,
+    test_schema_rejects_list_surface_still_fourth_pass,
+    test_schema_rejects_list_closes_fourth_pass,
+    test_schema_rejects_list_closes_still_fourth_pass,
+    test_schema_rejects_list_purpose_fourth_pass,
+    test_schema_rejects_list_purpose_still_fourth_pass,
+    test_schema_rejects_list_autonomy_fourth_pass,
+    test_schema_rejects_list_autonomy_still_fourth_pass,
+    test_schema_rejects_list_tier_fourth_pass,
+    test_schema_rejects_list_tier_still_fourth_pass,
+    test_schema_rejects_nested_purpose_publish_fourth_pass,
+    test_schema_rejects_nested_purpose_publish_still_fourth_pass,
+    test_schema_rejects_nested_repo_claude_fourth_pass,
+    test_schema_rejects_nested_repo_claude_still_fourth_pass,
+    test_schema_rejects_whitespace_scope_fourth_pass,
+    test_schema_rejects_whitespace_scope_still_fourth_pass,
+    test_schema_rejects_whitespace_owner_fourth_pass,
+    test_schema_rejects_whitespace_owner_still_fourth_pass,
+    test_schema_rejects_whitespace_maintainer_fourth_pass,
+    test_schema_rejects_whitespace_maintainer_still_fourth_pass,
+    test_schema_rejects_whitespace_purpose_fourth_pass,
+    test_schema_rejects_whitespace_purpose_still_fourth_pass,
+    test_schema_rejects_whitespace_edit_policy_fourth_pass,
+    test_schema_rejects_whitespace_edit_policy_still_fourth_pass,
+    test_schema_rejects_whitespace_closes_fourth_pass,
+    test_schema_rejects_whitespace_closes_still_fourth_pass,
+    test_schema_rejects_status_draft_backlog_fourth_pass,
+    test_schema_rejects_status_draft_backlog_still_fourth_pass,
+    test_schema_rejects_status_inactive_publish_fourth_pass,
+    test_schema_rejects_status_inactive_publish_still_fourth_pass,
+    test_schema_rejects_surface_copilot_wrong_case_fourth_pass,
+    test_schema_rejects_surface_copilot_wrong_case_still_fourth_pass,
+    test_schema_rejects_bool_status_publish_fourth_pass,
+    test_schema_rejects_bool_status_publish_still_fourth_pass,
+    test_schema_rejects_int_status_badge_fourth_pass,
+    test_schema_rejects_int_status_badge_still_fourth_pass,
+    test_schema_rejects_float_autonomy_fourth_pass,
+    test_schema_rejects_float_autonomy_still_fourth_pass,
+    test_schema_rejects_nested_last_updated_fourth_pass,
+    test_schema_rejects_nested_last_updated_still_fourth_pass,
+    test_schema_rejects_list_scope_fourth_pass,
+    test_schema_rejects_list_scope_still_fourth_pass,
+    test_schema_rejects_list_repo_fourth_pass,
+    test_schema_rejects_list_repo_still_fourth_pass,
+    test_schema_rejects_nested_owner_backlog_fourth_pass,
+    test_schema_rejects_nested_owner_backlog_still_fourth_pass,
+    test_schema_passes_backlog_without_invent_fourth_pass,
+    test_schema_passes_backlog_without_invent_still_fourth_pass,
+    test_schema_passes_good_tree_fourth_pass,
+    test_schema_passes_good_tree_still_fourth_pass,
+    test_schema_gate_requires_fourth_pass_doc_fourth_pass,
+    test_schema_gate_requires_fourth_pass_doc_still_fourth_pass,
+    test_schema_gate_requires_distinct_third_pass_pin_fourth_pass,
+    test_schema_gate_requires_distinct_third_pass_pin_still_fourth_pass,
+    test_schema_gate_requires_got_nested_list_fourth_pass,
+    test_schema_gate_requires_got_nested_list_still_fourth_pass,
+    test_schema_gate_requires_type_name_fourth_pass,
+    test_schema_gate_requires_type_name_still_fourth_pass,
+    test_schema_gate_requires_invent_not_in_policy_fourth_pass,
+    test_schema_gate_requires_invent_not_in_policy_still_fourth_pass,
+    test_schema_gate_requires_badge_invent_rel_fourth_pass,
+    test_schema_gate_requires_badge_invent_rel_still_fourth_pass,
+    test_schema_gate_requires_status_upper_fourth_pass,
+    test_schema_gate_requires_status_upper_still_fourth_pass,
+    test_schema_gate_requires_policy_lower_fourth_pass,
+    test_schema_gate_requires_policy_lower_still_fourth_pass,
+    test_schema_gate_requires_deprecated_stub_fourth_pass,
+    test_schema_gate_requires_deprecated_stub_still_fourth_pass,
+    test_schema_gate_requires_archived_stub_fourth_pass,
+    test_schema_gate_requires_archived_stub_still_fourth_pass,
+    test_schema_gate_requires_pending_stub_fourth_pass,
+    test_schema_gate_requires_pending_stub_still_fourth_pass,
+    test_schema_gate_requires_retired_stub_fourth_pass,
+    test_schema_gate_requires_retired_stub_still_fourth_pass,
+    test_schema_gate_requires_suspended_stub_fourth_pass,
+    test_schema_gate_requires_suspended_stub_still_fourth_pass,
+    test_schema_gate_requires_geryon_stub_fourth_pass,
+    test_schema_gate_requires_geryon_stub_still_fourth_pass,
+    test_schema_gate_requires_playwright_stub_fourth_pass,
+    test_schema_gate_requires_playwright_stub_still_fourth_pass,
+    test_schema_gate_requires_browser_claude_stub_fourth_pass,
+    test_schema_gate_requires_browser_claude_stub_still_fourth_pass,
+    test_schema_gate_requires_claude_cowork_stub_fourth_pass,
+    test_schema_gate_requires_claude_cowork_stub_still_fourth_pass,
+    test_schema_gate_requires_whitespace_pin_fourth_pass,
+    test_schema_gate_requires_whitespace_pin_still_fourth_pass,
+    test_schema_gate_requires_nested_policy_pin_fourth_pass,
+    test_schema_gate_requires_nested_policy_pin_still_fourth_pass,
+    test_schema_gate_requires_nested_version_pin_fourth_pass,
+    test_schema_gate_requires_nested_version_pin_still_fourth_pass,
+    test_schema_gate_requires_list_surface_pin_fourth_pass,
+    test_schema_gate_requires_list_surface_pin_still_fourth_pass,
+    test_schema_gate_requires_fourth_pass_slice_host_fourth_pass,
+    test_schema_gate_requires_fourth_pass_slice_host_still_fourth_pass,
+    test_schema_gate_requires_not_third_spam_host_fourth_pass,
+    test_schema_gate_requires_not_third_spam_host_still_fourth_pass,
+    test_schema_gate_requires_fourth_pass_contract_doc_fourth_pass,
+    test_schema_gate_requires_fourth_pass_contract_doc_still_fourth_pass,
+    test_schema_rejects_status_obsolete_fourth_pass,
+    test_schema_rejects_status_obsolete_still_fourth_pass,
+    test_schema_rejects_status_removed_fourth_pass,
+    test_schema_rejects_status_removed_still_fourth_pass,
+    test_schema_rejects_status_disabled_fourth_pass,
+    test_schema_rejects_status_disabled_still_fourth_pass,
+    test_schema_rejects_status_experimental_fourth_pass,
+    test_schema_rejects_status_experimental_still_fourth_pass,
+    test_schema_rejects_surface_human_fourth_pass,
+    test_schema_rejects_surface_human_still_fourth_pass,
+    test_schema_rejects_surface_cursor_fourth_pass,
+    test_schema_rejects_surface_cursor_still_fourth_pass,
+    test_schema_rejects_surface_notion_fourth_pass,
+    test_schema_rejects_surface_notion_still_fourth_pass,
+    test_schema_rejects_surface_zapier_fourth_pass,
+    test_schema_rejects_surface_zapier_still_fourth_pass,
+    test_schema_rejects_nested_closes_publish_fourth_pass,
+    test_schema_rejects_nested_closes_publish_still_fourth_pass,
+    test_schema_rejects_nested_created_fourth_pass,
+    test_schema_rejects_nested_created_still_fourth_pass,
+    test_schema_rejects_list_maintainer_fourth_pass,
+    test_schema_rejects_list_maintainer_still_fourth_pass,
+    test_schema_rejects_nested_scope_badge_fourth_pass,
+    test_schema_rejects_nested_scope_badge_still_fourth_pass,
+    test_schema_rejects_list_owner_badge_fourth_pass,
+    test_schema_rejects_list_owner_badge_still_fourth_pass,
+    test_schema_rejects_nested_owner_claude_fourth_pass,
+    test_schema_rejects_nested_owner_claude_still_fourth_pass,
+    test_schema_rejects_whitespace_surface_fourth_pass,
+    test_schema_rejects_whitespace_surface_still_fourth_pass,
+    test_schema_rejects_whitespace_version_fourth_pass,
+    test_schema_rejects_whitespace_version_still_fourth_pass,
+    test_schema_rejects_whitespace_repo_fourth_pass,
+    test_schema_rejects_whitespace_repo_still_fourth_pass,
+    test_schema_rejects_whitespace_parent_fourth_pass,
+    test_schema_rejects_whitespace_parent_still_fourth_pass,
 ]
 
     try:

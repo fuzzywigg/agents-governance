@@ -202,6 +202,10 @@ Path parent / yaml=None / five live docs / parse pins / path.is_file /
 block.strip / STRING_KEYS / BLE001 / DATE_KEYS / deepen docstring
 (lands closed #187/#188 leftover; do not revive #187/#188/#183/#164;
 distinct from path-order #189)).
+plus stewardship-schema fourth-pass after #191 tip: nested policy refs /
+invalid status+surface enum stubs / whitespace-only / nested+list rejects /
+pass-4 contract pins (lands closed #171 leftover; do not revive closed
+closed #171/#194/#190/#188/#187/#183),
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

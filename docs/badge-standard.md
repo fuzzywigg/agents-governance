@@ -267,6 +267,15 @@ stewardship-checks badge refuse leftover framing — DISTINCT leftover only
 not schema fourth-pass #216 / not stewardship-badge lint #208;
 lands closed #222/#215/#196 leftover on post-#225 tip; do not revive
 closed #222/#215/#196/#185/#172)).
+plus actionlint path-filter/path-order residual deepen after #225: contiguous
+pull_request:/schedule: adjacency / reject branches-ignore: /
+pull_request type-unfiltered / reject tj-actions/changed-files /
+contiguous four-step actionlint path-order / schedule before workflow_dispatch /
+contiguous shell-less actionlint run step — DISTINCT residual edges only
+(not saturated deepen #225/#203 / not #189 / not #176 / not schema #191/#216 /
+not Pass-2 residual #199/#203 / not Pass-2 leftover + md/link #220 /
+not wiki-badge leftover #227 / not stewardship-badge lint #208; do not revive
+closed #228/#226/#223/#217/#213/#198/#186/#166/#157)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

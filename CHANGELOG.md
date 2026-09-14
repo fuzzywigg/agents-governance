@@ -11,6 +11,21 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX actionlint path-filter/path-order residual deepen after #227 tip:
+  expand self-tests to 4376 cases (was 4230) fail-closing DISTINCT residual
+  actionlint path-filter / path-order edges on existing workflow modules —
+  contiguous pull_request:/schedule: adjacency (bare PR) / reject
+  branches-ignore: / pull_request type-unfiltered / reject
+  tj-actions/changed-files / contiguous four-step actionlint path-order
+  (gates → self-tests → Download → actionlint run) / schedule before
+  workflow_dispatch / contiguous shell-less actionlint run step / residual
+  docstring + gate-contract needles — path-filter/path-order residual slice
+  only (not saturated deepen #225/#203 / not #189 path-order / not #176
+  layouts / not schema #191/#216 / not Pass-2 residual #199/#203 / not Pass-2
+  leftover + md/link #220 / not wiki-badge leftover #227 / not
+  stewardship-badge lint #208); no invent-product; no fourth badge. Do **not**
+  revive #228/#226/#223/#217/#213/#198/#186/#166/#157. Distinct from merged
+  #227/#225/#220/#216/#208/#203/#199/#191/#189.
 - TOKENMAXX wiki-index/badge leftover deepen after #225 tip: expand self-tests
   to 4230 cases (was 4116) fail-closing unsaturated wiki-index/badge leftover —
   exact PUBLISHABLE_PAGES contiguous order / Home TOC loop+skip+link forms /

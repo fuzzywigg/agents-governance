@@ -640,3 +640,5 @@ _None yet._
 - Scope: EXISTING link-check.yml + markdown-lint.yml workflow edge pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #192 leftover on post-#189 main; do not revive #192; leave #191/#193 alone
 - Branch: cursor/tokenmaxx-mdlink-ci-edges-after-189-e189
 2026-09-14T05:55:00Z
+
+2026-09-14T06:05:00Z cursor: Local green — run_stewardship + self-tests 3466 + markdownlint ← ECO-067 md/link CI edges after #189 (do not revive #192; leave #191/#193 alone)

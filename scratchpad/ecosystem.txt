@@ -353,3 +353,5 @@ _None yet._
 2026-09-13T23:49:02Z
 
 2026-09-13T23:53:22Z cursor: PR #72 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-045 TOKENMAXX stewardship_common second-pass pins
+
+[2026-09-14T00:05:32Z] [cursor] TOKENMAXX deepen CI workflow second-pass pins after #72 — tests/CI only; draft PR

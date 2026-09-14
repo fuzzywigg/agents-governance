@@ -620,3 +620,5 @@ _None yet._
 2026-09-14T05:25:00Z cursor: Local green on post-#179 tip — run_stewardship + self-tests 3330 + markdownlint ← ECO-064 wiki-index validators after #176 (do not revive #177/#180)
 
 2026-09-14T05:28:00Z cursor: Draft PR #181 opened (rebased wiki-index after #176 onto post-#179 tip; 3330 cases) — awaiting CI; do not revive #177/#180
+
+2026-09-14T05:30:00Z cursor: PR #181 CI green (lint + link-check + stewardship) ← complete ECO-064 TOKENMAXX wiki-index validators after #176 (does not revive #177/#180)

@@ -279,6 +279,14 @@ not Pass-2 leftover + md/link #220 / not wiki-badge leftover #227 /
 not stewardship-checks/schema leftover #233 / not md/link residual #239 /
 not stewardship-badge lint #208; do not revive
 closed #236/#232/#228/#226/#223/#217/#213/#198/#186/#166/#157)).
+plus wiki/mdlink leftover deepen after #243 tip: PUBLISH YAML
+status+created+purpose / One-shot heading / exact clone dest / contiguous
+cp list / git commit `#16` / `git push origin master` / Acceptance+Fallback /
+Repository not found / Home (landing) / Home operator PUBLISH.md
+omit-when-copying plus exact contiguous link+lint concurrency / job headers /
+`**/*.md` then `fail: true` adjacency — DISTINCT leftover only (not #243
+wiki/PUBLISH saturated pins / not md/link residual #239 / not path-filter
+residual #244 / not schema #233; no extra wiki files)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

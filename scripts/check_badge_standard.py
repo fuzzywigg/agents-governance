@@ -286,8 +286,8 @@ NOT md/link residual layouts #239):
   public narrative layer /
   Repo-Stewardship ## Front-door duties / ## Docs quality CI
 - md/link residual harden: token then args: >- adjacency /
-  checkout→Check links→lychee@v2 triple adjacency /
-  checkout→Run markdownlint→DavidAnson@v24 triple adjacency
+  checkout->Check links->lychee@v2 triple adjacency /
+  checkout->Run markdownlint->DavidAnson@v24 triple adjacency
 
 """
 
@@ -2591,7 +2591,7 @@ def check_workflow_hardening(errors: list[str]) -> None:
     )
     if link_steps_triple not in link:
         fail(
-            "link-check.yml must keep checkout→Check links→lychee@v2 triple adjacency "
+            "link-check.yml must keep checkout->Check links->lychee@v2 triple adjacency "
             "(wiki/mdlink leftover residual after #293)",
             errors,
         )
@@ -2602,7 +2602,7 @@ def check_workflow_hardening(errors: list[str]) -> None:
     )
     if lint_steps_triple not in lint:
         fail(
-            "markdown-lint.yml must keep checkout→Run markdownlint→DavidAnson@v24 "
+            "markdown-lint.yml must keep checkout->Run markdownlint->DavidAnson@v24 "
             "triple adjacency (wiki/mdlink leftover residual after #293)",
             errors,
         )
@@ -3736,13 +3736,13 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
             "check_badge_standard.py must keep " + token_args_pin + " leftover pin",
             errors,
         )
-    link_triple_pin = "checkout→Check links→lychee@v2 triple " + "adjacency"
+    link_triple_pin = "checkout->Check links->lychee@v2 triple " + "adjacency"
     if link_triple_pin not in text:
         fail(
             "check_badge_standard.py must keep " + link_triple_pin + " leftover pin",
             errors,
         )
-    lint_triple_pin = "checkout→Run markdownlint→DavidAnson@v24 triple " + "adjacency"
+    lint_triple_pin = "checkout->Run markdownlint->DavidAnson@v24 triple " + "adjacency"
     if lint_triple_pin not in text:
         fail(
             "check_badge_standard.py must keep " + lint_triple_pin + " leftover pin",

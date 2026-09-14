@@ -81,8 +81,8 @@ landing page linked from README / clone fails Repository not found /
 push Home.md init / full git push origin master # or main line /
 Home Start here TOC / Source of truth / Canonical front door /
 public narrative layer / Repo-Stewardship Front-door duties + Docs quality CI /
-plus md/link token→args adjacency / checkout→Check links→lychee triple /
-checkout→Run markdownlint→DavidAnson triple (wiki/mdlink leftover residual
+plus md/link token->args adjacency / checkout->Check links->lychee triple /
+checkout->Run markdownlint->DavidAnson triple (wiki/mdlink leftover residual
 slice only; not wiki/mdlink leftover residual #293 /
 not stewardship-schema residual #282 / not lychee/blob-503 #278 /
 not Pass-2 residual + templates #272 / not path-edges leftover #262 /
@@ -21315,8 +21315,15 @@ def test_wiki_rejects_missing_publish_secrets_after_59() -> None:
         tmp_path = Path(tmp)
 
         def mutate(pages: dict[str, str]) -> None:
-            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace(
-                "No secrets.", "No private keys."
+            pages["PUBLISH.md"] = (
+                pages["PUBLISH.md"]
+                .replace("No secrets.", "No private keys.")
+                .replace(
+                    "No secrets, private MEMORY, or private-template internals "
+                    "in published pages",
+                    "No private MEMORY or private-template internals "
+                    "in published pages",
+                )
             )
 
         scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
@@ -81304,7 +81311,7 @@ def test_wiki_mdlink_rejects_link_steps_triple_pad0_after_293() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v2' in text
         path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v2', '      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v1', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout→Check links→lychee@v2 triple adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Check links->lychee@v2 triple adjacency')
 
 def test_wiki_mdlink_rejects_link_steps_triple_pad1_after_293() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -81314,7 +81321,7 @@ def test_wiki_mdlink_rejects_link_steps_triple_pad1_after_293() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v2' in text
         path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v2', '      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v1', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout→Check links→lychee@v2 triple adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Check links->lychee@v2 triple adjacency')
 
 def test_wiki_mdlink_rejects_link_steps_triple_pad2_after_293() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -81324,7 +81331,7 @@ def test_wiki_mdlink_rejects_link_steps_triple_pad2_after_293() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v2' in text
         path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v2', '      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v1', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout→Check links→lychee@v2 triple adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Check links->lychee@v2 triple adjacency')
 
 def test_wiki_mdlink_rejects_link_steps_triple_pad3_after_293() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -81334,7 +81341,7 @@ def test_wiki_mdlink_rejects_link_steps_triple_pad3_after_293() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v2' in text
         path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v2', '      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v1', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout→Check links→lychee@v2 triple adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Check links->lychee@v2 triple adjacency')
 
 def test_wiki_mdlink_rejects_link_steps_triple_pad4_after_293() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -81344,7 +81351,7 @@ def test_wiki_mdlink_rejects_link_steps_triple_pad4_after_293() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v2' in text
         path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v2', '      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v1', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout→Check links→lychee@v2 triple adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Check links->lychee@v2 triple adjacency')
 
 def test_wiki_mdlink_rejects_link_steps_triple_pad5_after_293() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -81354,7 +81361,7 @@ def test_wiki_mdlink_rejects_link_steps_triple_pad5_after_293() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v2' in text
         path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v2', '      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v1', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout→Check links→lychee@v2 triple adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Check links->lychee@v2 triple adjacency')
 
 def test_wiki_mdlink_rejects_link_steps_triple_still_after_293() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -81364,7 +81371,7 @@ def test_wiki_mdlink_rejects_link_steps_triple_still_after_293() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v2' in text
         path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v2', '      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v1', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout→Check links→lychee@v2 triple adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Check links->lychee@v2 triple adjacency')
 
 def test_wiki_mdlink_rejects_link_steps_triple_after_293() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -81374,7 +81381,7 @@ def test_wiki_mdlink_rejects_link_steps_triple_after_293() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v2' in text
         path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v2', '      - uses: actions/checkout@v7\n      - name: Check links\n        uses: lycheeverse/lychee-action@v1', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout→Check links→lychee@v2 triple adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Check links->lychee@v2 triple adjacency')
 
 def test_wiki_mdlink_rejects_lint_steps_triple_pad0_after_293() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -81384,7 +81391,7 @@ def test_wiki_mdlink_rejects_lint_steps_triple_pad0_after_293() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
         path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout→Run markdownlint→DavidAnson@v24')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v24')
 
 def test_wiki_mdlink_rejects_lint_steps_triple_pad1_after_293() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -81394,7 +81401,7 @@ def test_wiki_mdlink_rejects_lint_steps_triple_pad1_after_293() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
         path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout→Run markdownlint→DavidAnson@v24')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v24')
 
 def test_wiki_mdlink_rejects_lint_steps_triple_pad2_after_293() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -81404,7 +81411,7 @@ def test_wiki_mdlink_rejects_lint_steps_triple_pad2_after_293() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
         path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout→Run markdownlint→DavidAnson@v24')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v24')
 
 def test_wiki_mdlink_rejects_lint_steps_triple_pad3_after_293() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -81414,7 +81421,7 @@ def test_wiki_mdlink_rejects_lint_steps_triple_pad3_after_293() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
         path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout→Run markdownlint→DavidAnson@v24')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v24')
 
 def test_wiki_mdlink_rejects_lint_steps_triple_pad4_after_293() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -81424,7 +81431,7 @@ def test_wiki_mdlink_rejects_lint_steps_triple_pad4_after_293() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
         path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout→Run markdownlint→DavidAnson@v24')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v24')
 
 def test_wiki_mdlink_rejects_lint_steps_triple_pad5_after_293() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -81434,7 +81441,7 @@ def test_wiki_mdlink_rejects_lint_steps_triple_pad5_after_293() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
         path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout→Run markdownlint→DavidAnson@v24')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v24')
 
 def test_wiki_mdlink_rejects_lint_steps_triple_still_after_293() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -81444,7 +81451,7 @@ def test_wiki_mdlink_rejects_lint_steps_triple_still_after_293() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
         path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout→Run markdownlint→DavidAnson@v24')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v24')
 
 def test_wiki_mdlink_rejects_lint_steps_triple_after_293() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -81454,7 +81461,7 @@ def test_wiki_mdlink_rejects_lint_steps_triple_after_293() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
         path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout→Run markdownlint→DavidAnson@v24')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v24')
 
 def test_wiki_mdlink_rejects_gate_leftover_doc_pad0_after_293() -> None:
     with tempfile.TemporaryDirectory() as tmp:

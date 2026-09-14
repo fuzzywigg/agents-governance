@@ -25,8 +25,8 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   `| Page | What it covers |` / ## Source of truth (repository) /
   Canonical public governance front door / public narrative layer /
   Repo-Stewardship ## Front-door duties / ## Docs quality CI /
-  token then args: >- adjacency / checkout→Check links→lychee@v2 triple /
-  checkout→Run markdownlint→DavidAnson@v24 triple — wiki/mdlink leftover
+  token then args: >- adjacency / checkout->Check links->lychee@v2 triple /
+  checkout->Run markdownlint->DavidAnson@v24 triple — wiki/mdlink leftover
   residual slice only (not wiki/mdlink leftover residual #293 /
   not stewardship-schema residual #282 / not lychee/blob-503 leftover #278 /
   not Pass-2 residual + templates #272 / not path-edges leftover #262 /

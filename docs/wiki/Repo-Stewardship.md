@@ -360,8 +360,8 @@ editable source copy / Until `.wiki.git` treat / landing from README /
 clone fails initialized / push Home.md / full push # or main line /
 Home Start here TOC / Source of truth / Canonical front door /
 public narrative layer / Front-door duties / Docs quality CI /
-token→args adjacency / checkout→Check links→lychee triple /
-checkout→Run markdownlint→DavidAnson triple — DISTINCT leftover only
+token->args adjacency / checkout->Check links->lychee triple /
+checkout->Run markdownlint->DavidAnson triple — DISTINCT leftover only
 (not wiki/mdlink leftover residual #293 / not stewardship-schema residual #282 /
 not lychee/blob-503 leftover #278 / not Pass-2 residual + templates #272 /
 not path-edges leftover #262 / not wiki/mdlink leftover #252;

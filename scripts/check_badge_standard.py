@@ -265,6 +265,33 @@ NOT md/link residual layouts #239 / NOT stewardship-checks/schema residual #233)
 - markdown link residual harden: empty fragment / query string / escapes repo /
   missing heading # / OK banner / raw.startswith("#")
 
+Fail-closed wiki/mdlink leftover residual after #297 tip (beyond #293 saturated
+after_293 pins; lands closed #302 leftover; NOT stewardship-schema residual CI #297 /
+NOT wiki/mdlink leftover residual #293 /
+NOT stewardship-schema residual #282 / NOT lychee/blob-503 leftover #278 /
+NOT Pass-2 residual + templates #272 / NOT path-edges leftover #262 /
+NOT wiki/mdlink leftover #252 / NOT stewardship-schema leftover #258 /
+NOT path-filter/path-order leftover #244 / NOT wiki outline/PUBLISH leftover #243 /
+NOT md/link residual layouts #239):
+- wiki residual: # Publishing this wiki outline to GitHub Wiki /
+  in-repo source for the public wiki / GitHub Wiki is a separate git repo /
+  |-------------|-----------| separator /
+  When copying Home.md / Repo-Stewardship.md rewrite relative /
+  `../badge-standard.md` links to: /
+  Wiki Home README acceptance / private MEMORY internals /
+  editable source; wiki push is a copy /
+  Until the `.wiki.git` remote exists, treat /
+  landing page linked from the README /
+  If clone fails Repository not found initialized /
+  push `Home.md`) / full git push origin master # or main line /
+  Home ## Start here / | Page | What it covers | /
+  ## Source of truth (repository) / Canonical public governance front door /
+  public narrative layer /
+  Repo-Stewardship ## Front-door duties / ## Docs quality CI
+- md/link residual harden: token then args: >- adjacency /
+  checkout->Check links->lychee@v2 triple adjacency /
+  checkout->Run markdownlint->DavidAnson@v24 triple adjacency
+
 """
 
 from __future__ import annotations
@@ -2549,6 +2576,41 @@ def check_workflow_hardening(errors: list[str]) -> None:
             errors,
         )
 
+    # Wiki/mdlink leftover residual after #297 tip: md/link residual harden beyond #293 (lands #302).
+    link_token_args_adj = (
+        "          token: ${{ secrets.GITHUB_TOKEN }}\n"
+        "          args: >-"
+    )
+    if link_token_args_adj not in link:
+        fail(
+            "link-check.yml must keep token then args: >- adjacency "
+            "(wiki/mdlink leftover residual after #297)",
+            errors,
+        )
+    link_steps_triple = (
+        "      - uses: actions/checkout@v7\n"
+        "      - name: Check links\n"
+        "        uses: lycheeverse/lychee-action@v2"
+    )
+    if link_steps_triple not in link:
+        fail(
+            "link-check.yml must keep checkout->Check links->lychee@v2 triple adjacency "
+            "(wiki/mdlink leftover residual after #297)",
+            errors,
+        )
+    lint_steps_triple = (
+        "      - uses: actions/checkout@v7\n"
+        "      - name: Run markdownlint\n"
+        "        uses: DavidAnson/markdownlint-cli2-action@v24"
+    )
+    if lint_steps_triple not in lint:
+        fail(
+            "markdown-lint.yml must keep checkout->Run markdownlint->DavidAnson@v24 "
+            "triple adjacency (wiki/mdlink leftover residual after #297)",
+            errors,
+        )
+
+
 def check_badge_standard_doc(errors: list[str]) -> None:
     """Ensure docs/badge-standard.md still documents the same required order."""
     text = BADGE_STANDARD.read_text(encoding="utf-8")
@@ -3655,6 +3717,38 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
     if mdlink_lint_name_on_pin not in text:
         fail(
             "check_badge_standard.py must keep " + mdlink_lint_name_on_pin + " leftover pin",
+            errors,
+        )
+
+    leftover_293_doc = "wiki/mdlink leftover residual after " + "#293"
+    if leftover_293_doc not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + leftover_293_doc + " pin",
+            errors,
+        )
+    not_wiki_mdlink_293 = "NOT wiki/mdlink leftover residual " + "#293"
+    if not_wiki_mdlink_293 not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + not_wiki_mdlink_293
+            + " distinctness pin",
+            errors,
+        )
+    token_args_pin = "token then args: >- " + "adjacency"
+    if token_args_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + token_args_pin + " leftover pin",
+            errors,
+        )
+    link_triple_pin = "checkout->Check links->lychee@v2 triple " + "adjacency"
+    if link_triple_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + link_triple_pin + " leftover pin",
+            errors,
+        )
+    lint_triple_pin = "checkout->Run markdownlint->DavidAnson@v24 triple " + "adjacency"
+    if lint_triple_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + lint_triple_pin + " leftover pin",
             errors,
         )
 
@@ -8962,6 +9056,149 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
     if create_page_once not in wiki_text:
         fail(
             "check_wiki_outline.py must pin create any page once in the GitHub UI",
+            errors,
+        )
+
+    leftover_293_wiki = "Wiki/mdlink leftover residual after " + "#293"
+    if leftover_293_wiki not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + leftover_293_wiki + " pin",
+            errors,
+        )
+    not_wiki_mdlink_293_w = "NOT wiki/mdlink leftover residual " + "#293"
+    if not_wiki_mdlink_293_w not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_wiki_mdlink_293_w + " pin",
+            errors,
+        )
+    publish_h1_pin = "Publishing this wiki outline to GitHub " + "Wiki"
+    if publish_h1_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin PUBLISH.md Publishing this wiki outline H1",
+            errors,
+        )
+    in_repo_source_pin = "in-repo source for the public " + "wiki"
+    if in_repo_source_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin PUBLISH.md in-repo source for the public wiki",
+            errors,
+        )
+    separate_git_pin = "GitHub Wiki is a separate git " + "repo"
+    if separate_git_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin PUBLISH.md GitHub Wiki is a separate git repo",
+            errors,
+        )
+    table_sep_pin = "|-------------|-----------|"
+    if table_sep_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin PUBLISH.md table separator",
+            errors,
+        )
+    rewrite_rel_pin = (
+        "When copying `Home.md` / `Repo-Stewardship.md` to the wiki, rewrite relative"
+    )
+    if rewrite_rel_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin When copying Home.md rewrite relative wording",
+            errors,
+        )
+    badge_rel_pin = "`../badge-standard.md` links " + "to:"
+    if badge_rel_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin `../badge-standard.md` links to: hint",
+            errors,
+        )
+    accept_readme_pin = "Wiki Home links back to the " + "repository README"
+    if accept_readme_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Wiki Home README acceptance checkbox",
+            errors,
+        )
+    accept_memory_pin = "private MEMORY, or private-template " + "internals"
+    if accept_memory_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin private MEMORY private-template internals",
+            errors,
+        )
+    accept_editable_pin = "editable source; wiki push is a " + "copy"
+    if accept_editable_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin editable source; wiki push is a copy",
+            errors,
+        )
+    until_wiki_git_pin = "Until the `.wiki.git` remote exists, " + "treat"
+    if until_wiki_git_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Until the `.wiki.git` remote exists, treat",
+            errors,
+        )
+    landing_readme_pin = "landing page linked from the " + "README"
+    if landing_readme_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin landing page linked from the README",
+            errors,
+        )
+    clone_fails_pin = (
+        'If clone fails with "Repository not found", the wiki has never been initialized:'
+    )
+    if clone_fails_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin If clone fails Repository not found initialized",
+            errors,
+        )
+    push_home_pin = "push `Home.md`) wiki init " + "path"
+    if push_home_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin push `Home.md`) wiki init path",
+            errors,
+        )
+    full_push_pin = "full git push origin master   # or main " + "line"
+    if full_push_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin full git push origin master # or main line",
+            errors,
+        )
+    home_start_pin = "## Start " + "here"
+    if home_start_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Home.md ## Start here heading",
+            errors,
+        )
+    home_toc_pin = "| Page | What it covers |"
+    if home_toc_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Home.md | Page | What it covers | TOC header",
+            errors,
+        )
+    home_source_pin = "## Source of truth " + "(repository)"
+    if home_source_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Home.md ## Source of truth (repository)",
+            errors,
+        )
+    home_canonical_pin = "Canonical public governance front " + "door"
+    if home_canonical_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Home.md Canonical public governance front door",
+            errors,
+        )
+    home_narrative_pin = "public narrative " + "layer"
+    if home_narrative_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Home.md public narrative layer wording",
+            errors,
+        )
+    stew_front_pin = "## Front-door " + "duties"
+    if stew_front_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Repo-Stewardship ## Front-door duties",
+            errors,
+        )
+    stew_docs_ci_pin = "## Docs quality " + "CI"
+    if stew_docs_ci_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Repo-Stewardship ## Docs quality CI",
             errors,
         )
 

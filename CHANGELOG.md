@@ -11,6 +11,34 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki/mdlink leftover residual deepen after #297 tip: expand
+  self-tests to 6428 cases (was 6228) fail-closing unsaturated wiki outline /
+  PUBLISH.md residual plus Home/Repo-Stewardship residual plus markdown-lint /
+  link-check residual harden on existing modules only — PUBLISH H1 /
+  in-repo source for the public wiki / GitHub Wiki is a separate git repo /
+  `|-------------|-----------|` separator / When copying Home.md rewrite
+  relative / `` `../badge-standard.md` links to: `` / Wiki Home README
+  acceptance / private MEMORY internals / editable source; wiki push is a
+  copy / Until `.wiki.git` treat / landing page linked from the README /
+  If clone fails Repository not found initialized / push `Home.md`) /
+  full git push origin master # or main line / Home ## Start here /
+  `| Page | What it covers |` / ## Source of truth (repository) /
+  Canonical public governance front door / public narrative layer /
+  Repo-Stewardship ## Front-door duties / ## Docs quality CI /
+  token then args: >- adjacency / checkout->Check links->lychee@v2 triple /
+  checkout->Run markdownlint->DavidAnson@v24 triple — wiki/mdlink leftover
+  residual slice only (lands closed #302 leftover; not stewardship-schema
+  residual CI #297 / not wiki/mdlink leftover residual #293 /
+  not stewardship-schema residual #282 / not lychee/blob-503 leftover #278 /
+  not Pass-2 residual + templates #272 / not path-edges leftover #262 /
+  not wiki/mdlink leftover #252 / not stewardship-schema leftover #258 /
+  not path-filter/path-order leftover #244 / not wiki outline/PUBLISH leftover
+  #243 / not md/link residual layouts #239); no invent-product; no fourth
+  badge; no extra wiki files; no scratchpad notes. Distinct from merged
+  #297/#293/#282/#278/#272/#262/#258/#252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
+  Tip-relaunch of closed CONFLICTING #302 onto post-#297 tip (do **not**
+  revive #302/#301/#296/#289/#281/#277).
+
 - TOKENMAXX stewardship-schema residual CI deepen after #293 tip: expand
   self-tests to 6228 cases (was 5992) fail-closing unsaturated schema-only
   residual CI helper needles on existing `check_stewardship_schema.py` —

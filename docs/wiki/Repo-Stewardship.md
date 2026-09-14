@@ -146,6 +146,7 @@ lowered=text.lower / re.escape / https? URL-ish / ROOT.glob+found.update /
 set[Path] / workflows path join / scheme+pattern+hint loops / Shared helpers
 doc / hint.endswith(=) / MEMORY dumps / str|None+list[Path] /
 FORBIDDEN_BADGE_HINTS head / SECRET_URL_HINTS gh-family prefix members).
+plus CI workflow third-pass after #111/#117: concurrency templates / cron+timeout / DavidAnson@v24 / setup-python@v5 / lychee verbose+concurrency+timeout+retries / fail:true / get_actionlint / curl -fsSL).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

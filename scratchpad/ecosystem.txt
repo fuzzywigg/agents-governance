@@ -453,3 +453,12 @@ _None yet._
 2026-09-14T02:00:00Z
 
 2026-09-14T02:10:00Z cursor: PR #117 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-054 TOKENMAXX stewardship_common third-pass pins
+
+### [ECO-055] TOKENMAXX deepen CI workflow third-pass pins after #111/#117 — 2026-09-14T02:23:47Z
+- [x] cursor: Read live tree post-#117 (2331 cases; #111 actionlint + #117 common merged; #85/#124 closed — do not revive)
+- [x] cursor: Fail-close CI workflow third-pass — concurrency templates / cron+timeout / DavidAnson@v24 / setup-python@v5 / lychee flags / get_actionlint / curl -fsSL / gate contract
+- [x] cursor: Expand self-tests 2331 → 2403 (CI workflow third-pass reversible slice)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING CI workflow reversible pin wiring only; no invent-product; no fourth badge; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-workflow-third-pass-v2-88a9
+2026-09-14T02:23:47Z

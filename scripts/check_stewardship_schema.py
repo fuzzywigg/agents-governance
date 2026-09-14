@@ -46,7 +46,7 @@ Fail-closed pins (live path after #53; second-pass after #72/#75):
   stubs WIP|BETA|LEGACY|FROZEN|CANCELLED|PROTOTYPE / residual invalid surface stubs
   openai|anthropic|slack|auto|agents / "status" in required_keys / loaded is None /
   value.lower() == "true" / int(value) / if not text.strip() / residual docstring
-- Residual leftover after #243 (schema leftover; NOT wiki outline/PUBLISH #243 /
+- Residual leftover after #243 (schema leftover; NOT path-edges residual #244 / NOT wiki outline/PUBLISH #243 /
   NOT md/link residual #239 / NOT schema residual (pass-5) #233): leftover helper
   needles if ":" not in line / if yaml is not None: / if not match: /
   value is None or / status is not None / raw = str(data[date_key]) /

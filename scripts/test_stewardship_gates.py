@@ -68770,6 +68770,94 @@ def test_common_host_leftover_after_243() -> None:
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'common leftover after #243')
 
 
+
+def test_schema_not_path_edges_244_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT path-edges residual #244' in text
+        path.write_text(text.replace('NOT path-edges residual #244', 'NOT path-edges residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT path-edges residual #244')
+
+
+def test_schema_not_path_edges_244_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT path-edges residual #244' in text
+        path.write_text(text.replace('NOT path-edges residual #244', 'NOT path-edges residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT path-edges residual #244')
+
+
+def test_schema_not_path_edges_244_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT path-edges residual #244' in text
+        path.write_text(text.replace('NOT path-edges residual #244', 'NOT path-edges residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT path-edges residual #244')
+
+
+def test_schema_not_path_edges_244_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT path-edges residual #244' in text
+        path.write_text(text.replace('NOT path-edges residual #244', 'NOT path-edges residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT path-edges residual #244')
+
+
+def test_schema_not_path_edges_244_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT path-edges residual #244' in text
+        path.write_text(text.replace('NOT path-edges residual #244', 'NOT path-edges residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT path-edges residual #244')
+
+
+def test_schema_not_path_edges_244_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT path-edges residual #244' in text
+        path.write_text(text.replace('NOT path-edges residual #244', 'NOT path-edges residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT path-edges residual #244')
+
+
+def test_schema_not_path_edges_244_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT path-edges residual #244' in text
+        path.write_text(text.replace('NOT path-edges residual #244', 'NOT path-edges residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT path-edges residual #244')
+
+
+def test_schema_not_path_edges_244_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT path-edges residual #244' in text
+        path.write_text(text.replace('NOT path-edges residual #244', 'NOT path-edges residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT path-edges residual #244')
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -74004,6 +74092,14 @@ def main() -> int:
         test_common_host_leftover_pad5_after_243,
         test_common_host_leftover_still_after_243,
         test_common_host_leftover_after_243,
+        test_schema_not_path_edges_244_pad0_after_243,
+        test_schema_not_path_edges_244_pad1_after_243,
+        test_schema_not_path_edges_244_pad2_after_243,
+        test_schema_not_path_edges_244_pad3_after_243,
+        test_schema_not_path_edges_244_pad4_after_243,
+        test_schema_not_path_edges_244_pad5_after_243,
+        test_schema_not_path_edges_244_still_after_243,
+        test_schema_not_path_edges_244_after_243,
 ]
 
 

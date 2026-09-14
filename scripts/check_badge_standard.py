@@ -148,7 +148,7 @@ lands closed #229 leftover on post-#227 tip — do not revive #229):
 - reject strategy: / matrix: / services: invent on stewardship-checks.yml
 - schema residual (pass-5) invalid status+surface stubs + residual helper needles
 - schema leftover after #243: leftover helper needles + leftover status/surface stubs
-  (NOT wiki outline/PUBLISH #243 / NOT md/link residual #239 / NOT schema residual (pass-5) #233)
+  (NOT path-edges residual #244 / NOT wiki outline/PUBLISH #243 / NOT md/link residual #239 / NOT schema residual (pass-5) #233)
 - common leftover after #243: elif hint in text / for pattern in globs /
   found: set[Path] = set() / if not path.is_file(): (load_workflow)
 - Wiki outline/PUBLISH leftover after #233: existing docs/wiki pages only —
@@ -5559,8 +5559,8 @@ def check_stewardship_common_contract(errors: list[str]) -> None:
         )
 
     # Fail-closed after #243: common leftover helper / constant / needle pins
-    # (common leftover slice only; not wiki outline/PUBLISH #243 / not md/link
-    # residual #239 / not schema residual (pass-5) #233 spam).
+    # (common leftover slice only; not path-edges residual #244 / not wiki outline/PUBLISH #243 /
+    # not md/link residual #239 / not schema residual (pass-5) #233 spam).
     # Split literals so self-mutation of contiguous names cannot neutralize checks.
     common_leftover_doc = "Residual leftover after " + "#243 (common leftover"
     if common_leftover_doc not in text:
@@ -6597,13 +6597,19 @@ def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
         )
 
     # Fail-closed after #243: schema leftover helper / constant / needle pins
-    # (schema leftover slice only; not wiki outline/PUBLISH #243 / not md/link
-    # residual #239 / not schema residual (pass-5) #233 spam).
+    # (schema leftover slice only; not path-edges residual #244 / not wiki outline/PUBLISH #243 /
+    # not md/link residual #239 / not schema residual (pass-5) #233 spam).
     # Split literals so self-mutation of contiguous names cannot neutralize checks.
     leftover_243_doc = "Residual leftover after " + "#243 (schema leftover"
     if leftover_243_doc not in text:
         fail(
             "check_stewardship_schema.py docstring must pin " + leftover_243_doc,
+            errors,
+        )
+    not_path_edges_244 = "NOT path-edges residual " + "#244"
+    if not_path_edges_244 not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + not_path_edges_244,
             errors,
         )
     not_wiki_243 = "NOT wiki outline/PUBLISH " + "#243"

@@ -12,7 +12,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Added
 
 - TOKENMAXX stewardship-schema leftover deepen after #244 tip: expand
-  self-tests to 4976 cases (was 4792) fail-closing unsaturated schema +
+  self-tests to 4984 cases (was 4792) fail-closing unsaturated schema +
   `stewardship_common` leftover helpers on existing modules only —
   leftover parse/load needles (`if ":" not in line` / `if yaml is not None:` /
   `if not match:` / `value is None or` / `status is not None` /

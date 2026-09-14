@@ -810,7 +810,7 @@ _None yet._
 ### [ECO-077] TOKENMAXX deepen stewardship-schema leftovers after #243/#244 — 2026-09-14T08:40:00Z
 - [x] cursor: Read live tree post-#243/#244 (4792 cases; wiki outline/PUBLISH + path-edges residual saturated; pick unsaturated schema leftover + stewardship_common residual helpers)
 - [x] cursor: Fail-close leftover schema parse/load needles + leftover status/surface stubs + common glob/hint/is_file leftovers
-- [x] cursor: Expand self-tests 4792 → 4976 (schema leftover slice only; not path-edges #244 / wiki #243 / md/link #239 / schema residual #233 spam)
+- [x] cursor: Expand self-tests 4792 → 4984 (schema leftover slice only; not path-edges #244 / wiki #243 / md/link #239 / schema residual #233 spam)
 - [ ] cursor: Green draft PR with CI — leave draft
 - Scope: EXISTING check_stewardship_schema.py + stewardship_common.py leftover pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; leftover after #243 tip on post-#244 main; do not redo #244 path-edges / #243 wiki / #239 md/link / #233 schema residual
 - Branch: cursor/tokenmaxx-schema-leftover-after-243-811f

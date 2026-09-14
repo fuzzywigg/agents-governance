@@ -35,6 +35,12 @@ Fail-closed run_stewardship runner pins (live path after #117; lands closed #96)
 - same set as CI commentary / python3 scripts/<gate> for four gates
 - gate order badge → wiki → schema → relative
 - check_run_stewardship_gate_contract self-pins
+Fail-closed CI workflow pins (live path after #39/#72; third-pass after #111):
+- Third-pass after #111: exact concurrency group templates /
+  markdown-lint+stewardship cron/timeout pins / DavidAnson@v24 /
+  setup-python@v5 / lychee --verbose/--no-progress/--max-concurrency 8 /
+  --timeout 20/--max-retries 3 / fail: true / get_actionlint id+outputs /
+  curl -fsSL download / third-pass docstring
 """
 
 from __future__ import annotations
@@ -355,7 +361,14 @@ def check_actionlint_style(errors: list[str]) -> None:
 
 
 def check_workflow_hardening(errors: list[str]) -> None:
-    """Harden existing lint/link/stewardship workflows (triggers, perms, concurrency)."""
+    """Harden existing lint/link/stewardship workflows (triggers, perms, concurrency).
+
+    Third-pass after #111: reversible CI workflow exact pins —
+    concurrency group templates / markdown-lint+stewardship cron+timeout /
+    DavidAnson@v24 / setup-python@v5 / lychee verbose+no-progress+
+    max-concurrency 8+timeout 20+max-retries 3 / fail: true /
+    get_actionlint id+outputs / curl -fsSL / third-pass docstring.
+    """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
         if text is None:
@@ -374,6 +387,27 @@ def check_workflow_hardening(errors: list[str]) -> None:
                 "(supersede stale runs on the same ref)",
                 errors,
             )
+
+        # Third-pass after #111: reversible CI workflow exact concurrency group templates.
+        if name == "link-check.yml" and "link-check-${{ github.workflow }}-${{ github.ref }}" not in text:
+            fail(
+                'link-check.yml must pin concurrency group '
+                'link-check-${{ github.workflow }}-${{ github.ref }}',
+                errors,
+            )
+        if name == "markdown-lint.yml" and "markdown-lint-${{ github.workflow }}-${{ github.ref }}" not in text:
+            fail(
+                'markdown-lint.yml must pin concurrency group '
+                'markdown-lint-${{ github.workflow }}-${{ github.ref }}',
+                errors,
+            )
+        if name == "stewardship-checks.yml" and "stewardship-checks-${{ github.workflow }}-${{ github.ref }}" not in text:
+            fail(
+                'stewardship-checks.yml must pin concurrency group '
+                'stewardship-checks-${{ github.workflow }}-${{ github.ref }}',
+                errors,
+            )
+
         # Fail-closed: cancel-in-progress must be true (not false / empty).
         if not re.search(r"(?m)^\s*cancel-in-progress:\s*true\s*$", text):
             fail(
@@ -2280,6 +2314,82 @@ def check_actionlint_style_gate_contract(errors: list[str]) -> None:
             "check_actionlint_style must keep " + reversible_pin + " wording",
             errors,
         )
+
+
+def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
+    """Fail-close live CI workflow hardening wiring (third-pass after #111)."""
+    text = Path(__file__).read_text(encoding="utf-8")
+    # Fail-closed after #111: third-pass helper / constant / needle pins
+    # (CI workflow reversible slice only; not badge/wiki/relative/schema/actionlint spam).
+    third_pass_doc = "Third-pass after " + "#111"
+    if third_pass_doc not in text:
+        fail(
+            "check_workflow_hardening docstring must pin " + third_pass_doc,
+            errors,
+        )
+    module_third = "third-pass after " + "#111"
+    if module_third not in text:
+        fail(
+            "check_badge_standard.py module docstring must pin workflow "
+            + module_third,
+            errors,
+        )
+    # Split construction keeps self-host mutations fail-closed (needle not only in this tuple).
+    pins = (
+        ('cron: "30 6 * * ' + '1"', "markdown-lint weekly cron pin"),
+        ('cron: "15 6 * * ' + '1"', "stewardship weekly cron pin"),
+        ("timeout-minutes: " + "10", "markdown-lint job timeout pin"),
+        ("timeout-minutes: " + "15", "stewardship job timeout pin"),
+        ("DavidAnson/markdownlint-cli2-action@" + "v24", "markdownlint action major pin"),
+        ("actions/setup-python@" + "v5", "setup-python major pin"),
+        ("--verb" + "ose", "lychee verbose flag pin"),
+        ("--no-prog" + "ress", "lychee no-progress flag pin"),
+        ("--max-concurrency " + "8", "lychee max-concurrency pin"),
+        ("--timeout " + "20", "lychee timeout pin"),
+        ("--max-retries " + "3", "lychee max-retries pin"),
+        ("fail: " + "true", "lychee fail-true pin"),
+        ("get_actionlint.outputs." + "executable", "actionlint executable output pin"),
+        ("id: get_" + "actionlint", "actionlint download step id pin"),
+        ("curl -fs" + "SL", "actionlint curl download pin"),
+        (
+            "link-check-${{ github.workflow }}-${{ github." + "ref }}",
+            "link-check concurrency group pin",
+        ),
+        (
+            "markdown-lint-${{ github.workflow }}-${{ github." + "ref }}",
+            "markdown-lint concurrency group pin",
+        ),
+        (
+            "stewardship-checks-${{ github.workflow }}-${{ github." + "ref }}",
+            "stewardship concurrency group pin",
+        ),
+        ("reversible CI " + "workflow", "reversible workflow wording pin"),
+    )
+    for needle, label in pins:
+        if needle not in text:
+            fail(
+                "check_workflow_hardening must keep " + label + " pin",
+                errors,
+            )
+    fn_pin = "def check_workflow_hardening" + "("
+    if fn_pin not in text:
+        fail(
+            "check_badge_standard.py must define check_workflow_hardening function",
+            errors,
+        )
+    call_pin = "check_workflow_hardening_gate_contract" + "("
+    def_pin = "def check_workflow_hardening_gate_contract" + "("
+    if call_pin not in text.replace(def_pin, "", 1):
+        fail(
+            "check_badge_standard.py main must call workflow hardening gate contract",
+            errors,
+        )
+    if def_pin not in text:
+        fail(
+            "check_badge_standard.py must define workflow hardening gate contract",
+            errors,
+        )
+
 
 def check_stewardship_common_contract(errors: list[str]) -> None:
     """Fail-close live stewardship_common wiring (after #111; deepen after #65/#46)."""
@@ -4558,6 +4668,8 @@ def main() -> int:
     check_run_stewardship_gate_contract(errors)
     # Fail-closed after #100: docs-lint contract early (lycheeignore + markdownlint).
     check_docs_lint_gate_contract(errors)
+    # Fail-closed after #111: CI workflow third-pass contract early.
+    check_workflow_hardening_gate_contract(errors)
     if errors:
         print("Badge standard check FAILED:", file=sys.stderr)
         for err in errors:

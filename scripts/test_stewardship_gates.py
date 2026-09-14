@@ -114,6 +114,9 @@ Deepened after #108: actionlint-style third-pass — concurrency/cancel/permissi
 (not badge/docs-lint/wiki/relative spam).
 Deepened after #111: stewardship_common third-pass
 Deepened after #117: run_stewardship runner pins — shebang / set -euo /
+Deepened after #111/#117/#127: CI workflow third-pass — concurrency templates / cron+timeout /
+DavidAnson@v24 / setup-python@v5 / lychee verbose+concurrency+timeout+retries /
+fail:true / get_actionlint / curl -fsSL (not badge/wiki/relative/schema/actionlint/common/runner spam).
 dirname+pwd ROOT / cd ROOT / same-set-as-CI / python3 scripts/<gate> /
 badge→wiki→schema→relative order (lands closed #122/#96 leftover). — future annotations /
 exact secret regexes / helper contracts / SECRET_* + FORBIDDEN_* members
@@ -35667,6 +35670,824 @@ def test_run_stewardship_gate_contract_live_empty_still_after_117() -> None:
     assert errors == [], errors
 
 
+# --- TOKENMAXX deepen after #111: CI workflow third-pass pins ---
+
+def test_workflow_third_gate_third_pass_doc_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Third-pass after #111' in text
+        path.write_text(text.replace('Third-pass after #111', 'Third-pass after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening docstring must pin Third-pass after #111')
+
+
+def test_workflow_third_gate_third_pass_doc_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Third-pass after #111' in text
+        path.write_text(text.replace('Third-pass after #111', 'Third-pass after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening docstring must pin Third-pass after #111')
+
+
+def test_workflow_third_gate_module_third_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'third-pass after #111' in text
+        path.write_text(text.replace('third-pass after #111', 'third-pass after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'module docstring must pin workflow third-pass after #111')
+
+
+def test_workflow_third_gate_module_third_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'third-pass after #111' in text
+        path.write_text(text.replace('third-pass after #111', 'third-pass after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'module docstring must pin workflow third-pass after #111')
+
+
+def test_workflow_third_gate_cron_md_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'cron: "30 6 * * 1"' in text
+        path.write_text(text.replace('cron: "30 6 * * 1"', 'cron: "30 7 * * 1"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep markdown-lint weekly cron pin')
+
+
+def test_workflow_third_gate_cron_md_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'cron: "30 6 * * 1"' in text
+        path.write_text(text.replace('cron: "30 6 * * 1"', 'cron: "30 7 * * 1"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep markdown-lint weekly cron pin')
+
+
+def test_workflow_third_gate_cron_stew_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'cron: "15 6 * * 1"' in text
+        path.write_text(text.replace('cron: "15 6 * * 1"', 'cron: "15 7 * * 1"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep stewardship weekly cron pin')
+
+
+def test_workflow_third_gate_cron_stew_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'cron: "15 6 * * 1"' in text
+        path.write_text(text.replace('cron: "15 6 * * 1"', 'cron: "15 7 * * 1"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep stewardship weekly cron pin')
+
+
+def test_workflow_third_gate_timeout_md_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'timeout-minutes: 10' in text
+        path.write_text(text.replace('timeout-minutes: 10', 'timeout-minutes: 11'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep markdown-lint job timeout pin')
+
+
+def test_workflow_third_gate_timeout_md_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'timeout-minutes: 10' in text
+        path.write_text(text.replace('timeout-minutes: 10', 'timeout-minutes: 11'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep markdown-lint job timeout pin')
+
+
+def test_workflow_third_gate_timeout_stew_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'timeout-minutes: 15' in text
+        path.write_text(text.replace('timeout-minutes: 15', 'timeout-minutes: 16'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep stewardship job timeout pin')
+
+
+def test_workflow_third_gate_timeout_stew_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'timeout-minutes: 15' in text
+        path.write_text(text.replace('timeout-minutes: 15', 'timeout-minutes: 16'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep stewardship job timeout pin')
+
+
+def test_workflow_third_gate_mdlint_action_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'DavidAnson/markdownlint-cli2-action@v24' in text
+        path.write_text(text.replace('DavidAnson/markdownlint-cli2-action@v24', 'DavidAnson/markdownlint-cli2-action@v23'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep markdownlint action major pin')
+
+
+def test_workflow_third_gate_mdlint_action_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'DavidAnson/markdownlint-cli2-action@v24' in text
+        path.write_text(text.replace('DavidAnson/markdownlint-cli2-action@v24', 'DavidAnson/markdownlint-cli2-action@v23'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep markdownlint action major pin')
+
+
+def test_workflow_third_gate_setup_python_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'actions/setup-python@v5' in text
+        path.write_text(text.replace('actions/setup-python@v5', 'actions/setup-python@v4'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep setup-python major pin')
+
+
+def test_workflow_third_gate_setup_python_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'actions/setup-python@v5' in text
+        path.write_text(text.replace('actions/setup-python@v5', 'actions/setup-python@v4'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep setup-python major pin')
+
+
+def test_workflow_third_gate_verbose_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '--verbose' in text
+        path.write_text(text.replace('--verbose', '--quiet'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep lychee verbose flag pin')
+
+
+def test_workflow_third_gate_verbose_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '--verbose' in text
+        path.write_text(text.replace('--verbose', '--quiet'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep lychee verbose flag pin')
+
+
+def test_workflow_third_gate_no_progress_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '--no-progress' in text
+        path.write_text(text.replace('--no-progress', '--progress'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep lychee no-progress flag pin')
+
+
+def test_workflow_third_gate_no_progress_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '--no-progress' in text
+        path.write_text(text.replace('--no-progress', '--progress'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep lychee no-progress flag pin')
+
+
+def test_workflow_third_gate_max_conc_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '--max-concurrency 8' in text
+        path.write_text(text.replace('--max-concurrency 8', '--max-concurrency 4'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep lychee max-concurrency pin')
+
+
+def test_workflow_third_gate_max_conc_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '--max-concurrency 8' in text
+        path.write_text(text.replace('--max-concurrency 8', '--max-concurrency 4'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep lychee max-concurrency pin')
+
+
+def test_workflow_third_gate_timeout_ly_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '--timeout 20' in text
+        path.write_text(text.replace('--timeout 20', '--timeout 10'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep lychee timeout pin')
+
+
+def test_workflow_third_gate_timeout_ly_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '--timeout 20' in text
+        path.write_text(text.replace('--timeout 20', '--timeout 10'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep lychee timeout pin')
+
+
+def test_workflow_third_gate_max_retries_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '--max-retries 3' in text
+        path.write_text(text.replace('--max-retries 3', '--max-retries 1'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep lychee max-retries pin')
+
+
+def test_workflow_third_gate_max_retries_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '--max-retries 3' in text
+        path.write_text(text.replace('--max-retries 3', '--max-retries 1'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep lychee max-retries pin')
+
+
+def test_workflow_third_gate_fail_true_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'fail: true' in text
+        path.write_text(text.replace('fail: true', 'fail: false'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep lychee fail-true pin')
+
+
+def test_workflow_third_gate_fail_true_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'fail: true' in text
+        path.write_text(text.replace('fail: true', 'fail: false'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep lychee fail-true pin')
+
+
+def test_workflow_third_gate_get_out_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'get_actionlint.outputs.executable' in text
+        path.write_text(text.replace('get_actionlint.outputs.executable', 'get_actionlint.outputs.path'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep actionlint executable output pin')
+
+
+def test_workflow_third_gate_get_out_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'get_actionlint.outputs.executable' in text
+        path.write_text(text.replace('get_actionlint.outputs.executable', 'get_actionlint.outputs.path'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep actionlint executable output pin')
+
+
+def test_workflow_third_gate_get_id_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'id: get_actionlint' in text
+        path.write_text(text.replace('id: get_actionlint', 'id: fetch_actionlint'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep actionlint download step id pin')
+
+
+def test_workflow_third_gate_get_id_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'id: get_actionlint' in text
+        path.write_text(text.replace('id: get_actionlint', 'id: fetch_actionlint'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep actionlint download step id pin')
+
+
+def test_workflow_third_gate_curl_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'curl -fsSL' in text
+        path.write_text(text.replace('curl -fsSL', 'curl -fSL'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep actionlint curl download pin')
+
+
+def test_workflow_third_gate_curl_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'curl -fsSL' in text
+        path.write_text(text.replace('curl -fsSL', 'curl -fSL'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep actionlint curl download pin')
+
+
+def test_workflow_third_gate_conc_link_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'link-check-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('link-check-${{ github.workflow }}-${{ github.ref }}', 'link-check-${{ github.workflow }}-${{ github.sha }}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep link-check concurrency group pin')
+
+
+def test_workflow_third_gate_conc_link_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'link-check-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('link-check-${{ github.workflow }}-${{ github.ref }}', 'link-check-${{ github.workflow }}-${{ github.sha }}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep link-check concurrency group pin')
+
+
+def test_workflow_third_gate_conc_md_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'markdown-lint-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('markdown-lint-${{ github.workflow }}-${{ github.ref }}', 'markdown-lint-${{ github.workflow }}-${{ github.sha }}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep markdown-lint concurrency group pin')
+
+
+def test_workflow_third_gate_conc_md_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'markdown-lint-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('markdown-lint-${{ github.workflow }}-${{ github.ref }}', 'markdown-lint-${{ github.workflow }}-${{ github.sha }}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep markdown-lint concurrency group pin')
+
+
+def test_workflow_third_gate_conc_stew_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'stewardship-checks-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('stewardship-checks-${{ github.workflow }}-${{ github.ref }}', 'stewardship-checks-${{ github.workflow }}-${{ github.sha }}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep stewardship concurrency group pin')
+
+
+def test_workflow_third_gate_conc_stew_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'stewardship-checks-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('stewardship-checks-${{ github.workflow }}-${{ github.ref }}', 'stewardship-checks-${{ github.workflow }}-${{ github.sha }}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep stewardship concurrency group pin')
+
+
+def test_workflow_third_gate_reversible_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'reversible CI workflow' in text
+        path.write_text(text.replace('reversible CI workflow', 'reversible CI pipelines'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep reversible workflow wording pin')
+
+
+def test_workflow_third_gate_reversible_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'reversible CI workflow' in text
+        path.write_text(text.replace('reversible CI workflow', 'reversible CI pipelines'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep reversible workflow wording pin')
+
+
+def test_workflow_third_gate_fn_def_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'def check_workflow_hardening(' in text
+        path.write_text(text.replace('def check_workflow_hardening(', 'def check_workflow_hard('), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening function')
+
+
+def test_workflow_third_gate_fn_def_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'def check_workflow_hardening(' in text
+        path.write_text(text.replace('def check_workflow_hardening(', 'def check_workflow_hard('), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening function')
+
+
+def test_workflow_third_gate_contract_call_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'check_workflow_hardening_gate_contract(' in text
+        path.write_text(text.replace('check_workflow_hardening_gate_contract(', 'check_workflow_hardening_gate_verify('), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'workflow hardening gate contract')
+
+
+def test_workflow_third_gate_contract_call_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'check_workflow_hardening_gate_contract(' in text
+        path.write_text(text.replace('check_workflow_hardening_gate_contract(', 'check_workflow_hardening_gate_verify('), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'workflow hardening gate contract')
+
+
+def test_workflow_third_gate_contract_def_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        needle = "Fail-close live CI workflow hardening wiring"
+        assert needle in text
+        path.write_text(text.replace(needle, "Fail-close live CI workflow hardening wiringX"), encoding="utf-8")
+        # Renaming the def pin without syntax break: mutate def_pin construction marker
+        text2 = path.read_text(encoding="utf-8")
+        # Restore docstring; instead remove def pin via unique comment marker
+        text2 = text2.replace("Fail-close live CI workflow hardening wiringX", needle)
+        marker = 'def_pin = "def check_workflow_hardening_gate_contract" + "("'
+        assert marker in text2
+        path.write_text(text2.replace(marker, 'def_pin = "def check_workflow_hardening_gate_contractX" + "("'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "define workflow hardening gate contract",
+        )
+
+
+def test_workflow_third_gate_contract_def_still_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        needle = "Fail-close live CI workflow hardening wiring"
+        assert needle in text
+        path.write_text(text.replace(needle, "Fail-close live CI workflow hardening wiringX"), encoding="utf-8")
+        # Renaming the def pin without syntax break: mutate def_pin construction marker
+        text2 = path.read_text(encoding="utf-8")
+        # Restore docstring; instead remove def pin via unique comment marker
+        text2 = text2.replace("Fail-close live CI workflow hardening wiringX", needle)
+        marker = 'def_pin = "def check_workflow_hardening_gate_contract" + "("'
+        assert marker in text2
+        path.write_text(text2.replace(marker, 'def_pin = "def check_workflow_hardening_gate_contractX" + "("'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "define workflow hardening gate contract",
+        )
+
+
+def test_workflow_third_rejects_concurrency_link_check_pad0_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'link-check-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('link-check-${{ github.workflow }}-${{ github.ref }}', 'link-check-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'link-check-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_markdown_lint_pad1_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'markdown-lint-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('markdown-lint-${{ github.workflow }}-${{ github.ref }}', 'markdown-lint-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'markdown-lint-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_stewardship_checks_pad2_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'stewardship-checks-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('stewardship-checks-${{ github.workflow }}-${{ github.ref }}', 'stewardship-checks-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship-checks-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_link_check_pad3_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'link-check-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('link-check-${{ github.workflow }}-${{ github.ref }}', 'link-check-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'link-check-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_markdown_lint_pad4_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'markdown-lint-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('markdown-lint-${{ github.workflow }}-${{ github.ref }}', 'markdown-lint-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'markdown-lint-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_stewardship_checks_pad5_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'stewardship-checks-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('stewardship-checks-${{ github.workflow }}-${{ github.ref }}', 'stewardship-checks-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship-checks-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_link_check_pad6_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'link-check-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('link-check-${{ github.workflow }}-${{ github.ref }}', 'link-check-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'link-check-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_markdown_lint_pad7_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'markdown-lint-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('markdown-lint-${{ github.workflow }}-${{ github.ref }}', 'markdown-lint-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'markdown-lint-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_stewardship_checks_pad8_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'stewardship-checks-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('stewardship-checks-${{ github.workflow }}-${{ github.ref }}', 'stewardship-checks-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship-checks-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_link_check_pad9_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'link-check-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('link-check-${{ github.workflow }}-${{ github.ref }}', 'link-check-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'link-check-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_markdown_lint_pad10_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'markdown-lint-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('markdown-lint-${{ github.workflow }}-${{ github.ref }}', 'markdown-lint-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'markdown-lint-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_stewardship_checks_pad11_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'stewardship-checks-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('stewardship-checks-${{ github.workflow }}-${{ github.ref }}', 'stewardship-checks-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship-checks-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_link_check_pad12_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'link-check-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('link-check-${{ github.workflow }}-${{ github.ref }}', 'link-check-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'link-check-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_markdown_lint_pad13_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'markdown-lint-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('markdown-lint-${{ github.workflow }}-${{ github.ref }}', 'markdown-lint-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'markdown-lint-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_stewardship_checks_pad14_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'stewardship-checks-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('stewardship-checks-${{ github.workflow }}-${{ github.ref }}', 'stewardship-checks-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship-checks-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_link_check_pad15_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'link-check-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('link-check-${{ github.workflow }}-${{ github.ref }}', 'link-check-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'link-check-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_markdown_lint_pad16_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'markdown-lint-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('markdown-lint-${{ github.workflow }}-${{ github.ref }}', 'markdown-lint-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'markdown-lint-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_stewardship_checks_pad17_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'stewardship-checks-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('stewardship-checks-${{ github.workflow }}-${{ github.ref }}', 'stewardship-checks-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship-checks-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_link_check_pad18_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'link-check-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('link-check-${{ github.workflow }}-${{ github.ref }}', 'link-check-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'link-check-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_markdown_lint_pad19_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'markdown-lint-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('markdown-lint-${{ github.workflow }}-${{ github.ref }}', 'markdown-lint-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'markdown-lint-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_stewardship_checks_pad20_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'stewardship-checks-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('stewardship-checks-${{ github.workflow }}-${{ github.ref }}', 'stewardship-checks-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship-checks-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_link_check_pad21_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'link-check-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('link-check-${{ github.workflow }}-${{ github.ref }}', 'link-check-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'link-check-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_markdown_lint_pad22_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'markdown-lint-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('markdown-lint-${{ github.workflow }}-${{ github.ref }}', 'markdown-lint-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'markdown-lint-${{ github.workflow }}-${{ github.ref }}')
+
+
+def test_workflow_third_rejects_concurrency_stewardship_checks_pad23_after_111() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'stewardship-checks-${{ github.workflow }}-${{ github.ref }}' in text
+        path.write_text(text.replace('stewardship-checks-${{ github.workflow }}-${{ github.ref }}', 'stewardship-checks-${{ github.workflow }}-${{ github.sha }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship-checks-${{ github.workflow }}-${{ github.ref }}')
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -38316,6 +39137,80 @@ def main() -> int:
     test_common_secret_patterns_count_still_after_111,
 
     test_common_forbidden_hints_count_still_after_111,
+        # TOKENMAXX deepen after #111 (+72 CI workflow third-pass)
+        test_workflow_third_gate_third_pass_doc_after_111,
+        test_workflow_third_gate_third_pass_doc_still_after_111,
+        test_workflow_third_gate_module_third_after_111,
+        test_workflow_third_gate_module_third_still_after_111,
+        test_workflow_third_gate_cron_md_after_111,
+        test_workflow_third_gate_cron_md_still_after_111,
+        test_workflow_third_gate_cron_stew_after_111,
+        test_workflow_third_gate_cron_stew_still_after_111,
+        test_workflow_third_gate_timeout_md_after_111,
+        test_workflow_third_gate_timeout_md_still_after_111,
+        test_workflow_third_gate_timeout_stew_after_111,
+        test_workflow_third_gate_timeout_stew_still_after_111,
+        test_workflow_third_gate_mdlint_action_after_111,
+        test_workflow_third_gate_mdlint_action_still_after_111,
+        test_workflow_third_gate_setup_python_after_111,
+        test_workflow_third_gate_setup_python_still_after_111,
+        test_workflow_third_gate_verbose_after_111,
+        test_workflow_third_gate_verbose_still_after_111,
+        test_workflow_third_gate_no_progress_after_111,
+        test_workflow_third_gate_no_progress_still_after_111,
+        test_workflow_third_gate_max_conc_after_111,
+        test_workflow_third_gate_max_conc_still_after_111,
+        test_workflow_third_gate_timeout_ly_after_111,
+        test_workflow_third_gate_timeout_ly_still_after_111,
+        test_workflow_third_gate_max_retries_after_111,
+        test_workflow_third_gate_max_retries_still_after_111,
+        test_workflow_third_gate_fail_true_after_111,
+        test_workflow_third_gate_fail_true_still_after_111,
+        test_workflow_third_gate_get_out_after_111,
+        test_workflow_third_gate_get_out_still_after_111,
+        test_workflow_third_gate_get_id_after_111,
+        test_workflow_third_gate_get_id_still_after_111,
+        test_workflow_third_gate_curl_after_111,
+        test_workflow_third_gate_curl_still_after_111,
+        test_workflow_third_gate_conc_link_after_111,
+        test_workflow_third_gate_conc_link_still_after_111,
+        test_workflow_third_gate_conc_md_after_111,
+        test_workflow_third_gate_conc_md_still_after_111,
+        test_workflow_third_gate_conc_stew_after_111,
+        test_workflow_third_gate_conc_stew_still_after_111,
+        test_workflow_third_gate_reversible_after_111,
+        test_workflow_third_gate_reversible_still_after_111,
+        test_workflow_third_gate_fn_def_after_111,
+        test_workflow_third_gate_fn_def_still_after_111,
+        test_workflow_third_gate_contract_call_after_111,
+        test_workflow_third_gate_contract_call_still_after_111,
+        test_workflow_third_gate_contract_def_after_111,
+        test_workflow_third_gate_contract_def_still_after_111,
+        test_workflow_third_rejects_concurrency_link_check_pad0_after_111,
+        test_workflow_third_rejects_concurrency_markdown_lint_pad1_after_111,
+        test_workflow_third_rejects_concurrency_stewardship_checks_pad2_after_111,
+        test_workflow_third_rejects_concurrency_link_check_pad3_after_111,
+        test_workflow_third_rejects_concurrency_markdown_lint_pad4_after_111,
+        test_workflow_third_rejects_concurrency_stewardship_checks_pad5_after_111,
+        test_workflow_third_rejects_concurrency_link_check_pad6_after_111,
+        test_workflow_third_rejects_concurrency_markdown_lint_pad7_after_111,
+        test_workflow_third_rejects_concurrency_stewardship_checks_pad8_after_111,
+        test_workflow_third_rejects_concurrency_link_check_pad9_after_111,
+        test_workflow_third_rejects_concurrency_markdown_lint_pad10_after_111,
+        test_workflow_third_rejects_concurrency_stewardship_checks_pad11_after_111,
+        test_workflow_third_rejects_concurrency_link_check_pad12_after_111,
+        test_workflow_third_rejects_concurrency_markdown_lint_pad13_after_111,
+        test_workflow_third_rejects_concurrency_stewardship_checks_pad14_after_111,
+        test_workflow_third_rejects_concurrency_link_check_pad15_after_111,
+        test_workflow_third_rejects_concurrency_markdown_lint_pad16_after_111,
+        test_workflow_third_rejects_concurrency_stewardship_checks_pad17_after_111,
+        test_workflow_third_rejects_concurrency_link_check_pad18_after_111,
+        test_workflow_third_rejects_concurrency_markdown_lint_pad19_after_111,
+        test_workflow_third_rejects_concurrency_stewardship_checks_pad20_after_111,
+        test_workflow_third_rejects_concurrency_link_check_pad21_after_111,
+        test_workflow_third_rejects_concurrency_markdown_lint_pad22_after_111,
+        test_workflow_third_rejects_concurrency_stewardship_checks_pad23_after_111,
+
     ]
     try:
         for script in GATE_SCRIPTS:

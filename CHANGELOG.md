@@ -11,6 +11,14 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX CI workflow third-pass pins after #111/#117/#127: expand self-tests to
+  2491 cases (was 2419) fail-closing live reversible CI workflow integrity —
+  exact concurrency group templates / markdown-lint+stewardship cron+timeout /
+  DavidAnson@v24 / setup-python@v5 / lychee verbose+no-progress+max-concurrency 8+
+  timeout 20+max-retries 3 / fail: true / get_actionlint id+outputs /
+  curl -fsSL / `check_workflow_hardening_gate_contract` — CI workflow third-pass
+  slice only; no invent-product; no fourth badge. New draft after #127 (do not revive #85/#124/#129).
+
 - TOKENMAXX run_stewardship runner pins after #117: expand self-tests to
   2419 cases (was 2331) fail-closing live local runner integrity —
   `#!/usr/bin/env bash` / `set -euo pipefail` / `dirname "$0"` + `pwd` ROOT /

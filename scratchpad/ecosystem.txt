@@ -520,3 +520,5 @@ _None yet._
 - Scope: EXISTING wiki-badge posture integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #120/#131 leftover on post-#135 main
 - Branch: cursor/tokenmaxx-wiki-badge-after-132-cdb2
 2026-09-14T02:55:00Z
+
+2026-09-14T03:05:00Z cursor: PR #141 CI green (lint + link-check + stewardship/actionlint) MERGEABLE ← complete ECO-057 TOKENMAXX wiki-badge pins after #132/#135 (replaces closed #131/#136)

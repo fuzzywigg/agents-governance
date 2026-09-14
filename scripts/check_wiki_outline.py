@@ -32,6 +32,16 @@ Fail-closed pins (live path after #59; deepen after #43; third-pass after #90):
   (lands closed #185/#172 leftover on tip; not schema #191; distinct from
   stewardship-badge lint #208 / path-filter/path-order #225 / Pass-2 leftover + md/link #220 /
   schema fourth-pass #216; lands closed #222/#215/#196 leftover after #225 tip)
+- Wiki outline/PUBLISH leftover after #233: existing docs/wiki pages only —
+  PUBLISH.md pages-table row order / Pages to publish heading /
+  one-shot wiki.git clone / cp docs/wiki/{page} list (no operator PUBLISH.md) /
+  git add six publishable files / git push origin / purpose+closes #16 YAML /
+  Fallback .wiki.git / badge-standard blob rewrite / drop in-repo PUBLISH.md bullet /
+  OPERATOR_ONLY not in PUBLISHABLE_PAGES
+  (NOT wiki-index/badge leftover #227 / NOT stewardship-checks/schema residual #233 /
+  NOT path-filter/path-order #225 / NOT Pass-2 leftover + md/link #220;
+  existing pages only — do not invent extra wiki files)
+- Lands closed #238 leftover after #239 tip (NOT md/link residual #239)
 """
 
 from __future__ import annotations
@@ -111,6 +121,14 @@ def _reject_invent_badge_chrome(name: str, text: str, errors: list[str]) -> None
 def main() -> int:
     errors: list[str] = []
 
+    # Wiki outline/PUBLISH leftover after #233: operator PUBLISH.md is not a
+    # public wiki page (existing pages only — do not invent extra wiki files).
+    if OPERATOR_ONLY in PUBLISHABLE_PAGES:
+        fail(
+            "PUBLISH.md is operator-only and must not be in PUBLISHABLE_PAGES",
+            errors,
+        )
+
     if not WIKI.is_dir():
         print("FAIL: docs/wiki/ missing", file=sys.stderr)
         return 1
@@ -161,6 +179,68 @@ def main() -> int:
             )
         if "No secrets" not in publish_text and "secrets" not in publish_text.lower():
             fail("PUBLISH.md acceptance checks must mention secrets prohibition", errors)
+        # Wiki outline/PUBLISH leftover after #233 (existing pages only).
+        if "## Pages to publish" not in publish_text:
+            fail("PUBLISH.md must keep ## Pages to publish heading", errors)
+        last_row_at = -1
+        for name in PUBLISHABLE_PAGES:
+            row = f"| `{name}` |"
+            found = publish_text.find(row)
+            if found < 0:
+                fail(
+                    f"PUBLISH.md pages table must keep ordered row for {name}",
+                    errors,
+                )
+                continue
+            if found < last_row_at:
+                fail(
+                    "PUBLISH.md pages table must keep publishable page order",
+                    errors,
+                )
+            last_row_at = found
+        if "agents-governance.wiki.git" not in publish_text:
+            fail(
+                "PUBLISH.md one-shot must clone agents-governance.wiki.git",
+                errors,
+            )
+        if "cp docs/wiki/PUBLISH.md" in publish_text:
+            fail(
+                "PUBLISH.md one-shot must not copy operator PUBLISH.md",
+                errors,
+            )
+        for name in PUBLISHABLE_PAGES:
+            if f"docs/wiki/{name}" not in publish_text:
+                fail(
+                    f"PUBLISH.md one-shot must copy existing page docs/wiki/{name}",
+                    errors,
+                )
+        git_add_six = "git add Home.md Overview.md Autonomy-Levels.md Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md"
+        if git_add_six not in publish_text:
+            fail(
+                "PUBLISH.md one-shot must git add the six publishable pages",
+                errors,
+            )
+        if "git push origin" not in publish_text:
+            fail("PUBLISH.md one-shot must git push origin", errors)
+        if "Reversible publish path for docs/wiki" not in publish_text:
+            fail("PUBLISH.md YAML must keep Reversible publish path purpose", errors)
+        if 'closes: "#16"' not in publish_text and "closes: '#16'" not in publish_text:
+            fail("PUBLISH.md YAML must keep closes: \"#16\"", errors)
+        if ".wiki.git" not in publish_text:
+            fail("PUBLISH.md fallback must mention .wiki.git remote", errors)
+        if (
+            "https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge-standard.md"
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md must keep badge-standard blob rewrite URL",
+                errors,
+            )
+        if "drop the in-repo `PUBLISH.md` bullet" not in publish_text:
+            fail(
+                "PUBLISH.md must say drop the in-repo PUBLISH.md bullet from Home",
+                errors,
+            )
 
     home = WIKI / "Home.md"
     if home.is_file():

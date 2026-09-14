@@ -284,6 +284,14 @@ token commentary — DISTINCT residual edges only (not leftover #233 schema /
 not wiki-index/badge #227 / not path-edges #225 / not Pass-2 leftover +
 md/link #220 core / not stewardship-badge lint #208; lands closed #221 leftover
 residual; do not revive #221/#219/#214/#207/#201/#231)).
+plus wiki outline/PUBLISH leftover deepen after #239 tip: existing
+`docs/wiki` pages only — PUBLISH.md pages-table order / Pages to publish /
+wiki.git clone / cp docs/wiki/{page} (no operator PUBLISH.md) / git add six
+pages / purpose+closes `#16` / Fallback `.wiki.git` / badge-standard blob
+rewrite / OPERATOR_ONLY not in PUBLISHABLE_PAGES — DISTINCT leftover only
+(not md/link residual #239 / not stewardship-checks/schema #233 /
+not wiki-index/badge #227 / not path-filter/path-order #225;
+lands closed #238 leftover on post-#239 tip; do not revive #238)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

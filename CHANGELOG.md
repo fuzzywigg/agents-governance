@@ -11,6 +11,19 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship_common third-pass pins after #104: expand self-tests to 2187
+  cases (was 2079) fail-closing live stewardship_common integrity — future
+  annotations / import re+Path / exact PRIVATE KEY+gh-family+github-pat+sk|rk /
+  `SECRET_PATTERNS` tuple typing / `FENCED_BLOCK_RE.sub` / label or
+  `relative_to` / `pattern.search` / `lowered=text.lower()` / `re.escape` /
+  https? URL-ish / `ROOT.glob`+`found.update` / `set[Path]` / workflows path
+  join / for-loops / Shared helpers / `hint.endswith(=)` / MEMORY dumps /
+  `str|None`+`list[Path]` / FORBIDDEN head / SECRET_URL_HINTS gh-family
+  prefix members / exact aws+xox+npm+AIza+api-key+secret+passwd patterns +
+  gate contract third-pass — stewardship_common third-pass slice only (not
+  docs-lint / wiki / relative / actionlint / schema / badge / CI workflow
+  pin spam); no invent-product; no fourth badge
+
 - TOKENMAXX docs-lint pins after #100: expand self-tests to 2079 cases (was 1971)
   fail-closing live docs-lint integrity — `.lycheeignore` escaped
   `img\.shields\.io` / `modelcontextprotocol.io` / `linuxfoundation.org` /

@@ -128,7 +128,15 @@ plus docs-lint pins after #100: `.lycheeignore` escaped `img\.shields\.io` /
 commentary / reject `https://*`+`http://*`+`*` / exact MD013+MD024 objects /
 MD033+MD041+MD060 false / `default: true` / ROOT path assigns /
 `check_workflows_and_license` + CDN-exclude needle /
-`check_docs_lint_gate_contract`).
+`check_docs_lint_gate_contract`),
+plus stewardship_common third-pass after #104: future annotations / import
+re+Path / exact PRIVATE KEY+gh-family+github-pat+sk|rk / tuple typing /
+`FENCED_BLOCK_RE.sub` / label or `relative_to` / `pattern.search` /
+`lowered=text.lower` / `re.escape` / https? URL-ish / `ROOT.glob`+`found.update` /
+`set[Path]` / workflows path join / for-loops / Shared helpers /
+`hint.endswith(=)` / MEMORY dumps / `str|None`+`list[Path]` / FORBIDDEN head /
+SECRET_URL_HINTS gh-family prefix members / exact aws+xox+npm+AIza+api-key+
+secret+passwd patterns.
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

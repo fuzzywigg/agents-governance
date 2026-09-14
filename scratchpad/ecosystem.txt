@@ -806,3 +806,45 @@ _None yet._
 2026-09-14T08:40:00Z cursor: Local green — run_stewardship + self-tests 4792 + markdownlint ← ECO-076 path-filter/path-order residuals after #243 (leave draft; do not revive #236/#232/#228)
 
 2026-09-14T08:40:30Z cursor: Draft PR #244 opened (cursor/tokenmaxx-path-edges-residual-after-243-7fba); leave draft / do-not-merge; awaiting CI ← ECO-076 residual after #243 (do not revive #236/#232/#228)
+
+### [ECO-076] TOKENMAXX deepen Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #239 — 2026-09-14T08:28:00Z
+- [x] cursor: Read live tree post-#239 (4462 cases; md/link residual saturated via #239; #240 CLOSED CONFLICTING Pass-2 residual leftover)
+- [x] cursor: Fail-close Pass-2 residual leftover + existing templates/AGENTS-REPO.md validation (no invent templates)
+- [x] cursor: Expand self-tests 4462 → 4686 (Pass-2 residual + existing-template leftover slice only; not #239/#233/#227/#225 spam)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING run_stewardship Pass-2 residual + existing templates/AGENTS-REPO.md leftover only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates invent; do not revive #240/#235/#230; do not redo #239 md/link residual / #233 schema leftover / #227 wiki-index/badge
+- Branch: cursor/tokenmaxx-pass2-residual-templates-after-239-84bf
+2026-09-14T08:28:00Z
+
+2026-09-14T08:28:00Z cursor: Rebased ECO-076 onto post-#239 tip (54b2105); leave draft / do-not-merge; do not revive #240/#235/#230; do not redo #239 md/link / #233 schema
+
+### [ECO-077] TOKENMAXX deepen Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #244 — 2026-09-14T08:55:00Z
+- [x] cursor: Read live tree post-#244 (4792 cases; path-filter/path-order residual saturated via #244; #246/#245 DRAFT CONFLICTING Pass-2 residual leftover)
+- [x] cursor: Fail-close Pass-2 residual leftover + existing templates/AGENTS-REPO.md validation (no invent templates)
+- [x] cursor: Expand self-tests 4792 → 5016 (Pass-2 residual + existing-template leftover slice only; not #244/#243/#239/#233 spam)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING run_stewardship Pass-2 residual + existing templates/AGENTS-REPO.md leftover only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates invent; do not revive #246/#245/#240/#235/#230; do not redo #244 path-edges residual / #243 wiki/PUBLISH / #239 md/link / #233 schema
+- Branch: cursor/tokenmaxx-pass2-residual-templates-after-244-84bf
+2026-09-14T08:55:00Z
+
+2026-09-14T08:55:00Z cursor: Rebased ECO-077 onto post-#244 tip (c38ae7b); leave draft / do-not-merge; do not revive #246/#245/#240; do not redo #244 path-edges / #243 wiki/PUBLISH / #239 md/link
+
+2026-09-14T09:02:00Z cursor: Local green — run_stewardship + self-tests 5016 + markdownlint ← ECO-077 Pass-2 residual leftover + existing templates/AGENTS-REPO.md after #244 (leave draft; do not revive #246/#245/#240)
+
+2026-09-14T09:05:00Z cursor: Closed #250 RED — link-check flake GitHub 503 on same-repo blob/main wiki URLs (not leftover content regression); open fresh draft on tip without reviving #250/#246/#245/#240 ← ECO-077
+
+2026-09-14T09:09:40Z cursor: Closed #251 RED — link-check flake GitHub 503 on same-repo blob/main wiki URLs again (stewardship+lint green; not leftover content regression); open fresh draft on tip without reviving #251/#250/#246/#245/#240 ← ECO-077
+
+2026-09-14T09:22:00Z cursor: Retry ECO-077 on post-#244 tip — branch cursor/tokenmaxx-pass2-residual-templates-after-244-1979; Pass-2 residual + existing templates/AGENTS-REPO.md leftover only; do not revive #251/#250/#246/#245/#240; do not redo #244 path-edges / #243 wiki/PUBLISH / #239 md/link / #252 wiki-mdlink sibling
+
+2026-09-14T09:30:00Z cursor: Local green — run_stewardship + self-tests 5016 + markdownlint ← ECO-077 Pass-2 residual leftover + existing templates/AGENTS-REPO.md after #244 (leave draft; do not revive #251/#250/#246/#245/#240)
+
+2026-09-14T09:32:00Z cursor: Draft PR #254 opened (cursor/tokenmaxx-pass2-residual-templates-after-244-1979); leave draft / do-not-merge; awaiting CI ← ECO-077 Pass-2 residual + existing templates/AGENTS-REPO.md after #244 (do not revive #251/#250/#246/#245/#240; leave open sibling #252 alone)
+
+2026-09-14T10:20:00Z cursor: Rebased ECO-077 onto post-#262 tip (dd73fb4); self-tests 5326 → 5550 (+224 Pass-2/templates leftover); #265 CLOSED CONFLICTING after #262 tip move — open fresh draft; do not revive #265/#254/#251/#250/#246/#245/#240; do not redo #262 path-edges / #258 schema / #252 wiki/mdlink
+
+2026-09-14T10:28:00Z cursor: Local green — run_stewardship + self-tests 5550 + markdownlint ← ECO-077 Pass-2 residual leftover + existing templates/AGENTS-REPO.md after #262 (leave draft; do not revive #265/#254/#251/#250/#246/#245/#240)
+
+2026-09-14T10:30:00Z cursor: Draft PR #272 opened (cursor/tokenmaxx-pass2-residual-templates-after-244-1979) on post-#262 tip; leave draft / do-not-merge; awaiting CI ← ECO-077 Pass-2 residual + existing templates/AGENTS-REPO.md (do not revive #265/#254/#251/#250/#246/#245/#240)
+
+2026-09-14T10:41:00Z cursor: PR #272 CI green (lint + link-check + stewardship) + MERGEABLE on tip ← ECO-077 Pass-2 residual leftover + existing templates/AGENTS-REPO.md after #262 (leave draft / do-not-merge; do not revive #265/#254/#251/#250/#246/#245/#240)

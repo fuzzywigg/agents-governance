@@ -31,6 +31,12 @@ Fail-closed actionlint-style pins (live path after #75; second-pass after #83/#8
 - Deepen after #135: cancel-in-progress: true / contents: read /
   ubuntu-latest / workflow_dispatch: / reject security-events|attestations|
   statuses|deployments: write / deepen docstring
+- Path-order + badge CI leftovers after #149 (not closed #143/#120;
+  NOT #149 cancel-in-progress slice; NOT #135 docs-lint; NOT #141 wiki-badge):
+  contiguous three-path actionlint order / exact bash <(curl -fsSL) download /
+  no continue-on-error: true / Download actionlint + actionlint existing
+  workflow paths step names / no stewardship-checks.yml/badge.svg invent /
+  exact link-check.yml/badge.svg + markdown-lint.yml/badge.svg
 
 Fail-closed run_stewardship runner pins (live path after #117; lands closed #96):
 - shebang #!/usr/bin/env bash / set -euo pipefail
@@ -1081,6 +1087,47 @@ def check_workflow_hardening(errors: list[str]) -> None:
             "stewardship-checks.yml must pass actionlint version 1.7.7 to download script",
             errors,
         )
+    # Fail-closed after #149: contiguous three-path actionlint order
+    # (distinct from #149 cancel-in-progress deepen; not closed #143/#120).
+    ordered_paths = (
+        ".github/workflows/link-check.yml "
+        ".github/workflows/markdown-lint.yml "
+        ".github/workflows/stewardship-checks.yml"
+    )
+    if ordered_paths not in stew:
+        fail(
+            "stewardship-checks.yml actionlint must list three workflow paths "
+            "in order: link-check → markdown-lint → stewardship-checks",
+            errors,
+        )
+    download_form = (
+        "bash <(curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/"
+        "v1.7.7/scripts/download-actionlint.bash) 1.7.7"
+    )
+    if download_form not in stew:
+        fail(
+            "stewardship-checks.yml must use exact bash <(curl -fsSL …/v1.7.7/"
+            "…download-actionlint.bash) 1.7.7 form",
+            errors,
+        )
+    if re.search(r"(?m)^\s*continue-on-error:\s*true\s*$", stew):
+        fail(
+            "stewardship-checks.yml must not set continue-on-error: true "
+            "(actionlint / gates must fail closed)",
+            errors,
+        )
+    if "Download actionlint" not in stew:
+        fail(
+            "stewardship-checks.yml must name the download step "
+            "'Download actionlint'",
+            errors,
+        )
+    if "actionlint existing workflow paths" not in stew:
+        fail(
+            "stewardship-checks.yml must name the run step "
+            "'actionlint existing workflow paths'",
+            errors,
+        )
 
 
 def check_badge_standard_doc(errors: list[str]) -> None:
@@ -1129,6 +1176,25 @@ def check_readme_consistency(text: str, errors: list[str]) -> None:
     # No quiet stewardship marketed as a fourth README badge.
     if re.search(r"\[!\[.*[Ss]tewardship", text):
         fail("README.md must not add a Stewardship product/status badge", errors)
+    # Fail-closed after #149: badge CI leftover — no stewardship-checks invent badge.
+    if "stewardship-checks.yml/badge.svg" in text:
+        fail(
+            "README.md must not invent stewardship-checks.yml/badge.svg "
+            "(no fourth badge)",
+            errors,
+        )
+    link_badge = "link-check.yml/" + "badge.svg"
+    md_badge = "markdown-lint.yml/" + "badge.svg"
+    if link_badge not in text:
+        fail(
+            "README.md must keep exact link-check.yml/badge.svg image path",
+            errors,
+        )
+    if md_badge not in text:
+        fail(
+            "README.md must keep exact markdown-lint.yml/badge.svg image path",
+            errors,
+        )
 
 
 def check_contributing_and_agents(errors: list[str]) -> None:
@@ -2808,6 +2874,82 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
     if def_pin not in text:
         fail(
             "check_badge_standard.py must define workflow hardening gate contract",
+            errors,
+        )
+    # Fail-closed after #149: actionlint path-order + badge CI contract pins
+    # (distinct from #149 cancel-in-progress / #135 docs-lint; not closed #143/#120).
+    after_149 = "after " + "#149"
+    if after_149 not in text:
+        fail(
+            "check_badge_standard.py must pin " + after_149 + " deepen",
+            errors,
+        )
+    path_a = ".github/workflows/link-check.yml "
+    path_b = ".github/workflows/markdown-lint.yml "
+    path_c = ".github/workflows/stewardship-checks.yml"
+    if path_a not in text or path_b not in text or path_c not in text:
+        fail(
+            "after-#149 actionlint pins must keep three .github/workflows path pins",
+            errors,
+        )
+    order_fail = "in order: " + "link-check"
+    if order_fail not in text:
+        fail(
+            "after-#149 actionlint pins must emit three-path order fail needle",
+            errors,
+        )
+    download_bash = "bash <(curl -fsSL https://raw.githubusercontent.com/"
+    if download_bash not in text:
+        fail(
+            "after-#149 actionlint pins must keep exact bash <(curl -fsSL) form",
+            errors,
+        )
+    continue_fail = "must not set continue-on-error: " + "true"
+    if continue_fail not in text:
+        fail(
+            "after-#149 actionlint pins must emit continue-on-error: true fail needle",
+            errors,
+        )
+    download_step = "Download " + "actionlint"
+    if download_step not in text:
+        fail(
+            "after-#149 actionlint pins must require " + download_step + " step name",
+            errors,
+        )
+    run_step = "actionlint existing workflow " + "paths"
+    if run_step not in text:
+        fail(
+            "after-#149 actionlint pins must require " + run_step,
+            errors,
+        )
+    invent_badge = "stewardship-checks.yml/" + "badge.svg"
+    if invent_badge not in text:
+        fail(
+            "badge CI leftover must reject " + invent_badge + " invent",
+            errors,
+        )
+    link_badge_pin = "link-check.yml/" + "badge.svg"
+    md_badge_pin = "markdown-lint.yml/" + "badge.svg"
+    if link_badge_pin not in text:
+        fail(
+            "badge CI leftover must keep exact " + link_badge_pin,
+            errors,
+        )
+    if md_badge_pin not in text:
+        fail(
+            "badge CI leftover must keep exact " + md_badge_pin,
+            errors,
+        )
+    not_143 = "not closed " + "#143"
+    if not_143 not in text:
+        fail(
+            "module docstring must keep " + not_143 + " distinctness pin",
+            errors,
+        )
+    not_149_slice = "NOT #149 " + "cancel-in-progress"
+    if not_149_slice not in text:
+        fail(
+            "module docstring must keep " + not_149_slice + " distinctness pin",
             errors,
         )
 

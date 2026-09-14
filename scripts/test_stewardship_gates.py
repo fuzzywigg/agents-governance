@@ -33616,6 +33616,399 @@ def test_actionlint_fourth_rejects_cancel_true_link_check_pad9_after_135() -> No
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, "cancel-in-progress: true")
 
 
+# --- TOKENMAXX after #149: actionlint path-order + badge CI leftovers ---
+
+def test_actionlint_path_badge_gate_after_149_doc_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'after #149' in text
+        path.write_text(text.replace('after #149', 'after #999'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'after #149')
+
+def test_actionlint_path_badge_gate_after_149_doc_still_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'after #149' in text
+        path.write_text(text.replace('after #149', 'after #999'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'after #149')
+
+def test_actionlint_path_badge_gate_not_143_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'not closed #143' in text
+        path.write_text(text.replace('not closed #143', 'not closed #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'not closed #143')
+
+def test_actionlint_path_badge_gate_not_143_still_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'not closed #143' in text
+        path.write_text(text.replace('not closed #143', 'not closed #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'not closed #143')
+
+def test_actionlint_path_badge_gate_not_149_slice_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT #149 cancel-in-progress' in text
+        path.write_text(text.replace('NOT #149 cancel-in-progress', 'NOT #149 other-slice'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT #149 cancel-in-progress')
+
+def test_actionlint_path_badge_gate_not_149_slice_still_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT #149 cancel-in-progress' in text
+        path.write_text(text.replace('NOT #149 cancel-in-progress', 'NOT #149 other-slice'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT #149 cancel-in-progress')
+
+def test_actionlint_path_badge_gate_ordered_path_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        needle = 'in order: link-check'
+        assert needle in text
+        path.write_text(text.replace(needle, 'in order: shuffled'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'three-path order')
+
+def test_actionlint_path_badge_gate_ordered_path_still_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        needle = 'in order: link-check'
+        assert needle in text
+        path.write_text(text.replace(needle, 'in order: shuffled'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'three-path order')
+
+def test_actionlint_path_badge_gate_download_form_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        needle = 'bash <(curl -fsSL https://raw.githubusercontent.com/'
+        assert needle in text
+        path.write_text(text.replace(needle, 'bash <(curl -fsSL https://example.invalid/'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'bash <(curl -fsSL')
+
+def test_actionlint_path_badge_gate_download_form_still_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        needle = 'bash <(curl -fsSL https://raw.githubusercontent.com/'
+        assert needle in text
+        path.write_text(text.replace(needle, 'bash <(curl -fsSL https://example.invalid/'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'bash <(curl -fsSL')
+
+def test_actionlint_path_badge_gate_continue_fail_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        needle = 'must not set continue-on-error: true'
+        assert needle in text
+        path.write_text(text.replace(needle, 'must not set continue-on-error: yes'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'continue-on-error: true')
+
+def test_actionlint_path_badge_gate_continue_fail_still_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        needle = 'must not set continue-on-error: true'
+        assert needle in text
+        path.write_text(text.replace(needle, 'must not set continue-on-error: yes'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'continue-on-error: true')
+
+def test_actionlint_path_badge_gate_download_step_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        needle = 'Download actionlint'
+        assert needle in text
+        path.write_text(text.replace(needle, 'Fetch actionlint'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, needle)
+
+def test_actionlint_path_badge_gate_download_step_still_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        needle = 'Download actionlint'
+        assert needle in text
+        path.write_text(text.replace(needle, 'Fetch actionlint'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, needle)
+
+def test_actionlint_path_badge_gate_run_step_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        needle = 'actionlint existing workflow paths'
+        assert needle in text
+        path.write_text(text.replace(needle, 'actionlint existing workflows'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, needle)
+
+def test_actionlint_path_badge_gate_run_step_still_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        needle = 'actionlint existing workflow paths'
+        assert needle in text
+        path.write_text(text.replace(needle, 'actionlint existing workflows'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, needle)
+
+def test_actionlint_path_badge_gate_invent_badge_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        needle = 'stewardship-checks.yml/badge.svg'
+        assert needle in text
+        path.write_text(text.replace(needle, 'stewardship-checks.yml/status.svg'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, needle)
+
+def test_actionlint_path_badge_gate_invent_badge_still_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        needle = 'stewardship-checks.yml/badge.svg'
+        assert needle in text
+        path.write_text(text.replace(needle, 'stewardship-checks.yml/status.svg'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, needle)
+
+def test_actionlint_path_badge_gate_link_badge_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        readme = tmp_path / "README.md"
+        text = readme.read_text(encoding="utf-8")
+        assert 'link-check.yml/badge.svg' in text
+        readme.write_text(text.replace('link-check.yml/badge.svg', 'link-check.yml/status.svg'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'link-check.yml/badge.svg')
+
+def test_actionlint_path_badge_gate_link_badge_still_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        readme = tmp_path / "README.md"
+        text = readme.read_text(encoding="utf-8")
+        assert 'link-check.yml/badge.svg' in text
+        readme.write_text(text.replace('link-check.yml/badge.svg', 'link-check.yml/status.svg'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'link-check.yml/badge.svg')
+
+def test_actionlint_path_badge_gate_md_badge_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        readme = tmp_path / "README.md"
+        text = readme.read_text(encoding="utf-8")
+        assert 'markdown-lint.yml/badge.svg' in text
+        readme.write_text(text.replace('markdown-lint.yml/badge.svg', 'markdown-lint.yml/status.svg'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'markdown-lint.yml/badge.svg')
+
+def test_actionlint_path_badge_gate_md_badge_still_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        readme = tmp_path / "README.md"
+        text = readme.read_text(encoding="utf-8")
+        assert 'markdown-lint.yml/badge.svg' in text
+        readme.write_text(text.replace('markdown-lint.yml/badge.svg', 'markdown-lint.yml/status.svg'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'markdown-lint.yml/badge.svg')
+
+def test_actionlint_rejects_reordered_paths_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        ordered = (
+            ".github/workflows/link-check.yml "
+            ".github/workflows/markdown-lint.yml "
+            ".github/workflows/stewardship-checks.yml"
+        )
+        shuffled = (
+            ".github/workflows/markdown-lint.yml "
+            ".github/workflows/link-check.yml "
+            ".github/workflows/stewardship-checks.yml"
+        )
+        assert ordered in text
+        path.write_text(text.replace(ordered, shuffled, 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "in order: link-check",
+        )
+
+def test_actionlint_rejects_reordered_paths_still_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        ordered = (
+            ".github/workflows/link-check.yml "
+            ".github/workflows/markdown-lint.yml "
+            ".github/workflows/stewardship-checks.yml"
+        )
+        shuffled = (
+            ".github/workflows/markdown-lint.yml "
+            ".github/workflows/link-check.yml "
+            ".github/workflows/stewardship-checks.yml"
+        )
+        assert ordered in text
+        path.write_text(text.replace(ordered, shuffled, 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "in order: link-check",
+        )
+
+def test_actionlint_rejects_continue_on_error_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        # Insert continue-on-error under the actionlint run step
+        text = text.replace(
+            "      - name: actionlint existing workflow paths\n",
+            "      - name: actionlint existing workflow paths\n        continue-on-error: true\n",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "continue-on-error: true",
+        )
+
+def test_actionlint_rejects_continue_on_error_still_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        text = text.replace(
+            "      - name: actionlint existing workflow paths\n",
+            "      - name: actionlint existing workflow paths\n        continue-on-error: true\n",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "continue-on-error: true",
+        )
+
+def test_actionlint_rejects_download_form_drift_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        old = (
+            "bash <(curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/"
+            "v1.7.7/scripts/download-actionlint.bash) 1.7.7"
+        )
+        new = (
+            "bash <(curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/"
+            "v1.7.8/scripts/download-actionlint.bash) 1.7.8"
+        )
+        assert old in text
+        path.write_text(text.replace(old, new, 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "bash <(curl -fsSL",
+        )
+
+def test_actionlint_rejects_download_form_drift_still_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        old = (
+            "bash <(curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/"
+            "v1.7.7/scripts/download-actionlint.bash) 1.7.7"
+        )
+        new = (
+            "bash <(curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/"
+            "v1.7.8/scripts/download-actionlint.bash) 1.7.8"
+        )
+        assert old in text
+        path.write_text(text.replace(old, new, 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "bash <(curl -fsSL",
+        )
+
+def test_badge_rejects_stewardship_checks_badge_svg_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = _good_readme() + (
+            "\n[![Stewardship](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/stewardship-checks.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/stewardship-checks.yml)\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "stewardship-checks.yml/badge.svg",
+        )
+
+def test_badge_rejects_stewardship_checks_badge_svg_still_after_149() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = _good_readme() + (
+            "\n[![Stewardship](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/stewardship-checks.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/stewardship-checks.yml)\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "stewardship-checks.yml/badge.svg",
+        )
+
 
 # --- TOKENMAXX deepen after #111: stewardship_common third-pass pins ---
 
@@ -42779,6 +43172,36 @@ def main() -> int:
     test_actionlint_fourth_rejects_cancel_true_markdown_lint_pad7_after_135,
     test_actionlint_fourth_rejects_cancel_true_stewardship_checks_pad8_after_135,
     test_actionlint_fourth_rejects_cancel_true_link_check_pad9_after_135,
+    test_actionlint_path_badge_gate_after_149_doc_after_149,
+    test_actionlint_path_badge_gate_after_149_doc_still_after_149,
+    test_actionlint_path_badge_gate_not_143_after_149,
+    test_actionlint_path_badge_gate_not_143_still_after_149,
+    test_actionlint_path_badge_gate_not_149_slice_after_149,
+    test_actionlint_path_badge_gate_not_149_slice_still_after_149,
+    test_actionlint_path_badge_gate_ordered_path_after_149,
+    test_actionlint_path_badge_gate_ordered_path_still_after_149,
+    test_actionlint_path_badge_gate_download_form_after_149,
+    test_actionlint_path_badge_gate_download_form_still_after_149,
+    test_actionlint_path_badge_gate_continue_fail_after_149,
+    test_actionlint_path_badge_gate_continue_fail_still_after_149,
+    test_actionlint_path_badge_gate_download_step_after_149,
+    test_actionlint_path_badge_gate_download_step_still_after_149,
+    test_actionlint_path_badge_gate_run_step_after_149,
+    test_actionlint_path_badge_gate_run_step_still_after_149,
+    test_actionlint_path_badge_gate_invent_badge_after_149,
+    test_actionlint_path_badge_gate_invent_badge_still_after_149,
+    test_actionlint_path_badge_gate_link_badge_after_149,
+    test_actionlint_path_badge_gate_link_badge_still_after_149,
+    test_actionlint_path_badge_gate_md_badge_after_149,
+    test_actionlint_path_badge_gate_md_badge_still_after_149,
+    test_actionlint_rejects_reordered_paths_after_149,
+    test_actionlint_rejects_reordered_paths_still_after_149,
+    test_actionlint_rejects_continue_on_error_after_149,
+    test_actionlint_rejects_continue_on_error_still_after_149,
+    test_actionlint_rejects_download_form_drift_after_149,
+    test_actionlint_rejects_download_form_drift_still_after_149,
+    test_badge_rejects_stewardship_checks_badge_svg_after_149,
+    test_badge_rejects_stewardship_checks_badge_svg_still_after_149,
 
     ]
     try:

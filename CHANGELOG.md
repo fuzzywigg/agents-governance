@@ -11,6 +11,16 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX actionlint path-order + badge CI leftover pins after #149: expand
+  self-tests to 2791 cases (was 2761) fail-closing contiguous three-path
+  actionlint order / exact `bash <(curl -fsSL …/download-actionlint.bash) 1.7.7`
+  form / reject `continue-on-error: true` / `Download actionlint` +
+  `actionlint existing workflow paths` step names / reject invent
+  stewardship-checks workflow badge path / exact link-check+markdown-lint
+  badge.svg paths — path-order/badge-CI slice only (not #149 cancel-in-progress
+  deepen / #135 docs-lint / #141 wiki-badge); no invent-product; no fourth badge.
+  New draft after #149 (do **not** revive closed #143/#120/#138).
+
 - TOKENMAXX actionlint-style deepen pins after #135/#141: expand self-tests to
   2761 cases (was 2689) fail-closing live actionlint CI reliability leftovers —
   `cancel-in-progress: true` / `contents: read` / `ubuntu-latest` /

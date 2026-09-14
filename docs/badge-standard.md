@@ -187,6 +187,11 @@ plus wiki-badge posture after #132/#135: status badges cover Link Check+Markdown
 Lint / product badge refusal / reject stewardship-checks workflow badge invent /
 reject embedded markdown badge images / PUBLISH Link Check+Markdown Lint
 exactly / Home no badge-row embeds,
+plus actionlint path-order + badge CI leftovers after #149: contiguous
+three-path actionlint order / exact bash <(curl -fsSL) download /
+reject continue-on-error: true / Download actionlint + actionlint existing
+workflow paths step names / reject invent stewardship-checks workflow badge /
+exact link-check+markdown-lint badge.svg paths,
 plus actionlint-style deepen after #135/#141: `cancel-in-progress: true` /
 `contents: read` / `ubuntu-latest` / `workflow_dispatch:` / reject
 `security-events|attestations|statuses|deployments: write` / deepen docstring).

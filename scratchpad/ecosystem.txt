@@ -537,3 +537,12 @@ _None yet._
 2026-09-14T03:30:00Z cursor: Rebased onto post-#141 main; local gates green expected 2761 (2689+72); do not revive #139/#145
 
 2026-09-14T03:35:00Z cursor: Local green 2761 on post-#141; new draft branch cursor/tokenmaxx-actionlint-after-141-114e (do not revive #145/#148/#139)
+
+### [ECO-059] TOKENMAXX deepen actionlint path-order/badge CI pins after #149 — 2026-09-14T03:38:06Z
+- [x] cursor: Read live tree post-#149 (2761 cases; actionlint-style cancel-in-progress deepen saturated; #143 CLOSED CONFLICTING_after_141 — do not revive)
+- [x] cursor: Fail-close actionlint path-order + badge CI leftovers (distinct from #149 cancel-in-progress / #135 docs-lint / #141 wiki-badge)
+- [x] cursor: Expand self-tests 2761 → 2791
+- [ ] cursor: Green draft PR with CI
+- Scope: EXISTING actionlint-path + badge-CI integrity only; no invent-product; no fourth badge; no secrets; no DNS/history; NOT closed #120/#143 revive
+- Branch: cursor/tokenmaxx-actionlint-path-badge-after-149-4a67
+2026-09-14T03:38:06Z

@@ -688,3 +688,15 @@ _None yet._
 2026-09-14T06:13:48Z cursor: NEW draft PR #205 opened (cursor/tokenmaxx-stewardship-badge-lint-after-199-7653) — awaiting CI ← ECO-066 stewardship-badge lint after #199 tip (does not revive #195/#172/#190; leave #199/#191/#189 alone)
 
 2026-09-14T06:23:03Z cursor: NEW draft PR #208 opened (replaces closed #205; tip after #203; 3728 cases) — awaiting CI ← ECO-066 stewardship-badge lint (do not revive #205/#195/#172/#190)
+
+2026-09-14T06:24:00Z cursor: PR #208 MERGED (stewardship-badge lint after #199) ← tip
+
+2026-09-14T06:28:00Z cursor: PR #209 CLOSED CONFLICTING after CI green (tip moved via #208) — reopen fourth-pass on post-#208 tip
+
+### [ECO-070] TOKENMAXX deepen stewardship-schema fourth-pass after #208 tip — 2026-09-14T06:30:00Z
+- [x] cursor: Read live tree post-#208 (3728 cases; fourth-pass still unsaturated)
+- [x] cursor: Fail-close schema fourth-pass + expand self-tests 3728 → 3906
+- [ ] cursor: Green draft PR with CI
+- Scope: EXISTING schema fourth-pass only; lands #171/#209 leftover; do not revive #171/#209/#204/#200
+- Branch: cursor/tokenmaxx-schema-fourth-pass-after-208-57e2
+2026-09-14T06:30:00Z

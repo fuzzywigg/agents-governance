@@ -32,6 +32,14 @@ Fail-closed pins (live path after #53; second-pass after #72/#75):
   rel == AGENTS.md / engine PyYAML-or-stdlib / noqa BLE001 /
   errors: list[str] = [] / got != want / autonomy_level in data /
   tier in data / for date_key in DATE_KEYS / deepen docstring
+- Fourth-pass after #208: nested/list edit_policy+parent_governance policy refs /
+  got nested/list / type(value).__name__ / invent not in policy /
+  badge-standard edit_policy invent gate / str(status).upper() /
+  invalid status enum stubs DEPRECATED|ARCHIVED|PENDING|RETIRED|SUSPENDED /
+  invalid surface enum stubs geryon|playwright|browser-claude|claude-cowork /
+  whitespace-only non-empty / nested version+autonomy+maintainer+status+
+  surface+closes+tier / list surface+closes+purpose+autonomy /
+  fourth-pass docstring (distinct from schema-third-pass after-149)
 """
 
 from __future__ import annotations

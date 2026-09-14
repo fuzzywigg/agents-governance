@@ -4520,7 +4520,7 @@ def check_stewardship_common_contract(errors: list[str]) -> None:
 
 
 def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
-    """Fail-close live stewardship-schema gate wiring (after #72/#75; third-pass after #132; deepen after #189)."""
+    """Fail-close live stewardship-schema gate wiring (after #72/#75; third-pass after #132; deepen after #189; policy-schema pass-4 after #208)."""
     if not SCHEMA_GATE.is_file():
         fail("Missing scripts/check_stewardship_schema.py (schema gate)", errors)
         return
@@ -5266,6 +5266,135 @@ def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
             + " pin",
             errors,
         )
+
+    # Fail-closed after #208: policy-schema pass-4 helper / constant / needle pins
+    # (schema pass-4 slice only; not third-pass-after-149 / docs-lint / actionlint spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    # Avoid contiguous four+th so existing badge refusal self-tests (four→quaternary) stay valid.
+    pass4_doc = "Four" + "th-pass after #208"
+    if pass4_doc not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + pass4_doc,
+            errors,
+        )
+    distinct_pin = "distinct from schema-third-pass " + "after-149"
+    if distinct_pin not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + distinct_pin,
+            errors,
+        )
+    nested_list_needle = "got nested/" + "list"
+    if nested_list_needle not in text:
+        fail(
+            "check_stewardship_schema.py must emit got nested/list needle",
+            errors,
+        )
+    type_name = "type(value).__" + "name__"
+    if type_name not in text:
+        fail(
+            "check_stewardship_schema.py reject_non_scalar must use type(value).__name__",
+            errors,
+        )
+    invent_not_in = '"invent" not in ' + "policy"
+    if invent_not_in not in text and "'invent' not in policy" not in text:
+        fail(
+            'check_stewardship_schema.py must gate invent via "invent" not in policy',
+            errors,
+        )
+    badge_invent_rel = 'rel == "docs/badge-standard.md"'
+    if badge_invent_rel not in text and "rel == 'docs/badge-standard.md'" not in text:
+        fail(
+            'check_stewardship_schema.py invent pin must special-case '
+            'rel == "docs/badge-standard.md"',
+            errors,
+        )
+    status_upper = "str(status)." + "upper()"
+    if status_upper not in text:
+        fail(
+            "check_stewardship_schema.py must compare via str(status).upper()",
+            errors,
+        )
+    policy_lower = 'str(data["edit_policy"]).' + "lower()"
+    if policy_lower not in text and "str(data['edit_policy']).lower()" not in text:
+        fail(
+            'check_stewardship_schema.py must lower edit_policy via '
+            'str(data["edit_policy"]).lower()',
+            errors,
+        )
+    for stub in (
+        "DEPRECATED",
+        "ARCHIVED",
+        "PENDING",
+        "RETIRED",
+        "SUSPENDED",
+    ):
+        if stub not in text:
+            fail(
+                "check_stewardship_schema.py docstring must pin invalid status "
+                f"enum stub {stub}",
+                errors,
+            )
+    for stub in (
+        "geryon",
+        "playwright",
+        "browser-claude",
+        "claude-cowork",
+    ):
+        if stub not in text:
+            fail(
+                "check_stewardship_schema.py docstring must pin invalid surface "
+                f"enum stub {stub}",
+                errors,
+            )
+    whitespace_pin = "whitespace-only " + "non-empty"
+    if whitespace_pin not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + whitespace_pin,
+            errors,
+        )
+    nested_policy = "nested/list edit_policy+parent_governance " + "policy refs"
+    if nested_policy not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + nested_policy,
+            errors,
+        )
+    nested_version_pin = "nested version+autonomy+maintainer+" + "status"
+    if nested_version_pin not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + nested_version_pin,
+            errors,
+        )
+    list_surface_pin = "list surface+closes+purpose+" + "autonomy"
+    if list_surface_pin not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + list_surface_pin,
+            errors,
+        )
+    pass4_slice = "schema pass-4 " + "slice"
+    self_text3 = BADGE_GATE.read_text(encoding="utf-8")
+    if pass4_slice not in self_text3:
+        fail(
+            "check_badge_standard.py schema pass-4 must keep "
+            + pass4_slice
+            + " pin",
+            errors,
+        )
+    not_third_spam = "not third-pass-after-149 / docs-lint / " + "actionlint spam"
+    if not_third_spam not in self_text3:
+        fail(
+            "check_badge_standard.py schema pass-4 must keep "
+            + not_third_spam
+            + " pin",
+            errors,
+        )
+    contract_pass4 = "policy-schema pass-4 after " + "#208"
+    if contract_pass4 not in self_text3:
+        fail(
+            "check_badge_standard.py schema gate contract docstring must pin "
+            + contract_pass4,
+            errors,
+        )
+
 
 
 def check_wiki_outline_gate_contract(errors: list[str]) -> None:

@@ -702,3 +702,4 @@ _None yet._
 2026-09-14T06:40:00Z cursor: Local green — run_stewardship + self-tests 3874 + markdownlint ← ECO-069 path-filter/path-order deepen after #203 on post-#208 tip (leave draft; leave CONFLICTING #214 alone)
 
 2026-09-14T06:40:00Z cursor: Draft PR #213 force-updated onto post-#208 tip; leave draft / do-not-merge; awaiting CI ← ECO-069
+2026-09-14T06:45:00Z cursor: Draft PR #217 opened (replaces closed #213 after #208 tip rebase); leave draft / do-not-merge; awaiting CI ← ECO-069 path-filter/path-order deepen after #203 (leave MERGEABLE #216 alone)

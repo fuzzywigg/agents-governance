@@ -847,3 +847,12 @@ _None yet._
 2026-09-14T09:40:17Z cursor: Local green — run_stewardship + self-tests 5058 + markdownlint ← ECO-078 docs-lint pass-4 blob/503 + Pass-2 residual leftover after #244 (leave draft; do not revive #251/#250/#246/#245/#240)
 
 2026-09-14T09:41:05Z cursor: Draft PR #256 opened (cursor/tokenmaxx-pass2-residual-templates-after-244-linkflake-84bf); leave draft / do-not-merge; awaiting CI ← ECO-078 (do not revive #251/#250/#246/#245/#240)
+
+### [ECO-079] TOKENMAXX Pass-2 residual + blob/503 lychee harden after #258 — 2026-09-14T10:06:08Z
+- [x] cursor: Rebase Pass-2 residual + lycheeignore blob/main 503 harden onto post-#258 tip (schema leftover saturated via #258)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING Pass-2 residual + templates/AGENTS-REPO.md leftover + docs-lint pass-4 blob/503 harden; no invent templates; do not revive #261/#260/#256/#251/#250/#246/#245/#240; do not redo #258 schema / #252 wiki-mdlink / #244 path-edges
+- Branch: cursor/tokenmaxx-pass2-residual-templates-after-258-linkflake-84bf
+2026-09-14T10:06:08Z
+
+2026-09-14T10:06:08Z cursor: Rebased onto post-#258 tip (705f077); local verify next ← ECO-079 (do not revive #261/#260/#256)

@@ -72,7 +72,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   unblocks Pass-2 residual + existing `templates/AGENTS-REPO.md` leftover draft
   after #258 tip (do **not** revive #251/#250/#246/#245/#240). Distinct from
   Pass-2 residual/template leftover content; no invent templates; no DNS sprawl.
-- TOKENMAXX Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #244:
+- TOKENMAXX Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #258 (lands closed #260/#256/#251/#250 leftover on post-#258 tip):
   expand self-tests to 5016 cases (was 4792) fail-closing DISTINCT leftover Pass-2 residual
   soft-fail + existing concurrency group templates + existing `templates/AGENTS-REPO.md`
   leftover — soft-fail with `|| :` / `|| return 0` / `set +o errexit` / `set +o nounset` /

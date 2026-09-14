@@ -631,3 +631,14 @@ _None yet._
 - Scope: EXISTING actionlint path-order leftover pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #157 leftover on post-#181 main; do not revive #157/#182/#143/#120
 - Branch: cursor/tokenmaxx-actionlint-path-order-after-181-3e1c
 2026-09-14T05:25:00Z
+
+### [ECO-067] TOKENMAXX deepen wiki-index/badge leftover after #189 — 2026-09-14T05:45:00Z
+- [x] cursor: Read live tree post-#189 (3402 cases; path-order saturated; open #191 stewardship-schema — leave alone; pick unsaturated wiki-index/badge leftover)
+- [x] cursor: Fail-close wiki-index/badge leftover — exact PUBLISHABLE_PAGES contiguous / TOC loop / ]({page})+]({stem}) / empty-index comment / broken relative link / README invent stewardship-checks.yml/badge.svg refuse / exact actions/workflows/*.yml/badge.svg / gate contracts
+- [x] cursor: Expand self-tests 3402 → 3516 (wiki-index/badge leftover slice; not path-order #189 / stewardship-schema #191 / path-filter #176 / run_stewardship #179 spam)
+- [ ] cursor: Green draft PR with CI
+- Scope: EXISTING wiki-index validators / badge-standard gates only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #185/#172 leftover on post-#189 main; do not revive #185/#172/#177/#168; leave open #191 schema alone
+- Branch: cursor/tokenmaxx-wiki-index-badge-after-189-eb44
+2026-09-14T05:45:00Z
+
+2026-09-14T05:52:00Z cursor: Local green — run_stewardship + self-tests 3516 + markdownlint ← ECO-067 wiki-index/badge leftover deepen after #189 (do not revive #185/#172; leave #191 schema alone)

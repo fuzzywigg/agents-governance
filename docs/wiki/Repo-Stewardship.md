@@ -196,7 +196,13 @@ do not revive #177/#168/#170; distinct from path-filter #176 and run_stewardship
 plus actionlint path-order leftover after #181: contiguous three-path
 actionlint order / exact bash <(curl -fsSL) download /
 reject continue-on-error: true / Download actionlint + actionlint existing
-workflow paths step names / path-order leftover docstring).
+workflow paths step names / path-order leftover docstring,
+plus wiki-index/badge leftover deepen after #189: exact PUBLISHABLE_PAGES
+contiguous / TOC loop / `]({page})`+`]({stem})` / empty-index comment /
+broken relative link needle / README invent stewardship-checks workflow badge
+refuse / exact link-check + markdown-lint workflow badge.svg pins — lands closed
+PR #185/#172 leftover; do not revive #185/#172; distinct from path-order #189
+and stewardship-schema sibling).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

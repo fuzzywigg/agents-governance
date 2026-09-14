@@ -11,6 +11,19 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki-index/badge leftover deepen after #189: expand self-tests to
+  3516 cases (was 3402) fail-closing unsaturated wiki-index validators /
+  badge-standard gates — exact `PUBLISHABLE_PAGES` contiguous order / Home TOC
+  `for page in PUBLISHABLE_PAGES` loop / skip `Home.md` / `]({page})`+`]({stem})`
+  link forms / empty index (no publishable page links) comment / relative
+  broken relative link needle / README invent stewardship-checks workflow badge
+  refuse / exact link-check + markdown-lint workflow `badge.svg` pins /
+  wiki-index+relative+badge gate-contract deepen — wiki-index/badge leftover
+  slice only (not path-order #189 / not stewardship-schema sibling / not
+  path-filter #176 / not run_stewardship #179); no invent-product; no fourth
+  badge. Lands closed #185/#172 leftover on post-#189 main (do **not** revive
+  #185/#172/#177/#168). Distinct from open stewardship-schema sibling.
+
 - TOKENMAXX actionlint path-order leftover after #181: expand self-tests to
   3402 cases (was 3330) fail-closing live actionlint path-order leftovers —
   contiguous three-path actionlint order (`link-check` → `markdown-lint` →

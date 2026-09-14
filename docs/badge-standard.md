@@ -193,7 +193,11 @@ plus actionlint-style deepen after #135/#141: `cancel-in-progress: true` /
 plus leftover docs-lint/stewardship/actionlint pins after #149: docs-lint
 third-pass exact `.lycheeignore` full layout + commentary lines /
 actionlint leftover `contents: read` membership affirm (complement #149
-regex) / stewardship leftover exact `run_stewardship_checks.sh` full layout).
+regex) / stewardship leftover exact `run_stewardship_checks.sh` full layout,
+plus stewardship-badge lint deepen after #161: README invent stewardship-checks workflow badge refuse / exact link-check+markdown-lint
+`badge.svg` paths / exact live markdown-lint globs block + push paths /
+exact live link-check push paths / missing badge fixtures (NOT docs-lint
+leftover #161 / NOT wiki-badge #141).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

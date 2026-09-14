@@ -552,3 +552,15 @@ _None yet._
 2026-09-14T03:55:00Z cursor: Local green — run_stewardship + self-tests 2885 + markdownlint ← ECO-059 leftover docs-lint/stewardship/actionlint after #149 (do not revive #150/#146/#154)
 
 2026-09-14T03:52:00Z cursor: PR #161 CI green (lint + link-check + stewardship/actionlint) MERGEABLE ← complete ECO-059 TOKENMAXX leftover stewardship/docs-lint/actionlint after #149 (does not revive #150/#146/#154/#151/#156)
+
+### [ECO-060] TOKENMAXX deepen stewardship-badge lint after #161 — 2026-09-14T04:20:13Z
+- [x] cursor: Read live tree post-#161 (2885 cases; docs-lint leftover / wiki-badge saturated; residual badge invent + path globs uncovered)
+- [x] cursor: Fail-close stewardship-badge lint residuals (distinct from docs-lint leftover #161 / wiki-badge #141)
+- [x] cursor: Expand self-tests 2885 → 2953
+- [ ] cursor: Green draft PR with CI
+- Scope: EXISTING stewardship-badge lint integrity only; no invent-product; no fourth badge; no secrets; no DNS/history; NOT docs-lint leftover / wiki-badge revive; do not revive #157/#123/#143
+- Branch: overnight-stewardship-badge-lint-deepen
+2026-09-14T04:20:13Z
+
+
+2026-09-14T04:20:41Z cursor: Local green — run_stewardship + self-tests 2953 + markdownlint ← ECO-060 stewardship-badge lint after #161 (do not revive #157/#123/#143)

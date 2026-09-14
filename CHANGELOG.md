@@ -11,6 +11,16 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-badge lint deepen after #161: expand self-tests to
+  2953 cases (was 2885) fail-closing residual uncovered badge/lint edges —
+  README invent stewardship-checks workflow badge refuse / exact
+  `link-check.yml/badge.svg` + `markdown-lint.yml/badge.svg` paths / exact
+  live markdown-lint globs block (`**/*.md` + bang excludes) / exact live
+  markdown-lint + link-check push paths filters / missing badge fixtures —
+  stewardship-badge lint slice only (NOT docs-lint leftover #161 / NOT
+  wiki-badge #141); no invent-product; no fourth badge. Does **not** revive
+  closed #157/#123/#143.
+
 - TOKENMAXX leftover docs-lint/stewardship/actionlint pins after #149: expand
   self-tests to 2885 cases (was 2761) fail-closing live leftover integrity —
   docs-lint third-pass exact `.lycheeignore` full layout + commentary lines /

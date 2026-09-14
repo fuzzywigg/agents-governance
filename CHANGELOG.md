@@ -11,6 +11,16 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX actionlint-style deepen pins after #132: expand self-tests to
+  2563 cases (was 2491) fail-closing live actionlint CI reliability leftovers —
+  `cancel-in-progress: true` / `contents: read` / `ubuntu-latest` /
+  `workflow_dispatch:` / reject `security-events|attestations|statuses|
+  deployments: write` / deepen docstring + gate-contract needles —
+  actionlint-style slice only (not workflow-hardening / badge / wiki /
+  docs-lint / schema / common spam); no invent-product; no fourth badge.
+  New draft after #132 (do **not** revive closed #113).
+
+
 - TOKENMAXX CI workflow third-pass pins after #111/#117/#127: expand self-tests to
   2491 cases (was 2419) fail-closing live reversible CI workflow integrity —
   exact concurrency group templates / markdown-lint+stewardship cron+timeout /

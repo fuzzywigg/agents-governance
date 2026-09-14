@@ -473,3 +473,24 @@ _None yet._
 - Scope: EXISTING CI workflow reversible pin wiring only; no invent-product; no fourth badge; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-workflow-third-pass-v3-88a9
 2026-09-14T02:32:37Z
+
+### [ECO-057] TOKENMAXX deepen actionlint-style fourth-pass pins after #132 — 2026-09-14T02:45:00Z
+- [x] cursor: Read live tree post-#132 (2491 cases; workflow third-pass saturated; #113 CLOSED — do not revive; actionlint third-pass saturated after #111)
+- [x] cursor: Fail-close actionlint fourth-pass — cancel-in-progress: true / contents: read / ubuntu-latest / workflow_dispatch: / reject security-events|attestations|statuses|deployments write / fourth-pass docstring + gate contract
+- [x] cursor: Expand self-tests 2491 → 2563 (actionlint-style CI reliability leftover slice; not workflow-hardening/badge/wiki/docs-lint spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING actionlint-style reversible CI reliability pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands after #132; do not revive #113
+- Branch: cursor/tokenmaxx-actionlint-pins-after-132-f041
+2026-09-14T02:45:00Z
+
+### [ECO-057b] Pin wording: deepen after #132 (not fourth-pass) — 2026-09-14T03:05:00Z
+- [x] cursor: Rename actionlint pin phrase to "Deepen/deepen after #132" — contiguous fourth-pass collided with badge-refusal self-tests that mutate every fourth token in check_badge_standard.py
+- Scope: EXISTING actionlint-style reversible CI reliability pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands after #132; do not revive #113
+- Branch: cursor/tokenmaxx-actionlint-pins-after-132-f041
+2026-09-14T03:05:00Z
+
+### [ECO-057c] Local gates green — 2026-09-14T03:12:00Z
+- [x] cursor: bash scripts/run_stewardship_checks.sh OK; python3 scripts/test_stewardship_gates.py OK (2563 cases + live tree)
+- [ ] cursor: Draft PR + CI green (do not revive #113)
+- Branch: cursor/tokenmaxx-actionlint-pins-after-132-f041
+2026-09-14T03:12:00Z

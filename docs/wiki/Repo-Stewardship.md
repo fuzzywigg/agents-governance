@@ -139,6 +139,7 @@ plus actionlint-style third-pass after #108: `concurrency:` +
 `cancel-in-progress:` / `permissions:` present / reject
 `actions|packages|pull-requests: write` / `re.finditer` / docker continue /
 `rsplit[-1]` / third-pass docstring,
+plus actionlint-style deepen after #132: `cancel-in-progress: true` / `contents: read` / `ubuntu-latest` / `workflow_dispatch:` / reject `security-events|attestations|statuses|deployments: write` / deepen docstring,
 plus stewardship_common third-pass after #111: future annotations / import
 re+Path / exact PRIVATE KEY+gh-family+sk|rk patterns / SECRET_PATTERNS
 tuple typing / FENCED_BLOCK_RE.sub / label or relative_to / pattern.search /

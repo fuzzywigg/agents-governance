@@ -44,6 +44,14 @@ Fail-closed CI workflow pins (live path after #39/#72; third-pass after #111):
   setup-python@v5 / lychee --verbose/--no-progress/--max-concurrency 8 /
   --timeout 20/--max-retries 3 / fail: true / get_actionlint id+outputs /
   curl -fsSL download / third-pass docstring
+
+Fail-closed leftover docs-lint/stewardship/actionlint pins after #149:
+- docs-lint third-pass: exact live .lycheeignore full layout + exact
+  commentary lines (308 redirect / 103 early hints / badge CDN flaky /
+  License badge presence enforced by stewardship)
+- actionlint leftover: contents: read membership affirm (complement #149
+  regex) / leftover docstring (not docs-lint / wiki spam)
+- stewardship leftover: exact live run_stewardship_checks.sh full layout
 """
 
 from __future__ import annotations
@@ -316,6 +324,8 @@ def check_lycheeignore(errors: list[str]) -> None:
     http://* / bare *; not wiki / relative pin spam.
     Second-pass after #111: exact live exclude URLs + CDN/false-positive
     commentary (docs-lint second-pass; not actionlint / stewardship_common spam).
+    Third-pass after #149: exact live .lycheeignore full layout + exact
+    commentary lines (docs-lint leftover; not wiki / CI workflow spam).
     """
     if not LYCHEEIGNORE.is_file():
         return
@@ -436,6 +446,74 @@ def check_lycheeignore(errors: list[str]) -> None:
             errors,
         )
 
+    # Third-pass after #149: exact live .lycheeignore full layout (docs-lint leftover).
+    expected_lychee = (
+        "# modelcontextprotocol.io returns 308 redirect — valid site, lychee false-positive\n"
+        "https://modelcontextprotocol.io/\n"
+        "# linuxfoundation.org returns 103 early hints — valid site\n"
+        "https://www.linuxfoundation.org/\n"
+        "# img.shields.io badge CDN is flaky (Connection reset by peer / RST) "
+        "— not a broken URL.\n"
+        "# License badge presence remains enforced by stewardship "
+        "(check_badge_standard.py).\n"
+        r"https://img\.shields\.io" + "\n"
+    )
+    if text != expected_lychee:
+        fail(
+            ".lycheeignore must match exact live docs-lint third-pass layout",
+            errors,
+        )
+    # Third-pass after #149: exact live commentary line pins (docs-lint leftover).
+    mcp_line = (
+        "# modelcontextprotocol.io returns 308 redirect — valid site, "
+        "lychee false-positive"
+    )
+    if mcp_line not in text:
+        fail(
+            ".lycheeignore must keep exact MCP 308 commentary line "
+            "(docs-lint third-pass)",
+            errors,
+        )
+    lfs_line = "# linuxfoundation.org returns 103 early hints — valid site"
+    if lfs_line not in text:
+        fail(
+            ".lycheeignore must keep exact LF 103 commentary line "
+            "(docs-lint third-pass)",
+            errors,
+        )
+    flaky_line = (
+        "# img.shields.io badge CDN is flaky (Connection reset by peer / RST) "
+        "— not a broken URL."
+    )
+    if flaky_line not in text:
+        fail(
+            ".lycheeignore must keep exact shields flaky commentary line "
+            "(docs-lint third-pass)",
+            errors,
+        )
+    license_line = (
+        "# License badge presence remains enforced by stewardship "
+        "(check_badge_standard.py)."
+    )
+    if license_line not in text:
+        fail(
+            ".lycheeignore must keep exact License enforcement commentary line "
+            "(docs-lint third-pass)",
+            errors,
+        )
+    if "badge CDN is flaky" not in text:
+        fail(
+            ".lycheeignore must note badge CDN is flaky "
+            "(docs-lint third-pass)",
+            errors,
+        )
+    if "enforced by stewardship" not in text:
+        fail(
+            ".lycheeignore must note enforced by stewardship "
+            "(docs-lint third-pass)",
+            errors,
+        )
+
 
 def check_actionlint_style(errors: list[str]) -> None:
     """Static actionlint-like checks on existing workflow paths only.
@@ -455,6 +533,8 @@ def check_actionlint_style(errors: list[str]) -> None:
     Deepen after #135: cancel-in-progress: true / contents: read /
     ubuntu-latest / workflow_dispatch: / reject security-events|attestations|
     statuses|deployments: write / deepen docstring.
+    Leftover after #149: contents: read membership affirm (complement regex) /
+    actionlint leftover (not docs-lint / wiki spam).
     """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
@@ -523,6 +603,9 @@ def check_actionlint_style(errors: list[str]) -> None:
         # jobs must declare timeout (already checked globally; keep local needle).
         if "timeout-minutes:" not in text:
             fail(f"{name}: actionlint-style requires timeout-minutes on jobs", errors)
+        # Leftover after #149: affirm contents: read via membership (complement #149 regex).
+        if "contents: read" not in text:
+            fail(f"{name}: actionlint-style requires contents: read (membership)", errors)
 
 
 def check_workflow_hardening(errors: list[str]) -> None:
@@ -1801,6 +1884,8 @@ def check_docs_lint_gate_contract(errors: list[str]) -> None:
     Second-pass: exact live exclude URLs + CDN commentary + markdownlint
     layout/key-set pins (docs-lint second-pass; not actionlint /
     stewardship_common / badge spam).
+    Third-pass after #149: exact live .lycheeignore full layout + exact
+    commentary lines (docs-lint leftover; not CI workflow / wiki spam).
     """
     if not BADGE_GATE.is_file():
         fail("Missing scripts/check_badge_standard.py (docs-lint host)", errors)
@@ -2132,6 +2217,74 @@ def check_docs_lint_gate_contract(errors: list[str]) -> None:
     if not_badge not in text:
         fail(
             "docs-lint contract must keep " + not_badge + " wording",
+            errors,
+        )
+
+    # Third-pass after #149: docs-lint leftover exact layout + commentary pins.
+    third_pass = "Third-pass after " + "#149"
+    if third_pass not in text:
+        fail(
+            "docs-lint must keep " + third_pass + " docstring pin",
+            errors,
+        )
+    docs_third = "docs-lint " + "third-pass"
+    if docs_third not in text:
+        fail(
+            "docs-lint contract must keep " + docs_third + " wording",
+            errors,
+        )
+    exact_lychee_layout = "exact live docs-lint third-pass " + "layout"
+    if exact_lychee_layout not in text:
+        fail(
+            "check_lycheeignore must keep " + exact_lychee_layout + " needle",
+            errors,
+        )
+    mcp_line_pin = "exact MCP 308 commentary " + "line"
+    if mcp_line_pin not in text:
+        fail(
+            "check_lycheeignore must keep " + mcp_line_pin + " needle",
+            errors,
+        )
+    lfs_line_pin = "exact LF 103 commentary " + "line"
+    if lfs_line_pin not in text:
+        fail(
+            "check_lycheeignore must keep " + lfs_line_pin + " needle",
+            errors,
+        )
+    flaky_line_pin = "exact shields flaky commentary " + "line"
+    if flaky_line_pin not in text:
+        fail(
+            "check_lycheeignore must keep " + flaky_line_pin + " needle",
+            errors,
+        )
+    license_line_pin = "exact License enforcement commentary " + "line"
+    if license_line_pin not in text:
+        fail(
+            "check_lycheeignore must keep " + license_line_pin + " needle",
+            errors,
+        )
+    badge_cdn_flaky = "badge CDN is " + "flaky"
+    if badge_cdn_flaky not in text:
+        fail(
+            "check_lycheeignore must keep " + badge_cdn_flaky + " needle",
+            errors,
+        )
+    enforced_by_stew = "enforced by " + "stewardship"
+    if enforced_by_stew not in text:
+        fail(
+            "check_lycheeignore must keep " + enforced_by_stew + " needle",
+            errors,
+        )
+    leftover_docs = "docs-lint " + "leftover"
+    if leftover_docs not in text:
+        fail(
+            "docs-lint third-pass must keep " + leftover_docs + " wording",
+            errors,
+        )
+    not_wiki_ci = "not CI workflow / wiki " + "spam"
+    if not_wiki_ci not in text:
+        fail(
+            "docs-lint third-pass must keep " + not_wiki_ci + " wording",
             errors,
         )
 
@@ -2733,6 +2886,49 @@ def check_actionlint_style_gate_contract(errors: list[str]) -> None:
     if reliability_pin not in text:
         fail(
             "check_actionlint_style must keep " + reliability_pin + " wording",
+            errors,
+        )
+
+    # Leftover after #149: actionlint contents:read membership + leftover wording.
+    leftover_149 = "Leftover after " + "#149"
+    if leftover_149 not in text:
+        fail(
+            "check_actionlint_style docstring must pin " + leftover_149,
+            errors,
+        )
+    actionlint_leftover = "actionlint " + "leftover"
+    if actionlint_leftover not in text:
+        fail(
+            "check_actionlint_style must keep " + actionlint_leftover + " wording",
+            errors,
+        )
+    contents_read_mem = '"contents: read" not in ' + "text"
+    contents_read_mem_sq = "'contents: read' not in " + "text"
+    if contents_read_mem not in text and contents_read_mem_sq not in text:
+        fail(
+            "check_actionlint_style must require contents: read via membership",
+            errors,
+        )
+    # Concatenate so mutating the live fail() needle alone fails this contract
+    # (same pattern as fail_cancel_true / fail_contents_read after #135).
+    fail_contents_mem = (
+        "actionlint-style requires contents: read " + "(membership)"
+    )
+    if fail_contents_mem not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_contents_mem + " fail needle",
+            errors,
+        )
+    not_docs_wiki = "not docs-lint / wiki " + "spam"
+    if not_docs_wiki not in text:
+        fail(
+            "actionlint leftover must keep " + not_docs_wiki + " wording",
+            errors,
+        )
+    complement_pin = "complement " + "#149"
+    if complement_pin not in text:
+        fail(
+            "actionlint leftover must keep " + complement_pin + " wording",
             errors,
         )
 
@@ -4983,7 +5179,38 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
                 "run_stewardship_checks.sh must keep Run all stewardship doc gates note",
                 errors,
             )
-
+        # Leftover after #149: exact ROOT assign + blank line (before full layout).
+        root_assign = 'ROOT="$(cd "$(dirname "$0")/.." && pwd)"'
+        if root_assign not in run_text:
+            fail(
+                "run_stewardship_checks.sh must keep exact ROOT assign "
+                "(stewardship leftover after #149)",
+                errors,
+            )
+        if 'cd "$ROOT"\n\npython3 scripts/check_badge_standard.py' not in run_text:
+            fail(
+                "run_stewardship_checks.sh must keep blank line after cd "
+                "(stewardship leftover after #149)",
+                errors,
+            )
+        # Leftover after #149: exact live run_stewardship_checks.sh full layout.
+        expected_run = (
+            "#!/usr/bin/env bash\n"
+            "# Run all stewardship doc gates locally (same set as CI).\n"
+            "set -euo pipefail\n"
+            'ROOT="$(cd "$(dirname "$0")/.." && pwd)"\n'
+            'cd "$ROOT"\n'
+            "\n"
+            "python3 scripts/check_badge_standard.py\n"
+            "python3 scripts/check_wiki_outline.py\n"
+            "python3 scripts/check_stewardship_schema.py\n"
+            "python3 scripts/check_relative_links.py\n"
+        )
+        if run_text != expected_run:
+            fail(
+                "run_stewardship_checks.sh must match exact live stewardship leftover layout",
+                errors,
+            )
 
 
 def check_run_stewardship_gate_contract(errors: list[str]) -> None:
@@ -5103,6 +5330,43 @@ def check_run_stewardship_gate_contract(errors: list[str]) -> None:
             errors,
         )
 
+    # Leftover after #149: exact run_stewardship layout contract pins.
+    leftover_149 = "Leftover after " + "#149"
+    if leftover_149 not in text:
+        fail(
+            "run_stewardship pins must keep " + leftover_149 + " marker",
+            errors,
+        )
+    stew_leftover = "stewardship " + "leftover"
+    if stew_leftover not in text:
+        fail(
+            "run_stewardship contract must keep " + stew_leftover + " wording",
+            errors,
+        )
+    exact_run_layout = "exact live stewardship " + "leftover layout"
+    if exact_run_layout not in text:
+        fail(
+            "run_stewardship contract must keep " + exact_run_layout + " needle",
+            errors,
+        )
+    root_assign_pin = 'ROOT="$(cd "$(dirname "$0")/.." && ' + 'pwd)"'
+    if root_assign_pin not in text:
+        fail(
+            "run_stewardship contract must keep exact ROOT assign pin",
+            errors,
+        )
+    blank_after_cd = "blank line after " + "cd"
+    if blank_after_cd not in text:
+        fail(
+            "run_stewardship contract must keep " + blank_after_cd + " pin",
+            errors,
+        )
+    leftover_after = "stewardship leftover after " + "#149"
+    if leftover_after not in text:
+        fail(
+            "run_stewardship contract must keep " + leftover_after + " wording",
+            errors,
+        )
 
 
 def check_badges(badges: list[re.Match[str]], errors: list[str]) -> None:

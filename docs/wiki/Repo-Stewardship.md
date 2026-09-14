@@ -169,7 +169,12 @@ plus actionlint-style deepen after #135/#141: `cancel-in-progress: true` /
 plus leftover docs-lint/stewardship/actionlint pins after #149: docs-lint
 third-pass exact `.lycheeignore` full layout + commentary lines /
 actionlint leftover `contents: read` membership affirm (complement #149
-regex) / stewardship leftover exact `run_stewardship_checks.sh` full layout).
+regex) / stewardship leftover exact `run_stewardship_checks.sh` full layout,
+plus stewardship CI deepen after #161: Check links / Run markdownlint /
+Set up Python / Install PyYAML (schema parser) / Stewardship gates+self-tests
+step names / exact token+`--github-token` forms / `--exclude-path .github/agents` /
+`globs: |` / AGENTS+CLAUDE+LICENSE+CONTRIBUTING+`.github/workflows/**` paths /
+Weekly drift + GITHUB_TOKEN commentary / deepen docstring).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

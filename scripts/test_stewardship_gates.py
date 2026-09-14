@@ -197,6 +197,7 @@ on:
       - ".github/workflows/link-check.yml"
   pull_request:
   schedule:
+    # Run weekly to catch externally broken links
     - cron: "0 6 * * 1"
   workflow_dispatch:
 permissions:
@@ -212,8 +213,11 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v7
-      - uses: lycheeverse/lychee-action@v2
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
         with:
+          # GITHUB_TOKEN allows lychee to authenticate private GitHub repos
+          # without it, private repos return 404 and fail the check
           token: ${{ secrets.GITHUB_TOKEN }}
           args: >-
             --verbose --no-progress --max-concurrency 8 --timeout 20
@@ -232,6 +236,7 @@ on:
       - ".github/workflows/markdown-lint.yml"
   pull_request:
   schedule:
+    # Weekly drift catch aligned with link/stewardship schedules
     - cron: "30 6 * * 1"
   workflow_dispatch:
 permissions:
@@ -247,7 +252,8 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v7
-      - uses: DavidAnson/markdownlint-cli2-action@v24
+      - name: Run markdownlint
+        uses: DavidAnson/markdownlint-cli2-action@v24
         with:
           globs: |
             **/*.md
@@ -272,6 +278,7 @@ on:
       - ".markdownlint.json"
   pull_request:
   schedule:
+    # Weekly drift catch for badge/wiki/schema/relative-link gates
     - cron: "15 6 * * 1"
   workflow_dispatch:
 permissions:
@@ -287,12 +294,16 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install --quiet pyyaml
-      - run: bash scripts/run_stewardship_checks.sh
-      - run: python3 scripts/test_stewardship_gates.py
+      - name: Install PyYAML (schema parser)
+        run: pip install --quiet pyyaml
+      - name: Stewardship gates (badge / wiki / schema / relative links)
+        run: bash scripts/run_stewardship_checks.sh
+      - name: Stewardship gate self-tests
+        run: python3 scripts/test_stewardship_gates.py
       - name: Download actionlint
         id: get_actionlint
         run: bash <(curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/v1.7.7/scripts/download-actionlint.bash) 1.7.7
@@ -1351,7 +1362,7 @@ def test_workflow_hardening_requires_pyyaml_install() -> None:
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            "PyYAML",
+            "pip install --quiet pyyaml",
         )
 
 
@@ -3428,8 +3439,8 @@ def test_actionlint_rejects_unpinned_second_action() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
         text = path.read_text(encoding="utf-8").replace(
-            "- uses: actions/setup-python@v5",
-            "- uses: actions/setup-python",
+            "uses: actions/setup-python@v5",
+            "uses: actions/setup-python",
         )
         path.write_text(text, encoding="utf-8")
         assert_fail_script(
@@ -3445,8 +3456,8 @@ def test_actionlint_rejects_float_main_on_setup_python() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
         text = path.read_text(encoding="utf-8").replace(
-            "- uses: actions/setup-python@v5",
-            "- uses: actions/setup-python@main",
+            "uses: actions/setup-python@v5",
+            "uses: actions/setup-python@main",
         )
         path.write_text(text, encoding="utf-8")
         assert_fail_script(
@@ -4128,7 +4139,7 @@ def test_stewardship_requires_pyyaml_install_needle() -> None:
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            "PyYAML",
+            "pip install --quiet pyyaml",
         )
 
 
@@ -7779,7 +7790,7 @@ def test_stewardship_requires_pyyaml_install_still() -> None:
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            "PyYAML",
+            "pip install --quiet pyyaml",
         )
 
 
@@ -26322,7 +26333,7 @@ def test_actionlint_style_gate_requires_uses_re_after_86() -> None:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
-        text = path.read_text(encoding="utf-8").replace('(?m)^\\s*-\\s*uses:\\s*([^\\s#]+)', '(?m)^\\s*-\\s*needs:\\s*([^\\s#]+)')
+        text = path.read_text(encoding="utf-8").replace('(?m)^\\s*(?:-\\s+)?uses:\\s*([^\\s#]+)', '(?m)^\\s*(?:-\\s+)?needs:\\s*([^\\s#]+)')
         path.write_text(text, encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
@@ -41397,6 +41408,801 @@ def test_run_stewardship_rejects_layout_pad7_after_149() -> None:
             "exact live stewardship leftover layout",
         )
 
+
+# --- TOKENMAXX deepen after #161: stewardship CI workflow reliability pins ---
+
+def test_workflow_deepen_gate_deepen_doc_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Deepen after #161' in text
+        path.write_text(text.replace('Deepen after #161', 'Deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Deepen after #161')
+
+
+def test_workflow_deepen_gate_deepen_doc_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Deepen after #161' in text
+        path.write_text(text.replace('Deepen after #161', 'Deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Deepen after #161')
+
+
+def test_workflow_deepen_gate_module_deepen_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'deepen after #161' in text
+        path.write_text(text.replace('deepen after #161', 'deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'deepen after #161')
+
+
+def test_workflow_deepen_gate_module_deepen_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'deepen after #161' in text
+        path.write_text(text.replace('deepen after #161', 'deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'deepen after #161')
+
+
+def test_workflow_deepen_gate_check_links_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Check links' in text
+        path.write_text(text.replace('name: Check links', 'name: Check URLs'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Check links step-name pin')
+
+
+def test_workflow_deepen_gate_check_links_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Check links' in text
+        path.write_text(text.replace('name: Check links', 'name: Check URLs'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Check links step-name pin')
+
+
+def test_workflow_deepen_gate_run_md_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Run markdownlint' in text
+        path.write_text(text.replace('name: Run markdownlint', 'name: Run markdown-lint'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint step-name pin')
+
+
+def test_workflow_deepen_gate_run_md_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Run markdownlint' in text
+        path.write_text(text.replace('name: Run markdownlint', 'name: Run markdown-lint'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint step-name pin')
+
+
+def test_workflow_deepen_gate_setup_py_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Set up Python' in text
+        path.write_text(text.replace('name: Set up Python', 'name: Setup Python'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Set up Python step-name pin')
+
+
+def test_workflow_deepen_gate_setup_py_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Set up Python' in text
+        path.write_text(text.replace('name: Set up Python', 'name: Setup Python'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Set up Python step-name pin')
+
+
+def test_workflow_deepen_gate_install_yaml_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Install PyYAML (schema parser)' in text
+        path.write_text(text.replace('name: Install PyYAML (schema parser)', 'name: Install PyYAML (parser)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML step-name pin')
+
+
+def test_workflow_deepen_gate_install_yaml_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Install PyYAML (schema parser)' in text
+        path.write_text(text.replace('name: Install PyYAML (schema parser)', 'name: Install PyYAML (parser)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML step-name pin')
+
+
+def test_workflow_deepen_gate_stew_gates_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Stewardship gates (badge / wiki / schema / relative links)' in text
+        path.write_text(text.replace('name: Stewardship gates (badge / wiki / schema / relative links)', 'name: Stewardship gates (badge / wiki / schema)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Stewardship gates step-name pin')
+
+
+def test_workflow_deepen_gate_stew_gates_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Stewardship gates (badge / wiki / schema / relative links)' in text
+        path.write_text(text.replace('name: Stewardship gates (badge / wiki / schema / relative links)', 'name: Stewardship gates (badge / wiki / schema)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Stewardship gates step-name pin')
+
+
+def test_workflow_deepen_gate_stew_self_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Stewardship gate self-tests' in text
+        path.write_text(text.replace('name: Stewardship gate self-tests', 'name: Stewardship gate tests'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Stewardship gate self-tests step-name pin')
+
+
+def test_workflow_deepen_gate_stew_self_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Stewardship gate self-tests' in text
+        path.write_text(text.replace('name: Stewardship gate self-tests', 'name: Stewardship gate tests'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Stewardship gate self-tests step-name pin')
+
+
+def test_workflow_deepen_gate_token_exact_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'token: ${{ secrets.GITHUB_TOKEN }}' in text
+        path.write_text(text.replace('token: ${{ secrets.GITHUB_TOKEN }}', 'token: ${{ secrets.GH_TOKEN }}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact token secrets.GITHUB_TOKEN pin')
+
+
+def test_workflow_deepen_gate_token_exact_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'token: ${{ secrets.GITHUB_TOKEN }}' in text
+        path.write_text(text.replace('token: ${{ secrets.GITHUB_TOKEN }}', 'token: ${{ secrets.GH_TOKEN }}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact token secrets.GITHUB_TOKEN pin')
+
+
+def test_workflow_deepen_gate_gh_token_exact_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '--github-token ${{ secrets.GITHUB_TOKEN }}' in text
+        path.write_text(text.replace('--github-token ${{ secrets.GITHUB_TOKEN }}', '--github-token ${{ secrets.GH_TOKEN }}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact --github-token secrets.GITHUB_TOKEN pin')
+
+
+def test_workflow_deepen_gate_gh_token_exact_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '--github-token ${{ secrets.GITHUB_TOKEN }}' in text
+        path.write_text(text.replace('--github-token ${{ secrets.GITHUB_TOKEN }}', '--github-token ${{ secrets.GH_TOKEN }}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact --github-token secrets.GITHUB_TOKEN pin')
+
+
+def test_workflow_deepen_gate_exclude_path_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '--exclude-path .github/agents' in text
+        path.write_text(text.replace('--exclude-path .github/agents', '--exclude-path .github/bots'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous --exclude-path .github/agents pin')
+
+
+def test_workflow_deepen_gate_exclude_path_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '--exclude-path .github/agents' in text
+        path.write_text(text.replace('--exclude-path .github/agents', '--exclude-path .github/bots'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'contiguous --exclude-path .github/agents pin')
+
+
+def test_workflow_deepen_gate_globs_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'globs: |' in text
+        path.write_text(text.replace('globs: |', 'globs:'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'markdownlint globs multiline pin')
+
+
+def test_workflow_deepen_gate_globs_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'globs: |' in text
+        path.write_text(text.replace('globs: |', 'globs:'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'markdownlint globs multiline pin')
+
+
+def test_workflow_deepen_gate_agents_path_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"AGENTS.md"' in text
+        path.write_text(text.replace('"AGENTS.md"', '"AGENT.md"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship AGENTS.md path pin')
+
+
+def test_workflow_deepen_gate_agents_path_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"AGENTS.md"' in text
+        path.write_text(text.replace('"AGENTS.md"', '"AGENT.md"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship AGENTS.md path pin')
+
+
+def test_workflow_deepen_gate_claude_path_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"CLAUDE.md"' in text
+        path.write_text(text.replace('"CLAUDE.md"', '"CLAUD.md"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship CLAUDE.md path pin')
+
+
+def test_workflow_deepen_gate_claude_path_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"CLAUDE.md"' in text
+        path.write_text(text.replace('"CLAUDE.md"', '"CLAUD.md"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship CLAUDE.md path pin')
+
+
+def test_workflow_deepen_gate_license_path_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"LICENSE"' in text
+        path.write_text(text.replace('"LICENSE"', '"LICENCE"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship LICENSE path pin')
+
+
+def test_workflow_deepen_gate_license_path_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"LICENSE"' in text
+        path.write_text(text.replace('"LICENSE"', '"LICENCE"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship LICENSE path pin')
+
+
+def test_workflow_deepen_gate_contrib_path_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"CONTRIBUTING.md"' in text
+        path.write_text(text.replace('"CONTRIBUTING.md"', '"CONTRIBUTE.md"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship CONTRIBUTING.md path pin')
+
+
+def test_workflow_deepen_gate_contrib_path_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"CONTRIBUTING.md"' in text
+        path.write_text(text.replace('"CONTRIBUTING.md"', '"CONTRIBUTE.md"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship CONTRIBUTING.md path pin')
+
+
+def test_workflow_deepen_gate_wf_path_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '".github/workflows/**"' in text
+        path.write_text(text.replace('".github/workflows/**"', '".github/workflow/**"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship .github/workflows/** path pin')
+
+
+def test_workflow_deepen_gate_wf_path_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '".github/workflows/**"' in text
+        path.write_text(text.replace('".github/workflows/**"', '".github/workflow/**"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship .github/workflows/** path pin')
+
+
+def test_workflow_deepen_gate_token_comment_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'GITHUB_TOKEN allows lychee to authenticate private GitHub repos' in text
+        path.write_text(text.replace('GITHUB_TOKEN allows lychee to authenticate private GitHub repos', 'GITHUB_TOKEN allows lychee auth for private GitHub repos'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'GITHUB_TOKEN allows lychee commentary pin')
+
+
+def test_workflow_deepen_gate_token_comment_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'GITHUB_TOKEN allows lychee to authenticate private GitHub repos' in text
+        path.write_text(text.replace('GITHUB_TOKEN allows lychee to authenticate private GitHub repos', 'GITHUB_TOKEN allows lychee auth for private GitHub repos'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'GITHUB_TOKEN allows lychee commentary pin')
+
+
+def test_workflow_deepen_gate_private_404_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'private repos return 404' in text
+        path.write_text(text.replace('private repos return 404', 'private repos return gone'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'private-404 commentary pin')
+
+
+def test_workflow_deepen_gate_private_404_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'private repos return 404' in text
+        path.write_text(text.replace('private repos return 404', 'private repos return gone'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'private-404 commentary pin')
+
+
+def test_workflow_deepen_gate_drift_md_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Weekly drift catch aligned with link/stewardship schedules' in text
+        path.write_text(text.replace('Weekly drift catch aligned with link/stewardship schedules', 'Weekly drift catch aligned with link schedules'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'markdownlint Weekly drift commentary pin')
+
+
+def test_workflow_deepen_gate_drift_md_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Weekly drift catch aligned with link/stewardship schedules' in text
+        path.write_text(text.replace('Weekly drift catch aligned with link/stewardship schedules', 'Weekly drift catch aligned with link schedules'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'markdownlint Weekly drift commentary pin')
+
+
+def test_workflow_deepen_gate_drift_stew_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Weekly drift catch for badge/wiki/schema/relative-link gates' in text
+        path.write_text(text.replace('Weekly drift catch for badge/wiki/schema/relative-link gates', 'Weekly drift catch for badge/wiki/schema gates'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship Weekly drift commentary pin')
+
+
+def test_workflow_deepen_gate_drift_stew_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Weekly drift catch for badge/wiki/schema/relative-link gates' in text
+        path.write_text(text.replace('Weekly drift catch for badge/wiki/schema/relative-link gates', 'Weekly drift catch for badge/wiki/schema gates'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'stewardship Weekly drift commentary pin')
+
+
+def test_workflow_deepen_gate_reliability_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'stewardship CI reliability leftovers' in text
+        path.write_text(text.replace('stewardship CI reliability leftovers', 'stewardship CI reliability remnants'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'reliability-leftovers wording')
+
+
+def test_workflow_deepen_gate_reliability_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'stewardship CI reliability leftovers' in text
+        path.write_text(text.replace('stewardship CI reliability leftovers', 'stewardship CI reliability remnants'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'reliability-leftovers wording')
+
+
+def test_workflow_deepen_rejects_check_links_link_pad0_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Check links' in text
+        path.write_text(text.replace('name: Check links', 'name: Check URLs', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'step name: Check links')
+
+
+def test_workflow_deepen_rejects_run_md_lint_pad1_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Run markdownlint' in text
+        path.write_text(text.replace('name: Run markdownlint', 'name: Run md lint', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'step name: Run markdownlint')
+
+
+def test_workflow_deepen_rejects_setup_py_stew_pad2_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Set up Python' in text
+        path.write_text(text.replace('name: Set up Python', 'name: Setup Python', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'step name: Set up Python')
+
+
+def test_workflow_deepen_rejects_install_yaml_stew_pad3_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Install PyYAML (schema parser)' in text
+        path.write_text(text.replace('name: Install PyYAML (schema parser)', 'name: Install PyYAML', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML (schema parser)')
+
+
+def test_workflow_deepen_rejects_gates_stew_pad4_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Stewardship gates (badge / wiki / schema / relative links)' in text
+        path.write_text(text.replace('name: Stewardship gates (badge / wiki / schema / relative links)', 'name: Stewardship gates', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Stewardship gates (badge / wiki / schema / relative links)')
+
+
+def test_workflow_deepen_rejects_selftests_stew_pad5_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Stewardship gate self-tests' in text
+        path.write_text(text.replace('name: Stewardship gate self-tests', 'name: Stewardship self-tests', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Stewardship gate self-tests')
+
+
+def test_workflow_deepen_rejects_token_link_pad6_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'token: ${{ secrets.GITHUB_TOKEN }}' in text
+        path.write_text(text.replace('token: ${{ secrets.GITHUB_TOKEN }}', 'token: ${{ secrets.GH_TOKEN }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'token: ${{ secrets.GITHUB_TOKEN }}')
+
+
+def test_workflow_deepen_rejects_ghtoken_link_pad7_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '--github-token ${{ secrets.GITHUB_TOKEN }}' in text
+        path.write_text(text.replace('--github-token ${{ secrets.GITHUB_TOKEN }}', '--github-token ${{ secrets.GH_TOKEN }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '--github-token ${{ secrets.GITHUB_TOKEN }}')
+
+
+def test_workflow_deepen_rejects_exclude_link_pad8_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '--exclude-path .github/agents' in text
+        path.write_text(text.replace('--exclude-path .github/agents', '--exclude-path .github/bots', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '--exclude-path .github/agents')
+
+
+def test_workflow_deepen_rejects_check_links_link_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Check links' in text
+        path.write_text(text.replace('name: Check links', 'name: Check URLs', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'step name: Check links')
+
+
+def test_workflow_deepen_rejects_run_md_lint_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Run markdownlint' in text
+        path.write_text(text.replace('name: Run markdownlint', 'name: Run md lint', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'step name: Run markdownlint')
+
+
+def test_workflow_deepen_rejects_setup_py_stew_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Set up Python' in text
+        path.write_text(text.replace('name: Set up Python', 'name: Setup Python', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'step name: Set up Python')
+
+
+def test_workflow_deepen_rejects_install_yaml_stew_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Install PyYAML (schema parser)' in text
+        path.write_text(text.replace('name: Install PyYAML (schema parser)', 'name: Install PyYAML', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML (schema parser)')
+
+
+def test_workflow_deepen_rejects_gates_stew_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Stewardship gates (badge / wiki / schema / relative links)' in text
+        path.write_text(text.replace('name: Stewardship gates (badge / wiki / schema / relative links)', 'name: Stewardship gates', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Stewardship gates (badge / wiki / schema / relative links)')
+
+
+def test_workflow_deepen_rejects_selftests_stew_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'name: Stewardship gate self-tests' in text
+        path.write_text(text.replace('name: Stewardship gate self-tests', 'name: Stewardship self-tests', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Stewardship gate self-tests')
+
+
+def test_workflow_deepen_rejects_token_link_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'token: ${{ secrets.GITHUB_TOKEN }}' in text
+        path.write_text(text.replace('token: ${{ secrets.GITHUB_TOKEN }}', 'token: ${{ secrets.GH_TOKEN }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'token: ${{ secrets.GITHUB_TOKEN }}')
+
+
+def test_workflow_deepen_rejects_ghtoken_link_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '--github-token ${{ secrets.GITHUB_TOKEN }}' in text
+        path.write_text(text.replace('--github-token ${{ secrets.GITHUB_TOKEN }}', '--github-token ${{ secrets.GH_TOKEN }}', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '--github-token ${{ secrets.GITHUB_TOKEN }}')
+
+
+def test_workflow_deepen_rejects_exclude_link_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '--exclude-path .github/agents' in text
+        path.write_text(text.replace('--exclude-path .github/agents', '--exclude-path .github/bots', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '--exclude-path .github/agents')
+
+
+def test_workflow_deepen_rejects_globs_lint_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'globs: |' in text
+        path.write_text(text.replace('globs: |', 'globs:', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'globs: |')
+
+
+def test_workflow_deepen_rejects_agents_stew_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '"AGENTS.md"' in text
+        path.write_text(text.replace('"AGENTS.md"', '"AGENT.md"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'AGENTS.md')
+
+
+def test_workflow_deepen_rejects_claude_stew_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '"CLAUDE.md"' in text
+        path.write_text(text.replace('"CLAUDE.md"', '"CLAUD.md"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'CLAUDE.md')
+
+
+def test_workflow_deepen_rejects_license_stew_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '"LICENSE"' in text
+        path.write_text(text.replace('"LICENSE"', '"LICENCE"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'LICENSE')
+
+
+def test_workflow_deepen_rejects_contrib_stew_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '"CONTRIBUTING.md"' in text
+        path.write_text(text.replace('"CONTRIBUTING.md"', '"CONTRIBUTE.md"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'CONTRIBUTING.md')
+
+
+def test_workflow_deepen_rejects_wfglob_stew_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '".github/workflows/**"' in text
+        path.write_text(text.replace('".github/workflows/**"', '".github/workflow/**"', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '.github/workflows/**')
+
+
+def test_workflow_deepen_rejects_tokcomment_link_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'GITHUB_TOKEN allows lychee to authenticate private GitHub repos' in text
+        path.write_text(text.replace('GITHUB_TOKEN allows lychee to authenticate private GitHub repos', 'GITHUB_TOKEN allows lychee private auth', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'GITHUB_TOKEN allows lychee')
+
+
+def test_workflow_deepen_rejects_private404_link_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'private repos return 404' in text
+        path.write_text(text.replace('private repos return 404', 'private repos return gone', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'private repos return 404')
+
+
+def test_workflow_deepen_rejects_drift_lint_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'Weekly drift catch aligned with link/stewardship schedules' in text
+        path.write_text(text.replace('Weekly drift catch aligned with link/stewardship schedules', 'Weekly drift catch aligned with schedules', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Weekly drift catch')
+
+
+def test_workflow_deepen_rejects_drift_stew_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'Weekly drift catch for badge/wiki/schema/relative-link gates' in text
+        path.write_text(text.replace('Weekly drift catch for badge/wiki/schema/relative-link gates', 'Weekly drift catch for badge gates', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Weekly drift catch commentary')
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -44519,6 +45325,81 @@ def main() -> int:
     test_run_stewardship_rejects_layout_pad5_after_149,
     test_run_stewardship_rejects_layout_pad6_after_149,
     test_run_stewardship_rejects_layout_pad7_after_149,
+
+
+    # TOKENMAXX stewardship CI deepen after #161 (+72)
+    test_workflow_deepen_gate_deepen_doc_after_161,
+    test_workflow_deepen_gate_deepen_doc_still_after_161,
+    test_workflow_deepen_gate_module_deepen_after_161,
+    test_workflow_deepen_gate_module_deepen_still_after_161,
+    test_workflow_deepen_gate_check_links_after_161,
+    test_workflow_deepen_gate_check_links_still_after_161,
+    test_workflow_deepen_gate_run_md_after_161,
+    test_workflow_deepen_gate_run_md_still_after_161,
+    test_workflow_deepen_gate_setup_py_after_161,
+    test_workflow_deepen_gate_setup_py_still_after_161,
+    test_workflow_deepen_gate_install_yaml_after_161,
+    test_workflow_deepen_gate_install_yaml_still_after_161,
+    test_workflow_deepen_gate_stew_gates_after_161,
+    test_workflow_deepen_gate_stew_gates_still_after_161,
+    test_workflow_deepen_gate_stew_self_after_161,
+    test_workflow_deepen_gate_stew_self_still_after_161,
+    test_workflow_deepen_gate_token_exact_after_161,
+    test_workflow_deepen_gate_token_exact_still_after_161,
+    test_workflow_deepen_gate_gh_token_exact_after_161,
+    test_workflow_deepen_gate_gh_token_exact_still_after_161,
+    test_workflow_deepen_gate_exclude_path_after_161,
+    test_workflow_deepen_gate_exclude_path_still_after_161,
+    test_workflow_deepen_gate_globs_after_161,
+    test_workflow_deepen_gate_globs_still_after_161,
+    test_workflow_deepen_gate_agents_path_after_161,
+    test_workflow_deepen_gate_agents_path_still_after_161,
+    test_workflow_deepen_gate_claude_path_after_161,
+    test_workflow_deepen_gate_claude_path_still_after_161,
+    test_workflow_deepen_gate_license_path_after_161,
+    test_workflow_deepen_gate_license_path_still_after_161,
+    test_workflow_deepen_gate_contrib_path_after_161,
+    test_workflow_deepen_gate_contrib_path_still_after_161,
+    test_workflow_deepen_gate_wf_path_after_161,
+    test_workflow_deepen_gate_wf_path_still_after_161,
+    test_workflow_deepen_gate_token_comment_after_161,
+    test_workflow_deepen_gate_token_comment_still_after_161,
+    test_workflow_deepen_gate_private_404_after_161,
+    test_workflow_deepen_gate_private_404_still_after_161,
+    test_workflow_deepen_gate_drift_md_after_161,
+    test_workflow_deepen_gate_drift_md_still_after_161,
+    test_workflow_deepen_gate_drift_stew_after_161,
+    test_workflow_deepen_gate_drift_stew_still_after_161,
+    test_workflow_deepen_gate_reliability_after_161,
+    test_workflow_deepen_gate_reliability_still_after_161,
+    test_workflow_deepen_rejects_check_links_link_pad0_after_161,
+    test_workflow_deepen_rejects_run_md_lint_pad1_after_161,
+    test_workflow_deepen_rejects_setup_py_stew_pad2_after_161,
+    test_workflow_deepen_rejects_install_yaml_stew_pad3_after_161,
+    test_workflow_deepen_rejects_gates_stew_pad4_after_161,
+    test_workflow_deepen_rejects_selftests_stew_pad5_after_161,
+    test_workflow_deepen_rejects_token_link_pad6_after_161,
+    test_workflow_deepen_rejects_ghtoken_link_pad7_after_161,
+    test_workflow_deepen_rejects_exclude_link_pad8_after_161,
+    test_workflow_deepen_rejects_check_links_link_after_161,
+    test_workflow_deepen_rejects_run_md_lint_after_161,
+    test_workflow_deepen_rejects_setup_py_stew_after_161,
+    test_workflow_deepen_rejects_install_yaml_stew_after_161,
+    test_workflow_deepen_rejects_gates_stew_after_161,
+    test_workflow_deepen_rejects_selftests_stew_after_161,
+    test_workflow_deepen_rejects_token_link_after_161,
+    test_workflow_deepen_rejects_ghtoken_link_after_161,
+    test_workflow_deepen_rejects_exclude_link_after_161,
+    test_workflow_deepen_rejects_globs_lint_after_161,
+    test_workflow_deepen_rejects_agents_stew_after_161,
+    test_workflow_deepen_rejects_claude_stew_after_161,
+    test_workflow_deepen_rejects_license_stew_after_161,
+    test_workflow_deepen_rejects_contrib_stew_after_161,
+    test_workflow_deepen_rejects_wfglob_stew_after_161,
+    test_workflow_deepen_rejects_tokcomment_link_after_161,
+    test_workflow_deepen_rejects_private404_link_after_161,
+    test_workflow_deepen_rejects_drift_lint_after_161,
+    test_workflow_deepen_rejects_drift_stew_after_161,
 
     ]
     try:

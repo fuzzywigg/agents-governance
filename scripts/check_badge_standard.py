@@ -134,6 +134,20 @@ leftover #233 / NOT stewardship-badge lint #208):
 - schedule: precedes workflow_dispatch: on all three
 - contiguous shell-less actionlint run step (no invent shell: on run step)
 
+Fail-closed actionlint path-filter/path-order residual leftover after #244
+(NOT saturated residual #244/#225 / NOT saturated deepen #225/#203 /
+NOT #189 path-order / NOT #176 layouts / NOT schema #191/#216 /
+NOT Pass-2 residual #199/#203 / NOT Pass-2 leftover + md/link #220 /
+NOT wiki outline/PUBLISH leftover #243 / NOT md/link residual #239 /
+NOT stewardship-checks/schema leftover #233 / NOT wiki-badge leftover #227 /
+NOT stewardship-badge lint #208):
+- contiguous on:/push: adjacency on all three
+- push: precedes pull_request: on all three
+- reject tags-ignore: invent
+- schedule stays path-unfiltered (no nested paths:)
+- contiguous paths->pull_request adjacency (last path precedes bare PR)
+- reject bare paths-filter: invent (distinct from dorny/paths-filter)
+
 Fail-closed stewardship-checks + schema residual deepen after #225 (NOT wiki-index/badge
 #227 / NOT path-edges #225 / NOT Pass-2 leftover+md/link #220 / NOT schema fourth-pass #216 /
 NOT badge-lint #208 / NOT Pass-2 residual #199/#203 / NOT path-order #189;
@@ -782,6 +796,15 @@ def check_workflow_hardening(errors: list[str]) -> None:
     pull_request type-unfiltered / reject tj-actions/changed-files /
     contiguous four-step actionlint path-order /
     schedule before workflow_dispatch / contiguous shell-less actionlint run step.
+    Path-filter/path-order residual leftover after #244 (NOT saturated residual
+    #244/#225 / NOT saturated deepen #225/#203 / NOT #189 / NOT #176 /
+    NOT schema #191/#216 / NOT Pass-2 residual #199/#203 /
+    NOT Pass-2 leftover + md/link #220 / NOT wiki outline/PUBLISH leftover #243 /
+    NOT md/link residual #239 / NOT stewardship-checks/schema leftover #233 /
+    NOT wiki-badge leftover #227 / NOT stewardship-badge lint #208):
+    contiguous on:/push: adjacency / push: precedes pull_request: /
+    reject tags-ignore: / schedule path-unfiltered /
+    contiguous paths->pull_request adjacency / reject bare paths-filter: invent.
     Markdown-lint/link-check workflow edges after #203 tip (lands closed #202/#192 leftover;
     NOT path-filter / Pass-2 / path-order / schema / badge-lint spam):
     args: >- / externally broken links commentary / without-it private-404 commentary /
@@ -1897,6 +1920,77 @@ def check_workflow_hardening(errors: list[str]) -> None:
             "path-filter/path-order residual deepen after #225)",
             errors,
         )
+
+    # Path-filter/path-order residual leftover after #244 (DISTINCT leftover edges;
+    # NOT saturated residual #244/#225 / NOT saturated deepen #225/#203 /
+    # NOT #189 path-order / NOT #176 layouts / NOT schema #191/#216 /
+    # NOT Pass-2 residual #199/#203 / NOT Pass-2 leftover + md/link #220 /
+    # NOT wiki outline/PUBLISH leftover #243 / NOT md/link residual #239 /
+    # NOT stewardship-checks/schema leftover #233 /
+    # NOT wiki-badge leftover #227 / NOT stewardship-badge lint #208).
+    on_push = "on:\n  push:"
+    paths_pr_needles = {
+        "link-check.yml": (
+            '      - ".github/workflows/link-check.yml"\n  pull_request:'
+        ),
+        "markdown-lint.yml": (
+            '      - ".github/workflows/markdown-lint.yml"\n  pull_request:'
+        ),
+        "stewardship-checks.yml": (
+            '      - ".markdownlint.json"\n  pull_request:'
+        ),
+    }
+    for wf_name, body in (
+        ("link-check.yml", link),
+        ("markdown-lint.yml", lint),
+        ("stewardship-checks.yml", stew),
+    ):
+        if on_push not in body:
+            fail(
+                f"{wf_name} must keep contiguous on:/push: adjacency "
+                "(path-filter/path-order residual leftover after #244)",
+                errors,
+            )
+        push_idx = body.find("  push:")
+        pr_idx = body.find("  pull_request:")
+        if push_idx < 0 or pr_idx < 0 or not (push_idx < pr_idx):
+            fail(
+                f"{wf_name} push: must precede pull_request: "
+                "(path-filter/path-order residual leftover after #244)",
+                errors,
+            )
+        if "tags-ignore:" in body:
+            fail(
+                f"{wf_name} must not invent tags-ignore: "
+                "(path-filter/path-order residual leftover after #244)",
+                errors,
+            )
+        if "paths-filter:" in body:
+            fail(
+                f"{wf_name} must not invent bare paths-filter: "
+                "(distinct from dorny/paths-filter; "
+                "path-filter/path-order residual leftover after #244)",
+                errors,
+            )
+        sched_match = re.search(
+            r"(?m)^  schedule:\s*\n((?:    .*\n)*)",
+            body,
+        )
+        if sched_match and re.search(r"(?m)^    paths:", sched_match.group(1)):
+            fail(
+                f"{wf_name} schedule must stay path-unfiltered "
+                "(no nested paths:; "
+                "path-filter/path-order residual leftover after #244)",
+                errors,
+            )
+        paths_pr = paths_pr_needles[wf_name]
+        if paths_pr not in body:
+            fail(
+                f"{wf_name} must keep contiguous paths->pull_request adjacency "
+                "(last path precedes bare PR; "
+                "path-filter/path-order residual leftover after #244)",
+                errors,
+            )
 
     # Stewardship-checks + schema residual deepen after #225 (DISTINCT leftover;
     # NOT path-edges #225 / NOT Pass-2 leftover+md/link #220 / NOT schema fourth #216 /
@@ -4177,7 +4271,7 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
     """Fail-close live CI workflow hardening wiring (third-pass after #111; deepen after #161;
     path-filter leftovers after #173; path-order leftover after #181;
     path-filter/path-order deepen after #203;
-    path-filter/path-order residual deepen after #225)."""
+    path-filter/path-order residual deepen after #225; path-filter/path-order residual leftover after #244)."""
     text = Path(__file__).read_text(encoding="utf-8")
     # Fail-closed after #111: third-pass helper / constant / needle pins
     # (CI workflow reversible slice only; not badge/wiki/relative/schema/actionlint spam).
@@ -4818,6 +4912,105 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
         ),
     )
     for needle, label in path_residual_225_pins:
+        if needle not in text:
+            fail(
+                "check_workflow_hardening must keep " + label,
+                errors,
+            )
+
+    # Path-filter/path-order residual leftover after #244 (DISTINCT leftover edges).
+    path_leftover_244_doc = "Path-filter/path-order residual leftover after " + "#244"
+    if path_leftover_244_doc not in text:
+        fail(
+            "check_workflow_hardening docstring must pin " + path_leftover_244_doc,
+            errors,
+        )
+    path_module_leftover_244 = "path-filter/path-order residual leftover after " + "#244"
+    if path_module_leftover_244 not in text:
+        fail(
+            "check_badge_standard.py module docstring must pin "
+            + path_module_leftover_244,
+            errors,
+        )
+    not_saturated_244 = "NOT saturated residual " + "#244"
+    if not_saturated_244 not in text:
+        fail(
+            "path leftover must keep " + not_saturated_244 + " distinctness pin",
+            errors,
+        )
+    not_residual_225 = "NOT saturated residual " + "#244/#225"
+    if not_residual_225 not in text:
+        fail(
+            "path leftover must keep " + not_residual_225 + " distinctness pin",
+            errors,
+        )
+    not_189_path_order_244 = "NOT " + "#189"
+    if not_189_path_order_244 not in text:
+        fail(
+            "path leftover must keep " + not_189_path_order_244 + " distinctness pin",
+            errors,
+        )
+    not_176_layouts_244 = "NOT " + "#176"
+    if not_176_layouts_244 not in text:
+        fail(
+            "path leftover must keep " + not_176_layouts_244 + " distinctness pin",
+            errors,
+        )
+    not_schema_191_216_244 = "NOT schema " + "#191/#216"
+    if not_schema_191_216_244 not in text:
+        fail(
+            "path leftover must keep " + not_schema_191_216_244 + " distinctness pin",
+            errors,
+        )
+    not_pass2_spaces_220_244 = "NOT Pass-2 leftover + " + "md/link #220"
+    if not_pass2_spaces_220_244 not in text:
+        fail(
+            "path leftover must keep " + not_pass2_spaces_220_244 + " distinctness pin",
+            errors,
+        )
+    not_wiki_243 = "NOT wiki outline/PUBLISH leftover " + "#243"
+    if not_wiki_243 not in text:
+        fail(
+            "path leftover must keep " + not_wiki_243 + " distinctness pin",
+            errors,
+        )
+    not_stew_schema_233_244 = "NOT stewardship-checks/schema leftover " + "#233"
+    if not_stew_schema_233_244 not in text:
+        fail(
+            "path leftover must keep " + not_stew_schema_233_244 + " distinctness pin",
+            errors,
+        )
+    path_leftover_244_pins = (
+        (
+            "contiguous on:/push: " + "adjacency",
+            "on/push adjacency fail needle",
+        ),
+        (
+            "push: must precede " + "pull_request:",
+            "push-before-PR fail needle",
+        ),
+        (
+            "must not invent tags-" + "ignore:",
+            "tags-ignore invent reject needle",
+        ),
+        (
+            "schedule must stay path-" + "unfiltered",
+            "schedule path-unfiltered fail needle",
+        ),
+        (
+            "contiguous paths->pull_request " + "adjacency",
+            "paths->PR adjacency fail needle",
+        ),
+        (
+            "must not invent bare paths-" + "filter:",
+            "bare paths-filter invent reject needle",
+        ),
+        (
+            "path-filter/path-order residual leftover after " + "#244",
+            "path leftover-after-244 wording pin",
+        ),
+    )
+    for needle, label in path_leftover_244_pins:
         if needle not in text:
             fail(
                 "check_workflow_hardening must keep " + label,

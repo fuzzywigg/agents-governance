@@ -832,3 +832,9 @@ _None yet._
 2026-09-14T09:02:00Z cursor: Local green — run_stewardship + self-tests 5016 + markdownlint ← ECO-077 Pass-2 residual leftover + existing templates/AGENTS-REPO.md after #244 (leave draft; do not revive #246/#245/#240)
 
 2026-09-14T09:05:00Z cursor: Closed #250 RED — link-check flake GitHub 503 on same-repo blob/main wiki URLs (not leftover content regression); open fresh draft on tip without reviving #250/#246/#245/#240 ← ECO-077
+
+2026-09-14T09:09:40Z cursor: Closed #251 RED — link-check flake GitHub 503 on same-repo blob/main wiki URLs again (stewardship+lint green; not leftover content regression); open fresh draft on tip without reviving #251/#250/#246/#245/#240 ← ECO-077
+
+2026-09-14T09:22:00Z cursor: Retry ECO-077 on post-#244 tip — branch cursor/tokenmaxx-pass2-residual-templates-after-244-1979; Pass-2 residual + existing templates/AGENTS-REPO.md leftover only; do not revive #251/#250/#246/#245/#240; do not redo #244 path-edges / #243 wiki/PUBLISH / #239 md/link / #252 wiki-mdlink sibling
+
+2026-09-14T09:30:00Z cursor: Local green — run_stewardship + self-tests 5016 + markdownlint ← ECO-077 Pass-2 residual leftover + existing templates/AGENTS-REPO.md after #244 (leave draft; do not revive #251/#250/#246/#245/#240)

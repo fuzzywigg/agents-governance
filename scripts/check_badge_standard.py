@@ -211,8 +211,7 @@ NOT Pass-2 residual #199/#203 / NOT badge-lint #208 / NOT schema #216 /
 NOT path-order #189 / NOT md/link residual #239 /
 NOT wiki outline/PUBLISH leftover #243 /
 NOT actionlint path-filter/path-order residual #244;
-lands closed #251/#250/#246/#245/#240 leftover on post-#258 tip; do not invent new templates):
-- soft-fail with || : / soft-fail with || return 0 on run_stewardship_checks.sh
+lands closed #251/#250/#246/#245/#240 leftover on post-#258 tip; do not invent new templates):- soft-fail with || : / soft-fail with || return 0 on run_stewardship_checks.sh
 - set +o errexit / set +o nounset soft-fail refuse
 - invent python3 -m for gates refuse
 - must not source env files / must not dot-source paths

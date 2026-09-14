@@ -105,6 +105,11 @@ NOT run_stewardship residual #199; residual uncovered only):
 - exact live link-check push paths filter (.lycheeignore + self path)
 - missing badge fixtures for invent svg / wrong badge.svg / glob+paths drift
 
+Fail-closed markdown-lint/link-check workflow edges after #189 (markdown-lint/link-check edges after #189):
+- args: >- / externally-broken-links commentary / without-it private-404 line /
+  reject continue-on-error / exact job permissions / checkout adjacency
+  (not path-filter / Pass-2 / wiki-index / schema / path-order / badge-lint spam)
+
 """
 
 from __future__ import annotations
@@ -682,6 +687,10 @@ def check_workflow_hardening(errors: list[str]) -> None:
     contiguous three-path actionlint order / exact bash <(curl -fsSL) download /
     no continue-on-error: true / Download actionlint + actionlint existing
     workflow paths step names / path-order leftover docstring.
+    Markdown-lint/link-check workflow edges after #189: args: >- /
+    externally-broken-links commentary / without-it private-404 line /
+    reject continue-on-error / exact job permissions / checkout adjacency
+    (not path-filter / Pass-2 / wiki-index / schema / path-order / badge-lint spam).
     """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
@@ -1603,6 +1612,69 @@ def check_workflow_hardening(errors: list[str]) -> None:
             "stewardship-checks.yml must keep step name: "
             "actionlint existing workflow paths "
             "(actionlint path-order leftover)",
+            errors,
+        )
+
+
+
+    # Fail-closed after #189: markdown-lint / link-check workflow edges
+    # (distinct from path-filter #176 / Pass-2 #179 / wiki-index #181 /
+    # schema / path-order #189 spam).
+    if "args: >-" not in link:
+        fail(
+            "link-check.yml must keep multiline args: >- form",
+            errors,
+        )
+    if "Run weekly to catch externally broken links" not in link:
+        fail(
+            "link-check.yml must keep externally broken links commentary",
+            errors,
+        )
+    without_it = "without it, private repos return 404 and fail the check"
+    if without_it not in link:
+        fail(
+            "link-check.yml must keep without-it private-404 commentary",
+            errors,
+        )
+    if "continue-on-error:" in link:
+        fail(
+            "link-check.yml must not set continue-on-error "
+            "(markdown-lint/link-check edges after #189)",
+            errors,
+        )
+    if "continue-on-error:" in lint:
+        fail(
+            "markdown-lint.yml must not set continue-on-error "
+            "(markdown-lint/link-check edges after #189)",
+            errors,
+        )
+    job_perms = "    permissions:" + "\n" + "      contents: read"
+    if job_perms not in link:
+        fail(
+            "link-check.yml must keep exact job permissions: contents: read",
+            errors,
+        )
+    if job_perms not in lint:
+        fail(
+            "markdown-lint.yml must keep exact job permissions: contents: read",
+            errors,
+        )
+    link_checkout_adj = (
+        "      - uses: actions/checkout@v7" + "\n"
+        "      - name: Check links"
+    )
+    if link_checkout_adj not in link:
+        fail(
+            "link-check.yml must keep checkout before Check links adjacency",
+            errors,
+        )
+    lint_checkout_adj = (
+        "      - uses: actions/checkout@v7" + "\n"
+        "      - name: Run markdownlint"
+    )
+    if lint_checkout_adj not in lint:
+        fail(
+            "markdown-lint.yml must keep checkout before Run markdownlint adjacency",
             errors,
         )
 
@@ -3468,7 +3540,8 @@ def check_actionlint_style_gate_contract(errors: list[str]) -> None:
 
 def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
     """Fail-close live CI workflow hardening wiring (third-pass after #111; deepen after #161;
-    path-filter leftovers after #173; path-order leftover after #181)."""
+    path-filter leftovers after #173; path-order leftover after #181;
+    markdown-lint/link-check edges after #189)."""
     text = Path(__file__).read_text(encoding="utf-8")
     # Fail-closed after #111: third-pass helper / constant / needle pins
     # (CI workflow reversible slice only; not badge/wiki/relative/schema/actionlint spam).
@@ -3820,6 +3893,57 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
                 "check_workflow_hardening must keep " + label,
                 errors,
             )
+
+
+
+    # Fail-closed after #189: markdown-lint / link-check workflow edge pins
+    # (not path-filter / Pass-2 / wiki-index / schema / path-order spam).
+    edge_doc = "Markdown-lint/link-check workflow edges after " + "#189"
+    if edge_doc not in text:
+        fail(
+            "check_workflow_hardening docstring must pin " + edge_doc,
+            errors,
+        )
+    module_edge = "markdown-lint/link-check edges after " + "#189"
+    if module_edge not in text:
+        fail(
+            "check_badge_standard.py must pin " + module_edge,
+            errors,
+        )
+    edge_pins = (
+        ("args: " + ">-", "lychee args multiline form pin"),
+        (
+            "externally broken links " + "commentary",
+            "link-check externally-broken commentary pin",
+        ),
+        (
+            "without-it private-404 " + "commentary",
+            "link-check without-it private-404 pin",
+        ),
+        (
+            "must not set continue-on-" + "error",
+            "continue-on-error reject pin",
+        ),
+        (
+            "exact job permissions: contents: " + "read",
+            "job permissions exact pin",
+        ),
+        (
+            "checkout before Check links " + "adjacency",
+            "link-check checkout adjacency pin",
+        ),
+        (
+            "checkout before Run markdownlint " + "adjacency",
+            "markdown-lint checkout adjacency pin",
+        ),
+    )
+    for needle, label in edge_pins:
+        if needle not in text:
+            fail(
+                "check_workflow_hardening must keep " + label,
+                errors,
+            )
+
 
 
     fn_pin = "def check_workflow_hardening" + "("

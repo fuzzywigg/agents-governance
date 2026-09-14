@@ -130,6 +130,11 @@ Deepened after #132: docs-lint second-pass — exact live exclude URLs +
 Connection-reset/RST/false-positive/early-hints commentary + exact
 markdownlint layout/key-set/json.loads pins (not CI workflow / actionlint /
 stewardship_common / run_stewardship / badge / wiki / relative spam).
+Deepened after #165: overnight stewardship/CI/schema/wiki fixture deepen —
+residual schema/wiki/relative/common/badge policy fixtures only (not
+actionlint / docs-lint / stewardship-CI pin / path-filter / schema-third-pass
+pin spam). Lands closed #167 leftover on post-#165 main (do not revive
+#167/#168/#169).
 """
 
 from __future__ import annotations
@@ -42203,6 +42208,1880 @@ def test_workflow_deepen_rejects_drift_stew_after_161() -> None:
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Weekly drift catch commentary')
 
 
+# --- TOKENMAXX overnight stewardship/CI/schema/wiki fixture deepen after #165 (residual policy fixtures) ---
+
+def test_schema_rejects_bool_autonomy_agents_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: true\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "autonomy_level must be int in 0..3",
+        )
+
+def test_schema_rejects_bool_autonomy_agents_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: true\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "autonomy_level must be int in 0..3",
+        )
+
+def test_schema_rejects_bool_tier_badge_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: true\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "tier must be a positive int",
+        )
+
+def test_schema_rejects_bool_tier_badge_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: true\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "tier must be a positive int",
+        )
+
+def test_schema_rejects_nested_edit_policy_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy:\n  invent: no\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "scalar",
+        )
+
+def test_schema_rejects_nested_edit_policy_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy:\n  invent: no\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "scalar",
+        )
+
+def test_schema_rejects_list_scope_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope:\n  - front-door\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "scalar",
+        )
+
+def test_schema_rejects_list_scope_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope:\n  - front-door\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "scalar",
+        )
+
+def test_schema_rejects_int_owner_string_key_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: 42\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "must be a string",
+        )
+
+def test_schema_rejects_int_owner_string_key_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: 42\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "must be a string",
+        )
+
+def test_schema_rejects_edit_policy_without_invent_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"keep badges stable\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "no-invent-product wording",
+        )
+
+def test_schema_rejects_edit_policy_without_invent_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"keep badges stable\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "no-invent-product wording",
+        )
+
+def test_schema_rejects_draft_status_badge_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: DRAFT\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "status must be ACTIVE",
+        )
+
+def test_schema_rejects_draft_status_badge_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: DRAFT\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "status must be ACTIVE",
+        )
+
+def test_schema_rejects_wrong_parent_governance_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/example/other\n"
+                "autonomy_level: 1\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "parent_governance",
+        )
+
+def test_schema_rejects_wrong_parent_governance_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/example/other\n"
+                "autonomy_level: 1\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "parent_governance",
+        )
+
+def test_schema_rejects_wrong_surface_claude_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=(
+                "# CLAUDE\n\n```yaml\nrepo: agents-governance\n"
+                "owner: \"fuzzywigg (smtp.eth)\"\nsurface: geryon\n"
+                "autonomy_level: 1\nlast_updated: \"2026-04-13\"\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "surface",
+        )
+
+def test_schema_rejects_wrong_surface_claude_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=(
+                "# CLAUDE\n\n```yaml\nrepo: agents-governance\n"
+                "owner: \"fuzzywigg (smtp.eth)\"\nsurface: geryon\n"
+                "autonomy_level: 1\nlast_updated: \"2026-04-13\"\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "surface",
+        )
+
+def test_schema_rejects_closes_without_issue_ref_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=(
+                "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
+                "purpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\n"
+                "closes: \"soon\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "closes must reference an issue",
+        )
+
+def test_schema_rejects_closes_without_issue_ref_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=(
+                "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
+                "purpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\n"
+                "closes: \"soon\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "closes must reference an issue",
+        )
+
+def test_schema_rejects_semver_prerelease_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0-rc1\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "semver",
+        )
+
+def test_schema_rejects_semver_prerelease_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0-rc1\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "semver",
+        )
+
+def test_schema_rejects_bad_iso_created_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"13-09-2026\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "ISO-8601",
+        )
+
+def test_schema_rejects_bad_iso_created_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"13-09-2026\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "ISO-8601",
+        )
+
+def test_schema_rejects_empty_purpose_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=(
+                "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
+                "purpose: \"\"\ncloses: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "non-empty",
+        )
+
+def test_schema_rejects_empty_purpose_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            publish=(
+                "# P\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
+                "purpose: \"\"\ncloses: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "non-empty",
+        )
+
+def test_schema_rejects_autonomy_out_of_range_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 4\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "0..3",
+        )
+
+def test_schema_rejects_autonomy_out_of_range_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 4\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "0..3",
+        )
+
+def test_schema_rejects_tier_zero_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 0\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "positive int",
+        )
+
+def test_schema_rejects_tier_zero_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 0\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: \"public governance front-door repos\"\n"
+                "edit_policy: \"do not invent product badges\"\n"
+                "closes: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "positive int",
+        )
+
+def test_schema_rejects_wrong_maintainer_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: other.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "maintainer",
+        )
+
+def test_schema_rejects_wrong_maintainer_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: other.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "maintainer",
+        )
+
+def test_schema_rejects_wrong_agents_scope_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: ecosystem-wide\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "scope",
+        )
+
+def test_schema_rejects_wrong_agents_scope_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: ecosystem-wide\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "scope",
+        )
+
+def test_schema_rejects_empty_yaml_agents_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents="# AGENTS\n\n```yaml\n\n```\n",
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "empty yaml",
+        )
+
+def test_schema_rejects_empty_yaml_agents_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents="# AGENTS\n\n```yaml\n\n```\n",
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "empty yaml",
+        )
+
+def test_schema_rejects_wrong_backlog_owner_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=(
+                "# I\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: human\nedit_policy: x\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "owner",
+        )
+
+def test_schema_rejects_wrong_backlog_owner_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=(
+                "# I\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: human\nedit_policy: x\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "owner",
+        )
+
+def test_schema_rejects_wrong_claude_repo_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=(
+                "# CLAUDE\n\n```yaml\nrepo: other-repo\n"
+                "owner: \"fuzzywigg (smtp.eth)\"\nsurface: copilot\n"
+                "autonomy_level: 1\nlast_updated: \"2026-04-13\"\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "repo",
+        )
+
+def test_schema_rejects_wrong_claude_repo_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=(
+                "# CLAUDE\n\n```yaml\nrepo: other-repo\n"
+                "owner: \"fuzzywigg (smtp.eth)\"\nsurface: copilot\n"
+                "autonomy_level: 1\nlast_updated: \"2026-04-13\"\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "repo",
+        )
+
+def test_wiki_rejects_unexpected_extra_page_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_wiki_tree(tmp_path, extra_pages=("Invented-Page.md",))
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "Unexpected markdown",
+        )
+
+def test_wiki_rejects_unexpected_extra_page_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_wiki_tree(tmp_path, extra_pages=("Invented-Page.md",))
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "Unexpected markdown",
+        )
+
+def test_wiki_rejects_missing_kill_callout_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Home.md"] = pages["Home.md"].replace("Kill switch", "Write lock")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "kill-switch",
+        )
+
+def test_wiki_rejects_missing_kill_callout_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Home.md"] = pages["Home.md"].replace("Kill switch", "Write lock")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "kill-switch",
+        )
+
+def test_wiki_rejects_missing_invent_oos_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Home.md"] = pages["Home.md"].replace("invent product", "external tooling")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "invent-product",
+        )
+
+def test_wiki_rejects_missing_invent_oos_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Home.md"] = pages["Home.md"].replace("invent product", "external tooling")
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "invent-product",
+        )
+
+def test_wiki_rejects_producthunt_chrome_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Overview.md"] = (
+                "# O\n\n[Home](Home.md)\n\ngovernance public\n"
+                "See producthunt badge chrome.\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "invent-product / social badge chrome",
+        )
+
+def test_wiki_rejects_producthunt_chrome_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Overview.md"] = (
+                "# O\n\n[Home](Home.md)\n\ngovernance public\n"
+                "See producthunt badge chrome.\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "invent-product / social badge chrome",
+        )
+
+def test_wiki_rejects_buymeacoffee_chrome_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Overview.md"] = (
+                "# O\n\n[Home](Home.md)\n\ngovernance public\n"
+                "[![x](https://img.shields.io/badge/buymeacoffee-x)](https://example.com)\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "invent-product / social badge chrome",
+        )
+
+def test_wiki_rejects_buymeacoffee_chrome_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Overview.md"] = (
+                "# O\n\n[Home](Home.md)\n\ngovernance public\n"
+                "[![x](https://img.shields.io/badge/buymeacoffee-x)](https://example.com)\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "invent-product / social badge chrome",
+        )
+
+def test_wiki_rejects_missing_credential_topic_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Security-Boundaries.md"] = (
+                "# S\n\n[Home](Home.md)\n\nkill switch secret only\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "credential",
+        )
+
+def test_wiki_rejects_missing_credential_topic_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Security-Boundaries.md"] = (
+                "# S\n\n[Home](Home.md)\n\nkill switch secret only\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "credential",
+        )
+
+def test_wiki_rejects_stewardship_badge_svg_invent_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Repo-Stewardship.md"] = pages["Repo-Stewardship.md"] + (
+                "\n![Stewardship](https://github.com/fuzzywigg/agents-governance/"
+                "actions/workflows/stewardship-checks.yml/badge.svg)\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "stewardship-checks.yml/badge.svg",
+        )
+
+def test_wiki_rejects_stewardship_badge_svg_invent_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Repo-Stewardship.md"] = pages["Repo-Stewardship.md"] + (
+                "\n![Stewardship](https://github.com/fuzzywigg/agents-governance/"
+                "actions/workflows/stewardship-checks.yml/badge.svg)\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "stewardship-checks.yml/badge.svg",
+        )
+
+def test_wiki_rejects_badge_embed_on_overview_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Overview.md"] = (
+                "# O\n\n[Home](Home.md)\n\ngovernance public\n"
+                "[![Link Check](https://github.com/x/actions/workflows/link-check.yml/badge.svg)]"
+                "(https://github.com/x)\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "must not embed markdown badge images",
+        )
+
+def test_wiki_rejects_badge_embed_on_overview_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Overview.md"] = (
+                "# O\n\n[Home](Home.md)\n\ngovernance public\n"
+                "[![Link Check](https://github.com/x/actions/workflows/link-check.yml/badge.svg)]"
+                "(https://github.com/x)\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "must not embed markdown badge images",
+        )
+
+def test_wiki_rejects_http_insecure_link_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Overview.md"] = (
+                "# O\n\n[Home](Home.md)\n\ngovernance public\n"
+                "[docs](http://example.com/docs)\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "http://",
+        )
+
+def test_wiki_rejects_http_insecure_link_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Overview.md"] = (
+                "# O\n\n[Home](Home.md)\n\ngovernance public\n"
+                "[docs](http://example.com/docs)\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "http://",
+        )
+
+def test_wiki_rejects_javascript_scheme_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Overview.md"] = (
+                "# O\n\n[Home](Home.md)\n\ngovernance public\n"
+                "[x](javascript:alert(1))\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "dangerous link scheme",
+        )
+
+def test_wiki_rejects_javascript_scheme_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Overview.md"] = (
+                "# O\n\n[Home](Home.md)\n\ngovernance public\n"
+                "[x](javascript:alert(1))\n"
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "dangerous link scheme",
+        )
+
+def test_wiki_rejects_missing_home_backlink_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Agent-Routing.md"] = "# R\n\nsurface routing copilot\n"
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "Home.md",
+        )
+
+def test_wiki_rejects_missing_home_backlink_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["Agent-Routing.md"] = "# R\n\nsurface routing copilot\n"
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "Home.md",
+        )
+
+def test_wiki_rejects_missing_publish_table_row_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace(
+                "| `Security-Boundaries.md` | Security-Boundaries |\n",
+                "",
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "Security-Boundaries.md",
+        )
+
+def test_wiki_rejects_missing_publish_table_row_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace(
+                "| `Security-Boundaries.md` | Security-Boundaries |\n",
+                "",
+            )
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            "Security-Boundaries.md",
+        )
+
+def test_relative_rejects_nul_in_target_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](foo%00bar.md)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "NUL",
+        )
+
+def test_relative_rejects_nul_in_target_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](foo%00bar.md)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "NUL",
+        )
+
+def test_relative_rejects_query_string_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](docs/a.md?x=1)\n")
+        _write(tmp_path / "docs" / "a.md", "# A\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "query string",
+        )
+
+def test_relative_rejects_query_string_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](docs/a.md?x=1)\n")
+        _write(tmp_path / "docs" / "a.md", "# A\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "query string",
+        )
+
+def test_relative_rejects_empty_path_fragment_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](README.md#)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "empty fragment",
+        )
+
+def test_relative_rejects_empty_path_fragment_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](README.md#)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "empty fragment",
+        )
+
+def test_relative_rejects_vbscript_casefold_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](VbScript:msgbox(1))\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "dangerous link scheme",
+        )
+
+def test_relative_rejects_vbscript_casefold_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](VbScript:msgbox(1))\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "dangerous link scheme",
+        )
+
+def test_relative_rejects_file_scheme_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](file:///etc/passwd)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "dangerous link scheme",
+        )
+
+def test_relative_rejects_file_scheme_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](file:///etc/passwd)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "dangerous link scheme",
+        )
+
+def test_relative_rejects_javascript_casefold_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](JavaScript:alert(1))\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "dangerous link scheme",
+        )
+
+def test_relative_rejects_javascript_casefold_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](JavaScript:alert(1))\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "dangerous link scheme",
+        )
+
+def test_relative_rejects_nested_pct_escape_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](%252e%252e/etc/passwd)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "escapes repo",
+        )
+
+def test_relative_rejects_nested_pct_escape_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](%252e%252e/etc/passwd)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "escapes repo",
+        )
+
+def test_relative_rejects_protocol_relative_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](//evil.example/path)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "protocol-relative",
+        )
+
+def test_relative_rejects_protocol_relative_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](//evil.example/path)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "protocol-relative",
+        )
+
+def test_relative_rejects_broken_nested_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](docs/missing.md)\n")
+        (tmp_path / "docs").mkdir(parents=True, exist_ok=True)
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "broken relative link",
+        )
+
+def test_relative_rejects_broken_nested_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# T\n\n[x](docs/missing.md)\n")
+        (tmp_path / "docs").mkdir(parents=True, exist_ok=True)
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "broken relative link",
+        )
+
+def test_relative_rejects_missing_heading_frag_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# Title\n\n[x](#no-such-heading)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "missing heading",
+        )
+
+def test_relative_rejects_missing_heading_frag_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# Title\n\n[x](#no-such-heading)\n")
+        assert_fail_script(
+            scripts / "check_relative_links.py",
+            tmp_path,
+            "missing heading",
+        )
+
+def test_common_rejects_ghr_token_scan_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n\n"
+                "token ghr_abcdefghijklmnopqrstuv\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "secret-like",
+        )
+
+def test_common_rejects_ghr_token_scan_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n\n"
+                "token ghr_abcdefghijklmnopqrstuv\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "secret-like",
+        )
+
+def test_common_rejects_AIza_scan_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n\n"
+                "key AIzaSyA-abcdefghijklmnopqrstuvw\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "secret-like",
+        )
+
+def test_common_rejects_AIza_scan_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n\n"
+                "key AIzaSyA-abcdefghijklmnopqrstuvw\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "secret-like",
+        )
+
+def test_common_rejects_npm_token_scan_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n\n"
+                "npm_abcdefghijklmnopqrstuvwx\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "secret-like",
+        )
+
+def test_common_rejects_npm_token_scan_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n\n"
+                "npm_abcdefghijklmnopqrstuvwx\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "secret-like",
+        )
+
+def test_common_rejects_aws_secret_scan_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n\n"
+                'aws_secret_access_key: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"\n'
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "secret-like",
+        )
+
+def test_common_rejects_aws_secret_scan_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n\n"
+                'aws_secret_access_key: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"\n'
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "secret-like",
+        )
+
+def test_common_rejects_openssh_private_key_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n\n"
+                "-----BEGIN OPENSSH PRIVATE KEY-----\n"
+                "AAAA\n-----END OPENSSH PRIVATE KEY-----\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "secret-like",
+        )
+
+def test_common_rejects_openssh_private_key_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n\n"
+                "-----BEGIN OPENSSH PRIVATE KEY-----\n"
+                "AAAA\n-----END OPENSSH PRIVATE KEY-----\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "secret-like",
+        )
+
+def test_common_rejects_client_secret_url_hint_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n\n"
+                "https://example.com/oauth?client_secret=abc123xyz\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "secret-like URL hint",
+        )
+
+def test_common_rejects_client_secret_url_hint_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-04-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\n"
+                "autonomy_level: 1\n```\n\n"
+                "https://example.com/oauth?client_secret=abc123xyz\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            "secret-like URL hint",
+        )
+
+def test_common_forbidden_hint_producthunt_membership_after_165() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    from stewardship_common import FORBIDDEN_BADGE_HINTS  # noqa: E402
+
+    if "producthunt" not in FORBIDDEN_BADGE_HINTS:
+        raise AssertionError("FORBIDDEN_BADGE_HINTS missing producthunt")
+
+def test_common_forbidden_hint_producthunt_membership_still_after_165() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    from stewardship_common import FORBIDDEN_BADGE_HINTS  # noqa: E402
+
+    if "producthunt" not in FORBIDDEN_BADGE_HINTS:
+        raise AssertionError("FORBIDDEN_BADGE_HINTS missing producthunt")
+
+def test_common_forbidden_hint_buymeacoffee_membership_after_165() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    from stewardship_common import FORBIDDEN_BADGE_HINTS  # noqa: E402
+
+    if "buymeacoffee" not in FORBIDDEN_BADGE_HINTS:
+        raise AssertionError("FORBIDDEN_BADGE_HINTS missing buymeacoffee")
+
+def test_common_forbidden_hint_buymeacoffee_membership_still_after_165() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    from stewardship_common import FORBIDDEN_BADGE_HINTS  # noqa: E402
+
+    if "buymeacoffee" not in FORBIDDEN_BADGE_HINTS:
+        raise AssertionError("FORBIDDEN_BADGE_HINTS missing buymeacoffee")
+
+def test_common_dangerous_scheme_vbscript_membership_after_165() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    from stewardship_common import DANGEROUS_LINK_SCHEMES  # noqa: E402
+
+    if "vbscript:" not in DANGEROUS_LINK_SCHEMES:
+        raise AssertionError("DANGEROUS_LINK_SCHEMES missing vbscript:")
+
+def test_common_dangerous_scheme_vbscript_membership_still_after_165() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    from stewardship_common import DANGEROUS_LINK_SCHEMES  # noqa: E402
+
+    if "vbscript:" not in DANGEROUS_LINK_SCHEMES:
+        raise AssertionError("DANGEROUS_LINK_SCHEMES missing vbscript:")
+
+def test_common_dangerous_scheme_file_membership_after_165() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    from stewardship_common import DANGEROUS_LINK_SCHEMES  # noqa: E402
+
+    if "file:" not in DANGEROUS_LINK_SCHEMES:
+        raise AssertionError("DANGEROUS_LINK_SCHEMES missing file:")
+
+def test_common_dangerous_scheme_file_membership_still_after_165() -> None:
+    sys.path.insert(0, str(SCRIPTS))
+    from stewardship_common import DANGEROUS_LINK_SCHEMES  # noqa: E402
+
+    if "file:" not in DANGEROUS_LINK_SCHEMES:
+        raise AssertionError("DANGEROUS_LINK_SCHEMES missing file:")
+
+def test_badge_rejects_fourth_stewardship_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = _good_readme() + (
+            "[![Stewardship Checks](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/stewardship-checks.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/stewardship-checks.yml)\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Stewardship product/status badge",
+        )
+
+def test_badge_rejects_fourth_stewardship_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = _good_readme() + (
+            "[![Stewardship Checks](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/stewardship-checks.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/stewardship-checks.yml)\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Stewardship product/status badge",
+        )
+
+def test_badge_rejects_coverage_hint_in_row_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = (
+            "# agents-governance\n\n"
+            "[![Link Check](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/link-check.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+            "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/markdown-lint.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+            "[![coverage](https://img.shields.io/badge/coverage-100-green)](LICENSE)\n\n"
+            "See [docs/badge-standard.md](docs/badge-standard.md).\n"
+            "Run `bash scripts/run_stewardship_checks.sh`.\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Forbidden invent-product",
+        )
+
+def test_badge_rejects_coverage_hint_in_row_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = (
+            "# agents-governance\n\n"
+            "[![Link Check](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/link-check.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+            "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/markdown-lint.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+            "[![coverage](https://img.shields.io/badge/coverage-100-green)](LICENSE)\n\n"
+            "See [docs/badge-standard.md](docs/badge-standard.md).\n"
+            "Run `bash scripts/run_stewardship_checks.sh`.\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Forbidden invent-product",
+        )
+
+def test_badge_rejects_wrong_order_license_first_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(
+            tmp_path,
+            _good_readme(("License", "Link Check", "Markdown Lint")),
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Badge labels must be in order",
+        )
+
+def test_badge_rejects_wrong_order_license_first_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(
+            tmp_path,
+            _good_readme(("License", "Link Check", "Markdown Lint")),
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Badge labels must be in order",
+        )
+
+def test_badge_rejects_stars_hint_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = (
+            "# agents-governance\n\n"
+            "[![Link Check](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/link-check.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+            "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/markdown-lint.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+            "[![stars](https://img.shields.io/github/stars/fuzzywigg/agents-governance)](LICENSE)\n\n"
+            "See [docs/badge-standard.md](docs/badge-standard.md).\n"
+            "Run `bash scripts/run_stewardship_checks.sh`.\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Forbidden invent-product",
+        )
+
+def test_badge_rejects_stars_hint_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = (
+            "# agents-governance\n\n"
+            "[![Link Check](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/link-check.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+            "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/markdown-lint.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+            "[![stars](https://img.shields.io/github/stars/fuzzywigg/agents-governance)](LICENSE)\n\n"
+            "See [docs/badge-standard.md](docs/badge-standard.md).\n"
+            "Run `bash scripts/run_stewardship_checks.sh`.\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Forbidden invent-product",
+        )
+
+def test_badge_rejects_http_image_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = (
+            "# agents-governance\n\n"
+            "[![Link Check](http://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/link-check.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+            "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/markdown-lint.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+            "[![License](https://img.shields.io/github/license/fuzzywigg/agents-governance)]"
+            "(LICENSE)\n\n"
+            "See [docs/badge-standard.md](docs/badge-standard.md).\n"
+            "Run `bash scripts/run_stewardship_checks.sh`.\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "must be https://",
+        )
+
+def test_badge_rejects_http_image_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = (
+            "# agents-governance\n\n"
+            "[![Link Check](http://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/link-check.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+            "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/markdown-lint.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+            "[![License](https://img.shields.io/github/license/fuzzywigg/agents-governance)]"
+            "(LICENSE)\n\n"
+            "See [docs/badge-standard.md](docs/badge-standard.md).\n"
+            "Run `bash scripts/run_stewardship_checks.sh`.\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "must be https://",
+        )
+
+def test_badge_rejects_secret_token_url_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = (
+            "# agents-governance\n\n"
+            "[![Link Check](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/link-check.yml/badge.svg?token=abc)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+            "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/markdown-lint.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+            "[![License](https://img.shields.io/github/license/fuzzywigg/agents-governance)]"
+            "(LICENSE)\n\n"
+            "See [docs/badge-standard.md](docs/badge-standard.md).\n"
+            "Run `bash scripts/run_stewardship_checks.sh`.\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "secret-like",
+        )
+
+def test_badge_rejects_secret_token_url_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        readme = (
+            "# agents-governance\n\n"
+            "[![Link Check](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/link-check.yml/badge.svg?token=abc)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+            "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/"
+            "actions/workflows/markdown-lint.yml/badge.svg)]"
+            "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+            "[![License](https://img.shields.io/github/license/fuzzywigg/agents-governance)]"
+            "(LICENSE)\n\n"
+            "See [docs/badge-standard.md](docs/badge-standard.md).\n"
+            "Run `bash scripts/run_stewardship_checks.sh`.\n"
+        )
+        scripts = _seed_badge_tree(tmp_path, readme)
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "secret-like",
+        )
+
+def test_schema_passes_good_seed_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(tmp_path)
+        assert_pass_script(scripts / "check_stewardship_schema.py", tmp_path)
+
+def test_schema_passes_good_seed_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(tmp_path)
+        assert_pass_script(scripts / "check_stewardship_schema.py", tmp_path)
+
+def test_wiki_passes_good_seed_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_wiki_tree(tmp_path)
+        assert_pass_script(scripts / "check_wiki_outline.py", tmp_path)
+
+def test_wiki_passes_good_seed_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_wiki_tree(tmp_path)
+        assert_pass_script(scripts / "check_wiki_outline.py", tmp_path)
+
+def test_badge_passes_good_seed_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+def test_badge_passes_good_seed_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+def test_relative_passes_valid_fragment_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# Title\n\n[x](#title)\n")
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
+def test_relative_passes_valid_fragment_still_after_165() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_scripts(tmp_path, "check_relative_links.py")
+        _write(tmp_path / "README.md", "# Title\n\n[x](#title)\n")
+        assert_pass_script(scripts / "check_relative_links.py", tmp_path)
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -45400,6 +47279,133 @@ def main() -> int:
     test_workflow_deepen_rejects_private404_link_after_161,
     test_workflow_deepen_rejects_drift_lint_after_161,
     test_workflow_deepen_rejects_drift_stew_after_161,
+
+    # TOKENMAXX overnight stewardship/CI/schema/wiki fixture deepen after #165 (+124)
+    test_schema_rejects_bool_autonomy_agents_after_165,
+    test_schema_rejects_bool_autonomy_agents_still_after_165,
+    test_schema_rejects_bool_tier_badge_after_165,
+    test_schema_rejects_bool_tier_badge_still_after_165,
+    test_schema_rejects_nested_edit_policy_after_165,
+    test_schema_rejects_nested_edit_policy_still_after_165,
+    test_schema_rejects_list_scope_after_165,
+    test_schema_rejects_list_scope_still_after_165,
+    test_schema_rejects_int_owner_string_key_after_165,
+    test_schema_rejects_int_owner_string_key_still_after_165,
+    test_schema_rejects_edit_policy_without_invent_after_165,
+    test_schema_rejects_edit_policy_without_invent_still_after_165,
+    test_schema_rejects_draft_status_badge_after_165,
+    test_schema_rejects_draft_status_badge_still_after_165,
+    test_schema_rejects_wrong_parent_governance_after_165,
+    test_schema_rejects_wrong_parent_governance_still_after_165,
+    test_schema_rejects_wrong_surface_claude_after_165,
+    test_schema_rejects_wrong_surface_claude_still_after_165,
+    test_schema_rejects_closes_without_issue_ref_after_165,
+    test_schema_rejects_closes_without_issue_ref_still_after_165,
+    test_schema_rejects_semver_prerelease_after_165,
+    test_schema_rejects_semver_prerelease_still_after_165,
+    test_schema_rejects_bad_iso_created_after_165,
+    test_schema_rejects_bad_iso_created_still_after_165,
+    test_schema_rejects_empty_purpose_after_165,
+    test_schema_rejects_empty_purpose_still_after_165,
+    test_schema_rejects_autonomy_out_of_range_after_165,
+    test_schema_rejects_autonomy_out_of_range_still_after_165,
+    test_schema_rejects_tier_zero_after_165,
+    test_schema_rejects_tier_zero_still_after_165,
+    test_schema_rejects_wrong_maintainer_after_165,
+    test_schema_rejects_wrong_maintainer_still_after_165,
+    test_schema_rejects_wrong_agents_scope_after_165,
+    test_schema_rejects_wrong_agents_scope_still_after_165,
+    test_schema_rejects_empty_yaml_agents_after_165,
+    test_schema_rejects_empty_yaml_agents_still_after_165,
+    test_schema_rejects_wrong_backlog_owner_after_165,
+    test_schema_rejects_wrong_backlog_owner_still_after_165,
+    test_schema_rejects_wrong_claude_repo_after_165,
+    test_schema_rejects_wrong_claude_repo_still_after_165,
+    test_wiki_rejects_unexpected_extra_page_after_165,
+    test_wiki_rejects_unexpected_extra_page_still_after_165,
+    test_wiki_rejects_missing_kill_callout_after_165,
+    test_wiki_rejects_missing_kill_callout_still_after_165,
+    test_wiki_rejects_missing_invent_oos_after_165,
+    test_wiki_rejects_missing_invent_oos_still_after_165,
+    test_wiki_rejects_producthunt_chrome_after_165,
+    test_wiki_rejects_producthunt_chrome_still_after_165,
+    test_wiki_rejects_buymeacoffee_chrome_after_165,
+    test_wiki_rejects_buymeacoffee_chrome_still_after_165,
+    test_wiki_rejects_missing_credential_topic_after_165,
+    test_wiki_rejects_missing_credential_topic_still_after_165,
+    test_wiki_rejects_stewardship_badge_svg_invent_after_165,
+    test_wiki_rejects_stewardship_badge_svg_invent_still_after_165,
+    test_wiki_rejects_badge_embed_on_overview_after_165,
+    test_wiki_rejects_badge_embed_on_overview_still_after_165,
+    test_wiki_rejects_http_insecure_link_after_165,
+    test_wiki_rejects_http_insecure_link_still_after_165,
+    test_wiki_rejects_javascript_scheme_after_165,
+    test_wiki_rejects_javascript_scheme_still_after_165,
+    test_wiki_rejects_missing_home_backlink_after_165,
+    test_wiki_rejects_missing_home_backlink_still_after_165,
+    test_wiki_rejects_missing_publish_table_row_after_165,
+    test_wiki_rejects_missing_publish_table_row_still_after_165,
+    test_relative_rejects_nul_in_target_after_165,
+    test_relative_rejects_nul_in_target_still_after_165,
+    test_relative_rejects_query_string_after_165,
+    test_relative_rejects_query_string_still_after_165,
+    test_relative_rejects_empty_path_fragment_after_165,
+    test_relative_rejects_empty_path_fragment_still_after_165,
+    test_relative_rejects_vbscript_casefold_after_165,
+    test_relative_rejects_vbscript_casefold_still_after_165,
+    test_relative_rejects_file_scheme_after_165,
+    test_relative_rejects_file_scheme_still_after_165,
+    test_relative_rejects_javascript_casefold_after_165,
+    test_relative_rejects_javascript_casefold_still_after_165,
+    test_relative_rejects_nested_pct_escape_after_165,
+    test_relative_rejects_nested_pct_escape_still_after_165,
+    test_relative_rejects_protocol_relative_after_165,
+    test_relative_rejects_protocol_relative_still_after_165,
+    test_relative_rejects_broken_nested_after_165,
+    test_relative_rejects_broken_nested_still_after_165,
+    test_relative_rejects_missing_heading_frag_after_165,
+    test_relative_rejects_missing_heading_frag_still_after_165,
+    test_common_rejects_ghr_token_scan_after_165,
+    test_common_rejects_ghr_token_scan_still_after_165,
+    test_common_rejects_AIza_scan_after_165,
+    test_common_rejects_AIza_scan_still_after_165,
+    test_common_rejects_npm_token_scan_after_165,
+    test_common_rejects_npm_token_scan_still_after_165,
+    test_common_rejects_aws_secret_scan_after_165,
+    test_common_rejects_aws_secret_scan_still_after_165,
+    test_common_rejects_openssh_private_key_after_165,
+    test_common_rejects_openssh_private_key_still_after_165,
+    test_common_rejects_client_secret_url_hint_after_165,
+    test_common_rejects_client_secret_url_hint_still_after_165,
+    test_common_forbidden_hint_producthunt_membership_after_165,
+    test_common_forbidden_hint_producthunt_membership_still_after_165,
+    test_common_forbidden_hint_buymeacoffee_membership_after_165,
+    test_common_forbidden_hint_buymeacoffee_membership_still_after_165,
+    test_common_dangerous_scheme_vbscript_membership_after_165,
+    test_common_dangerous_scheme_vbscript_membership_still_after_165,
+    test_common_dangerous_scheme_file_membership_after_165,
+    test_common_dangerous_scheme_file_membership_still_after_165,
+    test_badge_rejects_fourth_stewardship_after_165,
+    test_badge_rejects_fourth_stewardship_still_after_165,
+    test_badge_rejects_coverage_hint_in_row_after_165,
+    test_badge_rejects_coverage_hint_in_row_still_after_165,
+    test_badge_rejects_wrong_order_license_first_after_165,
+    test_badge_rejects_wrong_order_license_first_still_after_165,
+    test_badge_rejects_stars_hint_after_165,
+    test_badge_rejects_stars_hint_still_after_165,
+    test_badge_rejects_http_image_after_165,
+    test_badge_rejects_http_image_still_after_165,
+    test_badge_rejects_secret_token_url_after_165,
+    test_badge_rejects_secret_token_url_still_after_165,
+    test_schema_passes_good_seed_after_165,
+    test_schema_passes_good_seed_still_after_165,
+    test_wiki_passes_good_seed_after_165,
+    test_wiki_passes_good_seed_still_after_165,
+    test_badge_passes_good_seed_after_165,
+    test_badge_passes_good_seed_still_after_165,
+    test_relative_passes_valid_fragment_after_165,
+    test_relative_passes_valid_fragment_still_after_165,
+
 
     ]
     try:

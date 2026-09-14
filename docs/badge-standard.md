@@ -198,7 +198,12 @@ plus stewardship CI deepen after #161: Check links / Run markdownlint /
 Set up Python / Install PyYAML (schema parser) / Stewardship gates+self-tests
 step names / exact token+`--github-token` forms / `--exclude-path .github/agents` /
 `globs: |` / AGENTS+CLAUDE+LICENSE+CONTRIBUTING+`.github/workflows/**` paths /
-Weekly drift + GITHUB_TOKEN commentary / deepen docstring).
+Weekly drift + GITHUB_TOKEN commentary / deepen docstring,
+plus overnight stewardship/CI/schema/wiki fixture deepen after #165: residual
+schema/wiki/relative/common/badge policy edge fixtures via existing `_seed_*`
+harnesses only — not actionlint / docs-lint / stewardship-CI pin / path-filter /
+schema-third-pass pin spam; lands closed #167 leftover; do not revive
+closed #167/#168/#169).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

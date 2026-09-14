@@ -565,3 +565,14 @@ _None yet._
 2026-09-14T04:18:00Z cursor: Local green — run_stewardship + self-tests 2957 + markdownlint ← ECO-060 stewardship CI deepen after #161 (do not revive #158/#113)
 
 2026-09-14T04:18:31Z cursor: Draft PR #165 opened (stewardship CI deepen after #161; 2957 cases) — awaiting CI; do not revive #158/#113; distinct from schema #164
+
+### [ECO-061] TOKENMAXX overnight stewardship/CI/schema/wiki fixture deepen after #165 — 2026-09-14T04:25:00Z
+- [x] cursor: Read live tree post-#165 (2957 cases; stewardship CI saturated; #167/#168/#169 CLOSED CONFLICTING — do not revive; open #164 schema-third / #166 path-filter CONFLICTING — leave alone)
+- [x] cursor: Deepen residual stewardship/CI/schema/wiki fixtures — schema/wiki/relative/common/badge policy edge rejects + still twins via existing _seed_* harness
+- [x] cursor: Expand self-tests 2957 → 3081 (fixture slice only; not actionlint/docs-lint/stewardship-CI pin/path-filter/schema-third-pass pin spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING governance fixture/harness only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #167 leftover on post-#165 main; do not revive #167/#168/#169; distinct from #164/#166
+- Branch: cursor/tokenmaxx-stewardship-schema-wiki-fixtures-after-165-4956
+2026-09-14T04:25:00Z
+
+2026-09-14T04:30:00Z cursor: Local green — run_stewardship + self-tests 3081 + markdownlint ← ECO-061 stewardship/CI/schema/wiki fixture deepen after #165 (do not revive #167/#168/#169; leave #164/#166 alone)

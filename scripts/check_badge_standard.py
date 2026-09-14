@@ -245,6 +245,24 @@ lands closed #251/#250/#246/#245/#240 leftover on post-#262 tip; do not invent n
   version 1.0.0 / YYYY-MM-DD placeholder / §1–§6 / [CONFIG_FILE] /
   Never commit .env / agents-md/description / no invent badge.svg chrome
 
+Fail-closed wiki/mdlink leftover residual after #282 tip (beyond #252 saturated
+after_243 pins; lands closed #281/#277 leftover; NOT stewardship-schema residual #282 /
+NOT lychee/blob-503 leftover #278 / NOT Pass-2 residual + templates #272 /
+NOT path-edges leftover #262 / NOT wiki/mdlink leftover #252 /
+NOT stewardship-schema leftover #258 /
+NOT path-filter/path-order leftover #244 / NOT wiki outline/PUBLISH leftover #243 /
+NOT md/link residual layouts #239 / NOT stewardship-checks/schema residual #233):
+- wiki residual: contiguous YAML status+created+purpose+closes /
+  | Source file | Wiki page | header / sibling table cells /
+  full operator push prose / clean worktree / or main default branch /
+  stay-green acceptance / [Home.md](./Home.md) / Settings → Features → Wikis /
+  create any page once in the GitHub UI
+- md/link residual harden: Check links->lychee-action@v2 adjacency /
+  Run markdownlint->DavidAnson@v24 adjacency /
+  name: Link Check then on: adjacency / name: Markdown Lint then on: adjacency
+- markdown link residual harden: empty fragment / query string / escapes repo /
+  missing heading # / OK banner / raw.startswith("#")
+
 """
 
 from __future__ import annotations
@@ -2492,6 +2510,43 @@ def check_workflow_hardening(errors: list[str]) -> None:
         )
 
 
+
+    # Wiki/mdlink leftover residual after #282 tip: md/link residual harden beyond #252.
+    link_uses_adj = (
+        "      - name: Check links\n"
+        "        uses: lycheeverse/lychee-action@v2"
+    )
+    if link_uses_adj not in link:
+        fail(
+            "link-check.yml must keep Check links -> lychee-action@v2 adjacency "
+            "(wiki/mdlink leftover residual after #282)",
+            errors,
+        )
+    lint_uses_adj = (
+        "      - name: Run markdownlint\n"
+        "        uses: DavidAnson/markdownlint-cli2-action@v24"
+    )
+    if lint_uses_adj not in lint:
+        fail(
+            "markdown-lint.yml must keep Run markdownlint -> DavidAnson@v24 adjacency "
+            "(wiki/mdlink leftover residual after #282)",
+            errors,
+        )
+    link_name_on = "name: Link Check\n\non:"
+    if link_name_on not in link:
+        fail(
+            "link-check.yml must keep name: Link Check then on: adjacency "
+            "(wiki/mdlink leftover residual after #282)",
+            errors,
+        )
+    lint_name_on = "name: Markdown Lint\n\non:"
+    if lint_name_on not in lint:
+        fail(
+            "markdown-lint.yml must keep name: Markdown Lint then on: adjacency "
+            "(wiki/mdlink leftover residual after #282)",
+            errors,
+        )
+
 def check_badge_standard_doc(errors: list[str]) -> None:
     """Ensure docs/badge-standard.md still documents the same required order."""
     text = BADGE_STANDARD.read_text(encoding="utf-8")
@@ -3523,6 +3578,81 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
     if fail_true_adj_pin not in text:
         fail(
             "check_badge_standard.py must keep " + fail_true_adj_pin + " leftover pin",
+            errors,
+        )
+
+
+
+    leftover_282_doc = "wiki/mdlink leftover residual after " + "#282"
+    if leftover_282_doc not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + leftover_282_doc + " pin",
+            errors,
+        )
+    not_schema_282 = "NOT stewardship-schema residual " + "#282"
+    if not_schema_282 not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + not_schema_282
+            + " distinctness pin",
+            errors,
+        )
+    not_lychee_278 = "NOT lychee/blob-503 leftover " + "#278"
+    if not_lychee_278 not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + not_lychee_278
+            + " distinctness pin",
+            errors,
+        )
+    not_pass2_272 = "NOT Pass-2 residual + templates " + "#272"
+    if not_pass2_272 not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + not_pass2_272
+            + " distinctness pin",
+            errors,
+        )
+    not_path_262 = "NOT path-edges leftover " + "#262"
+    if not_path_262 not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + not_path_262
+            + " distinctness pin",
+            errors,
+        )
+    not_wiki_mdlink_252 = "NOT wiki/mdlink leftover " + "#252"
+    if not_wiki_mdlink_252 not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + not_wiki_mdlink_252
+            + " distinctness pin",
+            errors,
+        )
+    not_schema_258 = "NOT stewardship-schema leftover " + "#258"
+    if not_schema_258 not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + not_schema_258
+            + " distinctness pin",
+            errors,
+        )
+    link_uses_pin = "Check links->lychee-action@v2 " + "adjacency"
+    if link_uses_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + link_uses_pin + " leftover pin",
+            errors,
+        )
+    lint_uses_pin = "Run markdownlint->DavidAnson@v24 " + "adjacency"
+    if lint_uses_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + lint_uses_pin + " leftover pin",
+            errors,
+        )
+    mdlink_name_on_pin = "name: Link Check then on: " + "adjacency"
+    if mdlink_name_on_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + mdlink_name_on_pin + " leftover pin",
+            errors,
+        )
+    mdlink_lint_name_on_pin = "name: Markdown Lint then on: " + "adjacency"
+    if mdlink_lint_name_on_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + mdlink_lint_name_on_pin + " leftover pin",
             errors,
         )
 
@@ -8469,6 +8599,105 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
 
 
 
+
+    leftover_282_wiki = "Wiki/mdlink leftover residual after " + "#282"
+    if leftover_282_wiki not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + leftover_282_wiki + " pin",
+            errors,
+        )
+    not_schema_282_w = "NOT stewardship-schema residual " + "#282"
+    if not_schema_282_w not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_schema_282_w + " pin",
+            errors,
+        )
+    not_lychee_278_w = "NOT lychee/blob-503 leftover " + "#278"
+    if not_lychee_278_w not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_lychee_278_w + " pin",
+            errors,
+        )
+    not_pass2_272_w = "NOT Pass-2 residual + templates " + "#272"
+    if not_pass2_272_w not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_pass2_272_w + " pin",
+            errors,
+        )
+    not_path_262_w = "NOT path-edges leftover " + "#262"
+    if not_path_262_w not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_path_262_w + " pin",
+            errors,
+        )
+    not_wiki_mdlink_252_w = "NOT wiki/mdlink leftover " + "#252"
+    if not_wiki_mdlink_252_w not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_wiki_mdlink_252_w + " pin",
+            errors,
+        )
+    not_schema_258_w = "NOT stewardship-schema leftover " + "#258"
+    if not_schema_258_w not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_schema_258_w + " pin",
+            errors,
+        )
+    yaml_closes_pin = "status/created/purpose/closes " + "block"
+    if yaml_closes_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin PUBLISH.md status/created/purpose/closes block",
+            errors,
+        )
+    table_header_pin = "| Source file | Wiki page |"
+    if table_header_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin PUBLISH.md | Source file | Wiki page | header",
+            errors,
+        )
+    operator_push_full = "to the wiki (operator instructions " + "only)"
+    if operator_push_full not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin full operator push prose",
+            errors,
+        )
+    clean_worktree = "clean worktree of agents-" + "governance"
+    if clean_worktree not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin clean worktree commentary",
+            errors,
+        )
+    or_main_branch = "or main — match the wiki default " + "branch"
+    if or_main_branch not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin or main — match the wiki default branch",
+            errors,
+        )
+    stay_green = "Link Check and Markdown Lint stay " + "green"
+    if stay_green not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin stay-green acceptance wording",
+            errors,
+        )
+    fallback_home = "[Home.md](./Home.md)"
+    if fallback_home not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin PUBLISH.md [Home.md](./Home.md) fallback",
+            errors,
+        )
+    settings_wikis = "Settings Features Wikis init " + "path"
+    if settings_wikis not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Settings Features Wikis init path",
+            errors,
+        )
+    create_page_once = "create any page once in the GitHub " + "UI"
+    if create_page_once not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin create any page once in the GitHub UI",
+            errors,
+        )
+
+
 def check_relative_link_gate_contract(errors: list[str]) -> None:
     """Fail-close live relative-link gate wiring (after #90; deepen after #55/#41)."""
     if not RELATIVE_LINK_GATE.is_file():
@@ -9227,6 +9456,58 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
             errors,
         )
 
+
+
+
+    # Fail-closed after #282: markdown link residual harden (wiki/mdlink leftover
+    # residual; lands #281/#277; NOT stewardship-schema residual #282 /
+    # NOT lychee/blob-503 leftover #278 / NOT Pass-2 residual + templates #272 /
+    # NOT path-edges leftover #262 / NOT wiki/mdlink leftover #252 /
+    # NOT stewardship-schema leftover #258 /
+    # NOT path-filter/path-order leftover #244 / NOT md/link residual layouts #239).
+    leftover_282_rel = "Wiki/mdlink leftover residual after " + "#282"
+    if leftover_282_rel not in text:
+        fail(
+            "check_relative_links.py docstring must keep " + leftover_282_rel + " pin",
+            errors,
+        )
+    empty_frag_exact = "empty fragment in relative " + "link"
+    if empty_frag_exact not in text:
+        fail(
+            "check_relative_links.py must keep exact empty fragment in relative link needle",
+            errors,
+        )
+    query_exact = "relative link must not include query " + "string"
+    if query_exact not in text:
+        fail(
+            "check_relative_links.py must keep exact relative link must not include query string",
+            errors,
+        )
+    escapes_exact = "relative link escapes " + "repo"
+    if escapes_exact not in text:
+        fail(
+            "check_relative_links.py must keep exact relative link escapes repo needle",
+            errors,
+        )
+    missing_heading_exact = "missing heading #"
+    if missing_heading_exact not in text:
+        fail(
+            "check_relative_links.py must keep exact missing heading # needle",
+            errors,
+        )
+    ok_banner_exact = "OK: relative markdown links " + "resolve"
+    if ok_banner_exact not in text:
+        fail(
+            "check_relative_links.py must keep exact OK: relative markdown links resolve banner",
+            errors,
+        )
+    startswith_hash = 'raw.startswith("#")'
+    startswith_hash_sq = "raw.startswith('#')"
+    if startswith_hash not in text and startswith_hash_sq not in text:
+        fail(
+            'check_relative_links.py must keep raw.startswith("#") same-file anchor pin',
+            errors,
+        )
 
 
 def check_run_stewardship_gate_contract(errors: list[str]) -> None:

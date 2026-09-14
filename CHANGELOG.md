@@ -11,6 +11,27 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki/mdlink leftover residual deepen after #282 tip: expand
+  self-tests to 5992 cases (was 5792) fail-closing unsaturated wiki outline /
+  PUBLISH.md residual plus markdown-lint / link-check residual harden plus
+  markdown-link residual needles on existing modules only — contiguous YAML
+  status+created+purpose+closes / `| Source file | Wiki page |` header /
+  sibling table cells Overview..Security-Boundaries / full operator push
+  prose / clean worktree commentary / `or main — match the wiki default
+  branch` / stay-green acceptance / Home.md `./Home.md` fallback /
+  Settings → Features → Wikis / create any page once in the GitHub UI /
+  Check links->lychee-action@v2 adjacency / Run markdownlint->DavidAnson@v24
+  adjacency / name->on adjacency / exact empty fragment / query-string /
+  escapes-repo / missing heading # / OK banner / `raw.startswith("#")` —
+  wiki/mdlink leftover residual slice only (lands closed #281/#277 leftover;
+  not stewardship-schema residual #282 / not lychee/blob-503 leftover #278 /
+  not Pass-2 residual + templates #272 / not path-edges leftover #262 /
+  not wiki/mdlink leftover #252 / not stewardship-schema leftover #258 /
+  not path-filter/path-order leftover #244 / not wiki outline/PUBLISH leftover
+  #243 / not md/link residual layouts #239 / not stewardship-checks/schema
+  residual #233); no invent-product; no fourth badge; no extra wiki files;
+  no scratchpad notes. Distinct from merged
+  #282/#278/#272/#262/#258/#252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
 - TOKENMAXX stewardship-schema leftover residual deepen after #262 tip
   (rebased post-#278): expand self-tests to 5792 cases (was 5592) fail-closing
   unsaturated schema + `stewardship_common` leftover residual helpers on

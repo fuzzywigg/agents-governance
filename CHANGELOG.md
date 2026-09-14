@@ -11,6 +11,17 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX actionlint path-order + docs-lint second-pass + wiki-badge pins
+  after #108: expand self-tests to 2229 cases (was 2151) fail-closing
+  stewardship actionlint exact three-path order / `bash <(curl -fsSL)` form /
+  no `continue-on-error: true` / Download actionlint + existing workflow paths /
+  lycheeignore exact URL lines / markdownlint exact key set /
+  wiki status badges cover Link Check+Markdown Lint / product badge refusal /
+  reject stewardship-checks fourth-badge invent / no wiki badge embeds /
+  PUBLISH Link Check+Markdown Lint exactly — combined slice only (not closed
+  #109/#110 concurrency third-pass; not badge-standard third-pass spam); no
+  invent-product; no fourth badge
+
 - TOKENMAXX badge-standard third-pass pins after #104: expand self-tests to
   2151 cases (was 2079) fail-closing live badge-standard integrity —
   `BADGE_LINE_RE`+`REPO_FROM_*` exact / `REQUIRED_WORKFLOWS` exact /

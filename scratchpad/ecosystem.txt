@@ -431,3 +431,12 @@ _None yet._
 2026-09-14T01:39:03Z
 
 2026-09-14T01:44:00Z cursor: PR #108 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-052 TOKENMAXX badge-standard third-pass pins
+
+### [ECO-053] TOKENMAXX deepen actionlint/docs-lint/wiki-badge after #108 — 2026-09-14T02:05:00Z
+- [x] cursor: Read live tree post-#108 (2151 cases; badge third-pass saturated; #109/#110 actionlint third-pass closed CONFLICTING — do not revive)
+- [x] cursor: Fail-close actionlint path-order + docs-lint second-pass + wiki-badge — three-path order / bash <(curl -fsSL) / no continue-on-error / step names / lycheeignore exact URLs / markdownlint key set / status badges cover / product badge / no fourth svg / no wiki embeds / PUBLISH exact Link Check+Markdown Lint
+- [x] cursor: Expand self-tests 2151 → 2229 (combined after-#108 slice; distinct from closed #109/#110 concurrency third-pass)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING actionlint/docs-lint/wiki-badge integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; distinct from closed #109/#110
+- Branch: cursor/tokenmaxx-actionlint-docs-wiki-after-108-4a67
+2026-09-14T02:05:00Z

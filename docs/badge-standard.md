@@ -158,7 +158,15 @@ exact / `REQUIRED_WORKFLOWS` exact / `group(label|img|link)` / `sys.exit` /
 stewardship_common / `BADGE_GATE` / utf-8 / Strict row / H1 startswith /
 FAIL README / https image+link needles / absolute workflow URL / License
 point / Unexpected label / extract+check_badges / `contract(errors)` /
-IGNORECASE / `blob.lower` / `EXPECTED_REPO.lower`).
+IGNORECASE / `blob.lower` / `EXPECTED_REPO.lower`,
+plus actionlint path-order + docs-lint second-pass + wiki-badge after #108:
+exact three-path actionlint order / `bash <(curl -fsSL)` download form /
+no `continue-on-error: true` / Download actionlint + existing workflow paths /
+lycheeignore exact URL lines / markdownlint exact key set /
+status badges cover Link Check+Markdown Lint / product badge refusal /
+reject stewardship-checks fourth-badge invent / no wiki badge embeds /
+PUBLISH Link Check+Markdown Lint exactly — distinct from closed #109/#110
+concurrency third-pass).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

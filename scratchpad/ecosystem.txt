@@ -576,3 +576,5 @@ _None yet._
 2026-09-14T04:25:00Z
 
 2026-09-14T04:30:00Z cursor: Local green — run_stewardship + self-tests 3145 + markdownlint ← ECO-061 schema third-pass after #165 (do not revive #142/#147/#153/#163; leave #166 alone)
+
+2026-09-14T04:35:00Z cursor: PR #164 CI green (lint + link-check + stewardship/actionlint) MERGEABLE ← complete ECO-061 TOKENMAXX schema third-pass after #165 (does not revive #142/#147/#153/#163; leave #166 alone)

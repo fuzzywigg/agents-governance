@@ -12,6 +12,7 @@ Markdown Lint / product badge refusal / reject stewardship-checks.yml/badge.svg
 invent / reject embedded markdown badge images / PUBLISH Link Check+Markdown Lint
 exactly / Home no badge-row embeds (not docs-lint #135 / common / run_stewardship /
 actionlint / relative / CI workflow spam).
+Deepened after #161: stewardship-schema third-pass + deepen / docs-lint markdownlint line pins / actionlint self-hosted reject / wiki-badge PUBLISHABLE_PAGES+STEWARDSHIP_CI_HINTS leftovers (distinct from #161 lychee/membership/run_stewardship and #157 path-order; do not revive #163/#162/#150).
 Deepened after #104: badge-standard third-pass — BADGE_LINE_RE+REPO_FROM_* exact /
 REQUIRED_WORKFLOWS exact / group(label|img|link) / sys.exit / stewardship_common /
 BADGE_GATE / utf-8 / Strict row / H1 startswith / FAIL README / https needles /
@@ -41397,2137 +41398,5688 @@ def test_run_stewardship_rejects_layout_pad7_after_149() -> None:
             "exact live stewardship leftover layout",
         )
 
+
+
+# --- TOKENMAXX deepen after #161: schema/docs-lint/actionlint/wiki-badge leftovers ---
+
+def test_schema_gate_requires_third_pass_doc_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('Third-pass after #132', 'Third-pass after #000')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Third-pass after #132',
+        )
+
+
+def test_schema_gate_requires_future_annotations_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('from __future__ import annotations', 'from __future__ import generator_stop')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'annotations',
+        )
+
+
+def test_schema_gate_requires_path_parent_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('Path(__file__).resolve().parent', 'Path(__file__).resolve().name')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'resolve().parent',
+        )
+
+
+def test_schema_gate_requires_path_insert_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('sys.path.insert(0, str(_SCRIPTS))', 'sys.path.append(str(_SCRIPTS))')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'sys.path.insert',
+        )
+
+
+def test_schema_gate_requires_common_import_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('from stewardship_common import ROOT, fail, scan_secrets', 'from stewardship_common import ROOT, fail')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'scan_secrets',
+        )
+
+
+def test_schema_gate_requires_yaml_none_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('yaml = None', 'yaml = False')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'yaml = None',
+        )
+
+
+def test_schema_gate_requires_pragma_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('pragma: no cover', 'pragma: nocover')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'pragma: no cover',
+        )
+
+
+def test_schema_gate_requires_five_docs_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('five live stewardship docs only', 'five live stewardship docs mostly')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'five live stewardship docs only',
+        )
+
+
+def test_schema_gate_requires_hash_comment_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('line.startswith("#")', 'line.startswith("##")')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'startswith("#")',
+        )
+
+
+def test_schema_gate_requires_true_false_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('{"true", "false"}', '{"yes", "false"}')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '"true"',
+        )
+
+
+def test_schema_gate_requires_null_tilde_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('{"null", "~"}', '{"null", "nil"}')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '"~"',
+        )
+
+
+def test_schema_gate_requires_fullmatch_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('re.fullmatch(r"-?\\d+", value)', 're.fullmatch(r"-?\\d*", value)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'fullmatch',
+        )
+
+
+def test_schema_gate_requires_split_colon_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('.split(":", 1)', '.split(":", 2)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'split(":", 1)',
+        )
+
+
+def test_schema_gate_requires_strip_quotes_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('value[1:-1]', 'value[1:]')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'value[1:-1]',
+        )
+
+
+def test_schema_gate_requires_loaded_dict_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('isinstance(loaded, dict)', 'isinstance(loaded, list)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'isinstance(loaded, dict)',
+        )
+
+
+def test_schema_gate_requires_fence_search_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('FENCED_YAML_RE.search(text)', 'FENCED_YAML_RE.match(text)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'FENCED_YAML_RE.search',
+        )
+
+
+def test_schema_gate_requires_nested_types_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('isinstance(value, (dict, list))', 'isinstance(value, (dict,))')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '(dict, list)',
+        )
+
+
+def test_schema_gate_requires_missing_sorted_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('sorted(required_keys - set(data))', 'sorted(set(required_keys) - set(data))')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'sorted(required_keys - set(data))',
+        )
+
+
+def test_schema_gate_requires_docs_prefix_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('.startswith("docs/")', '.startswith("doc/")')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'startswith("docs/")',
+        )
+
+
+def test_schema_gate_requires_active_upper_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('.upper() != "ACTIVE"', '.upper() != "Active"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ACTIVE',
+        )
+
+
+def test_schema_gate_requires_expected_get_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('EXPECTED_VALUES.get(rel, {})', 'EXPECTED_VALUES.get(rel) or {}')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'EXPECTED_VALUES.get(rel, {})',
+        )
+
+
+def test_schema_gate_requires_expected_fmt_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('(expected {want!r})', '(wanted {want!r})')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'expected',
+        )
+
+
+def test_schema_gate_requires_level_set_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('level not in (0, 1, 2, 3)', 'level not in (0, 1, 2)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '(0, 1, 2, 3)',
+        )
+
+
+def test_schema_gate_requires_tier_lt_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('tier < 1', 'tier < 0')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'tier < 1',
+        )
+
+
+def test_schema_gate_requires_iso_match_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('ISO_DATE_RE.match(raw)', 'ISO_DATE_RE.search(raw)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ISO_DATE_RE.match',
+        )
+
+
+def test_schema_gate_requires_semver_match_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('SEMVER_RE.match(ver)', 'SEMVER_RE.search(ver)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'SEMVER_RE.match',
+        )
+
+
+def test_schema_gate_requires_issue_search_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('ISSUE_REF_RE.search(closes)', 'ISSUE_REF_RE.match(closes)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ISSUE_REF_RE.search',
+        )
+
+
+def test_schema_gate_requires_closes_scope_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('{"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}', '{"docs/badge-standard.md"}')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'closes scope set',
+        )
+
+
+def test_schema_gate_requires_scan_call_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('scan_secrets(path, errors)', 'scan_secrets(path)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'scan_secrets(path, errors)',
+        )
+
+
+def test_schema_gate_requires_len_docs_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('len(DOC_SCHEMAS)', 'len(list(DOC_SCHEMAS))')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'len(DOC_SCHEMAS)',
+        )
+
+
+def test_schema_gate_requires_exit_main_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('sys.exit(main())', 'raise SystemExit(main())')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'sys.exit(main())',
+        )
+
+
+def test_schema_gate_requires_mapping_needle_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('metadata YAML must be a mapping', 'metadata YAML must be a map')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'mapping',
+        )
+
+
+def test_schema_gate_requires_empty_block_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('empty yaml metadata block', 'empty yaml metadata section')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'empty yaml metadata block',
+        )
+
+
+def test_schema_gate_requires_missing_file_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('missing file:', 'missing path:')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'missing file:',
+        )
+
+
+def test_schema_gate_requires_bool_subclass_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('bool is a subclass of int', 'bool is a subtype of int')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'subclass of int',
+        )
+
+
+def test_schema_gate_requires_safe_load_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('yaml.safe_load', 'yaml.load')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'safe_load',
+        )
+
+
+def test_schema_gate_requires_third_pass_in_contract_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '"Third-pass after " + "#132"',
+            '"Third-pass after " + "#000"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "docstring must pin",
+        )
+
+
+def test_schema_gate_requires_fence_exact_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('FENCED_YAML_RE = re.compile(r"^```yaml\\n(.*?)\\n```", re.MULTILINE | re.DOTALL)', 'FENCED_YAML_RE = re.compile(r"^```yml\\n(.*?)\\n```", re.MULTILINE | re.DOTALL)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '```yaml',
+        )
+
+
+def test_schema_gate_requires_iso_exact_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('ISO_DATE_RE = re.compile(r"^\\d{4}-\\d{2}-\\d{2}")', 'ISO_DATE_RE = re.compile(r"^\\d{4}/\\d{2}/\\d{2}")')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ISO_DATE_RE',
+        )
+
+
+def test_schema_gate_requires_semver_exact_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('SEMVER_RE = re.compile(r"^\\d+\\.\\d+\\.\\d+$")', 'SEMVER_RE = re.compile(r"^\\d+\\.\\d+$")')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'SEMVER_RE',
+        )
+
+
+def test_schema_gate_requires_issue_exact_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('ISSUE_REF_RE = re.compile(r"#\\d+")', 'ISSUE_REF_RE = re.compile(r"#\\d{2,}")')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ISSUE_REF_RE',
+        )
+
+
+def test_schema_gate_requires_date_keys_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('DATE_KEYS = ("created", "last_updated")', 'DATE_KEYS = ("created",)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'last_updated',
+        )
+
+
+def test_schema_gate_requires_tiny_yaml_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('Tiny YAML subset parser', 'Tiny YAML subset reader')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Tiny YAML subset',
+        )
+
+
+def test_schema_gate_requires_scalar_doc_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('stewardship metadata values must be scalars', 'stewardship metadata values must be simple')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'scalars',
+        )
+
+
+def test_schema_gate_requires_active_needle_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "status must be ACTIVE for active stewardship docs",
+            "status must be ACTIVE for live stewardship docs",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "ACTIVE stewardship docs",
+        )
+
+
+def test_schema_gate_requires_contract_fn_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('def check_stewardship_schema_gate_contract(', 'def check_stewardship_schema_gate_contract_x(')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'check_stewardship_schema_gate_contract',
+        )
+
+
+def test_schema_gate_requires_contract_call_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('check_stewardship_schema_gate_contract(errors)', 'check_stewardship_schema_gate_contract_x(errors)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'check_stewardship_schema_gate_contract',
+        )
+
+
+def test_schema_gate_requires_second_pass_doc_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('Second-pass: FENCED_YAML_RE exact', 'Second-pass: FENCED_YAML_RE approx')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Second-pass: FENCED_YAML_RE exact',
+        )
+
+
+def test_schema_gate_requires_path_insert_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('sys.path.insert(0, str(_SCRIPTS))', 'sys.path.insert(1, str(_SCRIPTS))')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'sys.path.insert(0',
+        )
+
+
+def test_schema_gate_requires_yaml_none_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('yaml = None', 'yaml = 0')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'yaml = None',
+        )
+
+
+def test_schema_gate_requires_five_docs_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('five live stewardship docs only', 'five live stewardship docs alone')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'five live stewardship docs only',
+        )
+
+
+def test_schema_gate_requires_true_false_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('{"true", "false"}', '{"true", "no"}')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '"false"',
+        )
+
+
+def test_schema_gate_requires_null_tilde_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('{"null", "~"}', '{"none", "~"}')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '"null"',
+        )
+
+
+def test_schema_gate_requires_loaded_dict_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('isinstance(loaded, dict)', 'isinstance(loaded, Mapping)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'isinstance(loaded, dict)',
+        )
+
+
+def test_schema_gate_requires_nested_types_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('isinstance(value, (dict, list))', 'isinstance(value, (list,))')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '(dict, list)',
+        )
+
+
+def test_schema_gate_requires_expected_get_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('EXPECTED_VALUES.get(rel, {})', 'EXPECTED_VALUES.get(rel, dict())')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'EXPECTED_VALUES.get(rel, {})',
+        )
+
+
+def test_schema_gate_requires_level_set_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('level not in (0, 1, 2, 3)', 'level not in {0, 1, 2, 3}')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '(0, 1, 2, 3)',
+        )
+
+
+def test_schema_gate_requires_tier_lt_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('tier < 1', 'tier <= 0')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'tier < 1',
+        )
+
+
+def test_schema_gate_requires_scan_call_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('scan_secrets(path, errors)', 'scan_secrets(rel, errors)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'scan_secrets(path, errors)',
+        )
+
+
+def test_schema_gate_requires_exit_main_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('sys.exit(main())', 'sys.exit(0)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'sys.exit(main())',
+        )
+
+
+def test_schema_rejects_bool_autonomy_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-09-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\nautonomy_level: true\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            '0..3',
+        )
+
+
+def test_schema_rejects_bool_tier_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=(
+                "# I\n\n```yaml\nstatus: ACTIVE\ntier: true\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nedit_policy: keep invent-product closed\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'positive int',
+        )
+
+
+def test_schema_rejects_nested_list_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=(
+                "# I\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: [copilot]\nedit_policy: keep invent-product closed\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'scalar',
+        )
+
+
+def test_schema_rejects_empty_block_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents="# AGENTS\n\n```yaml\n\n```\n",
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'empty yaml',
+        )
+
+
+def test_schema_rejects_non_string_owner_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=(
+                "# I\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: 1\nedit_policy: keep invent-product closed\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'must be a string',
+        )
+
+
+def test_schema_rejects_bad_semver_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0\"\nlast_updated: \"2026-09-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\nautonomy_level: 1\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'semver',
+        )
+
+
+def test_schema_rejects_closes_without_hash_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: public governance front-door repos\n"
+                "edit_policy: do not invent-product fields\ncloses: 16\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            '#N',
+        )
+
+
+def test_schema_rejects_inactive_status_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: DRAFT\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: public governance front-door repos\n"
+                "edit_policy: do not invent-product fields\ncloses: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'ACTIVE',
+        )
+
+
+def test_schema_rejects_bad_iso_date_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"13-09-2026\"\n"
+                "owner: copilot\nscope: public governance front-door repos\n"
+                "edit_policy: do not invent-product fields\ncloses: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'ISO-8601',
+        )
+
+
+def test_schema_rejects_missing_key_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=(
+                "# CLAUDE\n\n```yaml\nrepo: agents-governance\nowner: \"fuzzywigg (smtp.eth)\"\n"
+                "surface: copilot\nautonomy_level: 1\nlast_updated: \"2026-09-13\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'missing metadata',
+        )
+
+
+def test_schema_rejects_wrong_maintainer_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-09-13\"\n"
+                "maintainer: other.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\nautonomy_level: 1\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'expected',
+        )
+
+
+def test_schema_rejects_tier_zero_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=(
+                "# I\n\n```yaml\nstatus: ACTIVE\ntier: 0\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nedit_policy: keep invent-product closed\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'positive int',
+        )
+
+
+def test_schema_gate_requires_third_pass_doc_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('Third-pass after #132', 'Third-pass after #000')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Third-pass after #132',
+        )
+
+
+def test_schema_gate_requires_future_annotations_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('from __future__ import annotations', 'from __future__ import generator_stop')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'annotations',
+        )
+
+
+def test_schema_gate_requires_path_parent_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('Path(__file__).resolve().parent', 'Path(__file__).resolve().name')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'resolve().parent',
+        )
+
+
+def test_schema_gate_requires_path_insert_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('sys.path.insert(0, str(_SCRIPTS))', 'sys.path.append(str(_SCRIPTS))')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'sys.path.insert',
+        )
+
+
+def test_schema_gate_requires_common_import_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('from stewardship_common import ROOT, fail, scan_secrets', 'from stewardship_common import ROOT, fail')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'scan_secrets',
+        )
+
+
+def test_schema_gate_requires_yaml_none_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('yaml = None', 'yaml = False')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'yaml = None',
+        )
+
+
+def test_schema_gate_requires_pragma_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('pragma: no cover', 'pragma: nocover')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'pragma: no cover',
+        )
+
+
+def test_schema_gate_requires_five_docs_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('five live stewardship docs only', 'five live stewardship docs mostly')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'five live stewardship docs only',
+        )
+
+
+def test_schema_gate_requires_hash_comment_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('line.startswith("#")', 'line.startswith("##")')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'startswith("#")',
+        )
+
+
+def test_schema_gate_requires_true_false_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('{"true", "false"}', '{"yes", "false"}')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '"true"',
+        )
+
+
+def test_schema_gate_requires_null_tilde_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('{"null", "~"}', '{"null", "nil"}')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '"~"',
+        )
+
+
+def test_schema_gate_requires_fullmatch_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('re.fullmatch(r"-?\\d+", value)', 're.fullmatch(r"-?\\d*", value)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'fullmatch',
+        )
+
+
+def test_schema_gate_requires_split_colon_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('.split(":", 1)', '.split(":", 2)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'split(":", 1)',
+        )
+
+
+def test_schema_gate_requires_strip_quotes_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('value[1:-1]', 'value[1:]')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'value[1:-1]',
+        )
+
+
+def test_schema_gate_requires_loaded_dict_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('isinstance(loaded, dict)', 'isinstance(loaded, list)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'isinstance(loaded, dict)',
+        )
+
+
+def test_schema_gate_requires_fence_search_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('FENCED_YAML_RE.search(text)', 'FENCED_YAML_RE.match(text)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'FENCED_YAML_RE.search',
+        )
+
+
+def test_schema_gate_requires_nested_types_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('isinstance(value, (dict, list))', 'isinstance(value, (dict,))')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '(dict, list)',
+        )
+
+
+def test_schema_gate_requires_missing_sorted_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('sorted(required_keys - set(data))', 'sorted(set(required_keys) - set(data))')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'sorted(required_keys - set(data))',
+        )
+
+
+def test_schema_gate_requires_docs_prefix_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('.startswith("docs/")', '.startswith("doc/")')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'startswith("docs/")',
+        )
+
+
+def test_schema_gate_requires_active_upper_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('.upper() != "ACTIVE"', '.upper() != "Active"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ACTIVE',
+        )
+
+
+def test_schema_gate_requires_expected_get_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('EXPECTED_VALUES.get(rel, {})', 'EXPECTED_VALUES.get(rel) or {}')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'EXPECTED_VALUES.get(rel, {})',
+        )
+
+
+def test_schema_gate_requires_expected_fmt_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('(expected {want!r})', '(wanted {want!r})')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'expected',
+        )
+
+
+def test_schema_gate_requires_level_set_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('level not in (0, 1, 2, 3)', 'level not in (0, 1, 2)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '(0, 1, 2, 3)',
+        )
+
+
+def test_schema_gate_requires_tier_lt_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('tier < 1', 'tier < 0')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'tier < 1',
+        )
+
+
+def test_schema_gate_requires_iso_match_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('ISO_DATE_RE.match(raw)', 'ISO_DATE_RE.search(raw)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ISO_DATE_RE.match',
+        )
+
+
+def test_schema_gate_requires_semver_match_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('SEMVER_RE.match(ver)', 'SEMVER_RE.search(ver)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'SEMVER_RE.match',
+        )
+
+
+def test_schema_gate_requires_issue_search_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('ISSUE_REF_RE.search(closes)', 'ISSUE_REF_RE.match(closes)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ISSUE_REF_RE.search',
+        )
+
+
+def test_schema_gate_requires_closes_scope_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('{"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}', '{"docs/badge-standard.md"}')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'closes scope set',
+        )
+
+
+def test_schema_gate_requires_scan_call_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('scan_secrets(path, errors)', 'scan_secrets(path)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'scan_secrets(path, errors)',
+        )
+
+
+def test_schema_gate_requires_len_docs_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('len(DOC_SCHEMAS)', 'len(list(DOC_SCHEMAS))')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'len(DOC_SCHEMAS)',
+        )
+
+
+def test_schema_gate_requires_exit_main_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('sys.exit(main())', 'raise SystemExit(main())')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'sys.exit(main())',
+        )
+
+
+def test_schema_gate_requires_mapping_needle_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('metadata YAML must be a mapping', 'metadata YAML must be a map')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'mapping',
+        )
+
+
+def test_schema_gate_requires_empty_block_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('empty yaml metadata block', 'empty yaml metadata section')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'empty yaml metadata block',
+        )
+
+
+def test_schema_gate_requires_missing_file_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('missing file:', 'missing path:')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'missing file:',
+        )
+
+
+def test_schema_gate_requires_bool_subclass_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('bool is a subclass of int', 'bool is a subtype of int')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'subclass of int',
+        )
+
+
+def test_schema_gate_requires_safe_load_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('yaml.safe_load', 'yaml.load')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'safe_load',
+        )
+
+
+def test_schema_gate_requires_third_pass_in_contract_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '"Third-pass after " + "#132"',
+            '"Third-pass after " + "#000"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "docstring must pin",
+        )
+
+
+def test_schema_gate_requires_fence_exact_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('FENCED_YAML_RE = re.compile(r"^```yaml\\n(.*?)\\n```", re.MULTILINE | re.DOTALL)', 'FENCED_YAML_RE = re.compile(r"^```yml\\n(.*?)\\n```", re.MULTILINE | re.DOTALL)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '```yaml',
+        )
+
+
+def test_schema_gate_requires_iso_exact_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('ISO_DATE_RE = re.compile(r"^\\d{4}-\\d{2}-\\d{2}")', 'ISO_DATE_RE = re.compile(r"^\\d{4}/\\d{2}/\\d{2}")')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ISO_DATE_RE',
+        )
+
+
+def test_schema_gate_requires_semver_exact_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('SEMVER_RE = re.compile(r"^\\d+\\.\\d+\\.\\d+$")', 'SEMVER_RE = re.compile(r"^\\d+\\.\\d+$")')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'SEMVER_RE',
+        )
+
+
+def test_schema_gate_requires_issue_exact_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('ISSUE_REF_RE = re.compile(r"#\\d+")', 'ISSUE_REF_RE = re.compile(r"#\\d{2,}")')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ISSUE_REF_RE',
+        )
+
+
+def test_schema_gate_requires_date_keys_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('DATE_KEYS = ("created", "last_updated")', 'DATE_KEYS = ("created",)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'last_updated',
+        )
+
+
+def test_schema_gate_requires_tiny_yaml_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('Tiny YAML subset parser', 'Tiny YAML subset reader')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Tiny YAML subset',
+        )
+
+
+def test_schema_gate_requires_scalar_doc_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('stewardship metadata values must be scalars', 'stewardship metadata values must be simple')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'scalars',
+        )
+
+
+def test_schema_gate_requires_active_needle_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "status must be ACTIVE for active stewardship docs",
+            "status must be ACTIVE for live stewardship docs",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "ACTIVE stewardship docs",
+        )
+
+
+def test_schema_gate_requires_contract_fn_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('def check_stewardship_schema_gate_contract(', 'def check_stewardship_schema_gate_contract_x(')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'check_stewardship_schema_gate_contract',
+        )
+
+
+def test_schema_gate_requires_contract_call_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('check_stewardship_schema_gate_contract(errors)', 'check_stewardship_schema_gate_contract_x(errors)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'check_stewardship_schema_gate_contract',
+        )
+
+
+def test_schema_gate_requires_second_pass_doc_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('Second-pass: FENCED_YAML_RE exact', 'Second-pass: FENCED_YAML_RE approx')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Second-pass: FENCED_YAML_RE exact',
+        )
+
+
+def test_schema_gate_requires_path_insert_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('sys.path.insert(0, str(_SCRIPTS))', 'sys.path.insert(1, str(_SCRIPTS))')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'sys.path.insert(0',
+        )
+
+
+def test_schema_gate_requires_yaml_none_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('yaml = None', 'yaml = 0')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'yaml = None',
+        )
+
+
+def test_schema_gate_requires_five_docs_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('five live stewardship docs only', 'five live stewardship docs alone')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'five live stewardship docs only',
+        )
+
+
+def test_schema_gate_requires_true_false_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('{"true", "false"}', '{"true", "no"}')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '"false"',
+        )
+
+
+def test_schema_gate_requires_null_tilde_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('{"null", "~"}', '{"none", "~"}')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '"null"',
+        )
+
+
+def test_schema_gate_requires_loaded_dict_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('isinstance(loaded, dict)', 'isinstance(loaded, Mapping)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'isinstance(loaded, dict)',
+        )
+
+
+def test_schema_gate_requires_nested_types_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('isinstance(value, (dict, list))', 'isinstance(value, (list,))')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '(dict, list)',
+        )
+
+
+def test_schema_gate_requires_expected_get_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('EXPECTED_VALUES.get(rel, {})', 'EXPECTED_VALUES.get(rel, dict())')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'EXPECTED_VALUES.get(rel, {})',
+        )
+
+
+def test_schema_gate_requires_level_set_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('level not in (0, 1, 2, 3)', 'level not in {0, 1, 2, 3}')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '(0, 1, 2, 3)',
+        )
+
+
+def test_schema_gate_requires_tier_lt_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('tier < 1', 'tier <= 0')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'tier < 1',
+        )
+
+
+def test_schema_gate_requires_scan_call_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('scan_secrets(path, errors)', 'scan_secrets(rel, errors)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'scan_secrets(path, errors)',
+        )
+
+
+def test_schema_gate_requires_exit_main_still_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('sys.exit(main())', 'sys.exit(0)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'sys.exit(main())',
+        )
+
+
+def test_schema_rejects_bool_autonomy_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-09-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\nautonomy_level: true\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            '0..3',
+        )
+
+
+def test_schema_rejects_bool_tier_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=(
+                "# I\n\n```yaml\nstatus: ACTIVE\ntier: true\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nedit_policy: keep invent-product closed\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'positive int',
+        )
+
+
+def test_schema_rejects_nested_list_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=(
+                "# I\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: [copilot]\nedit_policy: keep invent-product closed\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'scalar',
+        )
+
+
+def test_schema_rejects_empty_block_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents="# AGENTS\n\n```yaml\n\n```\n",
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'empty yaml',
+        )
+
+
+def test_schema_rejects_non_string_owner_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=(
+                "# I\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: 1\nedit_policy: keep invent-product closed\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'must be a string',
+        )
+
+
+def test_schema_rejects_bad_semver_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0\"\nlast_updated: \"2026-09-13\"\n"
+                "maintainer: smtp.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\nautonomy_level: 1\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'semver',
+        )
+
+
+def test_schema_rejects_closes_without_hash_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: public governance front-door repos\n"
+                "edit_policy: do not invent-product fields\ncloses: 16\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            '#N',
+        )
+
+
+def test_schema_rejects_inactive_status_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: DRAFT\ntier: 1\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nscope: public governance front-door repos\n"
+                "edit_policy: do not invent-product fields\ncloses: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'ACTIVE',
+        )
+
+
+def test_schema_rejects_bad_iso_date_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge=(
+                "# B\n\n```yaml\nstatus: ACTIVE\ntier: 1\ncreated: \"13-09-2026\"\n"
+                "owner: copilot\nscope: public governance front-door repos\n"
+                "edit_policy: do not invent-product fields\ncloses: \"#16\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'ISO-8601',
+        )
+
+
+def test_schema_rejects_missing_key_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude=(
+                "# CLAUDE\n\n```yaml\nrepo: agents-governance\nowner: \"fuzzywigg (smtp.eth)\"\n"
+                "surface: copilot\nautonomy_level: 1\nlast_updated: \"2026-09-13\"\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'missing metadata',
+        )
+
+
+def test_schema_rejects_wrong_maintainer_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            agents=(
+                "# AGENTS\n\n```yaml\nversion: \"1.0.0\"\nlast_updated: \"2026-09-13\"\n"
+                "maintainer: other.eth\nscope: repository-specific\n"
+                "parent_governance: github.com/fuzzywigg/agents-governance\nautonomy_level: 1\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'expected',
+        )
+
+
+def test_schema_rejects_tier_zero_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            backlog=(
+                "# I\n\n```yaml\nstatus: ACTIVE\ntier: 0\ncreated: \"2026-09-13\"\n"
+                "owner: copilot\nedit_policy: keep invent-product closed\n```\n"
+            ),
+        )
+        assert_fail_script(
+            scripts / "check_stewardship_schema.py",
+            tmp_path,
+            'positive int',
+        )
+
+
+def test_schema_gate_requires_deepen_doc_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('Deepen after #161', 'Deepen after #000')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Deepen after #161',
+        )
+
+
+def test_schema_gate_requires_deepen_doc_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('Deepen after #161', 'Deepen after #000')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Deepen after #161',
+        )
+
+
+def test_schema_gate_requires_path_isfile_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('path.is_file()', 'path.exists()')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'path.is_file()',
+        )
+
+
+def test_schema_gate_requires_path_isfile_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('path.is_file()', 'path.exists()')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'path.is_file()',
+        )
+
+
+def test_schema_gate_requires_block_strip_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('block.strip()', 'block.lstrip()')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'block.strip()',
+        )
+
+
+def test_schema_gate_requires_block_strip_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('block.strip()', 'block.lstrip()')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'block.strip()',
+        )
+
+
+def test_schema_gate_requires_except_exc_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('except Exception as exc', 'except Exception as err')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Exception as exc',
+        )
+
+
+def test_schema_gate_requires_except_exc_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('except Exception as exc', 'except Exception as err')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Exception as exc',
+        )
+
+
+def test_schema_gate_requires_items_pin_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('DOC_SCHEMAS.items()', 'DOC_SCHEMAS.keys()')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'DOC_SCHEMAS.items()',
+        )
+
+
+def test_schema_gate_requires_items_pin_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('DOC_SCHEMAS.items()', 'DOC_SCHEMAS.keys()')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'DOC_SCHEMAS.items()',
+        )
+
+
+def test_schema_gate_requires_key_missing_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('key not in data', 'key not in required_keys')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'key not in data',
+        )
+
+
+def test_schema_gate_requires_key_missing_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('key not in data', 'key not in required_keys')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'key not in data',
+        )
+
+
+def test_schema_gate_requires_isinstance_str_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('isinstance(value, str)', 'isinstance(value, int)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'isinstance(value, str)',
+        )
+
+
+def test_schema_gate_requires_isinstance_str_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('isinstance(value, str)', 'isinstance(value, int)')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'isinstance(value, str)',
+        )
+
+
+def test_schema_gate_requires_string_keys_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('key in STRING_KEYS', 'key in DATE_KEYS')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'STRING_KEYS',
+        )
+
+
+def test_schema_gate_requires_string_keys_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('key in STRING_KEYS', 'key in DATE_KEYS')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'STRING_KEYS',
+        )
+
+
+def test_schema_gate_requires_status_get_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('data.get("status")', 'data.get("tier")')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'data.get("status")',
+        )
+
+
+def test_schema_gate_requires_status_get_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('data.get("status")', 'data.get("tier")')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'data.get("status")',
+        )
+
+
+def test_schema_gate_requires_edit_policy_in_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('"edit_policy" in data', '"closes" in data')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'edit_policy',
+        )
+
+
+def test_schema_gate_requires_edit_policy_in_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('"edit_policy" in data', '"closes" in data')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'edit_policy',
+        )
+
+
+def test_schema_gate_requires_agents_rel_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('rel == "AGENTS.md"', 'rel == "CLAUDE.md"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'AGENTS.md',
+        )
+
+
+def test_schema_gate_requires_agents_rel_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('rel == "AGENTS.md"', 'rel == "CLAUDE.md"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'AGENTS.md',
+        )
+
+
+def test_schema_gate_requires_engine_pin_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('engine = "PyYAML" if yaml is not None', 'engine = "PyYAML" if yaml is None')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'PyYAML',
+        )
+
+
+def test_schema_gate_requires_engine_pin_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('engine = "PyYAML" if yaml is not None', 'engine = "PyYAML" if yaml is None')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'PyYAML',
+        )
+
+
+def test_schema_gate_requires_ble001_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('noqa: BLE001', 'noqa: BLE002')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'BLE001',
+        )
+
+
+def test_schema_gate_requires_ble001_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('noqa: BLE001', 'noqa: BLE002')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'BLE001',
+        )
+
+
+def test_schema_gate_requires_errors_init_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('errors: list[str] = []', 'errors: list[str] = list()')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'errors: list[str] = []',
+        )
+
+
+def test_schema_gate_requires_errors_init_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('errors: list[str] = []', 'errors: list[str] = list()')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'errors: list[str] = []',
+        )
+
+
+def test_schema_gate_requires_got_want_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('got != want', 'got == want')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'got != want',
+        )
+
+
+def test_schema_gate_requires_got_want_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('got != want', 'got == want')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'got != want',
+        )
+
+
+def test_schema_gate_requires_autonomy_in_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('"autonomy_level" in data', '"version" in data')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'autonomy_level',
+        )
+
+
+def test_schema_gate_requires_autonomy_in_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('"autonomy_level" in data', '"version" in data')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'autonomy_level',
+        )
+
+
+def test_schema_gate_requires_tier_in_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('"tier" in data', '"status" in data')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '"tier" in data',
+        )
+
+
+def test_schema_gate_requires_tier_in_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('"tier" in data', '"status" in data')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '"tier" in data',
+        )
+
+
+def test_schema_gate_requires_date_loop_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('for date_key in DATE_KEYS', 'for date_key in STRING_KEYS')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'DATE_KEYS',
+        )
+
+
+def test_schema_gate_requires_date_loop_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8").replace('for date_key in DATE_KEYS', 'for date_key in STRING_KEYS')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'DATE_KEYS',
+        )
+
+
+def test_schema_gate_requires_leftover_pin_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('schema leftover slice', 'schema leftover chunk')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'schema leftover slice',
+        )
+
+
+def test_schema_gate_requires_leftover_pin_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('schema leftover slice', 'schema leftover chunk')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'schema leftover slice',
+        )
+
+
+def test_schema_gate_requires_not_docs_spam_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('not docs-lint / actionlint / wiki / workflow spam', 'not docs-lint / actionlint / wiki / relative spam')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'workflow spam',
+        )
+
+
+def test_schema_gate_requires_not_docs_spam_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('not docs-lint / actionlint / wiki / workflow spam', 'not docs-lint / actionlint / wiki / relative spam')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'workflow spam',
+        )
+
+
+def test_schema_passes_live_after_161() -> None:
+    assert_pass_live(ROOT / "scripts" / "check_stewardship_schema.py")
+
+
+def test_schema_passes_live_still_after_161() -> None:
+    assert_pass_live(ROOT / "scripts" / "check_stewardship_schema.py")
+
+
+def test_schema_passes_live_badge_with_schema_contract_after_161() -> None:
+    assert_pass_live(ROOT / "scripts" / "check_badge_standard.py")
+
+
+def test_schema_passes_live_badge_with_schema_contract_still_after_161() -> None:
+    assert_pass_live(ROOT / "scripts" / "check_badge_standard.py")
+
+
+def test_docs_lint_gate_requires_leftover_161_marker_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Leftover after #161' in text
+        path.write_text(text.replace('Leftover after #161', 'Leftover after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Leftover after #161',
+        )
+
+
+def test_docs_lint_gate_requires_leftover_161_marker_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Leftover after #161' in text
+        path.write_text(text.replace('Leftover after #161', 'Leftover after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Leftover after #161',
+        )
+
+
+def test_docs_lint_gate_requires_md_leftover_wording_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'docs-lint leftover after #161' in text
+        path.write_text(text.replace('docs-lint leftover after #161', 'docs-lint leftover after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'docs-lint leftover after #161',
+        )
+
+
+def test_docs_lint_gate_requires_md_leftover_wording_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'docs-lint leftover after #161' in text
+        path.write_text(text.replace('docs-lint leftover after #161', 'docs-lint leftover after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'docs-lint leftover after #161',
+        )
+
+
+def test_docs_lint_gate_requires_default_line_pin_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact default: true line' in text
+        path.write_text(text.replace('exact default: true line', 'exact default: true row'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact default: true line',
+        )
+
+
+def test_docs_lint_gate_requires_default_line_pin_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact default: true line' in text
+        path.write_text(text.replace('exact default: true line', 'exact default: true row'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact default: true line',
+        )
+
+
+def test_docs_lint_gate_requires_md013_line_pin_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact MD013 line' in text
+        path.write_text(text.replace('exact MD013 line', 'exact MD013 row'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact MD013 line',
+        )
+
+
+def test_docs_lint_gate_requires_md013_line_pin_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact MD013 line' in text
+        path.write_text(text.replace('exact MD013 line', 'exact MD013 row'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact MD013 line',
+        )
+
+
+def test_docs_lint_gate_requires_md024_line_pin_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact MD024 line' in text
+        path.write_text(text.replace('exact MD024 line', 'exact MD024 row'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact MD024 line',
+        )
+
+
+def test_docs_lint_gate_requires_md024_line_pin_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact MD024 line' in text
+        path.write_text(text.replace('exact MD024 line', 'exact MD024 row'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact MD024 line',
+        )
+
+
+def test_docs_lint_gate_requires_md033_line_pin_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact MD033 line' in text
+        path.write_text(text.replace('exact MD033 line', 'exact MD033 row'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact MD033 line',
+        )
+
+
+def test_docs_lint_gate_requires_md033_line_pin_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact MD033 line' in text
+        path.write_text(text.replace('exact MD033 line', 'exact MD033 row'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact MD033 line',
+        )
+
+
+def test_docs_lint_gate_requires_md041_line_pin_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact MD041 line' in text
+        path.write_text(text.replace('exact MD041 line', 'exact MD041 row'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact MD041 line',
+        )
+
+
+def test_docs_lint_gate_requires_md041_line_pin_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact MD041 line' in text
+        path.write_text(text.replace('exact MD041 line', 'exact MD041 row'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact MD041 line',
+        )
+
+
+def test_docs_lint_gate_requires_md060_line_pin_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact MD060 line' in text
+        path.write_text(text.replace('exact MD060 line', 'exact MD060 row'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact MD060 line',
+        )
+
+
+def test_docs_lint_gate_requires_md060_line_pin_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact MD060 line' in text
+        path.write_text(text.replace('exact MD060 line', 'exact MD060 row'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact MD060 line',
+        )
+
+
+def test_docs_lint_gate_requires_complement_lychee_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'complement #161 lychee' in text
+        path.write_text(text.replace('complement #161 lychee', 'complement #000 lychee'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'complement #161 lychee',
+        )
+
+
+def test_docs_lint_gate_requires_complement_lychee_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'complement #161 lychee' in text
+        path.write_text(text.replace('complement #161 lychee', 'complement #000 lychee'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'complement #161 lychee',
+        )
+
+def test_docs_lint_gate_requires_not_al_wiki_schema_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'not actionlint / wiki / schema spam' in text
+        path.write_text(text.replace('not actionlint / wiki / schema spam', 'not actionlint / wiki / relative spam'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'not actionlint / wiki / schema spam',
+        )
+
+
+def test_docs_lint_gate_requires_not_al_wiki_schema_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'not actionlint / wiki / schema spam' in text
+        path.write_text(text.replace('not actionlint / wiki / schema spam', 'not actionlint / wiki / relative spam'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'not actionlint / wiki / schema spam',
+        )
+
+
+def test_markdownlint_rejects_wrong_default_line_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8")
+        assert '  "default": true,' in text
+        path.write_text(text.replace('  "default": true,', '  "default": false,', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "docs-lint leftover after #161",
+        )
+
+
+def test_markdownlint_rejects_wrong_default_line_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8")
+        assert '  "default": true,' in text
+        path.write_text(text.replace('  "default": true,', '  "default": false,', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "docs-lint leftover after #161",
+        )
+
+
+def test_markdownlint_rejects_wrong_md013_line_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8")
+        assert '  "MD013": { "line_length": 200 },' in text
+        path.write_text(text.replace('  "MD013": { "line_length": 200 },', '  "MD013": { "line_length": 100 },', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "docs-lint leftover after #161",
+        )
+
+
+def test_markdownlint_rejects_wrong_md013_line_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8")
+        assert '  "MD013": { "line_length": 200 },' in text
+        path.write_text(text.replace('  "MD013": { "line_length": 200 },', '  "MD013": { "line_length": 100 },', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "docs-lint leftover after #161",
+        )
+
+
+def test_markdownlint_rejects_wrong_md024_line_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8")
+        assert '  "MD024": { "siblings_only": true },' in text
+        path.write_text(text.replace('  "MD024": { "siblings_only": true },', '  "MD024": { "siblings_only": false },', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "docs-lint leftover after #161",
+        )
+
+
+def test_markdownlint_rejects_wrong_md024_line_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8")
+        assert '  "MD024": { "siblings_only": true },' in text
+        path.write_text(text.replace('  "MD024": { "siblings_only": true },', '  "MD024": { "siblings_only": false },', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "docs-lint leftover after #161",
+        )
+
+
+def test_markdownlint_rejects_wrong_md033_line_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8")
+        assert '  "MD033": false,' in text
+        path.write_text(text.replace('  "MD033": false,', '  "MD033": true,', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "docs-lint leftover after #161",
+        )
+
+
+def test_markdownlint_rejects_wrong_md033_line_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8")
+        assert '  "MD033": false,' in text
+        path.write_text(text.replace('  "MD033": false,', '  "MD033": true,', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "docs-lint leftover after #161",
+        )
+
+
+def test_markdownlint_rejects_wrong_md041_line_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8")
+        assert '  "MD041": false,' in text
+        path.write_text(text.replace('  "MD041": false,', '  "MD041": true,', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "docs-lint leftover after #161",
+        )
+
+
+def test_markdownlint_rejects_wrong_md041_line_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8")
+        assert '  "MD041": false,' in text
+        path.write_text(text.replace('  "MD041": false,', '  "MD041": true,', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "docs-lint leftover after #161",
+        )
+
+
+def test_markdownlint_rejects_wrong_md060_line_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8")
+        assert '  "MD060": false' in text
+        path.write_text(text.replace('  "MD060": false', '  "MD060": true', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "docs-lint leftover after #161",
+        )
+
+
+def test_markdownlint_rejects_wrong_md060_line_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8")
+        assert '  "MD060": false' in text
+        path.write_text(text.replace('  "MD060": false', '  "MD060": true', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "docs-lint leftover after #161",
+        )
+
+
+def test_actionlint_gate_requires_leftover_161_marker_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Leftover after #161' in text
+        path.write_text(text.replace('Leftover after #161', 'Leftover after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Leftover after #161',
+        )
+
+
+def test_actionlint_gate_requires_leftover_161_marker_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Leftover after #161' in text
+        path.write_text(text.replace('Leftover after #161', 'Leftover after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Leftover after #161',
+        )
+
+
+def test_actionlint_gate_requires_self_hosted_reject_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'runs-on: self-hosted' in text
+        path.write_text(text.replace('runs-on: self-hosted', 'runs-on: other-hosted'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'runs-on: self-hosted',
+        )
+
+
+def test_actionlint_gate_requires_self_hosted_reject_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'runs-on: self-hosted' in text
+        path.write_text(text.replace('runs-on: self-hosted', 'runs-on: other-hosted'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'runs-on: self-hosted',
+        )
+
+
+def test_actionlint_gate_requires_reject_self_needle_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'actionlint-style rejects runs-on: self-hosted' in text
+        path.write_text(text.replace('actionlint-style rejects runs-on: self-hosted', 'actionlint-style rejects runs-on: other-hosted'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'actionlint-style rejects runs-on: self-hosted',
+        )
+
+
+def test_actionlint_gate_requires_reject_self_needle_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'actionlint-style rejects runs-on: self-hosted' in text
+        path.write_text(text.replace('actionlint-style rejects runs-on: self-hosted', 'actionlint-style rejects runs-on: other-hosted'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'actionlint-style rejects runs-on: self-hosted',
+        )
+
+
+def test_actionlint_gate_requires_required_workflows_loop_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'for name in REQUIRED_WORKFLOWS' in text
+        path.write_text(text.replace('for name in REQUIRED_WORKFLOWS', 'for name in OPTIONAL_WORKFLOWS'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'for name in REQUIRED_WORKFLOWS',
+        )
+
+
+def test_actionlint_gate_requires_required_workflows_loop_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'for name in REQUIRED_WORKFLOWS' in text
+        path.write_text(text.replace('for name in REQUIRED_WORKFLOWS', 'for name in OPTIONAL_WORKFLOWS'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'for name in REQUIRED_WORKFLOWS',
+        )
+
+
+def test_actionlint_gate_requires_not_157_path_order_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'not #157 path-order' in text
+        path.write_text(text.replace('not #157 path-order', 'not #000 path-order'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'not #157 path-order',
+        )
+
+
+def test_actionlint_gate_requires_not_157_path_order_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'not #157 path-order' in text
+        path.write_text(text.replace('not #157 path-order', 'not #000 path-order'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'not #157 path-order',
+        )
+
+
+def test_actionlint_gate_requires_not_161_membership_spam_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '#161 membership spam' in text
+        path.write_text(text.replace('#161 membership spam', '#000 membership spam'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '#161 membership spam',
+        )
+
+
+def test_actionlint_gate_requires_not_161_membership_spam_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert '#161 membership spam' in text
+        path.write_text(text.replace('#161 membership spam', '#000 membership spam'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '#161 membership spam',
+        )
+
+
+def test_actionlint_rejects_self_hosted_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert "runs-on: ubuntu-latest" in text
+        path.write_text(text.replace("runs-on: ubuntu-latest", "runs-on: self-hosted", 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "runs-on: self-hosted",
+        )
+
+
+def test_actionlint_rejects_self_hosted_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        assert "runs-on: ubuntu-latest" in text
+        path.write_text(text.replace("runs-on: ubuntu-latest", "runs-on: self-hosted", 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "runs-on: self-hosted",
+        )
+
+
+def test_wiki_gate_requires_leftover_161_marker_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Leftover after #161' in text
+        path.write_text(text.replace('Leftover after #161', 'Leftover after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Leftover after #161',
+        )
+
+
+def test_wiki_gate_requires_leftover_161_marker_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Leftover after #161' in text
+        path.write_text(text.replace('Leftover after #161', 'Leftover after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Leftover after #161',
+        )
+
+
+def test_wiki_gate_requires_wiki_leftover_wording_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'wiki-badge leftover after #161' in text
+        path.write_text(text.replace('wiki-badge leftover after #161', 'wiki-badge leftover after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'wiki-badge leftover after #161',
+        )
+
+
+def test_wiki_gate_requires_wiki_leftover_wording_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'wiki-badge leftover after #161' in text
+        path.write_text(text.replace('wiki-badge leftover after #161', 'wiki-badge leftover after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'wiki-badge leftover after #161',
+        )
+
+
+def test_wiki_gate_requires_not_141_posture_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'distinct from #141 posture' in text
+        path.write_text(text.replace('distinct from #141 posture', 'distinct from #000 posture'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'distinct from #141 posture',
+        )
+
+
+def test_wiki_gate_requires_not_141_posture_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'distinct from #141 posture' in text
+        path.write_text(text.replace('distinct from #141 posture', 'distinct from #000 posture'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'distinct from #141 posture',
+        )
+
+
+def test_wiki_gate_requires_pages_tuple_needle_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact PUBLISHABLE_PAGES tuple' in text
+        path.write_text(text.replace('exact PUBLISHABLE_PAGES tuple', 'exact PUBLISHABLE_PAGES list'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact PUBLISHABLE_PAGES tuple',
+        )
+
+
+def test_wiki_gate_requires_pages_tuple_needle_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact PUBLISHABLE_PAGES tuple' in text
+        path.write_text(text.replace('exact PUBLISHABLE_PAGES tuple', 'exact PUBLISHABLE_PAGES list'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact PUBLISHABLE_PAGES tuple',
+        )
+
+
+def test_wiki_gate_requires_ci_hints_needle_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact STEWARDSHIP_CI_HINTS tuple' in text
+        path.write_text(text.replace('exact STEWARDSHIP_CI_HINTS tuple', 'exact STEWARDSHIP_CI_HINTS list'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact STEWARDSHIP_CI_HINTS tuple',
+        )
+
+
+def test_wiki_gate_requires_ci_hints_needle_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact STEWARDSHIP_CI_HINTS tuple' in text
+        path.write_text(text.replace('exact STEWARDSHIP_CI_HINTS tuple', 'exact STEWARDSHIP_CI_HINTS list'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact STEWARDSHIP_CI_HINTS tuple',
+        )
+
+
+def test_wiki_rejects_reordered_publishable_pages_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        old = 'PUBLISHABLE_PAGES = (\n    "Home.md",\n    "Overview.md",'
+        new = 'PUBLISHABLE_PAGES = (\n    "Overview.md",\n    "Home.md",'
+        assert old in text
+        path.write_text(text.replace(old, new, 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "PUBLISHABLE_PAGES",
+        )
+
+
+def test_wiki_rejects_reordered_publishable_pages_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        old = 'PUBLISHABLE_PAGES = (\n    "Home.md",\n    "Overview.md",'
+        new = 'PUBLISHABLE_PAGES = (\n    "Overview.md",\n    "Home.md",'
+        assert old in text
+        path.write_text(text.replace(old, new, 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "PUBLISHABLE_PAGES",
+        )
+
+
+def test_wiki_rejects_missing_ci_hint_stewardship_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"stewardship-checks"' in text
+        path.write_text(text.replace('"stewardship-checks"', '"invent-checks"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "STEWARDSHIP_CI_HINTS",
+        )
+
+
+def test_wiki_rejects_wrong_wiki_root_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'WIKI = ROOT / "docs" / "wiki"' in text or "WIKI = ROOT / 'docs' / 'wiki'" in text
+        path.write_text(text.replace('WIKI = ROOT / "docs" / "wiki"', 'WIKI = ROOT / "docs" / "pages"', 1).replace("WIKI = ROOT / 'docs' / 'wiki'", "WIKI = ROOT / 'docs' / 'pages'", 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "WIKI = ROOT",
+        )
+
+
+
+def test_wiki_rejects_missing_ci_hint_stewardship_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"stewardship-checks"' in text
+        path.write_text(text.replace('"stewardship-checks"', '"invent-checks"', 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "STEWARDSHIP_CI_HINTS",
+        )
+
+
+def test_wiki_rejects_wrong_wiki_root_still_after_161() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'WIKI = ROOT / "docs" / "wiki"' in text or "WIKI = ROOT / 'docs' / 'wiki'" in text
+        path.write_text(text.replace('WIKI = ROOT / "docs" / "wiki"', 'WIKI = ROOT / "docs" / "pages"', 1).replace("WIKI = ROOT / 'docs' / 'wiki'", "WIKI = ROOT / 'docs' / 'pages'", 1), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "WIKI = ROOT",
+        )
+
+
+def test_gates_accept_live_tree_after_161() -> None:
+    assert_pass_live(ROOT / "scripts" / "check_badge_standard.py")
+
+
+def test_gates_accept_live_tree_still_after_161() -> None:
+    assert_pass_live(ROOT / "scripts" / "check_badge_standard.py")
+
 def main() -> int:
     tests = [
-        # Badge (13)
-        test_badge_rejects_wrong_order,
-        test_badge_rejects_invent_product,
-        test_badge_rejects_wrong_repo_slug,
-        test_badge_rejects_noncontiguous_row,
-        test_badge_rejects_secret_url,
-        test_badge_rejects_http_image,
-        test_badge_rejects_stewardship_product_badge,
-        test_badge_rejects_wrong_license_link,
-        test_badge_rejects_missing_workflow_dispatch,
-        test_badge_rejects_missing_fail_true,
-        test_badge_rejects_missing_markdownlint_config,
-        test_badge_rejects_missing_contributing_invent_warning,
-        test_badge_passes_good_fixture,
-        # Relative / markdown-link (13 + 9)
-        test_relative_links_reject_missing,
-        test_relative_links_reject_escape,
-        test_relative_links_reject_missing_fragment,
-        test_relative_links_ignore_fenced_examples,
-        test_relative_links_ignore_tilde_fences,
-        test_relative_links_reject_javascript_scheme,
-        test_relative_links_reject_data_scheme,
-        test_relative_links_reject_http_insecure,
-        test_relative_links_reject_protocol_relative,
-        test_relative_links_reject_encoded_escape,
-        test_relative_links_reject_cross_file_missing_fragment,
-        test_relative_links_accept_valid_fragment,
-        test_relative_links_skip_owasp_file,
-        test_relative_links_reject_file_scheme,
-        test_relative_links_reject_vbscript_scheme,
-        test_relative_links_reject_empty_target,
-        test_relative_links_accept_mailto,
-        test_relative_links_accept_https,
-        test_relative_links_skip_github_agents,
-        test_relative_links_reject_broken_image,
-        test_relative_links_accept_cross_file_fragment,
-        test_relative_links_github_slug_punctuation,
-        # Wiki (7 + 5)
-        test_wiki_rejects_unexpected_page,
-        test_wiki_rejects_missing_home_backlink,
-        test_wiki_rejects_invent_chrome,
-        test_wiki_rejects_missing_topic_hint,
-        test_wiki_rejects_http_link,
-        test_wiki_rejects_secret_pattern,
-        test_wiki_rejects_missing_out_of_scope,
-        test_wiki_rejects_missing_page,
-        test_wiki_rejects_missing_readme_link,
-        test_wiki_rejects_missing_ci_hint,
-        test_wiki_rejects_dangerous_scheme,
-        test_wiki_passes_good_fixture,
-        # Schema (11 + 3)
-        test_schema_rejects_wrong_value,
-        test_schema_rejects_inactive_status,
-        test_schema_rejects_missing_key,
-        test_schema_rejects_bad_autonomy_level,
-        test_schema_rejects_bad_tier,
-        test_schema_rejects_bad_iso_date,
-        test_schema_rejects_edit_policy_without_invent,
-        test_schema_rejects_wrong_surface,
-        test_schema_rejects_bad_semver,
-        test_schema_rejects_closes_without_issue,
-        test_schema_rejects_empty_required_value,
-        test_schema_rejects_missing_yaml_block,
-        test_schema_rejects_missing_file,
-        test_schema_passes_good_fixture,
-        # Common / workflow / actionlint / lycheeignore (6 + 22)
-        test_common_secret_patterns,
-        test_common_dangerous_schemes,
-        test_workflow_hardening_requires_timeout,
-        test_workflow_hardening_requires_schedule,
-        test_workflow_hardening_requires_concurrency,
-        test_workflow_hardening_requires_pyyaml_install,
-        test_lycheeignore_requires_shields_exclude,
-        test_lycheeignore_rejects_star_exclude,
-        test_missing_lycheeignore_fails,
-        test_missing_markdownlint_json_fails,
-        test_actionlint_rejects_pull_request_target,
-        test_actionlint_rejects_contents_write,
-        test_actionlint_rejects_unpinned_action,
-        test_actionlint_rejects_float_main_ref,
-        test_actionlint_requires_runs_on,
-        test_stewardship_requires_actionlint_needle,
-        test_link_check_requires_lycheeignore_reference,
-        test_badge_rejects_missing_license_file,
-        test_badge_rejects_forbidden_hint_in_row,
-        test_badge_rejects_wrong_link_check_image,
-        test_badge_rejects_missing_readme_badge_doc_link,
-        test_badge_rejects_missing_agents_selftest_needle,
-        test_workflow_rejects_missing_permissions_read,
-        test_workflow_rejects_missing_exclude_loopback,
-        test_workflow_rejects_missing_max_retries,
-        test_common_secret_url_hints,
-        test_common_forbidden_badge_hints,
-        test_github_slug_helper,
-        # TOKENMAXX deepen after #27 (+45)
-        test_actionlint_rejects_write_all,
-        test_actionlint_rejects_float_master_ref,
-        test_actionlint_rejects_float_latest_ref,
-        test_actionlint_requires_name,
-        test_actionlint_requires_steps,
-        test_link_check_requires_github_token,
-        test_link_check_requires_lychee_needle,
-        test_link_check_requires_exclude_path,
-        test_link_check_requires_max_concurrency,
-        test_link_check_requires_lychee_timeout,
-        test_markdown_lint_requires_owasp_exclude,
-        test_markdown_lint_requires_agents_exclude,
-        test_markdown_lint_requires_markdownlint_needle,
-        test_stewardship_requires_selftest_needle,
-        test_stewardship_requires_setup_python,
-        test_stewardship_requires_run_script,
-        test_stewardship_requires_actionlint_version_pin,
-        test_stewardship_requires_actionlint_all_workflows,
-        test_workflow_rejects_missing_pull_request,
-        test_badge_rejects_missing_h1,
-        test_badge_rejects_two_badges_only,
-        test_badge_rejects_http_badge_link,
-        test_badge_rejects_wrong_markdown_lint_image,
-        test_badge_rejects_missing_readme_stewardship_script,
-        test_badge_rejects_missing_contributing_script,
-        test_badge_rejects_missing_workflow_file,
-        test_lycheeignore_accepts_regex_escaped_shields,
-        test_lycheeignore_accepts_literal_shields,
-        test_relative_links_accept_tel,
-        test_relative_links_reject_nul,
-        test_relative_links_reject_bare_hash,
-        test_relative_links_accept_title_attr,
-        test_relative_links_accept_existing_image,
-        test_wiki_rejects_missing_publish,
-        test_wiki_rejects_missing_badge_link,
-        test_wiki_rejects_missing_home_page_link,
-        test_wiki_rejects_missing_publish_do_not_push,
-        test_wiki_rejects_missing_relative_hint,
-        test_wiki_rejects_missing_invent_on_stewardship,
-        test_schema_rejects_wrong_maintainer,
-        test_schema_rejects_wrong_claude_parent,
-        test_schema_rejects_wrong_badge_owner,
-        test_schema_rejects_secret_in_doc,
-        test_common_strip_fenced,
-        test_common_dangerous_schemes_complete,
-        # TOKENMAXX deepen after #28 (+48)
-        test_workflow_requires_cancel_in_progress,
-        test_link_check_requires_markdown_glob,
-        test_actionlint_requires_timeout_minutes_local,
-        test_actionlint_allows_docker_uses_without_pin,
-        test_badge_rejects_missing_badge_standard_file,
-        test_badge_rejects_missing_contributing_file,
-        test_badge_rejects_license_image_wrong_path,
-        test_badge_rejects_license_image_missing_repo_slug,
-        test_badge_rejects_secret_in_readme_body,
-        test_badge_rejects_agents_missing_link_check_needle,
-        test_badge_rejects_agents_missing_markdown_lint_needle,
-        test_badge_rejects_agents_missing_stewardship_needle,
-        test_badge_rejects_agents_missing_run_script_needle,
-        test_badge_doc_rejects_missing_invent_wording,
-        test_badge_doc_rejects_missing_three_badge_max,
-        test_badge_doc_rejects_stewardship_without_fourth_refusal,
-        test_badge_accepts_absolute_license_blob_link,
-        test_lycheeignore_rejects_https_star,
-        test_relative_links_accept_angle_bracket_https,
-        test_relative_links_accept_license_target,
-        test_relative_links_github_slug_ampersand,
-        test_relative_links_accept_ampersand_heading_fragment,
-        test_relative_links_reject_whitespace_only_target,
-        test_wiki_rejects_missing_publish_link_check,
-        test_wiki_rejects_missing_publish_markdown_lint,
-        test_wiki_rejects_missing_publish_secrets,
-        test_wiki_rejects_missing_overview_topic,
-        test_wiki_rejects_missing_security_topic,
-        test_wiki_rejects_stars_badge_chrome,
-        test_wiki_rejects_missing_wiki_dir,
-        test_schema_rejects_wrong_agents_scope,
-        test_schema_rejects_wrong_agents_parent,
-        test_schema_rejects_wrong_claude_repo,
-        test_schema_rejects_inactive_publish_status,
-        test_schema_rejects_backlog_wrong_tier,
-        test_schema_rejects_autonomy_as_string,
-        test_schema_rejects_bad_claude_date,
-        test_schema_rejects_unparseable_yaml,
-        test_common_secret_patterns_extended,
-        test_common_forbidden_badge_hints_extended,
-        test_common_has_dangerous_scheme_helper,
-        test_common_load_workflow_text_helper,
-        test_common_fail_helper_appends,
-        test_common_markdown_files_helper,
-        test_markdown_lint_requires_config_needle,
-        test_stewardship_requires_actionlint_link_check_path,
-        test_stewardship_requires_actionlint_stewardship_path,
-        test_workflow_rejects_missing_dispatch_on_stewardship,
-        # TOKENMAXX deepen after #29 (+51)
-        test_workflow_requires_cancel_in_progress_true,
-        test_workflow_requires_cancel_in_progress_true_on_stewardship,
-        test_link_check_requires_agents_exclude_path,
-        test_markdown_lint_requires_markdown_glob,
-        test_lycheeignore_rejects_http_star,
-        test_stewardship_requires_actionlint_markdown_lint_path,
-        test_actionlint_rejects_unpinned_second_action,
-        test_actionlint_rejects_float_main_on_setup_python,
-        test_workflow_rejects_missing_schedule_on_link_check,
-        test_workflow_rejects_missing_concurrency_on_markdown_lint,
-        test_badge_rejects_link_check_relative_workflow_link,
-        test_badge_rejects_markdown_lint_relative_workflow_link,
-        test_badge_accepts_dot_slash_license_link,
-        test_badge_rejects_forbidden_coverage_hint,
-        test_badge_rejects_secret_url_token_query,
-        test_badge_doc_rejects_missing_link_check_label,
-        test_badge_doc_rejects_missing_shields_license_snippet,
-        test_badge_rejects_four_badges,
-        test_relative_links_accept_angle_bracket_relative,
-        test_relative_links_github_slug_backticks,
-        test_relative_links_github_slug_markdown_link_heading,
-        test_relative_links_accept_nested_path,
-        test_relative_links_reject_missing_nested,
-        test_relative_links_accept_image_with_title,
-        test_relative_links_reject_percent_encoded_escape,
-        test_wiki_rejects_missing_actionlint_on_stewardship,
-        test_wiki_rejects_missing_autonomy_topic,
-        test_wiki_rejects_missing_routing_topic,
-        test_wiki_rejects_missing_home_out_of_scope,
-        test_wiki_rejects_forks_badge_chrome,
-        test_wiki_rejects_codecov_badge_chrome,
-        test_wiki_rejects_missing_home_to_routing,
-        test_wiki_rejects_secret_in_publish,
-        test_wiki_rejects_missing_publish_page_table_row,
-        test_schema_rejects_wrong_badge_status,
-        test_schema_rejects_wrong_badge_tier,
-        test_schema_rejects_publish_closes_without_issue,
-        test_schema_rejects_empty_agents_maintainer,
-        test_schema_rejects_tier_as_string,
-        test_schema_rejects_autonomy_out_of_range,
-        test_schema_rejects_non_mapping_yaml,
-        test_schema_rejects_bad_badge_created_date,
-        test_common_secret_url_hints_complete,
-        test_common_forbidden_badge_hints_social,
-        test_common_secret_patterns_private_key,
-        test_common_strip_fenced_tilde,
-        test_common_scan_secrets_ghp,
-        test_markdown_lint_requires_agents_exclude_path,
-        test_link_check_requires_fail_true_still,
-        test_stewardship_requires_pyyaml_install_needle,
-        test_workflow_rejects_missing_permissions_on_link_check,
-        # TOKENMAXX deepen after #30 (+56)
-        test_stewardship_requires_python_version_needle,
-        test_stewardship_requires_python_312_pin,
-        test_workflow_requires_cancel_in_progress_true_on_link_check,
-        test_actionlint_rejects_float_master_on_setup_python,
-        test_actionlint_rejects_float_latest_on_setup_python,
-        test_actionlint_rejects_contents_write_on_stewardship,
-        test_workflow_rejects_missing_timeout_on_stewardship,
-        test_workflow_rejects_missing_dispatch_on_markdown_lint,
-        test_lycheeignore_rejects_bare_star,
-        test_link_check_requires_markdown_glob_not_txt,
-        test_badge_rejects_discord_hint,
-        test_badge_rejects_producthunt_hint,
-        test_badge_rejects_api_key_query,
-        test_badge_rejects_access_token_query,
-        test_badge_rejects_http_license_image,
-        test_badge_rejects_license_first_order,
-        test_badge_doc_rejects_missing_markdown_lint_snippet,
-        test_badge_doc_rejects_missing_link_check_snippet,
-        test_badge_rejects_missing_workflow_link_check_file,
-        test_relative_links_skip_node_modules,
-        test_relative_links_reject_javascript_uppercase,
-        test_relative_links_reject_data_uppercase,
-        test_relative_links_reject_nested_escape,
-        test_relative_links_github_slug_numbers,
-        test_relative_links_accept_numbered_heading_fragment,
-        test_relative_links_accept_mailto_and_https,
-        test_relative_links_reject_file_uppercase,
-        test_wiki_rejects_missing_invent_on_home,
-        test_wiki_rejects_missing_secrets_on_home,
-        test_wiki_rejects_missing_l1_on_autonomy,
-        test_wiki_rejects_missing_kill_on_security,
-        test_wiki_rejects_downloads_badge_chrome,
-        test_wiki_rejects_missing_home_to_security,
-        test_wiki_rejects_missing_publish_overview_row,
-        test_wiki_rejects_data_scheme,
-        test_wiki_rejects_missing_badge_topic_on_stewardship,
-        test_schema_rejects_wrong_claude_owner,
-        test_schema_rejects_wrong_claude_autonomy,
-        test_schema_rejects_inactive_backlog_status,
-        test_schema_rejects_empty_badge_scope,
-        test_schema_rejects_missing_badge_closes_key,
-        test_schema_rejects_agents_autonomy_drift,
-        test_schema_rejects_publish_missing_purpose_key,
-        test_schema_rejects_float_autonomy,
-        test_common_forbidden_badge_hints_commerce,
-        test_common_secret_patterns_sk_token,
-        test_common_has_dangerous_scheme_casefold,
-        test_common_scan_secrets_url_token_hint,
-        test_markdown_lint_requires_owasp_exclude_still,
-        test_stewardship_requires_timeout_minutes_needle,
-        test_actionlint_rejects_write_all_on_markdown_lint,
-        test_badge_rejects_stars_hint,
-        test_relative_links_accept_parent_relative_existing,
-        test_wiki_rejects_twitter_badge_chrome,
-        test_schema_rejects_wrong_agents_version_semver_prerelease,
-        test_common_dangerous_schemes_file,
-        # TOKENMAXX deepen after #31 (+56)
-        test_link_check_requires_no_progress,
-        test_link_check_requires_verbose,
-        test_stewardship_requires_actions_checkout,
-        test_workflow_requires_cancel_in_progress_true_on_markdown_lint,
-        test_actionlint_rejects_pull_request_target_on_stewardship,
-        test_actionlint_rejects_unpinned_setup_python,
-        test_badge_rejects_coveralls_hint,
-        test_badge_rejects_buymeacoffee_hint,
-        test_badge_rejects_opencollective_hint,
-        test_badge_rejects_npm_hint,
-        test_badge_rejects_pypi_hint,
-        test_badge_rejects_followers_hint,
-        test_badge_rejects_x_com_hint,
-        test_badge_rejects_apikey_query,
-        test_badge_rejects_client_secret_query,
-        test_badge_rejects_gho_token_hint,
-        test_badge_rejects_license_wrong_shields_slug,
-        test_badge_rejects_missing_stewardship_workflow_file,
-        test_badge_doc_rejects_missing_license_label,
-        test_relative_links_skip_git_dir,
-        test_relative_links_reject_vbscript_uppercase,
-        test_relative_links_reject_encoded_nested_escape,
-        test_relative_links_accept_same_dir_existing,
-        test_relative_links_github_slug_underscore,
-        test_relative_links_accept_underscore_heading_fragment,
-        test_wiki_rejects_missing_l0_on_autonomy,
-        test_wiki_rejects_missing_secret_on_security,
-        test_wiki_rejects_missing_surface_on_routing,
-        test_wiki_rejects_missing_governance_on_overview,
-        test_wiki_rejects_missing_public_on_overview,
-        test_wiki_rejects_missing_home_to_autonomy,
-        test_wiki_rejects_followers_badge_chrome,
-        test_wiki_rejects_x_com_badge_chrome,
-        test_wiki_rejects_missing_publish_home_row,
-        test_wiki_rejects_file_scheme,
-        test_schema_rejects_missing_claude_surface_key,
-        test_schema_rejects_missing_backlog_owner_key,
-        test_schema_rejects_empty_publish_purpose,
-        test_schema_rejects_empty_agents_scope,
-        test_schema_rejects_wrong_agents_autonomy_zero,
-        test_schema_rejects_missing_publish_closes_key,
-        test_schema_rejects_missing_claude_repo_key,
-        test_schema_rejects_badge_closes_without_hash,
-        test_common_forbidden_badge_hints_registry,
-        test_common_secret_url_hints_apikey_client,
-        test_common_secret_patterns_gho,
-        test_common_scan_secrets_url_apikey,
-        test_markdown_lint_requires_markdown_glob_still,
-        test_link_check_requires_exclude_loopback_still,
-        test_stewardship_requires_python_312_pin_still,
-        test_workflow_rejects_missing_schedule_on_stewardship,
-        test_badge_rejects_forks_hint,
-        test_relative_links_accept_docs_nested_fragment,
-        test_wiki_rejects_missing_run_script_on_stewardship,
-        test_schema_rejects_wrong_claude_surface_still,
-        test_common_dangerous_schemes_vbscript,
-        # TOKENMAXX deepen after #32 (+56)
-        test_link_check_requires_lychee_action,
-        test_link_check_requires_actions_checkout,
-        test_markdown_lint_requires_actions_checkout,
-        test_markdownlint_json_requires_md013,
-        test_actionlint_rejects_pull_request_target_on_link_check,
-        test_actionlint_rejects_contents_write_on_markdown_lint,
-        test_actionlint_rejects_write_all_on_stewardship,
-        test_workflow_requires_cancel_in_progress_true_not_false_on_link,
-        test_badge_rejects_twitter_hint,
-        test_badge_rejects_codecov_hint,
-        test_badge_rejects_downloads_hint,
-        test_badge_rejects_github_pat_hint,
-        test_badge_rejects_ghp_token_hint,
-        test_badge_rejects_markdown_lint_first_order,
-        test_badge_doc_rejects_missing_three_badges_max_still,
-        test_badge_rejects_missing_agents_file,
-        test_relative_links_reject_javascript_mixed_case,
-        test_relative_links_reject_data_mixed_case,
-        test_relative_links_accept_tel_with_title,
-        test_relative_links_github_slug_colon_punct,
-        test_relative_links_accept_colon_heading_fragment,
-        test_relative_links_reject_missing_image_nested,
-        test_relative_links_accept_license_from_docs,
-        test_relative_links_reject_http_uppercase,
-        test_wiki_rejects_missing_home_to_overview,
-        test_wiki_rejects_discord_badge_chrome,
-        test_wiki_rejects_buymeacoffee_badge_chrome,
-        test_wiki_rejects_javascript_scheme,
-        test_wiki_rejects_missing_publish_autonomy_row,
-        test_wiki_rejects_missing_publish_security_row,
-        test_wiki_rejects_missing_publish_routing_row,
-        test_wiki_rejects_opencollective_badge_chrome,
-        test_wiki_rejects_missing_actionlint_still,
-        test_schema_rejects_empty_badge_edit_policy,
-        test_schema_rejects_empty_claude_owner,
-        test_schema_rejects_missing_agents_version_key,
-        test_schema_rejects_missing_backlog_edit_policy_key,
-        test_schema_rejects_tier_zero,
-        test_schema_rejects_empty_publish_created,
-        test_schema_rejects_wrong_badge_owner_still,
-        test_schema_rejects_autonomy_three_ok_range_but_agents_expected,
-        test_common_secret_patterns_npm,
-        test_common_secret_patterns_aiza,
-        test_common_secret_patterns_slack_xoxb,
-        test_common_secret_url_hints_github_pat,
-        test_common_forbidden_badge_hints_twitter_codecov,
-        test_common_scan_secrets_github_pat,
-        test_common_dangerous_schemes_javascript,
-        test_stewardship_requires_actions_checkout_still,
-        test_link_check_requires_verbose_still,
-        test_link_check_requires_no_progress_still,
-        test_markdown_lint_requires_config_needle_still,
-        test_lycheeignore_rejects_https_star_still,
-        test_workflow_rejects_missing_pull_request_on_markdown_lint,
-        test_badge_rejects_producthunt_hint_still,
-        test_relative_links_accept_nested_image_existing,
-        test_wiki_rejects_data_scheme_still,
-        test_schema_rejects_missing_claude_last_updated_key,
-        test_common_has_dangerous_scheme_data,
-        # TOKENMAXX deepen after #33 (+56)
-        test_link_check_requires_lycheeverse_action,
-        test_markdown_lint_requires_cli2_action,
-        test_markdownlint_json_requires_md013_line_length,
-        test_stewardship_requires_pip_install_pyyaml,
-        test_actionlint_rejects_pull_request_target_on_markdown_lint,
-        test_actionlint_rejects_contents_write_on_link_check,
-        test_actionlint_rejects_write_all_on_link_check,
-        test_actionlint_rejects_float_latest_on_checkout_link,
-        test_workflow_requires_cancel_in_progress_true_not_false_on_stewardship,
-        test_workflow_rejects_missing_concurrency_on_stewardship,
-        test_workflow_rejects_missing_timeout_on_markdown_lint,
-        test_badge_rejects_coverage_hint_still,
-        test_badge_rejects_stars_hint_still,
-        test_badge_rejects_token_query_still,
-        test_badge_rejects_license_http_link,
-        test_badge_rejects_four_badges_still,
-        test_badge_doc_rejects_missing_fourth_refusal_still,
-        test_relative_links_accept_https_uppercase,
-        test_relative_links_accept_mailto_uppercase,
-        test_relative_links_reject_file_mixed_case,
-        test_relative_links_github_slug_tilde,
-        test_relative_links_accept_tilde_heading_fragment,
-        test_relative_links_reject_missing_parent_file,
-        test_relative_links_accept_angle_bracket_mailto,
-        test_relative_links_reject_protocol_relative_still,
-        test_wiki_rejects_missing_home_to_stewardship,
-        test_wiki_rejects_coveralls_badge_chrome,
-        test_wiki_rejects_producthunt_badge_chrome,
-        test_wiki_rejects_npm_badge_chrome,
-        test_wiki_rejects_pypi_badge_chrome,
-        test_wiki_rejects_http_uppercase,
-        test_wiki_rejects_vbscript_scheme,
-        test_wiki_rejects_missing_publish_stewardship_row,
-        test_wiki_rejects_missing_relative_hint_still,
-        test_schema_rejects_empty_badge_closes,
-        test_schema_rejects_empty_agents_version,
-        test_schema_rejects_missing_agents_autonomy_key,
-        test_schema_rejects_missing_claude_parent_key,
-        test_schema_rejects_empty_claude_last_updated,
-        test_schema_rejects_wrong_badge_scope_empty_still,
-        test_schema_rejects_tier_negative,
-        test_schema_rejects_wrong_agents_maintainer_still,
-        test_common_secret_patterns_ghs,
-        test_common_secret_patterns_ghu,
-        test_common_secret_patterns_rk_token,
-        test_common_secret_patterns_aws_secret,
-        test_common_secret_patterns_openssh_key,
-        test_common_forbidden_badge_hints_coveralls_producthunt,
-        test_common_scan_secrets_npm,
-        test_common_has_dangerous_scheme_file_still,
-        test_link_check_requires_lychee_action_still,
-        test_markdownlint_json_requires_md013_still,
-        test_markdown_lint_requires_actions_checkout_still,
-        test_link_check_requires_actions_checkout_still,
-        test_stewardship_requires_pyyaml_install_still,
-        test_badge_rejects_discord_hint_still,
-        test_relative_links_reject_http_uppercase_still,
-        test_wiki_rejects_javascript_scheme_still,
-        test_schema_rejects_tier_zero_still,
-        test_common_dangerous_schemes_vbscript_still,
-        # TOKENMAXX deepen after #34 (+62)
-        test_markdown_lint_requires_davidanson_action,
-        test_link_check_requires_github_token_flag,
-        test_markdownlint_json_requires_md024,
-        test_stewardship_requires_download_actionlint_bash,
-        test_actionlint_rejects_pull_request_target_on_stewardship,
-        test_actionlint_rejects_contents_write_on_markdown_lint,
-        test_actionlint_rejects_write_all_on_markdown_lint,
-        test_actionlint_rejects_float_main_on_checkout_markdown,
-        test_workflow_requires_cancel_in_progress_true_not_false_on_link_check,
-        test_workflow_rejects_missing_schedule_on_stewardship,
-        test_workflow_rejects_missing_workflow_dispatch_on_link_check,
-        test_badge_rejects_followers_hint_still,
-        test_badge_rejects_forks_hint_still,
-        test_badge_rejects_npm_hint_still,
-        test_badge_rejects_pypi_hint_still,
-        test_badge_rejects_apikey_query_still,
-        test_badge_rejects_link_check_http_image,
-        test_badge_rejects_blank_line_between_still,
-        test_badge_doc_rejects_missing_three_max_still,
-        test_relative_links_accept_tel_uppercase,
-        test_relative_links_reject_javascript_mixed_case_still,
-        test_relative_links_reject_data_uppercase,
-        test_relative_links_github_slug_asterisk,
-        test_relative_links_accept_asterisk_heading_fragment,
-        test_relative_links_reject_broken_nested_docs,
-        test_relative_links_accept_angle_bracket_https,
-        test_relative_links_reject_empty_parens_still,
-        test_relative_links_reject_percent_traversal_still,
-        test_wiki_rejects_missing_home_to_security,
-        test_wiki_rejects_buymeacoffee_badge_chrome,
-        test_wiki_rejects_opencollective_badge_chrome,
-        test_wiki_rejects_codecov_badge_chrome,
-        test_wiki_rejects_downloads_badge_chrome,
-        test_wiki_rejects_file_uppercase,
-        test_wiki_rejects_missing_publish_overview_row,
-        test_wiki_rejects_missing_actionlint_hint_still,
-        test_wiki_rejects_missing_invent_on_stewardship_still,
-        test_schema_rejects_empty_badge_owner,
-        test_schema_rejects_empty_agents_scope,
-        test_schema_rejects_missing_agents_version_key,
-        test_schema_rejects_missing_claude_surface_key,
-        test_schema_rejects_empty_publish_purpose,
-        test_schema_rejects_wrong_badge_status_draft,
-        test_schema_rejects_autonomy_four_oob,
-        test_schema_rejects_wrong_claude_repo_still,
-        test_schema_rejects_closes_without_hash_still,
-        test_common_secret_patterns_ghr,
-        test_common_secret_patterns_gho,
-        test_common_secret_patterns_sk_token,
-        test_common_secret_patterns_ec_key,
-        test_common_forbidden_badge_hints_followers_forks,
-        test_common_scan_secrets_aiza,
-        test_common_has_dangerous_scheme_javascript_still,
-        test_markdown_lint_requires_cli2_action_still,
-        test_link_check_requires_lycheeverse_still,
-        test_markdownlint_json_requires_line_length_still,
-        test_stewardship_requires_pip_install_still,
-        test_badge_rejects_twitter_hint_still,
-        test_relative_links_reject_http_mixed_case_still,
-        test_wiki_rejects_data_scheme_still_after_34,
-        test_schema_rejects_tier_zero_still_after_34,
-        test_common_dangerous_schemes_data_still,
-        # TOKENMAXX deepen after #35 (+62)
-        test_markdownlint_json_requires_siblings_only,
-        test_stewardship_requires_rhysd_actionlint,
-        test_stewardship_requires_curl_download,
-        test_link_check_requires_action_token,
-        test_actionlint_rejects_pull_request_target_on_link_check_after_35,
-        test_actionlint_rejects_contents_write_on_stewardship_after_35,
-        test_actionlint_rejects_write_all_on_link_check_after_35,
-        test_actionlint_rejects_float_latest_on_checkout_stewardship,
-        test_workflow_requires_cancel_in_progress_true_not_false_on_markdown_lint,
-        test_workflow_rejects_missing_concurrency_on_link_check_after_35,
-        test_workflow_rejects_missing_timeout_on_markdown_lint_after_35,
-        test_badge_rejects_buymeacoffee_hint_still,
-        test_badge_rejects_opencollective_hint_still,
-        test_badge_rejects_coveralls_hint_still,
-        test_badge_rejects_xcom_hint_still,
-        test_badge_rejects_client_secret_query_still,
-        test_badge_rejects_markdown_lint_http_image,
-        test_badge_rejects_four_badges_still_after_35,
-        test_badge_doc_rejects_missing_fourth_refusal_still,
-        test_relative_links_accept_mailto_mixed_case,
-        test_relative_links_reject_vbscript_mixed_case_still,
-        test_relative_links_reject_file_uppercase_after_35,
-        test_relative_links_github_slug_underscore,
-        test_relative_links_accept_underscore_heading_fragment,
-        test_relative_links_reject_broken_docs_sibling,
-        test_relative_links_accept_angle_bracket_tel,
-        test_relative_links_reject_bare_hash_only_still,
-        test_relative_links_reject_encoded_escape_nested_still,
-        test_wiki_rejects_missing_home_to_overview_after_35,
-        test_wiki_rejects_discord_badge_chrome_after_35,
-        test_wiki_rejects_twitter_badge_chrome_after_35,
-        test_wiki_rejects_stars_badge_chrome_after_35,
-        test_wiki_rejects_forks_badge_chrome_after_35,
-        test_wiki_rejects_javascript_uppercase,
-        test_wiki_rejects_missing_publish_autonomy_row,
-        test_wiki_rejects_missing_ci_link_check_still,
-        test_wiki_rejects_missing_badge_topic_on_stewardship_still,
-        test_schema_rejects_empty_badge_scope,
-        test_schema_rejects_empty_claude_owner,
-        test_schema_rejects_missing_agents_maintainer_key,
-        test_schema_rejects_missing_claude_repo_key,
-        test_schema_rejects_empty_publish_closes,
-        test_schema_rejects_wrong_publish_status_draft,
-        test_schema_rejects_autonomy_negative,
-        test_schema_rejects_wrong_agents_scope_still,
-        test_schema_rejects_semver_prerelease_still,
-        test_common_secret_patterns_github_pat,
-        test_common_secret_patterns_xoxb,
-        test_common_secret_patterns_rsa_key,
-        test_common_forbidden_badge_hints_buymeacoffee_opencollective,
-        test_common_scan_secrets_xoxb,
-        test_common_has_dangerous_scheme_vbscript_still,
-        test_markdown_lint_requires_davidanson_still,
-        test_link_check_requires_github_token_flag_still,
-        test_markdownlint_json_requires_md024_still,
-        test_stewardship_requires_download_actionlint_bash_still,
-        test_badge_rejects_producthunt_hint_still,
-        test_relative_links_reject_http_scheme_still_after_35,
-        test_wiki_rejects_http_scheme_still_after_35,
-        test_schema_rejects_tier_zero_still_after_35,
-        test_common_dangerous_schemes_javascript_still,
-        test_lycheeignore_rejects_https_star_still_after_35,
-        # TOKENMAXX deepen after #36 (+62)
-        test_markdownlint_json_requires_line_length_200,
-        test_markdownlint_json_requires_siblings_only_true,
-        test_stewardship_requires_raw_githubusercontent,
-        test_stewardship_requires_curl_fssl,
-        test_actionlint_rejects_pull_request_target_on_markdown_lint_after_36,
-        test_actionlint_rejects_contents_write_on_link_check_after_36,
-        test_actionlint_rejects_write_all_on_stewardship_after_36,
-        test_actionlint_rejects_float_main_on_checkout_link_after_36,
-        test_workflow_requires_cancel_in_progress_true_not_false_on_stewardship_after_36,
-        test_workflow_rejects_missing_schedule_on_link_check_after_36,
-        test_workflow_rejects_missing_dispatch_on_stewardship_after_36,
-        test_badge_rejects_coverage_hint_after_36,
-        test_badge_rejects_stars_hint_after_36,
-        test_badge_rejects_discord_hint_after_36,
-        test_badge_rejects_npm_hint_after_36,
-        test_badge_rejects_token_query_after_36,
-        test_badge_rejects_link_check_http_image_after_36,
-        test_badge_rejects_four_badges_still_after_36,
-        test_badge_doc_rejects_missing_three_max_after_36,
-        test_relative_links_accept_https_mixed_case_after_36,
-        test_relative_links_reject_javascript_titlecase_after_36,
-        test_relative_links_reject_data_titlecase_after_36,
-        test_relative_links_github_slug_hash_punct_after_36,
-        test_relative_links_accept_hash_heading_fragment_after_36,
-        test_relative_links_reject_broken_parent_docs_after_36,
-        test_relative_links_accept_angle_bracket_mailto_mixed_after_36,
-        test_relative_links_reject_empty_parens_after_36,
-        test_relative_links_reject_protocol_relative_after_36,
-        test_wiki_rejects_missing_home_to_routing_after_36,
-        test_wiki_rejects_coveralls_badge_chrome_after_36,
-        test_wiki_rejects_producthunt_badge_chrome_after_36,
-        test_wiki_rejects_npm_badge_chrome_after_36,
-        test_wiki_rejects_pypi_badge_chrome_after_36,
-        test_wiki_rejects_data_uppercase_after_36,
-        test_wiki_rejects_missing_publish_security_row_after_36,
-        test_wiki_rejects_missing_actionlint_still_after_36,
-        test_wiki_rejects_missing_relative_hint_still_after_36,
-        test_schema_rejects_empty_badge_edit_policy_after_36,
-        test_schema_rejects_empty_agents_maintainer_after_36,
-        test_schema_rejects_missing_agents_parent_key_after_36,
-        test_schema_rejects_missing_claude_autonomy_key_after_36,
-        test_schema_rejects_empty_publish_created_after_36,
-        test_schema_rejects_wrong_badge_status_draft_after_36,
-        test_schema_rejects_autonomy_two_vs_expected_after_36,
-        test_schema_rejects_wrong_claude_parent_still_after_36,
-        test_schema_rejects_closes_without_hash_still_after_36,
-        test_common_secret_patterns_ghs_after_36,
-        test_common_secret_patterns_ghu_after_36,
-        test_common_secret_patterns_rk_after_36,
-        test_common_secret_patterns_aws_after_36,
-        test_common_forbidden_badge_hints_coverage_stars_after_36,
-        test_common_scan_secrets_ghs_after_36,
-        test_common_has_dangerous_scheme_file_still_after_36,
-        test_markdown_lint_requires_cli2_action_still_after_36,
-        test_link_check_requires_lycheeverse_still_after_36,
-        test_markdownlint_json_requires_siblings_only_still_after_36,
-        test_stewardship_requires_rhysd_still_after_36,
-        test_badge_rejects_twitter_hint_still_after_36,
-        test_relative_links_reject_http_scheme_still_after_36,
-        test_wiki_rejects_http_scheme_still_after_36,
-        test_schema_rejects_tier_zero_still_after_36,
-        test_common_dangerous_schemes_data_still_after_36,
-        # TOKENMAXX deepen after #37 (+62)
-        test_markdownlint_json_requires_default_true,
-        test_stewardship_requires_get_actionlint_outputs,
-        test_stewardship_requires_actionlint_v177_path,
-        test_link_check_requires_max_concurrency_8,
-        test_link_check_requires_timeout_20,
-        test_link_check_requires_max_retries_3,
-        test_actionlint_rejects_pull_request_target_on_stewardship_after_37,
-        test_actionlint_rejects_contents_write_on_markdown_lint_after_37,
-        test_actionlint_rejects_write_all_on_link_check_after_37,
-        test_actionlint_rejects_float_latest_on_checkout_stewardship_after_37,
-        test_workflow_requires_cancel_in_progress_true_not_false_on_link_check_after_37,
-        test_workflow_rejects_missing_concurrency_on_markdown_lint_after_37,
-        test_workflow_rejects_missing_timeout_on_stewardship_after_37,
-        test_badge_rejects_codecov_hint_after_37,
-        test_badge_rejects_downloads_hint_after_37,
-        test_badge_rejects_followers_hint_after_37,
-        test_badge_rejects_pypi_hint_after_37,
-        test_badge_rejects_apikey_query_after_37,
-        test_badge_rejects_markdown_lint_http_image_after_37,
-        test_badge_rejects_four_badges_still_after_37,
-        test_badge_doc_rejects_missing_fourth_refusal_after_37,
-        test_relative_links_accept_https_uppercase_after_37,
-        test_relative_links_reject_vbscript_titlecase_after_37,
-        test_relative_links_reject_file_titlecase_after_37,
-        test_relative_links_github_slug_ampersand_after_37,
-        test_relative_links_accept_ampersand_heading_fragment_after_37,
-        test_relative_links_reject_broken_sibling_after_37,
-        test_relative_links_accept_angle_bracket_tel_after_37,
-        test_relative_links_reject_bare_hash_after_37,
-        test_relative_links_reject_nested_dotdot_escape_after_37,
-        test_wiki_rejects_missing_home_to_overview_after_37,
-        test_wiki_rejects_discord_badge_chrome_after_37,
-        test_wiki_rejects_twitter_badge_chrome_after_37,
-        test_wiki_rejects_stars_badge_chrome_after_37,
-        test_wiki_rejects_forks_badge_chrome_after_37,
-        test_wiki_rejects_javascript_uppercase_after_37,
-        test_wiki_rejects_missing_publish_autonomy_row_after_37,
-        test_wiki_rejects_missing_ci_hint_still_after_37,
-        test_wiki_rejects_missing_badge_topic_still_after_37,
-        test_schema_rejects_empty_badge_scope_after_37,
-        test_schema_rejects_empty_agents_scope_after_37,
-        test_schema_rejects_missing_agents_maintainer_key_after_37,
-        test_schema_rejects_missing_claude_repo_key_after_37,
-        test_schema_rejects_empty_publish_closes_after_37,
-        test_schema_rejects_wrong_publish_status_draft_after_37,
-        test_schema_rejects_autonomy_negative_after_37,
-        test_schema_rejects_wrong_agents_scope_still_after_37,
-        test_schema_rejects_semver_prerelease_still_after_37,
-        test_common_secret_patterns_github_pat_after_37,
-        test_common_secret_patterns_xoxb_after_37,
-        test_common_secret_patterns_rsa_key_after_37,
-        test_common_forbidden_badge_hints_buymeacoffee_opencollective_after_37,
-        test_common_scan_secrets_xoxb_after_37,
-        test_common_has_dangerous_scheme_vbscript_still_after_37,
-        test_markdown_lint_requires_davidanson_still_after_37,
-        test_link_check_requires_github_token_flag_still_after_37,
-        test_markdownlint_json_requires_line_length_200_still_after_37,
-        test_stewardship_requires_raw_githubusercontent_still_after_37,
-        test_badge_rejects_coveralls_hint_still_after_37,
-        test_relative_links_reject_http_scheme_still_after_37,
-        test_wiki_rejects_http_scheme_still_after_37,
-        test_schema_rejects_tier_zero_still_after_37,
-        # TOKENMAXX deepen after #38 (+62)
-        test_markdownlint_json_requires_md033_false,
-        test_markdownlint_json_requires_md041_false,
-        test_markdownlint_json_requires_md060_false,
-        test_markdown_lint_requires_cli2_action_v24,
-        test_stewardship_requires_setup_python_v5,
-        test_stewardship_requires_get_actionlint_id,
-        test_actionlint_rejects_pull_request_target_on_markdown_lint_after_38,
-        test_actionlint_rejects_contents_write_on_link_check_after_38,
-        test_actionlint_rejects_write_all_on_stewardship_after_38,
-        test_actionlint_rejects_float_main_on_checkout_link_after_38,
-        test_workflow_requires_cancel_in_progress_true_not_false_on_stewardship_after_38,
-        test_workflow_rejects_missing_schedule_on_link_check_after_38,
-        test_workflow_rejects_missing_dispatch_on_stewardship_after_38,
-        test_badge_rejects_coverage_hint_after_38,
-        test_badge_rejects_stars_hint_after_38,
-        test_badge_rejects_discord_hint_after_38,
-        test_badge_rejects_npm_hint_after_38,
-        test_badge_rejects_token_query_after_38,
-        test_badge_rejects_link_check_http_image_after_38,
-        test_badge_rejects_four_badges_still_after_38,
-        test_badge_doc_rejects_missing_three_max_after_38,
-        test_relative_links_accept_https_mixed_case_after_38,
-        test_relative_links_reject_javascript_titlecase_after_38,
-        test_relative_links_reject_data_titlecase_after_38,
-        test_relative_links_github_slug_hash_punct_after_38,
-        test_relative_links_accept_hash_heading_fragment_after_38,
-        test_relative_links_reject_broken_parent_docs_after_38,
-        test_relative_links_accept_angle_bracket_mailto_mixed_after_38,
-        test_relative_links_reject_empty_parens_after_38,
-        test_relative_links_reject_protocol_relative_after_38,
-        test_wiki_rejects_missing_home_to_routing_after_38,
-        test_wiki_rejects_coveralls_badge_chrome_after_38,
-        test_wiki_rejects_producthunt_badge_chrome_after_38,
-        test_wiki_rejects_npm_badge_chrome_after_38,
-        test_wiki_rejects_pypi_badge_chrome_after_38,
-        test_wiki_rejects_data_uppercase_after_38,
-        test_wiki_rejects_missing_publish_security_row_after_38,
-        test_wiki_rejects_missing_actionlint_still_after_38,
-        test_wiki_rejects_missing_relative_hint_still_after_38,
-        test_schema_rejects_empty_badge_edit_policy_after_38,
-        test_schema_rejects_empty_agents_maintainer_after_38,
-        test_schema_rejects_missing_agents_parent_key_after_38,
-        test_schema_rejects_missing_claude_autonomy_key_after_38,
-        test_schema_rejects_empty_publish_created_after_38,
-        test_schema_rejects_wrong_badge_status_draft_after_38,
-        test_schema_rejects_autonomy_two_vs_expected_after_38,
-        test_schema_rejects_wrong_claude_parent_still_after_38,
-        test_schema_rejects_closes_without_hash_still_after_38,
-        test_common_secret_patterns_ghs_after_38,
-        test_common_secret_patterns_ghu_after_38,
-        test_common_secret_patterns_rk_after_38,
-        test_common_secret_patterns_aws_after_38,
-        test_common_forbidden_badge_hints_coverage_stars_after_38,
-        test_common_scan_secrets_ghs_after_38,
-        test_common_has_dangerous_scheme_file_still_after_38,
-        test_markdownlint_json_requires_default_true_still_after_38,
-        test_link_check_requires_max_concurrency_8_still_after_38,
-        test_stewardship_requires_actionlint_v177_path_still_after_38,
-        test_stewardship_requires_get_actionlint_outputs_still_after_38,
-        test_badge_rejects_codecov_hint_still_after_38,
-        test_relative_links_reject_http_scheme_still_after_38,
-        test_schema_rejects_tier_zero_still_after_38,
-
-        # TOKENMAXX deepen after #39 (+62)
-        test_link_check_requires_checkout_v7,
-        test_markdown_lint_requires_checkout_v7,
-        test_stewardship_requires_checkout_v7,
-        test_link_check_requires_lychee_action_v2,
-        test_link_check_requires_timeout_minutes_20,
-        test_markdown_lint_requires_timeout_minutes_10,
-        test_stewardship_requires_timeout_minutes_15,
-        test_link_check_requires_cron_0_6,
-        test_markdown_lint_requires_cron_30_6,
-        test_stewardship_requires_cron_15_6,
-        test_link_check_requires_ubuntu_latest,
-        test_markdown_lint_requires_ubuntu_latest,
-        test_stewardship_requires_ubuntu_latest,
-        test_stewardship_requires_pip_quiet,
-        test_stewardship_requires_shell_bash,
-        test_stewardship_requires_actionlint_color,
-        test_actionlint_rejects_pull_request_target_on_link_check_after_39,
-        test_actionlint_rejects_contents_write_on_markdown_lint_after_39,
-        test_actionlint_rejects_float_main_on_checkout_stewardship_after_39,
-        test_actionlint_rejects_float_latest_on_checkout_markdown_after_39,
-        test_actionlint_rejects_float_master_on_checkout_link_after_39,
-        test_actionlint_rejects_unpinned_checkout_on_link_after_39,
-        test_actionlint_rejects_unpinned_lychee_after_39,
-        test_workflow_requires_cancel_in_progress_true_not_false_on_markdown_lint_after_39,
-        test_workflow_rejects_missing_schedule_on_markdown_lint_after_39,
-        test_workflow_rejects_missing_dispatch_on_link_check_after_39,
-        test_workflow_rejects_missing_concurrency_on_stewardship_after_39,
-        test_workflow_rejects_missing_permissions_read_on_markdown_lint_after_39,
-        test_actionlint_rejects_contents_write_on_stewardship_after_39,
-        test_actionlint_rejects_pull_request_target_on_stewardship_after_39,
-        test_workflow_requires_cancel_in_progress_true_not_false_on_link_check_after_39,
-        test_workflow_rejects_missing_timeout_on_link_check_after_39,
-        test_actionlint_rejects_write_all_on_link_check_after_39,
-        test_actionlint_rejects_write_all_on_stewardship_after_39,
-        test_link_check_requires_fail_true_after_39,
-        test_link_check_requires_exclude_loopback_after_39,
-        test_link_check_requires_github_token_flag_after_39,
-        test_link_check_requires_action_token_after_39,
-        test_link_check_requires_max_concurrency_8_after_39,
-        test_link_check_requires_timeout_20_after_39,
-        test_link_check_requires_max_retries_3_after_39,
-        test_markdown_lint_requires_cli2_action_v24_after_39,
-        test_markdown_lint_requires_davidanson_after_39,
-        test_markdown_lint_requires_config_needle_after_39,
-        test_markdown_lint_requires_owasp_exclude_after_39,
-        test_markdown_lint_requires_agents_exclude_after_39,
-        test_markdownlint_json_requires_md033_false_still_after_39,
-        test_markdownlint_json_requires_md041_false_still_after_39,
-        test_markdownlint_json_requires_md060_false_still_after_39,
-        test_markdownlint_json_requires_line_length_200_still_after_39,
-        test_markdownlint_json_requires_default_true_still_after_39,
-        test_stewardship_requires_setup_python_v5_still_after_39,
-        test_stewardship_requires_get_actionlint_id_still_after_39,
-        test_stewardship_requires_actionlint_v177_path_still_after_39,
-        test_stewardship_requires_get_actionlint_outputs_still_after_39,
-        test_stewardship_requires_python_312_pin_still_after_39,
-        test_stewardship_requires_rhysd_still_after_39,
-        test_stewardship_requires_curl_fssl_still_after_39,
-        test_stewardship_requires_raw_githubusercontent_still_after_39,
-        test_lycheeignore_rejects_https_star_still_after_39,
-        test_lycheeignore_rejects_http_star_still_after_39,
-        test_lycheeignore_requires_shields_exclude_still_after_39,
-
-        # TOKENMAXX deepen after #41 (+67)
-        test_relative_gate_requires_owasp_skip_after_41,
-        test_relative_gate_requires_agents_skip_after_41,
-        test_relative_gate_requires_node_modules_skip_after_41,
-        test_relative_gate_requires_strip_fenced_after_41,
-        test_relative_gate_requires_fully_unquote_after_41,
-        test_relative_gate_requires_github_slug_after_41,
-        test_relative_gate_requires_dangerous_scheme_after_41,
-        test_relative_gate_requires_empty_fragment_needle_after_41,
-        test_relative_gate_requires_query_string_needle_after_41,
-        test_relative_gate_requires_http_reject_needle_after_41,
-        test_run_stewardship_requires_relative_gate_after_41,
-        test_run_stewardship_requires_badge_gate_after_41,
-        test_run_stewardship_requires_wiki_gate_after_41,
-        test_run_stewardship_requires_schema_gate_after_41,
-        test_agents_requires_relative_mention_after_41,
-        test_run_stewardship_requires_gate_order_after_41,
-        test_relative_gate_file_must_exist_after_41,
-        test_run_stewardship_file_must_exist_after_41,
-        test_relative_gate_requires_atx_needle_after_41,
-        test_relative_gate_requires_git_skip_after_41,
-        test_relative_links_reject_empty_path_fragment_after_41,
-        test_relative_links_reject_empty_path_fragment_nested_after_41,
-        test_relative_links_reject_query_string_after_41,
-        test_relative_links_reject_query_before_fragment_after_41,
-        test_relative_links_reject_double_encoded_escape_after_41,
-        test_relative_links_reject_abs_unix_escape_after_41,
-        test_relative_links_accept_https_still_after_41,
-        test_relative_links_accept_mailto_still_after_41,
-        test_relative_links_accept_tel_still_after_41,
-        test_relative_links_reject_protocol_relative_still_after_41,
-        test_relative_links_reject_http_still_after_41,
-        test_relative_links_reject_javascript_still_after_41,
-        test_relative_links_reject_data_still_after_41,
-        test_relative_links_reject_file_still_after_41,
-        test_relative_links_reject_vbscript_still_after_41,
-        test_relative_links_reject_empty_parens_still_after_41,
-        test_relative_links_reject_bare_hash_still_after_41,
-        test_relative_links_reject_broken_still_after_41,
-        test_relative_links_reject_missing_fragment_still_after_41,
-        test_relative_links_accept_valid_fragment_still_after_41,
-        test_relative_links_ignore_fenced_still_after_41,
-        test_relative_links_ignore_tilde_fence_still_after_41,
-        test_relative_links_reject_image_query_after_41,
-        test_relative_links_reject_image_empty_fragment_after_41,
-        test_relative_links_accept_angle_https_still_after_41,
-        test_relative_links_reject_encoded_escape_still_after_41,
-        test_relative_links_reject_dotdot_escape_still_after_41,
-        test_relative_links_github_slug_amp_still_after_41,
-        test_relative_links_reject_nul_still_after_41,
-        test_relative_links_accept_title_attr_still_after_41,
-        test_relative_links_reject_http_mixed_still_after_41,
-        test_relative_links_accept_https_mixed_still_after_41,
-        test_relative_links_reject_whitespace_target_still_after_41,
-        test_relative_links_reject_protocol_rel_image_after_41,
-        test_relative_links_reject_javascript_image_after_41,
-        test_relative_links_reject_empty_frag_angle_after_41,
-        test_relative_links_skip_owasp_still_after_41,
-        test_relative_links_skip_agents_still_after_41,
-        test_relative_links_accept_cross_file_fragment_still_after_41,
-        test_relative_links_accept_license_still_after_41,
-        test_relative_links_accept_nested_docs_still_after_41,
-        test_relative_links_reject_query_on_nested_after_41,
-        test_relative_links_reject_empty_frag_on_nested_after_41,
-        test_relative_links_skip_node_modules_still_after_41,
-        test_relative_links_accept_image_existing_still_after_41,
-        test_relative_links_reject_broken_image_still_after_41,
-        test_relative_links_fully_unquote_helper_after_41,
-
-        # TOKENMAXX deepen after #43 (+71)
-        test_wiki_gate_file_must_exist_after_43,
-        test_wiki_gate_requires_publishable_home_after_43,
-        test_wiki_gate_requires_publishable_overview_after_43,
-        test_wiki_gate_requires_publishable_autonomy_after_43,
-        test_wiki_gate_requires_publishable_stewardship_after_43,
-        test_wiki_gate_requires_publishable_routing_after_43,
-        test_wiki_gate_requires_publishable_security_after_43,
-        test_wiki_gate_requires_operator_publish_after_43,
-        test_wiki_gate_requires_publishable_pages_const_after_43,
-        test_wiki_gate_requires_topic_hints_const_after_43,
-        test_wiki_gate_requires_l2_topic_after_43,
-        test_wiki_gate_requires_l3_topic_after_43,
-        test_wiki_gate_requires_credential_topic_after_43,
-        test_wiki_gate_requires_copilot_topic_after_43,
-        test_wiki_gate_requires_strip_fenced_after_43,
-        test_wiki_gate_requires_dangerous_scheme_after_43,
-        test_wiki_gate_requires_protocol_relative_needle_after_43,
-        test_wiki_gate_requires_slash_slash_match_after_43,
-        test_wiki_gate_requires_http_reject_after_43,
-        test_wiki_gate_requires_forbidden_badge_hints_after_43,
-        test_wiki_gate_requires_stewardship_ci_hints_after_43,
-        test_wiki_gate_requires_markdown_lint_ci_after_43,
-        test_wiki_gate_requires_link_check_ci_after_43,
-        test_wiki_gate_requires_stewardship_checks_ci_after_43,
-        test_wiki_gate_requires_actionlint_after_43,
-        test_wiki_gate_requires_invent_pin_after_43,
-        test_wiki_gate_requires_kill_switch_needle_after_43,
-        test_wiki_gate_requires_scan_secrets_after_43,
-        test_wiki_gate_requires_readme_link_hints_after_43,
-        test_wiki_gate_requires_badge_standard_hints_after_43,
-        test_wiki_gate_requires_out_of_scope_after_43,
-        test_wiki_rejects_protocol_relative_after_43,
-        test_wiki_rejects_protocol_relative_image_after_43,
-        test_wiki_ignores_fenced_http_after_43,
-        test_wiki_ignores_tilde_fenced_javascript_after_43,
-        test_wiki_rejects_missing_l2_topic_after_43,
-        test_wiki_rejects_missing_l3_topic_after_43,
-        test_wiki_rejects_missing_credential_topic_after_43,
-        test_wiki_rejects_missing_copilot_topic_after_43,
-        test_wiki_rejects_missing_home_kill_after_43,
-        test_wiki_rejects_http_still_after_43,
-        test_wiki_rejects_javascript_still_after_43,
-        test_wiki_rejects_data_still_after_43,
-        test_wiki_rejects_vbscript_still_after_43,
-        test_wiki_rejects_file_still_after_43,
-        test_wiki_rejects_discord_chrome_still_after_43,
-        test_wiki_rejects_stars_chrome_still_after_43,
-        test_wiki_rejects_missing_actionlint_still_after_43,
-        test_wiki_rejects_missing_relative_hint_still_after_43,
-        test_wiki_rejects_missing_invent_home_still_after_43,
-        test_wiki_rejects_missing_secret_home_still_after_43,
-        test_wiki_rejects_missing_ci_hint_still_after_43,
-        test_wiki_rejects_missing_publish_home_row_still_after_43,
-        test_wiki_rejects_unexpected_page_still_after_43,
-        test_wiki_rejects_missing_home_backlink_still_after_43,
-        test_wiki_rejects_missing_home_to_security_still_after_43,
-        test_wiki_rejects_missing_badge_topic_still_after_43,
-        test_wiki_rejects_missing_l0_topic_still_after_43,
-        test_wiki_rejects_missing_l1_topic_still_after_43,
-        test_wiki_rejects_missing_kill_topic_still_after_43,
-        test_wiki_rejects_missing_surface_topic_still_after_43,
-        test_wiki_rejects_missing_governance_topic_still_after_43,
-        test_wiki_passes_good_fixture_still_after_43,
-        test_wiki_rejects_http_mixed_case_still_after_43,
-        test_wiki_rejects_javascript_mixed_case_still_after_43,
-        test_wiki_rejects_missing_do_not_push_still_after_43,
-        test_wiki_rejects_npm_chrome_still_after_43,
-        test_wiki_rejects_missing_out_of_scope_still_after_43,
-        test_wiki_rejects_missing_run_script_still_after_43,
-        test_wiki_rejects_missing_home_badge_link_still_after_43,
-        test_wiki_rejects_secret_pattern_still_after_43,
-
-        # TOKENMAXX deepen after #45 (+71)
-        test_schema_gate_file_must_exist_after_45,
-        test_schema_gate_requires_doc_schemas_const_after_45,
-        test_schema_gate_requires_expected_values_const_after_45,
-        test_schema_gate_requires_badge_standard_doc_after_45,
-        test_schema_gate_requires_publish_doc_after_45,
-        test_schema_gate_requires_backlog_doc_after_45,
-        test_schema_gate_requires_agents_doc_after_45,
-        test_schema_gate_requires_claude_doc_after_45,
-        test_schema_gate_requires_edit_policy_key_after_45,
-        test_schema_gate_requires_autonomy_key_after_45,
-        test_schema_gate_requires_parent_governance_key_after_45,
-        test_schema_gate_requires_version_key_after_45,
-        test_schema_gate_requires_surface_key_after_45,
-        test_schema_gate_requires_closes_key_after_45,
-        test_schema_gate_requires_purpose_key_after_45,
-        test_schema_gate_requires_maintainer_key_after_45,
-        test_schema_gate_requires_semver_re_after_45,
-        test_schema_gate_requires_iso_date_re_after_45,
-        test_schema_gate_requires_issue_ref_re_after_45,
-        test_schema_gate_requires_fenced_yaml_re_after_45,
-        test_schema_gate_requires_yaml_fence_needle_after_45,
-        test_schema_gate_requires_date_keys_after_45,
-        test_schema_gate_requires_parse_simple_yaml_after_45,
-        test_schema_gate_requires_load_yaml_after_45,
-        test_schema_gate_requires_first_yaml_block_after_45,
-        test_schema_gate_requires_safe_load_after_45,
-        test_schema_gate_requires_mapping_needle_after_45,
-        test_schema_gate_requires_scan_secrets_after_45,
-        test_schema_gate_requires_invent_pin_after_45,
-        test_schema_gate_requires_smtp_eth_after_45,
-        test_schema_gate_requires_repository_specific_after_45,
-        test_schema_gate_requires_copilot_pin_after_45,
-        test_schema_gate_requires_active_status_after_45,
-        test_schema_gate_requires_autonomy_range_after_45,
-        test_schema_gate_requires_backlog_owner_copilot_after_45,
-        test_schema_rejects_backlog_wrong_owner_after_45,
-        test_schema_rejects_empty_badge_edit_policy_after_45,
-        test_schema_rejects_empty_agents_maintainer_after_45,
-        test_schema_rejects_missing_agents_parent_key_after_45,
-        test_schema_rejects_missing_claude_autonomy_key_after_45,
-        test_schema_rejects_empty_publish_created_after_45,
-        test_schema_rejects_wrong_badge_status_draft_after_45,
-        test_schema_rejects_autonomy_two_vs_expected_after_45,
-        test_schema_rejects_wrong_claude_parent_still_after_45,
-        test_schema_rejects_closes_without_hash_still_after_45,
-        test_schema_rejects_tier_zero_still_after_45,
-        test_schema_rejects_semver_prerelease_still_after_45,
-        test_schema_rejects_wrong_agents_scope_still_after_45,
-        test_schema_rejects_wrong_publish_status_draft_after_45,
-        test_schema_rejects_autonomy_negative_after_45,
-        test_schema_rejects_empty_badge_scope_after_45,
-        test_schema_rejects_missing_agents_maintainer_key_after_45,
-        test_schema_rejects_missing_claude_repo_key_after_45,
-        test_schema_rejects_empty_publish_closes_after_45,
-        test_schema_rejects_badge_missing_invent_wording_after_45,
-        test_schema_rejects_wrong_badge_owner_after_45,
-        test_schema_rejects_wrong_claude_surface_after_45,
-        test_schema_rejects_bad_iso_date_after_45,
-        test_schema_rejects_backlog_tier_zero_after_45,
-        test_schema_rejects_backlog_draft_status_after_45,
-        test_schema_rejects_publish_closes_without_hash_after_45,
-        test_schema_rejects_missing_backlog_edit_policy_after_45,
-        test_schema_rejects_agents_wrong_maintainer_after_45,
-        test_schema_rejects_claude_wrong_repo_after_45,
-        test_schema_rejects_secret_pattern_in_badge_after_45,
-        test_schema_rejects_autonomy_four_after_45,
-        test_schema_rejects_empty_agents_scope_after_45,
-        test_schema_rejects_wrong_agents_parent_after_45,
-        test_schema_rejects_missing_badge_closes_key_after_45,
-        test_schema_rejects_non_mapping_yaml_after_45,
-        test_schema_passes_good_fixture_still_after_45,
-
-        # TOKENMAXX deepen after #46 (+69)
-        test_common_gate_file_must_exist_after_46,
-        test_common_gate_requires_secret_patterns_after_46,
-        test_common_gate_requires_secret_url_hints_after_46,
-        test_common_gate_requires_forbidden_badge_hints_after_46,
-        test_common_gate_requires_dangerous_link_schemes_after_46,
-        test_common_gate_requires_fenced_block_re_after_46,
-        test_common_gate_requires_strip_fenced_code_after_46,
-        test_common_gate_requires_has_dangerous_scheme_after_46,
-        test_common_gate_requires_markdown_files_after_46,
-        test_common_gate_requires_fail_helper_pin_after_46,
-        test_common_gate_requires_load_workflow_pin_after_46,
-        test_common_gate_requires_secret_ghp_after_46,
-        test_common_gate_requires_secret_gho_after_46,
-        test_common_gate_requires_secret_ghu_after_46,
-        test_common_gate_requires_secret_ghs_after_46,
-        test_common_gate_requires_secret_ghr_after_46,
-        test_common_gate_requires_secret_github_pat_after_46,
-        test_common_gate_requires_secret_private_key_after_46,
-        test_common_gate_requires_secret_sk_after_46,
-        test_common_gate_requires_secret_rk_after_46,
-        test_common_gate_requires_secret_api_key_re_after_46,
-        test_common_gate_requires_secret_aws_secret_after_46,
-        test_common_gate_requires_secret_xox_after_46,
-        test_common_gate_requires_secret_npm_after_46,
-        test_common_gate_requires_secret_aiza_after_46,
-        test_common_gate_requires_url_hint_token_eq_after_46,
-        test_common_gate_requires_url_hint_access_token_after_46,
-        test_common_gate_requires_url_hint_api_key_eq_after_46,
-        test_common_gate_requires_url_hint_apikey_eq_after_46,
-        test_common_gate_requires_url_hint_client_secret_after_46,
-        test_common_gate_requires_forbidden_coverage_after_46,
-        test_common_gate_requires_forbidden_codecov_after_46,
-        test_common_gate_requires_forbidden_coveralls_after_46,
-        test_common_gate_requires_forbidden_downloads_after_46,
-        test_common_gate_requires_forbidden_discord_after_46,
-        test_common_gate_requires_forbidden_twitter_after_46,
-        test_common_gate_requires_forbidden_x_com_after_46,
-        test_common_gate_requires_forbidden_stars_after_46,
-        test_common_gate_requires_forbidden_forks_after_46,
-        test_common_gate_requires_forbidden_followers_after_46,
-        test_common_gate_requires_forbidden_npm__after_46,
-        test_common_gate_requires_forbidden_pypi__after_46,
-        test_common_gate_requires_forbidden_producthunt_after_46,
-        test_common_gate_requires_forbidden_buymeacoffee_after_46,
-        test_common_gate_requires_forbidden_opencollective_after_46,
-        test_common_gate_requires_scheme_js_after_46,
-        test_common_gate_requires_scheme_data_after_46,
-        test_common_gate_requires_scheme_vbscript_after_46,
-        test_common_gate_requires_scheme_file_after_46,
-        test_common_gate_requires_tilde_fence_after_46,
-        test_common_gate_requires_endswith_urlish_after_46,
-        test_common_gate_requires_invent_wording_after_46,
-        test_common_gate_requires_live_secret_scan_pin_after_46,
-        test_common_secret_patterns_ghp_still_after_46,
-        test_common_secret_patterns_github_pat_still_after_46,
-        test_common_secret_patterns_npm_still_after_46,
-        test_common_secret_patterns_aiza_still_after_46,
-        test_common_dangerous_schemes_complete_still_after_46,
-        test_common_has_dangerous_javascript_still_after_46,
-        test_common_has_dangerous_data_still_after_46,
-        test_common_forbidden_hints_coverage_still_after_46,
-        test_common_strip_fenced_code_tilde_still_after_46,
-        test_common_strip_fenced_code_backtick_still_after_46,
-        test_common_scan_secrets_url_hint_still_after_46,
-        test_common_scan_secrets_ghp_prefix_still_after_46,
-        test_common_load_workflow_text_live_still_after_46,
-        test_common_markdown_files_readme_still_after_46,
-        test_common_fail_appends_still_after_46,
-        test_common_secret_url_hints_complete_still_after_46,
-        # TOKENMAXX deepen after #48 (+68 badge-standard gate pins)
-        test_badge_gate_requires_required_order_after_48,
-        test_badge_gate_requires_max_badges_after_48,
-        test_badge_gate_requires_expected_repo_after_48,
-        test_badge_gate_requires_required_workflows_after_48,
-        test_badge_gate_requires_badge_line_re_after_48,
-        test_badge_gate_requires_repo_from_github_re_after_48,
-        test_badge_gate_requires_repo_from_shields_re_after_48,
-        test_badge_gate_requires_label_link_check_after_48,
-        test_badge_gate_requires_label_markdown_lint_after_48,
-        test_badge_gate_requires_label_license_after_48,
-        test_badge_gate_requires_max_badges_eq_3_after_48,
-        test_badge_gate_requires_repo_slug_after_48,
-        test_badge_gate_requires_wf_link_check_after_48,
-        test_badge_gate_requires_wf_markdown_lint_after_48,
-        test_badge_gate_requires_wf_stewardship_after_48,
-        test_badge_gate_requires_fn_extract_badge_row_after_48,
-        test_badge_gate_requires_fn_check_badges_after_48,
-        test_badge_gate_requires_fn_check_badge_doc_after_48,
-        test_badge_gate_requires_fn_readme_consistency_after_48,
-        test_badge_gate_requires_fn_contributing_after_48,
-        test_badge_gate_requires_fn_lycheeignore_after_48,
-        test_badge_gate_requires_fn_actionlint_after_48,
-        test_badge_gate_requires_fn_workflow_hardening_after_48,
-        test_badge_gate_requires_fn_workflows_license_after_48,
-        test_badge_gate_requires_link_check_badge_svg_after_48,
-        test_badge_gate_requires_markdown_lint_badge_svg_after_48,
-        test_badge_gate_requires_shields_license_after_48,
-        test_badge_gate_requires_contiguous_pin_after_48,
-        test_badge_gate_requires_fourth_refusal_after_48,
-        test_badge_gate_requires_stewardship_product_reject_after_48,
-        test_badge_gate_requires_live_badge_row_pin_after_48,
-        test_badge_gate_requires_forbidden_hints_import_after_48,
-        test_badge_gate_requires_secret_url_hints_import_after_48,
-        test_badge_gate_requires_scan_secrets_after_48,
-        test_badge_gate_requires_invent_wording_after_48,
-        test_badge_gate_requires_https_images_after_48,
-        test_badge_gate_required_order_still_after_48,
-        test_badge_gate_max_badges_still_after_48,
-        test_badge_gate_expected_repo_still_after_48,
-        test_badge_gate_required_workflows_still_after_48,
-        test_badge_gate_contract_fn_still_after_48,
-        test_badge_gate_extract_row_still_after_48,
-        test_badge_gate_check_badges_order_still_after_48,
-        test_badge_gate_check_badges_https_still_after_48,
-        test_badge_gate_doc_fourth_still_after_48,
-        test_badge_gate_badge_line_re_still_after_48,
-        test_badge_gate_repo_github_re_still_after_48,
-        test_badge_gate_repo_shields_re_still_after_48,
-        test_badge_gate_main_calls_contract_still_after_48,
-        test_badge_gate_docstring_pin_still_after_48,
-        test_badge_gate_three_max_still_after_48,
-        test_badge_gate_contract_errors_empty_live_still_after_48,
-        test_badge_gate_no_fourth_in_order_still_after_48,
-        test_badge_gate_license_last_still_after_48,
-        test_badge_gate_link_check_first_still_after_48,
-        test_badge_gate_markdown_lint_middle_still_after_48,
-        test_badge_gate_badge_gate_path_still_after_48,
-        test_badge_gate_forbidden_hints_wired_still_after_48,
-        test_badge_gate_secret_hints_wired_still_after_48,
-        test_badge_gate_passes_live_contract_still_after_48,
-        test_badge_gate_doc_mentions_three_still_after_48,
-        test_badge_gate_readme_has_three_still_after_48,
-        test_badge_gate_check_badges_live_still_after_48,
-        test_badge_gate_contributing_invent_still_after_48,
-        test_badge_gate_agents_selftest_still_after_48,
-        test_badge_gate_lycheeignore_shields_still_after_48,
-        test_badge_gate_source_has_contract_section_still_after_48,
-        test_badge_gate_quiet_stewardship_doc_still_after_48,
-        test_schema_gate_requires_string_keys_after_53,
-        test_schema_gate_requires_reject_non_scalar_after_53,
-        test_schema_gate_requires_front_door_scope_after_53,
-        test_schema_gate_requires_reversible_purpose_after_53,
-        test_schema_gate_requires_closes_16_after_53,
-        test_schema_gate_requires_empty_yaml_needle_after_53,
-        test_schema_gate_requires_bool_int_reject_after_53,
-        test_schema_gate_requires_ecosystem_md_after_53,
-        test_schema_gate_requires_parent_governance_pin_after_53,
-        test_schema_gate_requires_fuzzywigg_owner_after_53,
-        test_schema_gate_requires_agents_governance_repo_after_53,
-        test_schema_rejects_bool_autonomy_after_53,
-        test_schema_rejects_bool_tier_after_53,
-        test_schema_rejects_nested_scope_after_53,
-        test_schema_rejects_list_owner_after_53,
-        test_schema_rejects_empty_yaml_block_after_53,
-        test_schema_rejects_null_maintainer_after_53,
-        test_schema_rejects_tilde_null_purpose_after_53,
-        test_schema_rejects_int_scope_after_53,
-        test_schema_rejects_wrong_badge_scope_after_53,
-        test_schema_rejects_wrong_publish_purpose_after_53,
-        test_schema_rejects_wrong_badge_closes_after_53,
-        test_schema_rejects_wrong_publish_closes_after_53,
-        test_schema_rejects_yes_autonomy_after_53,
-        test_schema_rejects_nested_purpose_after_53,
-        test_schema_rejects_list_closes_after_53,
-        test_schema_rejects_bool_status_after_53,
-        test_schema_rejects_wrong_value_still_after_53,
-        test_schema_rejects_inactive_status_still_after_53,
-        test_schema_rejects_missing_key_still_after_53,
-        test_schema_rejects_bad_semver_still_after_53,
-        test_schema_rejects_edit_policy_without_invent_still_after_53,
-        test_schema_rejects_wrong_surface_still_after_53,
-        test_schema_rejects_closes_without_issue_still_after_53,
-        test_schema_rejects_bad_iso_date_still_after_53,
-        test_schema_rejects_wrong_maintainer_still_after_53,
-        test_schema_rejects_float_autonomy_still_after_53,
-        test_schema_rejects_autonomy_as_string_still_after_53,
-        test_schema_rejects_tier_as_string_still_after_53,
-        test_schema_rejects_wrong_claude_repo_still_after_53,
-        test_schema_rejects_empty_badge_edit_policy_still_after_53,
-        test_schema_rejects_secret_in_doc_still_after_53,
-        test_schema_rejects_missing_yaml_block_still_after_53,
-        test_schema_rejects_missing_file_still_after_53,
-        test_schema_rejects_non_mapping_yaml_still_after_53,
-        test_schema_rejects_unparseable_yaml_still_after_53,
-        test_schema_rejects_wrong_backlog_owner_after_53,
-        test_schema_rejects_list_status_after_53,
-        test_schema_rejects_nested_edit_policy_after_53,
-        test_schema_rejects_bool_closes_after_53,
-        test_schema_rejects_int_purpose_after_53,
-        test_schema_rejects_bool_owner_after_53,
-        test_schema_rejects_nested_parent_governance_after_53,
-        test_schema_rejects_list_maintainer_after_53,
-        test_schema_rejects_float_tier_after_53,
-        test_schema_rejects_yes_tier_after_53,
-        test_schema_rejects_null_closes_after_53,
-        test_schema_rejects_int_surface_after_53,
-        test_schema_rejects_nested_repo_after_53,
-        test_schema_rejects_list_version_after_53,
-        test_schema_rejects_bool_version_after_53,
-        test_schema_rejects_wrong_badge_closes_hash_after_53,
-        test_schema_rejects_wrong_publish_purpose_short_after_53,
-        test_schema_rejects_wrong_front_door_scope_typo_after_53,
-        test_schema_gate_requires_string_keys_const_still_after_53,
-        test_schema_gate_requires_reject_non_scalar_still_after_53,
-        test_schema_gate_requires_empty_yaml_still_after_53,
-        test_schema_gate_requires_front_door_still_after_53,
-        test_schema_gate_requires_reversible_still_after_53,
-        test_schema_passes_good_fixture_still_after_53,
-        test_schema_rejects_tier_zero_still_after_53,
-
-        # TOKENMAXX deepen after #55 (+71 relative-link second-pass)
-        test_relative_gate_requires_md_link_re_after_55,
-        test_relative_gate_requires_skip_parts_after_55,
-        test_relative_gate_requires_skip_prefixes_after_55,
-        test_relative_gate_requires_skip_files_after_55,
-        test_relative_gate_requires_max_unquote_passes_after_55,
-        test_relative_gate_requires_max_unquote_eq_4_after_55,
-        test_relative_gate_requires_should_skip_after_55,
-        test_relative_gate_requires_iter_markdown_after_55,
-        test_relative_gate_requires_headings_in_after_55,
-        test_relative_gate_requires_check_file_after_55,
-        test_relative_gate_requires_mailto_allow_after_55,
-        test_relative_gate_requires_tel_allow_after_55,
-        test_relative_gate_requires_nul_reject_after_55,
-        test_relative_gate_requires_angle_bracket_strip_after_55,
-        test_relative_gate_requires_image_link_re_after_55,
-        test_relative_gate_requires_escapes_repo_needle_after_55,
-        test_relative_gate_requires_broken_link_needle_after_55,
-        test_relative_gate_requires_missing_heading_needle_after_55,
-        test_relative_gate_requires_rglob_after_55,
-        test_relative_gate_requires_no_md_fail_closed_after_55,
-        test_relative_links_reject_triple_encoded_escape_after_55,
-        test_relative_links_reject_query_with_amp_after_55,
-        test_relative_links_reject_empty_frag_whitespace_after_55,
-        test_relative_links_reject_image_http_after_55,
-        test_relative_links_reject_image_data_after_55,
-        test_relative_links_reject_image_file_scheme_after_55,
-        test_relative_links_reject_image_vbscript_after_55,
-        test_relative_links_accept_angle_mailto_after_55,
-        test_relative_links_accept_angle_tel_after_55,
-        test_relative_links_accept_title_on_https_after_55,
-        test_relative_links_reject_abs_windows_style_after_55,
-        test_relative_links_reject_query_on_image_path_after_55,
-        test_relative_links_reject_empty_frag_on_image_after_55,
-        test_relative_links_skip_git_dir_after_55,
-        test_relative_links_accept_nested_cross_frag_after_55,
-        test_relative_links_reject_nested_missing_frag_after_55,
-        test_relative_links_accept_self_frag_slug_after_55,
-        test_relative_links_reject_self_frag_missing_after_55,
-        test_relative_links_reject_whitespace_only_target_after_55,
-        test_relative_links_accept_https_image_after_55,
-        test_relative_links_fully_unquote_cap_helper_after_55,
-        test_relative_gate_requires_owasp_still_after_55,
-        test_relative_gate_requires_fully_unquote_still_after_55,
-        test_relative_gate_requires_empty_fragment_still_after_55,
-        test_relative_gate_requires_query_string_still_after_55,
-        test_relative_gate_requires_github_slug_still_after_55,
-        test_relative_gate_requires_atx_still_after_55,
-        test_relative_gate_requires_strip_fenced_still_after_55,
-        test_relative_gate_requires_dangerous_still_after_55,
-        test_run_stewardship_requires_gate_order_still_after_55,
-        test_relative_links_reject_http_still_after_55,
-        test_relative_links_reject_protocol_rel_still_after_55,
-        test_relative_links_reject_javascript_still_after_55,
-        test_relative_links_reject_data_still_after_55,
-        test_relative_links_reject_file_still_after_55,
-        test_relative_links_reject_vbscript_still_after_55,
-        test_relative_links_reject_empty_parens_still_after_55,
-        test_relative_links_reject_bare_hash_still_after_55,
-        test_relative_links_reject_broken_still_after_55,
-        test_relative_links_reject_empty_path_frag_still_after_55,
-        test_relative_links_reject_query_still_after_55,
-        test_relative_links_accept_https_still_after_55,
-        test_relative_links_accept_mailto_still_after_55,
-        test_relative_links_accept_tel_still_after_55,
-        test_relative_links_ignore_fenced_still_after_55,
-        test_relative_links_ignore_tilde_still_after_55,
-        test_relative_links_skip_owasp_still_after_55,
-        test_relative_links_skip_agents_still_after_55,
-        test_relative_links_skip_node_modules_still_after_55,
-        test_relative_links_accept_valid_fragment_still_after_55,
-        test_relative_links_reject_nul_still_after_55,
-
-        # TOKENMAXX deepen after #59 (+72 wiki-outline second-pass)
-        test_wiki_gate_requires_operator_only_after_59,
-        test_wiki_gate_requires_operator_only_eq_publish_after_59,
-        test_wiki_gate_requires_docs_path_after_59,
-        test_wiki_gate_requires_wiki_path_after_59,
-        test_wiki_gate_requires_reject_invent_helper_after_59,
-        test_wiki_gate_requires_autonomy_topic_after_59,
-        test_wiki_gate_requires_governance_topic_after_59,
-        test_wiki_gate_requires_public_topic_after_59,
-        test_wiki_gate_requires_kill_topic_after_59,
-        test_wiki_gate_requires_secret_topic_after_59,
-        test_wiki_gate_requires_surface_topic_after_59,
-        test_wiki_gate_requires_routing_topic_after_59,
-        test_wiki_gate_requires_run_script_topic_after_59,
-        test_wiki_gate_requires_badge_topic_after_59,
-        test_wiki_gate_requires_home_backlink_needle_after_59,
-        test_wiki_gate_requires_unexpected_md_needle_after_59,
-        test_wiki_gate_requires_missing_wiki_needle_after_59,
-        test_wiki_gate_requires_failed_banner_after_59,
-        test_wiki_gate_requires_ok_match_needle_after_59,
-        test_wiki_gate_requires_angle_bracket_strip_after_59,
-        test_wiki_gate_requires_image_link_re_after_59,
-        test_wiki_gate_requires_do_not_push_after_59,
-        test_wiki_gate_requires_readme_blob_after_59,
-        test_wiki_gate_requires_badge_hint_path_after_59,
-        test_wiki_gate_requires_stars_special_case_after_59,
-        test_wiki_gate_requires_forks_special_case_after_59,
-        test_wiki_gate_requires_followers_special_case_after_59,
-        test_wiki_gate_requires_invent_chrome_needle_after_59,
-        test_wiki_gate_requires_home_table_row_after_59,
-        test_wiki_rejects_missing_public_topic_after_59,
-        test_wiki_rejects_missing_autonomy_topic_after_59,
-        test_wiki_rejects_missing_routing_topic_after_59,
-        test_wiki_rejects_missing_governance_topic_after_59,
-        test_wiki_rejects_followers_chrome_after_59,
-        test_wiki_rejects_twitter_chrome_after_59,
-        test_wiki_rejects_xcom_chrome_after_59,
-        test_wiki_rejects_coveralls_chrome_after_59,
-        test_wiki_rejects_image_http_after_59,
-        test_wiki_rejects_image_javascript_after_59,
-        test_wiki_rejects_image_data_after_59,
-        test_wiki_rejects_image_file_scheme_after_59,
-        test_wiki_accepts_angle_https_after_59,
-        test_wiki_accepts_title_attr_after_59,
-        test_wiki_accepts_mailto_after_59,
-        test_wiki_accepts_tel_after_59,
-        test_wiki_rejects_missing_home_to_overview_after_59,
-        test_wiki_rejects_missing_home_to_autonomy_after_59,
-        test_wiki_rejects_missing_overview_home_backlink_after_59,
-        test_wiki_rejects_missing_publish_secrets_after_59,
-        test_wiki_rejects_missing_publish_link_check_after_59,
-        test_wiki_rejects_secret_in_publish_after_59,
-        test_wiki_rejects_downloads_chrome_after_59,
-        test_wiki_rejects_opencollective_chrome_after_59,
-        test_wiki_ignores_fenced_protocol_rel_after_59,
-        test_wiki_rejects_http_title_attr_after_59,
-        test_wiki_rejects_protocol_rel_title_attr_after_59,
-        test_wiki_gate_requires_publishable_pages_still_after_59,
-        test_wiki_gate_requires_topic_hints_still_after_59,
-        test_wiki_gate_requires_l2_still_after_59,
-        test_wiki_gate_requires_credential_still_after_59,
-        test_wiki_gate_requires_copilot_still_after_59,
-        test_wiki_gate_requires_strip_fenced_still_after_59,
-        test_wiki_gate_requires_dangerous_still_after_59,
-        test_wiki_gate_requires_protocol_rel_still_after_59,
-        test_wiki_gate_requires_http_reject_still_after_59,
-        test_wiki_gate_requires_forbidden_hints_still_after_59,
-        test_wiki_gate_requires_stewardship_ci_still_after_59,
-        test_wiki_gate_requires_actionlint_still_after_59,
-        test_wiki_gate_requires_invent_still_after_59,
-        test_wiki_gate_requires_kill_switch_still_after_59,
-        test_wiki_gate_requires_scan_secrets_still_after_59,
-        test_wiki_passes_good_fixture_still_after_59,
-
-        # TOKENMAXX deepen after #61 (+72 badge-standard second-pass)
-        test_badge_gate_requires_required_order_eq_after_61,
-        test_badge_gate_requires_expected_repo_eq_after_61,
-        test_badge_gate_requires_readme_path_after_61,
-        test_badge_gate_requires_license_path_after_61,
-        test_badge_gate_requires_badge_standard_path_after_61,
-        test_badge_gate_requires_contributing_path_after_61,
-        test_badge_gate_requires_agents_path_after_61,
-        test_badge_gate_requires_lycheeignore_path_after_61,
-        test_badge_gate_requires_markdownlint_path_after_61,
-        test_badge_gate_requires_contract_fn_after_61,
-        test_badge_gate_requires_main_fn_after_61,
-        test_badge_gate_requires_full_link_check_svg_after_61,
-        test_badge_gate_requires_full_md_lint_svg_after_61,
-        test_badge_gate_requires_exactly_needle_after_61,
-        test_badge_gate_requires_order_needle_after_61,
-        test_badge_gate_requires_contiguous_needle_after_61,
-        test_badge_gate_requires_missing_h1_needle_after_61,
-        test_badge_gate_requires_unexpected_label_needle_after_61,
-        test_badge_gate_requires_forbidden_hint_needle_after_61,
-        test_badge_gate_requires_secret_token_needle_after_61,
-        test_badge_gate_requires_failed_banner_after_61,
-        test_badge_gate_requires_ok_match_needle_after_61,
-        test_badge_gate_requires_endswith_license_after_61,
-        test_badge_gate_requires_dot_slash_license_after_61,
-        test_badge_gate_requires_load_workflow_text_after_61,
-        test_badge_gate_requires_invent_product_doc_pin_after_61,
-        test_badge_gate_requires_intentionally_pin_after_61,
-        test_badge_gate_requires_quiet_stewardship_after_61,
-        test_badge_gate_requires_selftest_agents_pin_after_61,
-        test_badge_gate_requires_relative_agents_pin_after_61,
-        test_badge_gate_requires_img_startswith_https_after_61,
-        test_badge_gate_requires_link_http_reject_after_61,
-        test_badge_rejects_wrong_order_after_61,
-        test_badge_rejects_four_badges_after_61,
-        test_badge_rejects_http_image_after_61,
-        test_badge_rejects_stewardship_product_after_61,
-        test_badge_rejects_wrong_repo_after_61,
-        test_badge_rejects_noncontiguous_after_61,
-        test_badge_rejects_secret_url_after_61,
-        test_badge_rejects_forbidden_coverage_after_61,
-        test_badge_rejects_two_badges_after_61,
-        test_badge_rejects_missing_h1_after_61,
-        test_badge_rejects_wrong_license_link_after_61,
-        test_badge_rejects_http_badge_link_after_61,
-        test_badge_accepts_dot_slash_license_after_61,
-        test_badge_accepts_absolute_license_blob_after_61,
-        test_badge_passes_good_fixture_after_61,
-        test_badge_rejects_codecov_hint_after_61,
-        test_badge_rejects_downloads_hint_after_61,
-        test_badge_rejects_stars_hint_after_61,
-        test_badge_rejects_wrong_link_check_image_after_61,
-        test_badge_rejects_wrong_md_lint_image_after_61,
-        test_badge_gate_requires_required_order_still_after_61,
-        test_badge_gate_requires_max_badges_still_after_61,
-        test_badge_gate_requires_expected_repo_still_after_61,
-        test_badge_gate_requires_required_workflows_still_after_61,
-        test_badge_gate_requires_badge_line_re_still_after_61,
-        test_badge_gate_requires_max_eq_3_still_after_61,
-        test_badge_gate_requires_link_svg_still_after_61,
-        test_badge_gate_requires_md_svg_still_after_61,
-        test_badge_gate_requires_shields_still_after_61,
-        test_badge_gate_requires_contiguous_still_after_61,
-        test_badge_gate_requires_fourth_still_after_61,
-        test_badge_gate_requires_stew_reject_still_after_61,
-        test_badge_gate_requires_live_row_still_after_61,
-        test_badge_gate_requires_forbidden_import_still_after_61,
-        test_badge_gate_requires_scan_secrets_still_after_61,
-        test_badge_passes_live_contract_still_after_61,
-        test_badge_rejects_wrong_order_still_after_61,
-        test_badge_passes_good_fixture_still_after_61,
-        test_badge_rejects_invent_still_after_61,
-        test_badge_rejects_secret_url_still_after_61,
-
-        # TOKENMAXX deepen after #65 (+72 stewardship_common second-pass)
-        test_common_gate_requires_root_parents_after_65,
-        test_common_gate_requires_fence_dotall_after_65,
-        test_common_gate_requires_fence_pattern_after_65,
-        test_common_gate_requires_strip_doc_after_65,
-        test_common_gate_requires_danger_doc_after_65,
-        test_common_gate_requires_scan_doc_after_65,
-        test_common_gate_requires_md_doc_after_65,
-        test_common_gate_requires_pattern_needle_after_65,
-        test_common_gate_requires_url_hint_needle_after_65,
-        test_common_gate_requires_token_hint_needle_after_65,
-        test_common_gate_requires_relative_to_after_65,
-        test_common_gate_requires_strip_lower_after_65,
-        test_common_gate_requires_startswith_after_65,
-        test_common_gate_requires_errors_append_after_65,
-        test_common_gate_requires_passwd_token_after_65,
-        test_common_gate_requires_openssh_after_65,
-        test_common_gate_requires_openssh_ec_after_65,
-        test_common_gate_requires_public_docs_after_65,
-        test_common_gate_requires_invent_surface_after_65,
-        test_common_gate_requires_social_chrome_after_65,
-        test_common_gate_requires_link_schemes_after_65,
-        test_common_gate_requires_is_file_after_65,
-        test_common_gate_requires_sorted_after_65,
-        test_common_gate_requires_workflows_after_65,
-        test_common_gate_requires_return_none_after_65,
-        test_common_gate_requires_url_hints_head_after_65,
-        test_common_gate_requires_schemes_js_first_after_65,
-        test_common_gate_requires_contract_fn_after_65,
-        test_common_gate_requires_contract_call_after_65,
-        test_common_secret_patterns_ghp_still_after_65,
-        test_common_secret_patterns_github_pat_still_after_65,
-        test_common_secret_patterns_npm_still_after_65,
-        test_common_secret_patterns_aiza_still_after_65,
-        test_common_secret_patterns_passwd_still_after_65,
-        test_common_secret_patterns_openssh_still_after_65,
-        test_common_dangerous_schemes_complete_still_after_65,
-        test_common_has_dangerous_javascript_still_after_65,
-        test_common_has_dangerous_data_still_after_65,
-        test_common_has_dangerous_none_https_after_65,
-        test_common_forbidden_hints_coverage_still_after_65,
-        test_common_strip_fenced_tilde_still_after_65,
-        test_common_strip_fenced_backtick_still_after_65,
-        test_common_scan_secrets_url_hint_still_after_65,
-        test_common_scan_secrets_ghp_prefix_still_after_65,
-        test_common_load_workflow_text_live_still_after_65,
-        test_common_load_workflow_text_missing_none_after_65,
-        test_common_markdown_files_readme_still_after_65,
-        test_common_fail_appends_still_after_65,
-        test_common_secret_url_hints_complete_still_after_65,
-        test_common_root_parents_live_after_65,
-        test_common_gate_requires_secret_patterns_still_after_65,
-        test_common_gate_requires_secret_url_hints_still_after_65,
-        test_common_gate_requires_forbidden_badge_hints_still_after_65,
-        test_common_gate_requires_dangerous_link_schemes_still_after_65,
-        test_common_gate_requires_fenced_block_re_still_after_65,
-        test_common_gate_requires_strip_fenced_code_still_after_65,
-        test_common_gate_requires_has_dangerous_scheme_still_after_65,
-        test_common_gate_requires_markdown_files_still_after_65,
-        test_common_gate_requires_fail_helper_pin_still_after_65,
-        test_common_gate_requires_load_workflow_pin_still_after_65,
-        test_common_gate_requires_secret_ghp_still_after_65,
-        test_common_gate_requires_secret_github_pat_still_after_65,
-        test_common_gate_requires_url_hint_token_eq_still_after_65,
-        test_common_gate_requires_forbidden_coverage_still_after_65,
-        test_common_gate_requires_scheme_js_still_after_65,
-        test_common_gate_requires_endswith_urlish_still_after_65,
-        test_common_gate_requires_invent_wording_still_after_65,
-        test_common_gate_requires_live_secret_scan_pin_still_after_65,
-        test_common_secret_patterns_sk_still_after_65,
-        test_common_secret_patterns_xox_still_after_65,
-        test_common_has_dangerous_vbscript_still_after_65,
-        test_common_has_dangerous_file_still_after_65,
-
-        # TOKENMAXX deepen after #72 (+72 CI workflow second-pass)
-        test_link_check_requires_name_link_check_after_72,
-        test_markdown_lint_requires_name_after_72,
-        test_stewardship_requires_name_after_72,
-        test_link_check_requires_branches_glob_after_72,
-        test_markdown_lint_requires_branches_glob_after_72,
-        test_stewardship_requires_branches_glob_after_72,
-        test_link_check_requires_concurrency_prefix_after_72,
-        test_markdown_lint_requires_concurrency_prefix_after_72,
-        test_stewardship_requires_concurrency_prefix_after_72,
-        test_link_check_requires_github_workflow_after_72,
-        test_link_check_requires_github_ref_after_72,
-        test_markdown_lint_requires_github_workflow_after_72,
-        test_stewardship_requires_github_ref_after_72,
-        test_link_check_requires_job_id_after_72,
-        test_markdown_lint_requires_job_id_lint_after_72,
-        test_stewardship_requires_job_id_after_72,
-        test_link_check_requires_self_path_filter_after_72,
-        test_markdown_lint_requires_self_path_filter_after_72,
-        test_stewardship_requires_scripts_path_after_72,
-        test_stewardship_requires_docs_path_after_72,
-        test_stewardship_requires_readme_path_after_72,
-        test_link_check_requires_secrets_github_token_after_72,
-        test_stewardship_requires_python_312_exact_after_72,
-        test_stewardship_requires_pip_quiet_pyyaml_after_72,
-        test_stewardship_requires_bash_run_script_after_72,
-        test_stewardship_requires_python3_selftest_after_72,
-        test_markdown_lint_requires_config_key_after_72,
-        test_markdown_lint_requires_agents_glob_bang_after_72,
-        test_markdown_lint_requires_owasp_bang_after_72,
-        test_stewardship_actionlint_lists_link_check_path_after_72,
-        test_stewardship_actionlint_lists_markdown_path_after_72,
-        test_stewardship_download_passes_177_after_72,
-        test_link_check_requires_checkout_v7_still_after_72,
-        test_markdown_lint_requires_checkout_v7_still_after_72,
-        test_stewardship_requires_checkout_v7_still_after_72,
-        test_link_check_requires_lychee_v2_still_after_72,
-        test_link_check_requires_timeout_20_still_after_72,
-        test_markdown_lint_requires_timeout_10_still_after_72,
-        test_stewardship_requires_timeout_15_still_after_72,
-        test_link_check_requires_cron_still_after_72,
-        test_markdown_lint_requires_cron_still_after_72,
-        test_stewardship_requires_cron_still_after_72,
-        test_link_check_requires_ubuntu_still_after_72,
-        test_markdown_lint_requires_ubuntu_still_after_72,
-        test_stewardship_requires_ubuntu_still_after_72,
-        test_stewardship_requires_setup_python_v5_still_after_72,
-        test_stewardship_requires_actionlint_color_still_after_72,
-        test_stewardship_requires_shell_bash_still_after_72,
-        test_link_check_requires_fail_true_still_after_72,
-        test_link_check_requires_verbose_still_after_72,
-        test_link_check_requires_no_progress_still_after_72,
-        test_markdown_lint_requires_cli2_v24_still_after_72,
-        test_stewardship_requires_get_actionlint_id_still_after_72,
-        test_stewardship_requires_pyyaml_still_after_72,
-        test_link_check_requires_exclude_loopback_still_after_72,
-        test_link_check_requires_max_concurrency_8_still_after_72,
-        test_stewardship_requires_actionlint_177_still_after_72,
-        test_stewardship_rejects_cancel_in_progress_false_after_72,
-        test_link_check_rejects_missing_pull_request_after_72,
-        test_markdown_lint_rejects_missing_workflow_dispatch_after_72,
-        test_stewardship_rejects_missing_contents_read_after_72,
-        test_link_check_rejects_missing_schedule_after_72,
-        test_stewardship_rejects_missing_concurrency_after_72,
-        test_markdown_lint_rejects_missing_owasp_exclude_still_after_72,
-        test_link_check_requires_lycheeignore_path_after_72,
-        test_markdown_lint_requires_markdownlint_json_path_after_72,
-        test_link_check_requires_max_retries_3_still_after_72,
-        test_link_check_requires_timeout_arg_20_still_after_72,
-
-        # TOKENMAXX actionlint-style gate pins after #75 (+71)
-        test_actionlint_style_gate_requires_fn_after_75,
-        test_actionlint_style_gate_requires_static_doc_after_75,
-        test_actionlint_style_gate_requires_live_pins_doc_after_75,
-        test_actionlint_style_gate_requires_load_workflow_text_after_75,
-        test_actionlint_style_gate_requires_top_level_name_after_75,
-        test_actionlint_style_gate_requires_jobs_runs_on_after_75,
-        test_actionlint_style_gate_requires_jobs_steps_after_75,
-        test_actionlint_style_gate_requires_timeout_minutes_after_75,
-        test_actionlint_style_gate_requires_prt_reject_after_75,
-        test_actionlint_style_gate_requires_harden_wording_after_75,
-        test_actionlint_style_gate_requires_write_all_reject_after_75,
-        test_actionlint_style_gate_requires_contents_write_reject_after_75,
-        test_actionlint_style_gate_requires_id_token_write_reject_after_75,
-        test_actionlint_style_gate_requires_docker_skip_after_75,
-        test_actionlint_style_gate_requires_unpinned_reject_after_75,
-        test_actionlint_style_gate_requires_float_main_after_75,
-        test_actionlint_style_gate_requires_float_master_after_75,
-        test_actionlint_style_gate_requires_float_latest_after_75,
-        test_actionlint_style_gate_requires_float_set_after_75,
-        test_actionlint_style_gate_requires_main_call_after_75,
-        test_actionlint_style_gate_requires_fn_still_after_75,
-        test_actionlint_style_gate_requires_id_token_still_after_75,
-        test_actionlint_style_gate_requires_write_all_still_after_75,
-        test_actionlint_style_gate_requires_prt_still_after_75,
-        test_actionlint_style_gate_requires_docker_still_after_75,
-        test_actionlint_style_gate_requires_unpinned_still_after_75,
-        test_actionlint_style_gate_requires_timeout_still_after_75,
-        test_actionlint_style_gate_requires_runs_on_still_after_75,
-        test_actionlint_style_gate_requires_steps_still_after_75,
-        test_actionlint_style_gate_requires_live_doc_still_after_75,
-        test_actionlint_rejects_id_token_write_on_stewardship_after_75,
-        test_actionlint_rejects_id_token_write_on_link_check_after_75,
-        test_actionlint_rejects_id_token_write_on_markdown_lint_after_75,
-        test_actionlint_rejects_write_all_on_stewardship_after_75,
-        test_actionlint_rejects_write_all_on_link_check_after_75,
-        test_actionlint_rejects_contents_write_on_stewardship_after_75,
-        test_actionlint_rejects_contents_write_on_link_check_after_75,
-        test_actionlint_rejects_prt_on_stewardship_after_75,
-        test_actionlint_rejects_prt_on_link_check_after_75,
-        test_actionlint_rejects_float_main_checkout_after_75,
-        test_actionlint_rejects_float_master_checkout_after_75,
-        test_actionlint_rejects_float_latest_checkout_after_75,
-        test_actionlint_rejects_unpinned_checkout_after_75,
-        test_actionlint_rejects_float_main_setup_python_after_75,
-        test_actionlint_rejects_missing_timeout_on_stewardship_after_75,
-        test_actionlint_rejects_missing_runs_on_after_75,
-        test_actionlint_rejects_missing_steps_after_75,
-        test_actionlint_rejects_id_token_write_stewardship_still_after_75,
-        test_actionlint_rejects_id_token_write_link_still_after_75,
-        test_actionlint_rejects_write_all_stewardship_still_after_75,
-        test_actionlint_rejects_contents_write_stewardship_still_after_75,
-        test_actionlint_rejects_prt_stewardship_still_after_75,
-        test_actionlint_rejects_float_main_still_after_75,
-        test_actionlint_rejects_float_latest_still_after_75,
-        test_actionlint_rejects_unpinned_still_after_75,
-        test_actionlint_rejects_float_master_setup_python_still_after_75,
-        test_actionlint_rejects_missing_name_after_75,
-        test_actionlint_rejects_prt_markdown_lint_after_75,
-        test_actionlint_rejects_write_all_markdown_lint_after_75,
-        test_actionlint_rejects_contents_write_markdown_lint_after_75,
-        test_actionlint_rejects_float_main_markdown_lint_after_75,
-        test_actionlint_rejects_unpinned_markdown_lint_after_75,
-        test_actionlint_rejects_missing_timeout_link_after_75,
-        test_actionlint_rejects_missing_timeout_markdown_after_75,
-        test_actionlint_rejects_id_token_write_markdown_still_after_75,
-        test_actionlint_rejects_float_latest_setup_python_after_75,
-        test_actionlint_rejects_unpinned_setup_python_after_75,
-        test_actionlint_rejects_contents_write_link_still_after_75,
-        test_actionlint_rejects_write_all_link_still_after_75,
-        test_actionlint_rejects_prt_link_still_after_75,
-        test_actionlint_rejects_float_master_link_after_75,
-
-        test_stewardship_requires_raw_githubusercontent_still_after_72,
-        test_stewardship_requires_curl_fssl_still_after_72,
-        test_markdown_lint_requires_davidanson_still_after_72,
-        test_link_check_requires_lycheeverse_still_after_72,
-
-
-        # TOKENMAXX deepen after #72/#75 (+72 stewardship-schema second-pass)
-        test_schema_gate_requires_fenced_yaml_exact_after_72,
-        test_schema_gate_requires_iso_date_exact_after_72,
-        test_schema_gate_requires_semver_exact_after_72,
-        test_schema_gate_requires_issue_ref_exact_after_72,
-        test_schema_gate_requires_date_keys_exact_after_72,
-        test_schema_gate_requires_tiny_yaml_doc_after_72,
-        test_schema_gate_requires_scalar_doc_after_72,
-        test_schema_gate_requires_no_fence_needle_after_72,
-        test_schema_gate_requires_unsupported_yaml_after_72,
-        test_schema_gate_requires_empty_key_after_72,
-        test_schema_gate_requires_scalar_needle_after_72,
-        test_schema_gate_requires_nonempty_needle_after_72,
-        test_schema_gate_requires_string_needle_after_72,
-        test_schema_gate_requires_active_needle_after_72,
-        test_schema_gate_requires_tier_needle_after_72,
-        test_schema_gate_requires_autonomy_needle_after_72,
-        test_schema_gate_requires_iso_needle_after_72,
-        test_schema_gate_requires_invent_needle_after_72,
-        test_schema_gate_requires_semver_needle_after_72,
-        test_schema_gate_requires_closes_needle_after_72,
-        test_schema_gate_requires_failed_banner_after_72,
-        test_schema_gate_requires_ok_banner_after_72,
-        test_schema_gate_requires_stdlib_subset_after_72,
-        test_schema_gate_requires_pyyaml_label_after_72,
-        test_schema_gate_requires_bool_subclass_after_72,
-        test_schema_gate_requires_group_one_after_72,
-        test_schema_gate_requires_missing_keys_after_72,
-        test_schema_gate_requires_utf8_encoding_after_72,
-        test_schema_gate_requires_string_keys_status_after_72,
-        test_schema_gate_requires_string_keys_edit_policy_after_72,
-        test_schema_gate_requires_string_keys_closes_after_72,
-        test_schema_gate_requires_string_keys_purpose_after_72,
-        test_schema_gate_requires_string_keys_version_after_72,
-        test_schema_gate_requires_string_keys_maintainer_after_72,
-        test_schema_gate_requires_string_keys_parent_after_72,
-        test_schema_gate_requires_string_keys_repo_after_72,
-        test_schema_gate_requires_string_keys_surface_after_72,
-        test_schema_gate_requires_string_keys_last_updated_after_72,
-        test_schema_gate_requires_second_pass_doc_after_72,
-        test_schema_gate_requires_contract_fn_def_after_72,
-        test_schema_rejects_bool_autonomy_after_72,
-        test_schema_rejects_bool_tier_after_72,
-        test_schema_rejects_nested_list_value_after_72,
-        test_schema_rejects_empty_yaml_block_after_72,
-        test_schema_rejects_non_string_owner_after_72,
-        test_schema_rejects_bad_semver_after_72,
-        test_schema_rejects_closes_without_hash_after_72,
-        test_schema_rejects_inactive_status_after_72,
-        test_schema_rejects_bad_iso_date_after_72,
-        test_schema_passes_good_fixture_after_72,
-        test_schema_gate_requires_doc_schemas_still_after_72,
-        test_schema_gate_requires_expected_values_still_after_72,
-        test_schema_gate_requires_string_keys_still_after_72,
-        test_schema_gate_requires_reject_non_scalar_still_after_72,
-        test_schema_gate_requires_front_door_still_after_72,
-        test_schema_gate_requires_closes_16_still_after_72,
-        test_schema_gate_requires_copilot_still_after_72,
-        test_schema_gate_requires_scan_secrets_still_after_72,
-        test_schema_gate_requires_safe_load_still_after_72,
-        test_schema_gate_requires_mapping_still_after_72,
-        test_schema_gate_requires_empty_yaml_still_after_72,
-        test_schema_gate_requires_smtp_eth_still_after_72,
-        test_schema_gate_requires_agents_governance_repo_still_after_72,
-        test_schema_gate_requires_reversible_still_after_72,
-        test_schema_gate_requires_contract_call_after_72,
-        test_schema_rejects_missing_key_after_72,
-        test_schema_rejects_wrong_maintainer_after_72,
-        test_schema_rejects_edit_policy_without_invent_after_72,
-        test_schema_rejects_autonomy_out_of_range_after_72,
-        test_schema_rejects_tier_zero_after_72,
-        test_schema_rejects_missing_yaml_fence_after_72,
-        test_schema_gate_requires_bool_int_reject_still_after_72,
-        # TOKENMAXX actionlint-style second-pass pins after #83/#86
-        test_actionlint_style_gate_requires_name_re_after_86,
-        test_actionlint_style_gate_requires_uses_re_after_86,
-        test_actionlint_style_gate_requires_write_all_re_after_86,
-        test_actionlint_style_gate_requires_contents_write_re_after_86,
-        test_actionlint_style_gate_requires_id_token_re_after_86,
-        test_actionlint_style_gate_requires_docker_startswith_after_86,
-        test_actionlint_style_gate_requires_at_not_in_uses_after_86,
-        test_actionlint_style_gate_requires_rsplit_after_86,
-        test_actionlint_style_gate_requires_group_strip_after_86,
-        test_actionlint_style_gate_requires_runs_membership_after_86,
-        test_actionlint_style_gate_requires_steps_membership_after_86,
-        test_actionlint_style_gate_requires_prt_membership_after_86,
-        test_actionlint_style_gate_requires_timeout_membership_after_86,
-        test_actionlint_style_gate_requires_none_continue_after_86,
-        test_actionlint_style_gate_requires_required_workflows_loop_after_86,
-        test_actionlint_style_gate_requires_least_privilege_after_86,
-        test_actionlint_style_gate_requires_oidc_comment_after_86,
-        test_actionlint_style_gate_requires_majors_comment_after_86,
-        test_actionlint_style_gate_requires_timeout_comment_after_86,
-        test_actionlint_style_gate_requires_fail_top_name_after_86,
-        test_actionlint_style_gate_requires_fail_runs_after_86,
-        test_actionlint_style_gate_requires_fail_steps_after_86,
-        test_actionlint_style_gate_requires_fail_prt_after_86,
-        test_actionlint_style_gate_requires_fail_write_all_after_86,
-        test_actionlint_style_gate_requires_fail_contents_after_86,
-        test_actionlint_style_gate_requires_fail_id_token_after_86,
-        test_actionlint_style_gate_requires_fail_unpinned_after_86,
-        test_actionlint_style_gate_requires_fail_float_after_86,
-        test_actionlint_style_gate_requires_fail_timeout_after_86,
-        test_actionlint_style_gate_requires_second_pass_doc_after_86,
-        test_actionlint_style_gate_requires_module_second_pass_after_86,
-        test_actionlint_style_gate_requires_fn_still_after_86,
-        test_actionlint_style_gate_requires_static_doc_still_after_86,
-        test_actionlint_style_gate_requires_live_pins_still_after_86,
-        test_actionlint_style_gate_requires_load_workflow_still_after_86,
-        test_actionlint_style_gate_requires_float_set_still_after_86,
-        test_actionlint_style_gate_requires_main_call_still_after_86,
-        test_actionlint_style_gate_requires_docker_still_after_86,
-        test_actionlint_style_gate_requires_id_token_still_after_86,
-        test_actionlint_style_gate_requires_write_all_still_after_86,
-        test_actionlint_style_gate_requires_prt_still_after_86,
-        test_actionlint_rejects_float_main_lychee_after_86,
-        test_actionlint_rejects_float_master_lychee_after_86,
-        test_actionlint_rejects_float_latest_lychee_after_86,
-        test_actionlint_rejects_unpinned_lychee_after_86,
-        test_actionlint_rejects_float_main_markdownlint_after_86,
-        test_actionlint_rejects_float_master_markdownlint_after_86,
-        test_actionlint_rejects_float_latest_markdownlint_after_86,
-        test_actionlint_rejects_unpinned_markdownlint_after_86,
-        test_actionlint_rejects_missing_name_link_after_86,
-        test_actionlint_rejects_missing_name_markdown_after_86,
-        test_actionlint_rejects_missing_runs_on_link_after_86,
-        test_actionlint_rejects_missing_runs_on_markdown_after_86,
-        test_actionlint_rejects_missing_steps_link_after_86,
-        test_actionlint_rejects_missing_steps_markdown_after_86,
-        test_actionlint_rejects_id_token_write_link_still_after_86,
-        test_actionlint_rejects_id_token_write_markdown_still_after_86,
-        test_actionlint_rejects_write_all_link_still_after_86,
-        test_actionlint_rejects_write_all_markdown_still_after_86,
-        test_actionlint_rejects_contents_write_link_still_after_86,
-        test_actionlint_rejects_contents_write_markdown_still_after_86,
-        test_actionlint_rejects_prt_link_still_after_86,
-        test_actionlint_rejects_prt_markdown_still_after_86,
-        test_actionlint_rejects_float_main_checkout_link_after_86,
-        test_actionlint_rejects_float_latest_checkout_markdown_after_86,
-        test_actionlint_rejects_unpinned_checkout_stewardship_after_86,
-        test_actionlint_rejects_missing_timeout_stewardship_still_after_86,
-        test_actionlint_rejects_missing_timeout_link_still_after_86,
-        test_actionlint_rejects_missing_timeout_markdown_still_after_86,
-        test_actionlint_rejects_float_master_setup_python_after_86,
-        test_actionlint_rejects_float_latest_setup_python_still_after_86,
-        test_actionlint_rejects_unpinned_setup_python_still_after_86,
-
-        # TOKENMAXX deepen after #90 (+72 relative-link third-pass)
-        test_relative_gate_requires_md_link_exact_after_90,
-        test_relative_gate_requires_atx_exact_after_90,
-        test_relative_gate_requires_skip_parts_exact_after_90,
-        test_relative_gate_requires_skip_files_exact_after_90,
-        test_relative_gate_requires_skip_prefix_path_after_90,
-        test_relative_gate_requires_ok_banner_after_90,
-        test_relative_gate_requires_failed_banner_after_90,
-        test_relative_gate_requires_empty_target_needle_after_90,
-        test_relative_gate_requires_http_needle_after_90,
-        test_relative_gate_requires_proto_needle_after_90,
-        test_relative_gate_requires_dangerous_needle_after_90,
-        test_relative_gate_requires_utf8_after_90,
-        test_relative_gate_requires_as_posix_after_90,
-        test_relative_gate_requires_md_suffix_after_90,
-        test_relative_gate_requires_value_error_after_90,
-        test_relative_gate_requires_sorted_after_90,
-        test_relative_gate_requires_unicode_after_90,
-        test_relative_gate_requires_space_dash_after_90,
-        test_relative_gate_requires_percent_stable_after_90,
-        test_relative_gate_requires_cap_nested_after_90,
-        test_relative_gate_requires_empty_parens_pin_after_90,
-        test_relative_gate_requires_sys_exit_after_90,
-        test_relative_gate_requires_urllib_unquote_after_90,
-        test_relative_gate_requires_group2_after_90,
-        test_relative_gate_requires_startswith_hash_after_90,
-        test_relative_gate_requires_split_hash_after_90,
-        test_relative_gate_requires_files_scanned_after_90,
-        test_relative_gate_requires_common_import_after_90,
-        test_relative_gate_requires_title_attr_after_90,
-        test_relative_gate_requires_atx_hash_range_after_90,
-        test_relative_gate_requires_slug_punct_after_90,
-        test_relative_gate_requires_offline_doc_after_90,
-        test_relative_gate_requires_lychee_doc_after_90,
-        test_relative_gate_requires_path_parent_after_90,
-        test_relative_gate_requires_fully_unquote_call_after_90,
-        test_relative_gate_requires_dangerous_call_after_90,
-        test_relative_gate_requires_third_pass_doc_after_90,
-        test_relative_gate_requires_def_main_after_90,
-        test_relative_gate_requires_relative_to_root_after_90,
-        test_relative_gate_requires_contract_fn_def_after_90,
-        test_relative_links_reject_image_protocol_rel_after_90,
-        test_relative_links_reject_image_empty_after_90,
-        test_relative_links_reject_image_bare_hash_after_90,
-        test_relative_links_reject_encoded_nul_after_90,
-        test_relative_links_reject_http_uppercase_after_90,
-        test_relative_links_accept_https_with_frag_after_90,
-        test_relative_links_accept_mailto_with_subject_after_90,
-        test_relative_links_reject_query_on_nested_after_90,
-        test_relative_links_reject_empty_frag_nested_after_90,
-        test_relative_links_accept_angle_https_title_after_90,
-        test_relative_links_reject_js_uppercase_after_90,
-        test_relative_links_github_slug_underscore_heading_after_90,
-        test_relative_links_reject_dotdot_escape_still_after_90,
-        test_relative_links_accept_self_dot_path_after_90,
-        test_relative_links_reject_missing_image_nested_after_90,
-        test_relative_gate_requires_md_link_re_still_after_90,
-        test_relative_gate_requires_max_unquote_4_still_after_90,
-        test_relative_gate_requires_should_skip_still_after_90,
-        test_relative_gate_requires_iter_markdown_still_after_90,
-        test_relative_gate_requires_headings_in_still_after_90,
-        test_relative_gate_requires_check_file_still_after_90,
-        test_relative_gate_requires_mailto_still_after_90,
-        test_relative_gate_requires_tel_still_after_90,
-        test_relative_gate_requires_nul_still_after_90,
-        test_relative_gate_requires_angle_strip_still_after_90,
-        test_relative_gate_requires_escapes_still_after_90,
-        test_relative_gate_requires_broken_still_after_90,
-        test_relative_gate_requires_missing_heading_still_after_90,
-        test_relative_gate_requires_rglob_still_after_90,
-        test_relative_gate_requires_no_md_fail_still_after_90,
-        test_relative_links_reject_http_still_after_90,
-        test_relative_links_reject_protocol_still_after_90,
-        # TOKENMAXX deepen after #90/#94 (+72 wiki-outline third-pass)
-        test_wiki_gate_requires_wiki_exact_after_90,
-        test_wiki_gate_requires_removesuffix_after_90,
-        test_wiki_gate_requires_glob_md_after_90,
-        test_wiki_gate_requires_sorted_unexpected_after_90,
-        test_wiki_gate_requires_link_check_accept_after_90,
-        test_wiki_gate_requires_markdown_lint_accept_after_90,
-        test_wiki_gate_requires_no_secrets_accept_after_90,
-        test_wiki_gate_requires_invent_home_needle_after_90,
-        test_wiki_gate_requires_secrets_home_needle_after_90,
-        test_wiki_gate_requires_kill_home_needle_after_90,
-        test_wiki_gate_requires_out_of_scope_section_after_90,
-        test_wiki_gate_requires_relative_steward_needle_after_90,
-        test_wiki_gate_requires_invent_steward_needle_after_90,
-        test_wiki_gate_requires_actionlint_steward_needle_after_90,
-        test_wiki_gate_requires_run_script_needle_after_90,
-        test_wiki_gate_requires_startswith_slash_after_90,
-        test_wiki_gate_requires_startswith_http_after_90,
-        test_wiki_gate_requires_group2_after_90,
-        test_wiki_gate_requires_utf8_after_90,
-        test_wiki_gate_requires_sys_exit_after_90,
-        test_wiki_gate_requires_common_import_after_90,
-        test_wiki_gate_requires_downloads_special_after_90,
-        test_wiki_gate_requires_discord_special_after_90,
-        test_wiki_gate_requires_twitter_special_after_90,
-        test_wiki_gate_requires_xcom_special_after_90,
-        test_wiki_gate_requires_shields_io_after_90,
-        test_wiki_gate_requires_md_badge_open_after_90,
-        test_wiki_gate_requires_badge_in_lowered_after_90,
-        test_wiki_gate_requires_readme_up_up_after_90,
-        test_wiki_gate_requires_readme_up_after_90,
-        test_wiki_gate_requires_badge_docs_path_after_90,
-        test_wiki_gate_requires_badge_blob_after_90,
-        test_wiki_gate_requires_pages_operator_ok_after_90,
-        test_wiki_gate_requires_intentional_pin_after_90,
-        test_wiki_gate_requires_topic_get_after_90,
-        test_wiki_gate_requires_strip_fenced_call_after_90,
-        test_wiki_gate_requires_dangerous_call_after_90,
-        test_wiki_gate_requires_scan_path_after_90,
-        test_wiki_gate_requires_scan_publish_after_90,
-        test_wiki_gate_requires_third_pass_doc_after_90,
-        test_wiki_gate_requires_contract_fn_def_after_90,
-        test_wiki_rejects_missing_link_check_publish_after_90,
-        test_wiki_rejects_missing_markdown_lint_publish_after_90,
-        test_wiki_rejects_missing_home_invent_after_90,
-        test_wiki_rejects_missing_home_secret_after_90,
-        test_wiki_rejects_missing_home_kill_after_90,
-        test_wiki_rejects_missing_steward_relative_after_90,
-        test_wiki_rejects_missing_steward_actionlint_after_90,
-        test_wiki_rejects_protocol_rel_after_90,
-        test_wiki_rejects_http_link_after_90,
-        test_wiki_rejects_javascript_link_after_90,
-        test_wiki_rejects_discord_chrome_after_90,
-        test_wiki_rejects_unexpected_page_after_90,
-        test_wiki_accepts_angle_https_after_90,
-        test_wiki_accepts_mailto_after_90,
-        test_wiki_ignores_fenced_http_after_90,
-        test_wiki_rejects_missing_run_script_steward_after_90,
-        test_wiki_gate_requires_def_main_after_90,
-        test_wiki_gate_requires_text_lower_after_90,
-        test_wiki_gate_requires_present_set_after_90,
-        test_wiki_gate_requires_wiki_is_dir_after_90,
-        test_wiki_gate_requires_third_pass_after_90_pin,
-        test_wiki_gate_requires_operator_only_still_after_90,
-        test_wiki_gate_requires_reject_invent_helper_still_after_90,
-        test_wiki_gate_requires_home_backlink_still_after_90,
-        test_wiki_gate_requires_failed_banner_still_after_90,
-        test_wiki_gate_requires_ok_match_still_after_90,
-        test_wiki_gate_requires_publishable_pages_still_after_90,
-        test_wiki_gate_requires_topic_hints_still_after_90,
-        test_wiki_gate_requires_stars_still_after_90,
-        test_wiki_gate_requires_len_pages_after_90,
-        test_wiki_gate_requires_home_is_file_after_90,
-        # TOKENMAXX deepen after #100 (+72 docs-lint)
-        test_docs_lint_gate_requires_lycheeignore_const_after_100,
-        test_docs_lint_gate_requires_markdownlint_const_after_100,
-        test_docs_lint_gate_requires_lycheeignore_path_after_100,
-        test_docs_lint_gate_requires_markdownlint_path_after_100,
-        test_docs_lint_gate_requires_fn_lycheeignore_after_100,
-        test_docs_lint_gate_requires_live_doc_pin_after_100,
-        test_docs_lint_gate_requires_escaped_shields_pin_after_100,
-        test_docs_lint_gate_requires_mcp_pin_after_100,
-        test_docs_lint_gate_requires_lfs_pin_after_100,
-        test_docs_lint_gate_requires_stewardship_note_after_100,
-        test_docs_lint_gate_requires_https_star_reject_after_100,
-        test_docs_lint_gate_requires_http_star_reject_after_100,
-        test_docs_lint_gate_requires_md013_obj_after_100,
-        test_docs_lint_gate_requires_md024_obj_after_100,
-        test_docs_lint_gate_requires_md033_false_re_after_100,
-        test_docs_lint_gate_requires_md041_false_re_after_100,
-        test_docs_lint_gate_requires_md060_false_re_after_100,
-        test_docs_lint_gate_requires_default_true_re_after_100,
-        test_docs_lint_gate_requires_line_length_re_after_100,
-        test_docs_lint_gate_requires_siblings_re_after_100,
-        test_docs_lint_gate_requires_main_call_lychee_after_100,
-        test_docs_lint_gate_requires_docs_slice_wording_after_100,
-        test_docs_lint_gate_requires_host_pin_after_100,
-        test_docs_lint_gate_requires_contract_spam_pin_after_100,
-        test_lycheeignore_rejects_missing_escaped_shields_after_100,
-        test_lycheeignore_rejects_missing_mcp_after_100,
-        test_lycheeignore_rejects_missing_lfs_after_100,
-        test_lycheeignore_rejects_missing_stewardship_note_after_100,
-        test_lycheeignore_rejects_https_star_after_100,
-        test_lycheeignore_rejects_http_star_after_100,
-        test_lycheeignore_rejects_bare_star_after_100,
-        test_lycheeignore_rejects_missing_shields_any_after_100,
-        test_markdownlint_rejects_wrong_md013_obj_after_100,
-        test_markdownlint_rejects_wrong_md024_obj_after_100,
-        test_markdownlint_rejects_md033_true_after_100,
-        test_markdownlint_rejects_md041_true_after_100,
-        test_markdownlint_rejects_md060_true_after_100,
-        test_markdownlint_rejects_default_false_after_100,
-        test_markdownlint_rejects_missing_md013_after_100,
-        test_markdownlint_rejects_missing_md024_after_100,
-        test_docs_lint_gate_requires_lycheeignore_const_still_after_100,
-        test_docs_lint_gate_requires_markdownlint_const_still_after_100,
-        test_docs_lint_gate_requires_escaped_shields_still_after_100,
-        test_docs_lint_gate_requires_mcp_still_after_100,
-        test_docs_lint_gate_requires_lfs_still_after_100,
-        test_docs_lint_gate_requires_md013_obj_still_after_100,
-        test_docs_lint_gate_requires_md024_obj_still_after_100,
-        test_docs_lint_gate_requires_fn_lycheeignore_still_after_100,
-        test_docs_lint_gate_requires_live_doc_still_after_100,
-        test_docs_lint_gate_requires_https_star_still_after_100,
-        test_docs_lint_gate_requires_stewardship_note_still_after_100,
-        test_docs_lint_gate_requires_default_true_still_after_100,
-        test_docs_lint_gate_requires_docs_slice_still_after_100,
-        test_lycheeignore_rejects_missing_mcp_still_after_100,
-        test_lycheeignore_rejects_missing_lfs_still_after_100,
-        test_lycheeignore_rejects_missing_escaped_still_after_100,
-        test_markdownlint_rejects_line_length_120_still_after_100,
-        test_markdownlint_rejects_siblings_false_still_after_100,
-        test_markdownlint_rejects_missing_default_still_after_100,
-        test_docs_lint_gate_requires_contract_fn_after_100,
-        test_docs_lint_gate_requires_spam_wording_after_100,
-        test_lycheeignore_rejects_missing_note_still_after_100,
-        test_markdownlint_rejects_md033_true_still_after_100,
-        test_markdownlint_rejects_md041_true_still_after_100,
-        test_markdownlint_rejects_md060_true_still_after_100,
-        test_docs_lint_gate_requires_http_star_still_after_100,
-        test_docs_lint_gate_requires_md033_still_after_100,
-        test_docs_lint_gate_requires_md041_still_after_100,
-        test_docs_lint_gate_requires_md060_still_after_100,
-        test_docs_lint_gate_requires_line_length_re_still_after_100,
-        test_docs_lint_gate_requires_siblings_re_still_after_100,
-        test_lycheeignore_accepts_full_live_fixture_after_100,
-        # TOKENMAXX deepen after #100 (+36 docs-lint)
-        test_docs_lint_gate_requires_wiki_spam_pin_after_100,
-        test_docs_lint_gate_requires_308_redirect_pin_after_100,
-        test_docs_lint_gate_requires_103_early_pin_after_100,
-        test_docs_lint_gate_requires_lychee_assign_after_100,
-        test_docs_lint_gate_requires_md_assign_after_100,
-        test_docs_lint_gate_requires_workflows_fn_after_100,
-        test_docs_lint_gate_requires_missing_lychee_needle_after_100,
-        test_docs_lint_gate_requires_missing_md_needle_after_100,
-        test_docs_lint_gate_requires_cdn_note_after_100,
-        test_docs_lint_gate_requires_workflows_call_after_100,
-        test_lycheeignore_rejects_missing_308_after_100,
-        test_lycheeignore_rejects_missing_103_after_100,
-        test_docs_lint_gate_requires_wiki_spam_still_after_100,
-        test_docs_lint_gate_requires_308_still_after_100,
-        test_docs_lint_gate_requires_103_still_after_100,
-        test_docs_lint_gate_requires_lychee_assign_still_after_100,
-        test_docs_lint_gate_requires_md_assign_still_after_100,
-        test_docs_lint_gate_requires_workflows_fn_still_after_100,
-        test_docs_lint_gate_requires_cdn_note_still_after_100,
-        test_docs_lint_gate_requires_workflows_call_still_after_100,
-        test_lycheeignore_rejects_missing_308_still_after_100,
-        test_lycheeignore_rejects_missing_103_still_after_100,
-        test_docs_lint_gate_requires_contract_call_still_after_100,
-        test_docs_lint_gate_requires_docs_slice_deepen_after_100,
-        test_markdownlint_rejects_wrong_md013_spacing_after_100,
-        test_markdownlint_rejects_wrong_md024_spacing_after_100,
-        test_docs_lint_gate_requires_host_pin_still_after_100,
-        test_docs_lint_gate_requires_spam_pin_still_after_100,
-        test_lycheeignore_rejects_https_star_with_full_fixture_after_100,
-        test_lycheeignore_rejects_http_star_with_full_fixture_after_100,
-        test_docs_lint_gate_requires_live_doc_deepen_after_100,
-        test_docs_lint_gate_requires_escaped_shields_deepen_after_100,
-        test_docs_lint_gate_requires_mcp_deepen_after_100,
-        test_docs_lint_gate_requires_lfs_deepen_after_100,
-        test_lycheeignore_accepts_live_tree_seed_after_100,
-        test_markdownlint_accepts_exact_objects_after_100,
+    test_badge_rejects_wrong_order,
+    test_badge_rejects_invent_product,
+    test_badge_rejects_wrong_repo_slug,
+    test_badge_rejects_noncontiguous_row,
+    test_badge_rejects_secret_url,
+    test_badge_rejects_http_image,
+    test_badge_rejects_stewardship_product_badge,
+    test_badge_rejects_wrong_license_link,
+    test_badge_rejects_missing_workflow_dispatch,
+    test_badge_rejects_missing_fail_true,
+    test_badge_rejects_missing_markdownlint_config,
+    test_badge_rejects_missing_contributing_invent_warning,
+    test_badge_passes_good_fixture,
+    test_relative_links_reject_missing,
+    test_relative_links_reject_escape,
+    test_relative_links_reject_missing_fragment,
+    test_relative_links_ignore_fenced_examples,
+    test_relative_links_ignore_tilde_fences,
+    test_relative_links_reject_javascript_scheme,
+    test_relative_links_reject_data_scheme,
+    test_relative_links_reject_http_insecure,
+    test_relative_links_reject_protocol_relative,
+    test_relative_links_reject_encoded_escape,
+    test_relative_links_reject_cross_file_missing_fragment,
+    test_relative_links_accept_valid_fragment,
+    test_relative_links_skip_owasp_file,
+    test_relative_links_reject_file_scheme,
+    test_relative_links_reject_vbscript_scheme,
+    test_relative_links_reject_empty_target,
+    test_relative_links_accept_mailto,
+    test_relative_links_accept_https,
+    test_relative_links_skip_github_agents,
+    test_relative_links_reject_broken_image,
+    test_relative_links_accept_cross_file_fragment,
+    test_relative_links_github_slug_punctuation,
+    test_wiki_rejects_unexpected_page,
+    test_wiki_rejects_missing_home_backlink,
+    test_wiki_rejects_invent_chrome,
+    test_wiki_rejects_missing_topic_hint,
+    test_wiki_rejects_http_link,
+    test_wiki_rejects_secret_pattern,
+    test_wiki_rejects_missing_out_of_scope,
+    test_wiki_rejects_missing_page,
+    test_wiki_rejects_missing_readme_link,
+    test_wiki_rejects_missing_ci_hint,
+    test_wiki_rejects_dangerous_scheme,
+    test_wiki_passes_good_fixture,
+    test_schema_rejects_wrong_value,
+    test_schema_rejects_inactive_status,
+    test_schema_rejects_missing_key,
+    test_schema_rejects_bad_autonomy_level,
+    test_schema_rejects_bad_tier,
+    test_schema_rejects_bad_iso_date,
+    test_schema_rejects_edit_policy_without_invent,
+    test_schema_rejects_wrong_surface,
+    test_schema_rejects_bad_semver,
+    test_schema_rejects_closes_without_issue,
+    test_schema_rejects_empty_required_value,
+    test_schema_rejects_missing_yaml_block,
+    test_schema_rejects_missing_file,
+    test_schema_passes_good_fixture,
+    test_common_secret_patterns,
+    test_common_dangerous_schemes,
+    test_workflow_hardening_requires_timeout,
+    test_workflow_hardening_requires_schedule,
+    test_workflow_hardening_requires_concurrency,
+    test_workflow_hardening_requires_pyyaml_install,
+    test_lycheeignore_requires_shields_exclude,
+    test_lycheeignore_rejects_star_exclude,
+    test_missing_lycheeignore_fails,
+    test_missing_markdownlint_json_fails,
+    test_actionlint_rejects_pull_request_target,
+    test_actionlint_rejects_contents_write,
+    test_actionlint_rejects_unpinned_action,
+    test_actionlint_rejects_float_main_ref,
+    test_actionlint_requires_runs_on,
+    test_stewardship_requires_actionlint_needle,
+    test_link_check_requires_lycheeignore_reference,
+    test_badge_rejects_missing_license_file,
+    test_badge_rejects_forbidden_hint_in_row,
+    test_badge_rejects_wrong_link_check_image,
+    test_badge_rejects_missing_readme_badge_doc_link,
+    test_badge_rejects_missing_agents_selftest_needle,
+    test_workflow_rejects_missing_permissions_read,
+    test_workflow_rejects_missing_exclude_loopback,
+    test_workflow_rejects_missing_max_retries,
+    test_common_secret_url_hints,
+    test_common_forbidden_badge_hints,
+    test_github_slug_helper,
+    test_actionlint_rejects_write_all,
+    test_actionlint_rejects_float_master_ref,
+    test_actionlint_rejects_float_latest_ref,
+    test_actionlint_requires_name,
+    test_actionlint_requires_steps,
+    test_link_check_requires_github_token,
+    test_link_check_requires_lychee_needle,
+    test_link_check_requires_exclude_path,
+    test_link_check_requires_max_concurrency,
+    test_link_check_requires_lychee_timeout,
+    test_markdown_lint_requires_owasp_exclude,
+    test_markdown_lint_requires_agents_exclude,
+    test_markdown_lint_requires_markdownlint_needle,
+    test_stewardship_requires_selftest_needle,
+    test_stewardship_requires_setup_python,
+    test_stewardship_requires_run_script,
+    test_stewardship_requires_actionlint_version_pin,
+    test_stewardship_requires_actionlint_all_workflows,
+    test_workflow_rejects_missing_pull_request,
+    test_badge_rejects_missing_h1,
+    test_badge_rejects_two_badges_only,
+    test_badge_rejects_http_badge_link,
+    test_badge_rejects_wrong_markdown_lint_image,
+    test_badge_rejects_missing_readme_stewardship_script,
+    test_badge_rejects_missing_contributing_script,
+    test_badge_rejects_missing_workflow_file,
+    test_lycheeignore_accepts_regex_escaped_shields,
+    test_lycheeignore_accepts_literal_shields,
+    test_relative_links_accept_tel,
+    test_relative_links_reject_nul,
+    test_relative_links_reject_bare_hash,
+    test_relative_links_accept_title_attr,
+    test_relative_links_accept_existing_image,
+    test_wiki_rejects_missing_publish,
+    test_wiki_rejects_missing_badge_link,
+    test_wiki_rejects_missing_home_page_link,
+    test_wiki_rejects_missing_publish_do_not_push,
+    test_wiki_rejects_missing_relative_hint,
+    test_wiki_rejects_missing_invent_on_stewardship,
+    test_schema_rejects_wrong_maintainer,
+    test_schema_rejects_wrong_claude_parent,
+    test_schema_rejects_wrong_badge_owner,
+    test_schema_rejects_secret_in_doc,
+    test_common_strip_fenced,
+    test_common_dangerous_schemes_complete,
+    test_workflow_requires_cancel_in_progress,
+    test_link_check_requires_markdown_glob,
+    test_actionlint_requires_timeout_minutes_local,
+    test_actionlint_allows_docker_uses_without_pin,
+    test_badge_rejects_missing_badge_standard_file,
+    test_badge_rejects_missing_contributing_file,
+    test_badge_rejects_license_image_wrong_path,
+    test_badge_rejects_license_image_missing_repo_slug,
+    test_badge_rejects_secret_in_readme_body,
+    test_badge_rejects_agents_missing_link_check_needle,
+    test_badge_rejects_agents_missing_markdown_lint_needle,
+    test_badge_rejects_agents_missing_stewardship_needle,
+    test_badge_rejects_agents_missing_run_script_needle,
+    test_badge_doc_rejects_missing_invent_wording,
+    test_badge_doc_rejects_missing_three_badge_max,
+    test_badge_doc_rejects_stewardship_without_fourth_refusal,
+    test_badge_accepts_absolute_license_blob_link,
+    test_lycheeignore_rejects_https_star,
+    test_relative_links_accept_angle_bracket_https,
+    test_relative_links_accept_license_target,
+    test_relative_links_github_slug_ampersand,
+    test_relative_links_accept_ampersand_heading_fragment,
+    test_relative_links_reject_whitespace_only_target,
+    test_wiki_rejects_missing_publish_link_check,
+    test_wiki_rejects_missing_publish_markdown_lint,
+    test_wiki_rejects_missing_publish_secrets,
+    test_wiki_rejects_missing_overview_topic,
+    test_wiki_rejects_missing_security_topic,
+    test_wiki_rejects_stars_badge_chrome,
+    test_wiki_rejects_missing_wiki_dir,
+    test_schema_rejects_wrong_agents_scope,
+    test_schema_rejects_wrong_agents_parent,
+    test_schema_rejects_wrong_claude_repo,
+    test_schema_rejects_inactive_publish_status,
+    test_schema_rejects_backlog_wrong_tier,
+    test_schema_rejects_autonomy_as_string,
+    test_schema_rejects_bad_claude_date,
+    test_schema_rejects_unparseable_yaml,
+    test_common_secret_patterns_extended,
+    test_common_forbidden_badge_hints_extended,
+    test_common_has_dangerous_scheme_helper,
+    test_common_load_workflow_text_helper,
+    test_common_fail_helper_appends,
+    test_common_markdown_files_helper,
+    test_markdown_lint_requires_config_needle,
+    test_stewardship_requires_actionlint_link_check_path,
+    test_stewardship_requires_actionlint_stewardship_path,
+    test_workflow_rejects_missing_dispatch_on_stewardship,
+    test_workflow_requires_cancel_in_progress_true,
+    test_workflow_requires_cancel_in_progress_true_on_stewardship,
+    test_link_check_requires_agents_exclude_path,
+    test_markdown_lint_requires_markdown_glob,
+    test_lycheeignore_rejects_http_star,
+    test_stewardship_requires_actionlint_markdown_lint_path,
+    test_actionlint_rejects_unpinned_second_action,
+    test_actionlint_rejects_float_main_on_setup_python,
+    test_workflow_rejects_missing_schedule_on_link_check,
+    test_workflow_rejects_missing_concurrency_on_markdown_lint,
+    test_badge_rejects_link_check_relative_workflow_link,
+    test_badge_rejects_markdown_lint_relative_workflow_link,
+    test_badge_accepts_dot_slash_license_link,
+    test_badge_rejects_forbidden_coverage_hint,
+    test_badge_rejects_secret_url_token_query,
+    test_badge_doc_rejects_missing_link_check_label,
+    test_badge_doc_rejects_missing_shields_license_snippet,
+    test_badge_rejects_four_badges,
+    test_relative_links_accept_angle_bracket_relative,
+    test_relative_links_github_slug_backticks,
+    test_relative_links_github_slug_markdown_link_heading,
+    test_relative_links_accept_nested_path,
+    test_relative_links_reject_missing_nested,
+    test_relative_links_accept_image_with_title,
+    test_relative_links_reject_percent_encoded_escape,
+    test_wiki_rejects_missing_actionlint_on_stewardship,
+    test_wiki_rejects_missing_autonomy_topic,
+    test_wiki_rejects_missing_routing_topic,
+    test_wiki_rejects_missing_home_out_of_scope,
+    test_wiki_rejects_forks_badge_chrome,
+    test_wiki_rejects_codecov_badge_chrome,
+    test_wiki_rejects_missing_home_to_routing,
+    test_wiki_rejects_secret_in_publish,
+    test_wiki_rejects_missing_publish_page_table_row,
+    test_schema_rejects_wrong_badge_status,
+    test_schema_rejects_wrong_badge_tier,
+    test_schema_rejects_publish_closes_without_issue,
+    test_schema_rejects_empty_agents_maintainer,
+    test_schema_rejects_tier_as_string,
+    test_schema_rejects_autonomy_out_of_range,
+    test_schema_rejects_non_mapping_yaml,
+    test_schema_rejects_bad_badge_created_date,
+    test_common_secret_url_hints_complete,
+    test_common_forbidden_badge_hints_social,
+    test_common_secret_patterns_private_key,
+    test_common_strip_fenced_tilde,
+    test_common_scan_secrets_ghp,
+    test_markdown_lint_requires_agents_exclude_path,
+    test_link_check_requires_fail_true_still,
+    test_stewardship_requires_pyyaml_install_needle,
+    test_workflow_rejects_missing_permissions_on_link_check,
+    test_stewardship_requires_python_version_needle,
+    test_stewardship_requires_python_312_pin,
+    test_workflow_requires_cancel_in_progress_true_on_link_check,
+    test_actionlint_rejects_float_master_on_setup_python,
+    test_actionlint_rejects_float_latest_on_setup_python,
+    test_actionlint_rejects_contents_write_on_stewardship,
+    test_workflow_rejects_missing_timeout_on_stewardship,
+    test_workflow_rejects_missing_dispatch_on_markdown_lint,
+    test_lycheeignore_rejects_bare_star,
+    test_link_check_requires_markdown_glob_not_txt,
+    test_badge_rejects_discord_hint,
+    test_badge_rejects_producthunt_hint,
+    test_badge_rejects_api_key_query,
+    test_badge_rejects_access_token_query,
+    test_badge_rejects_http_license_image,
+    test_badge_rejects_license_first_order,
+    test_badge_doc_rejects_missing_markdown_lint_snippet,
+    test_badge_doc_rejects_missing_link_check_snippet,
+    test_badge_rejects_missing_workflow_link_check_file,
+    test_relative_links_skip_node_modules,
+    test_relative_links_reject_javascript_uppercase,
+    test_relative_links_reject_data_uppercase,
+    test_relative_links_reject_nested_escape,
+    test_relative_links_github_slug_numbers,
+    test_relative_links_accept_numbered_heading_fragment,
+    test_relative_links_accept_mailto_and_https,
+    test_relative_links_reject_file_uppercase,
+    test_wiki_rejects_missing_invent_on_home,
+    test_wiki_rejects_missing_secrets_on_home,
+    test_wiki_rejects_missing_l1_on_autonomy,
+    test_wiki_rejects_missing_kill_on_security,
+    test_wiki_rejects_downloads_badge_chrome,
+    test_wiki_rejects_missing_home_to_security,
+    test_wiki_rejects_missing_publish_overview_row,
+    test_wiki_rejects_data_scheme,
+    test_wiki_rejects_missing_badge_topic_on_stewardship,
+    test_schema_rejects_wrong_claude_owner,
+    test_schema_rejects_wrong_claude_autonomy,
+    test_schema_rejects_inactive_backlog_status,
+    test_schema_rejects_empty_badge_scope,
+    test_schema_rejects_missing_badge_closes_key,
+    test_schema_rejects_agents_autonomy_drift,
+    test_schema_rejects_publish_missing_purpose_key,
+    test_schema_rejects_float_autonomy,
+    test_common_forbidden_badge_hints_commerce,
+    test_common_secret_patterns_sk_token,
+    test_common_has_dangerous_scheme_casefold,
+    test_common_scan_secrets_url_token_hint,
+    test_markdown_lint_requires_owasp_exclude_still,
+    test_stewardship_requires_timeout_minutes_needle,
+    test_actionlint_rejects_write_all_on_markdown_lint,
+    test_badge_rejects_stars_hint,
+    test_relative_links_accept_parent_relative_existing,
+    test_wiki_rejects_twitter_badge_chrome,
+    test_schema_rejects_wrong_agents_version_semver_prerelease,
+    test_common_dangerous_schemes_file,
+    test_link_check_requires_no_progress,
+    test_link_check_requires_verbose,
+    test_stewardship_requires_actions_checkout,
+    test_workflow_requires_cancel_in_progress_true_on_markdown_lint,
+    test_actionlint_rejects_pull_request_target_on_stewardship,
+    test_actionlint_rejects_unpinned_setup_python,
+    test_badge_rejects_coveralls_hint,
+    test_badge_rejects_buymeacoffee_hint,
+    test_badge_rejects_opencollective_hint,
+    test_badge_rejects_npm_hint,
+    test_badge_rejects_pypi_hint,
+    test_badge_rejects_followers_hint,
+    test_badge_rejects_x_com_hint,
+    test_badge_rejects_apikey_query,
+    test_badge_rejects_client_secret_query,
+    test_badge_rejects_gho_token_hint,
+    test_badge_rejects_license_wrong_shields_slug,
+    test_badge_rejects_missing_stewardship_workflow_file,
+    test_badge_doc_rejects_missing_license_label,
+    test_relative_links_skip_git_dir,
+    test_relative_links_reject_vbscript_uppercase,
+    test_relative_links_reject_encoded_nested_escape,
+    test_relative_links_accept_same_dir_existing,
+    test_relative_links_github_slug_underscore,
+    test_relative_links_accept_underscore_heading_fragment,
+    test_wiki_rejects_missing_l0_on_autonomy,
+    test_wiki_rejects_missing_secret_on_security,
+    test_wiki_rejects_missing_surface_on_routing,
+    test_wiki_rejects_missing_governance_on_overview,
+    test_wiki_rejects_missing_public_on_overview,
+    test_wiki_rejects_missing_home_to_autonomy,
+    test_wiki_rejects_followers_badge_chrome,
+    test_wiki_rejects_x_com_badge_chrome,
+    test_wiki_rejects_missing_publish_home_row,
+    test_wiki_rejects_file_scheme,
+    test_schema_rejects_missing_claude_surface_key,
+    test_schema_rejects_missing_backlog_owner_key,
+    test_schema_rejects_empty_publish_purpose,
+    test_schema_rejects_empty_agents_scope,
+    test_schema_rejects_wrong_agents_autonomy_zero,
+    test_schema_rejects_missing_publish_closes_key,
+    test_schema_rejects_missing_claude_repo_key,
+    test_schema_rejects_badge_closes_without_hash,
+    test_common_forbidden_badge_hints_registry,
+    test_common_secret_url_hints_apikey_client,
+    test_common_secret_patterns_gho,
+    test_common_scan_secrets_url_apikey,
+    test_markdown_lint_requires_markdown_glob_still,
+    test_link_check_requires_exclude_loopback_still,
+    test_stewardship_requires_python_312_pin_still,
+    test_workflow_rejects_missing_schedule_on_stewardship,
+    test_badge_rejects_forks_hint,
+    test_relative_links_accept_docs_nested_fragment,
+    test_wiki_rejects_missing_run_script_on_stewardship,
+    test_schema_rejects_wrong_claude_surface_still,
+    test_common_dangerous_schemes_vbscript,
+    test_link_check_requires_lychee_action,
+    test_link_check_requires_actions_checkout,
+    test_markdown_lint_requires_actions_checkout,
+    test_markdownlint_json_requires_md013,
+    test_actionlint_rejects_pull_request_target_on_link_check,
+    test_actionlint_rejects_contents_write_on_markdown_lint,
+    test_actionlint_rejects_write_all_on_stewardship,
+    test_workflow_requires_cancel_in_progress_true_not_false_on_link,
+    test_badge_rejects_twitter_hint,
+    test_badge_rejects_codecov_hint,
+    test_badge_rejects_downloads_hint,
+    test_badge_rejects_github_pat_hint,
+    test_badge_rejects_ghp_token_hint,
+    test_badge_rejects_markdown_lint_first_order,
+    test_badge_doc_rejects_missing_three_badges_max_still,
+    test_badge_rejects_missing_agents_file,
+    test_relative_links_reject_javascript_mixed_case,
+    test_relative_links_reject_data_mixed_case,
+    test_relative_links_accept_tel_with_title,
+    test_relative_links_github_slug_colon_punct,
+    test_relative_links_accept_colon_heading_fragment,
+    test_relative_links_reject_missing_image_nested,
+    test_relative_links_accept_license_from_docs,
+    test_relative_links_reject_http_uppercase,
+    test_wiki_rejects_missing_home_to_overview,
+    test_wiki_rejects_discord_badge_chrome,
+    test_wiki_rejects_buymeacoffee_badge_chrome,
+    test_wiki_rejects_javascript_scheme,
+    test_wiki_rejects_missing_publish_autonomy_row,
+    test_wiki_rejects_missing_publish_security_row,
+    test_wiki_rejects_missing_publish_routing_row,
+    test_wiki_rejects_opencollective_badge_chrome,
+    test_wiki_rejects_missing_actionlint_still,
+    test_schema_rejects_empty_badge_edit_policy,
+    test_schema_rejects_empty_claude_owner,
+    test_schema_rejects_missing_agents_version_key,
+    test_schema_rejects_missing_backlog_edit_policy_key,
+    test_schema_rejects_tier_zero,
+    test_schema_rejects_empty_publish_created,
+    test_schema_rejects_wrong_badge_owner_still,
+    test_schema_rejects_autonomy_three_ok_range_but_agents_expected,
+    test_common_secret_patterns_npm,
+    test_common_secret_patterns_aiza,
+    test_common_secret_patterns_slack_xoxb,
+    test_common_secret_url_hints_github_pat,
+    test_common_forbidden_badge_hints_twitter_codecov,
+    test_common_scan_secrets_github_pat,
+    test_common_dangerous_schemes_javascript,
+    test_stewardship_requires_actions_checkout_still,
+    test_link_check_requires_verbose_still,
+    test_link_check_requires_no_progress_still,
+    test_markdown_lint_requires_config_needle_still,
+    test_lycheeignore_rejects_https_star_still,
+    test_workflow_rejects_missing_pull_request_on_markdown_lint,
+    test_badge_rejects_producthunt_hint_still,
+    test_relative_links_accept_nested_image_existing,
+    test_wiki_rejects_data_scheme_still,
+    test_schema_rejects_missing_claude_last_updated_key,
+    test_common_has_dangerous_scheme_data,
+    test_link_check_requires_lycheeverse_action,
+    test_markdown_lint_requires_cli2_action,
+    test_markdownlint_json_requires_md013_line_length,
+    test_stewardship_requires_pip_install_pyyaml,
+    test_actionlint_rejects_pull_request_target_on_markdown_lint,
+    test_actionlint_rejects_contents_write_on_link_check,
+    test_actionlint_rejects_write_all_on_link_check,
+    test_actionlint_rejects_float_latest_on_checkout_link,
+    test_workflow_requires_cancel_in_progress_true_not_false_on_stewardship,
+    test_workflow_rejects_missing_concurrency_on_stewardship,
+    test_workflow_rejects_missing_timeout_on_markdown_lint,
+    test_badge_rejects_coverage_hint_still,
+    test_badge_rejects_stars_hint_still,
+    test_badge_rejects_token_query_still,
+    test_badge_rejects_license_http_link,
+    test_badge_rejects_four_badges_still,
+    test_badge_doc_rejects_missing_fourth_refusal_still,
+    test_relative_links_accept_https_uppercase,
+    test_relative_links_accept_mailto_uppercase,
+    test_relative_links_reject_file_mixed_case,
+    test_relative_links_github_slug_tilde,
+    test_relative_links_accept_tilde_heading_fragment,
+    test_relative_links_reject_missing_parent_file,
+    test_relative_links_accept_angle_bracket_mailto,
+    test_relative_links_reject_protocol_relative_still,
+    test_wiki_rejects_missing_home_to_stewardship,
+    test_wiki_rejects_coveralls_badge_chrome,
+    test_wiki_rejects_producthunt_badge_chrome,
+    test_wiki_rejects_npm_badge_chrome,
+    test_wiki_rejects_pypi_badge_chrome,
+    test_wiki_rejects_http_uppercase,
+    test_wiki_rejects_vbscript_scheme,
+    test_wiki_rejects_missing_publish_stewardship_row,
+    test_wiki_rejects_missing_relative_hint_still,
+    test_schema_rejects_empty_badge_closes,
+    test_schema_rejects_empty_agents_version,
+    test_schema_rejects_missing_agents_autonomy_key,
+    test_schema_rejects_missing_claude_parent_key,
+    test_schema_rejects_empty_claude_last_updated,
+    test_schema_rejects_wrong_badge_scope_empty_still,
+    test_schema_rejects_tier_negative,
+    test_schema_rejects_wrong_agents_maintainer_still,
+    test_common_secret_patterns_ghs,
+    test_common_secret_patterns_ghu,
+    test_common_secret_patterns_rk_token,
+    test_common_secret_patterns_aws_secret,
+    test_common_secret_patterns_openssh_key,
+    test_common_forbidden_badge_hints_coveralls_producthunt,
+    test_common_scan_secrets_npm,
+    test_common_has_dangerous_scheme_file_still,
+    test_link_check_requires_lychee_action_still,
+    test_markdownlint_json_requires_md013_still,
+    test_markdown_lint_requires_actions_checkout_still,
+    test_link_check_requires_actions_checkout_still,
+    test_stewardship_requires_pyyaml_install_still,
+    test_badge_rejects_discord_hint_still,
+    test_relative_links_reject_http_uppercase_still,
+    test_wiki_rejects_javascript_scheme_still,
+    test_schema_rejects_tier_zero_still,
+    test_common_dangerous_schemes_vbscript_still,
+    test_markdown_lint_requires_davidanson_action,
+    test_link_check_requires_github_token_flag,
+    test_markdownlint_json_requires_md024,
+    test_stewardship_requires_download_actionlint_bash,
+    test_actionlint_rejects_float_main_on_checkout_markdown,
+    test_workflow_requires_cancel_in_progress_true_not_false_on_link_check,
+    test_workflow_rejects_missing_workflow_dispatch_on_link_check,
+    test_badge_rejects_followers_hint_still,
+    test_badge_rejects_forks_hint_still,
+    test_badge_rejects_npm_hint_still,
+    test_badge_rejects_pypi_hint_still,
+    test_badge_rejects_apikey_query_still,
+    test_badge_rejects_link_check_http_image,
+    test_badge_rejects_blank_line_between_still,
+    test_badge_doc_rejects_missing_three_max_still,
+    test_relative_links_accept_tel_uppercase,
+    test_relative_links_reject_javascript_mixed_case_still,
+    test_relative_links_github_slug_asterisk,
+    test_relative_links_accept_asterisk_heading_fragment,
+    test_relative_links_reject_broken_nested_docs,
+    test_relative_links_reject_empty_parens_still,
+    test_relative_links_reject_percent_traversal_still,
+    test_wiki_rejects_file_uppercase,
+    test_wiki_rejects_missing_actionlint_hint_still,
+    test_wiki_rejects_missing_invent_on_stewardship_still,
+    test_schema_rejects_empty_badge_owner,
+    test_schema_rejects_wrong_badge_status_draft,
+    test_schema_rejects_autonomy_four_oob,
+    test_schema_rejects_wrong_claude_repo_still,
+    test_schema_rejects_closes_without_hash_still,
+    test_common_secret_patterns_ghr,
+    test_common_secret_patterns_ec_key,
+    test_common_forbidden_badge_hints_followers_forks,
+    test_common_scan_secrets_aiza,
+    test_common_has_dangerous_scheme_javascript_still,
+    test_markdown_lint_requires_cli2_action_still,
+    test_link_check_requires_lycheeverse_still,
+    test_markdownlint_json_requires_line_length_still,
+    test_stewardship_requires_pip_install_still,
+    test_badge_rejects_twitter_hint_still,
+    test_relative_links_reject_http_mixed_case_still,
+    test_wiki_rejects_data_scheme_still_after_34,
+    test_schema_rejects_tier_zero_still_after_34,
+    test_common_dangerous_schemes_data_still,
+    test_markdownlint_json_requires_siblings_only,
+    test_stewardship_requires_rhysd_actionlint,
+    test_stewardship_requires_curl_download,
+    test_link_check_requires_action_token,
+    test_actionlint_rejects_pull_request_target_on_link_check_after_35,
+    test_actionlint_rejects_contents_write_on_stewardship_after_35,
+    test_actionlint_rejects_write_all_on_link_check_after_35,
+    test_actionlint_rejects_float_latest_on_checkout_stewardship,
+    test_workflow_requires_cancel_in_progress_true_not_false_on_markdown_lint,
+    test_workflow_rejects_missing_concurrency_on_link_check_after_35,
+    test_workflow_rejects_missing_timeout_on_markdown_lint_after_35,
+    test_badge_rejects_buymeacoffee_hint_still,
+    test_badge_rejects_opencollective_hint_still,
+    test_badge_rejects_coveralls_hint_still,
+    test_badge_rejects_xcom_hint_still,
+    test_badge_rejects_client_secret_query_still,
+    test_badge_rejects_markdown_lint_http_image,
+    test_badge_rejects_four_badges_still_after_35,
+    test_relative_links_accept_mailto_mixed_case,
+    test_relative_links_reject_vbscript_mixed_case_still,
+    test_relative_links_reject_file_uppercase_after_35,
+    test_relative_links_reject_broken_docs_sibling,
+    test_relative_links_accept_angle_bracket_tel,
+    test_relative_links_reject_bare_hash_only_still,
+    test_relative_links_reject_encoded_escape_nested_still,
+    test_wiki_rejects_missing_home_to_overview_after_35,
+    test_wiki_rejects_discord_badge_chrome_after_35,
+    test_wiki_rejects_twitter_badge_chrome_after_35,
+    test_wiki_rejects_stars_badge_chrome_after_35,
+    test_wiki_rejects_forks_badge_chrome_after_35,
+    test_wiki_rejects_javascript_uppercase,
+    test_wiki_rejects_missing_ci_link_check_still,
+    test_wiki_rejects_missing_badge_topic_on_stewardship_still,
+    test_schema_rejects_missing_agents_maintainer_key,
+    test_schema_rejects_empty_publish_closes,
+    test_schema_rejects_wrong_publish_status_draft,
+    test_schema_rejects_autonomy_negative,
+    test_schema_rejects_wrong_agents_scope_still,
+    test_schema_rejects_semver_prerelease_still,
+    test_common_secret_patterns_github_pat,
+    test_common_secret_patterns_xoxb,
+    test_common_secret_patterns_rsa_key,
+    test_common_forbidden_badge_hints_buymeacoffee_opencollective,
+    test_common_scan_secrets_xoxb,
+    test_common_has_dangerous_scheme_vbscript_still,
+    test_markdown_lint_requires_davidanson_still,
+    test_link_check_requires_github_token_flag_still,
+    test_markdownlint_json_requires_md024_still,
+    test_stewardship_requires_download_actionlint_bash_still,
+    test_relative_links_reject_http_scheme_still_after_35,
+    test_wiki_rejects_http_scheme_still_after_35,
+    test_schema_rejects_tier_zero_still_after_35,
+    test_common_dangerous_schemes_javascript_still,
+    test_lycheeignore_rejects_https_star_still_after_35,
+    test_markdownlint_json_requires_line_length_200,
+    test_markdownlint_json_requires_siblings_only_true,
+    test_stewardship_requires_raw_githubusercontent,
+    test_stewardship_requires_curl_fssl,
+    test_actionlint_rejects_pull_request_target_on_markdown_lint_after_36,
+    test_actionlint_rejects_contents_write_on_link_check_after_36,
+    test_actionlint_rejects_write_all_on_stewardship_after_36,
+    test_actionlint_rejects_float_main_on_checkout_link_after_36,
+    test_workflow_requires_cancel_in_progress_true_not_false_on_stewardship_after_36,
+    test_workflow_rejects_missing_schedule_on_link_check_after_36,
+    test_workflow_rejects_missing_dispatch_on_stewardship_after_36,
+    test_badge_rejects_coverage_hint_after_36,
+    test_badge_rejects_stars_hint_after_36,
+    test_badge_rejects_discord_hint_after_36,
+    test_badge_rejects_npm_hint_after_36,
+    test_badge_rejects_token_query_after_36,
+    test_badge_rejects_link_check_http_image_after_36,
+    test_badge_rejects_four_badges_still_after_36,
+    test_badge_doc_rejects_missing_three_max_after_36,
+    test_relative_links_accept_https_mixed_case_after_36,
+    test_relative_links_reject_javascript_titlecase_after_36,
+    test_relative_links_reject_data_titlecase_after_36,
+    test_relative_links_github_slug_hash_punct_after_36,
+    test_relative_links_accept_hash_heading_fragment_after_36,
+    test_relative_links_reject_broken_parent_docs_after_36,
+    test_relative_links_accept_angle_bracket_mailto_mixed_after_36,
+    test_relative_links_reject_empty_parens_after_36,
+    test_relative_links_reject_protocol_relative_after_36,
+    test_wiki_rejects_missing_home_to_routing_after_36,
+    test_wiki_rejects_coveralls_badge_chrome_after_36,
+    test_wiki_rejects_producthunt_badge_chrome_after_36,
+    test_wiki_rejects_npm_badge_chrome_after_36,
+    test_wiki_rejects_pypi_badge_chrome_after_36,
+    test_wiki_rejects_data_uppercase_after_36,
+    test_wiki_rejects_missing_publish_security_row_after_36,
+    test_wiki_rejects_missing_actionlint_still_after_36,
+    test_wiki_rejects_missing_relative_hint_still_after_36,
+    test_schema_rejects_empty_badge_edit_policy_after_36,
+    test_schema_rejects_empty_agents_maintainer_after_36,
+    test_schema_rejects_missing_agents_parent_key_after_36,
+    test_schema_rejects_missing_claude_autonomy_key_after_36,
+    test_schema_rejects_empty_publish_created_after_36,
+    test_schema_rejects_wrong_badge_status_draft_after_36,
+    test_schema_rejects_autonomy_two_vs_expected_after_36,
+    test_schema_rejects_wrong_claude_parent_still_after_36,
+    test_schema_rejects_closes_without_hash_still_after_36,
+    test_common_secret_patterns_ghs_after_36,
+    test_common_secret_patterns_ghu_after_36,
+    test_common_secret_patterns_rk_after_36,
+    test_common_secret_patterns_aws_after_36,
+    test_common_forbidden_badge_hints_coverage_stars_after_36,
+    test_common_scan_secrets_ghs_after_36,
+    test_common_has_dangerous_scheme_file_still_after_36,
+    test_markdown_lint_requires_cli2_action_still_after_36,
+    test_link_check_requires_lycheeverse_still_after_36,
+    test_markdownlint_json_requires_siblings_only_still_after_36,
+    test_stewardship_requires_rhysd_still_after_36,
+    test_badge_rejects_twitter_hint_still_after_36,
+    test_relative_links_reject_http_scheme_still_after_36,
+    test_wiki_rejects_http_scheme_still_after_36,
+    test_schema_rejects_tier_zero_still_after_36,
+    test_common_dangerous_schemes_data_still_after_36,
+    test_markdownlint_json_requires_default_true,
+    test_stewardship_requires_get_actionlint_outputs,
+    test_stewardship_requires_actionlint_v177_path,
+    test_link_check_requires_max_concurrency_8,
+    test_link_check_requires_timeout_20,
+    test_link_check_requires_max_retries_3,
+    test_actionlint_rejects_pull_request_target_on_stewardship_after_37,
+    test_actionlint_rejects_contents_write_on_markdown_lint_after_37,
+    test_actionlint_rejects_write_all_on_link_check_after_37,
+    test_actionlint_rejects_float_latest_on_checkout_stewardship_after_37,
+    test_workflow_requires_cancel_in_progress_true_not_false_on_link_check_after_37,
+    test_workflow_rejects_missing_concurrency_on_markdown_lint_after_37,
+    test_workflow_rejects_missing_timeout_on_stewardship_after_37,
+    test_badge_rejects_codecov_hint_after_37,
+    test_badge_rejects_downloads_hint_after_37,
+    test_badge_rejects_followers_hint_after_37,
+    test_badge_rejects_pypi_hint_after_37,
+    test_badge_rejects_apikey_query_after_37,
+    test_badge_rejects_markdown_lint_http_image_after_37,
+    test_badge_rejects_four_badges_still_after_37,
+    test_badge_doc_rejects_missing_fourth_refusal_after_37,
+    test_relative_links_accept_https_uppercase_after_37,
+    test_relative_links_reject_vbscript_titlecase_after_37,
+    test_relative_links_reject_file_titlecase_after_37,
+    test_relative_links_github_slug_ampersand_after_37,
+    test_relative_links_accept_ampersand_heading_fragment_after_37,
+    test_relative_links_reject_broken_sibling_after_37,
+    test_relative_links_accept_angle_bracket_tel_after_37,
+    test_relative_links_reject_bare_hash_after_37,
+    test_relative_links_reject_nested_dotdot_escape_after_37,
+    test_wiki_rejects_missing_home_to_overview_after_37,
+    test_wiki_rejects_discord_badge_chrome_after_37,
+    test_wiki_rejects_twitter_badge_chrome_after_37,
+    test_wiki_rejects_stars_badge_chrome_after_37,
+    test_wiki_rejects_forks_badge_chrome_after_37,
+    test_wiki_rejects_javascript_uppercase_after_37,
+    test_wiki_rejects_missing_publish_autonomy_row_after_37,
+    test_wiki_rejects_missing_ci_hint_still_after_37,
+    test_wiki_rejects_missing_badge_topic_still_after_37,
+    test_schema_rejects_empty_badge_scope_after_37,
+    test_schema_rejects_empty_agents_scope_after_37,
+    test_schema_rejects_missing_agents_maintainer_key_after_37,
+    test_schema_rejects_missing_claude_repo_key_after_37,
+    test_schema_rejects_empty_publish_closes_after_37,
+    test_schema_rejects_wrong_publish_status_draft_after_37,
+    test_schema_rejects_autonomy_negative_after_37,
+    test_schema_rejects_wrong_agents_scope_still_after_37,
+    test_schema_rejects_semver_prerelease_still_after_37,
+    test_common_secret_patterns_github_pat_after_37,
+    test_common_secret_patterns_xoxb_after_37,
+    test_common_secret_patterns_rsa_key_after_37,
+    test_common_forbidden_badge_hints_buymeacoffee_opencollective_after_37,
+    test_common_scan_secrets_xoxb_after_37,
+    test_common_has_dangerous_scheme_vbscript_still_after_37,
+    test_markdown_lint_requires_davidanson_still_after_37,
+    test_link_check_requires_github_token_flag_still_after_37,
+    test_markdownlint_json_requires_line_length_200_still_after_37,
+    test_stewardship_requires_raw_githubusercontent_still_after_37,
+    test_badge_rejects_coveralls_hint_still_after_37,
+    test_relative_links_reject_http_scheme_still_after_37,
+    test_wiki_rejects_http_scheme_still_after_37,
+    test_schema_rejects_tier_zero_still_after_37,
+    test_markdownlint_json_requires_md033_false,
+    test_markdownlint_json_requires_md041_false,
+    test_markdownlint_json_requires_md060_false,
+    test_markdown_lint_requires_cli2_action_v24,
+    test_stewardship_requires_setup_python_v5,
+    test_stewardship_requires_get_actionlint_id,
+    test_actionlint_rejects_pull_request_target_on_markdown_lint_after_38,
+    test_actionlint_rejects_contents_write_on_link_check_after_38,
+    test_actionlint_rejects_write_all_on_stewardship_after_38,
+    test_actionlint_rejects_float_main_on_checkout_link_after_38,
+    test_workflow_requires_cancel_in_progress_true_not_false_on_stewardship_after_38,
+    test_workflow_rejects_missing_schedule_on_link_check_after_38,
+    test_workflow_rejects_missing_dispatch_on_stewardship_after_38,
+    test_badge_rejects_coverage_hint_after_38,
+    test_badge_rejects_stars_hint_after_38,
+    test_badge_rejects_discord_hint_after_38,
+    test_badge_rejects_npm_hint_after_38,
+    test_badge_rejects_token_query_after_38,
+    test_badge_rejects_link_check_http_image_after_38,
+    test_badge_rejects_four_badges_still_after_38,
+    test_badge_doc_rejects_missing_three_max_after_38,
+    test_relative_links_accept_https_mixed_case_after_38,
+    test_relative_links_reject_javascript_titlecase_after_38,
+    test_relative_links_reject_data_titlecase_after_38,
+    test_relative_links_github_slug_hash_punct_after_38,
+    test_relative_links_accept_hash_heading_fragment_after_38,
+    test_relative_links_reject_broken_parent_docs_after_38,
+    test_relative_links_accept_angle_bracket_mailto_mixed_after_38,
+    test_relative_links_reject_empty_parens_after_38,
+    test_relative_links_reject_protocol_relative_after_38,
+    test_wiki_rejects_missing_home_to_routing_after_38,
+    test_wiki_rejects_coveralls_badge_chrome_after_38,
+    test_wiki_rejects_producthunt_badge_chrome_after_38,
+    test_wiki_rejects_npm_badge_chrome_after_38,
+    test_wiki_rejects_pypi_badge_chrome_after_38,
+    test_wiki_rejects_data_uppercase_after_38,
+    test_wiki_rejects_missing_publish_security_row_after_38,
+    test_wiki_rejects_missing_actionlint_still_after_38,
+    test_wiki_rejects_missing_relative_hint_still_after_38,
+    test_schema_rejects_empty_badge_edit_policy_after_38,
+    test_schema_rejects_empty_agents_maintainer_after_38,
+    test_schema_rejects_missing_agents_parent_key_after_38,
+    test_schema_rejects_missing_claude_autonomy_key_after_38,
+    test_schema_rejects_empty_publish_created_after_38,
+    test_schema_rejects_wrong_badge_status_draft_after_38,
+    test_schema_rejects_autonomy_two_vs_expected_after_38,
+    test_schema_rejects_wrong_claude_parent_still_after_38,
+    test_schema_rejects_closes_without_hash_still_after_38,
+    test_common_secret_patterns_ghs_after_38,
+    test_common_secret_patterns_ghu_after_38,
+    test_common_secret_patterns_rk_after_38,
+    test_common_secret_patterns_aws_after_38,
+    test_common_forbidden_badge_hints_coverage_stars_after_38,
+    test_common_scan_secrets_ghs_after_38,
+    test_common_has_dangerous_scheme_file_still_after_38,
+    test_markdownlint_json_requires_default_true_still_after_38,
+    test_link_check_requires_max_concurrency_8_still_after_38,
+    test_stewardship_requires_actionlint_v177_path_still_after_38,
+    test_stewardship_requires_get_actionlint_outputs_still_after_38,
+    test_badge_rejects_codecov_hint_still_after_38,
+    test_relative_links_reject_http_scheme_still_after_38,
+    test_schema_rejects_tier_zero_still_after_38,
+    test_link_check_requires_checkout_v7,
+    test_markdown_lint_requires_checkout_v7,
+    test_stewardship_requires_checkout_v7,
+    test_link_check_requires_lychee_action_v2,
+    test_link_check_requires_timeout_minutes_20,
+    test_markdown_lint_requires_timeout_minutes_10,
+    test_stewardship_requires_timeout_minutes_15,
+    test_link_check_requires_cron_0_6,
+    test_markdown_lint_requires_cron_30_6,
+    test_stewardship_requires_cron_15_6,
+    test_link_check_requires_ubuntu_latest,
+    test_markdown_lint_requires_ubuntu_latest,
+    test_stewardship_requires_ubuntu_latest,
+    test_stewardship_requires_pip_quiet,
+    test_stewardship_requires_shell_bash,
+    test_stewardship_requires_actionlint_color,
+    test_actionlint_rejects_pull_request_target_on_link_check_after_39,
+    test_actionlint_rejects_contents_write_on_markdown_lint_after_39,
+    test_actionlint_rejects_float_main_on_checkout_stewardship_after_39,
+    test_actionlint_rejects_float_latest_on_checkout_markdown_after_39,
+    test_actionlint_rejects_float_master_on_checkout_link_after_39,
+    test_actionlint_rejects_unpinned_checkout_on_link_after_39,
+    test_actionlint_rejects_unpinned_lychee_after_39,
+    test_workflow_requires_cancel_in_progress_true_not_false_on_markdown_lint_after_39,
+    test_workflow_rejects_missing_schedule_on_markdown_lint_after_39,
+    test_workflow_rejects_missing_dispatch_on_link_check_after_39,
+    test_workflow_rejects_missing_concurrency_on_stewardship_after_39,
+    test_workflow_rejects_missing_permissions_read_on_markdown_lint_after_39,
+    test_actionlint_rejects_contents_write_on_stewardship_after_39,
+    test_actionlint_rejects_pull_request_target_on_stewardship_after_39,
+    test_workflow_requires_cancel_in_progress_true_not_false_on_link_check_after_39,
+    test_workflow_rejects_missing_timeout_on_link_check_after_39,
+    test_actionlint_rejects_write_all_on_link_check_after_39,
+    test_actionlint_rejects_write_all_on_stewardship_after_39,
+    test_link_check_requires_fail_true_after_39,
+    test_link_check_requires_exclude_loopback_after_39,
+    test_link_check_requires_github_token_flag_after_39,
+    test_link_check_requires_action_token_after_39,
+    test_link_check_requires_max_concurrency_8_after_39,
+    test_link_check_requires_timeout_20_after_39,
+    test_link_check_requires_max_retries_3_after_39,
+    test_markdown_lint_requires_cli2_action_v24_after_39,
+    test_markdown_lint_requires_davidanson_after_39,
+    test_markdown_lint_requires_config_needle_after_39,
+    test_markdown_lint_requires_owasp_exclude_after_39,
+    test_markdown_lint_requires_agents_exclude_after_39,
+    test_markdownlint_json_requires_md033_false_still_after_39,
+    test_markdownlint_json_requires_md041_false_still_after_39,
+    test_markdownlint_json_requires_md060_false_still_after_39,
+    test_markdownlint_json_requires_line_length_200_still_after_39,
+    test_markdownlint_json_requires_default_true_still_after_39,
+    test_stewardship_requires_setup_python_v5_still_after_39,
+    test_stewardship_requires_get_actionlint_id_still_after_39,
+    test_stewardship_requires_actionlint_v177_path_still_after_39,
+    test_stewardship_requires_get_actionlint_outputs_still_after_39,
+    test_stewardship_requires_python_312_pin_still_after_39,
+    test_stewardship_requires_rhysd_still_after_39,
+    test_stewardship_requires_curl_fssl_still_after_39,
+    test_stewardship_requires_raw_githubusercontent_still_after_39,
+    test_lycheeignore_rejects_https_star_still_after_39,
+    test_lycheeignore_rejects_http_star_still_after_39,
+    test_lycheeignore_requires_shields_exclude_still_after_39,
+    test_relative_gate_requires_owasp_skip_after_41,
+    test_relative_gate_requires_agents_skip_after_41,
+    test_relative_gate_requires_node_modules_skip_after_41,
+    test_relative_gate_requires_strip_fenced_after_41,
+    test_relative_gate_requires_fully_unquote_after_41,
+    test_relative_gate_requires_github_slug_after_41,
+    test_relative_gate_requires_dangerous_scheme_after_41,
+    test_relative_gate_requires_empty_fragment_needle_after_41,
+    test_relative_gate_requires_query_string_needle_after_41,
+    test_relative_gate_requires_http_reject_needle_after_41,
+    test_run_stewardship_requires_relative_gate_after_41,
+    test_run_stewardship_requires_badge_gate_after_41,
+    test_run_stewardship_requires_wiki_gate_after_41,
+    test_run_stewardship_requires_schema_gate_after_41,
+    test_agents_requires_relative_mention_after_41,
+    test_run_stewardship_requires_gate_order_after_41,
+    test_relative_gate_file_must_exist_after_41,
+    test_run_stewardship_file_must_exist_after_41,
+    test_relative_gate_requires_atx_needle_after_41,
+    test_relative_gate_requires_git_skip_after_41,
+    test_relative_links_reject_empty_path_fragment_after_41,
+    test_relative_links_reject_empty_path_fragment_nested_after_41,
+    test_relative_links_reject_query_string_after_41,
+    test_relative_links_reject_query_before_fragment_after_41,
+    test_relative_links_reject_double_encoded_escape_after_41,
+    test_relative_links_reject_abs_unix_escape_after_41,
+    test_relative_links_accept_https_still_after_41,
+    test_relative_links_accept_mailto_still_after_41,
+    test_relative_links_accept_tel_still_after_41,
+    test_relative_links_reject_protocol_relative_still_after_41,
+    test_relative_links_reject_http_still_after_41,
+    test_relative_links_reject_javascript_still_after_41,
+    test_relative_links_reject_data_still_after_41,
+    test_relative_links_reject_file_still_after_41,
+    test_relative_links_reject_vbscript_still_after_41,
+    test_relative_links_reject_empty_parens_still_after_41,
+    test_relative_links_reject_bare_hash_still_after_41,
+    test_relative_links_reject_broken_still_after_41,
+    test_relative_links_reject_missing_fragment_still_after_41,
+    test_relative_links_accept_valid_fragment_still_after_41,
+    test_relative_links_ignore_fenced_still_after_41,
+    test_relative_links_ignore_tilde_fence_still_after_41,
+    test_relative_links_reject_image_query_after_41,
+    test_relative_links_reject_image_empty_fragment_after_41,
+    test_relative_links_accept_angle_https_still_after_41,
+    test_relative_links_reject_encoded_escape_still_after_41,
+    test_relative_links_reject_dotdot_escape_still_after_41,
+    test_relative_links_github_slug_amp_still_after_41,
+    test_relative_links_reject_nul_still_after_41,
+    test_relative_links_accept_title_attr_still_after_41,
+    test_relative_links_reject_http_mixed_still_after_41,
+    test_relative_links_accept_https_mixed_still_after_41,
+    test_relative_links_reject_whitespace_target_still_after_41,
+    test_relative_links_reject_protocol_rel_image_after_41,
+    test_relative_links_reject_javascript_image_after_41,
+    test_relative_links_reject_empty_frag_angle_after_41,
+    test_relative_links_skip_owasp_still_after_41,
+    test_relative_links_skip_agents_still_after_41,
+    test_relative_links_accept_cross_file_fragment_still_after_41,
+    test_relative_links_accept_license_still_after_41,
+    test_relative_links_accept_nested_docs_still_after_41,
+    test_relative_links_reject_query_on_nested_after_41,
+    test_relative_links_reject_empty_frag_on_nested_after_41,
+    test_relative_links_skip_node_modules_still_after_41,
+    test_relative_links_accept_image_existing_still_after_41,
+    test_relative_links_reject_broken_image_still_after_41,
+    test_relative_links_fully_unquote_helper_after_41,
+    test_wiki_gate_file_must_exist_after_43,
+    test_wiki_gate_requires_publishable_home_after_43,
+    test_wiki_gate_requires_publishable_overview_after_43,
+    test_wiki_gate_requires_publishable_autonomy_after_43,
+    test_wiki_gate_requires_publishable_stewardship_after_43,
+    test_wiki_gate_requires_publishable_routing_after_43,
+    test_wiki_gate_requires_publishable_security_after_43,
+    test_wiki_gate_requires_operator_publish_after_43,
+    test_wiki_gate_requires_publishable_pages_const_after_43,
+    test_wiki_gate_requires_topic_hints_const_after_43,
+    test_wiki_gate_requires_l2_topic_after_43,
+    test_wiki_gate_requires_l3_topic_after_43,
+    test_wiki_gate_requires_credential_topic_after_43,
+    test_wiki_gate_requires_copilot_topic_after_43,
+    test_wiki_gate_requires_strip_fenced_after_43,
+    test_wiki_gate_requires_dangerous_scheme_after_43,
+    test_wiki_gate_requires_protocol_relative_needle_after_43,
+    test_wiki_gate_requires_slash_slash_match_after_43,
+    test_wiki_gate_requires_http_reject_after_43,
+    test_wiki_gate_requires_forbidden_badge_hints_after_43,
+    test_wiki_gate_requires_stewardship_ci_hints_after_43,
+    test_wiki_gate_requires_markdown_lint_ci_after_43,
+    test_wiki_gate_requires_link_check_ci_after_43,
+    test_wiki_gate_requires_stewardship_checks_ci_after_43,
+    test_wiki_gate_requires_actionlint_after_43,
+    test_wiki_gate_requires_invent_pin_after_43,
+    test_wiki_gate_requires_kill_switch_needle_after_43,
+    test_wiki_gate_requires_scan_secrets_after_43,
+    test_wiki_gate_requires_readme_link_hints_after_43,
+    test_wiki_gate_requires_badge_standard_hints_after_43,
+    test_wiki_gate_requires_out_of_scope_after_43,
+    test_wiki_rejects_protocol_relative_after_43,
+    test_wiki_rejects_protocol_relative_image_after_43,
+    test_wiki_ignores_fenced_http_after_43,
+    test_wiki_ignores_tilde_fenced_javascript_after_43,
+    test_wiki_rejects_missing_l2_topic_after_43,
+    test_wiki_rejects_missing_l3_topic_after_43,
+    test_wiki_rejects_missing_credential_topic_after_43,
+    test_wiki_rejects_missing_copilot_topic_after_43,
+    test_wiki_rejects_missing_home_kill_after_43,
+    test_wiki_rejects_http_still_after_43,
+    test_wiki_rejects_javascript_still_after_43,
+    test_wiki_rejects_data_still_after_43,
+    test_wiki_rejects_vbscript_still_after_43,
+    test_wiki_rejects_file_still_after_43,
+    test_wiki_rejects_discord_chrome_still_after_43,
+    test_wiki_rejects_stars_chrome_still_after_43,
+    test_wiki_rejects_missing_actionlint_still_after_43,
+    test_wiki_rejects_missing_relative_hint_still_after_43,
+    test_wiki_rejects_missing_invent_home_still_after_43,
+    test_wiki_rejects_missing_secret_home_still_after_43,
+    test_wiki_rejects_missing_ci_hint_still_after_43,
+    test_wiki_rejects_missing_publish_home_row_still_after_43,
+    test_wiki_rejects_unexpected_page_still_after_43,
+    test_wiki_rejects_missing_home_backlink_still_after_43,
+    test_wiki_rejects_missing_home_to_security_still_after_43,
+    test_wiki_rejects_missing_badge_topic_still_after_43,
+    test_wiki_rejects_missing_l0_topic_still_after_43,
+    test_wiki_rejects_missing_l1_topic_still_after_43,
+    test_wiki_rejects_missing_kill_topic_still_after_43,
+    test_wiki_rejects_missing_surface_topic_still_after_43,
+    test_wiki_rejects_missing_governance_topic_still_after_43,
+    test_wiki_passes_good_fixture_still_after_43,
+    test_wiki_rejects_http_mixed_case_still_after_43,
+    test_wiki_rejects_javascript_mixed_case_still_after_43,
+    test_wiki_rejects_missing_do_not_push_still_after_43,
+    test_wiki_rejects_npm_chrome_still_after_43,
+    test_wiki_rejects_missing_out_of_scope_still_after_43,
+    test_wiki_rejects_missing_run_script_still_after_43,
+    test_wiki_rejects_missing_home_badge_link_still_after_43,
+    test_wiki_rejects_secret_pattern_still_after_43,
+    test_schema_gate_file_must_exist_after_45,
+    test_schema_gate_requires_doc_schemas_const_after_45,
+    test_schema_gate_requires_expected_values_const_after_45,
+    test_schema_gate_requires_badge_standard_doc_after_45,
+    test_schema_gate_requires_publish_doc_after_45,
+    test_schema_gate_requires_backlog_doc_after_45,
+    test_schema_gate_requires_agents_doc_after_45,
+    test_schema_gate_requires_claude_doc_after_45,
+    test_schema_gate_requires_edit_policy_key_after_45,
+    test_schema_gate_requires_autonomy_key_after_45,
+    test_schema_gate_requires_parent_governance_key_after_45,
+    test_schema_gate_requires_version_key_after_45,
+    test_schema_gate_requires_surface_key_after_45,
+    test_schema_gate_requires_closes_key_after_45,
+    test_schema_gate_requires_purpose_key_after_45,
+    test_schema_gate_requires_maintainer_key_after_45,
+    test_schema_gate_requires_semver_re_after_45,
+    test_schema_gate_requires_iso_date_re_after_45,
+    test_schema_gate_requires_issue_ref_re_after_45,
+    test_schema_gate_requires_fenced_yaml_re_after_45,
+    test_schema_gate_requires_yaml_fence_needle_after_45,
+    test_schema_gate_requires_date_keys_after_45,
+    test_schema_gate_requires_parse_simple_yaml_after_45,
+    test_schema_gate_requires_load_yaml_after_45,
+    test_schema_gate_requires_first_yaml_block_after_45,
+    test_schema_gate_requires_safe_load_after_45,
+    test_schema_gate_requires_mapping_needle_after_45,
+    test_schema_gate_requires_scan_secrets_after_45,
+    test_schema_gate_requires_invent_pin_after_45,
+    test_schema_gate_requires_smtp_eth_after_45,
+    test_schema_gate_requires_repository_specific_after_45,
+    test_schema_gate_requires_copilot_pin_after_45,
+    test_schema_gate_requires_active_status_after_45,
+    test_schema_gate_requires_autonomy_range_after_45,
+    test_schema_gate_requires_backlog_owner_copilot_after_45,
+    test_schema_rejects_backlog_wrong_owner_after_45,
+    test_schema_rejects_empty_badge_edit_policy_after_45,
+    test_schema_rejects_empty_agents_maintainer_after_45,
+    test_schema_rejects_missing_agents_parent_key_after_45,
+    test_schema_rejects_missing_claude_autonomy_key_after_45,
+    test_schema_rejects_empty_publish_created_after_45,
+    test_schema_rejects_wrong_badge_status_draft_after_45,
+    test_schema_rejects_autonomy_two_vs_expected_after_45,
+    test_schema_rejects_wrong_claude_parent_still_after_45,
+    test_schema_rejects_closes_without_hash_still_after_45,
+    test_schema_rejects_tier_zero_still_after_45,
+    test_schema_rejects_semver_prerelease_still_after_45,
+    test_schema_rejects_wrong_agents_scope_still_after_45,
+    test_schema_rejects_wrong_publish_status_draft_after_45,
+    test_schema_rejects_autonomy_negative_after_45,
+    test_schema_rejects_empty_badge_scope_after_45,
+    test_schema_rejects_missing_agents_maintainer_key_after_45,
+    test_schema_rejects_missing_claude_repo_key_after_45,
+    test_schema_rejects_empty_publish_closes_after_45,
+    test_schema_rejects_badge_missing_invent_wording_after_45,
+    test_schema_rejects_wrong_badge_owner_after_45,
+    test_schema_rejects_wrong_claude_surface_after_45,
+    test_schema_rejects_bad_iso_date_after_45,
+    test_schema_rejects_backlog_tier_zero_after_45,
+    test_schema_rejects_backlog_draft_status_after_45,
+    test_schema_rejects_publish_closes_without_hash_after_45,
+    test_schema_rejects_missing_backlog_edit_policy_after_45,
+    test_schema_rejects_agents_wrong_maintainer_after_45,
+    test_schema_rejects_claude_wrong_repo_after_45,
+    test_schema_rejects_secret_pattern_in_badge_after_45,
+    test_schema_rejects_autonomy_four_after_45,
+    test_schema_rejects_empty_agents_scope_after_45,
+    test_schema_rejects_wrong_agents_parent_after_45,
+    test_schema_rejects_missing_badge_closes_key_after_45,
+    test_schema_rejects_non_mapping_yaml_after_45,
+    test_schema_passes_good_fixture_still_after_45,
+    test_common_gate_file_must_exist_after_46,
+    test_common_gate_requires_secret_patterns_after_46,
+    test_common_gate_requires_secret_url_hints_after_46,
+    test_common_gate_requires_forbidden_badge_hints_after_46,
+    test_common_gate_requires_dangerous_link_schemes_after_46,
+    test_common_gate_requires_fenced_block_re_after_46,
+    test_common_gate_requires_strip_fenced_code_after_46,
+    test_common_gate_requires_has_dangerous_scheme_after_46,
+    test_common_gate_requires_markdown_files_after_46,
+    test_common_gate_requires_fail_helper_pin_after_46,
+    test_common_gate_requires_load_workflow_pin_after_46,
+    test_common_gate_requires_secret_ghp_after_46,
+    test_common_gate_requires_secret_gho_after_46,
+    test_common_gate_requires_secret_ghu_after_46,
+    test_common_gate_requires_secret_ghs_after_46,
+    test_common_gate_requires_secret_ghr_after_46,
+    test_common_gate_requires_secret_github_pat_after_46,
+    test_common_gate_requires_secret_private_key_after_46,
+    test_common_gate_requires_secret_sk_after_46,
+    test_common_gate_requires_secret_rk_after_46,
+    test_common_gate_requires_secret_api_key_re_after_46,
+    test_common_gate_requires_secret_aws_secret_after_46,
+    test_common_gate_requires_secret_xox_after_46,
+    test_common_gate_requires_secret_npm_after_46,
+    test_common_gate_requires_secret_aiza_after_46,
+    test_common_gate_requires_url_hint_token_eq_after_46,
+    test_common_gate_requires_url_hint_access_token_after_46,
+    test_common_gate_requires_url_hint_api_key_eq_after_46,
+    test_common_gate_requires_url_hint_apikey_eq_after_46,
+    test_common_gate_requires_url_hint_client_secret_after_46,
+    test_common_gate_requires_forbidden_coverage_after_46,
+    test_common_gate_requires_forbidden_codecov_after_46,
+    test_common_gate_requires_forbidden_coveralls_after_46,
+    test_common_gate_requires_forbidden_downloads_after_46,
+    test_common_gate_requires_forbidden_discord_after_46,
+    test_common_gate_requires_forbidden_twitter_after_46,
+    test_common_gate_requires_forbidden_x_com_after_46,
+    test_common_gate_requires_forbidden_stars_after_46,
+    test_common_gate_requires_forbidden_forks_after_46,
+    test_common_gate_requires_forbidden_followers_after_46,
+    test_common_gate_requires_forbidden_npm__after_46,
+    test_common_gate_requires_forbidden_pypi__after_46,
+    test_common_gate_requires_forbidden_producthunt_after_46,
+    test_common_gate_requires_forbidden_buymeacoffee_after_46,
+    test_common_gate_requires_forbidden_opencollective_after_46,
+    test_common_gate_requires_scheme_js_after_46,
+    test_common_gate_requires_scheme_data_after_46,
+    test_common_gate_requires_scheme_vbscript_after_46,
+    test_common_gate_requires_scheme_file_after_46,
+    test_common_gate_requires_tilde_fence_after_46,
+    test_common_gate_requires_endswith_urlish_after_46,
+    test_common_gate_requires_invent_wording_after_46,
+    test_common_gate_requires_live_secret_scan_pin_after_46,
+    test_common_secret_patterns_ghp_still_after_46,
+    test_common_secret_patterns_github_pat_still_after_46,
+    test_common_secret_patterns_npm_still_after_46,
+    test_common_secret_patterns_aiza_still_after_46,
+    test_common_dangerous_schemes_complete_still_after_46,
+    test_common_has_dangerous_javascript_still_after_46,
+    test_common_has_dangerous_data_still_after_46,
+    test_common_forbidden_hints_coverage_still_after_46,
+    test_common_strip_fenced_code_tilde_still_after_46,
+    test_common_strip_fenced_code_backtick_still_after_46,
+    test_common_scan_secrets_url_hint_still_after_46,
+    test_common_scan_secrets_ghp_prefix_still_after_46,
+    test_common_load_workflow_text_live_still_after_46,
+    test_common_markdown_files_readme_still_after_46,
+    test_common_fail_appends_still_after_46,
+    test_common_secret_url_hints_complete_still_after_46,
+    test_badge_gate_requires_required_order_after_48,
+    test_badge_gate_requires_max_badges_after_48,
+    test_badge_gate_requires_expected_repo_after_48,
+    test_badge_gate_requires_required_workflows_after_48,
+    test_badge_gate_requires_badge_line_re_after_48,
+    test_badge_gate_requires_repo_from_github_re_after_48,
+    test_badge_gate_requires_repo_from_shields_re_after_48,
+    test_badge_gate_requires_label_link_check_after_48,
+    test_badge_gate_requires_label_markdown_lint_after_48,
+    test_badge_gate_requires_label_license_after_48,
+    test_badge_gate_requires_max_badges_eq_3_after_48,
+    test_badge_gate_requires_repo_slug_after_48,
+    test_badge_gate_requires_wf_link_check_after_48,
+    test_badge_gate_requires_wf_markdown_lint_after_48,
+    test_badge_gate_requires_wf_stewardship_after_48,
+    test_badge_gate_requires_fn_extract_badge_row_after_48,
+    test_badge_gate_requires_fn_check_badges_after_48,
+    test_badge_gate_requires_fn_check_badge_doc_after_48,
+    test_badge_gate_requires_fn_readme_consistency_after_48,
+    test_badge_gate_requires_fn_contributing_after_48,
+    test_badge_gate_requires_fn_lycheeignore_after_48,
+    test_badge_gate_requires_fn_actionlint_after_48,
+    test_badge_gate_requires_fn_workflow_hardening_after_48,
+    test_badge_gate_requires_fn_workflows_license_after_48,
+    test_badge_gate_requires_link_check_badge_svg_after_48,
+    test_badge_gate_requires_markdown_lint_badge_svg_after_48,
+    test_badge_gate_requires_shields_license_after_48,
+    test_badge_gate_requires_contiguous_pin_after_48,
+    test_badge_gate_requires_fourth_refusal_after_48,
+    test_badge_gate_requires_stewardship_product_reject_after_48,
+    test_badge_gate_requires_live_badge_row_pin_after_48,
+    test_badge_gate_requires_forbidden_hints_import_after_48,
+    test_badge_gate_requires_secret_url_hints_import_after_48,
+    test_badge_gate_requires_scan_secrets_after_48,
+    test_badge_gate_requires_invent_wording_after_48,
+    test_badge_gate_requires_https_images_after_48,
+    test_badge_gate_required_order_still_after_48,
+    test_badge_gate_max_badges_still_after_48,
+    test_badge_gate_expected_repo_still_after_48,
+    test_badge_gate_required_workflows_still_after_48,
+    test_badge_gate_contract_fn_still_after_48,
+    test_badge_gate_extract_row_still_after_48,
+    test_badge_gate_check_badges_order_still_after_48,
+    test_badge_gate_check_badges_https_still_after_48,
+    test_badge_gate_doc_fourth_still_after_48,
+    test_badge_gate_badge_line_re_still_after_48,
+    test_badge_gate_repo_github_re_still_after_48,
+    test_badge_gate_repo_shields_re_still_after_48,
+    test_badge_gate_main_calls_contract_still_after_48,
+    test_badge_gate_docstring_pin_still_after_48,
+    test_badge_gate_three_max_still_after_48,
+    test_badge_gate_contract_errors_empty_live_still_after_48,
+    test_badge_gate_no_fourth_in_order_still_after_48,
+    test_badge_gate_license_last_still_after_48,
+    test_badge_gate_link_check_first_still_after_48,
+    test_badge_gate_markdown_lint_middle_still_after_48,
+    test_badge_gate_badge_gate_path_still_after_48,
+    test_badge_gate_forbidden_hints_wired_still_after_48,
+    test_badge_gate_secret_hints_wired_still_after_48,
+    test_badge_gate_passes_live_contract_still_after_48,
+    test_badge_gate_doc_mentions_three_still_after_48,
+    test_badge_gate_readme_has_three_still_after_48,
+    test_badge_gate_check_badges_live_still_after_48,
+    test_badge_gate_contributing_invent_still_after_48,
+    test_badge_gate_agents_selftest_still_after_48,
+    test_badge_gate_lycheeignore_shields_still_after_48,
+    test_badge_gate_source_has_contract_section_still_after_48,
+    test_badge_gate_quiet_stewardship_doc_still_after_48,
+    test_schema_gate_requires_string_keys_after_53,
+    test_schema_gate_requires_reject_non_scalar_after_53,
+    test_schema_gate_requires_front_door_scope_after_53,
+    test_schema_gate_requires_reversible_purpose_after_53,
+    test_schema_gate_requires_closes_16_after_53,
+    test_schema_gate_requires_empty_yaml_needle_after_53,
+    test_schema_gate_requires_bool_int_reject_after_53,
+    test_schema_gate_requires_ecosystem_md_after_53,
+    test_schema_gate_requires_parent_governance_pin_after_53,
+    test_schema_gate_requires_fuzzywigg_owner_after_53,
+    test_schema_gate_requires_agents_governance_repo_after_53,
+    test_schema_rejects_bool_autonomy_after_53,
+    test_schema_rejects_bool_tier_after_53,
+    test_schema_rejects_nested_scope_after_53,
+    test_schema_rejects_list_owner_after_53,
+    test_schema_rejects_empty_yaml_block_after_53,
+    test_schema_rejects_null_maintainer_after_53,
+    test_schema_rejects_tilde_null_purpose_after_53,
+    test_schema_rejects_int_scope_after_53,
+    test_schema_rejects_wrong_badge_scope_after_53,
+    test_schema_rejects_wrong_publish_purpose_after_53,
+    test_schema_rejects_wrong_badge_closes_after_53,
+    test_schema_rejects_wrong_publish_closes_after_53,
+    test_schema_rejects_yes_autonomy_after_53,
+    test_schema_rejects_nested_purpose_after_53,
+    test_schema_rejects_list_closes_after_53,
+    test_schema_rejects_bool_status_after_53,
+    test_schema_rejects_wrong_value_still_after_53,
+    test_schema_rejects_inactive_status_still_after_53,
+    test_schema_rejects_missing_key_still_after_53,
+    test_schema_rejects_bad_semver_still_after_53,
+    test_schema_rejects_edit_policy_without_invent_still_after_53,
+    test_schema_rejects_wrong_surface_still_after_53,
+    test_schema_rejects_closes_without_issue_still_after_53,
+    test_schema_rejects_bad_iso_date_still_after_53,
+    test_schema_rejects_wrong_maintainer_still_after_53,
+    test_schema_rejects_float_autonomy_still_after_53,
+    test_schema_rejects_autonomy_as_string_still_after_53,
+    test_schema_rejects_tier_as_string_still_after_53,
+    test_schema_rejects_wrong_claude_repo_still_after_53,
+    test_schema_rejects_empty_badge_edit_policy_still_after_53,
+    test_schema_rejects_secret_in_doc_still_after_53,
+    test_schema_rejects_missing_yaml_block_still_after_53,
+    test_schema_rejects_missing_file_still_after_53,
+    test_schema_rejects_non_mapping_yaml_still_after_53,
+    test_schema_rejects_unparseable_yaml_still_after_53,
+    test_schema_rejects_wrong_backlog_owner_after_53,
+    test_schema_rejects_list_status_after_53,
+    test_schema_rejects_nested_edit_policy_after_53,
+    test_schema_rejects_bool_closes_after_53,
+    test_schema_rejects_int_purpose_after_53,
+    test_schema_rejects_bool_owner_after_53,
+    test_schema_rejects_nested_parent_governance_after_53,
+    test_schema_rejects_list_maintainer_after_53,
+    test_schema_rejects_float_tier_after_53,
+    test_schema_rejects_yes_tier_after_53,
+    test_schema_rejects_null_closes_after_53,
+    test_schema_rejects_int_surface_after_53,
+    test_schema_rejects_nested_repo_after_53,
+    test_schema_rejects_list_version_after_53,
+    test_schema_rejects_bool_version_after_53,
+    test_schema_rejects_wrong_badge_closes_hash_after_53,
+    test_schema_rejects_wrong_publish_purpose_short_after_53,
+    test_schema_rejects_wrong_front_door_scope_typo_after_53,
+    test_schema_gate_requires_string_keys_const_still_after_53,
+    test_schema_gate_requires_reject_non_scalar_still_after_53,
+    test_schema_gate_requires_empty_yaml_still_after_53,
+    test_schema_gate_requires_front_door_still_after_53,
+    test_schema_gate_requires_reversible_still_after_53,
+    test_schema_passes_good_fixture_still_after_53,
+    test_schema_rejects_tier_zero_still_after_53,
+    test_relative_gate_requires_md_link_re_after_55,
+    test_relative_gate_requires_skip_parts_after_55,
+    test_relative_gate_requires_skip_prefixes_after_55,
+    test_relative_gate_requires_skip_files_after_55,
+    test_relative_gate_requires_max_unquote_passes_after_55,
+    test_relative_gate_requires_max_unquote_eq_4_after_55,
+    test_relative_gate_requires_should_skip_after_55,
+    test_relative_gate_requires_iter_markdown_after_55,
+    test_relative_gate_requires_headings_in_after_55,
+    test_relative_gate_requires_check_file_after_55,
+    test_relative_gate_requires_mailto_allow_after_55,
+    test_relative_gate_requires_tel_allow_after_55,
+    test_relative_gate_requires_nul_reject_after_55,
+    test_relative_gate_requires_angle_bracket_strip_after_55,
+    test_relative_gate_requires_image_link_re_after_55,
+    test_relative_gate_requires_escapes_repo_needle_after_55,
+    test_relative_gate_requires_broken_link_needle_after_55,
+    test_relative_gate_requires_missing_heading_needle_after_55,
+    test_relative_gate_requires_rglob_after_55,
+    test_relative_gate_requires_no_md_fail_closed_after_55,
+    test_relative_links_reject_triple_encoded_escape_after_55,
+    test_relative_links_reject_query_with_amp_after_55,
+    test_relative_links_reject_empty_frag_whitespace_after_55,
+    test_relative_links_reject_image_http_after_55,
+    test_relative_links_reject_image_data_after_55,
+    test_relative_links_reject_image_file_scheme_after_55,
+    test_relative_links_reject_image_vbscript_after_55,
+    test_relative_links_accept_angle_mailto_after_55,
+    test_relative_links_accept_angle_tel_after_55,
+    test_relative_links_accept_title_on_https_after_55,
+    test_relative_links_reject_abs_windows_style_after_55,
+    test_relative_links_reject_query_on_image_path_after_55,
+    test_relative_links_reject_empty_frag_on_image_after_55,
+    test_relative_links_skip_git_dir_after_55,
+    test_relative_links_accept_nested_cross_frag_after_55,
+    test_relative_links_reject_nested_missing_frag_after_55,
+    test_relative_links_accept_self_frag_slug_after_55,
+    test_relative_links_reject_self_frag_missing_after_55,
+    test_relative_links_reject_whitespace_only_target_after_55,
+    test_relative_links_accept_https_image_after_55,
+    test_relative_links_fully_unquote_cap_helper_after_55,
+    test_relative_gate_requires_owasp_still_after_55,
+    test_relative_gate_requires_fully_unquote_still_after_55,
+    test_relative_gate_requires_empty_fragment_still_after_55,
+    test_relative_gate_requires_query_string_still_after_55,
+    test_relative_gate_requires_github_slug_still_after_55,
+    test_relative_gate_requires_atx_still_after_55,
+    test_relative_gate_requires_strip_fenced_still_after_55,
+    test_relative_gate_requires_dangerous_still_after_55,
+    test_run_stewardship_requires_gate_order_still_after_55,
+    test_relative_links_reject_http_still_after_55,
+    test_relative_links_reject_protocol_rel_still_after_55,
+    test_relative_links_reject_javascript_still_after_55,
+    test_relative_links_reject_data_still_after_55,
+    test_relative_links_reject_file_still_after_55,
+    test_relative_links_reject_vbscript_still_after_55,
+    test_relative_links_reject_empty_parens_still_after_55,
+    test_relative_links_reject_bare_hash_still_after_55,
+    test_relative_links_reject_broken_still_after_55,
+    test_relative_links_reject_empty_path_frag_still_after_55,
+    test_relative_links_reject_query_still_after_55,
+    test_relative_links_accept_https_still_after_55,
+    test_relative_links_accept_mailto_still_after_55,
+    test_relative_links_accept_tel_still_after_55,
+    test_relative_links_ignore_fenced_still_after_55,
+    test_relative_links_ignore_tilde_still_after_55,
+    test_relative_links_skip_owasp_still_after_55,
+    test_relative_links_skip_agents_still_after_55,
+    test_relative_links_skip_node_modules_still_after_55,
+    test_relative_links_accept_valid_fragment_still_after_55,
+    test_relative_links_reject_nul_still_after_55,
+    test_wiki_gate_requires_operator_only_after_59,
+    test_wiki_gate_requires_operator_only_eq_publish_after_59,
+    test_wiki_gate_requires_docs_path_after_59,
+    test_wiki_gate_requires_wiki_path_after_59,
+    test_wiki_gate_requires_reject_invent_helper_after_59,
+    test_wiki_gate_requires_autonomy_topic_after_59,
+    test_wiki_gate_requires_governance_topic_after_59,
+    test_wiki_gate_requires_public_topic_after_59,
+    test_wiki_gate_requires_kill_topic_after_59,
+    test_wiki_gate_requires_secret_topic_after_59,
+    test_wiki_gate_requires_surface_topic_after_59,
+    test_wiki_gate_requires_routing_topic_after_59,
+    test_wiki_gate_requires_run_script_topic_after_59,
+    test_wiki_gate_requires_badge_topic_after_59,
+    test_wiki_gate_requires_home_backlink_needle_after_59,
+    test_wiki_gate_requires_unexpected_md_needle_after_59,
+    test_wiki_gate_requires_missing_wiki_needle_after_59,
+    test_wiki_gate_requires_failed_banner_after_59,
+    test_wiki_gate_requires_ok_match_needle_after_59,
+    test_wiki_gate_requires_angle_bracket_strip_after_59,
+    test_wiki_gate_requires_image_link_re_after_59,
+    test_wiki_gate_requires_do_not_push_after_59,
+    test_wiki_gate_requires_readme_blob_after_59,
+    test_wiki_gate_requires_badge_hint_path_after_59,
+    test_wiki_gate_requires_stars_special_case_after_59,
+    test_wiki_gate_requires_forks_special_case_after_59,
+    test_wiki_gate_requires_followers_special_case_after_59,
+    test_wiki_gate_requires_invent_chrome_needle_after_59,
+    test_wiki_gate_requires_home_table_row_after_59,
+    test_wiki_rejects_missing_public_topic_after_59,
+    test_wiki_rejects_missing_autonomy_topic_after_59,
+    test_wiki_rejects_missing_routing_topic_after_59,
+    test_wiki_rejects_missing_governance_topic_after_59,
+    test_wiki_rejects_followers_chrome_after_59,
+    test_wiki_rejects_twitter_chrome_after_59,
+    test_wiki_rejects_xcom_chrome_after_59,
+    test_wiki_rejects_coveralls_chrome_after_59,
+    test_wiki_rejects_image_http_after_59,
+    test_wiki_rejects_image_javascript_after_59,
+    test_wiki_rejects_image_data_after_59,
+    test_wiki_rejects_image_file_scheme_after_59,
+    test_wiki_accepts_angle_https_after_59,
+    test_wiki_accepts_title_attr_after_59,
+    test_wiki_accepts_mailto_after_59,
+    test_wiki_accepts_tel_after_59,
+    test_wiki_rejects_missing_home_to_overview_after_59,
+    test_wiki_rejects_missing_home_to_autonomy_after_59,
+    test_wiki_rejects_missing_overview_home_backlink_after_59,
+    test_wiki_rejects_missing_publish_secrets_after_59,
+    test_wiki_rejects_missing_publish_link_check_after_59,
+    test_wiki_rejects_secret_in_publish_after_59,
+    test_wiki_rejects_downloads_chrome_after_59,
+    test_wiki_rejects_opencollective_chrome_after_59,
+    test_wiki_ignores_fenced_protocol_rel_after_59,
+    test_wiki_rejects_http_title_attr_after_59,
+    test_wiki_rejects_protocol_rel_title_attr_after_59,
+    test_wiki_gate_requires_publishable_pages_still_after_59,
+    test_wiki_gate_requires_topic_hints_still_after_59,
+    test_wiki_gate_requires_l2_still_after_59,
+    test_wiki_gate_requires_credential_still_after_59,
+    test_wiki_gate_requires_copilot_still_after_59,
+    test_wiki_gate_requires_strip_fenced_still_after_59,
+    test_wiki_gate_requires_dangerous_still_after_59,
+    test_wiki_gate_requires_protocol_rel_still_after_59,
+    test_wiki_gate_requires_http_reject_still_after_59,
+    test_wiki_gate_requires_forbidden_hints_still_after_59,
+    test_wiki_gate_requires_stewardship_ci_still_after_59,
+    test_wiki_gate_requires_actionlint_still_after_59,
+    test_wiki_gate_requires_invent_still_after_59,
+    test_wiki_gate_requires_kill_switch_still_after_59,
+    test_wiki_gate_requires_scan_secrets_still_after_59,
+    test_wiki_passes_good_fixture_still_after_59,
+    test_badge_gate_requires_required_order_eq_after_61,
+    test_badge_gate_requires_expected_repo_eq_after_61,
+    test_badge_gate_requires_readme_path_after_61,
+    test_badge_gate_requires_license_path_after_61,
+    test_badge_gate_requires_badge_standard_path_after_61,
+    test_badge_gate_requires_contributing_path_after_61,
+    test_badge_gate_requires_agents_path_after_61,
+    test_badge_gate_requires_lycheeignore_path_after_61,
+    test_badge_gate_requires_markdownlint_path_after_61,
+    test_badge_gate_requires_contract_fn_after_61,
+    test_badge_gate_requires_main_fn_after_61,
+    test_badge_gate_requires_full_link_check_svg_after_61,
+    test_badge_gate_requires_full_md_lint_svg_after_61,
+    test_badge_gate_requires_exactly_needle_after_61,
+    test_badge_gate_requires_order_needle_after_61,
+    test_badge_gate_requires_contiguous_needle_after_61,
+    test_badge_gate_requires_missing_h1_needle_after_61,
+    test_badge_gate_requires_unexpected_label_needle_after_61,
+    test_badge_gate_requires_forbidden_hint_needle_after_61,
+    test_badge_gate_requires_secret_token_needle_after_61,
+    test_badge_gate_requires_failed_banner_after_61,
+    test_badge_gate_requires_ok_match_needle_after_61,
+    test_badge_gate_requires_endswith_license_after_61,
+    test_badge_gate_requires_dot_slash_license_after_61,
+    test_badge_gate_requires_load_workflow_text_after_61,
+    test_badge_gate_requires_invent_product_doc_pin_after_61,
+    test_badge_gate_requires_intentionally_pin_after_61,
+    test_badge_gate_requires_quiet_stewardship_after_61,
+    test_badge_gate_requires_selftest_agents_pin_after_61,
+    test_badge_gate_requires_relative_agents_pin_after_61,
+    test_badge_gate_requires_img_startswith_https_after_61,
+    test_badge_gate_requires_link_http_reject_after_61,
+    test_badge_rejects_wrong_order_after_61,
+    test_badge_rejects_four_badges_after_61,
+    test_badge_rejects_http_image_after_61,
+    test_badge_rejects_stewardship_product_after_61,
+    test_badge_rejects_wrong_repo_after_61,
+    test_badge_rejects_noncontiguous_after_61,
+    test_badge_rejects_secret_url_after_61,
+    test_badge_rejects_forbidden_coverage_after_61,
+    test_badge_rejects_two_badges_after_61,
+    test_badge_rejects_missing_h1_after_61,
+    test_badge_rejects_wrong_license_link_after_61,
+    test_badge_rejects_http_badge_link_after_61,
+    test_badge_accepts_dot_slash_license_after_61,
+    test_badge_accepts_absolute_license_blob_after_61,
+    test_badge_passes_good_fixture_after_61,
+    test_badge_rejects_codecov_hint_after_61,
+    test_badge_rejects_downloads_hint_after_61,
+    test_badge_rejects_stars_hint_after_61,
+    test_badge_rejects_wrong_link_check_image_after_61,
+    test_badge_rejects_wrong_md_lint_image_after_61,
+    test_badge_gate_requires_required_order_still_after_61,
+    test_badge_gate_requires_max_badges_still_after_61,
+    test_badge_gate_requires_expected_repo_still_after_61,
+    test_badge_gate_requires_required_workflows_still_after_61,
+    test_badge_gate_requires_badge_line_re_still_after_61,
+    test_badge_gate_requires_max_eq_3_still_after_61,
+    test_badge_gate_requires_link_svg_still_after_61,
+    test_badge_gate_requires_md_svg_still_after_61,
+    test_badge_gate_requires_shields_still_after_61,
+    test_badge_gate_requires_contiguous_still_after_61,
+    test_badge_gate_requires_fourth_still_after_61,
+    test_badge_gate_requires_stew_reject_still_after_61,
+    test_badge_gate_requires_live_row_still_after_61,
+    test_badge_gate_requires_forbidden_import_still_after_61,
+    test_badge_gate_requires_scan_secrets_still_after_61,
+    test_badge_passes_live_contract_still_after_61,
+    test_badge_rejects_wrong_order_still_after_61,
+    test_badge_passes_good_fixture_still_after_61,
+    test_badge_rejects_invent_still_after_61,
+    test_badge_rejects_secret_url_still_after_61,
+    test_common_gate_requires_root_parents_after_65,
+    test_common_gate_requires_fence_dotall_after_65,
+    test_common_gate_requires_fence_pattern_after_65,
+    test_common_gate_requires_strip_doc_after_65,
+    test_common_gate_requires_danger_doc_after_65,
+    test_common_gate_requires_scan_doc_after_65,
+    test_common_gate_requires_md_doc_after_65,
+    test_common_gate_requires_pattern_needle_after_65,
+    test_common_gate_requires_url_hint_needle_after_65,
+    test_common_gate_requires_token_hint_needle_after_65,
+    test_common_gate_requires_relative_to_after_65,
+    test_common_gate_requires_strip_lower_after_65,
+    test_common_gate_requires_startswith_after_65,
+    test_common_gate_requires_errors_append_after_65,
+    test_common_gate_requires_passwd_token_after_65,
+    test_common_gate_requires_openssh_after_65,
+    test_common_gate_requires_openssh_ec_after_65,
+    test_common_gate_requires_public_docs_after_65,
+    test_common_gate_requires_invent_surface_after_65,
+    test_common_gate_requires_social_chrome_after_65,
+    test_common_gate_requires_link_schemes_after_65,
+    test_common_gate_requires_is_file_after_65,
+    test_common_gate_requires_sorted_after_65,
+    test_common_gate_requires_workflows_after_65,
+    test_common_gate_requires_return_none_after_65,
+    test_common_gate_requires_url_hints_head_after_65,
+    test_common_gate_requires_schemes_js_first_after_65,
+    test_common_gate_requires_contract_fn_after_65,
+    test_common_gate_requires_contract_call_after_65,
+    test_common_secret_patterns_ghp_still_after_65,
+    test_common_secret_patterns_github_pat_still_after_65,
+    test_common_secret_patterns_npm_still_after_65,
+    test_common_secret_patterns_aiza_still_after_65,
+    test_common_secret_patterns_passwd_still_after_65,
+    test_common_secret_patterns_openssh_still_after_65,
+    test_common_dangerous_schemes_complete_still_after_65,
+    test_common_has_dangerous_javascript_still_after_65,
+    test_common_has_dangerous_data_still_after_65,
+    test_common_has_dangerous_none_https_after_65,
+    test_common_forbidden_hints_coverage_still_after_65,
+    test_common_strip_fenced_tilde_still_after_65,
+    test_common_strip_fenced_backtick_still_after_65,
+    test_common_scan_secrets_url_hint_still_after_65,
+    test_common_scan_secrets_ghp_prefix_still_after_65,
+    test_common_load_workflow_text_live_still_after_65,
+    test_common_load_workflow_text_missing_none_after_65,
+    test_common_markdown_files_readme_still_after_65,
+    test_common_fail_appends_still_after_65,
+    test_common_secret_url_hints_complete_still_after_65,
+    test_common_root_parents_live_after_65,
+    test_common_gate_requires_secret_patterns_still_after_65,
+    test_common_gate_requires_secret_url_hints_still_after_65,
+    test_common_gate_requires_forbidden_badge_hints_still_after_65,
+    test_common_gate_requires_dangerous_link_schemes_still_after_65,
+    test_common_gate_requires_fenced_block_re_still_after_65,
+    test_common_gate_requires_strip_fenced_code_still_after_65,
+    test_common_gate_requires_has_dangerous_scheme_still_after_65,
+    test_common_gate_requires_markdown_files_still_after_65,
+    test_common_gate_requires_fail_helper_pin_still_after_65,
+    test_common_gate_requires_load_workflow_pin_still_after_65,
+    test_common_gate_requires_secret_ghp_still_after_65,
+    test_common_gate_requires_secret_github_pat_still_after_65,
+    test_common_gate_requires_url_hint_token_eq_still_after_65,
+    test_common_gate_requires_forbidden_coverage_still_after_65,
+    test_common_gate_requires_scheme_js_still_after_65,
+    test_common_gate_requires_endswith_urlish_still_after_65,
+    test_common_gate_requires_invent_wording_still_after_65,
+    test_common_gate_requires_live_secret_scan_pin_still_after_65,
+    test_common_secret_patterns_sk_still_after_65,
+    test_common_secret_patterns_xox_still_after_65,
+    test_common_has_dangerous_vbscript_still_after_65,
+    test_common_has_dangerous_file_still_after_65,
+    test_link_check_requires_name_link_check_after_72,
+    test_markdown_lint_requires_name_after_72,
+    test_stewardship_requires_name_after_72,
+    test_link_check_requires_branches_glob_after_72,
+    test_markdown_lint_requires_branches_glob_after_72,
+    test_stewardship_requires_branches_glob_after_72,
+    test_link_check_requires_concurrency_prefix_after_72,
+    test_markdown_lint_requires_concurrency_prefix_after_72,
+    test_stewardship_requires_concurrency_prefix_after_72,
+    test_link_check_requires_github_workflow_after_72,
+    test_link_check_requires_github_ref_after_72,
+    test_markdown_lint_requires_github_workflow_after_72,
+    test_stewardship_requires_github_ref_after_72,
+    test_link_check_requires_job_id_after_72,
+    test_markdown_lint_requires_job_id_lint_after_72,
+    test_stewardship_requires_job_id_after_72,
+    test_link_check_requires_self_path_filter_after_72,
+    test_markdown_lint_requires_self_path_filter_after_72,
+    test_stewardship_requires_scripts_path_after_72,
+    test_stewardship_requires_docs_path_after_72,
+    test_stewardship_requires_readme_path_after_72,
+    test_link_check_requires_secrets_github_token_after_72,
+    test_stewardship_requires_python_312_exact_after_72,
+    test_stewardship_requires_pip_quiet_pyyaml_after_72,
+    test_stewardship_requires_bash_run_script_after_72,
+    test_stewardship_requires_python3_selftest_after_72,
+    test_markdown_lint_requires_config_key_after_72,
+    test_markdown_lint_requires_agents_glob_bang_after_72,
+    test_markdown_lint_requires_owasp_bang_after_72,
+    test_stewardship_actionlint_lists_link_check_path_after_72,
+    test_stewardship_actionlint_lists_markdown_path_after_72,
+    test_stewardship_download_passes_177_after_72,
+    test_link_check_requires_checkout_v7_still_after_72,
+    test_markdown_lint_requires_checkout_v7_still_after_72,
+    test_stewardship_requires_checkout_v7_still_after_72,
+    test_link_check_requires_lychee_v2_still_after_72,
+    test_link_check_requires_timeout_20_still_after_72,
+    test_markdown_lint_requires_timeout_10_still_after_72,
+    test_stewardship_requires_timeout_15_still_after_72,
+    test_link_check_requires_cron_still_after_72,
+    test_markdown_lint_requires_cron_still_after_72,
+    test_stewardship_requires_cron_still_after_72,
+    test_link_check_requires_ubuntu_still_after_72,
+    test_markdown_lint_requires_ubuntu_still_after_72,
+    test_stewardship_requires_ubuntu_still_after_72,
+    test_stewardship_requires_setup_python_v5_still_after_72,
+    test_stewardship_requires_actionlint_color_still_after_72,
+    test_stewardship_requires_shell_bash_still_after_72,
+    test_link_check_requires_fail_true_still_after_72,
+    test_link_check_requires_verbose_still_after_72,
+    test_link_check_requires_no_progress_still_after_72,
+    test_markdown_lint_requires_cli2_v24_still_after_72,
+    test_stewardship_requires_get_actionlint_id_still_after_72,
+    test_stewardship_requires_pyyaml_still_after_72,
+    test_link_check_requires_exclude_loopback_still_after_72,
+    test_link_check_requires_max_concurrency_8_still_after_72,
+    test_stewardship_requires_actionlint_177_still_after_72,
+    test_stewardship_rejects_cancel_in_progress_false_after_72,
+    test_link_check_rejects_missing_pull_request_after_72,
+    test_markdown_lint_rejects_missing_workflow_dispatch_after_72,
+    test_stewardship_rejects_missing_contents_read_after_72,
+    test_link_check_rejects_missing_schedule_after_72,
+    test_stewardship_rejects_missing_concurrency_after_72,
+    test_markdown_lint_rejects_missing_owasp_exclude_still_after_72,
+    test_link_check_requires_lycheeignore_path_after_72,
+    test_markdown_lint_requires_markdownlint_json_path_after_72,
+    test_link_check_requires_max_retries_3_still_after_72,
+    test_link_check_requires_timeout_arg_20_still_after_72,
+    test_actionlint_style_gate_requires_fn_after_75,
+    test_actionlint_style_gate_requires_static_doc_after_75,
+    test_actionlint_style_gate_requires_live_pins_doc_after_75,
+    test_actionlint_style_gate_requires_load_workflow_text_after_75,
+    test_actionlint_style_gate_requires_top_level_name_after_75,
+    test_actionlint_style_gate_requires_jobs_runs_on_after_75,
+    test_actionlint_style_gate_requires_jobs_steps_after_75,
+    test_actionlint_style_gate_requires_timeout_minutes_after_75,
+    test_actionlint_style_gate_requires_prt_reject_after_75,
+    test_actionlint_style_gate_requires_harden_wording_after_75,
+    test_actionlint_style_gate_requires_write_all_reject_after_75,
+    test_actionlint_style_gate_requires_contents_write_reject_after_75,
+    test_actionlint_style_gate_requires_id_token_write_reject_after_75,
+    test_actionlint_style_gate_requires_docker_skip_after_75,
+    test_actionlint_style_gate_requires_unpinned_reject_after_75,
+    test_actionlint_style_gate_requires_float_main_after_75,
+    test_actionlint_style_gate_requires_float_master_after_75,
+    test_actionlint_style_gate_requires_float_latest_after_75,
+    test_actionlint_style_gate_requires_float_set_after_75,
+    test_actionlint_style_gate_requires_main_call_after_75,
+    test_actionlint_style_gate_requires_fn_still_after_75,
+    test_actionlint_style_gate_requires_id_token_still_after_75,
+    test_actionlint_style_gate_requires_write_all_still_after_75,
+    test_actionlint_style_gate_requires_prt_still_after_75,
+    test_actionlint_style_gate_requires_docker_still_after_75,
+    test_actionlint_style_gate_requires_unpinned_still_after_75,
+    test_actionlint_style_gate_requires_timeout_still_after_75,
+    test_actionlint_style_gate_requires_runs_on_still_after_75,
+    test_actionlint_style_gate_requires_steps_still_after_75,
+    test_actionlint_style_gate_requires_live_doc_still_after_75,
+    test_actionlint_rejects_id_token_write_on_stewardship_after_75,
+    test_actionlint_rejects_id_token_write_on_link_check_after_75,
+    test_actionlint_rejects_id_token_write_on_markdown_lint_after_75,
+    test_actionlint_rejects_write_all_on_stewardship_after_75,
+    test_actionlint_rejects_write_all_on_link_check_after_75,
+    test_actionlint_rejects_contents_write_on_stewardship_after_75,
+    test_actionlint_rejects_contents_write_on_link_check_after_75,
+    test_actionlint_rejects_prt_on_stewardship_after_75,
+    test_actionlint_rejects_prt_on_link_check_after_75,
+    test_actionlint_rejects_float_main_checkout_after_75,
+    test_actionlint_rejects_float_master_checkout_after_75,
+    test_actionlint_rejects_float_latest_checkout_after_75,
+    test_actionlint_rejects_unpinned_checkout_after_75,
+    test_actionlint_rejects_float_main_setup_python_after_75,
+    test_actionlint_rejects_missing_timeout_on_stewardship_after_75,
+    test_actionlint_rejects_missing_runs_on_after_75,
+    test_actionlint_rejects_missing_steps_after_75,
+    test_actionlint_rejects_id_token_write_stewardship_still_after_75,
+    test_actionlint_rejects_id_token_write_link_still_after_75,
+    test_actionlint_rejects_write_all_stewardship_still_after_75,
+    test_actionlint_rejects_contents_write_stewardship_still_after_75,
+    test_actionlint_rejects_prt_stewardship_still_after_75,
+    test_actionlint_rejects_float_main_still_after_75,
+    test_actionlint_rejects_float_latest_still_after_75,
+    test_actionlint_rejects_unpinned_still_after_75,
+    test_actionlint_rejects_float_master_setup_python_still_after_75,
+    test_actionlint_rejects_missing_name_after_75,
+    test_actionlint_rejects_prt_markdown_lint_after_75,
+    test_actionlint_rejects_write_all_markdown_lint_after_75,
+    test_actionlint_rejects_contents_write_markdown_lint_after_75,
+    test_actionlint_rejects_float_main_markdown_lint_after_75,
+    test_actionlint_rejects_unpinned_markdown_lint_after_75,
+    test_actionlint_rejects_missing_timeout_link_after_75,
+    test_actionlint_rejects_missing_timeout_markdown_after_75,
+    test_actionlint_rejects_id_token_write_markdown_still_after_75,
+    test_actionlint_rejects_float_latest_setup_python_after_75,
+    test_actionlint_rejects_unpinned_setup_python_after_75,
+    test_actionlint_rejects_contents_write_link_still_after_75,
+    test_actionlint_rejects_write_all_link_still_after_75,
+    test_actionlint_rejects_prt_link_still_after_75,
+    test_actionlint_rejects_float_master_link_after_75,
+    test_stewardship_requires_raw_githubusercontent_still_after_72,
+    test_stewardship_requires_curl_fssl_still_after_72,
+    test_markdown_lint_requires_davidanson_still_after_72,
+    test_link_check_requires_lycheeverse_still_after_72,
+    test_schema_gate_requires_fenced_yaml_exact_after_72,
+    test_schema_gate_requires_iso_date_exact_after_72,
+    test_schema_gate_requires_semver_exact_after_72,
+    test_schema_gate_requires_issue_ref_exact_after_72,
+    test_schema_gate_requires_date_keys_exact_after_72,
+    test_schema_gate_requires_tiny_yaml_doc_after_72,
+    test_schema_gate_requires_scalar_doc_after_72,
+    test_schema_gate_requires_no_fence_needle_after_72,
+    test_schema_gate_requires_unsupported_yaml_after_72,
+    test_schema_gate_requires_empty_key_after_72,
+    test_schema_gate_requires_scalar_needle_after_72,
+    test_schema_gate_requires_nonempty_needle_after_72,
+    test_schema_gate_requires_string_needle_after_72,
+    test_schema_gate_requires_active_needle_after_72,
+    test_schema_gate_requires_tier_needle_after_72,
+    test_schema_gate_requires_autonomy_needle_after_72,
+    test_schema_gate_requires_iso_needle_after_72,
+    test_schema_gate_requires_invent_needle_after_72,
+    test_schema_gate_requires_semver_needle_after_72,
+    test_schema_gate_requires_closes_needle_after_72,
+    test_schema_gate_requires_failed_banner_after_72,
+    test_schema_gate_requires_ok_banner_after_72,
+    test_schema_gate_requires_stdlib_subset_after_72,
+    test_schema_gate_requires_pyyaml_label_after_72,
+    test_schema_gate_requires_bool_subclass_after_72,
+    test_schema_gate_requires_group_one_after_72,
+    test_schema_gate_requires_missing_keys_after_72,
+    test_schema_gate_requires_utf8_encoding_after_72,
+    test_schema_gate_requires_string_keys_status_after_72,
+    test_schema_gate_requires_string_keys_edit_policy_after_72,
+    test_schema_gate_requires_string_keys_closes_after_72,
+    test_schema_gate_requires_string_keys_purpose_after_72,
+    test_schema_gate_requires_string_keys_version_after_72,
+    test_schema_gate_requires_string_keys_maintainer_after_72,
+    test_schema_gate_requires_string_keys_parent_after_72,
+    test_schema_gate_requires_string_keys_repo_after_72,
+    test_schema_gate_requires_string_keys_surface_after_72,
+    test_schema_gate_requires_string_keys_last_updated_after_72,
+    test_schema_gate_requires_second_pass_doc_after_72,
+    test_schema_gate_requires_contract_fn_def_after_72,
+    test_schema_rejects_bool_autonomy_after_72,
+    test_schema_rejects_bool_tier_after_72,
+    test_schema_rejects_nested_list_value_after_72,
+    test_schema_rejects_empty_yaml_block_after_72,
+    test_schema_rejects_non_string_owner_after_72,
+    test_schema_rejects_bad_semver_after_72,
+    test_schema_rejects_closes_without_hash_after_72,
+    test_schema_rejects_inactive_status_after_72,
+    test_schema_rejects_bad_iso_date_after_72,
+    test_schema_passes_good_fixture_after_72,
+    test_schema_gate_requires_doc_schemas_still_after_72,
+    test_schema_gate_requires_expected_values_still_after_72,
+    test_schema_gate_requires_string_keys_still_after_72,
+    test_schema_gate_requires_reject_non_scalar_still_after_72,
+    test_schema_gate_requires_front_door_still_after_72,
+    test_schema_gate_requires_closes_16_still_after_72,
+    test_schema_gate_requires_copilot_still_after_72,
+    test_schema_gate_requires_scan_secrets_still_after_72,
+    test_schema_gate_requires_safe_load_still_after_72,
+    test_schema_gate_requires_mapping_still_after_72,
+    test_schema_gate_requires_empty_yaml_still_after_72,
+    test_schema_gate_requires_smtp_eth_still_after_72,
+    test_schema_gate_requires_agents_governance_repo_still_after_72,
+    test_schema_gate_requires_reversible_still_after_72,
+    test_schema_gate_requires_contract_call_after_72,
+    test_schema_rejects_missing_key_after_72,
+    test_schema_rejects_wrong_maintainer_after_72,
+    test_schema_rejects_edit_policy_without_invent_after_72,
+    test_schema_rejects_autonomy_out_of_range_after_72,
+    test_schema_rejects_tier_zero_after_72,
+    test_schema_rejects_missing_yaml_fence_after_72,
+    test_schema_gate_requires_bool_int_reject_still_after_72,
+    test_actionlint_style_gate_requires_name_re_after_86,
+    test_actionlint_style_gate_requires_uses_re_after_86,
+    test_actionlint_style_gate_requires_write_all_re_after_86,
+    test_actionlint_style_gate_requires_contents_write_re_after_86,
+    test_actionlint_style_gate_requires_id_token_re_after_86,
+    test_actionlint_style_gate_requires_docker_startswith_after_86,
+    test_actionlint_style_gate_requires_at_not_in_uses_after_86,
+    test_actionlint_style_gate_requires_rsplit_after_86,
+    test_actionlint_style_gate_requires_group_strip_after_86,
+    test_actionlint_style_gate_requires_runs_membership_after_86,
+    test_actionlint_style_gate_requires_steps_membership_after_86,
+    test_actionlint_style_gate_requires_prt_membership_after_86,
+    test_actionlint_style_gate_requires_timeout_membership_after_86,
+    test_actionlint_style_gate_requires_none_continue_after_86,
+    test_actionlint_style_gate_requires_required_workflows_loop_after_86,
+    test_actionlint_style_gate_requires_least_privilege_after_86,
+    test_actionlint_style_gate_requires_oidc_comment_after_86,
+    test_actionlint_style_gate_requires_majors_comment_after_86,
+    test_actionlint_style_gate_requires_timeout_comment_after_86,
+    test_actionlint_style_gate_requires_fail_top_name_after_86,
+    test_actionlint_style_gate_requires_fail_runs_after_86,
+    test_actionlint_style_gate_requires_fail_steps_after_86,
+    test_actionlint_style_gate_requires_fail_prt_after_86,
+    test_actionlint_style_gate_requires_fail_write_all_after_86,
+    test_actionlint_style_gate_requires_fail_contents_after_86,
+    test_actionlint_style_gate_requires_fail_id_token_after_86,
+    test_actionlint_style_gate_requires_fail_unpinned_after_86,
+    test_actionlint_style_gate_requires_fail_float_after_86,
+    test_actionlint_style_gate_requires_fail_timeout_after_86,
+    test_actionlint_style_gate_requires_second_pass_doc_after_86,
+    test_actionlint_style_gate_requires_module_second_pass_after_86,
+    test_actionlint_style_gate_requires_fn_still_after_86,
+    test_actionlint_style_gate_requires_static_doc_still_after_86,
+    test_actionlint_style_gate_requires_live_pins_still_after_86,
+    test_actionlint_style_gate_requires_load_workflow_still_after_86,
+    test_actionlint_style_gate_requires_float_set_still_after_86,
+    test_actionlint_style_gate_requires_main_call_still_after_86,
+    test_actionlint_style_gate_requires_docker_still_after_86,
+    test_actionlint_style_gate_requires_id_token_still_after_86,
+    test_actionlint_style_gate_requires_write_all_still_after_86,
+    test_actionlint_style_gate_requires_prt_still_after_86,
+    test_actionlint_rejects_float_main_lychee_after_86,
+    test_actionlint_rejects_float_master_lychee_after_86,
+    test_actionlint_rejects_float_latest_lychee_after_86,
+    test_actionlint_rejects_unpinned_lychee_after_86,
+    test_actionlint_rejects_float_main_markdownlint_after_86,
+    test_actionlint_rejects_float_master_markdownlint_after_86,
+    test_actionlint_rejects_float_latest_markdownlint_after_86,
+    test_actionlint_rejects_unpinned_markdownlint_after_86,
+    test_actionlint_rejects_missing_name_link_after_86,
+    test_actionlint_rejects_missing_name_markdown_after_86,
+    test_actionlint_rejects_missing_runs_on_link_after_86,
+    test_actionlint_rejects_missing_runs_on_markdown_after_86,
+    test_actionlint_rejects_missing_steps_link_after_86,
+    test_actionlint_rejects_missing_steps_markdown_after_86,
+    test_actionlint_rejects_id_token_write_link_still_after_86,
+    test_actionlint_rejects_id_token_write_markdown_still_after_86,
+    test_actionlint_rejects_write_all_link_still_after_86,
+    test_actionlint_rejects_write_all_markdown_still_after_86,
+    test_actionlint_rejects_contents_write_link_still_after_86,
+    test_actionlint_rejects_contents_write_markdown_still_after_86,
+    test_actionlint_rejects_prt_link_still_after_86,
+    test_actionlint_rejects_prt_markdown_still_after_86,
+    test_actionlint_rejects_float_main_checkout_link_after_86,
+    test_actionlint_rejects_float_latest_checkout_markdown_after_86,
+    test_actionlint_rejects_unpinned_checkout_stewardship_after_86,
+    test_actionlint_rejects_missing_timeout_stewardship_still_after_86,
+    test_actionlint_rejects_missing_timeout_link_still_after_86,
+    test_actionlint_rejects_missing_timeout_markdown_still_after_86,
+    test_actionlint_rejects_float_master_setup_python_after_86,
+    test_actionlint_rejects_float_latest_setup_python_still_after_86,
+    test_actionlint_rejects_unpinned_setup_python_still_after_86,
+    test_relative_gate_requires_md_link_exact_after_90,
+    test_relative_gate_requires_atx_exact_after_90,
+    test_relative_gate_requires_skip_parts_exact_after_90,
+    test_relative_gate_requires_skip_files_exact_after_90,
+    test_relative_gate_requires_skip_prefix_path_after_90,
+    test_relative_gate_requires_ok_banner_after_90,
+    test_relative_gate_requires_failed_banner_after_90,
+    test_relative_gate_requires_empty_target_needle_after_90,
+    test_relative_gate_requires_http_needle_after_90,
+    test_relative_gate_requires_proto_needle_after_90,
+    test_relative_gate_requires_dangerous_needle_after_90,
+    test_relative_gate_requires_utf8_after_90,
+    test_relative_gate_requires_as_posix_after_90,
+    test_relative_gate_requires_md_suffix_after_90,
+    test_relative_gate_requires_value_error_after_90,
+    test_relative_gate_requires_sorted_after_90,
+    test_relative_gate_requires_unicode_after_90,
+    test_relative_gate_requires_space_dash_after_90,
+    test_relative_gate_requires_percent_stable_after_90,
+    test_relative_gate_requires_cap_nested_after_90,
+    test_relative_gate_requires_empty_parens_pin_after_90,
+    test_relative_gate_requires_sys_exit_after_90,
+    test_relative_gate_requires_urllib_unquote_after_90,
+    test_relative_gate_requires_group2_after_90,
+    test_relative_gate_requires_startswith_hash_after_90,
+    test_relative_gate_requires_split_hash_after_90,
+    test_relative_gate_requires_files_scanned_after_90,
+    test_relative_gate_requires_common_import_after_90,
+    test_relative_gate_requires_title_attr_after_90,
+    test_relative_gate_requires_atx_hash_range_after_90,
+    test_relative_gate_requires_slug_punct_after_90,
+    test_relative_gate_requires_offline_doc_after_90,
+    test_relative_gate_requires_lychee_doc_after_90,
+    test_relative_gate_requires_path_parent_after_90,
+    test_relative_gate_requires_fully_unquote_call_after_90,
+    test_relative_gate_requires_dangerous_call_after_90,
+    test_relative_gate_requires_third_pass_doc_after_90,
+    test_relative_gate_requires_def_main_after_90,
+    test_relative_gate_requires_relative_to_root_after_90,
+    test_relative_gate_requires_contract_fn_def_after_90,
+    test_relative_links_reject_image_protocol_rel_after_90,
+    test_relative_links_reject_image_empty_after_90,
+    test_relative_links_reject_image_bare_hash_after_90,
+    test_relative_links_reject_encoded_nul_after_90,
+    test_relative_links_reject_http_uppercase_after_90,
+    test_relative_links_accept_https_with_frag_after_90,
+    test_relative_links_accept_mailto_with_subject_after_90,
+    test_relative_links_reject_query_on_nested_after_90,
+    test_relative_links_reject_empty_frag_nested_after_90,
+    test_relative_links_accept_angle_https_title_after_90,
+    test_relative_links_reject_js_uppercase_after_90,
+    test_relative_links_github_slug_underscore_heading_after_90,
+    test_relative_links_reject_dotdot_escape_still_after_90,
+    test_relative_links_accept_self_dot_path_after_90,
+    test_relative_links_reject_missing_image_nested_after_90,
+    test_relative_gate_requires_md_link_re_still_after_90,
+    test_relative_gate_requires_max_unquote_4_still_after_90,
+    test_relative_gate_requires_should_skip_still_after_90,
+    test_relative_gate_requires_iter_markdown_still_after_90,
+    test_relative_gate_requires_headings_in_still_after_90,
+    test_relative_gate_requires_check_file_still_after_90,
+    test_relative_gate_requires_mailto_still_after_90,
+    test_relative_gate_requires_tel_still_after_90,
+    test_relative_gate_requires_nul_still_after_90,
+    test_relative_gate_requires_angle_strip_still_after_90,
+    test_relative_gate_requires_escapes_still_after_90,
+    test_relative_gate_requires_broken_still_after_90,
+    test_relative_gate_requires_missing_heading_still_after_90,
+    test_relative_gate_requires_rglob_still_after_90,
+    test_relative_gate_requires_no_md_fail_still_after_90,
+    test_relative_links_reject_http_still_after_90,
+    test_relative_links_reject_protocol_still_after_90,
+    test_wiki_gate_requires_wiki_exact_after_90,
+    test_wiki_gate_requires_removesuffix_after_90,
+    test_wiki_gate_requires_glob_md_after_90,
+    test_wiki_gate_requires_sorted_unexpected_after_90,
+    test_wiki_gate_requires_link_check_accept_after_90,
+    test_wiki_gate_requires_markdown_lint_accept_after_90,
+    test_wiki_gate_requires_no_secrets_accept_after_90,
+    test_wiki_gate_requires_invent_home_needle_after_90,
+    test_wiki_gate_requires_secrets_home_needle_after_90,
+    test_wiki_gate_requires_kill_home_needle_after_90,
+    test_wiki_gate_requires_out_of_scope_section_after_90,
+    test_wiki_gate_requires_relative_steward_needle_after_90,
+    test_wiki_gate_requires_invent_steward_needle_after_90,
+    test_wiki_gate_requires_actionlint_steward_needle_after_90,
+    test_wiki_gate_requires_run_script_needle_after_90,
+    test_wiki_gate_requires_startswith_slash_after_90,
+    test_wiki_gate_requires_startswith_http_after_90,
+    test_wiki_gate_requires_group2_after_90,
+    test_wiki_gate_requires_utf8_after_90,
+    test_wiki_gate_requires_sys_exit_after_90,
+    test_wiki_gate_requires_common_import_after_90,
+    test_wiki_gate_requires_downloads_special_after_90,
+    test_wiki_gate_requires_discord_special_after_90,
+    test_wiki_gate_requires_twitter_special_after_90,
+    test_wiki_gate_requires_xcom_special_after_90,
+    test_wiki_gate_requires_shields_io_after_90,
+    test_wiki_gate_requires_md_badge_open_after_90,
+    test_wiki_gate_requires_badge_in_lowered_after_90,
+    test_wiki_gate_requires_readme_up_up_after_90,
+    test_wiki_gate_requires_readme_up_after_90,
+    test_wiki_gate_requires_badge_docs_path_after_90,
+    test_wiki_gate_requires_badge_blob_after_90,
+    test_wiki_gate_requires_pages_operator_ok_after_90,
+    test_wiki_gate_requires_intentional_pin_after_90,
+    test_wiki_gate_requires_topic_get_after_90,
+    test_wiki_gate_requires_strip_fenced_call_after_90,
+    test_wiki_gate_requires_dangerous_call_after_90,
+    test_wiki_gate_requires_scan_path_after_90,
+    test_wiki_gate_requires_scan_publish_after_90,
+    test_wiki_gate_requires_third_pass_doc_after_90,
+    test_wiki_gate_requires_contract_fn_def_after_90,
+    test_wiki_rejects_missing_link_check_publish_after_90,
+    test_wiki_rejects_missing_markdown_lint_publish_after_90,
+    test_wiki_rejects_missing_home_invent_after_90,
+    test_wiki_rejects_missing_home_secret_after_90,
+    test_wiki_rejects_missing_home_kill_after_90,
+    test_wiki_rejects_missing_steward_relative_after_90,
+    test_wiki_rejects_missing_steward_actionlint_after_90,
+    test_wiki_rejects_protocol_rel_after_90,
+    test_wiki_rejects_http_link_after_90,
+    test_wiki_rejects_javascript_link_after_90,
+    test_wiki_rejects_discord_chrome_after_90,
+    test_wiki_rejects_unexpected_page_after_90,
+    test_wiki_accepts_angle_https_after_90,
+    test_wiki_accepts_mailto_after_90,
+    test_wiki_ignores_fenced_http_after_90,
+    test_wiki_rejects_missing_run_script_steward_after_90,
+    test_wiki_gate_requires_def_main_after_90,
+    test_wiki_gate_requires_text_lower_after_90,
+    test_wiki_gate_requires_present_set_after_90,
+    test_wiki_gate_requires_wiki_is_dir_after_90,
+    test_wiki_gate_requires_third_pass_after_90_pin,
+    test_wiki_gate_requires_operator_only_still_after_90,
+    test_wiki_gate_requires_reject_invent_helper_still_after_90,
+    test_wiki_gate_requires_home_backlink_still_after_90,
+    test_wiki_gate_requires_failed_banner_still_after_90,
+    test_wiki_gate_requires_ok_match_still_after_90,
+    test_wiki_gate_requires_publishable_pages_still_after_90,
+    test_wiki_gate_requires_topic_hints_still_after_90,
+    test_wiki_gate_requires_stars_still_after_90,
+    test_wiki_gate_requires_len_pages_after_90,
+    test_wiki_gate_requires_home_is_file_after_90,
+    test_docs_lint_gate_requires_lycheeignore_const_after_100,
+    test_docs_lint_gate_requires_markdownlint_const_after_100,
+    test_docs_lint_gate_requires_lycheeignore_path_after_100,
+    test_docs_lint_gate_requires_markdownlint_path_after_100,
+    test_docs_lint_gate_requires_fn_lycheeignore_after_100,
+    test_docs_lint_gate_requires_live_doc_pin_after_100,
+    test_docs_lint_gate_requires_escaped_shields_pin_after_100,
+    test_docs_lint_gate_requires_mcp_pin_after_100,
+    test_docs_lint_gate_requires_lfs_pin_after_100,
+    test_docs_lint_gate_requires_stewardship_note_after_100,
+    test_docs_lint_gate_requires_https_star_reject_after_100,
+    test_docs_lint_gate_requires_http_star_reject_after_100,
+    test_docs_lint_gate_requires_md013_obj_after_100,
+    test_docs_lint_gate_requires_md024_obj_after_100,
+    test_docs_lint_gate_requires_md033_false_re_after_100,
+    test_docs_lint_gate_requires_md041_false_re_after_100,
+    test_docs_lint_gate_requires_md060_false_re_after_100,
+    test_docs_lint_gate_requires_default_true_re_after_100,
+    test_docs_lint_gate_requires_line_length_re_after_100,
+    test_docs_lint_gate_requires_siblings_re_after_100,
+    test_docs_lint_gate_requires_main_call_lychee_after_100,
+    test_docs_lint_gate_requires_docs_slice_wording_after_100,
+    test_docs_lint_gate_requires_host_pin_after_100,
+    test_docs_lint_gate_requires_contract_spam_pin_after_100,
+    test_lycheeignore_rejects_missing_escaped_shields_after_100,
+    test_lycheeignore_rejects_missing_mcp_after_100,
+    test_lycheeignore_rejects_missing_lfs_after_100,
+    test_lycheeignore_rejects_missing_stewardship_note_after_100,
+    test_lycheeignore_rejects_https_star_after_100,
+    test_lycheeignore_rejects_http_star_after_100,
+    test_lycheeignore_rejects_bare_star_after_100,
+    test_lycheeignore_rejects_missing_shields_any_after_100,
+    test_markdownlint_rejects_wrong_md013_obj_after_100,
+    test_markdownlint_rejects_wrong_md024_obj_after_100,
+    test_markdownlint_rejects_md033_true_after_100,
+    test_markdownlint_rejects_md041_true_after_100,
+    test_markdownlint_rejects_md060_true_after_100,
+    test_markdownlint_rejects_default_false_after_100,
+    test_markdownlint_rejects_missing_md013_after_100,
+    test_markdownlint_rejects_missing_md024_after_100,
+    test_docs_lint_gate_requires_lycheeignore_const_still_after_100,
+    test_docs_lint_gate_requires_markdownlint_const_still_after_100,
+    test_docs_lint_gate_requires_escaped_shields_still_after_100,
+    test_docs_lint_gate_requires_mcp_still_after_100,
+    test_docs_lint_gate_requires_lfs_still_after_100,
+    test_docs_lint_gate_requires_md013_obj_still_after_100,
+    test_docs_lint_gate_requires_md024_obj_still_after_100,
+    test_docs_lint_gate_requires_fn_lycheeignore_still_after_100,
+    test_docs_lint_gate_requires_live_doc_still_after_100,
+    test_docs_lint_gate_requires_https_star_still_after_100,
+    test_docs_lint_gate_requires_stewardship_note_still_after_100,
+    test_docs_lint_gate_requires_default_true_still_after_100,
+    test_docs_lint_gate_requires_docs_slice_still_after_100,
+    test_lycheeignore_rejects_missing_mcp_still_after_100,
+    test_lycheeignore_rejects_missing_lfs_still_after_100,
+    test_lycheeignore_rejects_missing_escaped_still_after_100,
+    test_markdownlint_rejects_line_length_120_still_after_100,
+    test_markdownlint_rejects_siblings_false_still_after_100,
+    test_markdownlint_rejects_missing_default_still_after_100,
+    test_docs_lint_gate_requires_contract_fn_after_100,
+    test_docs_lint_gate_requires_spam_wording_after_100,
+    test_lycheeignore_rejects_missing_note_still_after_100,
+    test_markdownlint_rejects_md033_true_still_after_100,
+    test_markdownlint_rejects_md041_true_still_after_100,
+    test_markdownlint_rejects_md060_true_still_after_100,
+    test_docs_lint_gate_requires_http_star_still_after_100,
+    test_docs_lint_gate_requires_md033_still_after_100,
+    test_docs_lint_gate_requires_md041_still_after_100,
+    test_docs_lint_gate_requires_md060_still_after_100,
+    test_docs_lint_gate_requires_line_length_re_still_after_100,
+    test_docs_lint_gate_requires_siblings_re_still_after_100,
+    test_lycheeignore_accepts_full_live_fixture_after_100,
+    test_docs_lint_gate_requires_wiki_spam_pin_after_100,
+    test_docs_lint_gate_requires_308_redirect_pin_after_100,
+    test_docs_lint_gate_requires_103_early_pin_after_100,
+    test_docs_lint_gate_requires_lychee_assign_after_100,
+    test_docs_lint_gate_requires_md_assign_after_100,
+    test_docs_lint_gate_requires_workflows_fn_after_100,
+    test_docs_lint_gate_requires_missing_lychee_needle_after_100,
+    test_docs_lint_gate_requires_missing_md_needle_after_100,
+    test_docs_lint_gate_requires_cdn_note_after_100,
+    test_docs_lint_gate_requires_workflows_call_after_100,
+    test_lycheeignore_rejects_missing_308_after_100,
+    test_lycheeignore_rejects_missing_103_after_100,
+    test_docs_lint_gate_requires_wiki_spam_still_after_100,
+    test_docs_lint_gate_requires_308_still_after_100,
+    test_docs_lint_gate_requires_103_still_after_100,
+    test_docs_lint_gate_requires_lychee_assign_still_after_100,
+    test_docs_lint_gate_requires_md_assign_still_after_100,
+    test_docs_lint_gate_requires_workflows_fn_still_after_100,
+    test_docs_lint_gate_requires_cdn_note_still_after_100,
+    test_docs_lint_gate_requires_workflows_call_still_after_100,
+    test_lycheeignore_rejects_missing_308_still_after_100,
+    test_lycheeignore_rejects_missing_103_still_after_100,
+    test_docs_lint_gate_requires_contract_call_still_after_100,
+    test_docs_lint_gate_requires_docs_slice_deepen_after_100,
+    test_markdownlint_rejects_wrong_md013_spacing_after_100,
+    test_markdownlint_rejects_wrong_md024_spacing_after_100,
+    test_docs_lint_gate_requires_host_pin_still_after_100,
+    test_docs_lint_gate_requires_spam_pin_still_after_100,
+    test_lycheeignore_rejects_https_star_with_full_fixture_after_100,
+    test_lycheeignore_rejects_http_star_with_full_fixture_after_100,
+    test_docs_lint_gate_requires_live_doc_deepen_after_100,
+    test_docs_lint_gate_requires_escaped_shields_deepen_after_100,
+    test_docs_lint_gate_requires_mcp_deepen_after_100,
+    test_docs_lint_gate_requires_lfs_deepen_after_100,
+    test_lycheeignore_accepts_live_tree_seed_after_100,
+    test_markdownlint_accepts_exact_objects_after_100,
     test_badge_accepts_absolute_license_blob_after_104,
     test_badge_accepts_dot_slash_license_after_104,
     test_badge_gate_requires_abs_https_when_after_104,
@@ -43601,356 +47153,181 @@ def main() -> int:
     test_badge_rejects_wrong_order_after_104,
     test_badge_rejects_wrong_repo_after_104,
     test_actionlint_third_gate_third_pass_lc_after_108,
-
     test_actionlint_third_gate_third_pass_lc_still_after_108,
-
     test_actionlint_third_gate_concurrency_if_after_108,
-
     test_actionlint_third_gate_concurrency_if_still_after_108,
-
     test_actionlint_third_gate_cancel_if_after_108,
-
     test_actionlint_third_gate_cancel_if_still_after_108,
-
     test_actionlint_third_gate_fail_actions_after_108,
-
     test_actionlint_third_gate_fail_actions_still_after_108,
-
     test_actionlint_third_gate_fail_packages_after_108,
-
     test_actionlint_third_gate_fail_packages_still_after_108,
-
     test_actionlint_third_gate_fail_prs_after_108,
-
     test_actionlint_third_gate_fail_prs_still_after_108,
-
     test_actionlint_third_gate_reversible_after_108,
-
     test_actionlint_third_gate_reversible_still_after_108,
-
     test_actionlint_third_gate_docker_after_108,
-
     test_actionlint_third_gate_docker_still_after_108,
-
     test_actionlint_third_gate_finditer_after_108,
-
     test_actionlint_third_gate_finditer_still_after_108,
-
     test_actionlint_third_gate_actions_re_after_108,
-
     test_actionlint_third_gate_actions_re_still_after_108,
-
     test_actionlint_third_gate_packages_re_after_108,
-
     test_actionlint_third_gate_packages_re_still_after_108,
-
     test_actionlint_third_gate_pr_re_after_108,
-
     test_actionlint_third_gate_pr_re_still_after_108,
-
     test_actionlint_third_gate_concurrency_mem_after_108,
-
     test_actionlint_third_gate_concurrency_mem_still_after_108,
-
     test_actionlint_third_gate_rsplit_after_108,
-
     test_actionlint_third_gate_rsplit_still_after_108,
-
     test_actionlint_third_rejects_concurrency_link_check_after_108,
-
     test_actionlint_third_rejects_cancel_link_check_after_108,
-
     test_actionlint_third_rejects_permissions_link_check_after_108,
-
     test_actionlint_third_rejects_concurrency_markdown_lint_after_108,
-
     test_actionlint_third_rejects_cancel_markdown_lint_after_108,
-
     test_actionlint_third_rejects_permissions_markdown_lint_after_108,
-
     test_actionlint_third_rejects_concurrency_stewardship_checks_after_108,
-
     test_actionlint_third_rejects_cancel_stewardship_checks_after_108,
-
     test_actionlint_third_rejects_permissions_stewardship_checks_after_108,
-
     test_actionlint_third_rejects_actions_link_check_after_108,
-
     test_actionlint_third_rejects_actions_markdown_lint_after_108,
-
     test_actionlint_third_rejects_actions_stewardship_checks_after_108,
-
     test_actionlint_third_rejects_packages_link_check_after_108,
-
     test_actionlint_third_rejects_packages_markdown_lint_after_108,
-
     test_actionlint_third_rejects_packages_stewardship_checks_after_108,
-
     test_actionlint_third_rejects_pull_requests_link_check_after_108,
-
     test_actionlint_third_rejects_pull_requests_markdown_lint_after_108,
-
     test_actionlint_third_rejects_pull_requests_stewardship_checks_after_108,
-
     test_actionlint_third_accepts_seed_after_108,
-
     test_actionlint_third_rejects_concurrency_link_check_pad0_after_108,
-
     test_actionlint_third_rejects_concurrency_markdown_lint_pad1_after_108,
-
     test_actionlint_third_rejects_concurrency_stewardship_checks_pad2_after_108,
-
     test_actionlint_third_rejects_concurrency_link_check_pad3_after_108,
-
     test_actionlint_third_rejects_concurrency_markdown_lint_pad4_after_108,
-
     test_actionlint_third_rejects_concurrency_stewardship_checks_pad5_after_108,
-
     test_actionlint_third_rejects_concurrency_link_check_pad6_after_108,
-
     test_actionlint_third_rejects_concurrency_markdown_lint_pad7_after_108,
-
     test_actionlint_third_rejects_concurrency_stewardship_checks_pad8_after_108,
-
     test_actionlint_third_rejects_concurrency_link_check_pad9_after_108,
-
     test_actionlint_third_rejects_concurrency_markdown_lint_pad10_after_108,
-
     test_actionlint_third_rejects_concurrency_stewardship_checks_pad11_after_108,
-
     test_actionlint_third_rejects_concurrency_link_check_pad12_after_108,
-
     test_actionlint_third_rejects_concurrency_markdown_lint_pad13_after_108,
-
     test_actionlint_third_rejects_concurrency_stewardship_checks_pad14_after_108,
-
     test_actionlint_third_rejects_concurrency_link_check_pad15_after_108,
-
     test_actionlint_third_rejects_concurrency_markdown_lint_pad16_after_108,
-
     test_actionlint_third_rejects_concurrency_stewardship_checks_pad17_after_108,
-
     test_actionlint_third_rejects_concurrency_link_check_pad18_after_108,
-
     test_actionlint_third_rejects_concurrency_markdown_lint_pad19_after_108,
-
     test_actionlint_third_rejects_concurrency_stewardship_checks_pad20_after_108,
-
     test_actionlint_third_rejects_concurrency_link_check_pad21_after_108,
-
     test_actionlint_third_rejects_concurrency_markdown_lint_pad22_after_108,
-
     test_actionlint_third_rejects_concurrency_stewardship_checks_pad23_after_108,
-
     test_actionlint_third_rejects_concurrency_link_check_pad24_after_108,
     test_common_gate_requires_future_annotations_after_111,
-
     test_common_gate_requires_import_re_after_111,
-
     test_common_gate_requires_import_path_after_111,
-
     test_common_gate_requires_priv_key_exact_after_111,
-
     test_common_gate_requires_ghp_group_exact_after_111,
-
     test_common_gate_requires_github_pat_exact_after_111,
-
     test_common_gate_requires_sk_rk_exact_after_111,
-
     test_common_gate_requires_tuple_typing_after_111,
-
     test_common_gate_requires_secret_patterns_tuple_after_111,
-
     test_common_gate_requires_fence_sub_after_111,
-
     test_common_gate_requires_label_or_after_111,
-
     test_common_gate_requires_pattern_search_after_111,
-
     test_common_gate_requires_lowered_after_111,
-
     test_common_gate_requires_re_escape_after_111,
-
     test_common_gate_requires_urlish_re_after_111,
-
     test_common_gate_requires_root_glob_after_111,
-
     test_common_gate_requires_found_update_after_111,
-
     test_common_gate_requires_set_path_after_111,
-
     test_common_gate_requires_wf_join_after_111,
-
     test_common_gate_requires_for_scheme_after_111,
-
     test_common_gate_requires_for_pattern_after_111,
-
     test_common_gate_requires_for_hint_after_111,
-
     test_common_gate_requires_shared_helpers_after_111,
-
     test_common_gate_requires_endswith_eq_after_111,
-
     test_common_gate_requires_memory_dumps_after_111,
-
     test_common_gate_requires_str_none_after_111,
-
     test_common_gate_requires_list_path_after_111,
-
     test_common_gate_requires_forbidden_head_after_111,
-
     test_common_gate_requires_url_hint_ghp_member_after_111,
-
     test_common_gate_requires_url_hint_gho_member_after_111,
-
     test_common_gate_requires_url_hint_github_pat_member_after_111,
-
     test_common_gate_requires_third_pass_doc_after_111,
-
     test_common_gate_requires_module_third_after_111,
-
     test_common_gate_requires_load_utf8_after_111,
-
     test_common_gate_requires_scan_utf8_after_111,
-
     test_common_gate_requires_aws_exact_after_111,
-
     test_common_gate_requires_xox_exact_after_111,
-
     test_common_gate_requires_npm_exact_after_111,
-
     test_common_gate_requires_aiza_exact_after_111,
-
     test_common_gate_requires_api_key_exact_after_111,
-
     test_common_gate_requires_secret_assign_exact_after_111,
-
     test_common_gate_requires_passwd_exact_after_111,
-
     test_common_gate_requires_contract_fn_still_after_111,
-
     test_common_gate_requires_contract_doc_after_111,
-
     test_common_gate_requires_spam_pin_after_111,
-
     test_common_gate_requires_slice_only_after_111,
-
     test_common_gate_requires_root_parents_still_after_111,
-
     test_common_gate_requires_fence_dotall_still_after_111,
-
     test_common_gate_requires_fence_pattern_still_after_111,
-
     test_common_gate_requires_strip_doc_still_after_111,
-
     test_common_gate_requires_danger_doc_still_after_111,
-
     test_common_gate_requires_scan_doc_still_after_111,
-
     test_common_gate_requires_md_doc_still_after_111,
-
     test_common_gate_requires_pattern_needle_still_after_111,
-
     test_common_gate_requires_url_hint_needle_still_after_111,
-
     test_common_gate_requires_token_hint_needle_still_after_111,
-
     test_common_gate_requires_relative_to_still_after_111,
-
     test_common_gate_requires_strip_lower_still_after_111,
-
     test_common_gate_requires_startswith_still_after_111,
-
     test_common_gate_requires_errors_append_still_after_111,
-
     test_common_gate_requires_passwd_token_still_after_111,
-
     test_common_gate_requires_openssh_still_after_111,
-
     test_common_gate_requires_public_docs_still_after_111,
-
     test_common_gate_requires_invent_surface_still_after_111,
-
     test_common_gate_requires_social_chrome_still_after_111,
-
     test_common_gate_requires_link_schemes_still_after_111,
-
     test_common_gate_requires_is_file_still_after_111,
-
     test_common_gate_requires_sorted_still_after_111,
-
     test_common_gate_requires_workflows_still_after_111,
-
     test_common_gate_requires_return_none_still_after_111,
-
     test_common_gate_requires_url_hints_head_still_after_111,
-
     test_common_gate_requires_schemes_exact_still_after_111,
-
     test_common_gate_requires_secret_patterns_still_after_111,
-
     test_common_gate_requires_forbidden_still_after_111,
-
     test_common_gate_requires_dangerous_still_after_111,
-
     test_common_gate_requires_fenced_block_still_after_111,
-
     test_common_gate_requires_endswith_urlish_still_after_111,
-
     test_common_gate_requires_invent_wording_still_after_111,
-
     test_common_gate_requires_live_secret_scan_still_after_111,
-
     test_common_gate_requires_fail_helper_still_after_111,
-
     test_common_gate_requires_load_workflow_pin_still_after_111,
-
     test_common_gate_requires_strip_fenced_still_after_111,
-
     test_common_gate_requires_has_dangerous_still_after_111,
-
     test_common_gate_requires_markdown_files_still_after_111,
-
     test_common_gate_requires_scan_secrets_still_after_111,
-
     test_common_gate_requires_fail_fn_still_after_111,
-
     test_common_gate_requires_load_workflow_fn_still_after_111,
-
     test_common_gate_requires_openssh_ec_still_after_111,
-
     test_common_gate_requires_second_pass_doc_still_after_111,
-
     test_common_gate_requires_url_hint_access_token_still_after_111,
-
     test_common_strip_fenced_tilde_still_after_111,
-
     test_common_strip_fenced_backtick_still_after_111,
-
     test_common_dangerous_scheme_js_still_after_111,
-
     test_common_dangerous_scheme_none_still_after_111,
-
     test_common_fail_appends_still_after_111,
-
     test_common_load_workflow_missing_still_after_111,
-
     test_common_scan_secrets_ghp_still_after_111,
-
     test_common_scan_secrets_url_token_still_after_111,
-
     test_common_forbidden_hints_coveralls_still_after_111,
-
     test_common_forbidden_hints_opencollective_still_after_111,
-
     test_common_url_hints_client_secret_still_after_111,
-
     test_common_schemes_file_still_after_111,
-
     test_common_markdown_files_sorted_still_after_111,
-
     test_common_seed_accepts_mutated_common_contract_after_111,
-
     test_common_gate_file_must_exist_still_after_111,
     test_run_stewardship_gate_requires_host_after_117,
     test_run_stewardship_gate_requires_spam_after_117,
@@ -44040,86 +47417,81 @@ def main() -> int:
     test_run_stewardship_gate_requires_closed_96_still_after_117,
     test_run_stewardship_accepts_live_seed_still_after_117,
     test_run_stewardship_gate_contract_live_empty_still_after_117,
-
     test_common_contract_call_still_after_111,
-
     test_common_secret_patterns_count_still_after_111,
-
     test_common_forbidden_hints_count_still_after_111,
-        # TOKENMAXX deepen after #111 (+72 CI workflow third-pass)
-        test_workflow_third_gate_third_pass_doc_after_111,
-        test_workflow_third_gate_third_pass_doc_still_after_111,
-        test_workflow_third_gate_module_third_after_111,
-        test_workflow_third_gate_module_third_still_after_111,
-        test_workflow_third_gate_cron_md_after_111,
-        test_workflow_third_gate_cron_md_still_after_111,
-        test_workflow_third_gate_cron_stew_after_111,
-        test_workflow_third_gate_cron_stew_still_after_111,
-        test_workflow_third_gate_timeout_md_after_111,
-        test_workflow_third_gate_timeout_md_still_after_111,
-        test_workflow_third_gate_timeout_stew_after_111,
-        test_workflow_third_gate_timeout_stew_still_after_111,
-        test_workflow_third_gate_mdlint_action_after_111,
-        test_workflow_third_gate_mdlint_action_still_after_111,
-        test_workflow_third_gate_setup_python_after_111,
-        test_workflow_third_gate_setup_python_still_after_111,
-        test_workflow_third_gate_verbose_after_111,
-        test_workflow_third_gate_verbose_still_after_111,
-        test_workflow_third_gate_no_progress_after_111,
-        test_workflow_third_gate_no_progress_still_after_111,
-        test_workflow_third_gate_max_conc_after_111,
-        test_workflow_third_gate_max_conc_still_after_111,
-        test_workflow_third_gate_timeout_ly_after_111,
-        test_workflow_third_gate_timeout_ly_still_after_111,
-        test_workflow_third_gate_max_retries_after_111,
-        test_workflow_third_gate_max_retries_still_after_111,
-        test_workflow_third_gate_fail_true_after_111,
-        test_workflow_third_gate_fail_true_still_after_111,
-        test_workflow_third_gate_get_out_after_111,
-        test_workflow_third_gate_get_out_still_after_111,
-        test_workflow_third_gate_get_id_after_111,
-        test_workflow_third_gate_get_id_still_after_111,
-        test_workflow_third_gate_curl_after_111,
-        test_workflow_third_gate_curl_still_after_111,
-        test_workflow_third_gate_conc_link_after_111,
-        test_workflow_third_gate_conc_link_still_after_111,
-        test_workflow_third_gate_conc_md_after_111,
-        test_workflow_third_gate_conc_md_still_after_111,
-        test_workflow_third_gate_conc_stew_after_111,
-        test_workflow_third_gate_conc_stew_still_after_111,
-        test_workflow_third_gate_reversible_after_111,
-        test_workflow_third_gate_reversible_still_after_111,
-        test_workflow_third_gate_fn_def_after_111,
-        test_workflow_third_gate_fn_def_still_after_111,
-        test_workflow_third_gate_contract_call_after_111,
-        test_workflow_third_gate_contract_call_still_after_111,
-        test_workflow_third_gate_contract_def_after_111,
-        test_workflow_third_gate_contract_def_still_after_111,
-        test_workflow_third_rejects_concurrency_link_check_pad0_after_111,
-        test_workflow_third_rejects_concurrency_markdown_lint_pad1_after_111,
-        test_workflow_third_rejects_concurrency_stewardship_checks_pad2_after_111,
-        test_workflow_third_rejects_concurrency_link_check_pad3_after_111,
-        test_workflow_third_rejects_concurrency_markdown_lint_pad4_after_111,
-        test_workflow_third_rejects_concurrency_stewardship_checks_pad5_after_111,
-        test_workflow_third_rejects_concurrency_link_check_pad6_after_111,
-        test_workflow_third_rejects_concurrency_markdown_lint_pad7_after_111,
-        test_workflow_third_rejects_concurrency_stewardship_checks_pad8_after_111,
-        test_workflow_third_rejects_concurrency_link_check_pad9_after_111,
-        test_workflow_third_rejects_concurrency_markdown_lint_pad10_after_111,
-        test_workflow_third_rejects_concurrency_stewardship_checks_pad11_after_111,
-        test_workflow_third_rejects_concurrency_link_check_pad12_after_111,
-        test_workflow_third_rejects_concurrency_markdown_lint_pad13_after_111,
-        test_workflow_third_rejects_concurrency_stewardship_checks_pad14_after_111,
-        test_workflow_third_rejects_concurrency_link_check_pad15_after_111,
-        test_workflow_third_rejects_concurrency_markdown_lint_pad16_after_111,
-        test_workflow_third_rejects_concurrency_stewardship_checks_pad17_after_111,
-        test_workflow_third_rejects_concurrency_link_check_pad18_after_111,
-        test_workflow_third_rejects_concurrency_markdown_lint_pad19_after_111,
-        test_workflow_third_rejects_concurrency_stewardship_checks_pad20_after_111,
-        test_workflow_third_rejects_concurrency_link_check_pad21_after_111,
-        test_workflow_third_rejects_concurrency_markdown_lint_pad22_after_111,
-        test_workflow_third_rejects_concurrency_stewardship_checks_pad23_after_111,
-    # TOKENMAXX docs-lint second-pass after #132 (+102)
+    test_workflow_third_gate_third_pass_doc_after_111,
+    test_workflow_third_gate_third_pass_doc_still_after_111,
+    test_workflow_third_gate_module_third_after_111,
+    test_workflow_third_gate_module_third_still_after_111,
+    test_workflow_third_gate_cron_md_after_111,
+    test_workflow_third_gate_cron_md_still_after_111,
+    test_workflow_third_gate_cron_stew_after_111,
+    test_workflow_third_gate_cron_stew_still_after_111,
+    test_workflow_third_gate_timeout_md_after_111,
+    test_workflow_third_gate_timeout_md_still_after_111,
+    test_workflow_third_gate_timeout_stew_after_111,
+    test_workflow_third_gate_timeout_stew_still_after_111,
+    test_workflow_third_gate_mdlint_action_after_111,
+    test_workflow_third_gate_mdlint_action_still_after_111,
+    test_workflow_third_gate_setup_python_after_111,
+    test_workflow_third_gate_setup_python_still_after_111,
+    test_workflow_third_gate_verbose_after_111,
+    test_workflow_third_gate_verbose_still_after_111,
+    test_workflow_third_gate_no_progress_after_111,
+    test_workflow_third_gate_no_progress_still_after_111,
+    test_workflow_third_gate_max_conc_after_111,
+    test_workflow_third_gate_max_conc_still_after_111,
+    test_workflow_third_gate_timeout_ly_after_111,
+    test_workflow_third_gate_timeout_ly_still_after_111,
+    test_workflow_third_gate_max_retries_after_111,
+    test_workflow_third_gate_max_retries_still_after_111,
+    test_workflow_third_gate_fail_true_after_111,
+    test_workflow_third_gate_fail_true_still_after_111,
+    test_workflow_third_gate_get_out_after_111,
+    test_workflow_third_gate_get_out_still_after_111,
+    test_workflow_third_gate_get_id_after_111,
+    test_workflow_third_gate_get_id_still_after_111,
+    test_workflow_third_gate_curl_after_111,
+    test_workflow_third_gate_curl_still_after_111,
+    test_workflow_third_gate_conc_link_after_111,
+    test_workflow_third_gate_conc_link_still_after_111,
+    test_workflow_third_gate_conc_md_after_111,
+    test_workflow_third_gate_conc_md_still_after_111,
+    test_workflow_third_gate_conc_stew_after_111,
+    test_workflow_third_gate_conc_stew_still_after_111,
+    test_workflow_third_gate_reversible_after_111,
+    test_workflow_third_gate_reversible_still_after_111,
+    test_workflow_third_gate_fn_def_after_111,
+    test_workflow_third_gate_fn_def_still_after_111,
+    test_workflow_third_gate_contract_call_after_111,
+    test_workflow_third_gate_contract_call_still_after_111,
+    test_workflow_third_gate_contract_def_after_111,
+    test_workflow_third_gate_contract_def_still_after_111,
+    test_workflow_third_rejects_concurrency_link_check_pad0_after_111,
+    test_workflow_third_rejects_concurrency_markdown_lint_pad1_after_111,
+    test_workflow_third_rejects_concurrency_stewardship_checks_pad2_after_111,
+    test_workflow_third_rejects_concurrency_link_check_pad3_after_111,
+    test_workflow_third_rejects_concurrency_markdown_lint_pad4_after_111,
+    test_workflow_third_rejects_concurrency_stewardship_checks_pad5_after_111,
+    test_workflow_third_rejects_concurrency_link_check_pad6_after_111,
+    test_workflow_third_rejects_concurrency_markdown_lint_pad7_after_111,
+    test_workflow_third_rejects_concurrency_stewardship_checks_pad8_after_111,
+    test_workflow_third_rejects_concurrency_link_check_pad9_after_111,
+    test_workflow_third_rejects_concurrency_markdown_lint_pad10_after_111,
+    test_workflow_third_rejects_concurrency_stewardship_checks_pad11_after_111,
+    test_workflow_third_rejects_concurrency_link_check_pad12_after_111,
+    test_workflow_third_rejects_concurrency_markdown_lint_pad13_after_111,
+    test_workflow_third_rejects_concurrency_stewardship_checks_pad14_after_111,
+    test_workflow_third_rejects_concurrency_link_check_pad15_after_111,
+    test_workflow_third_rejects_concurrency_markdown_lint_pad16_after_111,
+    test_workflow_third_rejects_concurrency_stewardship_checks_pad17_after_111,
+    test_workflow_third_rejects_concurrency_link_check_pad18_after_111,
+    test_workflow_third_rejects_concurrency_markdown_lint_pad19_after_111,
+    test_workflow_third_rejects_concurrency_stewardship_checks_pad20_after_111,
+    test_workflow_third_rejects_concurrency_link_check_pad21_after_111,
+    test_workflow_third_rejects_concurrency_markdown_lint_pad22_after_111,
+    test_workflow_third_rejects_concurrency_stewardship_checks_pad23_after_111,
     test_docs_lint_gate_requires_second_pass_doc_after_111,
     test_docs_lint_gate_requires_second_pass_doc_still_after_111,
     test_docs_lint_gate_requires_docs_second_wording_after_111,
@@ -44222,8 +47594,6 @@ def main() -> int:
     test_lycheeignore_rejects_peer_pad5_after_111,
     test_lycheeignore_rejects_peer_pad6_after_111,
     test_lycheeignore_rejects_peer_pad7_after_111,
-
-    # TOKENMAXX wiki-badge after #132/#135
     test_wiki_gate_status_badges_cover_after_132,
     test_wiki_gate_status_badges_cover_still_after_132,
     test_wiki_gate_product_badge_after_132,
@@ -44320,8 +47690,6 @@ def main() -> int:
     test_wiki_passes_live_wiki_outline_still_after_132,
     test_wiki_passes_live_badge_with_wiki_contract_after_132,
     test_wiki_passes_live_badge_with_wiki_contract_still_after_132,
-
-    # TOKENMAXX deepen after #135: actionlint-style deepen pins (+72)
     test_actionlint_fourth_gate_fourth_pass_doc_after_135,
     test_actionlint_fourth_gate_fourth_pass_doc_still_after_135,
     test_actionlint_fourth_gate_module_fourth_after_135,
@@ -44394,7 +47762,6 @@ def main() -> int:
     test_actionlint_fourth_rejects_cancel_true_markdown_lint_pad7_after_135,
     test_actionlint_fourth_rejects_cancel_true_stewardship_checks_pad8_after_135,
     test_actionlint_fourth_rejects_cancel_true_link_check_pad9_after_135,
-
     test_docs_lint_gate_requires_third_pass_doc_after_149,
     test_docs_lint_gate_requires_third_pass_doc_still_after_149,
     test_docs_lint_gate_requires_docs_third_wording_after_149,
@@ -44519,6 +47886,258 @@ def main() -> int:
     test_run_stewardship_rejects_layout_pad5_after_149,
     test_run_stewardship_rejects_layout_pad6_after_149,
     test_run_stewardship_rejects_layout_pad7_after_149,
+    test_schema_gate_requires_third_pass_doc_after_132,
+    test_schema_gate_requires_future_annotations_after_132,
+    test_schema_gate_requires_path_parent_after_132,
+    test_schema_gate_requires_path_insert_after_132,
+    test_schema_gate_requires_common_import_after_132,
+    test_schema_gate_requires_yaml_none_after_132,
+    test_schema_gate_requires_pragma_after_132,
+    test_schema_gate_requires_five_docs_after_132,
+    test_schema_gate_requires_hash_comment_after_132,
+    test_schema_gate_requires_true_false_after_132,
+    test_schema_gate_requires_null_tilde_after_132,
+    test_schema_gate_requires_fullmatch_after_132,
+    test_schema_gate_requires_split_colon_after_132,
+    test_schema_gate_requires_strip_quotes_after_132,
+    test_schema_gate_requires_loaded_dict_after_132,
+    test_schema_gate_requires_fence_search_after_132,
+    test_schema_gate_requires_nested_types_after_132,
+    test_schema_gate_requires_missing_sorted_after_132,
+    test_schema_gate_requires_docs_prefix_after_132,
+    test_schema_gate_requires_active_upper_after_132,
+    test_schema_gate_requires_expected_get_after_132,
+    test_schema_gate_requires_expected_fmt_after_132,
+    test_schema_gate_requires_level_set_after_132,
+    test_schema_gate_requires_tier_lt_after_132,
+    test_schema_gate_requires_iso_match_after_132,
+    test_schema_gate_requires_semver_match_after_132,
+    test_schema_gate_requires_issue_search_after_132,
+    test_schema_gate_requires_closes_scope_after_132,
+    test_schema_gate_requires_scan_call_after_132,
+    test_schema_gate_requires_len_docs_after_132,
+    test_schema_gate_requires_exit_main_after_132,
+    test_schema_gate_requires_mapping_needle_after_132,
+    test_schema_gate_requires_empty_block_after_132,
+    test_schema_gate_requires_missing_file_after_132,
+    test_schema_gate_requires_bool_subclass_after_132,
+    test_schema_gate_requires_safe_load_after_132,
+    test_schema_gate_requires_third_pass_in_contract_after_132,
+    test_schema_gate_requires_fence_exact_still_after_132,
+    test_schema_gate_requires_iso_exact_still_after_132,
+    test_schema_gate_requires_semver_exact_still_after_132,
+    test_schema_gate_requires_issue_exact_still_after_132,
+    test_schema_gate_requires_date_keys_still_after_132,
+    test_schema_gate_requires_tiny_yaml_still_after_132,
+    test_schema_gate_requires_scalar_doc_still_after_132,
+    test_schema_gate_requires_active_needle_still_after_132,
+    test_schema_gate_requires_contract_fn_still_after_132,
+    test_schema_gate_requires_contract_call_still_after_132,
+    test_schema_gate_requires_second_pass_doc_still_after_132,
+    test_schema_gate_requires_path_insert_still_after_132,
+    test_schema_gate_requires_yaml_none_still_after_132,
+    test_schema_gate_requires_five_docs_still_after_132,
+    test_schema_gate_requires_true_false_still_after_132,
+    test_schema_gate_requires_null_tilde_still_after_132,
+    test_schema_gate_requires_loaded_dict_still_after_132,
+    test_schema_gate_requires_nested_types_still_after_132,
+    test_schema_gate_requires_expected_get_still_after_132,
+    test_schema_gate_requires_level_set_still_after_132,
+    test_schema_gate_requires_tier_lt_still_after_132,
+    test_schema_gate_requires_scan_call_still_after_132,
+    test_schema_gate_requires_exit_main_still_after_132,
+    test_schema_rejects_bool_autonomy_after_132,
+    test_schema_rejects_bool_tier_after_132,
+    test_schema_rejects_nested_list_after_132,
+    test_schema_rejects_empty_block_after_132,
+    test_schema_rejects_non_string_owner_after_132,
+    test_schema_rejects_bad_semver_after_132,
+    test_schema_rejects_closes_without_hash_after_132,
+    test_schema_rejects_inactive_status_after_132,
+    test_schema_rejects_bad_iso_date_after_132,
+    test_schema_rejects_missing_key_after_132,
+    test_schema_rejects_wrong_maintainer_after_132,
+    test_schema_rejects_tier_zero_after_132,
+    test_schema_gate_requires_third_pass_doc_still_after_161,
+    test_schema_gate_requires_future_annotations_still_after_161,
+    test_schema_gate_requires_path_parent_still_after_161,
+    test_schema_gate_requires_path_insert_still_after_161,
+    test_schema_gate_requires_common_import_still_after_161,
+    test_schema_gate_requires_yaml_none_still_after_161,
+    test_schema_gate_requires_pragma_still_after_161,
+    test_schema_gate_requires_five_docs_still_after_161,
+    test_schema_gate_requires_hash_comment_still_after_161,
+    test_schema_gate_requires_true_false_still_after_161,
+    test_schema_gate_requires_null_tilde_still_after_161,
+    test_schema_gate_requires_fullmatch_still_after_161,
+    test_schema_gate_requires_split_colon_still_after_161,
+    test_schema_gate_requires_strip_quotes_still_after_161,
+    test_schema_gate_requires_loaded_dict_still_after_161,
+    test_schema_gate_requires_fence_search_still_after_161,
+    test_schema_gate_requires_nested_types_still_after_161,
+    test_schema_gate_requires_missing_sorted_still_after_161,
+    test_schema_gate_requires_docs_prefix_still_after_161,
+    test_schema_gate_requires_active_upper_still_after_161,
+    test_schema_gate_requires_expected_get_still_after_161,
+    test_schema_gate_requires_expected_fmt_still_after_161,
+    test_schema_gate_requires_level_set_still_after_161,
+    test_schema_gate_requires_tier_lt_still_after_161,
+    test_schema_gate_requires_iso_match_still_after_161,
+    test_schema_gate_requires_semver_match_still_after_161,
+    test_schema_gate_requires_issue_search_still_after_161,
+    test_schema_gate_requires_closes_scope_still_after_161,
+    test_schema_gate_requires_scan_call_still_after_161,
+    test_schema_gate_requires_len_docs_still_after_161,
+    test_schema_gate_requires_exit_main_still_after_161,
+    test_schema_gate_requires_mapping_needle_still_after_161,
+    test_schema_gate_requires_empty_block_still_after_161,
+    test_schema_gate_requires_missing_file_still_after_161,
+    test_schema_gate_requires_bool_subclass_still_after_161,
+    test_schema_gate_requires_safe_load_still_after_161,
+    test_schema_gate_requires_third_pass_in_contract_still_after_161,
+    test_schema_gate_requires_fence_exact_still_still_after_161,
+    test_schema_gate_requires_iso_exact_still_still_after_161,
+    test_schema_gate_requires_semver_exact_still_still_after_161,
+    test_schema_gate_requires_issue_exact_still_still_after_161,
+    test_schema_gate_requires_date_keys_still_still_after_161,
+    test_schema_gate_requires_tiny_yaml_still_still_after_161,
+    test_schema_gate_requires_scalar_doc_still_still_after_161,
+    test_schema_gate_requires_active_needle_still_still_after_161,
+    test_schema_gate_requires_contract_fn_still_still_after_161,
+    test_schema_gate_requires_contract_call_still_still_after_161,
+    test_schema_gate_requires_second_pass_doc_still_still_after_161,
+    test_schema_gate_requires_path_insert_still_still_after_161,
+    test_schema_gate_requires_yaml_none_still_still_after_161,
+    test_schema_gate_requires_five_docs_still_still_after_161,
+    test_schema_gate_requires_true_false_still_still_after_161,
+    test_schema_gate_requires_null_tilde_still_still_after_161,
+    test_schema_gate_requires_loaded_dict_still_still_after_161,
+    test_schema_gate_requires_nested_types_still_still_after_161,
+    test_schema_gate_requires_expected_get_still_still_after_161,
+    test_schema_gate_requires_level_set_still_still_after_161,
+    test_schema_gate_requires_tier_lt_still_still_after_161,
+    test_schema_gate_requires_scan_call_still_still_after_161,
+    test_schema_gate_requires_exit_main_still_still_after_161,
+    test_schema_rejects_bool_autonomy_still_after_161,
+    test_schema_rejects_bool_tier_still_after_161,
+    test_schema_rejects_nested_list_still_after_161,
+    test_schema_rejects_empty_block_still_after_161,
+    test_schema_rejects_non_string_owner_still_after_161,
+    test_schema_rejects_bad_semver_still_after_161,
+    test_schema_rejects_closes_without_hash_still_after_161,
+    test_schema_rejects_inactive_status_still_after_161,
+    test_schema_rejects_bad_iso_date_still_after_161,
+    test_schema_rejects_missing_key_still_after_161,
+    test_schema_rejects_wrong_maintainer_still_after_161,
+    test_schema_rejects_tier_zero_still_after_161,
+    test_schema_gate_requires_deepen_doc_after_161,
+    test_schema_gate_requires_deepen_doc_still_after_161,
+    test_schema_gate_requires_path_isfile_after_161,
+    test_schema_gate_requires_path_isfile_still_after_161,
+    test_schema_gate_requires_block_strip_after_161,
+    test_schema_gate_requires_block_strip_still_after_161,
+    test_schema_gate_requires_except_exc_after_161,
+    test_schema_gate_requires_except_exc_still_after_161,
+    test_schema_gate_requires_items_pin_after_161,
+    test_schema_gate_requires_items_pin_still_after_161,
+    test_schema_gate_requires_key_missing_after_161,
+    test_schema_gate_requires_key_missing_still_after_161,
+    test_schema_gate_requires_isinstance_str_after_161,
+    test_schema_gate_requires_isinstance_str_still_after_161,
+    test_schema_gate_requires_string_keys_after_161,
+    test_schema_gate_requires_string_keys_still_after_161,
+    test_schema_gate_requires_status_get_after_161,
+    test_schema_gate_requires_status_get_still_after_161,
+    test_schema_gate_requires_edit_policy_in_after_161,
+    test_schema_gate_requires_edit_policy_in_still_after_161,
+    test_schema_gate_requires_agents_rel_after_161,
+    test_schema_gate_requires_agents_rel_still_after_161,
+    test_schema_gate_requires_engine_pin_after_161,
+    test_schema_gate_requires_engine_pin_still_after_161,
+    test_schema_gate_requires_ble001_after_161,
+    test_schema_gate_requires_ble001_still_after_161,
+    test_schema_gate_requires_errors_init_after_161,
+    test_schema_gate_requires_errors_init_still_after_161,
+    test_schema_gate_requires_got_want_after_161,
+    test_schema_gate_requires_got_want_still_after_161,
+    test_schema_gate_requires_autonomy_in_after_161,
+    test_schema_gate_requires_autonomy_in_still_after_161,
+    test_schema_gate_requires_tier_in_after_161,
+    test_schema_gate_requires_tier_in_still_after_161,
+    test_schema_gate_requires_date_loop_after_161,
+    test_schema_gate_requires_date_loop_still_after_161,
+    test_schema_gate_requires_leftover_pin_after_161,
+    test_schema_gate_requires_leftover_pin_still_after_161,
+    test_schema_gate_requires_not_docs_spam_after_161,
+    test_schema_gate_requires_not_docs_spam_still_after_161,
+    test_schema_passes_live_after_161,
+    test_schema_passes_live_still_after_161,
+    test_schema_passes_live_badge_with_schema_contract_after_161,
+    test_schema_passes_live_badge_with_schema_contract_still_after_161,
+    test_docs_lint_gate_requires_leftover_161_marker_after_161,
+    test_docs_lint_gate_requires_leftover_161_marker_still_after_161,
+    test_docs_lint_gate_requires_md_leftover_wording_after_161,
+    test_docs_lint_gate_requires_md_leftover_wording_still_after_161,
+    test_docs_lint_gate_requires_default_line_pin_after_161,
+    test_docs_lint_gate_requires_default_line_pin_still_after_161,
+    test_docs_lint_gate_requires_md013_line_pin_after_161,
+    test_docs_lint_gate_requires_md013_line_pin_still_after_161,
+    test_docs_lint_gate_requires_md024_line_pin_after_161,
+    test_docs_lint_gate_requires_md024_line_pin_still_after_161,
+    test_docs_lint_gate_requires_md033_line_pin_after_161,
+    test_docs_lint_gate_requires_md033_line_pin_still_after_161,
+    test_docs_lint_gate_requires_md041_line_pin_after_161,
+    test_docs_lint_gate_requires_md041_line_pin_still_after_161,
+    test_docs_lint_gate_requires_md060_line_pin_after_161,
+    test_docs_lint_gate_requires_md060_line_pin_still_after_161,
+    test_docs_lint_gate_requires_complement_lychee_after_161,
+    test_docs_lint_gate_requires_complement_lychee_still_after_161,
+    test_docs_lint_gate_requires_not_al_wiki_schema_after_161,
+    test_docs_lint_gate_requires_not_al_wiki_schema_still_after_161,
+    test_markdownlint_rejects_wrong_default_line_after_161,
+    test_markdownlint_rejects_wrong_default_line_still_after_161,
+    test_markdownlint_rejects_wrong_md013_line_after_161,
+    test_markdownlint_rejects_wrong_md013_line_still_after_161,
+    test_markdownlint_rejects_wrong_md024_line_after_161,
+    test_markdownlint_rejects_wrong_md024_line_still_after_161,
+    test_markdownlint_rejects_wrong_md033_line_after_161,
+    test_markdownlint_rejects_wrong_md033_line_still_after_161,
+    test_markdownlint_rejects_wrong_md041_line_after_161,
+    test_markdownlint_rejects_wrong_md041_line_still_after_161,
+    test_markdownlint_rejects_wrong_md060_line_after_161,
+    test_markdownlint_rejects_wrong_md060_line_still_after_161,
+    test_actionlint_gate_requires_leftover_161_marker_after_161,
+    test_actionlint_gate_requires_leftover_161_marker_still_after_161,
+    test_actionlint_gate_requires_self_hosted_reject_after_161,
+    test_actionlint_gate_requires_self_hosted_reject_still_after_161,
+    test_actionlint_gate_requires_reject_self_needle_after_161,
+    test_actionlint_gate_requires_reject_self_needle_still_after_161,
+    test_actionlint_gate_requires_required_workflows_loop_after_161,
+    test_actionlint_gate_requires_required_workflows_loop_still_after_161,
+    test_actionlint_gate_requires_not_157_path_order_after_161,
+    test_actionlint_gate_requires_not_157_path_order_still_after_161,
+    test_actionlint_gate_requires_not_161_membership_spam_after_161,
+    test_actionlint_gate_requires_not_161_membership_spam_still_after_161,
+    test_actionlint_rejects_self_hosted_after_161,
+    test_actionlint_rejects_self_hosted_still_after_161,
+    test_wiki_gate_requires_leftover_161_marker_after_161,
+    test_wiki_gate_requires_leftover_161_marker_still_after_161,
+    test_wiki_gate_requires_wiki_leftover_wording_after_161,
+    test_wiki_gate_requires_wiki_leftover_wording_still_after_161,
+    test_wiki_gate_requires_not_141_posture_after_161,
+    test_wiki_gate_requires_not_141_posture_still_after_161,
+    test_wiki_gate_requires_pages_tuple_needle_after_161,
+    test_wiki_gate_requires_pages_tuple_needle_still_after_161,
+    test_wiki_gate_requires_ci_hints_needle_after_161,
+    test_wiki_gate_requires_ci_hints_needle_still_after_161,
+    test_wiki_rejects_reordered_publishable_pages_after_161,
+    test_wiki_rejects_missing_ci_hint_stewardship_after_161,
+    test_wiki_rejects_wrong_wiki_root_after_161,
+    test_wiki_rejects_reordered_publishable_pages_still_after_161,
+    test_wiki_rejects_missing_ci_hint_stewardship_still_after_161,
+    test_wiki_rejects_wrong_wiki_root_still_after_161,
+    test_gates_accept_live_tree_after_161,
+    test_gates_accept_live_tree_still_after_161,
 
     ]
     try:

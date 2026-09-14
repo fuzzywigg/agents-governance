@@ -22,6 +22,9 @@ Fail-closed pins (live path after #59; deepen after #43; third-pass after #90):
 - After #132 wiki-badge posture: status badges cover Link Check+Markdown Lint /
   product badge refusal / reject stewardship-checks.yml/badge.svg invent /
   reject embedded markdown badge images / PUBLISH Link Check+Markdown Lint exactly
+- Leftover after #161: exact PUBLISHABLE_PAGES tuple / STEWARDSHIP_CI_HINTS /
+  WIKI path assign / _reject_invent_badge_chrome (wiki-badge leftover; not
+  #141 posture spam / #161 lychee)
 """
 
 from __future__ import annotations

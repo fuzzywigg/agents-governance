@@ -52,6 +52,14 @@ Fail-closed leftover docs-lint/stewardship/actionlint pins after #149:
 - actionlint leftover: contents: read membership affirm (complement #149
   regex) / leftover docstring (not docs-lint / wiki spam)
 - stewardship leftover: exact live run_stewardship_checks.sh full layout
+
+Fail-closed leftover stewardship-schema / docs-lint / actionlint / wiki-badge
+pins after #161 (distinct from #161 lychee/membership/run_stewardship and
+open #157 path-order/badge CI; do not revive #163/#162/#150):
+- stewardship-schema third-pass + deepen: helper/constant/needle pins
+- docs-lint leftover: exact markdownlint line pins (complement #161 lychee)
+- actionlint leftover: reject runs-on self-hosted + REQUIRED_WORKFLOWS loop
+- wiki-badge leftover: exact PUBLISHABLE_PAGES tuple + STEWARDSHIP_CI_HINTS
 """
 
 from __future__ import annotations
@@ -313,6 +321,50 @@ def check_workflows_and_license(errors: list[str]) -> None:
                 "(docs-lint second-pass)",
                 errors,
             )
+        # Leftover after #161: exact live markdownlint line pins (docs-lint leftover;
+        # complement #161 lychee layout; not actionlint / wiki / schema spam).
+        default_line = '  "default": true,'
+        if default_line not in md_cfg:
+            fail(
+                ".markdownlint.json must keep exact default: true line "
+                "(docs-lint leftover after #161)",
+                errors,
+            )
+        md013_line = '  "MD013": { "line_length": 200 },'
+        if md013_line not in md_cfg:
+            fail(
+                ".markdownlint.json must keep exact MD013 line "
+                "(docs-lint leftover after #161)",
+                errors,
+            )
+        md024_line = '  "MD024": { "siblings_only": true },'
+        if md024_line not in md_cfg:
+            fail(
+                ".markdownlint.json must keep exact MD024 line "
+                "(docs-lint leftover after #161)",
+                errors,
+            )
+        md033_line = '  "MD033": false,'
+        if md033_line not in md_cfg:
+            fail(
+                ".markdownlint.json must keep exact MD033 line "
+                "(docs-lint leftover after #161)",
+                errors,
+            )
+        md041_line = '  "MD041": false,'
+        if md041_line not in md_cfg:
+            fail(
+                ".markdownlint.json must keep exact MD041 line "
+                "(docs-lint leftover after #161)",
+                errors,
+            )
+        md060_line = '  "MD060": false'
+        if md060_line not in md_cfg:
+            fail(
+                ".markdownlint.json must keep exact MD060 line "
+                "(docs-lint leftover after #161)",
+                errors,
+            )
 
 
 def check_lycheeignore(errors: list[str]) -> None:
@@ -535,6 +587,8 @@ def check_actionlint_style(errors: list[str]) -> None:
     statuses|deployments: write / deepen docstring.
     Leftover after #149: contents: read membership affirm (complement regex) /
     actionlint leftover (not docs-lint / wiki spam).
+    Leftover after #161: reject runs-on self-hosted / REQUIRED_WORKFLOWS loop
+    affirm (actionlint leftover; not #157 path-order / #161 membership spam).
     """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
@@ -606,6 +660,10 @@ def check_actionlint_style(errors: list[str]) -> None:
         # Leftover after #149: affirm contents: read via membership (complement #149 regex).
         if "contents: read" not in text:
             fail(f"{name}: actionlint-style requires contents:read via membership", errors)
+        # Leftover after #161: reject self-hosted runners on docs CI (actionlint leftover;
+        # not #157 path-order / #161 contents:read membership spam).
+        if re.search(r"(?m)^\s*runs-on:\s*self-hosted\b", text):
+            fail(f"{name}: actionlint-style rejects runs-on: self-hosted", errors)
 
 
 def check_workflow_hardening(errors: list[str]) -> None:
@@ -2287,6 +2345,68 @@ def check_docs_lint_gate_contract(errors: list[str]) -> None:
             "docs-lint third-pass must keep " + not_wiki_ci + " wording",
             errors,
         )
+    # Leftover after #161: docs-lint exact markdownlint line pins (complement #161 lychee;
+    # not actionlint / wiki / schema spam).
+    leftover_161 = "Leftover after " + "#161"
+    if leftover_161 not in text:
+        fail(
+            "docs-lint must keep " + leftover_161 + " markdownlint leftover marker",
+            errors,
+        )
+    md_leftover = "docs-lint leftover after " + "#161"
+    if md_leftover not in text:
+        fail(
+            "docs-lint must keep " + md_leftover + " wording",
+            errors,
+        )
+    default_line_pin = "exact default: true " + "line"
+    if default_line_pin not in text:
+        fail(
+            "docs-lint must keep " + default_line_pin + " needle",
+            errors,
+        )
+    md013_line_pin = "exact MD013 " + "line"
+    if md013_line_pin not in text:
+        fail(
+            "docs-lint must keep " + md013_line_pin + " needle",
+            errors,
+        )
+    md024_line_pin = "exact MD024 " + "line"
+    if md024_line_pin not in text:
+        fail(
+            "docs-lint must keep " + md024_line_pin + " needle",
+            errors,
+        )
+    md033_line_pin = "exact MD033 " + "line"
+    if md033_line_pin not in text:
+        fail(
+            "docs-lint must keep " + md033_line_pin + " needle",
+            errors,
+        )
+    md041_line_pin = "exact MD041 " + "line"
+    if md041_line_pin not in text:
+        fail(
+            "docs-lint must keep " + md041_line_pin + " needle",
+            errors,
+        )
+    md060_line_pin = "exact MD060 " + "line"
+    if md060_line_pin not in text:
+        fail(
+            "docs-lint must keep " + md060_line_pin + " needle",
+            errors,
+        )
+    complement_lychee = "complement #161 " + "lychee"
+    if complement_lychee not in text:
+        fail(
+            "docs-lint leftover must keep " + complement_lychee + " wording",
+            errors,
+        )
+    not_al_wiki = "not actionlint / wiki / " + "schema spam"
+    if not_al_wiki not in text:
+        fail(
+            "docs-lint leftover must keep " + not_al_wiki + " wording",
+            errors,
+        )
 
 
 def check_actionlint_style_gate_contract(errors: list[str]) -> None:
@@ -2925,6 +3045,44 @@ def check_actionlint_style_gate_contract(errors: list[str]) -> None:
     if complement_pin not in text:
         fail(
             "actionlint leftover must keep " + complement_pin + " wording",
+            errors,
+        )
+    # Leftover after #161: actionlint self-hosted reject + REQUIRED_WORKFLOWS loop
+    # (distinct from #157 path-order / #161 contents:read membership).
+    leftover_161 = "Leftover after " + "#161"
+    if leftover_161 not in text:
+        fail(
+            "actionlint leftover must keep " + leftover_161 + " marker",
+            errors,
+        )
+    self_hosted = "runs-on: " + "self-hosted"
+    if self_hosted not in text:
+        fail(
+            "actionlint leftover must reject " + self_hosted,
+            errors,
+        )
+    reject_self = "actionlint-style rejects runs-on: " + "self-hosted"
+    if reject_self not in text:
+        fail(
+            "actionlint leftover must emit " + reject_self + " fail needle",
+            errors,
+        )
+    req_loop = "for name in REQUIRED_" + "WORKFLOWS"
+    if req_loop not in text:
+        fail(
+            "actionlint leftover must keep " + req_loop + " loop",
+            errors,
+        )
+    not_157 = "not #157 path-" + "order"
+    if not_157 not in text:
+        fail(
+            "actionlint leftover must keep " + not_157 + " distinctness pin",
+            errors,
+        )
+    not_161_mem = "#161 membership " + "spam"
+    if not_161_mem not in text:
+        fail(
+            "actionlint leftover must keep " + not_161_mem + " distinctness pin",
             errors,
         )
 
@@ -3625,7 +3783,7 @@ def check_stewardship_common_contract(errors: list[str]) -> None:
 
 
 def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
-    """Fail-close live stewardship-schema gate wiring (after #72/#75; deepen after #53)."""
+    """Fail-close live stewardship-schema gate wiring (after #72/#75; third-pass after #132; deepen after #161)."""
     if not SCHEMA_GATE.is_file():
         fail("Missing scripts/check_stewardship_schema.py (schema gate)", errors)
         return
@@ -4016,6 +4174,358 @@ def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
     if contract_fn + "(" not in self_text.replace(f"def {contract_fn}(", "", 1):
         fail(
             "check_badge_standard.py main must call " + contract_fn + "()",
+            errors,
+        )
+
+    # Fail-closed after #132: third-pass helper / constant / needle pins
+    # (schema slice only; not docs-lint / wiki / relative / actionlint / workflow spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    third_pass_doc = "Third-pass after " + "#132"
+    if third_pass_doc not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + third_pass_doc,
+            errors,
+        )
+    future_ann = "from __future__ import " + "annotations"
+    if future_ann not in text:
+        fail(
+            "check_stewardship_schema.py must import " + future_ann,
+            errors,
+        )
+    path_parent = "Path(__file__).resolve()." + "parent"
+    if path_parent not in text:
+        fail(
+            "check_stewardship_schema.py must set _SCRIPTS via " + path_parent,
+            errors,
+        )
+    path_insert = "sys.path.insert(0, str(" + "_SCRIPTS))"
+    if path_insert not in text:
+        fail(
+            "check_stewardship_schema.py must sys.path.insert(0, str(_SCRIPTS))",
+            errors,
+        )
+    common_import = "from stewardship_common import ROOT, fail, " + "scan_secrets"
+    if common_import not in text:
+        fail(
+            "check_stewardship_schema.py must import ROOT, fail, scan_secrets",
+            errors,
+        )
+    yaml_none = "yaml = " + "None"
+    if yaml_none not in text:
+        fail(
+            "check_stewardship_schema.py must set yaml = None on ImportError",
+            errors,
+        )
+    pragma_pin = "pragma: no " + "cover"
+    if pragma_pin not in text:
+        fail(
+            "check_stewardship_schema.py ImportError path must keep pragma: no cover",
+            errors,
+        )
+    five_docs = "five live stewardship docs " + "only"
+    if five_docs not in text:
+        fail(
+            "check_stewardship_schema.py must keep " + five_docs + " pin",
+            errors,
+        )
+    hash_comment = 'line.startswith("#")'
+    if hash_comment not in text and "line.startswith('#')" not in text:
+        fail(
+            'check_stewardship_schema.py parse_simple_yaml must skip line.startswith("#")',
+            errors,
+        )
+    true_false = '{"true", "false"}'
+    if true_false not in text and "{'true', 'false'}" not in text:
+        fail(
+            'check_stewardship_schema.py must parse {"true", "false"} bools',
+            errors,
+        )
+    null_tilde = '{"null", "~"}'
+    if null_tilde not in text and "{'null', '~'}" not in text:
+        fail(
+            'check_stewardship_schema.py must parse {"null", "~"} nulls',
+            errors,
+        )
+    fullmatch_int = 're.fullmatch(r"-?\\d+", ' + "value)"
+    if fullmatch_int not in text:
+        fail(
+            'check_stewardship_schema.py must re.fullmatch(r"-?\\d+", value)',
+            errors,
+        )
+    split_colon = '.split(":", ' + "1)"
+    if split_colon not in text and ".split(':', 1)" not in text:
+        fail(
+            'check_stewardship_schema.py must split(":", 1) key/value',
+            errors,
+        )
+    strip_quotes = "value[1:" + "-1]"
+    if strip_quotes not in text:
+        fail(
+            "check_stewardship_schema.py must strip quotes via value[1:-1]",
+            errors,
+        )
+    loaded_dict = "isinstance(loaded, " + "dict)"
+    if loaded_dict not in text:
+        fail(
+            "check_stewardship_schema.py load_yaml must isinstance(loaded, dict)",
+            errors,
+        )
+    fence_search = "FENCED_YAML_RE.search(" + "text)"
+    if fence_search not in text:
+        fail(
+            "check_stewardship_schema.py first_yaml_block must FENCED_YAML_RE.search(text)",
+            errors,
+        )
+    nested_types = "isinstance(value, (dict, " + "list))"
+    if nested_types not in text:
+        fail(
+            "check_stewardship_schema.py reject_non_scalar must isinstance(value, (dict, list))",
+            errors,
+        )
+    missing_sorted = "sorted(required_keys - set(" + "data))"
+    if missing_sorted not in text:
+        fail(
+            "check_stewardship_schema.py must sorted(required_keys - set(data))",
+            errors,
+        )
+    docs_prefix = '.startswith("docs/' + '")'
+    if docs_prefix not in text and ".startswith('docs/')" not in text:
+        fail(
+            'check_stewardship_schema.py ACTIVE check must startswith("docs/")',
+            errors,
+        )
+    active_upper = '.upper() != "' + 'ACTIVE"'
+    if active_upper not in text and ".upper() != 'ACTIVE'" not in text:
+        fail(
+            'check_stewardship_schema.py must compare .upper() != "ACTIVE"',
+            errors,
+        )
+    expected_get = "EXPECTED_VALUES.get(rel, " + "{})"
+    if expected_get not in text:
+        fail(
+            "check_stewardship_schema.py must EXPECTED_VALUES.get(rel, {})",
+            errors,
+        )
+    expected_fmt = "(expected {" + "want!r})"
+    if expected_fmt not in text:
+        fail(
+            "check_stewardship_schema.py must emit (expected {want!r}) needle",
+            errors,
+        )
+    level_set = "level not in (0, 1, 2, " + "3)"
+    if level_set not in text:
+        fail(
+            "check_stewardship_schema.py autonomy_level must use level not in (0, 1, 2, 3)",
+            errors,
+        )
+    tier_lt = "tier < " + "1"
+    if tier_lt not in text:
+        fail(
+            "check_stewardship_schema.py tier must keep tier < 1 reject",
+            errors,
+        )
+    iso_match = "ISO_DATE_RE.match(" + "raw)"
+    if iso_match not in text:
+        fail(
+            "check_stewardship_schema.py must ISO_DATE_RE.match(raw)",
+            errors,
+        )
+    semver_match = "SEMVER_RE.match(" + "ver)"
+    if semver_match not in text:
+        fail(
+            "check_stewardship_schema.py must SEMVER_RE.match(ver)",
+            errors,
+        )
+    issue_search = "ISSUE_REF_RE.search(" + "closes)"
+    if issue_search not in text:
+        fail(
+            "check_stewardship_schema.py must ISSUE_REF_RE.search(closes)",
+            errors,
+        )
+    closes_scope = '{"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}'
+    closes_scope_sq = "{'docs/badge-standard.md', 'docs/wiki/PUBLISH.md'}"
+    if closes_scope not in text and closes_scope_sq not in text:
+        fail(
+            "check_stewardship_schema.py must pin closes scope set for badge+PUBLISH",
+            errors,
+        )
+    scan_call = "scan_secrets(path, " + "errors)"
+    if scan_call not in text:
+        fail(
+            "check_stewardship_schema.py must call scan_secrets(path, errors)",
+            errors,
+        )
+    len_docs = "len(DOC_" + "SCHEMAS)"
+    if len_docs not in text:
+        fail(
+            "check_stewardship_schema.py OK banner must include len(DOC_SCHEMAS)",
+            errors,
+        )
+    exit_main = "sys.exit(" + "main())"
+    if exit_main not in text:
+        fail(
+            "check_stewardship_schema.py must sys.exit(main())",
+            errors,
+        )
+    mapping_needle = "metadata YAML must be a " + "mapping"
+    if mapping_needle not in text:
+        fail(
+            "check_stewardship_schema.py must emit metadata YAML must be a mapping",
+            errors,
+        )
+    empty_block = "empty yaml metadata " + "block"
+    if empty_block not in text:
+        fail(
+            "check_stewardship_schema.py must emit empty yaml metadata block",
+            errors,
+        )
+    missing_file = "missing file:"
+    if missing_file not in text:
+        fail(
+            "check_stewardship_schema.py must emit missing file: needle",
+            errors,
+        )
+    bool_subclass = "bool is a subclass of " + "int"
+    if bool_subclass not in text:
+        fail(
+            "check_stewardship_schema.py must keep bool is a subclass of int pin",
+            errors,
+        )
+    safe_load = "yaml.safe_" + "load"
+    if safe_load not in text:
+        fail(
+            "check_stewardship_schema.py must call yaml.safe_load when present",
+            errors,
+        )
+
+    # Fail-closed after #161: schema deepen helper / constant / needle pins
+    # (schema leftover slice only; not docs-lint / actionlint / wiki / workflow spam).
+    deepen_doc = "Deepen after " + "#161"
+    if deepen_doc not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + deepen_doc,
+            errors,
+        )
+    path_isfile = "path.is_" + "file()"
+    if path_isfile not in text:
+        fail(
+            "check_stewardship_schema.py must gate missing docs via path.is_file()",
+            errors,
+        )
+    block_strip = "block.strip()"
+    if block_strip not in text:
+        fail(
+            "check_stewardship_schema.py must reject empty blocks via block.strip()",
+            errors,
+        )
+    except_exc = "except Exception as " + "exc"
+    if except_exc not in text:
+        fail(
+            "check_stewardship_schema.py must catch Exception as exc on parse",
+            errors,
+        )
+    items_pin = "DOC_SCHEMAS.items()"
+    if items_pin not in text:
+        fail(
+            "check_stewardship_schema.py must iterate DOC_SCHEMAS.items()",
+            errors,
+        )
+    key_missing = "key not in " + "data"
+    if key_missing not in text:
+        fail(
+            "check_stewardship_schema.py must skip absent keys via key not in data",
+            errors,
+        )
+    isinstance_str = "isinstance(value, " + "str)"
+    if isinstance_str not in text:
+        fail(
+            "check_stewardship_schema.py must isinstance(value, str) for STRING_KEYS",
+            errors,
+        )
+    string_keys_membership = "key in STRING_" + "KEYS"
+    if string_keys_membership not in text:
+        fail(
+            "check_stewardship_schema.py must gate string typing via key in STRING_KEYS",
+            errors,
+        )
+    status_get = 'data.get("status")'
+    if status_get not in text and "data.get('status')" not in text:
+        fail(
+            'check_stewardship_schema.py must data.get("status")',
+            errors,
+        )
+    edit_policy_in = '"edit_policy" in ' + "data"
+    if edit_policy_in not in text and "'edit_policy' in data" not in text:
+        fail(
+            'check_stewardship_schema.py must gate edit_policy via "edit_policy" in data',
+            errors,
+        )
+    agents_rel = 'rel == "AGENTS.md"'
+    if agents_rel not in text and "rel == 'AGENTS.md'" not in text:
+        fail(
+            'check_stewardship_schema.py must special-case rel == "AGENTS.md" semver',
+            errors,
+        )
+    engine_pin = 'engine = "PyYAML" if yaml is not ' + "None"
+    if engine_pin not in text and "engine = 'PyYAML' if yaml is not None" not in text:
+        fail(
+            'check_stewardship_schema.py must set engine = "PyYAML" if yaml is not None',
+            errors,
+        )
+    ble001 = "noqa: " + "BLE001"
+    if ble001 not in text:
+        fail(
+            "check_stewardship_schema.py parse except must keep noqa: BLE001",
+            errors,
+        )
+    errors_init = "errors: list[str] = " + "[]"
+    if errors_init not in text:
+        fail(
+            "check_stewardship_schema.py main must init errors: list[str] = []",
+            errors,
+        )
+    got_want = "got != " + "want"
+    if got_want not in text:
+        fail(
+            "check_stewardship_schema.py EXPECTED_VALUES compare must use got != want",
+            errors,
+        )
+    autonomy_in = '"autonomy_level" in ' + "data"
+    if autonomy_in not in text and "'autonomy_level' in data" not in text:
+        fail(
+            'check_stewardship_schema.py must gate autonomy via "autonomy_level" in data',
+            errors,
+        )
+    tier_in = '"tier" in ' + "data"
+    if tier_in not in text and "'tier' in data" not in text:
+        fail(
+            'check_stewardship_schema.py must gate tier via "tier" in data',
+            errors,
+        )
+    date_loop = "for date_key in DATE_" + "KEYS"
+    if date_loop not in text:
+        fail(
+            "check_stewardship_schema.py must iterate for date_key in DATE_KEYS",
+            errors,
+        )
+    leftover_pin = "schema leftover " + "slice"
+    # Self-pin host commentary so deepen cannot silently drop.
+    # Check via split-constructed needles only — contiguous literals would
+    # neutralize under the same replace() the self-tests apply.
+    self_text2 = BADGE_GATE.read_text(encoding="utf-8")
+    if leftover_pin not in self_text2:
+        fail(
+            "check_badge_standard.py schema deepen must keep "
+            + leftover_pin
+            + " pin",
+            errors,
+        )
+    not_docs_spam = "not docs-lint / actionlint / wiki / " + "workflow spam"
+    if not_docs_spam not in self_text2:
+        fail(
+            "check_badge_standard.py schema deepen must keep "
+            + not_docs_spam
+            + " pin",
             errors,
         )
 
@@ -4673,7 +5183,86 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
             "check_wiki_outline.py must gate embeds via badge.svg in text.lower()",
             errors,
         )
-
+    # Leftover after #161: wiki-badge exact PUBLISHABLE_PAGES + STEWARDSHIP_CI_HINTS
+    # (distinct from #141 posture pins / #161 docs-lint lychee; do not revive #163).
+    leftover_161 = "Leftover after " + "#161"
+    pages_tuple = (
+        "PUBLISHABLE_PAGES = (\n"
+        '    "Home.md",\n'
+        '    "Overview.md",\n'
+        '    "Autonomy-Levels.md",\n'
+        '    "Repo-Stewardship.md",\n'
+        '    "Agent-Routing.md",\n'
+        '    "Security-Boundaries.md",\n'
+        ")"
+    )
+    pages_tuple_sq = pages_tuple.replace('"', "'")
+    if pages_tuple not in wiki_text and pages_tuple_sq not in wiki_text:
+        fail(
+            "check_wiki_outline.py must keep exact PUBLISHABLE_PAGES tuple "
+            "(wiki-badge leftover after #161)",
+            errors,
+        )
+    ci_hints = (
+        "STEWARDSHIP_CI_HINTS = (\n"
+        '    "markdown-lint",\n'
+        '    "link-check",\n'
+        '    "stewardship-checks",\n'
+        ")"
+    )
+    ci_hints_sq = ci_hints.replace('"', "'")
+    if ci_hints not in wiki_text and ci_hints_sq not in wiki_text:
+        fail(
+            "check_wiki_outline.py must keep exact STEWARDSHIP_CI_HINTS tuple "
+            "(wiki-badge leftover after #161)",
+            errors,
+        )
+    wiki_root = 'WIKI = ROOT / "docs" / "wiki"'
+    wiki_root_sq = "WIKI = ROOT / 'docs' / 'wiki'"
+    if wiki_root not in wiki_text and wiki_root_sq not in wiki_text:
+        fail(
+            'check_wiki_outline.py must set WIKI = ROOT / "docs" / "wiki" '
+            "(wiki-badge leftover after #161)",
+            errors,
+        )
+    invent_fn = "_reject_invent_badge_" + "chrome"
+    if invent_fn not in wiki_text:
+        fail(
+            "check_wiki_outline.py must keep " + invent_fn + " "
+            "(wiki-badge leftover after #161)",
+            errors,
+        )
+    # Self-pin host leftover commentary (split-constructed).
+    self_wiki = BADGE_GATE.read_text(encoding="utf-8")
+    if leftover_161 not in self_wiki:
+        fail(
+            "wiki-badge leftover must keep " + leftover_161 + " marker",
+            errors,
+        )
+    wiki_leftover = "wiki-badge leftover after " + "#161"
+    if wiki_leftover not in self_wiki:
+        fail(
+            "wiki-badge leftover must keep " + wiki_leftover + " wording",
+            errors,
+        )
+    not_141 = "distinct from #141 " + "posture"
+    if not_141 not in self_wiki:
+        fail(
+            "wiki-badge leftover must keep " + not_141 + " distinctness pin",
+            errors,
+        )
+    pages_tuple_pin = "exact PUBLISHABLE_PAGES " + "tuple"
+    if pages_tuple_pin not in self_wiki:
+        fail(
+            "wiki-badge leftover must keep " + pages_tuple_pin + " needle",
+            errors,
+        )
+    ci_hints_pin = "exact STEWARDSHIP_CI_HINTS " + "tuple"
+    if ci_hints_pin not in self_wiki:
+        fail(
+            "wiki-badge leftover must keep " + ci_hints_pin + " needle",
+            errors,
+        )
 
 
 def check_relative_link_gate_contract(errors: list[str]) -> None:

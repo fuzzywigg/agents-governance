@@ -552,3 +552,13 @@ _None yet._
 2026-09-14T03:55:00Z cursor: Local green — run_stewardship + self-tests 2885 + markdownlint ← ECO-059 leftover docs-lint/stewardship/actionlint after #149 (do not revive #150/#146/#154)
 
 2026-09-14T03:52:00Z cursor: PR #161 CI green (lint + link-check + stewardship/actionlint) MERGEABLE ← complete ECO-059 TOKENMAXX leftover stewardship/docs-lint/actionlint after #149 (does not revive #150/#146/#154/#151/#156)
+
+### [ECO-060] TOKENMAXX deepen schema/docs-lint/actionlint/wiki-badge leftovers after #161 — 2026-09-14T04:25:50Z
+- [x] cursor: Read live tree post-#161 (2885 cases; #161 lychee/membership/run_stewardship saturated; #157 OPEN path-order; #163/#162 CLOSED — do not revive)
+- [x] cursor: Fail-close leftovers — stewardship-schema third-pass+deepen / docs-lint exact markdownlint line pins / actionlint reject runs-on self-hosted + REQUIRED_WORKFLOWS loop / wiki-badge exact PUBLISHABLE_PAGES+STEWARDSHIP_CI_HINTS
+- [x] cursor: Expand self-tests 2885 → 3111 (schema/docs-lint/actionlint/wiki-badge leftover slice; not #161 lychee/membership / not #157 path-order spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING schema/docs-lint/actionlint/wiki-badge leftover pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; distinct from #161/#157; do not revive #163/#162/#150
+- Branch: cursor/tokenmaxx-schema-docs-actionlint-wiki-after-161-09f2
+2026-09-14T04:25:50Z
+

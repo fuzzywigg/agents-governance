@@ -194,6 +194,14 @@ plus leftover docs-lint/stewardship/actionlint pins after #149: docs-lint
 third-pass exact `.lycheeignore` full layout + commentary lines /
 actionlint leftover `contents: read` membership affirm (complement #149
 regex) / stewardship leftover exact `run_stewardship_checks.sh` full layout).
+plus leftover stewardship-schema / docs-lint / actionlint / wiki-badge pins
+after #161: stewardship-schema third-pass + deepen helper/constant/needle
+pins / docs-lint leftover exact markdownlint line pins (complement #161
+lychee) / actionlint leftover reject `runs-on: self-hosted` +
+REQUIRED_WORKFLOWS loop / wiki-badge leftover exact PUBLISHABLE_PAGES +
+STEWARDSHIP_CI_HINTS tuples (distinct from #161 lychee/membership/
+run_stewardship and open #157 path-order/badge CI; do not revive
+closed #163/#162/#150).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

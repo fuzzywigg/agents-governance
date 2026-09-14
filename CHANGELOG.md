@@ -11,6 +11,17 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX leftover stewardship-schema / docs-lint / actionlint / wiki-badge pins
+  after #161: expand self-tests to 3111 cases (was 2885) fail-closing live leftover
+  integrity — stewardship-schema third-pass + deepen helper/constant/needle pins /
+  docs-lint leftover exact markdownlint line pins (complement #161 lychee) /
+  actionlint leftover reject `runs-on: self-hosted` + REQUIRED_WORKFLOWS loop /
+  wiki-badge leftover exact PUBLISHABLE_PAGES + STEWARDSHIP_CI_HINTS tuples —
+  schema/docs-lint/actionlint/wiki-badge leftover slice only (not #161
+  lychee/membership/run_stewardship / not #157 path-order/badge CI spam); no
+  invent-product; no fourth badge. Distinct from #161 leftover deepen and open
+  #157. Does **not** revive closed #163/#162/#150 siblings.
+
 - TOKENMAXX leftover docs-lint/stewardship/actionlint pins after #149: expand
   self-tests to 2885 cases (was 2761) fail-closing live leftover integrity —
   docs-lint third-pass exact `.lycheeignore` full layout + commentary lines /

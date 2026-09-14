@@ -264,7 +264,7 @@ def _minimal_workflows(tmp: Path) -> None:
     # Keep aligned with live CI second-pass pins after #72 (branches / concurrency /
     # job ids / path filters / action pins). Not invent-product workflows.
     # Path-filter residual leftover after #262: contiguous name:/on: and
-    # workflow_dispatch:/concurrency: (no invent top-level permissions:).
+    # workflow_dispatch:/concurrency:; keep top-level permissions after concurrency for older pins.
     link = """name: Link Check
 
 on:
@@ -283,6 +283,8 @@ on:
 concurrency:
   group: link-check-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+permissions:
+  contents: read
 jobs:
   link-check:
     runs-on: ubuntu-latest
@@ -327,6 +329,8 @@ on:
 concurrency:
   group: markdown-lint-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+permissions:
+  contents: read
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -369,6 +373,8 @@ on:
 concurrency:
   group: stewardship-checks-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+permissions:
+  contents: read
 jobs:
   stewardship:
     runs-on: ubuntu-latest

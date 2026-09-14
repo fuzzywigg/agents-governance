@@ -335,15 +335,14 @@ plus actionlint path-filter/path-order residual leftover deepen after #262:
 contiguous workflow_dispatch:/concurrency: adjacency / contiguous name:/on:
 workflow header / reject workflow_run: / reject repository_dispatch: /
 reject merge_group: / reject tags: (bare) / contiguous six-step actionlint
-path-order — DISTINCT residual leftover edges only (not saturated leftover
-#262 / not stewardship-schema leftover #258 / not wiki/mdlink leftover #252 /
-not saturated residual #244 / not saturated deepen #225/#203 /
+path-order — DISTINCT residual leftover edges only (not saturated
+leftover #262 / not stewardship-schema leftover #258 / not wiki/mdlink
+leftover #252 / not saturated residual #244 / not saturated deepen #225/#203 /
 not wiki outline/PUBLISH leftover #243 / not md/link residual #239 /
 not stewardship-checks/schema leftover #233 / not wiki-badge leftover #227 /
 not #189 / not #176 / not schema #191/#216 / not Pass-2 residual #199/#203 /
 not Pass-2 leftover + md/link #220 / not stewardship-badge lint #208; do not
-revive closed
-#264/#255/#247/#244/#236/#232/#228/#226/#223/#217/#213/#198/#186/#166/#157)).
+revive closed #264/#255/#247/#244/#236/#232/#228/#226/#223/#217/#213/#198/#186/#166/#157)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

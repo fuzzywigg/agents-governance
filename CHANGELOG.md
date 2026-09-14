@@ -11,6 +11,30 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX Pass-2 residual / templates leftovers after #309 tip: expand
+  self-tests to 6712 cases (was 6464) fail-closing DISTINCT leftover soft-fail +
+  existing `templates/AGENTS-REPO.md` + lychee residual edges on existing
+  modules only — soft-fail with `|| true` / `set +e` / must not `eval` /
+  AGENTS-REPO `Level [0/1/2]` / L0 Advisory / L1 Bounded / L2 Supervised /
+  Critical Files / Autonomy Level / End of Document / SEV-1..SEV-4 /
+  `[test command]` / cov-req placeholder /
+  `.env` Secrets Never commit row / governs AI agent behavior blurb /
+  lychee reject invent `tree/main` exclude / reject bare
+  `https://github.com/` exclude / keep Same-repo GitHub commentary —
+  Pass-2 residual templates leftovers slice only (lands closed
+  #313/#312/#305/#298/#291 leftover on post-#309 tip; not
+  stewardship-schema residual CI leftover #309 /
+  not stewardship-schema residual CI #299 /
+  not wiki/mdlink leftover residual #293 /
+  not stewardship-schema leftover residual #282 /
+  not saturated Pass-2 residual leftover #272 /
+  not lychee/blob-503 leftover #278 / not path-edges leftover #262 /
+  not schema leftover #258 / not wiki/mdlink leftover #252); no
+  invent-product; no fourth badge; no new templates; no secrets; no
+  scratchpad notes. Distinct from merged
+  #309/#299/#297/#293/#282/#278/#272/#262/#258/#252/#244. Do **not** revive
+  #313/#312/#305/#298/#291.
+
 - TOKENMAXX stewardship-schema residual CI leftover deepen after #299 tip: expand
   self-tests to 6464 cases (was 6228) fail-closing unsaturated schema-only
   residual CI leftover helper needles on existing `check_stewardship_schema.py` —

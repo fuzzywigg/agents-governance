@@ -656,3 +656,5 @@ _None yet._
 2026-09-14T06:25:00Z cursor: Local green on post-#191 tip — run_stewardship + self-tests 3654 + markdownlint ← ECO-067 md/link CI edges (do not revive #192/#197; leave #193 alone)
 
 2026-09-14T06:28:00Z cursor: Draft PR #201 opened (cursor/tokenmaxx-mdlink-ci-edges-after-191-f191); awaiting CI ← ECO-067 md/link CI edges after #191 (do not revive #192/#197; leave #199/#200 alone)
+
+2026-09-14T06:02:00Z cursor: PR #201 CI green (lint + link-check + stewardship) MERGEABLE ← complete ECO-067 TOKENMAXX md/link CI edges after #191 (does not revive #192/#197; leave #199/#200 alone)

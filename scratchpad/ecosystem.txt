@@ -452,3 +452,4 @@ _None yet._
 - Branch: cursor/tokenmaxx-docs-lint-second-pass-after-111-ca9a
 2026-09-14T02:17:15Z
 
+2026-09-14T02:22:34Z cursor: PR #125 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-054 TOKENMAXX docs-lint second-pass pins

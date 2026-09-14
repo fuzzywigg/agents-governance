@@ -644,3 +644,5 @@ _None yet._
 2026-09-14T05:49:50Z
 
 2026-09-14T05:55:41Z cursor: Local green — run_stewardship + self-tests 3548 + markdownlint ← ECO-067 actionlint path-filter/path-order deepen after #189 (do not revive #166/#157/#182/#186; leave #191/#192 alone)
+
+2026-09-14T05:56:10Z cursor: Draft PR #198 opened (cursor/tokenmaxx-actionlint-path-edges-after-189-95f2); awaiting CI ← ECO-067 actionlint path-filter/path-order deepen after #189 (do not revive #166/#157/#182/#186; leave #191/#192 alone)

@@ -29,7 +29,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   #253/#248/#241). Distinct from merged
   #252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
 - TOKENMAXX wiki/mdlink leftover deepen after #243 tip (post-#244 rebase): expand
-  self-tests to 4976 cases (was 4792) fail-closing unsaturated wiki outline /
+  self-tests to 4976 cases (was 5176 post-#258) fail-closing unsaturated wiki outline /
   PUBLISH.md leftover plus markdown-lint / link-check residual layouts on
   existing modules only — PUBLISH YAML status+created+purpose block /
   One-shot heading / exact `wiki.git` clone dest / contiguous six-page `cp`
@@ -54,7 +54,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   after #258 tip (do **not** revive #251/#250/#246/#245/#240). Distinct from
   Pass-2 residual/template leftover content; no invent templates; no DNS sprawl.
 - TOKENMAXX Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #258 (lands closed #260/#256/#251/#250 leftover on post-#258 tip):
-  expand self-tests to 5016 cases (was 4792) fail-closing DISTINCT leftover Pass-2 residual
+  expand self-tests to 5442 cases (was 5176 post-#258) fail-closing DISTINCT leftover Pass-2 residual
   soft-fail + existing concurrency group templates + existing `templates/AGENTS-REPO.md`
   leftover — soft-fail with `|| :` / `|| return 0` / `set +o errexit` / `set +o nounset` /
   invent `python3 -m` for gates / must not source env files / must not dot-source paths /

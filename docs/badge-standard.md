@@ -203,7 +203,11 @@ plus overnight stewardship/CI/schema/wiki fixture deepen after #165: residual
 schema/wiki/relative/common/badge policy edge fixtures via existing `_seed_*`
 harnesses only — not actionlint / docs-lint / stewardship-CI pin / path-filter /
 schema-third-pass pin spam; lands closed #167 leftover; do not revive
-closed #167/#168/#169).
+closed #167/#168/#169,
+plus wiki-index validators after #173: Home TOC empty-index / publishable
+page index stubs / broken internal stub links / empty markdown index /
+duplicate slug `headings_in` set collapse — lands closed #168/#170 leftover;
+distinct from fixtures #173 / path-filter #166).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

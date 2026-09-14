@@ -11,6 +11,17 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki-index validators after #173: expand self-tests to 3153 cases
+  (was 3081) fail-closing live wiki-index integrity — Home TOC empty-index /
+  publishable page index stubs / broken internal stub links / empty markdown
+  index / duplicate slug `headings_in` set collapse, plus
+  `check_wiki_outline_gate_contract` + `check_relative_link_gate_contract`
+  wiki-index pins — wiki-index slice only (not fixtures #173 / path-filter
+  #166 / wiki-badge #141 / stewardship-CI #165 spam); no invent-product; no
+  fourth badge. Lands closed #168/#170 leftover on post-#173 main (do **not**
+  revive #168/#170 as conflicting drafts). Distinct from actionlint
+  path-filter leftovers.
+
 - TOKENMAXX overnight stewardship/CI/schema/wiki fixture deepen after #165:
   expand self-tests to 3081 cases (was 2957) covering residual policy/
   stewardship edge fixtures — schema bool/nested/list/string/edit_policy/

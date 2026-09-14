@@ -243,7 +243,12 @@ def check_actionlint_style(errors: list[str]) -> None:
 
 
 def check_workflow_hardening(errors: list[str]) -> None:
-    """Harden existing lint/link/stewardship workflows (triggers, perms, concurrency)."""
+    """Harden existing lint/link/stewardship workflows (triggers, perms, concurrency).
+
+    Second-pass after #72: push / branches: ["**"] / github.workflow+github.ref
+    concurrency / paths filters / live job ids (not common / badge / wiki /
+    relative / schema / actionlint-style spam).
+    """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
         if text is None:
@@ -272,6 +277,30 @@ def check_workflow_hardening(errors: list[str]) -> None:
             fail(f"{name} jobs must set timeout-minutes", errors)
         if "schedule:" not in text:
             fail(f"{name} must include a weekly schedule drift catch", errors)
+        # Fail-closed after #72: second-pass push trigger on all three workflows.
+        if not re.search(r"(?m)^\s*push:\s*$", text):
+            fail(f"{name} must run on push", errors)
+        # Fail-closed after #72: live branch filter is ["**"] (all branches).
+        if 'branches: ["**"]' not in text:
+            fail(
+                f'{name} must pin branches: ["**"] on push',
+                errors,
+            )
+        # Fail-closed after #72: concurrency group keys on github.workflow.
+        if "github.workflow" not in text:
+            fail(
+                f"{name} concurrency group must include github.workflow",
+                errors,
+            )
+        # Fail-closed after #72: concurrency group keys on github.ref.
+        if "github.ref" not in text:
+            fail(
+                f"{name} concurrency group must include github.ref",
+                errors,
+            )
+        # Fail-closed after #72: push path filters keep CI scoped.
+        if not re.search(r"(?m)^\s*paths:\s*$", text):
+            fail(f"{name} must declare push paths filters", errors)
 
     link = load_workflow_text("link-check.yml") or ""
     if "lychee" not in link.lower():
@@ -606,6 +635,166 @@ def check_workflow_hardening(errors: list[str]) -> None:
         fail(
             "link-check.yml must reference .lycheeignore (paths filter or args) "
             "so shields CDN excludes stay wired",
+            errors,
+        )
+
+    # Fail-closed after #72: live job ids on the three existing workflows.
+    if not re.search(r"(?m)^\s*link-check:\s*$", link):
+        fail(
+            "link-check.yml must declare job id link-check:",
+            errors,
+        )
+    if not re.search(r"(?m)^\s*lint:\s*$", lint):
+        fail(
+            "markdown-lint.yml must declare job id lint:",
+            errors,
+        )
+    if not re.search(r"(?m)^\s*stewardship:\s*$", stew):
+        fail(
+            "stewardship-checks.yml must declare job id stewardship:",
+            errors,
+        )
+    # Fail-closed after #72: live path-filter needles (scoped push triggers).
+    if ".github/workflows/link-check.yml" not in link:
+        fail(
+            "link-check.yml paths must include .github/workflows/link-check.yml",
+            errors,
+        )
+    if ".markdownlint.json" not in lint:
+        fail(
+            "markdown-lint.yml paths must include .markdownlint.json",
+            errors,
+        )
+    if ".github/workflows/markdown-lint.yml" not in lint:
+        fail(
+            "markdown-lint.yml paths must include .github/workflows/markdown-lint.yml",
+            errors,
+        )
+    if "scripts/**" not in stew:
+        fail(
+            "stewardship-checks.yml paths must include scripts/**",
+            errors,
+        )
+    if ".github/workflows/**" not in stew:
+        fail(
+            "stewardship-checks.yml paths must include .github/workflows/**",
+            errors,
+        )
+
+
+def check_ci_workflow_gate_contract(errors: list[str]) -> None:
+    """Fail-close live CI workflow hardening wiring (second-pass after #72)."""
+    if not BADGE_GATE.is_file():
+        fail("Missing scripts/check_badge_standard.py (CI workflow gate host)", errors)
+        return
+    text = BADGE_GATE.read_text(encoding="utf-8")
+    # Split pin literals so self-mutation of contiguous names cannot neutralize checks.
+    harden_fn = "check_workflow_" + "hardening"
+    if f"def {harden_fn}(" not in text:
+        fail(
+            "check_badge_standard.py must provide " + harden_fn + "()",
+            errors,
+        )
+    contract_fn = "check_ci_workflow_" + "gate_contract"
+    if f"def {contract_fn}(" not in text:
+        fail(
+            "check_badge_standard.py must provide " + contract_fn + "()",
+            errors,
+        )
+    push_pin = "must run on " + "push"
+    if push_pin not in text:
+        fail(
+            "check_workflow_hardening must emit " + push_pin + " needle",
+            errors,
+        )
+    # Split so self-mutation of contiguous branches: ["**"] cannot neutralize.
+    branches_pin = 'branches: ["' + '**"]'
+    if branches_pin not in text:
+        fail(
+            "check_workflow_hardening must pin " + branches_pin,
+            errors,
+        )
+    wf_pin = "github." + "workflow"
+    if wf_pin not in text:
+        fail(
+            "check_workflow_hardening must pin " + wf_pin,
+            errors,
+        )
+    ref_pin = "github." + "ref"
+    if ref_pin not in text:
+        fail(
+            "check_workflow_hardening must pin " + ref_pin,
+            errors,
+        )
+    paths_pin = "push paths " + "filters"
+    if paths_pin not in text:
+        fail(
+            "check_workflow_hardening must emit " + paths_pin + " needle",
+            errors,
+        )
+    job_link = "job id " + "link-check:"
+    if job_link not in text:
+        fail(
+            "check_workflow_hardening must emit " + job_link + " needle",
+            errors,
+        )
+    job_lint = "job id " + "lint:"
+    if job_lint not in text:
+        fail(
+            "check_workflow_hardening must emit " + job_lint + " needle",
+            errors,
+        )
+    job_stew = "job id " + "stewardship:"
+    if job_stew not in text:
+        fail(
+            "check_workflow_hardening must emit " + job_stew + " needle",
+            errors,
+        )
+    path_link = ".github/workflows/link-check" + ".yml"
+    if path_link not in text:
+        fail(
+            "check_workflow_hardening must pin " + path_link + " path filter",
+            errors,
+        )
+    path_md = ".markdownlint" + ".json"
+    if path_md not in text:
+        fail(
+            "check_workflow_hardening must pin " + path_md + " path filter",
+            errors,
+        )
+    path_md_wf = ".github/workflows/markdown-lint" + ".yml"
+    if path_md_wf not in text:
+        fail(
+            "check_workflow_hardening must pin " + path_md_wf + " path filter",
+            errors,
+        )
+    path_scripts = "scripts/" + "**"
+    if path_scripts not in text:
+        fail(
+            "check_workflow_hardening must pin " + path_scripts + " path filter",
+            errors,
+        )
+    path_wf_glob = ".github/workflows/" + "**"
+    if path_wf_glob not in text:
+        fail(
+            "check_workflow_hardening must pin " + path_wf_glob + " path filter",
+            errors,
+        )
+    second_pass = "Second-pass after " + "#72"
+    if second_pass not in text:
+        fail(
+            "check_workflow_hardening must keep " + second_pass + " docstring pin",
+            errors,
+        )
+    # main() must call both hardening and this contract (fail-closed wiring).
+    if harden_fn + "(errors)" not in text:
+        fail(
+            "check_badge_standard.py main must call " + harden_fn + "(errors)",
+            errors,
+        )
+    if contract_fn + "(errors)" not in text:
+        fail(
+            "check_badge_standard.py main must call " + contract_fn + "(errors)",
             errors,
         )
 
@@ -2054,6 +2243,7 @@ def main() -> int:
     check_workflows_and_license(errors)
     check_lycheeignore(errors)
     check_workflow_hardening(errors)
+    check_ci_workflow_gate_contract(errors)
     check_actionlint_style(errors)
     check_relative_link_gate_contract(errors)
     check_wiki_outline_gate_contract(errors)

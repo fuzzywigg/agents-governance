@@ -116,7 +116,11 @@ plus stewardship_common second-pass after #65: ROOT `parents[1]` /
 `password|passwd|token` / OPENSSH+EC / Public docs / invent-product
 surface / social chrome / Link schemes / `is_file`+`sorted` /
 workflows path / `return None` / exact `DANGEROUS_LINK_SCHEMES` +
-`SECRET_URL_HINTS` head).
+`SECRET_URL_HINTS` head),
+plus CI workflow second-pass after #72: `push` / `branches: ["**"]` /
+`github.workflow`+`github.ref` concurrency / `paths` filters / live job ids
+`link-check`|`lint`|`stewardship` / path-filter needles /
+`check_ci_workflow_gate_contract`).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

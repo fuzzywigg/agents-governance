@@ -162,7 +162,12 @@ IGNORECASE / `blob.lower` / `EXPECTED_REPO.lower`,
 plus actionlint-style third-pass after #108: `concurrency:` +
 `cancel-in-progress:` / `permissions:` present / reject
 `actions|packages|pull-requests: write` / `re.finditer` / docker continue /
-`rsplit[-1]` / third-pass docstring).
+`rsplit[-1]` / third-pass docstring,
+plus docs-lint second-pass after #111: exact live exclude URLs /
+Connection-reset+RST+false-positive+early-hints+valid-site commentary /
+`check_badge_standard.py` reference / License badge presence remains enforced /
+exact `.markdownlint.json` layout+key-set+`json.loads` pins /
+`check_docs_lint_gate_contract` second-pass).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

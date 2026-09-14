@@ -188,7 +188,13 @@ plus run_stewardship Pass-2 after #176: exact ROOT assign / exactly four
 `python3 scripts/` / no `|| true` soft-fail / `dirname "$0")/..` fragment /
 doc gates locally / CI runner before self-tests /
 `check_run_stewardship_gate_contract` Pass-2 (lands closed #175/#140 leftover;
-do not revive #175/#140/#122)).
+do not revive #175/#140/#122),
+plus wiki-index validators after #179: Home TOC empty-index / publishable
+page index stubs / broken internal stub links / empty markdown index /
+duplicate slug `headings_in` set collapse /
+`check_wiki_outline_gate_contract` + `check_relative_link_gate_contract`
+wiki-index pins (lands closed #180/#177 leftover; do not revive
+closed #180/#177/#168/#170)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

@@ -604,3 +604,18 @@ _None yet._
 2026-09-14T05:00:00Z cursor: Local green — run_stewardship + self-tests 3258 + markdownlint ← ECO-063 run_stewardship Pass-2 after #176 (do not revive #175/#140/#122; distinct from path-filter #176 / fixtures #173 / stewardship-CI #165)
 
 2026-09-14T05:02:00Z cursor: Draft PR #179 opened (cursor/tokenmaxx-run-stewardship-pass2-after-176-d318); awaiting CI ← ECO-063 run_stewardship Pass-2 after #176 (do not revive #175/#140/#122)
+
+2026-09-14T05:01:06Z cursor: PR #179 MERGED (run_stewardship Pass-2 after #176; 3258 cases) ← complete ECO-063 (do not revive #175/#140/#122)
+
+2026-09-14T05:04:10Z cursor: PR #180 CLOSED CONFLICTING (wiki-index validators after #176) — unsaturated leftover for post-#179 tip; do not revive #180 as conflicting draft
+
+### [ECO-064] TOKENMAXX deepen wiki-index validators after #179 — 2026-09-14T05:10:00Z
+- [x] cursor: Read live tree post-#179 (3258 cases; run_stewardship Pass-2 saturated; #180 CLOSED CONFLICTING — do not revive; pick unsaturated wiki-index leftover)
+- [x] cursor: Fail-close wiki-index — Home TOC empty-index / publishable page index stubs / broken internal stub links / empty markdown index / duplicate slug headings_in set collapse / contract pins
+- [x] cursor: Expand self-tests 3258 → 3330 (wiki-index leftover slice; not path-filter #176 / fixtures #173 / run_stewardship #179 / wiki-badge #141 spam)
+- [ ] cursor: Green draft PR with CI
+- Scope: EXISTING wiki-outline + relative-link wiki-index integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #180/#177 leftover on post-#179 main; do not revive #180/#177/#168/#170
+- Branch: cursor/tokenmaxx-wiki-index-validators-after-179-57e2
+2026-09-14T05:10:00Z
+
+2026-09-14T05:15:00Z cursor: Local green — run_stewardship + self-tests 3330 + markdownlint ← ECO-064 wiki-index validators after #179 (do not revive #180/#177/#168/#170; distinct from run_stewardship #179 / path-filter #176 / fixtures #173)

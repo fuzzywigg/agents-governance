@@ -20,6 +20,12 @@ Fail-closed pins (live path after #55; deepen after #41; third-pass after #90):
 - Wiki-index after #176: broken internal stub links / empty markdown index /
   no markdown files found / duplicate slug headings_in set collapse via
   {github_slug(match.group(2))} (not wiki-badge #141 / fixtures #173 spam)
+- Deepen after #225: wiki-index/badge leftover — broken relative link fail needle /
+  empty markdown index fail-closed / Duplicate slug edge set collapse /
+  NOT path-order #189 / NOT stewardship-schema sibling /
+  NOT path-edges #225 / NOT Pass-2 leftover + md/link #220
+  (lands closed #222/#196/#185/#172 leftover on tip; not schema #191; distinct from
+  stewardship-badge lint #208 / path-edges #225 / md/link #220)
 """
 
 from __future__ import annotations

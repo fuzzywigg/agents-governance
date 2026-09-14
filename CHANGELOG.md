@@ -11,6 +11,19 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX markdown-lint/link-check residual + wiki-index/badge leftover after
+  #225: expand self-tests to 4284 cases (was 4116) fail-closing DISTINCT leftover
+  markdown-lint / link-check residual exact layouts (contiguous args: >- flag
+  block / contiguous on: push/PR/schedule/workflow_dispatch / contiguous
+  markdown-lint with: globs|+config / contiguous link-check with: token
+  commentary) plus wiki-index/badge leftover (exact PUBLISHABLE_PAGES order /
+  TOC loop/skip/link forms / empty-index / broken relative link needle /
+  invent stewardship-checks workflow badge.svg refuse) — md/link + wiki-index/
+  badge residual slice only (not path-edges #225 / not Pass-2 leftover + md/link
+  #220 / not stewardship-badge lint #208 / not schema #216/#191 / not path-order
+  #189); no invent-product; no fourth badge. Lands closed #222/#221/#196/#185/#172
+  leftover on post-#225 tip (do **not** revive #222/#221/#196/#185/#172/#215).
+  Distinct from merged #225/#220/#216/#208/#203/#199/#191/#189.
 - TOKENMAXX actionlint path-filter/path-order deepen leftovers after #220: expand
   self-tests to 4116 cases (was 3970) fail-closing DISTINCT leftover actionlint
   path-filter / path-order edges on existing workflow modules — contiguous

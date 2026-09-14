@@ -235,6 +235,15 @@ order / contiguous Download/id/run/shell block / reject uses: rhysd/actionlint@
 not schema #191 / not Pass-2 residual #199/#203 / not Pass-2 leftover + md/link #220 /
 not wiki-badge / not stewardship-badge lint #208 / not schema fourth-pass #216;
 lands closed #223/#217/#213/#198 leftover; do not revive #223/#217/#213/#198/#186/#166/#157)).
+plus markdown-lint/link-check residual + wiki-index/badge leftover after #225:
+exact contiguous link-check args: >- flag block / exact contiguous on:
+push/PR/schedule/workflow_dispatch for link+lint / exact contiguous
+markdown-lint with: globs|+config / exact contiguous link-check with: token
+commentary / exact PUBLISHABLE_PAGES order / TOC loop / invent stewardship-checks
+workflow badge.svg refuse — DISTINCT residual edges only (not path-edges #225 /
+not Pass-2 leftover + md/link #220 / not stewardship-badge lint #208 /
+not schema #216/#191 / not path-order #189; lands closed #222/#221/#196 leftover;
+do not revive #222/#221/#196/#185/#172/#215)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

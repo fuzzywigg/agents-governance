@@ -130,6 +130,27 @@ NOT run_stewardship residual #199; residual uncovered only):
 - exact live link-check push paths filter (.lycheeignore + self path)
 - missing badge fixtures for invent svg / wrong badge.svg / glob+paths drift
 
+Fail-closed wiki-index/badge leftover deepen after #225 (lands closed #222/#196/#185/#172;
+NOT path-order #189 / NOT stewardship-schema sibling / NOT path-filter #176 /
+NOT wiki-index first-pass #181 alone / NOT stewardship-badge lint #208 /
+NOT path-edges #225 / NOT Pass-2 leftover + md/link #220):
+- wiki-index: exact PUBLISHABLE_PAGES contiguous order / TOC loop /
+  ]({page})+]({stem}) / empty index (no publishable page links)
+- relative wiki-index: broken relative link needle / empty markdown index /
+  Duplicate slug edge set collapse
+- badge-standard: refuse README invent stewardship-checks.yml/badge.svg /
+  exact actions/workflows/link-check.yml/badge.svg +
+  markdown-lint.yml/badge.svg image pins / no Stewardship product badge
+
+Fail-closed markdown-lint/link-check residual exact layouts after #225
+(lands closed #221 leftover residual; NOT Pass-2 leftover + md/link #220 core /
+NOT path-edges #225 / NOT wiki-index/badge leftover / NOT stewardship-badge lint #208):
+- exact contiguous link-check args: >- flag block (verbose→*.md)
+- exact contiguous link-check on: push/PR/schedule/workflow_dispatch block
+- exact contiguous markdown-lint on: push/PR/schedule/workflow_dispatch block
+- exact contiguous markdown-lint with: globs|+config block
+- exact contiguous link-check with: token commentary block
+
 """
 
 from __future__ import annotations
@@ -1801,6 +1822,96 @@ def check_workflow_hardening(errors: list[str]) -> None:
             errors,
         )
 
+    # Fail-closed after #225: markdown-lint/link-check residual exact layouts
+    # (lands closed #221 leftover residual; NOT Pass-2 leftover + md/link #220 core /
+    # NOT path-edges #225 / NOT wiki-index/badge leftover).
+    link_args_exact = (
+        "args: >-\n"
+        "            --verbose\n"
+        "            --no-progress\n"
+        "            --exclude-loopback\n"
+        "            --max-concurrency 8\n"
+        "            --timeout 20\n"
+        "            --max-retries 3\n"
+        "            --github-token ${{ secrets.GITHUB_TOKEN }}\n"
+        "            --exclude-path .github/agents\n"
+        '            "**/*.md"'
+    )
+    if link_args_exact not in link:
+        fail(
+            "link-check.yml must keep exact contiguous args: >- flag block "
+            "(markdown-lint/link-check residual after #225)",
+            errors,
+        )
+    link_on_exact = (
+        "on:\n"
+        "  push:\n"
+        '    branches: ["**"]\n'
+        "    paths:\n"
+        '      - "**/*.md"\n'
+        '      - ".lycheeignore"\n'
+        '      - ".github/workflows/link-check.yml"\n'
+        "  pull_request:\n"
+        "  schedule:\n"
+        "    # Run weekly to catch externally broken links\n"
+        '    - cron: "0 6 * * 1"\n'
+        "  workflow_dispatch:"
+    )
+    if link_on_exact not in link:
+        fail(
+            "link-check.yml must keep exact contiguous on: "
+            "push/PR/schedule/workflow_dispatch block "
+            "(markdown-lint/link-check residual after #225)",
+            errors,
+        )
+    lint_on_exact = (
+        "on:\n"
+        "  push:\n"
+        '    branches: ["**"]\n'
+        "    paths:\n"
+        '      - "**/*.md"\n'
+        '      - ".markdownlint.json"\n'
+        '      - ".github/workflows/markdown-lint.yml"\n'
+        "  pull_request:\n"
+        "  schedule:\n"
+        "    # Weekly drift catch aligned with link/stewardship schedules\n"
+        '    - cron: "30 6 * * 1"\n'
+        "  workflow_dispatch:"
+    )
+    if lint_on_exact not in lint:
+        fail(
+            "markdown-lint.yml must keep exact contiguous on: "
+            "push/PR/schedule/workflow_dispatch block "
+            "(markdown-lint/link-check residual after #225)",
+            errors,
+        )
+    lint_with_exact = (
+        "with:\n"
+        "          globs: |\n"
+        "            **/*.md\n"
+        "            !.github/agents/**\n"
+        "            !OWASP-AGENTIC.md\n"
+        '          config: ".markdownlint.json"'
+    )
+    if lint_with_exact not in lint:
+        fail(
+            "markdown-lint.yml must keep exact contiguous with: globs|+config block "
+            "(markdown-lint/link-check residual after #225)",
+            errors,
+        )
+    link_token_with = (
+        "with:\n"
+        "          # GITHUB_TOKEN allows lychee to authenticate private GitHub repos\n"
+        "          # without it, private repos return 404 and fail the check\n"
+        "          token: ${{ secrets.GITHUB_TOKEN }}"
+    )
+    if link_token_with not in link:
+        fail(
+            "link-check.yml must keep exact contiguous with: token commentary block "
+            "(markdown-lint/link-check residual after #225)",
+            errors,
+        )
+
 
 
 def check_badge_standard_doc(errors: list[str]) -> None:
@@ -1856,7 +1967,15 @@ def check_readme_consistency(text: str, errors: list[str]) -> None:
     if "stewardship-checks.yml/badge.svg" in text:
         fail(
             "README.md must not invent stewardship-checks.yml/badge.svg "
-            "(no fourth badge; stewardship-badge lint after #189)",
+            "(no fourth badge; wiki-index/badge leftover after #225; "
+            "stewardship-badge lint after #189)",
+            errors,
+        )
+    if "actions/workflows/stewardship-checks.yml/badge.svg" in text:
+        fail(
+            "README.md must not invent "
+            "actions/workflows/stewardship-checks.yml/badge.svg "
+            "(no fourth badge; wiki-index/badge leftover after #225)",
             errors,
         )
     link_badge = "link-check.yml/" + "badge.svg"
@@ -2609,6 +2728,100 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
             "module docstring must keep " + residual_pin + " wording",
             errors,
         )
+
+
+    # Deepen after #225: wiki-index/badge leftover on badge-standard gate
+    # (lands closed #222/#196/#185/#172; NOT path-order #189 / NOT stewardship-schema /
+    # NOT path-edges #225 / NOT Pass-2 leftover + md/link #220).
+    badge_deepen_225 = "wiki-index/badge leftover deepen after " + "#225"
+    if badge_deepen_225 not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + badge_deepen_225 + " pin",
+            errors,
+        )
+    badge_lands_222 = "lands closed #222/" + "#196"
+    if badge_lands_222 not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + badge_lands_222 + " pin",
+            errors,
+        )
+    badge_not_path_order = "NOT path-order " + "#189"
+    if badge_not_path_order not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + badge_not_path_order + " pin",
+            errors,
+        )
+    badge_not_schema = "NOT stewardship-schema " + "sibling"
+    if badge_not_schema not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + badge_not_schema + " pin",
+            errors,
+        )
+    badge_not_path_edges = "NOT path-edges " + "#225"
+    if badge_not_path_edges not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + badge_not_path_edges + " pin",
+            errors,
+        )
+    invent_stew_svg = "stewardship-checks.yml/" + "badge.svg"
+    if invent_stew_svg not in text:
+        fail(
+            "check_badge_standard.py must refuse invent " + invent_stew_svg,
+            errors,
+        )
+    invent_stew_full = "actions/workflows/stewardship-checks.yml/" + "badge.svg"
+    if invent_stew_full not in text:
+        fail(
+            "check_badge_standard.py must refuse invent " + invent_stew_full,
+            errors,
+        )
+    invent_leftover_needle = "wiki-index/badge leftover after " + "#225"
+    if invent_leftover_needle not in text:
+        fail(
+            "check_badge_standard.py invent refuse must keep "
+            + invent_leftover_needle
+            + " needle",
+            errors,
+        )
+    no_stew_product = "must not add a Stewardship product/status " + "badge"
+    if no_stew_product not in text:
+        fail(
+            "check_badge_standard.py must keep Stewardship product/status badge refuse",
+            errors,
+        )
+    exact_link_svg = "actions/workflows/link-check.yml/" + "badge.svg"
+    if exact_link_svg not in text:
+        fail(
+            "check_badge_standard.py must pin exact " + exact_link_svg,
+            errors,
+        )
+    exact_md_svg = "actions/workflows/markdown-lint.yml/" + "badge.svg"
+    if exact_md_svg not in text:
+        fail(
+            "check_badge_standard.py must pin exact " + exact_md_svg,
+            errors,
+        )
+    no_fourth_paren_badge = "(no fourth " + "badge;"
+    if no_fourth_paren_badge not in text:
+        fail(
+            "check_badge_standard.py invent refuse must keep "
+            + no_fourth_paren_badge
+            + " parenthetical",
+            errors,
+        )
+    mdlink_residual_doc = "markdown-lint/link-check residual exact layouts after " + "#225"
+    if mdlink_residual_doc not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + mdlink_residual_doc + " pin",
+            errors,
+        )
+    link_args_residual_pin = "exact contiguous args: >- flag " + "block"
+    if link_args_residual_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + link_args_residual_pin + " residual pin",
+            errors,
+        )
+
 
 def check_docs_lint_gate_contract(errors: list[str]) -> None:
     """Fail-close live docs-lint wiring (after #100; second-pass after #111).
@@ -6449,6 +6662,105 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
 
 
 
+
+    # Deepen after #225: wiki-index/badge leftover (lands closed #222/#196/#185/#172;
+    # NOT path-order #189 / NOT stewardship-schema sibling / NOT path-filter /
+    # NOT path-edges #225 / NOT Pass-2 leftover + md/link #220).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    deepen_225_doc = "Deepen after " + "#225"
+    if deepen_225_doc not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + deepen_225_doc + " pin",
+            errors,
+        )
+    wiki_badge_leftover = "wiki-index/badge " + "leftover"
+    if wiki_badge_leftover not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + wiki_badge_leftover + " pin",
+            errors,
+        )
+    not_path_order = "NOT path-order " + "#189"
+    if not_path_order not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_path_order + " pin",
+            errors,
+        )
+    not_schema_sib = "NOT stewardship-schema " + "sibling"
+    if not_schema_sib not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_schema_sib + " pin",
+            errors,
+        )
+    not_path_edges = "NOT path-edges " + "#225"
+    if not_path_edges not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_path_edges + " pin",
+            errors,
+        )
+    lands_222 = "lands closed " + "#222"
+    if lands_222 not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + lands_222 + " pin",
+            errors,
+        )
+    pages_contiguous = (
+        'PUBLISHABLE_PAGES = (\n'
+        '    "Home.md",\n'
+        '    "Overview.md",\n'
+        '    "Autonomy-Levels.md",\n'
+        '    "Repo-Stewardship.md",\n'
+        '    "Agent-Routing.md",\n'
+        '    "Security-Boundaries.md",\n'
+        ')'
+    )
+    if pages_contiguous not in wiki_text:
+        fail(
+            "check_wiki_outline.py must keep exact PUBLISHABLE_PAGES contiguous order",
+            errors,
+        )
+    toc_loop = "for page in PUBLISHABLE_" + "PAGES:"
+    if toc_loop not in wiki_text:
+        fail(
+            "check_wiki_outline.py Home TOC must loop for page in PUBLISHABLE_PAGES",
+            errors,
+        )
+    skip_home = 'if page == "Home.md":'
+    skip_home_sq = "if page == 'Home.md':"
+    if skip_home not in wiki_text and skip_home_sq not in wiki_text:
+        fail(
+            'check_wiki_outline.py Home TOC must skip Home.md via if page == "Home.md"',
+            errors,
+        )
+    link_page_form = 'f"]({page})"'
+    link_page_sq = "f']({page})'"
+    if link_page_form not in wiki_text and link_page_sq not in wiki_text:
+        fail(
+            "check_wiki_outline.py Home TOC must match ]({page}) link form",
+            errors,
+        )
+    link_stem_form = 'f"]({stem})"'
+    link_stem_sq = "f']({stem})'"
+    if link_stem_form not in wiki_text and link_stem_sq not in wiki_text:
+        fail(
+            "check_wiki_outline.py Home TOC must match ]({stem}) link form",
+            errors,
+        )
+    empty_index_comment = "empty index (no publishable page " + "links)"
+    if empty_index_comment not in wiki_text:
+        fail(
+            "check_wiki_outline.py must keep "
+            + empty_index_comment
+            + " comment",
+            errors,
+        )
+    not_schema_191 = "not schema " + "#191"
+    if not_schema_191 not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_schema_191 + " distinctness pin",
+            errors,
+        )
+
+
 def check_relative_link_gate_contract(errors: list[str]) -> None:
     """Fail-close live relative-link gate wiring (after #90; deepen after #55/#41)."""
     if not RELATIVE_LINK_GATE.is_file():
@@ -7112,6 +7424,60 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
                 "run_stewardship_checks.sh must match exact live stewardship leftover layout",
                 errors,
             )
+
+
+
+    # Deepen after #225: wiki-index/badge leftover on relative wiki-index
+    # (lands closed #222/#196/#185/#172; NOT path-order #189 / NOT stewardship-schema /
+    # NOT path-edges #225 / NOT Pass-2 leftover + md/link #220).
+    rel_deepen_225 = "Deepen after " + "#225"
+    if rel_deepen_225 not in text:
+        fail(
+            "check_relative_links.py docstring must keep " + rel_deepen_225 + " pin",
+            errors,
+        )
+    rel_wiki_badge = "wiki-index/badge " + "leftover"
+    if rel_wiki_badge not in text:
+        fail(
+            "check_relative_links.py docstring must keep " + rel_wiki_badge + " pin",
+            errors,
+        )
+    broken_rel_needle = "broken relative " + "link"
+    if broken_rel_needle not in text:
+        fail(
+            "check_relative_links.py must emit " + broken_rel_needle + " fail needle",
+            errors,
+        )
+    rel_not_path_order = "NOT path-order " + "#189"
+    if rel_not_path_order not in text:
+        fail(
+            "check_relative_links.py docstring must keep " + rel_not_path_order + " pin",
+            errors,
+        )
+    rel_not_schema = "NOT stewardship-schema " + "sibling"
+    if rel_not_schema not in text:
+        fail(
+            "check_relative_links.py docstring must keep " + rel_not_schema + " pin",
+            errors,
+        )
+    rel_not_path_edges = "NOT path-edges " + "#225"
+    if rel_not_path_edges not in text:
+        fail(
+            "check_relative_links.py docstring must keep " + rel_not_path_edges + " pin",
+            errors,
+        )
+    rel_not_191 = "not schema " + "#191"
+    if rel_not_191 not in text:
+        fail(
+            "check_relative_links.py docstring must keep " + rel_not_191 + " distinctness pin",
+            errors,
+        )
+    rel_lands_222 = "lands closed " + "#222"
+    if rel_lands_222 not in text:
+        fail(
+            "check_relative_links.py docstring must keep " + rel_lands_222 + " pin",
+            errors,
+        )
 
 
 def check_run_stewardship_gate_contract(errors: list[str]) -> None:

@@ -568,3 +568,5 @@ _None yet._
 2026-09-14T04:26:13Z cursor: PR #169 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-060 TOKENMAXX stewardship-badge lint after #161 (does not revive #157/#123/#143; draft — do not merge)
 
 2026-09-14T04:27:21Z cursor: Reopened as draft PR #172 (same branch; #169 closed without merge) — deepen commit CI green; waiting #172 CI; do not merge
+
+2026-09-14T04:34:17Z cursor: PR #172 CI green (lint + link-check + stewardship/actionlint) on 3e494a0 ← complete ECO-060 TOKENMAXX stewardship-badge lint after #161 (draft — do not merge; replaces closed #169)

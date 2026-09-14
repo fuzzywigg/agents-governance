@@ -563,3 +563,5 @@ _None yet._
 2026-09-14T04:15:00Z
 
 2026-09-14T04:20:00Z cursor: Local green — run_stewardship + self-tests 2957 + markdownlint ← ECO-060 wiki-index validators after #161 (distinct from wiki-badge #141)
+
+2026-09-14T04:22:00Z cursor: Opened draft PR #168 overnight-wiki-index-validators (ECO-060 wiki-index validators; do not merge)

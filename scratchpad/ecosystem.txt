@@ -746,3 +746,5 @@ _None yet._
 
 
 2026-09-14T07:30:00Z cursor: Local green — run_stewardship + self-tests 4230 + markdownlint ← ECO-073 wiki-index/badge leftover after #225 (leave draft; do not revive #222/#215/#196)
+
+2026-09-14T07:35:00Z cursor: Draft PR #227 opened (cursor/tokenmaxx-wiki-badge-leftover-after-225-5367); leave draft / do-not-merge; awaiting CI ← ECO-073 wiki-index/badge leftover after #225 (do not revive #222/#215/#196)

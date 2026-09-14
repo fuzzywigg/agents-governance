@@ -10,6 +10,7 @@ on:
   pull_request:
   schedule:
     # Weekly drift catch aligned with link/stewardship schedules
+    # docs CI config pins stay wired after #83
     - cron: "30 6 * * 1"
   workflow_dispatch:
 

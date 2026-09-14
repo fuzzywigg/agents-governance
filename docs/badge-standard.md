@@ -137,4 +137,3 @@ badge presence remains stewardship-enforced.
 - Public wiki outline: [wiki/Home.md](./wiki/Home.md)
 - Wiki publish path: [wiki/PUBLISH.md](./wiki/PUBLISH.md)
 - Testing commands: [AGENTS.md §3](../AGENTS.md#3-testing-requirements)
-

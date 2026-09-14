@@ -33,6 +33,17 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   third-pass pins in `check_badge_standard.py` — stewardship_common third-pass
   slice only (not badge/actionlint/docs-lint/wiki/relative spam); no
   invent-product; no fourth badge. Lands open #112 leftover on post-#111 main.
+- TOKENMAXX docs-lint second-pass pins after #127: expand self-tests to
+  2521 cases (was 2419) fail-closing live docs-lint integrity —
+  exact `.lycheeignore` exclude URLs (`https://modelcontextprotocol.io/`,
+  `https://www.linuxfoundation.org/`) / Connection reset by peer + RST /
+  false-positive + early hints + valid site commentary /
+  `check_badge_standard.py` reference / License badge presence remains enforced /
+  exact `.markdownlint.json` layout + key set + `json.loads` true/false object pins,
+  plus `check_docs_lint_gate_contract` second-pass pins in
+  `check_badge_standard.py` — docs-lint second-pass slice only (not actionlint /
+  stewardship_common / badge / wiki / relative spam); no invent-product; no fourth badge.
+  Distinct from stewardship_common (#117) and closed #116 leftover.
 
 - TOKENMAXX actionlint-style third-pass pins after #108: expand self-tests to
   2223 cases (was 2151) fail-closing live reversible CI workflow integrity —

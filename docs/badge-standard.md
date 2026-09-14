@@ -174,7 +174,12 @@ plus run_stewardship runner pins after #117: `#!/usr/bin/env bash` /
 `set -euo pipefail` / `dirname "$0"`+`pwd` ROOT / `cd "$ROOT"` / same set as
 CI / `python3 scripts/<gate>` ×4 / badge→wiki→schema→relative order /
 `check_run_stewardship_gate_contract` (lands closed #122/#96 leftover; do not
-revive #119)).
+revive #119),
+plus docs-lint second-pass after #127: exact live exclude URLs /
+Connection-reset+RST+false-positive+early-hints+valid-site commentary /
+`check_badge_standard.py` reference / License badge presence remains enforced /
+exact `.markdownlint.json` layout+key-set+`json.loads` pins /
+`check_docs_lint_gate_contract` second-pass).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

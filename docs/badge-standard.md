@@ -232,6 +232,10 @@ back-to-back gates→self-tests block / no inline check_*.py /
 self-tests before actionlint (lands closed #193/#178 leftover; do not
 revive #193/#178/#175/#140; distinct from schema third-pass #191 and
 path-order #189)).
+plus stewardship-schema fourth-pass after #203 tip: nested policy refs /
+invalid status+surface enum stubs / whitespace-only / nested+list rejects /
+pass-4 contract pins (lands closed #171/#204 leftover; do not revive closed
+closed #171/#204/#200/#194/#190/#188/#187/#183),
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

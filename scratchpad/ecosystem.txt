@@ -675,3 +675,15 @@ _None yet._
 2026-09-14T06:12:00Z cursor: Local green — run_stewardship + self-tests 3660 + markdownlint ← ECO-068 register Pass-2 residual after_191 after #199 (leave draft; leave CONFLICTING #195 alone; do not redo #191)
 
 2026-09-14T06:08:00Z cursor: Draft PR #203 opened (cursor/tokenmaxx-register-pass2-residual-tests-after-199-ebbb); leave draft / do-not-merge; awaiting CI ← ECO-068 register after #199 (leave CONFLICTING #202 alone; do not redo #191/#199)
+
+2026-09-14T06:13:52Z cursor: PR #203 MERGED (register Pass-2 residual self-tests after #199; 3660 cases) ← tip
+
+2026-09-14T06:18:00Z cursor: PR #204 CLOSED CONFLICTING after CI green (tip moved via #203) — reopen fourth-pass on post-#203 tip
+
+### [ECO-069] TOKENMAXX deepen stewardship-schema fourth-pass after #203 tip — 2026-09-14T06:20:00Z
+- [x] cursor: Read live tree post-#203 (3660 cases; #171/#204 fourth-pass leftover unsaturated)
+- [x] cursor: Fail-close schema fourth-pass pins + expand self-tests 3660 → 3838
+- [ ] cursor: Green draft PR with CI
+- Scope: EXISTING schema fourth-pass only; no invent-product; lands #171/#204 leftover; do not revive #171/#204/#200/#194
+- Branch: cursor/tokenmaxx-schema-fourth-pass-after-203-57e2
+2026-09-14T06:20:00Z

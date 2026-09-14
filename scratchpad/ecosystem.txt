@@ -711,8 +711,10 @@ _None yet._
 - [x] cursor: Read live tree post-#216 (3906 cases; schema fourth #216 + badge-lint #208 saturated; Pass-2 leftover+md/link edges still unsaturated; open CONFLICTING #219 md/link edges — leave alone / do not revive)
 - [x] cursor: Fail-close Pass-2 leftover + md/link edges on tip
 - [x] cursor: Expand self-tests (Pass-2 leftover + md/link edges slice only; not schema #216 / badge-lint #208 / Pass-2 residual #199/#203 / path-order #189 / open #219 spam)
-- [ ] cursor: Green draft PR with CI
+- [x] cursor: Green draft PR with CI
 - Scope: EXISTING run_stewardship_checks.sh + link-check.yml + markdown-lint.yml only; lands closed #202/#192/#212/#218 leftover; do not revive those; leave open CONFLICTING #219 alone; do not redo #216/#208/#203/#199
 - Branch: cursor/tokenmaxx-pass2-leftover-mdlink-edges-after-216-f641
 2026-09-14T06:48:03Z
 2026-09-14T06:52:59Z cursor: Draft PR #220 opened (cursor/tokenmaxx-pass2-leftover-mdlink-edges-after-216-f641); leave draft; awaiting CI ← ECO-071 Pass-2 leftover + md/link edges after #216 (do not revive #218/#212/#202/#192; leave CONFLICTING #219 alone)
+
+2026-09-14T06:59:27Z cursor: PR #220 CI green (lint + link-check + stewardship); OPEN MERGEABLE draft ← complete ECO-071 TOKENMAXX Pass-2 leftover + md/link edges after #216 (does not revive #218/#212/#202/#192; leaves CONFLICTING #219 alone)

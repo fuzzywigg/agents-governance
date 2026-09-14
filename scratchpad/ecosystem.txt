@@ -375,3 +375,12 @@ _None yet._
 - Scope: EXISTING stewardship-schema integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-schema-second-pass-c6f7
 2026-09-14T00:21:26Z
+
+### [ECO-048] TOKENMAXX deepen lycheeignore + markdownlint.json second-pass pins after #83 — 2026-09-14T00:44:59Z
+- [x] cursor: Read live tree post-#83 (1755 cases; schema second-pass saturated; lychee/markdownlint unsaturated)
+- [x] cursor: Fail-close lycheeignore + markdownlint.json second-pass — MCP/LF/shields hosts / 308+103+flaky / star rejects / exact markdownlint key set / line_length 200 / siblings_only true / MD033+MD041+MD060 false / json.loads contract
+- [x] cursor: Expand self-tests 1755 → 1821 (lycheeignore + markdownlint.json second-pass slice; not schema / actionlint / badge / wiki / relative / common / CI workflow pin spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING lycheeignore + markdownlint.json integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-lychee-markdownlint-second-pass-01ba
+2026-09-14T00:44:59Z

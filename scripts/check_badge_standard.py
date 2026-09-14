@@ -17,10 +17,19 @@ Fail-closed actionlint-style pins (live path after #75):
 - no pull_request_target / no permissions: write-all / no contents: write
 - no id-token: write / actions must be @-pinned (not main|master|latest)
 - docker:// uses skipped; unpinned uses rejected
+
+Fail-closed lycheeignore + markdownlint.json second-pass pins (after #83):
+- .lycheeignore hosts: img.shields.io / modelcontextprotocol.io /
+  linuxfoundation.org; reject https://* / http://* / bare *; rationale
+  needles 308 / 103 / flaky
+- .markdownlint.json exact key set default/MD013/MD024/MD033/MD041/MD060;
+  default true; MD013 line_length 200; MD024 siblings_only true;
+  MD033/MD041/MD060 false
 """
 
 from __future__ import annotations
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -190,10 +199,60 @@ def check_workflows_and_license(errors: list[str]) -> None:
                 ".markdownlint.json must set MD060: false for docs lint",
                 errors,
             )
+        # Fail-closed after #83: live .markdownlint.json exact key set (second-pass).
+        try:
+            parsed = json.loads(md_cfg)
+        except json.JSONDecodeError:
+            fail(".markdownlint.json must be valid JSON", errors)
+        else:
+            expected_keys = {
+                "default",
+                "MD013",
+                "MD024",
+                "MD033",
+                "MD041",
+                "MD060",
+            }
+            if set(parsed) != expected_keys:
+                fail(
+                    ".markdownlint.json must pin exact key set "
+                    f"{sorted(expected_keys)} (got {sorted(parsed)})",
+                    errors,
+                )
+            if parsed.get("default") is not True:
+                fail(
+                    ".markdownlint.json default must be JSON true",
+                    errors,
+                )
+            md013 = parsed.get("MD013")
+            if not isinstance(md013, dict) or md013.get("line_length") != 200:
+                fail(
+                    ".markdownlint.json MD013 must be "
+                    '{"line_length": 200}',
+                    errors,
+                )
+            md024 = parsed.get("MD024")
+            if not isinstance(md024, dict) or md024.get("siblings_only") is not True:
+                fail(
+                    ".markdownlint.json MD024 must be "
+                    '{"siblings_only": true}',
+                    errors,
+                )
+            for rule in ("MD033", "MD041", "MD060"):
+                if parsed.get(rule) is not False:
+                    fail(
+                        f".markdownlint.json {rule} must be JSON false",
+                        errors,
+                    )
 
 
 def check_lycheeignore(errors: list[str]) -> None:
-    """Keep flaky badge CDN out of lychee; license badge stays in stewardship."""
+    """Keep flaky badge CDN out of lychee; license badge stays in stewardship.
+
+    Fail-closed second-pass after #83: pin live exclude hosts already present —
+    img.shields.io / modelcontextprotocol.io / linuxfoundation.org; reject
+    https://* / http://* / bare *; retain 308 / 103 / flaky rationale needles.
+    """
     if not LYCHEEIGNORE.is_file():
         return
     text = LYCHEEIGNORE.read_text(encoding="utf-8")
@@ -202,6 +261,41 @@ def check_lycheeignore(errors: list[str]) -> None:
         fail(
             ".lycheeignore must exclude flaky img.shields.io badge CDN "
             "(license badge presence remains stewardship-enforced)",
+            errors,
+        )
+    # Fail-closed after #83: live lycheeignore already excludes MCP 308 false-positive.
+    if "modelcontextprotocol.io" not in text:
+        fail(
+            ".lycheeignore must exclude modelcontextprotocol.io "
+            "(308 redirect false-positive)",
+            errors,
+        )
+    # Fail-closed after #83: live lycheeignore already excludes LF 103 early hints.
+    if "linuxfoundation.org" not in text:
+        fail(
+            ".lycheeignore must exclude linuxfoundation.org "
+            "(103 early hints false-positive)",
+            errors,
+        )
+    # Rationale needles already present on the live exclude file.
+    if "308" not in text:
+        fail(
+            ".lycheeignore must document MCP 308 redirect rationale",
+            errors,
+        )
+    if "103" not in text:
+        fail(
+            ".lycheeignore must document linuxfoundation 103 early-hints rationale",
+            errors,
+        )
+    if "early hints" not in text.lower():
+        fail(
+            ".lycheeignore must document early hints rationale",
+            errors,
+        )
+    if "flaky" not in text.lower():
+        fail(
+            ".lycheeignore must document flaky img.shields.io rationale",
             errors,
         )
     # Do not quietly drop fail-closed posture by ignoring everything.
@@ -2491,6 +2585,163 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
             )
 
 
+
+def check_markdownlint_lycheeignore_gate_contract(errors: list[str]) -> None:
+    """Fail-close lycheeignore + markdownlint.json second-pass wiring (after #83).
+
+    Slice only: not schema / actionlint / badge / wiki / relative / common /
+    CI workflow pin spam. Pins live exclude hosts + exact markdownlint key set.
+    """
+    self_text = BADGE_GATE.read_text(encoding="utf-8")
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    contract_fn = "check_markdownlint_lycheeignore_gate_" + "contract"
+    if f"def {contract_fn}(" not in self_text:
+        fail(
+            "check_badge_standard.py must provide " + contract_fn + "()",
+            errors,
+        )
+    if contract_fn + "(" not in self_text.replace(f"def {contract_fn}(", "", 1):
+        fail(
+            "check_badge_standard.py main must call " + contract_fn + "()",
+            errors,
+        )
+    lychee_fn = "check_lychee" + "ignore"
+    if f"def {lychee_fn}(" not in self_text:
+        fail(
+            "check_badge_standard.py must provide check_lycheeignore()",
+            errors,
+        )
+    lychee_assign = 'LYCHEEIGNORE = ROOT / ".lycheeignore"'
+    lychee_assign_sq = "LYCHEEIGNORE = ROOT / '.lycheeignore'"
+    if lychee_assign not in self_text and lychee_assign_sq not in self_text:
+        fail(
+            "check_badge_standard.py must declare LYCHEEIGNORE path constant",
+            errors,
+        )
+    md_assign = 'MARKDOWNLINT_CONFIG = ROOT / ".markdownlint.json"'
+    md_assign_sq = "MARKDOWNLINT_CONFIG = ROOT / '.markdownlint.json'"
+    if md_assign not in self_text and md_assign_sq not in self_text:
+        fail(
+            "check_badge_standard.py must declare MARKDOWNLINT_CONFIG path constant",
+            errors,
+        )
+    # Live lycheeignore host pins (second-pass after #83) — split so mutating
+    # host strings in check_lycheeignore cannot neutralize contract.
+    mcp_host = "modelcontextprotocol" + ".io"
+    if f'"{mcp_host}"' not in self_text and f"'{mcp_host}'" not in self_text:
+        fail(
+            "check_lycheeignore must pin modelcontextprotocol.io exclude",
+            errors,
+        )
+    lf_host = "linuxfoundation" + ".org"
+    if f'"{lf_host}"' not in self_text and f"'{lf_host}'" not in self_text:
+        fail(
+            "check_lycheeignore must pin linuxfoundation.org exclude",
+            errors,
+        )
+    shields_host = "img.shields" + ".io"
+    if f'"{shields_host}"' not in self_text and f"'{shields_host}'" not in self_text:
+        # Accept regex-escaped form already present from #26.
+        if "img.shields.io" not in self_text and r"img\.shields\.io" not in self_text:
+            fail(
+                "check_lycheeignore must pin img.shields.io exclude",
+                errors,
+            )
+    needle_308 = "308 redirect false-" + "positive"
+    if needle_308 not in self_text:
+        fail(
+            "check_lycheeignore must keep 308 redirect needle",
+            errors,
+        )
+    needle_103 = "103 early hints false-" + "positive"
+    if needle_103 not in self_text:
+        fail(
+            "check_lycheeignore must keep 103 early hints needle",
+            errors,
+        )
+    needle_flaky = "flaky img.shields.io " + "rationale"
+    if needle_flaky not in self_text:
+        fail(
+            "check_lycheeignore must keep flaky shields rationale needle",
+            errors,
+        )
+    # Split so mutating '"https://*" in text' cannot neutralize.
+    if '"https://' + '*" in text' not in self_text:
+        fail(
+            "check_lycheeignore must reject https://* star excludes",
+            errors,
+        )
+    if '"http://' + '*" in text' not in self_text:
+        fail(
+            "check_lycheeignore must reject http://* star excludes",
+            errors,
+        )
+    # Live markdownlint.json exact key-set / value pins (second-pass).
+    json_loads_parse = "parsed = json." + "loads(md_cfg)"
+    if json_loads_parse not in self_text:
+        fail(
+            "check_workflows_and_license must parse .markdownlint.json via json.loads",
+            errors,
+        )
+    exact_key_set = "must pin exact key " + "set"
+    if exact_key_set not in self_text:
+        fail(
+            "check_workflows_and_license must emit exact key set needle",
+            errors,
+        )
+    for key in ("default", "MD013", "MD024", "MD033", "MD041", "MD060"):
+        if f'"{key}"' not in self_text and f"'{key}'" not in self_text:
+            fail(
+                f"check_workflows_and_license markdownlint key set must pin {key}",
+                errors,
+            )
+    line_length_get = 'md013.get("line_length") != 200'
+    line_length_get_sq = "md013.get('line_length') != 200"
+    if line_length_get not in self_text and line_length_get_sq not in self_text:
+        fail(
+            "check_workflows_and_license must pin MD013 line_length",
+            errors,
+        )
+    # Exact {"siblings_only": true} lives in check_workflows fail message.
+    if '{"siblings_' + 'only": true}' not in self_text:
+        fail(
+            "check_workflows_and_license must pin MD024 siblings_only",
+            errors,
+        )
+    default_true = "default must be JSON " + "true"
+    if default_true not in self_text:
+        fail(
+            "check_workflows_and_license must emit "
+            + "default must be JSON "
+            + "true needle",
+            errors,
+        )
+    rule_false_tmpl = "{rule} must be JSON " + "false"
+    if rule_false_tmpl not in self_text:
+        fail(
+            "check_workflows_and_license must emit "
+            + "{rule} must be JSON "
+            + "false template",
+            errors,
+        )
+    valid_json = "must be valid " + "JSON"
+    if valid_json not in self_text:
+        fail(
+            "check_workflows_and_license must emit "
+            + "must be valid "
+            + "JSON needle",
+            errors,
+        )
+    second_pass_doc = "lycheeignore + markdownlint.json second-pass " + "pins"
+    if second_pass_doc not in self_text:
+        fail(
+            "check_badge_standard.py docstring must pin "
+            "lycheeignore + markdownlint.json second-pass pins",
+            errors,
+        )
+
+
+
 def check_badges(badges: list[re.Match[str]], errors: list[str]) -> None:
     if len(badges) != MAX_BADGES:
         fail(
@@ -2572,6 +2823,7 @@ def main() -> int:
     # Fail-closed after #75: actionlint-style contract early (same self-host file)
     # so style-helper renames / needle drift fail closed before NameError.
     check_actionlint_style_gate_contract(errors)
+    check_markdownlint_lycheeignore_gate_contract(errors)
     if errors:
         print("Badge standard check FAILED:", file=sys.stderr)
         for err in errors:

@@ -11,6 +11,18 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX lycheeignore + markdownlint.json second-pass pins after #83: expand
+  self-tests to 1821 cases (was 1755) fail-closing live lychee/markdownlint
+  integrity — `.lycheeignore` hosts `modelcontextprotocol.io` /
+  `linuxfoundation.org` / `img.shields.io` / 308+103+flaky rationale needles /
+  reject `https://*`+`http://*`+bare `*` / `.markdownlint.json` exact key set
+  `default`/`MD013`/`MD024`/`MD033`/`MD041`/`MD060` / `line_length` 200 /
+  `siblings_only` true / MD033+MD041+MD060 false / `json.loads` exact-key
+  contract, plus `check_markdownlint_lycheeignore_gate_contract` in
+  `check_badge_standard.py` — lycheeignore + markdownlint.json second-pass
+  slice only (not schema / actionlint / badge / wiki / relative / common /
+  CI workflow pin spam); no invent-product; no fourth badge
+
 - TOKENMAXX stewardship-schema second-pass pins after #79: expand self-tests
   to 1755 cases (was 1683) fail-closing live schema integrity —
   `FENCED_YAML_RE` exact / `ISO_DATE_RE` / `SEMVER_RE` / `ISSUE_REF_RE` /

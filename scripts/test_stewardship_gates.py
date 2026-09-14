@@ -89,10 +89,18 @@ scalar+non-empty+string / ACTIVE / tier / 0..3 / ISO-8601 / invent /
 semver / closes #N / FAILED+OK / stdlib-subset+PyYAML / bool subclass /
 match.group(1) / missing keys / utf-8 / STRING_KEYS members (not badge / wiki /
 relative / common / CI workflow / actionlint pin spam).
+Deepened after #83: lycheeignore + markdownlint.json second-pass —
+modelcontextprotocol.io / linuxfoundation.org / img.shields.io hosts /
+308+103+flaky rationales / reject https://*+http://*+bare * /
+.markdownlint.json exact key set default/MD013/MD024/MD033/MD041/MD060 /
+line_length 200 / siblings_only true / MD033+MD041+MD060 false /
+json.loads exact-key contract (not schema / actionlint / badge / wiki /
+relative / common / CI workflow pin spam).
 """
 
 from __future__ import annotations
 
+import json
 import shutil
 import subprocess
 import sys
@@ -264,7 +272,12 @@ jobs:
     (wf / "stewardship-checks.yml").write_text(stew, encoding="utf-8")
     _write(
         tmp / ".lycheeignore",
-        "# flaky badge CDN\nhttps://img\\.shields\\.io\n",
+        "# modelcontextprotocol.io returns 308 redirect — valid site\n"
+        "https://modelcontextprotocol.io/\n"
+        "# linuxfoundation.org returns 103 early hints — valid site\n"
+        "https://www.linuxfoundation.org/\n"
+        "# img.shields.io badge CDN is flaky\n"
+        "https://img\\.shields\\.io\n",
     )
     _write(
         tmp / ".markdownlint.json",
@@ -2245,7 +2258,15 @@ def test_lycheeignore_accepts_regex_escaped_shields() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
-        _write(tmp_path / ".lycheeignore", "https://img\\.shields\\.io\n")
+        _write(
+            tmp_path / ".lycheeignore",
+            "# modelcontextprotocol.io returns 308 redirect — valid site\n"
+            "https://modelcontextprotocol.io/\n"
+            "# linuxfoundation.org returns 103 early hints — valid site\n"
+            "https://www.linuxfoundation.org/\n"
+            "# img.shields.io badge CDN is flaky\n"
+            "https://img\\.shields\\.io\n",
+        )
         assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
 
 
@@ -2253,7 +2274,15 @@ def test_lycheeignore_accepts_literal_shields() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
-        _write(tmp_path / ".lycheeignore", "https://img.shields.io/\n")
+        _write(
+            tmp_path / ".lycheeignore",
+            "# modelcontextprotocol.io returns 308 redirect — valid site\n"
+            "https://modelcontextprotocol.io/\n"
+            "# linuxfoundation.org returns 103 early hints — valid site\n"
+            "https://www.linuxfoundation.org/\n"
+            "# img.shields.io badge CDN is flaky\n"
+            "https://img.shields.io/\n",
+        )
         assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
 
 
@@ -26233,6 +26262,950 @@ def test_schema_gate_requires_bool_int_reject_still_after_72() -> None:
         )
 
 
+
+# --- TOKENMAXX deepen after #83: lycheeignore + markdownlint.json second-pass pins ---
+
+def test_lycheeignore_requires_mcp_host_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".lycheeignore"
+        text = path.read_text(encoding="utf-8").replace("modelcontextprotocol.io", "example.com")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "modelcontextprotocol.io",
+        )
+
+def test_lycheeignore_requires_linuxfoundation_host_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".lycheeignore"
+        text = path.read_text(encoding="utf-8").replace("linuxfoundation.org", "example.org")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "linuxfoundation.org",
+        )
+
+def test_lycheeignore_requires_308_rationale_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".lycheeignore"
+        text = path.read_text(encoding="utf-8").replace("308", "redirect-code")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "308",
+        )
+
+def test_lycheeignore_requires_103_rationale_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".lycheeignore"
+        text = path.read_text(encoding="utf-8").replace("103", "code")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "103",
+        )
+
+def test_lycheeignore_requires_flaky_rationale_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".lycheeignore"
+        text = path.read_text(encoding="utf-8").replace("flaky", "unstable")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "flaky",
+        )
+
+def test_lycheeignore_requires_shields_still_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".lycheeignore"
+        text = path.read_text(encoding="utf-8").replace("img.shields.io", "badges.example").replace(r"img\.shields\.io", "badges.example")
+        # also handle escaped form written by seed
+        text = text.replace("img\\.shields\\.io", "badges.example")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "img.shields.io",
+        )
+
+def test_lycheeignore_rejects_https_star_still_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".lycheeignore"
+        text = path.read_text(encoding="utf-8") + "https://*\n"
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "https://*",
+        )
+
+def test_lycheeignore_rejects_http_star_still_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".lycheeignore"
+        text = path.read_text(encoding="utf-8") + "http://*\n"
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "http://*",
+        )
+
+def test_lycheeignore_rejects_bare_star_still_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        _write(tmp_path / ".lycheeignore", "*\n")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "must not exclude all http",
+        )
+
+def test_lycheeignore_accepts_full_live_hosts_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+def test_markdownlint_json_rejects_extra_key_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        cfg = json.loads(path.read_text(encoding="utf-8"))
+        cfg["MD999"] = False
+        path.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact key set",
+        )
+
+def test_markdownlint_json_rejects_missing_md013_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        cfg = json.loads(path.read_text(encoding="utf-8"))
+        del cfg["MD013"]
+        path.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "MD013",
+        )
+
+def test_markdownlint_json_rejects_wrong_line_length_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        cfg = json.loads(path.read_text(encoding="utf-8"))
+        cfg["MD013"] = {"line_length": 120}
+        path.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "line_length",
+        )
+
+def test_markdownlint_json_rejects_siblings_only_false_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        cfg = json.loads(path.read_text(encoding="utf-8"))
+        cfg["MD024"] = {"siblings_only": False}
+        path.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "siblings_only",
+        )
+
+def test_markdownlint_json_rejects_default_false_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        cfg = json.loads(path.read_text(encoding="utf-8"))
+        cfg["default"] = False
+        path.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "default",
+        )
+
+def test_markdownlint_json_rejects_md033_true_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        cfg = json.loads(path.read_text(encoding="utf-8"))
+        cfg["MD033"] = True
+        path.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "MD033",
+        )
+
+def test_markdownlint_json_rejects_md041_true_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        cfg = json.loads(path.read_text(encoding="utf-8"))
+        cfg["MD041"] = True
+        path.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "MD041",
+        )
+
+def test_markdownlint_json_rejects_md060_true_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        cfg = json.loads(path.read_text(encoding="utf-8"))
+        cfg["MD060"] = True
+        path.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "MD060",
+        )
+
+def test_markdownlint_json_rejects_invalid_json_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        path.write_text("{ not json\n", encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "valid JSON",
+        )
+
+def test_markdownlint_json_rejects_md013_non_object_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        cfg = json.loads(path.read_text(encoding="utf-8"))
+        cfg["MD013"] = 200
+        path.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "line_length",
+        )
+
+def test_markdownlint_json_rejects_md024_non_object_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        cfg = json.loads(path.read_text(encoding="utf-8"))
+        cfg["MD024"] = True
+        path.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "siblings_only",
+        )
+
+def test_markdownlint_json_accepts_exact_live_set_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+def test_md_lychee_contract_requires_mcp_pin_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'if "modelcontextprotocol.io" not in text:',
+            'if "modelcontextprotocol.example" not in text:',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "modelcontextprotocol.io",
+        )
+
+def test_md_lychee_contract_requires_lf_pin_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'if "linuxfoundation.org" not in text:',
+            'if "linuxfoundation.example" not in text:',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "linuxfoundation.org",
+        )
+
+def test_md_lychee_contract_requires_json_loads_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "parsed = json.loads(md_cfg)",
+            "parsed = json.load(md_cfg)",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "json.loads",
+        )
+
+def test_md_lychee_contract_requires_exact_key_set_needle_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('must pin exact key set', 'must pin key set')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exact key set',
+        )
+
+def test_md_lychee_contract_requires_default_json_true_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "default must be JSON true",
+            "default must be boolean true",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "JSON true",
+        )
+
+def test_md_lychee_contract_requires_valid_json_needle_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        # Contiguous fail needle only (contract looks via split "must be valid "+"JSON").
+        text = path.read_text(encoding="utf-8").replace(
+            '.markdownlint.json must be valid JSON',
+            '.markdownlint.json must be parseable JSON',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "valid JSON",
+        )
+
+def test_md_lychee_contract_requires_308_needle_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "(308 redirect false-positive)",
+            "(redirect false-positive)",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "308 redirect",
+        )
+
+def test_md_lychee_contract_requires_103_needle_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "(103 early hints false-positive)",
+            "(early hints false-positive)",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "103 early hints",
+        )
+
+def test_md_lychee_contract_requires_flaky_needle_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "flaky img.shields.io rationale",
+            "unstable img.shields.io rationale",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "flaky shields rationale",
+        )
+
+def test_md_lychee_contract_requires_https_star_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '"https://*" in text',
+            '"https://star" in text',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "https://*",
+        )
+
+def test_md_lychee_contract_requires_http_star_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '"http://*" in text',
+            '"http://star" in text',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "http://*",
+        )
+
+def test_md_lychee_contract_requires_lycheeignore_const_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'LYCHEEIGNORE = ROOT / ".lycheeignore"',
+            'LYCHEE_IGNORE = ROOT / ".lycheeignore"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "LYCHEEIGNORE",
+        )
+
+def test_md_lychee_contract_requires_markdownlint_const_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'MARKDOWNLINT_CONFIG = ROOT / ".markdownlint.json"',
+            'MARKDOWN_LINT_CONFIG = ROOT / ".markdownlint.json"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "MARKDOWNLINT_CONFIG",
+        )
+
+def test_md_lychee_contract_requires_check_lycheeignore_fn_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('def check_lycheeignore(', 'def check_lychee_ignore(')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'check_lycheeignore',
+        )
+
+def test_md_lychee_contract_requires_second_pass_doc_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('lycheeignore + markdownlint.json second-pass pins', 'lycheeignore markdownlint second-pass pins')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'second-pass pins',
+        )
+
+def test_md_lychee_contract_requires_rule_false_tmpl_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '{rule} must be JSON false',
+            '{rule} must be boolean false',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "JSON false",
+        )
+
+def test_md_lychee_contract_requires_md013_key_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('"MD013"', '"MD13"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'MD013',
+        )
+
+def test_md_lychee_contract_requires_md024_key_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('"MD024"', '"MD24"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'MD024',
+        )
+
+def test_md_lychee_contract_requires_md033_key_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '"MD033",\n                "MD041",\n                "MD060",',
+            '"MD33",\n                "MD041",\n                "MD060",',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "MD033",
+        )
+
+def test_md_lychee_contract_requires_md041_key_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '"MD041",\n                "MD060",',
+            '"MD41",\n                "MD060",',
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "MD041",
+        )
+
+def test_md_lychee_contract_requires_md060_key_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '"MD060",\n            }',
+            '"MD60",\n            }',
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "MD060",
+        )
+
+def test_md_lychee_contract_requires_default_key_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace('"default"', '"defaults"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'default',
+        )
+
+def test_md_lychee_contract_requires_fn_def_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "def check_markdownlint_lycheeignore_gate_contract(",
+            "def check_markdownlint_lychee_gate_contract(",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "check_markdownlint_lycheeignore_gate_contract",
+        )
+
+def test_md_lychee_contract_requires_fn_call_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "check_markdownlint_lycheeignore_gate_contract(errors)",
+            "check_markdownlint_lycheeignore_gate_contract_x(errors)",
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "check_markdownlint_lycheeignore_gate_contract",
+        )
+
+def test_markdownlint_json_requires_md013_still_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8").replace('MD013', 'MD013X')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'MD013',
+        )
+
+def test_markdownlint_json_requires_line_length_200_still_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8").replace('line_length": 200', 'line_length": 180')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'line_length',
+        )
+
+def test_markdownlint_json_requires_siblings_only_true_still_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8").replace('siblings_only": true', 'siblings_only": false')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'siblings_only',
+        )
+
+def test_markdownlint_json_requires_default_true_still_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8").replace('"default": true', '"default": false')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'default',
+        )
+
+def test_markdownlint_json_requires_md033_false_still_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8").replace('"MD033": false', '"MD033": true')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'MD033',
+        )
+
+def test_markdownlint_json_requires_md041_false_still_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8").replace('"MD041": false', '"MD041": true')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'MD041',
+        )
+
+def test_markdownlint_json_requires_md060_false_still_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8").replace('"MD060": false', '"MD060": true')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'MD060',
+        )
+
+def test_markdownlint_gate_requires_md013_regex_still_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8").replace('"MD013"', '"MD012"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "MD013",
+        )
+
+def test_markdownlint_gate_requires_md024_regex_still_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        text = path.read_text(encoding="utf-8").replace('"MD024"', '"MD025"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "MD024",
+        )
+
+def test_lycheeignore_gate_requires_shields_still_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'if "img.shields.io" not in text and r"img\\.shields\\.io" not in text:',
+            'if "img.badges.io" not in text and r"img\\.badges\\.io" not in text:',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "img.shields.io",
+        )
+
+def test_lycheeignore_rejects_missing_mcp_with_shields_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        _write(
+            tmp_path / ".lycheeignore",
+            "# linuxfoundation.org returns 103 early hints — valid site\n"
+            "https://www.linuxfoundation.org/\n"
+            "# img.shields.io badge CDN is flaky\n"
+            "https://img\\.shields\\.io\n",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "modelcontextprotocol.io",
+        )
+
+def test_lycheeignore_rejects_missing_lf_with_mcp_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        _write(
+            tmp_path / ".lycheeignore",
+            "# modelcontextprotocol.io returns 308 redirect — valid site\n"
+            "https://modelcontextprotocol.io/\n"
+            "# img.shields.io badge CDN is flaky\n"
+            "https://img\\.shields\\.io\n",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "linuxfoundation.org",
+        )
+
+def test_lycheeignore_rejects_missing_308_comment_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        _write(
+            tmp_path / ".lycheeignore",
+            "# modelcontextprotocol.io redirect — valid site\n"
+            "https://modelcontextprotocol.io/\n"
+            "# linuxfoundation.org returns 103 early hints — valid site\n"
+            "https://www.linuxfoundation.org/\n"
+            "# img.shields.io badge CDN is flaky\n"
+            "https://img\\.shields\\.io\n",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "308",
+        )
+
+def test_markdownlint_json_rejects_missing_md024_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        cfg = json.loads(path.read_text(encoding="utf-8"))
+        del cfg["MD024"]
+        path.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "MD024",
+        )
+
+def test_markdownlint_json_rejects_missing_default_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        cfg = json.loads(path.read_text(encoding="utf-8"))
+        del cfg["default"]
+        path.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "default",
+        )
+
+def test_markdownlint_json_rejects_missing_md033_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        cfg = json.loads(path.read_text(encoding="utf-8"))
+        del cfg["MD033"]
+        path.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "MD033",
+        )
+
+def test_markdownlint_json_rejects_missing_md041_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        cfg = json.loads(path.read_text(encoding="utf-8"))
+        del cfg["MD041"]
+        path.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "MD041",
+        )
+
+def test_markdownlint_json_rejects_missing_md060_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".markdownlint.json"
+        cfg = json.loads(path.read_text(encoding="utf-8"))
+        del cfg["MD060"]
+        path.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "MD060",
+        )
+
+def test_md_lychee_contract_requires_siblings_pin_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        # Mutate only the exact-key JSON value check contiguous needle.
+        text = path.read_text(encoding="utf-8").replace(
+            '{"siblings_only": true}',
+            '{"sibling_only": true}',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "siblings_only",
+        )
+
+def test_md_lychee_contract_requires_line_length_obj_after_83() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'md013.get("line_length") != 200',
+            'md013.get("line_len") != 200',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "line_length",
+        )
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -28034,6 +29007,73 @@ def main() -> int:
         test_schema_rejects_tier_zero_after_72,
         test_schema_rejects_missing_yaml_fence_after_72,
         test_schema_gate_requires_bool_int_reject_still_after_72,
+        # TOKENMAXX deepen after #83 (lycheeignore + markdownlint.json second-pass)
+        test_lycheeignore_requires_mcp_host_after_83,
+        test_lycheeignore_requires_linuxfoundation_host_after_83,
+        test_lycheeignore_requires_308_rationale_after_83,
+        test_lycheeignore_requires_103_rationale_after_83,
+        test_lycheeignore_requires_flaky_rationale_after_83,
+        test_lycheeignore_requires_shields_still_after_83,
+        test_lycheeignore_rejects_https_star_still_after_83,
+        test_lycheeignore_rejects_http_star_still_after_83,
+        test_lycheeignore_rejects_bare_star_still_after_83,
+        test_lycheeignore_accepts_full_live_hosts_after_83,
+        test_markdownlint_json_rejects_extra_key_after_83,
+        test_markdownlint_json_rejects_missing_md013_after_83,
+        test_markdownlint_json_rejects_wrong_line_length_after_83,
+        test_markdownlint_json_rejects_siblings_only_false_after_83,
+        test_markdownlint_json_rejects_default_false_after_83,
+        test_markdownlint_json_rejects_md033_true_after_83,
+        test_markdownlint_json_rejects_md041_true_after_83,
+        test_markdownlint_json_rejects_md060_true_after_83,
+        test_markdownlint_json_rejects_invalid_json_after_83,
+        test_markdownlint_json_rejects_md013_non_object_after_83,
+        test_markdownlint_json_rejects_md024_non_object_after_83,
+        test_markdownlint_json_accepts_exact_live_set_after_83,
+        test_md_lychee_contract_requires_mcp_pin_after_83,
+        test_md_lychee_contract_requires_lf_pin_after_83,
+        test_md_lychee_contract_requires_json_loads_after_83,
+        test_md_lychee_contract_requires_exact_key_set_needle_after_83,
+        test_md_lychee_contract_requires_default_json_true_after_83,
+        test_md_lychee_contract_requires_valid_json_needle_after_83,
+        test_md_lychee_contract_requires_308_needle_after_83,
+        test_md_lychee_contract_requires_103_needle_after_83,
+        test_md_lychee_contract_requires_flaky_needle_after_83,
+        test_md_lychee_contract_requires_https_star_after_83,
+        test_md_lychee_contract_requires_http_star_after_83,
+        test_md_lychee_contract_requires_lycheeignore_const_after_83,
+        test_md_lychee_contract_requires_markdownlint_const_after_83,
+        test_md_lychee_contract_requires_check_lycheeignore_fn_after_83,
+        test_md_lychee_contract_requires_second_pass_doc_after_83,
+        test_md_lychee_contract_requires_rule_false_tmpl_after_83,
+        test_md_lychee_contract_requires_md013_key_after_83,
+        test_md_lychee_contract_requires_md024_key_after_83,
+        test_md_lychee_contract_requires_md033_key_after_83,
+        test_md_lychee_contract_requires_md041_key_after_83,
+        test_md_lychee_contract_requires_md060_key_after_83,
+        test_md_lychee_contract_requires_default_key_after_83,
+        test_md_lychee_contract_requires_fn_def_after_83,
+        test_md_lychee_contract_requires_fn_call_after_83,
+        test_markdownlint_json_requires_md013_still_after_83,
+        test_markdownlint_json_requires_line_length_200_still_after_83,
+        test_markdownlint_json_requires_siblings_only_true_still_after_83,
+        test_markdownlint_json_requires_default_true_still_after_83,
+        test_markdownlint_json_requires_md033_false_still_after_83,
+        test_markdownlint_json_requires_md041_false_still_after_83,
+        test_markdownlint_json_requires_md060_false_still_after_83,
+        test_markdownlint_gate_requires_md013_regex_still_after_83,
+        test_markdownlint_gate_requires_md024_regex_still_after_83,
+        test_lycheeignore_gate_requires_shields_still_after_83,
+        test_lycheeignore_rejects_missing_mcp_with_shields_after_83,
+        test_lycheeignore_rejects_missing_lf_with_mcp_after_83,
+        test_lycheeignore_rejects_missing_308_comment_after_83,
+        test_markdownlint_json_rejects_missing_md024_after_83,
+        test_markdownlint_json_rejects_missing_default_after_83,
+        test_markdownlint_json_rejects_missing_md033_after_83,
+        test_markdownlint_json_rejects_missing_md041_after_83,
+        test_markdownlint_json_rejects_missing_md060_after_83,
+        test_md_lychee_contract_requires_siblings_pin_after_83,
+        test_md_lychee_contract_requires_line_length_obj_after_83,
     ]
     try:
         for script in GATE_SCRIPTS:

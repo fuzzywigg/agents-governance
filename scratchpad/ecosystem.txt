@@ -851,3 +851,5 @@ _None yet._
 2026-09-14T09:42:59Z cursor: Tip-push CHANGELOG track #256 to fire PR CI on head (scratchpad-only tip lacked path triggers); leave draft; do not revive #251/#250 ← ECO-078
 
 2026-09-14T09:43:28Z cursor: Touch docs/badge-standard.md so stewardship path filter runs on #256 tip ← ECO-078
+
+2026-09-14T09:53:34Z cursor: PR #256 CI green (lint + link-check + stewardship) on tip 0cdf49e — leave draft / do-not-merge ← ECO-078 Pass-2 residual + blob/503 harden after #244 (do not revive #251/#250/#246/#245/#240)

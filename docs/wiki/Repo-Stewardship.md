@@ -353,6 +353,19 @@ not path-edges leftover #262 / not wiki/mdlink leftover #252 /
 not stewardship-schema leftover #258 / not path-filter residual #244 /
 not wiki outline/PUBLISH leftover #243 / not md/link residual layouts #239;
 no extra wiki files)).
+plus wiki/mdlink leftover residual deepen after #293 tip: PUBLISH H1 /
+in-repo source / separate git repo / table separator / rewrite relative /
+badge-standard.md links to: / Wiki Home README acceptance / private MEMORY /
+editable source copy / Until `.wiki.git` treat / landing from README /
+clone fails initialized / push Home.md / full push # or main line /
+Home Start here TOC / Source of truth / Canonical front door /
+public narrative layer / Front-door duties / Docs quality CI /
+token→args adjacency / checkout→Check links→lychee triple /
+checkout→Run markdownlint→DavidAnson triple — DISTINCT leftover only
+(not wiki/mdlink leftover residual #293 / not stewardship-schema residual #282 /
+not lychee/blob-503 leftover #278 / not Pass-2 residual + templates #272 /
+not path-edges leftover #262 / not wiki/mdlink leftover #252;
+no extra wiki files)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

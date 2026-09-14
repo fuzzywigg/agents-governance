@@ -93,6 +93,27 @@ Fail-closed pins (live path after #53; second-pass after #72/#75):
   residual CI invalid status stubs SHELVED|SUPERSEDED|HOLD|STALE|ALPHA|NIGHTLY /
   residual CI invalid surface stubs chatgpt|vertex|groq|together|mistral /
   residual CI docstring
+- Residual CI leftover deepen after #299 (schema residual CI leftover; NOT schema residual CI #299 /
+  NOT wiki/mdlink leftover residual #293 / NOT schema leftover residual #282 /
+  NOT lychee/blob-503 leftover #278 / NOT Pass-2 residual leftover #272 /
+  NOT path-filter/path-order leftover #262 / NOT schema leftover #258 /
+  NOT wiki/mdlink leftover #252 / NOT path-edges residual #244 /
+  NOT schema residual (pass-5) #233):
+  residual CI leftover helper needles missing = sorted(required_keys - set(data)) /
+  if key not in data: / value = data[key] /
+  if reject_non_scalar(rel, key, value, errors): /
+  status = data.get("status") / str(status).upper() != "ACTIVE" /
+  if rel.startswith("docs/"): / expected = EXPECTED_VALUES.get(rel, {}) /
+  if got != want: / isinstance(level, bool) /
+  level not in (0, 1, 2, 3) / if "tier" in data: /
+  tier = data["tier"] / for date_key in DATE_KEYS: /
+  if "invent" not in policy / scan_secrets(path, errors) /
+  except Exception as exc: / errors: list[str] = [] /
+  sys.exit(main()) /
+  engine = "PyYAML" if yaml is not None else "stdlib-subset" /
+  residual CI leftover invalid status stubs BLOCKED|PAUSED|DEFERRED|SKIPPED|MUTED|DORMANT /
+  residual CI leftover invalid surface stubs gemini|perplexity|fireworks|deepseek|ollama /
+  residual CI leftover docstring
 """
 
 from __future__ import annotations

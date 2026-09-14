@@ -787,3 +787,6 @@ _None yet._
 2026-09-14T08:12:00Z cursor: Local green — run_stewardship + self-tests 4560 + markdownlint ← ECO-075 path-filter/path-order residuals after #233 (leave draft; do not revive #232/#228/#226)
 
 2026-09-14T08:12:30Z cursor: Draft PR #236 opened (cursor/tokenmaxx-path-edges-residual-after-233-7fba); leave draft / do-not-merge; awaiting CI ← ECO-075 residual after #233 (do not revive #232/#228/#226/#223/#217/#213/#198)
+
+2026-09-14T08:22:02Z cursor: PR #239 MERGED (md/link residual layouts after #233) ← tip
+2026-09-14T08:24:00Z cursor: Merged origin/main (#239) into open #236 — MERGEABLE; local self-tests 4608 ← ECO-075 residual on post-#239 tip (leave draft; do not revive #232/#228)

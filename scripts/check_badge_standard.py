@@ -206,6 +206,28 @@ def check_workflows_and_license(errors: list[str]) -> None:
                 '.markdownlint.json must pin "MD024": { "siblings_only": true }',
                 errors,
             )
+        # Fail-closed after #83 HEAVY: live markdownlint key set (no invent rules).
+        for required_key in (
+            '"default"',
+            '"MD013"',
+            '"MD024"',
+            '"MD033"',
+            '"MD041"',
+            '"MD060"',
+        ):
+            if required_key not in md_cfg:
+                fail(
+                    f".markdownlint.json must keep live key {required_key} "
+                    "(docs CI config path)",
+                    errors,
+                )
+        # Fail-closed after #83 HEAVY: reject invent-rule drift (MD001 invent).
+        if '"MD001"' in md_cfg:
+            fail(
+                ".markdownlint.json must not invent MD001 "
+                "(docs CI config fail-closed)",
+                errors,
+            )
 
 
 def check_lycheeignore(errors: list[str]) -> None:
@@ -214,7 +236,8 @@ def check_lycheeignore(errors: list[str]) -> None:
     Live fail-closed pins after #83 (docs CI config slice; not CI workflow spam):
     escaped img\\.shields\\.io; modelcontextprotocol.io + linuxfoundation.org
     live excludes; stewardship/license-badge commentary; reject https://* /
-    http://* / bare *.
+    http://* / bare *. Exact live URL forms + 308/103/flaky commentary pins
+    (TOKENMAXX HEAVY deepen on docs CI config only).
     """
     if not LYCHEEIGNORE.is_file():
         return
@@ -233,6 +256,13 @@ def check_lycheeignore(errors: list[str]) -> None:
             "(live docs CI config path)",
             errors,
         )
+    # Fail-closed after #83 HEAVY: live line is https://img\.shields\.io (scheme+escape).
+    if r"https://img\.shields\.io" not in text:
+        fail(
+            r".lycheeignore must pin https://img\.shields\.io exclude line "
+            "(live docs CI config path)",
+            errors,
+        )
     # Fail-closed after #83: live excludes for known lychee false-positives.
     if "modelcontextprotocol.io" not in text:
         fail(
@@ -246,6 +276,19 @@ def check_lycheeignore(errors: list[str]) -> None:
             "(live lychee false-positive path)",
             errors,
         )
+    # Fail-closed after #83 HEAVY: exact live URL forms (trailing slash).
+    if "https://modelcontextprotocol.io/" not in text:
+        fail(
+            ".lycheeignore must pin https://modelcontextprotocol.io/ "
+            "(exact live exclude URL)",
+            errors,
+        )
+    if "https://www.linuxfoundation.org/" not in text:
+        fail(
+            ".lycheeignore must pin https://www.linuxfoundation.org/ "
+            "(exact live exclude URL)",
+            errors,
+        )
     # Fail-closed after #83: commentary must keep stewardship license-badge posture.
     lowered = text.lower()
     if "stewardship" not in lowered and "license badge" not in lowered:
@@ -254,11 +297,34 @@ def check_lycheeignore(errors: list[str]) -> None:
             "(CDN exclude is not a missing License badge)",
             errors,
         )
+    # Fail-closed after #83 HEAVY: live commentary rationale pins.
+    if "308" not in text:
+        fail(
+            ".lycheeignore must note 308 redirect rationale for MCP exclude",
+            errors,
+        )
+    if "103" not in text:
+        fail(
+            ".lycheeignore must note 103 early-hints rationale for LF exclude",
+            errors,
+        )
+    if "flaky" not in lowered:
+        fail(
+            ".lycheeignore must note flaky shields CDN rationale",
+            errors,
+        )
     # Do not quietly drop fail-closed posture by ignoring everything.
     if text.strip() == "*" or "https://*" in text or "http://*" in text:
         fail(
             ".lycheeignore must not exclude all http(s) targets "
             "(https://* / http://* / bare *)",
+            errors,
+        )
+    # Fail-closed after #83 HEAVY: reject recursive glob excludes.
+    if "**" in text:
+        fail(
+            ".lycheeignore must not use ** recursive excludes "
+            "(docs CI config fail-closed)",
             errors,
         )
 
@@ -1381,6 +1447,73 @@ def check_docs_ci_config_gate_contract(errors: list[str]) -> None:
     if docs_slice not in text:
         fail(
             "docs CI config contract must keep " + docs_slice + " wording",
+            errors,
+        )
+    # TOKENMAXX HEAVY deepen pins after #83 (exact live URL + commentary).
+    https_shields = r"https://img\.shields" + r"\.io"
+    if https_shields not in text:
+        fail(
+            "check_lycheeignore must pin " + https_shields + " exclude line",
+            errors,
+        )
+    mcp_url = "https://modelcontextprotocol.io" + "/"
+    if mcp_url not in text:
+        fail(
+            "check_lycheeignore must pin exact " + mcp_url,
+            errors,
+        )
+    lfs_url = "https://www.linuxfoundation.org" + "/"
+    if lfs_url not in text:
+        fail(
+            "check_lycheeignore must pin exact " + lfs_url,
+            errors,
+        )
+    mcp_308_pin = "308 redirect rationale for " + "MCP"
+    if mcp_308_pin not in text:
+        fail(
+            "check_lycheeignore must keep " + mcp_308_pin + " pin",
+            errors,
+        )
+    lfs_103_pin = "103 early-hints rationale for " + "LF"
+    if lfs_103_pin not in text:
+        fail(
+            "check_lycheeignore must keep " + lfs_103_pin + " pin",
+            errors,
+        )
+    flaky_pin = "flaky shields CDN " + "rationale"
+    if flaky_pin not in text:
+        fail(
+            "check_lycheeignore must keep " + flaky_pin + " pin",
+            errors,
+        )
+    glob_check = 'if "**" in ' + "text"
+    if glob_check not in text:
+        fail(
+            "check_lycheeignore must reject ** via " + glob_check,
+            errors,
+        )
+    md001_reject = "must not invent " + "MD001"
+    if md001_reject not in text:
+        fail(
+            "check_workflows_and_license must reject invent MD001",
+            errors,
+        )
+    for live_key in ('"default"', '"MD013"', '"MD024"', '"MD033"', '"MD041"', '"MD060"'):
+        if live_key not in text:
+            fail(
+                "check_workflows_and_license must keep live key " + live_key,
+                errors,
+            )
+    live_key_wording = "must keep live " + "key"
+    if live_key_wording not in text:
+        fail(
+            "check_workflows_and_license must keep " + live_key_wording + " wording",
+            errors,
+        )
+    heavy_pin = "TOKENMAXX HEAVY " + "deepen"
+    if heavy_pin not in text:
+        fail(
+            "check_lycheeignore must keep " + heavy_pin + " docstring pin",
             errors,
         )
 

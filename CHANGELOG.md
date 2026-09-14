@@ -11,6 +11,19 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX docs CI config pins after #83: expand self-tests to 1852 cases
+  (was 1755) fail-closing live docs CI config integrity — `.lycheeignore`
+  escaped `img\.shields\.io` / `modelcontextprotocol.io` /
+  `linuxfoundation.org` / stewardship license-badge note / `https://*` +
+  `http://*` + bare `*` reject / exact `https://img\.shields\.io` line /
+  trailing-slash MCP+LF URLs / 308+103+flaky commentary / `**` reject /
+  `.markdownlint.json` exact `"MD013": { "line_length": 200 }` +
+  `"MD024": { "siblings_only": true }` objects / `MD033`+`MD041`+`MD060`
+  false / `default: true` / live key set / MD001 invent reject / docs CI
+  config gate contract in `check_badge_standard.py` — docs CI config slice
+  only (not schema / actionlint / badge / wiki / relative / common / CI
+  workflow pin spam); no invent-product; no fourth badge
+
 - TOKENMAXX stewardship-schema second-pass pins after #79: expand self-tests
   to 1755 cases (was 1683) fail-closing live schema integrity —
   `FENCED_YAML_RE` exact / `ISO_DATE_RE` / `SEMVER_RE` / `ISSUE_REF_RE` /

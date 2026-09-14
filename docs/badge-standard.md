@@ -126,7 +126,13 @@ plus stewardship-schema second-pass after #72/#75: `FENCED_YAML_RE` exact /
 `ISO_DATE_RE` / `SEMVER_RE` / `ISSUE_REF_RE` / `DATE_KEYS` / Tiny YAML /
 scalar+non-empty+string / ACTIVE / tier / 0..3 / ISO-8601 / invent /
 semver / closes #N / FAILED+OK / stdlib-subset+PyYAML / bool subclass /
-`match.group(1)` / missing keys / utf-8 / `STRING_KEYS` members).
+`match.group(1)` / missing keys / utf-8 / `STRING_KEYS` members,
+plus docs CI config pins after #83: `.lycheeignore` escaped shields /
+`modelcontextprotocol.io` / `linuxfoundation.org` / stewardship
+license-badge note / `https://*`+`http://*` reject / `.markdownlint.json`
+exact MD013+MD024 objects / MD033+MD041+MD060 false / `default: true` /
+exact `https://img\.shields\.io` line / trailing-slash MCP+LF URLs /
+308+103+flaky commentary / `**` reject / live key set / MD001 invent reject).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

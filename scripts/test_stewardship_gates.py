@@ -94,6 +94,9 @@ modelcontextprotocol.io + linuxfoundation.org / stewardship license-badge
 note / https://* http://* reject / .markdownlint.json exact MD013+MD024
 objects / MD033+MD041+MD060 false / default:true / gate contract
 (not schema / actionlint / badge / wiki / relative / common / CI workflow spam).
+HEAVY deepen: exact https://img\\.shields\\.io line / trailing-slash MCP+LF
+URLs / 308+103+flaky commentary / ** reject / MD001 invent reject / live
+markdownlint key set.
 """
 
 from __future__ import annotations
@@ -2257,7 +2260,7 @@ def test_lycheeignore_accepts_regex_escaped_shields() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         _write(
             tmp_path / ".lycheeignore",
-            "# stewardship license badge\n"
+            "# MCP 308 LF 103 flaky stewardship license badge\n"
             "https://modelcontextprotocol.io/\n"
             "https://www.linuxfoundation.org/\n"
             "https://img\\.shields\\.io\n",
@@ -26604,7 +26607,7 @@ def test_lycheeignore_rejects_missing_escaped_shields_after_83() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
-        _write(tmp_path / ".lycheeignore", "# stewardship license badge\nhttps://modelcontextprotocol.io/\nhttps://www.linuxfoundation.org/\nhttps://img.shields.io/\n")
+        _write(tmp_path / ".lycheeignore", "# MCP 308 stewardship license badge\nhttps://modelcontextprotocol.io/\n# LF 103\nhttps://www.linuxfoundation.org/\n# flaky shields\nhttps://img.shields.io/\n")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
@@ -26616,7 +26619,7 @@ def test_lycheeignore_rejects_missing_mcp_after_83() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
-        _write(tmp_path / ".lycheeignore", "# stewardship license badge\nhttps://www.linuxfoundation.org/\nhttps://img\\.shields\\.io\n")
+        _write(tmp_path / ".lycheeignore", "# MCP 308 LF 103 flaky stewardship license badge\nhttps://www.linuxfoundation.org/\nhttps://img\\.shields\\.io\n")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
@@ -26628,7 +26631,7 @@ def test_lycheeignore_rejects_missing_lfs_after_83() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
-        _write(tmp_path / ".lycheeignore", "# stewardship license badge\nhttps://modelcontextprotocol.io/\nhttps://img\\.shields\\.io\n")
+        _write(tmp_path / ".lycheeignore", "# MCP 308 stewardship license badge flaky\nhttps://modelcontextprotocol.io/\n# LF 103\nhttps://img\\.shields\\.io\n")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
@@ -26640,7 +26643,7 @@ def test_lycheeignore_rejects_missing_stewardship_note_after_83() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
-        _write(tmp_path / ".lycheeignore", "https://modelcontextprotocol.io/\nhttps://www.linuxfoundation.org/\nhttps://img\\.shields\\.io\n")
+        _write(tmp_path / ".lycheeignore", "# MCP 308 LF 103 flaky CDN excludes only\nhttps://modelcontextprotocol.io/\nhttps://www.linuxfoundation.org/\nhttps://img\\.shields\\.io\n")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
@@ -26652,7 +26655,7 @@ def test_lycheeignore_rejects_https_star_after_83() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
-        _write(tmp_path / ".lycheeignore", "# stewardship license badge\nhttps://modelcontextprotocol.io/\nhttps://www.linuxfoundation.org/\nhttps://img\\.shields\\.io\nhttps://*\n")
+        _write(tmp_path / ".lycheeignore", "# MCP 308 LF 103 flaky stewardship license badge\nhttps://modelcontextprotocol.io/\nhttps://www.linuxfoundation.org/\nhttps://img\\.shields\\.io\nhttps://*\n")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
@@ -26664,7 +26667,7 @@ def test_lycheeignore_rejects_http_star_after_83() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
-        _write(tmp_path / ".lycheeignore", "# stewardship license badge\nhttps://modelcontextprotocol.io/\nhttps://www.linuxfoundation.org/\nhttps://img\\.shields\\.io\nhttp://*\n")
+        _write(tmp_path / ".lycheeignore", "# MCP 308 LF 103 flaky stewardship license badge\nhttps://modelcontextprotocol.io/\nhttps://www.linuxfoundation.org/\nhttps://img\\.shields\\.io\nhttp://*\n")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
@@ -26688,7 +26691,7 @@ def test_lycheeignore_rejects_missing_shields_any_after_83() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
-        _write(tmp_path / ".lycheeignore", "# stewardship license badge\nhttps://modelcontextprotocol.io/\nhttps://www.linuxfoundation.org/\n")
+        _write(tmp_path / ".lycheeignore", "# MCP 308 LF 103 flaky stewardship license badge\nhttps://modelcontextprotocol.io/\nhttps://www.linuxfoundation.org/\n")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
@@ -26993,7 +26996,7 @@ def test_lycheeignore_rejects_missing_mcp_still_after_83() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
-        _write(tmp_path / ".lycheeignore", "# license badge stewardship\nhttps://www.linuxfoundation.org/\nhttps://img\\.shields\\.io\n")
+        _write(tmp_path / ".lycheeignore", "# MCP 308 LF 103 flaky license badge stewardship\nhttps://www.linuxfoundation.org/\nhttps://img\\.shields\\.io\n")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
@@ -27005,7 +27008,7 @@ def test_lycheeignore_rejects_missing_lfs_still_after_83() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
-        _write(tmp_path / ".lycheeignore", "# license badge stewardship\nhttps://modelcontextprotocol.io/\nhttps://img\\.shields\\.io\n")
+        _write(tmp_path / ".lycheeignore", "# MCP 308 LF 103 flaky license badge stewardship\nhttps://modelcontextprotocol.io/\nhttps://img\\.shields\\.io\n")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
@@ -27017,7 +27020,7 @@ def test_lycheeignore_rejects_missing_escaped_still_after_83() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
-        _write(tmp_path / ".lycheeignore", "# license badge stewardship\nhttps://modelcontextprotocol.io/\nhttps://www.linuxfoundation.org/\nhttps://img.shields.io\n")
+        _write(tmp_path / ".lycheeignore", "# MCP 308 LF 103 flaky license badge stewardship\nhttps://modelcontextprotocol.io/\nhttps://www.linuxfoundation.org/\nhttps://img.shields.io\n")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
@@ -27107,6 +27110,7 @@ def test_lycheeignore_rejects_missing_note_still_after_83() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         _write(
             tmp_path / ".lycheeignore",
+            "# MCP 308 LF 103 flaky CDN excludes only\n"
             "https://modelcontextprotocol.io/\n"
             "https://www.linuxfoundation.org/\n"
             "https://img\\.shields\\.io\n",
@@ -27267,6 +27271,438 @@ def test_lycheeignore_accepts_full_live_fixture_after_83() -> None:
             "https://img\\.shields\\.io\n",
         )
         assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+
+# --- TOKENMAXX HEAVY deepen after #83: exact live URL + commentary + MD key set ---
+
+def test_docs_ci_gate_requires_https_shields_line_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            r"https://img\.shields\.io", r"img\.shields\.io"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            r"https://img\.shields\.io",
+        )
+
+
+def test_docs_ci_gate_requires_exact_mcp_url_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "https://modelcontextprotocol.io/", "https://modelcontextprotocol.io"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "https://modelcontextprotocol.io/",
+        )
+
+
+def test_docs_ci_gate_requires_exact_lfs_url_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "https://www.linuxfoundation.org/", "https://www.linuxfoundation.org"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "https://www.linuxfoundation.org/",
+        )
+
+
+def test_docs_ci_gate_requires_308_pin_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "308 redirect rationale for MCP",
+            "redirect rationale for MCP",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "308 redirect rationale for MCP",
+        )
+
+
+def test_docs_ci_gate_requires_103_pin_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "103 early-hints rationale for LF",
+            "early-hints rationale for LF",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "103 early-hints rationale for LF",
+        )
+
+
+def test_docs_ci_gate_requires_flaky_pin_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "flaky shields CDN rationale",
+            "unstable shields CDN rationale",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "flaky shields CDN rationale",
+        )
+
+
+def test_docs_ci_gate_requires_glob_reject_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'if "**" in text:',
+            'if "GLOBSTAR" in text:',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'if "**" in text',
+        )
+
+
+def test_docs_ci_gate_requires_md001_reject_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "must not invent MD001", "must not invent MD999"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "must reject invent MD001",
+        )
+
+
+def test_docs_ci_gate_requires_heavy_docstring_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "TOKENMAXX HEAVY deepen", "TOKENMAXX LIGHT deepen"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "TOKENMAXX HEAVY deepen",
+        )
+
+
+def test_docs_ci_gate_requires_md013_live_key_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "must keep live key",
+            "must keep present key",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "must keep live key",
+        )
+
+
+def test_lycheeignore_rejects_missing_https_shields_line_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        _write(
+            tmp_path / ".lycheeignore",
+            "# MCP 308 LF 103 flaky stewardship license badge\n"
+            "https://modelcontextprotocol.io/\n"
+            "https://www.linuxfoundation.org/\n"
+            "img\\.shields\\.io\n",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            r"https://img\.shields\.io",
+        )
+
+
+def test_lycheeignore_rejects_mcp_url_without_slash_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        _write(
+            tmp_path / ".lycheeignore",
+            "# MCP 308 LF 103 flaky stewardship license badge\n"
+            "https://modelcontextprotocol.io\n"
+            "https://www.linuxfoundation.org/\n"
+            "https://img\\.shields\\.io\n",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "https://modelcontextprotocol.io/",
+        )
+
+
+def test_lycheeignore_rejects_lfs_url_without_slash_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        _write(
+            tmp_path / ".lycheeignore",
+            "# MCP 308 LF 103 flaky stewardship license badge\n"
+            "https://modelcontextprotocol.io/\n"
+            "https://www.linuxfoundation.org\n"
+            "https://img\\.shields\\.io\n",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "https://www.linuxfoundation.org/",
+        )
+
+
+def test_lycheeignore_rejects_missing_308_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        _write(
+            tmp_path / ".lycheeignore",
+            "# MCP redirect LF 103 flaky stewardship license badge\n"
+            "https://modelcontextprotocol.io/\n"
+            "https://www.linuxfoundation.org/\n"
+            "https://img\\.shields\\.io\n",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "308 redirect",
+        )
+
+
+def test_lycheeignore_rejects_missing_103_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        _write(
+            tmp_path / ".lycheeignore",
+            "# MCP 308 LF early-hints flaky stewardship license badge\n"
+            "https://modelcontextprotocol.io/\n"
+            "https://www.linuxfoundation.org/\n"
+            "https://img\\.shields\\.io\n",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "103 early-hints",
+        )
+
+
+def test_lycheeignore_rejects_missing_flaky_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        _write(
+            tmp_path / ".lycheeignore",
+            "# MCP 308 LF 103 stewardship license badge\n"
+            "https://modelcontextprotocol.io/\n"
+            "https://www.linuxfoundation.org/\n"
+            "https://img\\.shields\\.io\n",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "flaky shields",
+        )
+
+
+def test_lycheeignore_rejects_double_star_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        _write(
+            tmp_path / ".lycheeignore",
+            "# MCP 308 LF 103 flaky stewardship license badge\n"
+            "https://modelcontextprotocol.io/\n"
+            "https://www.linuxfoundation.org/\n"
+            "https://img\\.shields\\.io\n"
+            "**\n",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "must not use **",
+        )
+
+
+def test_markdownlint_rejects_invent_md001_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        _write(
+            tmp_path / ".markdownlint.json",
+            '{\n  "default": true,\n  "MD013": { "line_length": 200 },\n'
+            '  "MD024": { "siblings_only": true },\n'
+            '  "MD033": false,\n  "MD041": false,\n  "MD060": false,\n'
+            '  "MD001": true\n}\n',
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "must not invent MD001",
+        )
+
+
+def test_markdownlint_rejects_missing_default_key_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        _write(
+            tmp_path / ".markdownlint.json",
+            '{\n  "MD013": { "line_length": 200 },\n'
+            '  "MD024": { "siblings_only": true },\n'
+            '  "MD033": false,\n  "MD041": false,\n  "MD060": false\n}\n',
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "default: true",
+        )
+
+
+def test_lycheeignore_accepts_live_tree_pins_still_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        _write(
+            tmp_path / ".lycheeignore",
+            "# modelcontextprotocol.io returns 308 redirect — valid site\n"
+            "https://modelcontextprotocol.io/\n"
+            "# linuxfoundation.org returns 103 early hints — valid site\n"
+            "https://www.linuxfoundation.org/\n"
+            "# img.shields.io badge CDN is flaky — stewardship license badge enforced\n"
+            "https://img\\.shields\\.io\n",
+        )
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+
+def test_docs_ci_gate_requires_https_shields_still_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            r"https://img\.shields\.io", "https://img.shields.io"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            r"https://img\.shields\.io",
+        )
+
+
+def test_docs_ci_gate_requires_exact_mcp_still_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "https://modelcontextprotocol.io/", "http://modelcontextprotocol.io/"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "https://modelcontextprotocol.io/",
+        )
+
+
+def test_docs_ci_gate_requires_flaky_still_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "flaky shields CDN rationale",
+            "noisy shields CDN rationale",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "flaky shields CDN rationale",
+        )
+
+
+def test_lycheeignore_rejects_double_star_still_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        _write(
+            tmp_path / ".lycheeignore",
+            "# MCP 308 LF 103 flaky stewardship license badge\n"
+            "https://modelcontextprotocol.io/\n"
+            "https://www.linuxfoundation.org/\n"
+            "https://img\\.shields\\.io\n"
+            "foo/**/bar\n",
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "must not use **",
+        )
+
+
+def test_markdownlint_rejects_invent_md001_still_after_83_heavy() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        _write(
+            tmp_path / ".markdownlint.json",
+            '{\n  "default": true,\n  "MD013": { "line_length": 200 },\n'
+            '  "MD024": { "siblings_only": true },\n'
+            '  "MD033": false,\n  "MD041": false,\n  "MD060": false,\n'
+            '  "MD001": false\n}\n',
+        )
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "MD001",
+        )
+
 
 def main() -> int:
     tests = [
@@ -29143,6 +29579,33 @@ def main() -> int:
         test_docs_ci_gate_requires_line_length_re_still_after_83,
         test_docs_ci_gate_requires_siblings_re_still_after_83,
         test_lycheeignore_accepts_full_live_fixture_after_83,
+
+        # TOKENMAXX HEAVY docs CI config exact URL / commentary / MD key pins after #83
+        test_docs_ci_gate_requires_https_shields_line_after_83_heavy,
+        test_docs_ci_gate_requires_exact_mcp_url_after_83_heavy,
+        test_docs_ci_gate_requires_exact_lfs_url_after_83_heavy,
+        test_docs_ci_gate_requires_308_pin_after_83_heavy,
+        test_docs_ci_gate_requires_103_pin_after_83_heavy,
+        test_docs_ci_gate_requires_flaky_pin_after_83_heavy,
+        test_docs_ci_gate_requires_glob_reject_after_83_heavy,
+        test_docs_ci_gate_requires_md001_reject_after_83_heavy,
+        test_docs_ci_gate_requires_heavy_docstring_after_83_heavy,
+        test_docs_ci_gate_requires_md013_live_key_after_83_heavy,
+        test_lycheeignore_rejects_missing_https_shields_line_after_83_heavy,
+        test_lycheeignore_rejects_mcp_url_without_slash_after_83_heavy,
+        test_lycheeignore_rejects_lfs_url_without_slash_after_83_heavy,
+        test_lycheeignore_rejects_missing_308_after_83_heavy,
+        test_lycheeignore_rejects_missing_103_after_83_heavy,
+        test_lycheeignore_rejects_missing_flaky_after_83_heavy,
+        test_lycheeignore_rejects_double_star_after_83_heavy,
+        test_markdownlint_rejects_invent_md001_after_83_heavy,
+        test_markdownlint_rejects_missing_default_key_after_83_heavy,
+        test_lycheeignore_accepts_live_tree_pins_still_after_83_heavy,
+        test_docs_ci_gate_requires_https_shields_still_after_83_heavy,
+        test_docs_ci_gate_requires_exact_mcp_still_after_83_heavy,
+        test_docs_ci_gate_requires_flaky_still_after_83_heavy,
+        test_lycheeignore_rejects_double_star_still_after_83_heavy,
+        test_markdownlint_rejects_invent_md001_still_after_83_heavy,
     ]
     try:
         for script in GATE_SCRIPTS:

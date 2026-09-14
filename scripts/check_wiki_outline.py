@@ -47,7 +47,7 @@ Fail-closed pins (live path after #59; deepen after #43; third-pass after #90):
   contiguous six-page cp list / cd /tmp/agents-governance.wiki /
   git commit #16 / git push origin master / ## Acceptance checks /
   ## Fallback / Repository not found / Home (landing) table cell /
-  Home operator PUBLISH.md omit-when-copying 
+  Home operator PUBLISH.md omit-when-copying
   (NOT wiki outline/PUBLISH leftover #243 saturated pins / NOT md/link residual layouts #239 /
   NOT path-filter/path-order leftover #244 / NOT stewardship-checks/schema #233 /
   NOT wiki-index/badge leftover #227; existing pages only — do not invent extra wiki files)

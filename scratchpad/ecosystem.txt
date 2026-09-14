@@ -692,3 +692,5 @@ _None yet._
 2026-09-14T06:20:00Z
 
 2026-09-14T06:25:00Z cursor: Local green — run_stewardship + self-tests 3838 + markdownlint ← ECO-069 schema fourth-pass after #203 (leave draft; leave open #206 alone; do not revive #171/#200/#204)
+
+2026-09-14T06:30:00Z cursor: Draft PR #210 CI green (lint + link-check + stewardship) ← ECO-069 schema fourth-pass after #203 (leave draft; leave #206/#211/#209 alone; do not revive #171/#200/#204)

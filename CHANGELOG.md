@@ -11,6 +11,31 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-schema leftover residual deepen after #262 tip
+  (rebased post-#278): expand self-tests to 5792 cases (was 5592) fail-closing
+  unsaturated schema + `stewardship_common` leftover residual helpers on
+  existing modules only — leftover residual parse/load needles (`if not key:` /
+  `data[key] = value` / `raise ValueError("metadata YAML must be a mapping")` /
+  `return match.group(1)` / `block = first_yaml_block(path)` /
+  `data = load_yaml(block)` / `if missing:` / `got = data.get(key)` /
+  `policy = str(data["edit_policy"]).lower()` /
+  `print("Stewardship schema check FAILED:")` / leftover residual invalid
+  status stubs REJECTED|UNKNOWN|ORPHANED|QUARANTINE|SHADOW|PREVIEW /
+  leftover residual invalid surface stubs telegram|matrix|irc|email|webhook /
+  common leftover residual `errors.append(msg)` /
+  `lowered = target.strip().lower()` / `for scheme in DANGEROUS_LINK_SCHEMES:` /
+  `found.update(ROOT.glob(pattern))` — schema leftover residual slice only
+  (not lychee/blob-503 leftover #278 / not Pass-2 residual leftover #272 /
+  not path-filter/path-order leftover #262 / not schema leftover #258 /
+  not wiki/mdlink leftover #252 / not path-edges residual #244 /
+  not wiki outline/PUBLISH leftover #243 / not md/link residual #239 /
+  not stewardship-checks/schema residual #233 / not wiki-index/badge leftover
+  #227); no invent-product; no fourth badge. Lands closed #279/#276/#275/#269
+  leftover on post-#278 tip (do **not** revive
+  closed PRs #279/#276/#275/#269/#263/#257/#253/#248/#241; prior #269 RED was
+  MD018 issue-number ATX at line start — docs stay lint-clean). Distinct from
+  merged PRs
+  PR #278/#272/#262/#258/#252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
 - TOKENMAXX docs-lint pass-4 lychee/blob-503 harden after #272 tip: expand
   self-tests to 5592 cases (was 5550) fail-closing remaining same-repo GitHub
   `blob/main` HTML 503 flake leftovers on existing docs-lint / `.lycheeignore`

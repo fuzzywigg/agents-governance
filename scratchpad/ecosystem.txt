@@ -830,3 +830,5 @@ _None yet._
 - Scope: EXISTING actionlint path-filter/path-order residual leftover edge pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; do not revive #255/#247/#244/#236/#232/#228/#226/#223/#217/#213/#198; do not redo #252/#244/#243/#239/#233/#227/#225
 - Branch: cursor/tokenmaxx-path-edges-leftover-after-252-2a53
 2026-09-14T09:50:00Z
+
+2026-09-14T09:55:00Z cursor: Local green — run_stewardship + self-tests 5122 + markdownlint ← ECO-078 path-filter/path-order residual leftover after #244 on tip #252 (leave draft; do not revive #255/#247/#244/#236/#232/#228)

@@ -26,6 +26,12 @@ Fail-closed pins (live path after #55; deepen after #41; third-pass after #90):
   (lands closed #185/#172 leftover on tip; not schema #191; distinct from
   stewardship-badge lint #208 / path-filter/path-order #225 / Pass-2 leftover + md/link #220 /
   schema fourth-pass #216; lands closed #222/#215/#196 leftover after #225 tip)
+- Wiki/mdlink leftover residual after #258 (markdown link residual harden;
+  NOT wiki/mdlink leftover #252 / NOT stewardship-schema leftover #258 /
+  NOT path-filter/path-order leftover #244 / NOT md/link residual layouts #239):
+  exact empty fragment in relative link / relative link must not include query string /
+  relative link escapes repo / missing heading # /
+  OK: relative markdown links resolve / raw.startswith("#")
 """
 
 from __future__ import annotations

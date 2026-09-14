@@ -297,7 +297,7 @@ needles / leftover invalid status+surface stubs / `stewardship_common`
 glob+hint+is_file leftovers — DISTINCT leftover only (not wiki
 outline/PUBLISH leftover #243 / not md/link residual #239 / not
 stewardship-checks/schema residual #233 / not wiki-index/badge
-leftover #227; leftover after #243 tip).
+leftover #227; leftover after #243 tip; not stewardship-badge lint #208).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

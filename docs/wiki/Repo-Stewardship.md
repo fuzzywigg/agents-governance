@@ -151,6 +151,9 @@ plus run_stewardship runner pins after #117: `#!/usr/bin/env bash` /
 CI / `python3 scripts/<gate>` ×4 / badge→wiki→schema→relative order /
 `check_run_stewardship_gate_contract` (lands closed #122/#96 leftover; do not
 revive #119)).
+plus CI workflow third-pass after #111/#117/#127: concurrency templates /
+cron+timeout / DavidAnson@v24 / setup-python@v5 / lychee verbose+
+concurrency+timeout+retries / fail:true / get_actionlint / curl -fsSL).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

@@ -193,10 +193,28 @@ def check_workflows_and_license(errors: list[str]) -> None:
                 ".markdownlint.json must set MD060: false for docs lint",
                 errors,
             )
+        # Fail-closed after #100: exact live MD013 object (docs-lint slice).
+        if '"MD013": { "line_length": 200 }' not in md_cfg:
+            fail(
+                '.markdownlint.json must pin "MD013": { "line_length": 200 }',
+                errors,
+            )
+        # Fail-closed after #100: exact live MD024 object (docs-lint slice).
+        if '"MD024": { "siblings_only": true }' not in md_cfg:
+            fail(
+                '.markdownlint.json must pin "MD024": { "siblings_only": true }',
+                errors,
+            )
 
 
 def check_lycheeignore(errors: list[str]) -> None:
-    """Keep flaky badge CDN out of lychee; license badge stays in stewardship."""
+    r"""Keep flaky badge CDN out of lychee; license badge stays in stewardship.
+
+    Live fail-closed pins after #100 (docs-lint slice; not CI workflow spam):
+    escaped img\.shields\.io; modelcontextprotocol.io + linuxfoundation.org
+    live excludes; stewardship/license-badge commentary; reject https://* /
+    http://* / bare *.
+    """
     if not LYCHEEIGNORE.is_file():
         return
     text = LYCHEEIGNORE.read_text(encoding="utf-8")
@@ -205,6 +223,34 @@ def check_lycheeignore(errors: list[str]) -> None:
         fail(
             ".lycheeignore must exclude flaky img.shields.io badge CDN "
             "(license badge presence remains stewardship-enforced)",
+            errors,
+        )
+    # Fail-closed after #100: live tree pins the regex-escaped shields form.
+    if r"img\.shields\.io" not in text:
+        fail(
+            r".lycheeignore must pin escaped img\.shields\.io exclude "
+            "(live docs-lint path)",
+            errors,
+        )
+    # Fail-closed after #100: live excludes for known lychee false-positives.
+    if "modelcontextprotocol.io" not in text:
+        fail(
+            ".lycheeignore must exclude modelcontextprotocol.io "
+            "(live lychee false-positive path)",
+            errors,
+        )
+    if "linuxfoundation.org" not in text:
+        fail(
+            ".lycheeignore must exclude linuxfoundation.org "
+            "(live lychee false-positive path)",
+            errors,
+        )
+    # Fail-closed after #100: commentary must keep stewardship license-badge posture.
+    lowered = text.lower()
+    if "stewardship" not in lowered and "license badge" not in lowered:
+        fail(
+            ".lycheeignore must note stewardship/license-badge enforcement "
+            "(CDN exclude is not a missing License badge)",
             errors,
         )
     # Do not quietly drop fail-closed posture by ignoring everything.
@@ -1185,6 +1231,160 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
             errors,
         )
 
+
+
+def check_docs_lint_gate_contract(errors: list[str]) -> None:
+    """Fail-close live docs-lint wiring (after #100; not CI workflow spam)."""
+    if not BADGE_GATE.is_file():
+        fail("Missing scripts/check_badge_standard.py (docs-lint host)", errors)
+        return
+    text = BADGE_GATE.read_text(encoding="utf-8")
+    # Split pin literals so self-mutation of contiguous names cannot neutralize checks.
+    host_pin = "docs-lint " + "host"
+    if host_pin not in text:
+        fail(
+            "check_docs_lint_gate_contract must keep " + host_pin + " pin",
+            errors,
+        )
+    spam_pin = "not CI workflow " + "spam"
+    if spam_pin not in text:
+        fail(
+            "check_docs_lint_gate_contract must keep " + spam_pin + " pin",
+            errors,
+        )
+    lychee_const = "LYCHEE" + "IGNORE"
+    md_const = "MARKDOWNLINT_" + "CONFIG"
+    if lychee_const not in text:
+        fail(
+            "check_badge_standard.py must declare " + lychee_const,
+            errors,
+        )
+    if md_const not in text:
+        fail(
+            "check_badge_standard.py must declare " + md_const,
+            errors,
+        )
+    lychee_path = '".lychee' + 'ignore"'
+    md_path = '".markdownlint' + '.json"'
+    if lychee_path not in text and "'.lycheeignore'" not in text:
+        fail(
+            "check_badge_standard.py must pin path .lycheeignore",
+            errors,
+        )
+    if md_path not in text and "'.markdownlint.json'" not in text:
+        fail(
+            "check_badge_standard.py must pin path .markdownlint.json",
+            errors,
+        )
+    fn_pin = "check_lychee" + "ignore"
+    if f"def {fn_pin}(" not in text:
+        fail(
+            "check_badge_standard.py must provide " + fn_pin + "()",
+            errors,
+        )
+    contract_fn = "check_docs_lint_" + "gate_contract"
+    if f"def {contract_fn}(" not in text:
+        fail(
+            "check_badge_standard.py must provide " + contract_fn + "()",
+            errors,
+        )
+    live_doc = "Live fail-closed pins after " + "#100"
+    if live_doc not in text:
+        fail(
+            "check_lycheeignore must keep " + live_doc + " docstring pin",
+            errors,
+        )
+    escaped_pin = r"img\.shields" + r"\.io"
+    if escaped_pin not in text:
+        fail(
+            "check_lycheeignore must pin escaped " + escaped_pin,
+            errors,
+        )
+    mcp_pin = "modelcontextprotocol" + ".io"
+    if mcp_pin not in text:
+        fail(
+            "check_lycheeignore must pin " + mcp_pin + " exclude",
+            errors,
+        )
+    lfs_pin = "linuxfoundation" + ".org"
+    if lfs_pin not in text:
+        fail(
+            "check_lycheeignore must pin " + lfs_pin + " exclude",
+            errors,
+        )
+    stew_note = "stewardship/license-badge " + "enforcement"
+    if stew_note not in text:
+        fail(
+            "check_lycheeignore must keep " + stew_note + " needle",
+            errors,
+        )
+    https_star = "https://" + "*"
+    http_star = "http://" + "*"
+    if https_star not in text:
+        fail(
+            "check_lycheeignore must reject " + https_star,
+            errors,
+        )
+    if http_star not in text:
+        fail(
+            "check_lycheeignore must reject " + http_star,
+            errors,
+        )
+    md013_obj = '"MD013": { "line_length": ' + "200 }"
+    if md013_obj not in text:
+        fail(
+            "check_workflows_and_license must pin MD013 line_length 200 object",
+            errors,
+        )
+    md024_obj = '"MD024": { "siblings_only": ' + "true }"
+    if md024_obj not in text:
+        fail(
+            "check_workflows_and_license must pin MD024 siblings_only true object",
+            errors,
+        )
+    for rule in ("MD033", "MD041", "MD060"):
+        needle = f'"{rule}"' + r"\s*:\s*false"
+        if needle not in text:
+            fail(
+                f"check_workflows_and_license must pin {rule}: false regex",
+                errors,
+            )
+    default_true = r'"default"\s*:\s*true'
+    if default_true not in text:
+        fail(
+            "check_workflows_and_license must pin default: true regex",
+            errors,
+        )
+    line_len_re = r'"line_length"\s*:\s*200'
+    if line_len_re not in text:
+        fail(
+            "check_workflows_and_license must pin line_length: 200 regex",
+            errors,
+        )
+    siblings_re = r'"siblings_only"\s*:\s*true'
+    if siblings_re not in text:
+        fail(
+            "check_workflows_and_license must pin siblings_only: true regex",
+            errors,
+        )
+    call_lychee = fn_pin + "(errors)"
+    if call_lychee not in text:
+        fail(
+            "main must call " + call_lychee,
+            errors,
+        )
+    contract_call = contract_fn + "(errors)"
+    if contract_call not in text:
+        fail(
+            "main must call " + contract_call,
+            errors,
+        )
+    docs_slice = "docs-lint " + "slice"
+    if docs_slice not in text:
+        fail(
+            "docs-lint contract must keep " + docs_slice + " wording",
+            errors,
+        )
 
 
 def check_actionlint_style_gate_contract(errors: list[str]) -> None:
@@ -3337,6 +3537,8 @@ def main() -> int:
     # Fail-closed after #75: actionlint-style contract early (same self-host file)
     # so style-helper renames / needle drift fail closed before NameError.
     check_actionlint_style_gate_contract(errors)
+    # Fail-closed after #100: docs-lint contract early (lycheeignore + markdownlint).
+    check_docs_lint_gate_contract(errors)
     if errors:
         print("Badge standard check FAILED:", file=sys.stderr)
         for err in errors:

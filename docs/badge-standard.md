@@ -146,7 +146,12 @@ utf-8 / `sys.exit` / stewardship_common / invent-chrome social special-cases /
 shields host / markdown-badge open / badge-in-lowered gate /
 README+badge hint paths / pages+operator OK / intentional PUBLISH pin /
 `PAGE_TOPIC_HINTS.get` / `strip_fenced_code(text)` /
-`has_dangerous_scheme(target)` / `scan_secrets` calls).
+`has_dangerous_scheme(target)` / `scan_secrets` calls,
+plus docs-lint pins after #100: escaped `img\.shields\.io` /
+`modelcontextprotocol.io` / `linuxfoundation.org` /
+stewardship/license-badge note / reject `https://*`+`http://*`+`*` /
+exact MD013+MD024 objects / MD033+MD041+MD060 false / `default: true` /
+`check_docs_lint_gate_contract`).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

@@ -219,6 +219,14 @@ plus stewardship-schema fourth-pass after #208 tip: nested policy refs /
 invalid status+surface enum stubs / whitespace-only / nested+list rejects /
 pass-4 contract pins (lands closed #171/#209 leftover; do not revive closed
 closed #171/#209/#204/#200/#194/#190/#188/#187/#183),
+plus actionlint path-filter/path-order deepen after #216 tip: contiguous
+push/branches/paths headers / pull_request path-unfiltered /
+reject dorny/paths-filter / residual self-workflow path lists / exact
+contiguous actionlint run / Download-before-run + self-tests-before-Download
+order / contiguous Download/id/run/shell block / reject uses: rhysd/actionlint@
+— DISTINCT leftover edges only (not saturated #189 / not #176 layouts /
+not schema #191 / not Pass-2 residual #199/#203 / not Pass-2+md/link #192 /
+not wiki-badge / not stewardship-badge lint #208 / not schema fourth-pass #216; lands closed #217/#213/#198 leftover; do not revive #217/#213/#198/#186/#166/#157; leave CONFLICTING #219 alone)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

@@ -706,3 +706,14 @@ _None yet._
 2026-09-14T06:36:00Z cursor: Draft PR #216 opened (cursor/tokenmaxx-schema-fourth-pass-after-208-57e2); awaiting CI ← ECO-070 schema fourth-pass after #208 tip (do not revive #171/#209/#204/#200)
 
 2026-09-14T06:40:00Z cursor: PR #216 CI green (lint + link-check + stewardship) + MERGEABLE on tip ← ECO-070 schema fourth-pass after #208 tip (do not revive #171/#209/#204/#200)
+
+### [ECO-071] TOKENMAXX deepen actionlint path-filter/path-order edges after #216 tip — 2026-09-14T06:50:00Z
+- [x] cursor: Read live tree post-#216 (3906 cases; schema fourth-pass saturated via #216; open CONFLICTING #219 md/link — leave alone; pick unsaturated path-filter/path-order deepen leftover from closed #217/#213/#198)
+- [x] cursor: Fail-close path-filter/path-order deepen — contiguous push/branches/paths / pull_request path-unfiltered / reject dorny / self-workflow path lists / exact contiguous actionlint run / Download block + order / self-tests-before-Download / reject rhysd/actionlint@ uses
+- [x] cursor: Expand self-tests 3906 → 4052 (path-edges deepen slice only; not #216/#208/#203/#199/#191/#189 / not #219 spam)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING actionlint path-filter/path-order leftover edge pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; lands closed #217/#213/#198 leftover on post-#216 tip; do not revive #217/#213/#198/#186/#166/#157; leave CONFLICTING #219 alone
+- Branch: cursor/tokenmaxx-path-edges-after-216-ab79
+2026-09-14T06:50:00Z
+
+2026-09-14T06:55:00Z cursor: Local green — run_stewardship + self-tests 4052 + markdownlint ← ECO-071 path-filter/path-order deepen after #216 tip (leave draft; leave CONFLICTING #219 alone; do not revive #217/#213/#198)

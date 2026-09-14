@@ -762,3 +762,7 @@ _None yet._
 - Scope: EXISTING actionlint path-filter/path-order residual edge pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; do not revive #228/#226/#223/#217/#213/#198/#186/#166/#157; do not redo #227 wiki-badge / #225 deepen
 - Branch: cursor/tokenmaxx-path-edges-residual-after-227-7fba
 2026-09-14T07:52:00Z
+
+2026-09-14T07:58:00Z cursor: Local green — run_stewardship + self-tests 4376 + markdownlint ← ECO-074 path-filter/path-order residuals after #227 (leave draft; do not revive #228/#226/#223)
+
+2026-09-14T07:58:30Z cursor: Draft PR #232 opened (cursor/tokenmaxx-path-edges-residual-after-227-7fba); leave draft / do-not-merge; awaiting CI ← ECO-074 residual after #227 (do not revive #228/#226/#223/#217/#213/#198)

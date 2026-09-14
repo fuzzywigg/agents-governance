@@ -661,3 +661,13 @@ _None yet._
 - Scope: EXISTING run_stewardship_checks.sh + stewardship-checks.yml residual integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #193/#178 leftover on post-#191 tip; do not revive #193/#178/#175/#140; leave open CONFLICTING #195 alone; do not redo #191
 - Branch: cursor/tokenmaxx-run-stewardship-pass2-residual-after-191-ebbb
 2026-09-14T05:55:00Z
+
+### [ECO-066] TOKENMAXX deepen stewardship-badge lint after #189/#199 tip — 2026-09-14T06:09:40Z
+- [x] cursor: Read live tree post-#199; #195 CLOSED — reopen NEW draft on tip with distinct stewardship-badge lint leftover
+- [x] cursor: Fail-close stewardship-badge lint pins (Exact needles; no Contiguous trap)
+- [x] cursor: Expand self-tests +68
+- [ ] cursor: Green NEW draft PR with CI
+- Branch: cursor/tokenmaxx-stewardship-badge-lint-after-199-7653
+2026-09-14T06:09:40Z
+
+2026-09-14T06:13:04Z cursor: Local green — run_stewardship + self-tests 3728 + markdownlint ← ECO-066 stewardship-badge lint after #189/#199 tip (NEW draft; do not revive #195/#172/#190)

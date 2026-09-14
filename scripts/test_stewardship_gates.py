@@ -581,12 +581,11 @@ def _seed_wiki_tree(tmp: Path, *, extra_pages: tuple[str, ...] = (), mutate=None
             "# PUBLISH\n\n```yaml\nstatus: ACTIVE\ncreated: \"2026-09-13\"\n"
             "purpose: \"Reversible publish path for docs/wiki → GitHub Wiki\"\ncloses: \"#16\"\n```\n\n"
             "## Pages to publish\n\n"
-            "| `Home.md` | Home |\n| `Overview.md` | Overview |\n"
+            "| `Home.md` | Home (landing) |\n| `Overview.md` | Overview |\n"
             "| `Autonomy-Levels.md` | Autonomy-Levels |\n"
             "| `Repo-Stewardship.md` | Repo-Stewardship |\n"
             "| `Agent-Routing.md` | Agent-Routing |\n"
-            "| `Security-Boundaries.md` | Security-Boundaries |\n"
-            "| `Home.md` | Home (landing) |\n\n"
+            "| `Security-Boundaries.md` | Security-Boundaries |\n\n"
             "Do **not** push `PUBLISH.md`.\n"
             "drop the in-repo `PUBLISH.md` bullet from Home\n"
             "https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge-standard.md\n"
@@ -15449,7 +15448,7 @@ def test_wiki_rejects_missing_publish_home_row_still_after_43() -> None:
 
         def mutate(pages: dict[str, str]) -> None:
             pages["PUBLISH.md"] = pages["PUBLISH.md"].replace(
-                "| `Home.md` | Home |\n", ""
+                "| `Home.md` | Home (landing) |\n", ""
             )
 
         scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
@@ -64849,7 +64848,7 @@ def test_wiki_publish_rejects_table_order_pad0_after_233() -> None:
         tmp_path = Path(tmp)
 
         def mutate(pages: dict[str, str]) -> None:
-            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home |\n")
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home (landing) |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home (landing) |\n")
 
         scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
         assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'publishable page order')
@@ -64859,7 +64858,7 @@ def test_wiki_publish_rejects_table_order_pad1_after_233() -> None:
         tmp_path = Path(tmp)
 
         def mutate(pages: dict[str, str]) -> None:
-            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home |\n")
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home (landing) |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home (landing) |\n")
 
         scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
         assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'publishable page order')
@@ -64869,7 +64868,7 @@ def test_wiki_publish_rejects_table_order_pad2_after_233() -> None:
         tmp_path = Path(tmp)
 
         def mutate(pages: dict[str, str]) -> None:
-            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home |\n")
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home (landing) |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home (landing) |\n")
 
         scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
         assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'publishable page order')
@@ -64879,7 +64878,7 @@ def test_wiki_publish_rejects_table_order_pad3_after_233() -> None:
         tmp_path = Path(tmp)
 
         def mutate(pages: dict[str, str]) -> None:
-            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home |\n")
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home (landing) |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home (landing) |\n")
 
         scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
         assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'publishable page order')
@@ -64889,7 +64888,7 @@ def test_wiki_publish_rejects_table_order_pad4_after_233() -> None:
         tmp_path = Path(tmp)
 
         def mutate(pages: dict[str, str]) -> None:
-            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home |\n")
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home (landing) |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home (landing) |\n")
 
         scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
         assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'publishable page order')
@@ -64899,7 +64898,7 @@ def test_wiki_publish_rejects_table_order_pad5_after_233() -> None:
         tmp_path = Path(tmp)
 
         def mutate(pages: dict[str, str]) -> None:
-            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home |\n")
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home (landing) |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home (landing) |\n")
 
         scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
         assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'publishable page order')
@@ -64909,7 +64908,7 @@ def test_wiki_publish_rejects_table_order_still_after_233() -> None:
         tmp_path = Path(tmp)
 
         def mutate(pages: dict[str, str]) -> None:
-            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home |\n")
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home (landing) |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home (landing) |\n")
 
         scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
         assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'publishable page order')
@@ -64919,7 +64918,7 @@ def test_wiki_publish_rejects_table_order_after_233() -> None:
         tmp_path = Path(tmp)
 
         def mutate(pages: dict[str, str]) -> None:
-            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home |\n")
+            pages["PUBLISH.md"] = pages["PUBLISH.md"].replace("| `Home.md` | Home (landing) |\n| `Overview.md` | Overview |\n", "| `Overview.md` | Overview |\n| `Home.md` | Home (landing) |\n")
 
         scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
         assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'publishable page order')

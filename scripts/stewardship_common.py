@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Shared helpers for stewardship doc gates (no invent-product surface).
 
-Fail-closed pins (live path after #46; second-pass after #65):
+Fail-closed pins (live path after #46; second-pass after #65; third-pass after #111):
 - SECRET_PATTERNS: ghp_/gho_/ghu_/ghs_/ghr_, github_pat_, PRIVATE KEY,
   sk-/rk-, api_key/secret/password/token, aws_secret_access_key, xox*,
   npm_, AIza
@@ -18,7 +18,15 @@ Fail-closed pins (live path after #46; second-pass after #65):
   errors.append / password|passwd|token / OPENSSH+EC / Public docs /
   invent-product surface / social chrome / Link schemes / is_file+sorted /
   workflows path / return None
+- Third-pass: future annotations / import re+Path / exact PRIVATE KEY+gh*
+  +github_pat+sk|rk patterns / SECRET_PATTERNS tuple typing /
+  FENCED_BLOCK_RE.sub / label or relative_to / pattern.search /
+  lowered=text.lower / re.escape / https? URL-ish / ROOT.glob+found.update /
+  set[Path] / workflows path join / for-loops over schemes+patterns+hints /
+  Shared helpers doc / hint.endswith(=) / MEMORY dumps / str|None+list[Path] /
+  FORBIDDEN_BADGE_HINTS head / SECRET_URL_HINTS ghp_+gho_+github_pat_ members
 """
+
 
 from __future__ import annotations
 

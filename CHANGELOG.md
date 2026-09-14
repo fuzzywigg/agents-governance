@@ -11,6 +11,20 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship_common third-pass pins after #111: expand self-tests to
+  2331 cases (was 2223) fail-closing live stewardship_common integrity —
+  future annotations / import re+Path / exact PRIVATE KEY+gh*+github_pat+sk|rk /
+  SECRET_PATTERNS tuple typing / FENCED_BLOCK_RE.sub / label or relative_to /
+  pattern.search / lowered+re.escape / URL-ish / ROOT.glob+found.update /
+  set[Path] / workflows join / for-loops / Shared helpers / endswith(=) /
+  MEMORY dumps / str|None+list[Path] / FORBIDDEN head /
+  SECRET_URL_HINTS ghp_+gho_+github_pat_ members, plus
+  `check_stewardship_common_contract` third-pass pins in
+  `check_badge_standard.py` — stewardship_common third-pass slice only (not
+  docs-lint / wiki / relative / actionlint / schema / badge / CI workflow pin
+  spam); no invent-product; no fourth badge. Lands closed #112 leftover on
+  post-#111 main (do not revive #112/#113).
+
 - TOKENMAXX actionlint-style third-pass pins after #108: expand self-tests to
   2223 cases (was 2151) fail-closing live reversible CI workflow integrity —
   `concurrency:` + `cancel-in-progress:` / `permissions:` present /

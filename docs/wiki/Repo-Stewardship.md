@@ -235,6 +235,13 @@ order / contiguous Download/id/run/shell block / reject uses: rhysd/actionlint@
 not schema #191 / not Pass-2 residual #199/#203 / not Pass-2 leftover + md/link #220 /
 not wiki-badge / not stewardship-badge lint #208 / not schema fourth-pass #216;
 lands closed #223/#217/#213/#198 leftover; do not revive #223/#217/#213/#198/#186/#166/#157)).
+plus stewardship-checks + schema residual deepen after #225: exact Set up Python /
+Install PyYAML / checkout→Set up Python / full push paths / schedule+cron /
+concurrency / jobs.stewardship header / reject strategy|matrix|services invent /
+schema residual (pass-5) status+surface stubs + helper needles — residual slice
+only (not path-edges #225 / not Pass-2 leftover+md/link #220 / not schema
+fourth #216 / not badge-lint #208 / not Pass-2 residual #199/#203 / not
+path-order #189)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

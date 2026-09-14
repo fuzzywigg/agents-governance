@@ -120,6 +120,19 @@ NOT Pass-2 leftover + md/link #220):
 - Stewardship gate self-tests precedes Download actionlint
 - reject uses: rhysd/actionlint@ invent (keep download-actionlint.bash)
 
+Fail-closed stewardship-checks + schema residual deepen after #225 (NOT path-edges
+#225 / NOT Pass-2 leftover+md/link #220 / NOT schema fourth-pass #216 /
+NOT badge-lint #208 / NOT Pass-2 residual #199/#203 / NOT path-order #189):
+- exact contiguous Set up Python / uses / with / python-version block
+- exact Install PyYAML (schema parser) run: pip install --quiet pyyaml block
+- checkout@v7 immediately precedes Set up Python
+- exact full stewardship push paths list (README→.markdownlint.json)
+- exact schedule Weekly-drift + cron "15 6 * * 1" block
+- exact concurrency group + cancel-in-progress block
+- exact jobs.stewardship runs-on/timeout/permissions header
+- reject strategy: / matrix: / services: invent on stewardship-checks.yml
+- schema residual (pass-5) invalid status+surface stubs + residual helper needles
+
 Fail-closed stewardship-badge lint deepen after #189 (NOT docs-lint leftover
 #161 / NOT wiki-badge #141 / NOT path-order #189 / NOT schema third-pass #191 /
 NOT run_stewardship residual #199; residual uncovered only):
@@ -721,6 +734,12 @@ def check_workflow_hardening(errors: list[str]) -> None:
     args: >- / externally broken links commentary / without-it private-404 commentary /
     must not set continue-on-error / exact job permissions: contents: read /
     checkout before Check links adjacency / checkout before Run markdownlint adjacency.
+    Stewardship-checks + schema residual deepen after #225 (NOT path-edges #225 /
+    NOT Pass-2 leftover+md/link #220 / NOT schema fourth-pass #216 / NOT badge-lint #208 /
+    NOT Pass-2 residual #199/#203 / NOT path-order #189):
+    exact Set up Python block / exact Install PyYAML block / checkout→Set up Python /
+    exact full push paths list / exact schedule+cron block / exact concurrency block /
+    exact jobs.stewardship header / reject strategy|matrix|services invent.
     """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
@@ -1737,6 +1756,127 @@ def check_workflow_hardening(errors: list[str]) -> None:
             "stewardship-checks.yml must not invent uses: rhysd/actionlint@ "
             "(keep download-actionlint.bash; "
             "path-filter/path-order deepen after #203)",
+            errors,
+        )
+
+    # Stewardship-checks + schema residual deepen after #225 (DISTINCT leftover;
+    # NOT path-edges #225 / NOT Pass-2 leftover+md/link #220 / NOT schema fourth #216 /
+    # NOT badge-lint #208 / NOT Pass-2 residual #199/#203 / NOT path-order #189).
+    setup_python_block = (
+        "      - name: Set up Python\n"
+        "        uses: actions/setup-python@v5\n"
+        "        with:\n"
+        '          python-version: "3.12"'
+    )
+    if setup_python_block not in stew:
+        fail(
+            "stewardship-checks.yml must keep exact contiguous Set up Python "
+            "/ uses / with / python-version block "
+            "(stewardship-checks + schema residual after #225)",
+            errors,
+        )
+    install_pyyaml_block = (
+        "      - name: Install PyYAML (schema parser)\n"
+        "        run: pip install --quiet pyyaml"
+    )
+    if install_pyyaml_block not in stew:
+        fail(
+            "stewardship-checks.yml must keep exact Install PyYAML "
+            "(schema parser) pip install --quiet pyyaml block "
+            "(stewardship-checks + schema residual after #225)",
+            errors,
+        )
+    checkout_then_python = (
+        "      - uses: actions/checkout@v7\n"
+        "      - name: Set up Python"
+    )
+    if checkout_then_python not in stew:
+        fail(
+            "stewardship-checks.yml checkout@v7 must immediately precede "
+            "Set up Python (stewardship-checks + schema residual after #225)",
+            errors,
+        )
+    full_push_paths = (
+        "    paths:\n"
+        '      - "README.md"\n'
+        '      - "AGENTS.md"\n'
+        '      - "CLAUDE.md"\n'
+        '      - "LICENSE"\n'
+        '      - "CONTRIBUTING.md"\n'
+        '      - "docs/**"\n'
+        '      - "scripts/**"\n'
+        '      - ".github/workflows/**"\n'
+        '      - ".lycheeignore"\n'
+        '      - ".markdownlint.json"'
+    )
+    if full_push_paths not in stew:
+        fail(
+            "stewardship-checks.yml must keep exact full push paths list "
+            "README→.markdownlint.json "
+            "(stewardship-checks + schema residual after #225)",
+            errors,
+        )
+    schedule_block = (
+        "  schedule:\n"
+        "    # Weekly drift catch for badge/wiki/schema/relative-link gates\n"
+        '    - cron: "15 6 * * 1"'
+    )
+    if schedule_block not in stew:
+        fail(
+            "stewardship-checks.yml must keep exact schedule Weekly-drift + "
+            'cron "15 6 * * 1" block '
+            "(stewardship-checks + schema residual after #225)",
+            errors,
+        )
+    concurrency_block = (
+        "concurrency:\n"
+        "  group: stewardship-checks-${{ github.workflow }}-${{ github.ref }}\n"
+        "  cancel-in-progress: true"
+    )
+    if concurrency_block not in stew:
+        fail(
+            "stewardship-checks.yml must keep exact concurrency group + "
+            "cancel-in-progress block "
+            "(stewardship-checks + schema residual after #225)",
+            errors,
+        )
+    job_header = (
+        "jobs:\n"
+        "  stewardship:\n"
+        "    runs-on: ubuntu-latest\n"
+        "    timeout-minutes: 15\n"
+        "    permissions:\n"
+        "      contents: read"
+    )
+    if job_header not in stew:
+        fail(
+            "stewardship-checks.yml must keep exact jobs.stewardship "
+            "runs-on/timeout/permissions header "
+            "(stewardship-checks + schema residual after #225)",
+            errors,
+        )
+    if re.search(r"(?m)^\s*strategy:\s*$", stew) or re.search(
+        r"(?m)^\s*strategy:\s+\S", stew
+    ):
+        fail(
+            "stewardship-checks.yml must not invent strategy: "
+            "(stewardship-checks + schema residual after #225)",
+            errors,
+        )
+    if re.search(r"(?m)^\s*matrix:\s*$", stew) or re.search(
+        r"(?m)^\s*matrix:\s+\S", stew
+    ):
+        fail(
+            "stewardship-checks.yml must not invent matrix: "
+            "(stewardship-checks + schema residual after #225)",
+            errors,
+        )
+    if re.search(r"(?m)^\s*services:\s*$", stew) or re.search(
+        r"(?m)^\s*services:\s+\S", stew
+    ):
+        fail(
+            "stewardship-checks.yml must not invent services: "
+            "(stewardship-checks + schema residual after #225)",
             errors,
         )
 
@@ -4129,6 +4269,91 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
                 errors,
             )
 
+    # Stewardship-checks + schema residual deepen after #225 (DISTINCT leftover).
+    residual_225_doc = "Stewardship-checks + schema residual deepen after " + "#225"
+    if residual_225_doc not in text:
+        fail(
+            "check_workflow_hardening docstring must pin " + residual_225_doc,
+            errors,
+        )
+    module_residual_225 = "stewardship-checks + schema residual deepen after " + "#225"
+    if module_residual_225 not in text:
+        fail(
+            "check_badge_standard.py module docstring must pin "
+            + module_residual_225,
+            errors,
+        )
+    not_path_edges_225 = "NOT path-edges " + "#225"
+    if not_path_edges_225 not in text:
+        fail(
+            "residual deepen must keep " + not_path_edges_225 + " distinctness pin",
+            errors,
+        )
+    not_pass2_220 = "NOT Pass-2 leftover+md/link " + "#220"
+    if not_pass2_220 not in text:
+        fail(
+            "residual deepen must keep " + not_pass2_220 + " distinctness pin",
+            errors,
+        )
+    not_schema_fourth = "NOT schema fourth-pass " + "#216"
+    if not_schema_fourth not in text:
+        fail(
+            "residual deepen must keep " + not_schema_fourth + " distinctness pin",
+            errors,
+        )
+    residual_225_pins = (
+        (
+            "exact contiguous Set up Python" + " ",
+            "Set up Python block fail needle",
+        ),
+        (
+            "exact Install PyYAML" + " ",
+            "Install PyYAML block fail needle",
+        ),
+        (
+            "checkout@v7 must immediately precede" + " ",
+            "checkout→Set up Python adjacency fail needle",
+        ),
+        (
+            "exact full push paths list" + " ",
+            "full push paths list fail needle",
+        ),
+        (
+            "exact schedule Weekly-drift +" + " ",
+            "schedule+cron block fail needle",
+        ),
+        (
+            "exact concurrency group +" + " ",
+            "concurrency block fail needle",
+        ),
+        (
+            "exact jobs.stewardship" + " ",
+            "jobs.stewardship header fail needle",
+        ),
+        (
+            "must not invent strategy" + ":",
+            "strategy invent reject needle",
+        ),
+        (
+            "must not invent matrix" + ":",
+            "matrix invent reject needle",
+        ),
+        (
+            "must not invent services" + ":",
+            "services invent reject needle",
+        ),
+        (
+            "stewardship-checks + schema residual after " + "#225",
+            "residual-after-225 wording pin",
+        ),
+    )
+    for needle, label in residual_225_pins:
+        if needle not in text:
+            fail(
+                "check_workflow_hardening must keep " + label,
+                errors,
+            )
+
     fn_pin = "def check_workflow_hardening" + "("
     if fn_pin not in text:
         fail(
@@ -4875,7 +5100,7 @@ def check_stewardship_common_contract(errors: list[str]) -> None:
 
 
 def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
-    """Fail-close live stewardship-schema gate wiring (after #72/#75; third-pass after #132; deepen after #189; policy-schema pass-4 after #208)."""
+    """Fail-close live stewardship-schema gate wiring (after #72/#75; third-pass after #132; deepen after #189; policy-schema pass-4 after #208; schema residual after #225)."""
     if not SCHEMA_GATE.is_file():
         fail("Missing scripts/check_stewardship_schema.py (schema gate)", errors)
         return
@@ -5747,6 +5972,111 @@ def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
         fail(
             "check_badge_standard.py schema gate contract docstring must pin "
             + contract_pass4,
+            errors,
+        )
+
+    # Fail-closed after #225: schema residual (pass-5) helper / constant / needle pins
+    # (schema residual slice only; not fourth-pass #216 / path-edges #225 / Pass-2 leftover
+    # +md/link #220 / badge-lint #208 spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    # Avoid contiguous five+th so existing badge refusal self-tests stay valid.
+    pass5_doc = "Residual after " + "#225"
+    if pass5_doc not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + pass5_doc,
+            errors,
+        )
+    residual_host = "schema residual " + "(pass-5)"
+    self_text4 = BADGE_GATE.read_text(encoding="utf-8")
+    if residual_host not in self_text4:
+        fail(
+            "check_badge_standard.py must keep " + residual_host + " host pin",
+            errors,
+        )
+    not_fourth_216 = "NOT fourth-pass " + "#216"
+    if not_fourth_216 not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + not_fourth_216,
+            errors,
+        )
+    status_in_required = '"status" in required_' + "keys"
+    if status_in_required not in text and "'status' in required_keys" not in text:
+        fail(
+            'check_stewardship_schema.py must gate ACTIVE via "status" in required_keys',
+            errors,
+        )
+    loaded_none = "loaded is " + "None"
+    if loaded_none not in text:
+        fail(
+            "check_stewardship_schema.py load_yaml must reject loaded is None",
+            errors,
+        )
+    value_true = 'value.lower() == "true"'
+    if value_true not in text and "value.lower() == 'true'" not in text:
+        fail(
+            'check_stewardship_schema.py must parse bools via value.lower() == "true"',
+            errors,
+        )
+    int_value = "int(" + "value)"
+    if int_value not in text:
+        fail(
+            "check_stewardship_schema.py must coerce ints via int(value)",
+            errors,
+        )
+    text_strip = "if not text.strip()"
+    if text_strip not in text:
+        fail(
+            "check_stewardship_schema.py load_yaml stdlib path must keep if not text.strip()",
+            errors,
+        )
+    for stub in (
+        "WIP",
+        "BETA",
+        "LEGACY",
+        "FROZEN",
+        "CANCELLED",
+        "PROTOTYPE",
+    ):
+        if stub not in text:
+            fail(
+                "check_stewardship_schema.py docstring must pin residual status "
+                f"enum stub {stub}",
+                errors,
+            )
+    for stub in (
+        "openai",
+        "anthropic",
+        "slack",
+        "auto",
+        "agents",
+    ):
+        if stub not in text:
+            fail(
+                "check_stewardship_schema.py docstring must pin residual surface "
+                f"enum stub {stub}",
+                errors,
+            )
+    residual_slice = "schema residual " + "slice"
+    if residual_slice not in self_text4:
+        fail(
+            "check_badge_standard.py schema residual must keep "
+            + residual_slice
+            + " pin",
+            errors,
+        )
+    not_pass2_spam = "not fourth-pass #216 / path-edges #225 / " + "Pass-2 leftover"
+    if not_pass2_spam not in self_text4:
+        fail(
+            "check_badge_standard.py schema residual must keep "
+            + not_pass2_spam
+            + " distinctness pin",
+            errors,
+        )
+    contract_residual = "schema residual after " + "#225"
+    if contract_residual not in self_text4:
+        fail(
+            "check_stewardship_schema_gate_contract docstring must pin "
+            + contract_residual,
             errors,
         )
 

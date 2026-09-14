@@ -11,6 +11,22 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-checks + schema residual deepen after #225: expand
+  self-tests to 4300 cases (was 4116) fail-closing DISTINCT leftover
+  stewardship-checks contiguous layout + schema residual (pass-5) edges —
+  exact Set up Python / uses / with / python-version block / exact Install
+  PyYAML pip block / checkout@v7→Set up Python adjacency / exact full push
+  paths list / exact schedule Weekly-drift + cron block / exact concurrency
+  group block / exact jobs.stewardship header / reject strategy|matrix|services
+  invent / residual invalid status stubs WIP|BETA|LEGACY|FROZEN|CANCELLED|PROTOTYPE /
+  residual invalid surface stubs openai|anthropic|slack|auto|agents /
+  residual helper needles (`"status" in required_keys` / loaded is None /
+  value.lower() == "true" / int(value) / if not text.strip()) / residual
+  semver+ISO+closes+EXPECTED_VALUES fixture edges — stewardship-checks +
+  schema residual slice only (not path-edges #225 / not Pass-2 leftover+md/link
+  #220 / not schema fourth-pass #216 / not badge-lint #208 / not Pass-2 residual
+  #199/#203 / not path-order #189); no invent-product; no fourth badge.
+  Distinct from merged #225/#220/#216/#208/#203/#199/#191/#189.
 - TOKENMAXX actionlint path-filter/path-order deepen leftovers after #220: expand
   self-tests to 4116 cases (was 3970) fail-closing DISTINCT leftover actionlint
   path-filter / path-order edges on existing workflow modules — contiguous

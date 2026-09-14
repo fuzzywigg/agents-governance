@@ -137,7 +137,13 @@ needles / utf-8 / `as_posix` / `.md` suffix / `ValueError` / `sorted` /
 UNICODE / space-dash / Percent-decode+Cap / empty () / `sys.exit` /
 `urllib.unquote` / `group(2)` / `startswith#` / `split#` / files scanned /
 stewardship_common / title / `#{1,6}` / slug punct / Offline+lychee /
-`path.parent`).
+`path.parent`,
+plus wiki-outline third-pass after #94: `WIKI`+`PUBLISHABLE_PAGES` exact /
+`STEWARDSHIP_CI_HINTS` exact / README+badge hint extras / link RE /
+utf-8 / `sys.exit` / stewardship_common / removesuffix / glob /
+FAIL+OK / Link Check+Markdown Lint+No secrets / relative+actionlint /
+invent AND secrets / `match.group(2).strip()` / startswith `//`+http /
+pages+operator / intentional update).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

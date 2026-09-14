@@ -397,3 +397,8 @@ _None yet._
 2026-09-14T00:51:09Z
 
 2026-09-14T00:55:30Z cursor: PR #94 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-049 TOKENMAXX relative-link third-pass pins
+
+### [ECO-050] TOKENMAXX deepen wiki-outline third-pass pins after #94 — 2026-09-14T01:12:53Z
+- [x] cursor: Fail-close wiki-outline third-pass — WIKI+PUBLISHABLE_PAGES exact / STEWARDSHIP_CI_HINTS exact / README+badge hint extras / link RE / utf-8 / sys.exit / stewardship_common / removesuffix / glob / FAIL+OK / Link Check+Markdown Lint+No secrets / relative+actionlint / invent AND secrets / match.group(2).strip() / startswith //+http / pages+operator / intentional update
+- [x] cursor: Expand self-tests 1899 → 1971 (wiki-outline third-pass slice; not relative / schema / badge / common / CI workflow / actionlint / runner pin spam)
+- [ ] cursor: Draft PR + CI green (lint + link-check + stewardship/actionlint)

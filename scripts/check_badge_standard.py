@@ -2252,7 +2252,7 @@ def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
 
 
 def check_wiki_outline_gate_contract(errors: list[str]) -> None:
-    """Fail-close live wiki-outline gate wiring (after #59; deepen after #43)."""
+    """Fail-close live wiki-outline gate wiring (after #94; deepen after #59/#43)."""
     if not WIKI_OUTLINE_GATE.is_file():
         fail("Missing scripts/check_wiki_outline.py (wiki-outline gate)", errors)
         return
@@ -2493,6 +2493,316 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
     if "| `Home.md` |" not in text and "|`Home.md`|" not in text:
         fail(
             "check_wiki_outline.py must require PUBLISH.md table row for Home.md",
+            errors,
+        )
+    # Fail-closed after #94: third-pass helper / constant / needle pins
+    # (wiki-outline slice only; not relative / schema / badge / common / CI
+    # workflow / actionlint / runner pin spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    wiki_exact = 'WIKI = ROOT / "docs" / "wiki"'
+    wiki_exact_sq = "WIKI = ROOT / 'docs' / 'wiki'"
+    if wiki_exact not in text and wiki_exact_sq not in text:
+        fail(
+            'check_wiki_outline.py must set WIKI = ROOT / "docs" / "wiki"',
+            errors,
+        )
+    pages_exact = (
+        "PUBLISHABLE_PAGES = (\n"
+        '    "Home.md",\n'
+        '    "Overview.md",\n'
+        '    "Autonomy-Levels.md",\n'
+        '    "Repo-Stewardship.md",\n'
+        '    "Agent-Routing.md",\n'
+        '    "Security-Boundaries.md",\n'
+        ")"
+    )
+    if pages_exact not in text:
+        fail(
+            "check_wiki_outline.py must set PUBLISHABLE_PAGES exact six-page tuple",
+            errors,
+        )
+    ci_exact = (
+        "STEWARDSHIP_CI_HINTS = (\n"
+        '    "markdown-lint",\n'
+        '    "link-check",\n'
+        '    "stewardship-checks",\n'
+        ")"
+    )
+    if ci_exact not in text:
+        fail(
+            "check_wiki_outline.py must set STEWARDSHIP_CI_HINTS exact triple",
+            errors,
+        )
+    if '"../../README.md"' not in text and "'../../README.md'" not in text:
+        fail(
+            'check_wiki_outline.py README_LINK_HINTS must pin ../../README.md',
+            errors,
+        )
+    if '"../README.md"' not in text and "'../README.md'" not in text:
+        fail(
+            'check_wiki_outline.py README_LINK_HINTS must pin ../README.md',
+            errors,
+        )
+    badge_blob = (
+        "https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge-standard.md"
+    )
+    if badge_blob not in text:
+        fail(
+            "check_wiki_outline.py BADGE_STANDARD_HINTS must pin badge-standard blob URL",
+            errors,
+        )
+    if '"docs/badge-standard.md"' not in text and "'docs/badge-standard.md'" not in text:
+        fail(
+            'check_wiki_outline.py BADGE_STANDARD_HINTS must pin docs/badge-standard.md',
+            errors,
+        )
+    link_re_exact = (
+        'r"!?\\[([^\\]]*)\\]\\(([^)\\s]+)(?:\\s+\\"[^\\"]*\\")?\\)"'
+    )
+    # Accept the live finditer pattern form.
+    if r"!?\[([^\]]*)\]\(([^)\s]+)" not in text:
+        fail(
+            "check_wiki_outline.py link scan must keep exact image+link RE",
+            errors,
+        )
+    if 'read_text(encoding="utf-8")' not in text and "read_text(encoding='utf-8')" not in text:
+        fail(
+            'check_wiki_outline.py must read wiki pages via read_text(encoding="utf-8")',
+            errors,
+        )
+    if "sys.exit(main())" not in text:
+        fail(
+            "check_wiki_outline.py must invoke sys.exit(main())",
+            errors,
+        )
+    if "from stewardship_common import" not in text:
+        fail(
+            "check_wiki_outline.py must import from stewardship_common",
+            errors,
+        )
+    if 'name.removesuffix(".md")' not in text and "name.removesuffix('.md')" not in text:
+        fail(
+            'check_wiki_outline.py must use name.removesuffix(".md") for stems',
+            errors,
+        )
+    if 'page.removesuffix(".md")' not in text and "page.removesuffix('.md')" not in text:
+        fail(
+            'check_wiki_outline.py must use page.removesuffix(".md") for stems',
+            errors,
+        )
+    if 'glob("*.md")' not in text and "glob('*.md')" not in text:
+        fail(
+            'check_wiki_outline.py must glob("*.md") under docs/wiki',
+            errors,
+        )
+    if "def main() -> int" not in text and "def main()->int" not in text:
+        fail(
+            "check_wiki_outline.py must expose def main() -> int",
+            errors,
+        )
+    fail_missing = "FAIL: docs/wiki/ " + "missing"
+    if fail_missing not in text:
+        fail(
+            "check_wiki_outline.py must print FAIL: docs/wiki/ missing",
+            errors,
+        )
+    pages_op = "pages + operator " + "PUBLISH.md"
+    if pages_op not in text:
+        fail(
+            "check_wiki_outline.py OK banner must keep pages + operator PUBLISH.md",
+            errors,
+        )
+    if "len(PUBLISHABLE_PAGES)" not in text:
+        fail(
+            "check_wiki_outline.py OK banner must report len(PUBLISHABLE_PAGES)",
+            errors,
+        )
+    if 'startswith("//")' not in text and "startswith('//')" not in text:
+        fail(
+            'check_wiki_outline.py must match protocol-relative via startswith("//")',
+            errors,
+        )
+    http_start = 'startswith("http://")'
+    http_start_sq = "startswith('http://')"
+    if http_start not in text and http_start_sq not in text:
+        fail(
+            'check_wiki_outline.py must match insecure http via startswith("http://")',
+            errors,
+        )
+    if "match.group(2).strip()" not in text:
+        fail(
+            "check_wiki_outline.py must read link targets via match.group(2).strip()",
+            errors,
+        )
+    if "Link Check" not in text:
+        fail(
+            "check_wiki_outline.py must require PUBLISH.md Link Check acceptance",
+            errors,
+        )
+    if "Markdown Lint" not in text:
+        fail(
+            "check_wiki_outline.py must require PUBLISH.md Markdown Lint acceptance",
+            errors,
+        )
+    if "No secrets" not in text:
+        fail(
+            "check_wiki_outline.py must require PUBLISH.md No secrets acceptance",
+            errors,
+        )
+    rel_cov = "relative-link gate " + "coverage"
+    if rel_cov not in text:
+        fail(
+            "check_wiki_outline.py must mention relative-link gate coverage",
+            errors,
+        )
+    act_path = "actionlint on existing workflow " + "paths"
+    if act_path not in text:
+        fail(
+            "check_wiki_outline.py must require actionlint on existing workflow paths",
+            errors,
+        )
+    invent_and = "invent-product AND " + "secrets"
+    if invent_and not in text and "invent-product AND secrets" not in text:
+        fail(
+            "check_wiki_outline.py must keep invent-product AND secrets Home pin",
+            errors,
+        )
+    intentional = "update PUBLISH.md page list if " + "intentional"
+    if intentional not in text:
+        fail(
+            "check_wiki_outline.py must keep update PUBLISH.md page list if intentional needle",
+            errors,
+        )
+    if "must list source file" not in text:
+        fail(
+            "check_wiki_outline.py must emit must list source file needle",
+            errors,
+        )
+    if "must link back to the repository README" not in text:
+        fail(
+            "check_wiki_outline.py must emit README backlink needle",
+            errors,
+        )
+    if "must link to the badge standard" not in text:
+        fail(
+            "check_wiki_outline.py must emit badge standard link needle",
+            errors,
+        )
+    if "must retain secrets out-of-scope wording" not in text:
+        fail(
+            "check_wiki_outline.py must emit secrets out-of-scope needle",
+            errors,
+        )
+    if "must retain invent-product out-of-scope wording" not in text:
+        fail(
+            "check_wiki_outline.py must emit invent-product out-of-scope needle",
+            errors,
+        )
+    if "must document bash scripts/run_stewardship_checks.sh" not in text:
+        fail(
+            "check_wiki_outline.py must document bash scripts/run_stewardship_checks.sh",
+            errors,
+        )
+    if "must retain no-invent-product stewardship wording" not in text:
+        fail(
+            "check_wiki_outline.py must emit no-invent-product stewardship needle",
+            errors,
+        )
+    if "must link back to Home.md" not in text:
+        fail(
+            "check_wiki_outline.py must emit must link back to Home.md needle",
+            errors,
+        )
+    if "must retain topic hint" not in text:
+        fail(
+            "check_wiki_outline.py must emit must retain topic hint needle",
+            errors,
+        )
+    wiki_http = "insecure http:// link (use https://)"
+    if wiki_http not in text:
+        fail(
+            "check_wiki_outline.py must emit insecure http:// link (use https://) needle",
+            errors,
+        )
+    wiki_proto = "protocol-relative link '"
+    if wiki_proto not in text and 'protocol-relative link "' not in text:
+        # live uses f-string with single quotes around target
+        if "protocol-relative link" not in text:
+            fail(
+                "check_wiki_outline.py must emit protocol-relative link needle",
+                errors,
+            )
+    if "dangerous link scheme" not in text:
+        fail(
+            "check_wiki_outline.py must emit dangerous link scheme needle",
+            errors,
+        )
+    if 'r"!?\\[([^\\]]*)\\]\\(([^)\\s]+)' not in text and "!?\\[([^\\]]*)\\]\\(([^)\\s]+)" not in text:
+        # also accept unreescaped form in source
+        if 'r"!?' not in text:
+            fail(
+                "check_wiki_outline.py must keep raw image+link RE string",
+                errors,
+            )
+    third_pass_doc = "Third-pass: WIKI+PUBLISHABLE_PAGES " + "exact"
+    if third_pass_doc not in text:
+        fail(
+            "check_wiki_outline.py docstring must keep Third-pass WIKI+PUBLISHABLE_PAGES exact pin",
+            errors,
+        )
+    if "operator page" not in text:
+        fail(
+            "check_wiki_outline.py must emit operator page missing needle",
+            errors,
+        )
+    if "Missing operator page" not in text:
+        fail(
+            "check_wiki_outline.py must emit Missing operator page needle",
+            errors,
+        )
+    if "present - set(PUBLISHABLE_PAGES)" not in text:
+        fail(
+            "check_wiki_outline.py must compute unexpected via present - set(PUBLISHABLE_PAGES)",
+            errors,
+        )
+    if "WIKI.is_dir()" not in text:
+        fail(
+            "check_wiki_outline.py must gate on WIKI.is_dir()",
+            errors,
+        )
+    if "WIKI / name" not in text and 'WIKI / name' not in text:
+        fail(
+            "check_wiki_outline.py must resolve pages via WIKI / name",
+            errors,
+        )
+    if "scan_secrets(path, errors)" not in text:
+        fail(
+            "check_wiki_outline.py must call scan_secrets(path, errors)",
+            errors,
+        )
+    if "scan_secrets(publish, errors)" not in text:
+        fail(
+            "check_wiki_outline.py must call scan_secrets(publish, errors)",
+            errors,
+        )
+    if "_reject_invent_badge_chrome(name, text, errors)" not in text:
+        fail(
+            "check_wiki_outline.py must call _reject_invent_badge_chrome(name, text, errors)",
+            errors,
+        )
+    if "strip_fenced_code(text)" not in text:
+        fail(
+            "check_wiki_outline.py must call strip_fenced_code(text)",
+            errors,
+        )
+    if "has_dangerous_scheme(target)" not in text:
+        fail(
+            "check_wiki_outline.py must call has_dangerous_scheme(target)",
+            errors,
+        )
+    if 'target.lower().startswith("http://")' not in text and "target.lower().startswith('http://')" not in text:
+        fail(
+            "check_wiki_outline.py must casefold http:// via target.lower().startswith",
             errors,
         )
 

@@ -629,3 +629,7 @@ _None yet._
 - Scope: EXISTING stewardship-schema integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #164 leftover on post-#181 main; do not revive #164/#163/#142/#147/#153/#171/#183
 - Branch: cursor/tokenmaxx-schema-third-pass-after-181-c181
 2026-09-14T05:25:00Z
+
+2026-09-14T05:40:00Z cursor: Local green — run_stewardship + self-tests 3518 + markdownlint ← ECO-065 stewardship-schema third-pass after #181 (do not revive #164/#163/#142/#183; leave wiki-index #181 alone)
+
+2026-09-14T05:40:00Z cursor: Draft PR #188 opened (cursor/tokenmaxx-schema-third-pass-after-181-c181); awaiting CI ← ECO-065 stewardship-schema third-pass after #181 (abandons CONFLICTING #183)

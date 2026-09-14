@@ -17,6 +17,10 @@ Fail-closed actionlint-style pins (live path after #75):
 - no pull_request_target / no permissions: write-all / no contents: write
 - no id-token: write / actions must be @-pinned (not main|master|latest)
 - docker:// uses skipped; unpinned uses rejected
+
+Fail-closed docs CI config pins (live path after #83):
+- .lycheeignore escaped shields + MCP/LF excludes + stewardship note
+- .markdownlint.json exact MD013/MD024 objects + MD033/041/060 false
 """
 
 from __future__ import annotations

@@ -11,6 +11,15 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX markdown-lint/link-check CI workflow edges after #216: expand
+  self-tests to 3970 cases (was 3906) fail-closing unsaturated md/link edges —
+  `args: >-` form / externally-broken-links commentary / without-it private-404 /
+  reject `continue-on-error` / exact job `permissions: contents: read` /
+  checkout adjacency before Check links / Run markdownlint — md/link slice only
+  (not schema fourth-pass #216 / badge-lint #208 / Pass-2 register #203 /
+  Pass-2 residual #199 / schema third-pass #191 / path-order #189); no invent
+  AGENTS-ECOSYSTEM / templates / secrets.
+
 - TOKENMAXX stewardship-schema fourth-pass pins after #208 tip: expand
   self-tests to 3906 cases (was 3728) fail-closing live schema integrity —
   nested/list edit_policy+parent_governance policy refs / invalid status enum

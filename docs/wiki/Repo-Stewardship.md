@@ -219,6 +219,14 @@ plus stewardship-schema fourth-pass after #208 tip: nested policy refs /
 invalid status+surface enum stubs / whitespace-only / nested+list rejects /
 pass-4 contract pins (lands closed #171/#209 leftover; do not revive closed
 closed #171/#209/#204/#200/#194/#190/#188/#187/#183),
+plus markdown-lint/link-check edges after #189: args: >- /
+externally-broken-links commentary / without-it private-404 /
+reject continue-on-error / exact job permissions: contents: read /
+checkout adjacency before Check links and Run markdownlint
+(lands closed PR #192/#197/#201/#207/#214/#219 leftover; do not revive
+PR #192/#197/#201/#202/#207/#214/#219; distinct from schema fourth-pass #216 /
+badge-lint #208 / Pass-2 register #203 / Pass-2 residual #199 /
+schema third-pass #191 / path-order #189),
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

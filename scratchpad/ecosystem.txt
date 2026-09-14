@@ -706,3 +706,12 @@ _None yet._
 2026-09-14T06:36:00Z cursor: Draft PR #216 opened (cursor/tokenmaxx-schema-fourth-pass-after-208-57e2); awaiting CI ← ECO-070 schema fourth-pass after #208 tip (do not revive #171/#209/#204/#200)
 
 2026-09-14T06:40:00Z cursor: PR #216 CI green (lint + link-check + stewardship) + MERGEABLE on tip ← ECO-070 schema fourth-pass after #208 tip (do not revive #171/#209/#204/#200)
+
+### [ECO-071] TOKENMAXX deepen markdown-lint/link-check edges after #216 — 2026-09-14T07:10:00Z
+- [x] cursor: Read live tree post-#216 (3906 cases; schema fourth-pass saturated via #216; #219/#214/#207 CLOSED CONFLICTING md/link — unsaturated leftover; leave other drafts alone / do not revive)
+- [x] cursor: Fail-close md/link edges — args: >- / externally-broken commentary / without-it private-404 / reject continue-on-error / exact job permissions / checkout adjacency / contract pins
+- [x] cursor: Expand self-tests 3906 → 3970 (md/link slice only; not schema fourth-pass #216 / badge-lint #208 / Pass-2 register #203 / Pass-2 residual #199)
+- [x] cursor: Local green — run_stewardship + self-tests 3970 + markdownlint ← ECO-071 md/link edges after #216 (do not revive #192/#197/#201/#202/#207/#214/#219)
+- [ ] cursor: Draft PR opened; awaiting CI ← ECO-071 markdown-lint/link-check edges after #216
+
+2026-09-14T07:15:00Z cursor: Local green — run_stewardship + self-tests 3970 + markdownlint ← ECO-071 markdown-lint/link-check edges after #216 (do not revive #192/#197/#201/#202/#207/#214/#219)

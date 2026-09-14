@@ -781,3 +781,5 @@ _None yet._
 - Scope: EXISTING check_stewardship_schema.py + stewardship_common.py leftover pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; leftover after #243 tip; do not redo #243 wiki / #239 md/link / #233 schema residual
 - Branch: cursor/tokenmaxx-schema-leftover-after-243-811f
 2026-09-14T08:40:00Z
+2026-09-14T08:55:00Z cursor: Local green — run_stewardship + self-tests 4830 + markdownlint ← ECO-076 stewardship-schema leftovers after #243 (leave draft; do not redo #243 wiki / #239 md/link / #233 schema residual)
+2026-09-14T08:55:30Z cursor: Draft PR #248 opened (cursor/tokenmaxx-schema-leftover-after-243-811f); awaiting CI ← ECO-076 stewardship-schema leftovers after #243

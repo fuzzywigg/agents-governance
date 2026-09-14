@@ -731,3 +731,5 @@ _None yet._
 2026-09-14T06:55:00Z cursor: Draft PR #215 converted from path-edges duplicate to wiki-index/badge leftover on post-#208 tip (cursor/tokenmaxx-actionlint-path-edges-after-203-e7ec); awaiting CI ← ECO-071 (distinct from open path-edges #213 / md/link #214)
 
 2026-09-14T07:05:00Z cursor: Rebased ECO-071 onto post-#216 tip (3906→4020); local green — run_stewardship + self-tests 4020 + markdownlint ← wiki-index/badge leftover (do not revive #196/#185/#172; leave open #213/#214 alone; distinct from merged schema fourth-pass #216)
+
+2026-09-14T07:10:00Z cursor: Closed #215 head stuck after force-push; draft PR #222 opened on same branch with post-#216 wiki-index/badge leftover (4020 cases) ← ECO-071 (replaces #215; distinct from #216/#208)

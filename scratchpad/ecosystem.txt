@@ -642,3 +642,5 @@ _None yet._
 2026-09-14T05:41:10Z
 
 2026-09-14T05:44:43Z cursor: Draft PR #193 opened (run_stewardship Pass-2 residual after #189; 3470 cases) — awaiting CI; do not revive #178/#175/#140; leave open #191 schema alone
+
+2026-09-14T05:50:23Z cursor: PR #193 CI green (lint + link-check + stewardship/actionlint) on HEAD 1184b45 ← complete ECO-066 run_stewardship Pass-2 residual after #189 (do not revive #178/#175/#140; leave #191 alone)

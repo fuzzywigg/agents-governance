@@ -16,6 +16,22 @@ Fail-closed pins (live path after #53; second-pass after #72/#75):
   ACTIVE status / positive tier / 0..3 autonomy / ISO-8601 / invent wording /
   semver / closes #N / FAILED+OK banners / stdlib-subset+PyYAML /
   bool subclass / group(1) / missing metadata keys / utf-8
+- Third-pass after #132: future annotations / Path(__file__).resolve().parent /
+  sys.path.insert / stewardship_common ROOT+fail+scan_secrets / yaml=None /
+  pragma no cover / five live stewardship docs only / startswith("#") /
+  true+false / null+~ / re.fullmatch -?\\d+ / split(":", 1) / value[1:-1] /
+  isinstance(loaded, dict) / FENCED_YAML_RE.search / isinstance (dict, list) /
+  sorted(required_keys - set(data)) / startswith("docs/") / .upper()!=ACTIVE /
+  EXPECTED_VALUES.get / (expected {want!r}) / level not in (0,1,2,3) /
+  tier < 1 / ISO_DATE_RE.match / SEMVER_RE.match / ISSUE_REF_RE.search /
+  closes scope set / scan_secrets(path, errors) / len(DOC_SCHEMAS) /
+  sys.exit(main()) / third-pass docstring
+- Deepen after #149: path.is_file() / block.strip() / except Exception as exc /
+  DOC_SCHEMAS.items() / key not in data / isinstance(value, str) /
+  key in STRING_KEYS / data.get("status") / edit_policy in data /
+  rel == AGENTS.md / engine PyYAML-or-stdlib / noqa BLE001 /
+  errors: list[str] = [] / got != want / autonomy_level in data /
+  tier in data / for date_key in DATE_KEYS / deepen docstring
 """
 
 from __future__ import annotations

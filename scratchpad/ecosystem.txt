@@ -537,3 +537,12 @@ _None yet._
 2026-09-14T03:30:00Z cursor: Rebased onto post-#141 main; local gates green expected 2761 (2689+72); do not revive #139/#145
 
 2026-09-14T03:35:00Z cursor: Local green 2761 on post-#141; new draft branch cursor/tokenmaxx-actionlint-after-141-114e (do not revive #145/#148/#139)
+
+### [ECO-059] TOKENMAXX deepen stewardship-schema third-pass after #149 — 2026-09-14T03:45:00Z
+- [x] cursor: Read live tree post-#149 (2761 cases; actionlint deepen saturated; #156 open docs-lint/stewardship/actionlint — leave alone; lands closed #142/#147/#153 leftover)
+- [x] cursor: Fail-close schema third-pass + deepen — future annotations / Path parent / yaml=None / five live docs / true+false / null+~ / fullmatch / FENCED search / ACTIVE / EXPECTED get / closes scope / path.is_file / block.strip / Exception as exc / STRING_KEYS / engine PyYAML / BLE001 / got != want / DATE_KEYS
+- [x] cursor: Expand self-tests 2761 → 2949 (schema leftover slice; not docs-lint / actionlint / wiki / workflow spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING stewardship-schema integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #142/#147/#153 leftover on post-#149 main; do not revive those; leave #156 alone
+- Branch: cursor/tokenmaxx-schema-third-pass-after-149-52a7
+2026-09-14T03:45:00Z

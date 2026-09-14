@@ -165,7 +165,18 @@ reject embedded markdown badge images / PUBLISH Link Check+Markdown Lint
 exactly / Home no badge-row embeds,
 plus actionlint-style deepen after #135/#141: `cancel-in-progress: true` /
 `contents: read` / `ubuntu-latest` / `workflow_dispatch:` / reject
-`security-events|attestations|statuses|deployments: write` / deepen docstring).
+`security-events|attestations|statuses|deployments: write` / deepen docstring,
+plus stewardship-schema third-pass + deepen after #149: future annotations /
+Path parent / sys.path.insert / ROOT+fail+scan_secrets / yaml=None /
+pragma no cover / five live docs / true+false / null+~ / fullmatch int /
+split(":", 1) / value[1:-1] / isinstance loaded dict / FENCED search /
+nested dict+list / sorted missing keys / docs/ ACTIVE / EXPECTED get /
+want!r / level 0..3 / tier < 1 / ISO+SEMVER+ISSUE match / closes scope /
+scan_secrets call / len(DOC_SCHEMAS) / sys.exit(main()) / path.is_file /
+block.strip / Exception as exc / DOC_SCHEMAS.items / STRING_KEYS /
+engine PyYAML-or-stdlib / noqa BLE001 / got != want / DATE_KEYS loop
+— schema leftover slice only (not docs-lint / actionlint / wiki /
+workflow spam)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

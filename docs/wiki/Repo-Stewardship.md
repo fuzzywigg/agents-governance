@@ -201,7 +201,12 @@ plus stewardship-schema third-pass + deepen after #189: future annotations /
 Path parent / yaml=None / five live docs / parse pins / path.is_file /
 block.strip / STRING_KEYS / BLE001 / DATE_KEYS / deepen docstring
 (lands closed #187/#188 leftover; do not revive #187/#188/#183/#164;
-distinct from path-order #189)).
+distinct from path-order #189)
+plus markdown-lint/link-check CI workflow edges after #189 (post-#191 tip):
+args: >- / externally-broken-links commentary / without-it private-404 /
+continue-on-error reject / exact job permissions / checkout adjacency
+(CI md/link edge slice only; lands closed PR #192 leftover; do not revive
+PR #192; leave open Pass-2 residual #193 alone; distinct from schema #191)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

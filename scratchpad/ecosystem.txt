@@ -520,3 +520,5 @@ _None yet._
 - Scope: EXISTING actionlint-path + badge-CI integrity only; no invent-product; no fourth badge; no secrets; no DNS/history; NOT closed #120/#138 revive
 - Branch: cursor/tokenmaxx-actionlint-badge-docs-after-135-4a67
 2026-09-14T03:05:00Z
+
+2026-09-14T03:13:05Z cursor: PR #143 CI green (lint + link-check + stewardship) ← complete ECO-058 TOKENMAXX actionlint/badge CI pins after #135

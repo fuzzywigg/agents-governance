@@ -169,7 +169,13 @@ plus actionlint-style deepen after #135/#141: `cancel-in-progress: true` /
 plus leftover docs-lint/stewardship/actionlint pins after #149: docs-lint
 third-pass exact `.lycheeignore` full layout + commentary lines /
 actionlint leftover `contents: read` membership affirm (complement #149
-regex) / stewardship leftover exact `run_stewardship_checks.sh` full layout).
+regex) / stewardship leftover exact `run_stewardship_checks.sh` full layout,
+plus policy-schema fourth-pass after #161: nested/list `edit_policy`+
+`parent_governance` policy refs / `got nested/list` / invalid status enum
+stubs DEPRECATED|ARCHIVED|PENDING|RETIRED|SUSPENDED / invalid surface enum
+stubs geryon|playwright|browser-claude|claude-cowork / whitespace-only
+non-empty / nested version+autonomy+maintainer+status / list
+surface+closes+purpose (distinct from schema-third-pass after-149).)
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

@@ -11,6 +11,17 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX policy-schema fourth-pass pins after #161: expand self-tests to
+  3063 cases (was 2885) fail-closing remaining stewardship-schema branches —
+  nested/list `edit_policy`+`parent_governance` policy refs / `got nested/list` /
+  invalid status enum stubs DEPRECATED|ARCHIVED|PENDING|RETIRED|SUSPENDED /
+  invalid surface enum stubs geryon|playwright|browser-claude|claude-cowork /
+  whitespace-only non-empty / nested version+autonomy+maintainer+status /
+  list surface+closes+purpose+autonomy — policy-schema fourth-pass slice only
+  (not schema-third-pass after-149 / docs-lint / actionlint / wiki / badge spam);
+  no invent-product; no fourth badge. Distinct from closed #163 schema-third-pass
+  after-149. Does **not** revive #142/#147/#153/#163.
+
 - TOKENMAXX leftover docs-lint/stewardship/actionlint pins after #149: expand
   self-tests to 2885 cases (was 2761) fail-closing live leftover integrity —
   docs-lint third-pass exact `.lycheeignore` full layout + commentary lines /

@@ -189,7 +189,11 @@ reject embedded markdown badge images / PUBLISH Link Check+Markdown Lint
 exactly / Home no badge-row embeds,
 plus actionlint-style deepen after #135/#141: `cancel-in-progress: true` /
 `contents: read` / `ubuntu-latest` / `workflow_dispatch:` / reject
-`security-events|attestations|statuses|deployments: write` / deepen docstring).
+`security-events|attestations|statuses|deployments: write` / deepen docstring,
+plus leftover docs-lint/stewardship/actionlint pins after #149: docs-lint
+third-pass exact `.lycheeignore` full layout + commentary lines /
+actionlint leftover `contents: read` membership affirm (complement #149
+regex) / stewardship leftover exact `run_stewardship_checks.sh` full layout).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

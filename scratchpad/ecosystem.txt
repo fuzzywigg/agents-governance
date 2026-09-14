@@ -716,3 +716,14 @@ _None yet._
 - Branch: cursor/tokenmaxx-pass2-leftover-mdlink-edges-after-216-f641
 2026-09-14T06:48:03Z
 2026-09-14T06:52:59Z cursor: Draft PR #220 opened (cursor/tokenmaxx-pass2-leftover-mdlink-edges-after-216-f641); leave draft; awaiting CI ← ECO-071 Pass-2 leftover + md/link edges after #216 (do not revive #218/#212/#202/#192; leave CONFLICTING #219 alone)
+
+### [ECO-072] TOKENMAXX deepen path-filter/path-order leftovers after #220 — 2026-09-14T07:05:00Z
+- [x] cursor: Read live tree post-#220 (3970 cases; Pass-2 leftover+md/link saturated via #220; schema fourth #216 + badge-lint #208 saturated; pick unsaturated path-filter/path-order deepen leftover from closed #223/#217/#213/#198)
+- [x] cursor: Fail-close path-filter/path-order deepen — contiguous push/branches/paths / pull_request path-unfiltered / reject dorny / self-workflow path lists / exact contiguous actionlint run / Download block + order / self-tests-before-Download / reject rhysd/actionlint@ uses
+- [x] cursor: Expand self-tests 3970 → 4116 (path-edges deepen slice only; not #220/#216/#208/#203/#199/#191/#189 spam)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING actionlint path-filter/path-order leftover edge pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no scratchpad-only PR; lands closed #223/#217/#213/#198 leftover on post-#220 tip; do not revive #223/#217/#213/#198/#186/#166/#157; do not revive thin #224
+- Branch: cursor/tokenmaxx-path-edges-leftover-after-220-3359
+2026-09-14T07:05:00Z
+
+2026-09-14T07:21:30Z cursor: Local green — run_stewardship + self-tests 4116 + markdownlint ← ECO-072 path-filter/path-order leftovers after #220 (leave draft; do not revive #223/#217/#213/#198; do not open scratchpad-only)

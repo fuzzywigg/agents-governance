@@ -249,7 +249,17 @@ shebang-first / reject `|| exit 0` / `args: >-` /
 externally-broken commentary / without-it private-404 /
 reject continue-on-error / exact job permissions / checkout adjacency
 (lands closed #202/#192 leftover; do not revive #202/#192;
-distinct from Pass-2 residual #199 and merged badge-lint #208)).
+distinct from Pass-2 residual #199 and merged badge-lint #208),
+plus actionlint path-filter/path-order leftovers after #220 tip: contiguous
+push/branches/paths headers / pull_request path-unfiltered /
+reject dorny/paths-filter / residual self-workflow path lists / exact
+contiguous actionlint run / Download-before-run + self-tests-before-Download
+order / contiguous Download/id/run/shell block / reject uses: rhysd/actionlint@
+— DISTINCT leftover edges only (not saturated #189 / not #176 layouts /
+not schema #191 / not Pass-2 residual #199/#203 / not Pass-2 leftover+md/link
+ #220/#192 / not wiki-badge / not stewardship-badge lint #208 / not schema
+fourth-pass #216; lands closed #223/#217/#213/#198 leftover; do not revive
+ #223/#217/#213/#198/#186/#166/#157)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

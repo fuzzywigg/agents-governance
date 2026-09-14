@@ -130,7 +130,11 @@ semver / closes #N / FAILED+OK / stdlib-subset+PyYAML / bool subclass /
 plus actionlint-style second-pass after #83/#86: exact `name:`/`uses:`
 regexes / write-all+contents+id-token regexes / `docker://` startswith /
 `@` not in uses / `rsplit` / `group(1).strip()` / fail needles /
-least-privilege+OIDC+majors comments / `REQUIRED_WORKFLOWS` loop).
+least-privilege+OIDC+majors comments / `REQUIRED_WORKFLOWS` loop,
+plus run_stewardship runner pins after #90: `#!/usr/bin/env bash` /
+`set -euo pipefail` / `dirname "$0"` / `cd "$ROOT"` / `same set as CI` /
+badge→wiki→schema→relative / `python3 scripts/` four-gate prefix /
+`check_run_stewardship_gate_contract`).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

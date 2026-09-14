@@ -11,6 +11,15 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX run_stewardship runner pins after #90: expand self-tests to 1899
+  cases (was 1827) fail-closing live `run_stewardship_checks.sh` integrity —
+  `#!/usr/bin/env bash` / `set -euo pipefail` / `dirname "$0"` / `cd "$ROOT"` /
+  reconstructed `same set as CI` / gate order badge→wiki→schema→relative /
+  `python3 scripts/` prefix for all four gates, plus
+  `check_run_stewardship_gate_contract` in `check_badge_standard.py` —
+  run_stewardship runner slice only (not actionlint / relative / schema /
+  lychee/mdlint / CI workflow pin spam); no invent-product; no fourth badge
+
 - TOKENMAXX actionlint-style second-pass pins after #83/#86: expand self-tests
   to 1827 cases (was 1755) fail-closing live actionlint-style integrity —
   exact `name:` / `uses:` regexes / write-all+contents+id-token regexes /

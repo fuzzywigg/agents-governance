@@ -11,6 +11,14 @@ Fail-closed pins (live path after #48; second-pass after #61):
 - Quiet stewardship: no Stewardship product/status badge; no fourth badge
 - Second-pass: path constants / exact REQUIRED_ORDER+EXPECTED_REPO assigns /
   actions/workflows/*.yml/badge.svg / fail needles / LICENSE link / FAILED+OK
+- Third-pass after #100: ROOT path exact assigns / REQUIRED_WORKFLOWS tuple /
+  BADGE_LINE_RE+REPO_* named groups / group(label|img|link) /
+  Badge image/link/repo-slug needles / Link+Markdown+License image+link pins /
+  Documents+Stewardship README pins / optional blank lines /
+  BADGE_LINE_RE+REPO_FROM_* compile / main extract+check_badges+sys.exit /
+  Enforce+Quiet docs / contiguous H1 row needles / FAIL README missing /
+  workflow URL absolute / License shields slug / gate path constants /
+  for-hint forbidden+secret loops / Third-pass docstring
 
 Fail-closed actionlint-style pins (live path after #75; second-pass after #83/#86):
 - top-level name: / jobs.*.runs-on / jobs.*.steps / timeout-minutes
@@ -1184,7 +1192,149 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
             "check_badge_standard.py must reject link.startswith(http://)",
             errors,
         )
-
+    # Fail-closed after #100: third-pass helper / constant / needle pins
+    # (badge-standard slice only; not wiki / relative / schema / common / CI
+    # workflow / actionlint pin spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    # Fail messages intentionally omit the exact searched needle (tests mutate it).
+    if "README = ROOT / " + '"README.md"' not in text:
+        fail("check_badge_standard.py must pin README.md ROOT path assign", errors)
+    if "LICENSE = ROOT / " + '"LICENSE"' not in text:
+        fail("check_badge_standard.py must pin LICENSE ROOT path assign", errors)
+    if 'BADGE_STANDARD = ROOT / "docs" / ' + '"badge-standard.md"' not in text:
+        fail("check_badge_standard.py must pin BADGE_STANDARD docs path assign", errors)
+    if "CONTRIBUTING = ROOT / " + '"CONTRIBUTING.md"' not in text:
+        fail("check_badge_standard.py must pin CONTRIBUTING ROOT path assign", errors)
+    if "AGENTS = ROOT / " + '"AGENTS.md"' not in text:
+        fail("check_badge_standard.py must pin AGENTS ROOT path assign", errors)
+    if "LYCHEEIGNORE = ROOT / " + '".lycheeignore"' not in text:
+        fail("check_badge_standard.py must pin LYCHEEIGNORE ROOT path assign", errors)
+    if "MARKDOWNLINT_CONFIG = ROOT / " + '".markdownlint.json"' not in text:
+        fail("check_badge_standard.py must pin MARKDOWNLINT_CONFIG ROOT path assign", errors)
+    if 'WORKFLOWS = ROOT / ".github" / ' + '"workflows"' not in text:
+        fail("check_badge_standard.py must pin WORKFLOWS github path assign", errors)
+    if "REQUIRED_" + "WORKFLOWS = (" not in text:
+        fail("check_badge_standard.py must declare REQUIRED_WORKFLOWS tuple assign", errors)
+    if '"link-check.yml"' not in text:
+        fail("check_badge_standard.py REQUIRED_WORKFLOWS must include link-check workflow", errors)
+    if '"markdown-lint.yml"' not in text:
+        fail("check_badge_standard.py REQUIRED_WORKFLOWS must include markdown-lint workflow", errors)
+    if '"stewardship-checks.yml"' not in text:
+        fail("check_badge_standard.py REQUIRED_WORKFLOWS must include stewardship-checks workflow", errors)
+    if "(?P<" + "label>" not in text:
+        fail("check_badge_standard.py BADGE_LINE_RE must name label capture group", errors)
+    if "(?P<" + "img>" not in text:
+        fail("check_badge_standard.py BADGE_LINE_RE must name img capture group", errors)
+    if "(?P<" + "link>" not in text:
+        fail("check_badge_standard.py BADGE_LINE_RE must name link capture group", errors)
+    if "https://github" + r"\.com/" not in text:
+        fail("check_badge_standard.py REPO_FROM_GITHUB_RE must pin github host pattern", errors)
+    if "https://img" + r"\.shields\.io/github/" not in text:
+        fail("check_badge_standard.py REPO_FROM_SHIELDS_RE must pin shields github pattern", errors)
+    if 'group("' + 'label")' not in text:
+        fail("check_badge_standard.py must read badge label named group", errors)
+    if 'group("' + 'img")' not in text:
+        fail("check_badge_standard.py must read badge img named group", errors)
+    if 'group("' + 'link")' not in text:
+        fail("check_badge_standard.py must read badge link named group", errors)
+    if "Badge image " + "for" not in text:
+        fail("check_badge_standard.py must emit https image requirement needle", errors)
+    if "must use https:// when " + "absolute" not in text:
+        fail("check_badge_standard.py must emit absolute https link requirement needle", errors)
+    if "Badge URL repo slug " + "must be" not in text:
+        fail("check_badge_standard.py must emit repo slug mismatch needle", errors)
+    if "Link Check image must use " + "link-check.yml/badge.svg" not in text:
+        fail("check_badge_standard.py must emit Link Check image badge.svg needle", errors)
+    if "Link Check link must target " + "link-check.yml workflow" not in text:
+        fail("check_badge_standard.py must emit Link Check workflow link needle", errors)
+    if "Markdown Lint image must use " + "markdown-lint.yml/badge.svg" not in text:
+        fail("check_badge_standard.py must emit Markdown Lint image badge.svg needle", errors)
+    if "Markdown Lint link must target " + "markdown-lint.yml workflow" not in text:
+        fail("check_badge_standard.py must emit Markdown Lint workflow link needle", errors)
+    if "License image must use " + "img.shields.io/github/license/" not in text:
+        fail("check_badge_standard.py must emit License shields image needle", errors)
+    if "License badge link must point at " + "LICENSE" not in text:
+        fail("check_badge_standard.py must emit License badge link needle", errors)
+    if "License shields image must include repo " + "slug" not in text:
+        fail("check_badge_standard.py must emit License shields repo slug needle", errors)
+    if "absolute https:// workflow " + "URL" not in text:
+        fail("check_badge_standard.py must require absolute workflow badge URLs", errors)
+    if "Documents section must link to docs/" + "badge-standard.md" not in text:
+        fail("check_badge_standard.py must require README Documents badge-standard link", errors)
+    if "Stewardship product/" + "status badge" not in text:
+        fail("check_badge_standard.py must refuse Stewardship status badge chrome", errors)
+    if "optional blank " + "lines" not in text:
+        fail("check_badge_standard.py must keep under-H1 optional blanks pin", errors)
+    if "BADGE_LINE_RE = re." + "compile(" not in text:
+        fail("check_badge_standard.py must compile BADGE_LINE_RE", errors)
+    if "extract_badge_" + "row(" not in text:
+        fail("check_badge_standard.py must invoke badge row extractor", errors)
+    if "check_badges(" + "badges" not in text:
+        fail("check_badge_standard.py must invoke badge row validator", errors)
+    if "sys.exit(" + "main())" not in text:
+        fail("check_badge_standard.py must exit via main entrypoint", errors)
+    if "Enforce docs/badge-standard.md against " + "README.md" not in text:
+        fail("check_badge_standard.py module doc must keep Enforce README pin", errors)
+    if "Quiet " + "stewardship:" not in text:
+        fail("check_badge_standard.py must keep Quiet stewardship wording pin", errors)
+    if "no blank lines between " + "badge" not in text:
+        fail("check_badge_standard.py must keep contiguous badge-row blank-line pin", errors)
+    if "immediately under the " + "H1" not in text:
+        fail("check_badge_standard.py must keep badge-row under H1 pin", errors)
+    if "FAIL: README.md " + "missing" not in text:
+        fail("check_badge_standard.py must keep missing README fail banner", errors)
+    if "check_workflows_and_license(" + "errors)" not in text:
+        fail("check_badge_standard.py main must invoke workflows/license checker", errors)
+    if "check_lycheeignore(" + "errors)" not in text:
+        fail("check_badge_standard.py main must invoke lycheeignore checker", errors)
+    if "check_readme_consistency(" + "text, errors)" not in text:
+        fail("check_badge_standard.py main must invoke readme consistency checker", errors)
+    if "check_contributing_and_agents(" + "errors)" not in text:
+        fail("check_badge_standard.py main must invoke contributing/agents checker", errors)
+    if "(?P<" + "owner>" not in text:
+        fail("check_badge_standard.py repo regexes must name owner capture", errors)
+    if "(?P<" + "repo>" not in text:
+        fail("check_badge_standard.py repo regexes must name repo capture", errors)
+    if "Third-pass after #100: ROOT path exact " + "assigns" not in text:
+        fail("check_badge_standard.py docstring must keep Third-pass after #100 pin", errors)
+    if "BADGE_GATE = Path(__file__)." + "resolve()" not in text:
+        fail("check_badge_standard.py must pin BADGE_GATE resolve assign", errors)
+    if "list(" + "REQUIRED_ORDER)" not in text:
+        fail("check_badge_standard.py must compare labels via REQUIRED_ORDER list", errors)
+    if "Return consecutive badge " + "lines" not in text:
+        fail("check_badge_standard.py extract_badge_row must keep consecutive-lines doc", errors)
+    if "startswith(" + '"# ")' not in text:
+        fail("check_badge_standard.py extract_badge_row must detect H1 startswith title", errors)
+    if "for hint in FORBIDDEN_" + "BADGE_HINTS:" not in text:
+        fail("check_badge_standard.py must iterate forbidden badge hint list", errors)
+    if "for hint in SECRET_" + "URL_HINTS:" not in text:
+        fail("check_badge_standard.py must iterate secret URL hint list", errors)
+    if "EXPECTED_REPO." + "lower()" not in text:
+        fail("check_badge_standard.py must casefold compare EXPECTED_REPO", errors)
+    if 'link in {"LICENSE", ' + '"./LICENSE"}' not in text:
+        fail("check_badge_standard.py License link must accept relative LICENSE set", errors)
+    if "scan_secrets(" + "README, errors)" not in text:
+        fail("check_badge_standard.py main must scan README secrets", errors)
+    if "scan_secrets(" + "BADGE_STANDARD, errors)" not in text:
+        fail("check_badge_standard.py main must scan badge-standard secrets", errors)
+    if "REPO_FROM_GITHUB_RE = re." + "compile(" not in text:
+        fail("check_badge_standard.py must compile REPO_FROM_GITHUB_RE", errors)
+    if "REPO_FROM_SHIELDS_RE = re." + "compile(" not in text:
+        fail("check_badge_standard.py must compile REPO_FROM_SHIELDS_RE", errors)
+    if "keep-the-row-" + "thin" not in text:
+        fail("check_badge_standard.py must retain row-thin wording", errors)
+    if "do not invent product " + "badges" not in text.lower():
+        fail("check_badge_standard.py must retain invent-product badges wording", errors)
+    if 'RELATIVE_LINK_GATE = ROOT / "scripts" / ' + '"check_relative_links.py"' not in text:
+        fail("check_badge_standard.py must pin relative-link gate script path", errors)
+    if 'WIKI_OUTLINE_GATE = ROOT / "scripts" / ' + '"check_wiki_outline.py"' not in text:
+        fail("check_badge_standard.py must pin wiki-outline gate script path", errors)
+    if 'SCHEMA_GATE = ROOT / "scripts" / ' + '"check_stewardship_schema.py"' not in text:
+        fail("check_badge_standard.py must pin schema gate script path", errors)
+    if 'COMMON_GATE = ROOT / "scripts" / ' + '"stewardship_common.py"' not in text:
+        fail("check_badge_standard.py must pin common gate script path", errors)
+    if 'RUN_STEWARDSHIP = ROOT / "scripts" / ' + '"run_stewardship_checks.sh"' not in text:
+        fail("check_badge_standard.py must pin run_stewardship script path", errors)
 
 
 def check_actionlint_style_gate_contract(errors: list[str]) -> None:

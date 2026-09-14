@@ -146,7 +146,15 @@ utf-8 / `sys.exit` / stewardship_common / invent-chrome social special-cases /
 shields host / markdown-badge open / badge-in-lowered gate /
 README+badge hint paths / pages+operator OK / intentional PUBLISH pin /
 `PAGE_TOPIC_HINTS.get` / `strip_fenced_code(text)` /
-`has_dangerous_scheme(target)` / `scan_secrets` calls).
+`has_dangerous_scheme(target)` / `scan_secrets` calls),
+plus badge-standard third-pass after #100: ROOT path exact assigns /
+`REQUIRED_WORKFLOWS` tuple / `BADGE_LINE_RE`+`REPO_*` named groups /
+`group(label|img|link)` / Badge image+link+repo-slug needles /
+Link+Markdown+License image+link pins / Documents+Stewardship README /
+optional blanks / `BADGE_LINE_RE`+`REPO` compile /
+extract+check_badges+sys.exit / Enforce+Quiet docs / contiguous H1 row /
+FAIL README missing / absolute workflow URL / License shields slug /
+gate path constants / forbidden+secret for-hint loops).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

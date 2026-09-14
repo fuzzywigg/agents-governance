@@ -17,7 +17,7 @@ Fail-closed pins (live path after #48; second-pass after #61; third-pass after #
   absolute workflow URL / License point / Unexpected label / extract+check_badges /
   contract(errors) call / IGNORECASE / blob.lower / EXPECTED_REPO.lower
 
-Fail-closed actionlint-style pins (live path after #75; second-pass after #83/#86; third-pass after #108):
+Fail-closed actionlint-style pins (live path after #75; second-pass after #83/#86; third-pass after #108; deepen after #141):
 - top-level name: / jobs.*.runs-on / jobs.*.steps / timeout-minutes
 - no pull_request_target / no permissions: write-all / no contents: write
 - no id-token: write / actions must be @-pinned (not main|master|latest)
@@ -28,6 +28,9 @@ Fail-closed actionlint-style pins (live path after #75; second-pass after #83/#8
 - Third-pass after #108: concurrency:+cancel-in-progress: / permissions: present /
   reject actions|packages|pull-requests: write / finditer uses / docker continue /
   rsplit[-1] / third-pass docstring
+- Deepen after #141: cancel-in-progress: true / contents: read /
+  ubuntu-latest / workflow_dispatch: / reject security-events|attestations|
+  statuses|deployments: write / deepen docstring
 
 Fail-closed run_stewardship runner pins (live path after #117; lands closed #96):
 - shebang #!/usr/bin/env bash / set -euo pipefail
@@ -449,6 +452,9 @@ def check_actionlint_style(errors: list[str]) -> None:
     Third-pass after #108: concurrency:+cancel-in-progress: / permissions: present /
     reject actions|packages|pull-requests: write / finditer uses /
     docker continue / rsplit[-1] / third-pass docstring.
+    Deepen after #141: cancel-in-progress: true / contents: read /
+    ubuntu-latest / workflow_dispatch: / reject security-events|attestations|
+    statuses|deployments: write / deepen docstring.
     """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
@@ -496,6 +502,24 @@ def check_actionlint_style(errors: list[str]) -> None:
             ref = uses.rsplit("@", 1)[-1]
             if ref in {"main", "master", "latest"}:
                 fail(f"{name}: action must not float on @{ref}: {uses}", errors)
+        # Deepen after #141: CI reliability leftovers (actionlint-style slice).
+        if not re.search(r"(?m)^\s*cancel-in-progress:\s*true\s*$", text):
+            fail(f"{name}: actionlint-style requires cancel-in-progress: true", errors)
+        if not re.search(r"(?m)^\s*contents:\s*read\s*$", text):
+            fail(f"{name}: actionlint-style requires contents: read", errors)
+        if "ubuntu-latest" not in text:
+            fail(f"{name}: actionlint-style requires runs-on ubuntu-latest", errors)
+        if "workflow_dispatch:" not in text:
+            fail(f"{name}: actionlint-style requires workflow_dispatch:", errors)
+        # Reject extra write scopes on docs CI (beyond third-pass actions/packages/pull-requests).
+        if re.search(r"(?m)^\s*security-events:\s*write\s*$", text):
+            fail(f"{name}: security-events: write is forbidden on stewardship workflows", errors)
+        if re.search(r"(?m)^\s*attestations:\s*write\s*$", text):
+            fail(f"{name}: attestations: write is forbidden on stewardship workflows", errors)
+        if re.search(r"(?m)^\s*statuses:\s*write\s*$", text):
+            fail(f"{name}: statuses: write is forbidden on stewardship workflows", errors)
+        if re.search(r"(?m)^\s*deployments:\s*write\s*$", text):
+            fail(f"{name}: deployments: write is forbidden on stewardship workflows", errors)
         # jobs must declare timeout (already checked globally; keep local needle).
         if "timeout-minutes:" not in text:
             fail(f"{name}: actionlint-style requires timeout-minutes on jobs", errors)
@@ -2579,6 +2603,137 @@ def check_actionlint_style_gate_contract(errors: list[str]) -> None:
     if reversible_pin not in text:
         fail(
             "check_actionlint_style must keep " + reversible_pin + " wording",
+            errors,
+        )
+
+
+    # Fail-closed after #141: deepen helper / constant / needle pins
+    # (actionlint-style CI reliability leftovers only; not workflow-hardening /
+    # badge / wiki / docs-lint / schema / common spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    # Avoid contiguous "four"+"th" wording here — that collides with badge-refusal
+    # self-tests that mutate every "fourth" token in this file.
+    deepen_doc = "Deepen after " + "#141"
+    if deepen_doc not in text:
+        fail(
+            "check_actionlint_style docstring must pin " + deepen_doc,
+            errors,
+        )
+    module_deepen = "deepen after " + "#141"
+    if module_deepen not in text:
+        fail(
+            "check_badge_standard.py module docstring must pin actionlint "
+            + module_deepen,
+            errors,
+        )
+    cancel_true_re = 'r"(?m)^\\s*cancel-in-progress:\\s*' + 'true\\s*$"'
+    cancel_true_re_sq = "r'(?m)^\\s*cancel-in-progress:\\s*" + "true\\s*$'"
+    if cancel_true_re not in text and cancel_true_re_sq not in text:
+        fail(
+            "check_actionlint_style must keep exact cancel-in-progress: true regex",
+            errors,
+        )
+    contents_read_re = 'r"(?m)^\\s*contents:\\s*' + 'read\\s*$"'
+    contents_read_re_sq = "r'(?m)^\\s*contents:\\s*" + "read\\s*$'"
+    if contents_read_re not in text and contents_read_re_sq not in text:
+        fail(
+            "check_actionlint_style must keep exact contents: read regex",
+            errors,
+        )
+    ubuntu_membership = '"ubuntu-latest" not in ' + "text"
+    ubuntu_membership_sq = "'ubuntu-latest' not in " + "text"
+    if ubuntu_membership not in text and ubuntu_membership_sq not in text:
+        fail(
+            "check_actionlint_style must require ubuntu-latest via membership",
+            errors,
+        )
+    dispatch_membership = '"workflow_dispatch:" not in ' + "text"
+    dispatch_membership_sq = "'workflow_dispatch:' not in " + "text"
+    if dispatch_membership not in text and dispatch_membership_sq not in text:
+        fail(
+            "check_actionlint_style must require workflow_dispatch: via membership",
+            errors,
+        )
+    security_write_re = 'r"(?m)^\\s*security-events:\\s*' + 'write\\s*$"'
+    security_write_re_sq = "r'(?m)^\\s*security-events:\\s*" + "write\\s*$'"
+    if security_write_re not in text and security_write_re_sq not in text:
+        fail(
+            "check_actionlint_style must keep exact security-events: write regex",
+            errors,
+        )
+    attest_write_re = 'r"(?m)^\\s*attestations:\\s*' + 'write\\s*$"'
+    attest_write_re_sq = "r'(?m)^\\s*attestations:\\s*" + "write\\s*$'"
+    if attest_write_re not in text and attest_write_re_sq not in text:
+        fail(
+            "check_actionlint_style must keep exact attestations: write regex",
+            errors,
+        )
+    statuses_write_re = 'r"(?m)^\\s*statuses:\\s*' + 'write\\s*$"'
+    statuses_write_re_sq = "r'(?m)^\\s*statuses:\\s*" + "write\\s*$'"
+    if statuses_write_re not in text and statuses_write_re_sq not in text:
+        fail(
+            "check_actionlint_style must keep exact statuses: write regex",
+            errors,
+        )
+    deployments_write_re = 'r"(?m)^\\s*deployments:\\s*' + 'write\\s*$"'
+    deployments_write_re_sq = "r'(?m)^\\s*deployments:\\s*" + "write\\s*$'"
+    if deployments_write_re not in text and deployments_write_re_sq not in text:
+        fail(
+            "check_actionlint_style must keep exact deployments: write regex",
+            errors,
+        )
+    fail_cancel_true = "actionlint-style requires cancel-in-progress: " + "true"
+    if fail_cancel_true not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_cancel_true + " fail needle",
+            errors,
+        )
+    fail_contents_read = "actionlint-style requires contents: " + "read"
+    if fail_contents_read not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_contents_read + " fail needle",
+            errors,
+        )
+    fail_ubuntu = "actionlint-style requires runs-on ubuntu-" + "latest"
+    if fail_ubuntu not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_ubuntu + " fail needle",
+            errors,
+        )
+    fail_dispatch = "actionlint-style requires workflow_" + "dispatch:"
+    if fail_dispatch not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_dispatch + " fail needle",
+            errors,
+        )
+    fail_security = "security-events: write is forbidden on stewardship " + "workflows"
+    if fail_security not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_security + " fail needle",
+            errors,
+        )
+    fail_attest = "attestations: write is forbidden on stewardship " + "workflows"
+    if fail_attest not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_attest + " fail needle",
+            errors,
+        )
+    fail_statuses = "statuses: write is forbidden on stewardship " + "workflows"
+    if fail_statuses not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_statuses + " fail needle",
+            errors,
+        )
+    fail_deployments = "deployments: write is forbidden on stewardship " + "workflows"
+    if fail_deployments not in text:
+        fail(
+            "check_actionlint_style must emit " + fail_deployments + " fail needle",
+            errors,
+        )
+    reliability_pin = "CI reliability " + "leftovers"
+    if reliability_pin not in text:
+        fail(
+            "check_actionlint_style must keep " + reliability_pin + " wording",
             errors,
         )
 

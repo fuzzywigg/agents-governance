@@ -162,7 +162,10 @@ exact `.markdownlint.json` layout+key-set+`json.loads` pins /
 plus wiki-badge posture after #132/#135: status badges cover Link Check+Markdown
 Lint / product badge refusal / reject stewardship-checks workflow badge invent /
 reject embedded markdown badge images / PUBLISH Link Check+Markdown Lint
-exactly / Home no badge-row embeds).
+exactly / Home no badge-row embeds,
+plus actionlint-style deepen after #141: `cancel-in-progress: true` /
+`contents: read` / `ubuntu-latest` / `workflow_dispatch:` / reject
+`security-events|attestations|statuses|deployments: write` / deepen docstring).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

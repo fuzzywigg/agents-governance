@@ -522,3 +522,12 @@ _None yet._
 2026-09-14T02:55:00Z
 
 2026-09-14T03:05:00Z cursor: PR #141 CI green (lint + link-check + stewardship/actionlint) MERGEABLE ← complete ECO-057 TOKENMAXX wiki-badge pins after #132/#135 (replaces closed #131/#136)
+
+### [ECO-058] TOKENMAXX deepen actionlint pins after #141 — 2026-09-14T03:19:10Z
+- [x] cursor: Read live tree post-#141 (2689 cases; wiki-badge saturated; #144/#145/#146 CLOSED CONFLICTING — do not revive)
+- [x] cursor: Fail-close actionlint-style deepen — cancel-in-progress: true / contents: read / ubuntu-latest / workflow_dispatch: / reject security-events|attestations|statuses|deployments: write / deepen docstring + check_actionlint_style_gate_contract
+- [x] cursor: Expand self-tests 2689 → 2781 (actionlint-style deepen slice; not wiki-badge #141 / docs-lint #135 / common / run_stewardship / CI workflow spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING actionlint-style CI reliability leftover pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #145 leftover on post-#141 main; do not revive #144/#145/#146
+- Branch: cursor/tokenmaxx-actionlint-after-141-cdb2
+2026-09-14T03:19:10Z

@@ -11,6 +11,15 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX actionlint-style deepen pins after #141: expand self-tests to
+  2781 cases (was 2689) fail-closing live actionlint CI reliability leftovers —
+  `cancel-in-progress: true` / `contents: read` / `ubuntu-latest` /
+  `workflow_dispatch:` / reject `security-events|attestations|statuses|
+  deployments: write` / deepen docstring + gate-contract needles —
+  actionlint-style slice only (not wiki-badge #141 / docs-lint #135 /
+  workflow-hardening / badge / schema / common spam); no invent-product; no
+  fourth badge. New draft after #141 (do **not** revive closed #144/#145/#146).
+
 - TOKENMAXX wiki-badge posture pins after #132/#135: expand self-tests to
   2689 cases (was 2593) fail-closing live wiki badge posture — status badges
   cover Link Check+Markdown Lint / product badge refusal / reject stewardship

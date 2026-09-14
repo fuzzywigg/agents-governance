@@ -725,3 +725,7 @@ _None yet._
 - Branch: cursor/tokenmaxx-actionlint-path-edges-after-203-e7ec
   (converted to wiki-index/badge leftover after path-edges sibling #213)
 2026-09-14T06:45:00Z
+
+2026-09-14T06:55:00Z cursor: Local green — run_stewardship + self-tests 3842 + markdownlint ← ECO-071 wiki-index/badge leftover after #208 (do not revive #196/#185/#172; leave open #213/#214 alone)
+
+2026-09-14T06:55:00Z cursor: Draft PR #215 converted from path-edges duplicate to wiki-index/badge leftover on post-#208 tip (cursor/tokenmaxx-actionlint-path-edges-after-203-e7ec); awaiting CI ← ECO-071 (distinct from open path-edges #213 / md/link #214)

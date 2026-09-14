@@ -145,7 +145,11 @@ tuple typing / FENCED_BLOCK_RE.sub / label or relative_to / pattern.search /
 lowered=text.lower / re.escape / https? URL-ish / ROOT.glob+found.update /
 set[Path] / workflows path join / scheme+pattern+hint loops / Shared helpers
 doc / hint.endswith(=) / MEMORY dumps / str|None+list[Path] /
-FORBIDDEN_BADGE_HINTS head / SECRET_URL_HINTS gh-family prefix members).
+FORBIDDEN_BADGE_HINTS head / SECRET_URL_HINTS gh-family prefix members,
+plus wiki-badge posture after #117: status badges cover Link Check+Markdown
+Lint / product badge refusal / reject stewardship-checks workflow badge invent /
+reject embedded markdown badge images / PUBLISH Link Check+Markdown
+Lint exactly / Home no badge-row embeds).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

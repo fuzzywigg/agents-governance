@@ -3843,6 +3843,105 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
             errors,
         )
 
+    # Fail-closed after #117: wiki-badge posture pins (Link Check + Markdown Lint only;
+    # no stewardship-checks.yml/badge.svg invent; lands closed #120 leftover;
+    # not stewardship_common #117 / docs-lint #126 / run_stewardship #127).
+    wiki_text = (
+        WIKI_OUTLINE_GATE.read_text(encoding="utf-8")
+        if WIKI_OUTLINE_GATE.is_file()
+        else ""
+    )
+    status_badges = "status badges " + "cover"
+    if status_badges not in wiki_text:
+        fail(
+            "check_wiki_outline.py must keep status badges cover wording",
+            errors,
+        )
+    product_badge = "product " + "badge"
+    if product_badge not in wiki_text:
+        fail(
+            "check_wiki_outline.py must keep product badge refusal wording",
+            errors,
+        )
+    no_fourth_svg = "stewardship-checks.yml/" + "badge.svg"
+    if no_fourth_svg not in wiki_text:
+        fail(
+            "check_wiki_outline.py must reject stewardship-checks.yml/badge.svg invent",
+            errors,
+        )
+    no_embed = "must not embed markdown badge " + "images"
+    if no_embed not in wiki_text:
+        fail(
+            "check_wiki_outline.py must reject embedded markdown badge images",
+            errors,
+        )
+    if "Link Check exactly" not in wiki_text:
+        fail(
+            "check_wiki_outline.py must require PUBLISH.md Link Check exactly",
+            errors,
+        )
+    if "Markdown Lint exactly" not in wiki_text:
+        fail(
+            "check_wiki_outline.py must require PUBLISH.md Markdown Lint exactly",
+            errors,
+        )
+    after_117_wiki = "after " + "#117"
+    if after_117_wiki not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must pin after #117 wiki-badge deepen",
+            errors,
+        )
+    home_no_embed = "Home.md must not embed markdown badge " + "images"
+    if home_no_embed not in wiki_text:
+        fail(
+            "check_wiki_outline.py must reject Home.md badge-row embeds",
+            errors,
+        )
+    status_badges_names = "must name Link Check and Markdown Lint " + "status badges"
+    if status_badges_names not in wiki_text:
+        fail(
+            "check_wiki_outline.py must require Repo-Stewardship Link Check+Markdown Lint names",
+            errors,
+        )
+    product_refuse = "must refuse stewardship as a product " + "badge"
+    if product_refuse not in wiki_text:
+        fail(
+            "check_wiki_outline.py must emit product badge refusal fail needle",
+            errors,
+        )
+    no_fourth_paren = "(no fourth " + "badge)"
+    if no_fourth_paren not in wiki_text:
+        fail(
+            "check_wiki_outline.py must keep no fourth badge invent parenthetical",
+            errors,
+        )
+    narrative_not_row = "wiki is narrative, not badge " + "row"
+    if narrative_not_row not in wiki_text:
+        fail(
+            "check_wiki_outline.py must keep wiki is narrative, not badge row wording",
+            errors,
+        )
+    wiki_badge_doc = "wiki-badge " + "posture"
+    if wiki_badge_doc not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep wiki-badge posture pin",
+            errors,
+        )
+    badge_open = '"[!["'
+    badge_open_sq = "'[!['"
+    if badge_open not in wiki_text and badge_open_sq not in wiki_text:
+        fail(
+            "check_wiki_outline.py must match markdown badge open [![ for embeds",
+            errors,
+        )
+    badge_svg_lower = '"badge.svg" in ' + "text.lower()"
+    badge_svg_lower_sq = "'badge.svg' in " + "text.lower()"
+    if badge_svg_lower not in wiki_text and badge_svg_lower_sq not in wiki_text:
+        fail(
+            "check_wiki_outline.py must gate embeds via badge.svg in text.lower()",
+            errors,
+        )
+
 
 
 def check_relative_link_gate_contract(errors: list[str]) -> None:

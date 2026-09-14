@@ -294,6 +294,19 @@ leftover #252 / not path-edges residual #244 / not wiki outline/PUBLISH
 leftover #243 / not md/link residual #239 / not stewardship-checks/schema
 residual #233 / not wiki-index/badge leftover #227; do not revive
 closed #253/#248/#241)).
+plus actionlint path-filter/path-order residual leftover deepen after #258:
+contiguous push:/pull_request: adjacency / contiguous
+schedule:/workflow_dispatch: adjacency / pull_request branches-unfiltered /
+reject tags-ignore: / reject workflow_call: / contiguous five-step
+actionlint path-order / contiguous on:/push: header — DISTINCT residual
+leftover edges only (not stewardship-schema leftover #258 /
+not wiki/mdlink leftover #252 / not saturated residual #244 /
+not saturated deepen #225/#203 / not wiki outline/PUBLISH leftover #243 /
+not md/link residual #239 / not stewardship-checks/schema leftover #233 /
+not wiki-badge leftover #227 / not #189 / not #176 / not schema #191/#216 /
+not Pass-2 residual #199/#203 / not Pass-2 leftover + md/link #220 /
+not stewardship-badge lint #208; do not revive
+closed #255/#247/#244/#236/#232/#228/#226/#223/#217/#213/#198/#186/#166/#157)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

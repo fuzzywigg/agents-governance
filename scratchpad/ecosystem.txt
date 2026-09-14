@@ -819,3 +819,7 @@ _None yet._
 - Branch: cursor/tokenmaxx-schema-residual-after-252-f8c8
 2026-09-14T09:53:09Z
 
+
+2026-09-14T10:06:04Z cursor: Local green — run_stewardship + self-tests 5212 + markdownlint ← ECO-077 schema residual leftover after #252 (leave draft; do not revive #257/#253/#248/#241)
+
+2026-09-14T10:06:04Z cursor: Draft PR #259 opened (cursor/tokenmaxx-schema-residual-after-252-f8c8); leave draft / do-not-merge; awaiting CI ← ECO-077 schema residual leftover after #252 (do not revive #257/#253/#248/#241)

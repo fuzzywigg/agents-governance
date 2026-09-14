@@ -6790,7 +6790,8 @@ def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
     )
     if string_keys_isinstance not in text:
         fail(
-            "check_stewardship_schema.py must keep STRING_KEYS isinstance(value, str) gate",
+            "check_stewardship_schema.py must keep "
+            "if key in STRING_KEYS and not isinstance(value, str):",
             errors,
         )
     autonomy_in = 'if "autonomy_level" in ' + "data:"
@@ -6808,7 +6809,8 @@ def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
     re_fullmatch_digit = 'elif re.fullmatch(r"-?\\d+", ' + "value):"
     if re_fullmatch_digit not in text:
         fail(
-            'check_stewardship_schema.py must keep elif re.fullmatch(r"-?\\d+", value):',
+            "check_stewardship_schema.py must keep "
+            'elif re.fullmatch(r"-?\\d+", value):',
             errors,
         )
     value_slice = "value = value[1:" + "-1]"

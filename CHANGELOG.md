@@ -20,6 +20,20 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   — wiki-badge slice only (not docs-lint #135 / common / run_stewardship /
   actionlint / relative / CI workflow spam); no invent-product; no fourth badge.
   Lands closed #120/#131 leftovers on post-#135 main (do not revive #131/#134).
+- TOKENMAXX stewardship-schema third-pass pins after #141: expand self-tests to
+  2761 cases (was 2689) fail-closing live schema integrity — future annotations /
+  Path.parent + sys.path.insert / stewardship_common import / yaml=None /
+  pragma no cover / five live docs only / startswith("#") / true+false / null+~ /
+  re.fullmatch -?\\d+ / split(":", 1) / value[1:-1] / isinstance(loaded, dict) /
+  FENCED_YAML_RE.search / isinstance (dict, list) / sorted(required_keys - set(data)) /
+  startswith("docs/") / .upper()!=ACTIVE / EXPECTED_VALUES.get /
+  (expected {want!r}) / level not in (0,1,2,3) / tier < 1 / ISO_DATE_RE.match /
+  SEMVER_RE.match / ISSUE_REF_RE.search / closes scope set /
+  scan_secrets(path, errors) / len(DOC_SCHEMAS) / sys.exit(main()) /
+  mapping+empty+missing-file needles / bool subclass / yaml.safe_load, plus
+  `check_stewardship_schema_gate_contract` third-pass — schema slice only; no
+  invent-product; no fourth badge. New draft after #132 (do not revive
+  #77/#78/#82/#87; docs-lint contested by #135).
 
 - TOKENMAXX CI workflow third-pass pins after #111/#117/#127: expand self-tests to
   2491 cases (was 2419) fail-closing live reversible CI workflow integrity —

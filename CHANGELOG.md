@@ -11,6 +11,18 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX actionlint path-order leftover after #181: expand self-tests to
+  3402 cases (was 3330) fail-closing live actionlint path-order leftovers —
+  contiguous three-path actionlint order (`link-check` → `markdown-lint` →
+  `stewardship-checks`) / exact `bash <(curl -fsSL …/download-actionlint.bash) 1.7.7`
+  form / reject `continue-on-error: true` / `Download actionlint` +
+  `actionlint existing workflow paths` step names / path-order leftover
+  docstring + gate-contract needles — actionlint path-order leftover slice only
+  (not wiki-index #181 / not path-filter #176 / not run_stewardship #179 /
+  not stewardship CI #165 / not #149 cancel-in-progress); no invent-product; no
+  fourth badge. Lands closed #157 leftover on post-#181 main (do **not** revive
+  #157/#182/#143/#120). New draft after tip; abandons closed CONFLICTING #182.
+
 - TOKENMAXX wiki-index validators after #176: expand self-tests to 3330 cases
   (was 3258) fail-closing live wiki-index integrity — Home TOC empty-index /
   publishable page index stubs / broken internal stub links / empty markdown

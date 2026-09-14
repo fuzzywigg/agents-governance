@@ -622,3 +622,12 @@ _None yet._
 2026-09-14T05:28:00Z cursor: Draft PR #181 opened (rebased wiki-index after #176 onto post-#179 tip; 3330 cases) — awaiting CI; do not revive #177/#180
 
 2026-09-14T05:30:00Z cursor: PR #181 CI green (lint + link-check + stewardship) ← complete ECO-064 TOKENMAXX wiki-index validators after #176 (does not revive #177/#180)
+
+### [ECO-065] TOKENMAXX deepen actionlint path-order leftover after #181 — 2026-09-14T05:25:00Z
+- [x] cursor: Read live tree post-#181 (3330 cases; wiki-index saturated; path-order still unsaturated; #182 CLOSED CONFLICTING — abandon that branch; do not revive #157/#182)
+- [x] cursor: Fail-close actionlint path-order leftover on NEW branch — contiguous three-path order / exact bash <(curl -fsSL) download / reject continue-on-error: true / Download actionlint + actionlint existing workflow paths step names / path-order docstring + gate contract
+- [x] cursor: Expand self-tests 3330 → 3402 (actionlint path-order leftover slice; not wiki-index #181 / path-filter #176 / run_stewardship #179 / stewardship CI spam)
+- [ ] cursor: Green draft PR with CI
+- Scope: EXISTING actionlint path-order leftover pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #157 leftover on post-#181 main; do not revive #157/#182/#143/#120
+- Branch: cursor/tokenmaxx-actionlint-path-order-after-181-3e1c
+2026-09-14T05:25:00Z

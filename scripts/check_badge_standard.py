@@ -75,6 +75,16 @@ Fail-closed actionlint path-filter leftovers after #173:
 - ignore globs: --exclude-path .github/agents + exact markdownlint bangs
 - empty workflow stubs already handled (load None continue); distinct from
   path-order/badge, stewardship-badge lint, and stewardship CI deepen
+
+Fail-closed actionlint path-order leftover after #181 (lands closed #157/#182;
+NOT path-filter #176 / NOT wiki-index #181 / NOT run_stewardship #179 /
+NOT #165 stewardship CI / NOT #149 cancel-in-progress):
+- contiguous three-path actionlint order (link-check → markdown-lint →
+  stewardship-checks)
+- exact bash <(curl -fsSL) download-actionlint.bash 1.7.7 form
+- no continue-on-error: true
+- Download actionlint + actionlint existing workflow paths step names
+- path-order leftover docstring
 """
 
 from __future__ import annotations
@@ -647,6 +657,11 @@ def check_workflow_hardening(errors: list[str]) -> None:
     Path-filter leftovers after #173: exact push paths layouts / residual
     stewardship path entries / reject paths-ignore / ignore-glob exactness
     (empty workflow stubs already handled; not path-order/badge spam).
+    Path-order leftover after #181 (lands closed #157/#182; NOT path-filter /
+    NOT wiki-index / NOT run_stewardship / NOT #165 stewardship CI):
+    contiguous three-path actionlint order / exact bash <(curl -fsSL) download /
+    no continue-on-error: true / Download actionlint + actionlint existing
+    workflow paths step names / path-order leftover docstring.
     """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
@@ -1433,6 +1448,53 @@ def check_workflow_hardening(errors: list[str]) -> None:
             "markdown-lint.yml must keep exact ignore-glob globs layout",
             errors,
         )
+
+
+    # Path-order leftover after #181 (lands closed #157/#182; NOT path-filter #176 /
+    # NOT wiki-index #181 / NOT run_stewardship #179 / NOT #165 stewardship CI).
+    ordered_paths = (
+        ".github/workflows/link-check.yml "
+        ".github/workflows/markdown-lint.yml "
+        ".github/workflows/stewardship-checks.yml"
+    )
+    if ordered_paths not in stew:
+        fail(
+            "stewardship-checks.yml actionlint must list three workflow paths "
+            "in order: link-check → markdown-lint → stewardship-checks "
+            "(actionlint path-order leftover)",
+            errors,
+        )
+    download_form = (
+        "bash <(curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/"
+        "v1.7.7/scripts/download-actionlint.bash) 1.7.7"
+    )
+    if download_form not in stew:
+        fail(
+            "stewardship-checks.yml must use exact bash <(curl -fsSL …/v1.7.7/"
+            "…download-actionlint.bash) 1.7.7 form "
+            "(actionlint path-order leftover)",
+            errors,
+        )
+    if re.search(r"(?m)^\s*continue-on-error:\s*true\s*$", stew):
+        fail(
+            "stewardship-checks.yml must not set continue-on-error: true "
+            "(actionlint path-order leftover)",
+            errors,
+        )
+    if "name: Download actionlint" not in stew:
+        fail(
+            "stewardship-checks.yml must keep step name: Download actionlint "
+            "(actionlint path-order leftover)",
+            errors,
+        )
+    if "name: actionlint existing workflow paths" not in stew:
+        fail(
+            "stewardship-checks.yml must keep step name: "
+            "actionlint existing workflow paths "
+            "(actionlint path-order leftover)",
+            errors,
+        )
+
 
 
 def check_badge_standard_doc(errors: list[str]) -> None:
@@ -3200,7 +3262,7 @@ def check_actionlint_style_gate_contract(errors: list[str]) -> None:
 
 def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
     """Fail-close live CI workflow hardening wiring (third-pass after #111; deepen after #161;
-    path-filter leftovers after #173)."""
+    path-filter leftovers after #173; path-order leftover after #181)."""
     text = Path(__file__).read_text(encoding="utf-8")
     # Fail-closed after #111: third-pass helper / constant / needle pins
     # (CI workflow reversible slice only; not badge/wiki/relative/schema/actionlint spam).
@@ -3460,6 +3522,99 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
             "check_workflow_hardening must require push paths: declaration",
             errors,
         )
+
+
+    # Path-order leftover after #181 (lands closed #157/#182; NOT path-filter /
+    # NOT wiki-index / NOT run_stewardship / NOT #165 stewardship CI).
+    path_order_doc = "Path-order leftover after " + "#181"
+    if path_order_doc not in text:
+        fail(
+            "check_workflow_hardening docstring must pin " + path_order_doc,
+            errors,
+        )
+    module_path_order = "Path-order leftover after " + "#181"
+    if module_path_order not in text:
+        fail(
+            "check_badge_standard.py module docstring must pin "
+            + module_path_order,
+            errors,
+        )
+    not_157 = "lands closed " + "#157"
+    if not_157 not in text:
+        fail(
+            "path-order leftover must keep " + not_157 + " distinctness pin",
+            errors,
+        )
+    not_182 = "lands closed #157/" + "#182"
+    if not_182 not in text:
+        fail(
+            "path-order leftover must keep closed #182 distinctness pin",
+            errors,
+        )
+    not_path_filter = "NOT " + "path-filter"
+    if not_path_filter not in text:
+        fail(
+            "path-order leftover must keep " + not_path_filter + " distinctness pin",
+            errors,
+        )
+    not_wiki_index = "NOT " + "wiki-index"
+    if not_wiki_index not in text:
+        fail(
+            "path-order leftover must keep " + not_wiki_index + " distinctness pin",
+            errors,
+        )
+    not_run_stew = "NOT " + "run_stewardship"
+    if not_run_stew not in text:
+        fail(
+            "path-order leftover must keep " + not_run_stew + " distinctness pin",
+            errors,
+        )
+    # Split construction keeps self-host mutations fail-closed.
+    path_order_pins = (
+        (
+            ".github/workflows/link-check.yml" + " ",
+            "link-check.yml path pin (path-order leftover)",
+        ),
+        (
+            ".github/workflows/markdown-lint.yml" + " ",
+            "markdown-lint.yml path pin (path-order leftover)",
+        ),
+        (
+            ".github/workflows/stewardship-checks" + ".yml",
+            "stewardship-checks.yml path pin (path-order leftover)",
+        ),
+        (
+            "in order: " + "link-check",
+            "three-path order fail needle",
+        ),
+        (
+            "bash <(curl -fsSL https://raw." + "githubusercontent.com/",
+            "exact bash <(curl -fsSL) download form pin",
+        ),
+        (
+            "must not set continue-on-error: " + "true",
+            "continue-on-error: true fail needle",
+        ),
+        (
+            "name: Download " + "actionlint",
+            "Download actionlint step-name pin",
+        ),
+        (
+            "name: actionlint existing workflow " + "paths",
+            "actionlint existing workflow paths step-name pin",
+        ),
+        (
+            "actionlint path-order " + "leftover",
+            "path-order leftover wording pin",
+        ),
+    )
+    for needle, label in path_order_pins:
+        if needle not in text:
+            fail(
+                "check_workflow_hardening must keep " + label,
+                errors,
+            )
+
 
     fn_pin = "def check_workflow_hardening" + "("
     if fn_pin not in text:

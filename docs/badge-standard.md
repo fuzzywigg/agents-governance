@@ -220,7 +220,12 @@ do not revive #177/#168/#170; distinct from path-filter #176 and run_stewardship
 plus actionlint path-order leftover after #181: contiguous three-path
 actionlint order / exact bash <(curl -fsSL) download /
 reject continue-on-error: true / Download actionlint + actionlint existing
-workflow paths step names / path-order leftover docstring).
+workflow paths step names / path-order leftover docstring),
+plus markdown-lint/link-check CI workflow edges after #189: args: >- /
+externally-broken-links commentary / without-it private-404 /
+continue-on-error reject / exact job permissions / checkout adjacency
+(CI md/link edge slice only; lands closed #192 leftover; do not revive
+PR #192; leave open schema #191 and Pass-2 residual #193 alone).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

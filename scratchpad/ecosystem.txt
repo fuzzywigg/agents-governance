@@ -631,3 +631,12 @@ _None yet._
 - Scope: EXISTING actionlint path-order leftover pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #157 leftover on post-#181 main; do not revive #157/#182/#143/#120
 - Branch: cursor/tokenmaxx-actionlint-path-order-after-181-3e1c
 2026-09-14T05:25:00Z
+
+### [ECO-067] TOKENMAXX deepen markdown-lint/link-check CI edges after #189 — 2026-09-14T05:55:00Z
+- [x] cursor: Abandon closed CONFLICTING schema drafts; read tip post-#189 (3402 cases); leave open #191 schema + #193 Pass-2 residual alone
+- [x] cursor: Fail-close unsaturated md/link CI workflow edges from closed #192 — args: >- / externally-broken commentary / without-it private-404 / continue-on-error reject / exact job permissions / checkout adjacency
+- [x] cursor: Expand self-tests 3402 → 3466 (CI md/link edge slice only; not schema #191 / Pass-2 #193 / path-order #189 / wiki-index #181 spam)
+- [ ] cursor: Green draft PR with CI
+- Scope: EXISTING link-check.yml + markdown-lint.yml workflow edge pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #192 leftover on post-#189 main; do not revive #192; leave #191/#193 alone
+- Branch: cursor/tokenmaxx-mdlink-ci-edges-after-189-e189
+2026-09-14T05:55:00Z

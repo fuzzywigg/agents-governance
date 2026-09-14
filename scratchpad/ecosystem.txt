@@ -473,7 +473,6 @@ _None yet._
 - Scope: EXISTING CI workflow reversible pin wiring only; no invent-product; no fourth badge; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-workflow-third-pass-v3-88a9
 2026-09-14T02:32:37Z
-<<<<<<< HEAD
 ### [ECO-054] TOKENMAXX deepen docs-lint second-pass pins after #111 — 2026-09-14T02:17:15Z
 - [x] cursor: Read live tree post-#117 (2331 cases; actionlint third-pass saturated; #116 stewardship_common closed CI-red — do not revive)
 - [x] cursor: Fail-close docs-lint second-pass — exact live exclude URLs / Connection-reset+RST+false-positive+early-hints+valid-site / check_badge_standard.py reference / License badge presence remains enforced / exact markdownlint layout+key-set+json.loads / check_docs_lint_gate_contract second-pass
@@ -512,7 +511,6 @@ _None yet._
 - Scope: EXISTING docs-lint integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; rebased onto post-#132 main; distinct from closed #116
 - Branch: cursor/tokenmaxx-docs-lint-second-pass-after-111-ca9a
 2026-09-14T02:40:36Z
-=======
 
 ### [ECO-057] TOKENMAXX deepen stewardship-schema third-pass pins after #132 — 2026-09-14T02:50:00Z
 - [x] cursor: Read live tree post-#132 (2491 cases; CI workflow third-pass merged; docs-lint contested by open #135 — pivot to schema)
@@ -523,4 +521,10 @@ _None yet._
 - Branch: cursor/tokenmaxx-stewardship-schema-third-pass-88a9
 2026-09-14T02:50:00Z
 
->>>>>>> 47239ce (ci: TOKENMAXX deepen stewardship-schema third-pass pins after #132)
+### [ECO-058] TOKENMAXX deepen stewardship-schema third-pass pins after #135 — 2026-09-14T03:20:00Z
+- [x] cursor: #85/#142 closed; #135 docs-lint merged; actionlint contested (#143/#144/#145) — schema third-pass on latest main
+- [x] cursor: Fail-close stewardship-schema third-pass (2593→2665)
+- [ ] cursor: Green NEW draft PR with CI
+- Scope: EXISTING stewardship-schema integrity only; no invent-product; no fourth badge; no secrets/DNS/history; do not revive #85/#142
+- Branch: cursor/tokenmaxx-stewardship-schema-third-pass-v3-88a9
+2026-09-14T03:20:00Z

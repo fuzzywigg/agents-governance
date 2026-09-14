@@ -11,8 +11,8 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-- TOKENMAXX stewardship-schema third-pass pins after #132: expand self-tests to
-  2563 cases (was 2491) fail-closing live schema integrity — future annotations /
+- TOKENMAXX stewardship-schema third-pass pins after #135 (lands #132 leftover): expand self-tests to
+  2665 cases (was 2593) fail-closing live schema integrity — future annotations /
   Path.parent + sys.path.insert / stewardship_common import / yaml=None /
   pragma no cover / five live docs only / startswith("#") / true+false / null+~ /
   re.fullmatch -?\\d+ / split(":", 1) / value[1:-1] / isinstance(loaded, dict) /

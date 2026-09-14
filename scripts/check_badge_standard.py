@@ -53,6 +53,16 @@ lands closed #175 leftover; lands closed #140; lands closed #96):
   back-to-back gates→self-tests named block /
   no inline check_*.py in stewardship-checks.yml /
   self-tests before actionlint; CI gates-self-tests back-to-back block pin
+- Pass-2 leftovers after #208 tip (lands closed #202/#192/#212 leftover; NOT Pass-2 residual #199 /
+  NOT Pass-2 register #203 / NOT badge-lint #208 / NOT schema third-pass #191 / NOT path-order #189 /
+  NOT open schema fourth #216):
+  shebang as first line / soft-fail with || exit 0 refuse (residual beyond #179/#199)
+- markdown-lint/link-check edges after #208 tip (Markdown-lint/link-check workflow edges after #203 tip;
+  lands closed #202/#192/#212 leftover; NOT path-filter #176 / NOT Pass-2 #179/#199 /
+  NOT path-order #189 / NOT badge-lint #208 / NOT schema #191/#216):
+  args: >- / externally broken links commentary / without-it private-404 commentary /
+  must not set continue-on-error / exact job permissions: contents: read /
+  checkout before Check links adjacency / checkout before Run markdownlint adjacency
 Fail-closed CI workflow pins (live path after #39/#72; third-pass after #111; deepen after #161;
 path-filter leftovers after #173):
 - Third-pass after #111: exact concurrency group templates /
@@ -682,6 +692,11 @@ def check_workflow_hardening(errors: list[str]) -> None:
     contiguous three-path actionlint order / exact bash <(curl -fsSL) download /
     no continue-on-error: true / Download actionlint + actionlint existing
     workflow paths step names / path-order leftover docstring.
+    Markdown-lint/link-check workflow edges after #203 tip (lands closed #202/#192 leftover;
+    NOT path-filter / Pass-2 / path-order / schema / badge-lint spam):
+    args: >- / externally broken links commentary / without-it private-404 commentary /
+    must not set continue-on-error / exact job permissions: contents: read /
+    checkout before Check links adjacency / checkout before Run markdownlint adjacency.
     """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
@@ -1603,6 +1618,67 @@ def check_workflow_hardening(errors: list[str]) -> None:
             "stewardship-checks.yml must keep step name: "
             "actionlint existing workflow paths "
             "(actionlint path-order leftover)",
+            errors,
+        )
+
+    # Fail-closed after #203 tip: markdown-lint / link-check workflow edges
+    # (lands closed #202/#192 leftover; NOT path-filter #176 / Pass-2 #179/#199 /
+    # path-order #189 / wiki-index #181 / schema #191/#204 / badge-lint #205).
+    if "args: >-" not in link:
+        fail(
+            "link-check.yml must keep multiline args: >- form",
+            errors,
+        )
+    if "Run weekly to catch externally broken links" not in link:
+        fail(
+            "link-check.yml must keep externally broken links commentary",
+            errors,
+        )
+    without_it = "without it, private repos return 404 and fail the check"
+    if without_it not in link:
+        fail(
+            "link-check.yml must keep without-it private-404 commentary",
+            errors,
+        )
+    if "continue-on-error:" in link:
+        fail(
+            "link-check.yml must not set continue-on-error "
+            "(markdown-lint/link-check edges after #203)",
+            errors,
+        )
+    if "continue-on-error:" in lint:
+        fail(
+            "markdown-lint.yml must not set continue-on-error "
+            "(markdown-lint/link-check edges after #203)",
+            errors,
+        )
+    job_perms = "    permissions:\n      contents: read"
+    if job_perms not in link:
+        fail(
+            "link-check.yml must keep exact job permissions: contents: read",
+            errors,
+        )
+    if job_perms not in lint:
+        fail(
+            "markdown-lint.yml must keep exact job permissions: contents: read",
+            errors,
+        )
+    link_checkout_adj = (
+        "      - uses: actions/checkout@v7\n"
+        "      - name: Check links"
+    )
+    if link_checkout_adj not in link:
+        fail(
+            "link-check.yml must keep checkout before Check links adjacency",
+            errors,
+        )
+    lint_checkout_adj = (
+        "      - uses: actions/checkout@v7\n"
+        "      - name: Run markdownlint"
+    )
+    if lint_checkout_adj not in lint:
+        fail(
+            "markdown-lint.yml must keep checkout before Run markdownlint adjacency",
             errors,
         )
 
@@ -3840,6 +3916,54 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
             "check_badge_standard.py must define workflow hardening gate contract",
             errors,
         )
+
+    # Fail-closed after #203 tip: markdown-lint / link-check workflow edge pins
+    # (lands closed #202/#192 leftover; not path-filter / Pass-2 / path-order / schema spam).
+    edge_doc = "Markdown-lint/link-check workflow edges after " + "#203"
+    if edge_doc not in text:
+        fail(
+            "check_workflow_hardening docstring must pin " + edge_doc,
+            errors,
+        )
+    module_edge = "markdown-lint/link-check edges after " + "#203"
+    if module_edge not in text:
+        fail(
+            "check_badge_standard.py module docstring must pin " + module_edge,
+            errors,
+        )
+    edge_pins = (
+        ("args: " + ">-", "lychee args multiline form pin"),
+        (
+            "externally broken links " + "commentary",
+            "link-check externally-broken commentary pin",
+        ),
+        (
+            "without-it private-404 " + "commentary",
+            "link-check without-it private-404 pin",
+        ),
+        (
+            "must not set continue-on-" + "error",
+            "continue-on-error reject pin",
+        ),
+        (
+            "exact job permissions: contents: " + "read",
+            "job permissions exact pin",
+        ),
+        (
+            "checkout before Check links " + "adjacency",
+            "link-check checkout adjacency pin",
+        ),
+        (
+            "checkout before Run markdownlint " + "adjacency",
+            "markdown-lint checkout adjacency pin",
+        ),
+    )
+    for needle, label in edge_pins:
+        if needle not in text:
+            fail(
+                "check_workflow_hardening must keep " + label,
+                errors,
+            )
 
 
 
@@ -6598,6 +6722,18 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
                 "(Pass-2 residual after #191)",
                 errors,
             )
+        # Pass-2 leftovers after #203 tip: residual soft-fail beyond #179/#199
+        # (lands closed #202/#192 leftover; not open #205 badge-lint / #204 schema).
+        if "|| exit 0" in run_text or "||exit 0" in run_text:
+            fail(
+                "run_stewardship_checks.sh must not soft-fail with || exit 0",
+                errors,
+            )
+        if not run_text.startswith("#!/usr/bin/env bash\n"):
+            fail(
+                "run_stewardship_checks.sh must keep shebang as first line",
+                errors,
+            )
         # Leftover after #149: exact live run_stewardship_checks.sh full layout.
         expected_run = (
             "#!/usr/bin/env bash\n"
@@ -6923,6 +7059,26 @@ def check_run_stewardship_gate_contract(errors: list[str]) -> None:
     if block_marker not in text:
         fail(
             "run_stewardship contract must keep " + block_marker,
+            errors,
+        )
+    # Pass-2 leftovers after #203 tip: residual soft-fail / shebang-first pins
+    # (lands closed #202/#192 leftover; NOT Pass-2 residual #199 / register #203).
+    leftover_203 = "Pass-2 leftovers after " + "#203"
+    if leftover_203 not in text:
+        fail(
+            "run_stewardship pins must keep " + leftover_203 + " marker",
+            errors,
+        )
+    exit0_pin = "soft-fail with || exit " + "0"
+    if exit0_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + exit0_pin + " pin",
+            errors,
+        )
+    shebang_first = "shebang as first " + "line"
+    if shebang_first not in text:
+        fail(
+            "run_stewardship contract must keep " + shebang_first + " pin",
             errors,
         )
 

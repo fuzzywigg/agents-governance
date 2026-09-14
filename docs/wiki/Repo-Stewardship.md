@@ -214,7 +214,13 @@ link-check+markdown-lint badge.svg paths / exact live markdown-lint
 globs block / exact live markdown-lint+link-check push paths filters
 (stewardship-badge lint slice only; lands closed #172 leftover; do not
 revive #172/#169/#195/#190; leave path-order #189, schema third-pass #191,
-and run_stewardship residual #199 alone)).
+and run_stewardship residual #199 alone,
+plus Pass-2 leftover + markdown-lint/link-check edges after #203 tip:
+shebang-first / reject `|| exit 0` / `args: >-` /
+externally-broken commentary / without-it private-404 /
+reject continue-on-error / exact job permissions / checkout adjacency
+(lands closed #202/#192 leftover; do not revive #202/#192;
+distinct from Pass-2 residual #199 and merged badge-lint #208)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

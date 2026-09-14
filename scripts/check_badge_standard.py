@@ -151,6 +151,27 @@ NOT stewardship-badge lint #208):
   (Install PyYAML → gates → self-tests → Download → actionlint run)
 - contiguous on:/push: header on all three
 
+Fail-closed actionlint path-filter/path-order residual leftover deepen after #272
+(NOT wiki/mdlink leftover residual #293 / NOT stewardship-schema residual #282 /
+NOT lychee/blob-503 harden #278 /
+NOT Pass-2 residual leftover #272 /
+NOT saturated leftover #262 /
+NOT stewardship-schema leftover #258 /
+NOT wiki/mdlink leftover #252 / NOT saturated residual #244 /
+NOT saturated deepen #225/#203 / NOT #189 path-order / NOT #176 layouts /
+NOT schema #191/#216 / NOT Pass-2 residual #199/#203 /
+NOT Pass-2 leftover + md/link #220 / NOT wiki outline/PUBLISH leftover #243 /
+NOT md/link residual #239 / NOT stewardship-checks/schema leftover #233 /
+NOT wiki-badge leftover #227 / NOT stewardship-badge lint #208):
+- contiguous workflow_dispatch:/concurrency: adjacency on all three
+- contiguous name:/on: workflow header on all three
+- reject workflow_run: invent
+- reject repository_dispatch: invent
+- reject merge_group: invent
+- reject tags: invent (not tags-ignore:)
+- contiguous six-step actionlint path-order
+  (Set up Python → Install PyYAML → gates → self-tests → Download → actionlint run)
+
 Fail-closed stewardship-checks + schema residual deepen after #225 (NOT wiki-index/badge
 #227 / NOT path-edges #225 / NOT Pass-2 leftover+md/link #220 / NOT schema fourth-pass #216 /
 NOT badge-lint #208 / NOT Pass-2 residual #199/#203 / NOT path-order #189;
@@ -932,6 +953,21 @@ def check_workflow_hardening(errors: list[str]) -> None:
     pull_request branches-unfiltered / reject tags-ignore: /
     reject workflow_call: / contiguous five-step actionlint path-order /
     contiguous on:/push: header.
+    Path-filter/path-order residual leftover deepen after #272 (NOT wiki/mdlink
+    leftover residual #293 / NOT stewardship-schema residual #282 /
+    NOT lychee/blob-503 harden #278 / NOT Pass-2 residual leftover #272 /
+    NOT saturated leftover #262 /
+    NOT stewardship-schema leftover #258 /
+    NOT wiki/mdlink leftover #252 / NOT saturated residual #244 /
+    NOT saturated deepen #225/#203 / NOT #189 / NOT #176 /
+    NOT schema #191/#216 / NOT Pass-2 residual #199/#203 /
+    NOT Pass-2 leftover + md/link #220 / NOT wiki outline/PUBLISH leftover #243 /
+    NOT md/link residual #239 / NOT stewardship-checks/schema leftover #233 /
+    NOT wiki-badge leftover #227 / NOT stewardship-badge lint #208):
+    contiguous workflow_dispatch:/concurrency: adjacency /
+    contiguous name:/on: workflow header / reject workflow_run: /
+    reject repository_dispatch: / reject merge_group: / reject tags: /
+    contiguous six-step actionlint path-order.
     Markdown-lint/link-check workflow edges after #203 tip (lands closed #202/#192 leftover;
     NOT path-filter / Pass-2 / path-order / schema / badge-lint spam):
     args: >- / externally broken links commentary / without-it private-404 commentary /
@@ -2170,6 +2206,106 @@ def check_workflow_hardening(errors: list[str]) -> None:
             "actionlint path-order "
             "(Install PyYAML → gates → self-tests → Download → actionlint run; "
             "path-filter/path-order residual leftover deepen after #258)",
+            errors,
+        )
+
+    # Path-filter/path-order residual leftover deepen after #272 (DISTINCT leftover;
+    # NOT wiki/mdlink leftover residual #293 / NOT stewardship-schema residual #282 /
+    # NOT lychee/blob-503 harden #278 /
+    # NOT Pass-2 residual leftover #272 /
+    # NOT saturated leftover #262 /
+    # NOT stewardship-schema leftover #258 /
+    # NOT wiki/mdlink leftover #252 / NOT saturated residual #244 /
+    # NOT saturated deepen #225/#203 / NOT #189 path-order / NOT #176 layouts /
+    # NOT schema #191/#216 / NOT Pass-2 residual #199/#203 /
+    # NOT Pass-2 leftover + md/link #220 / NOT wiki outline/PUBLISH leftover #243 /
+    # NOT md/link residual #239 / NOT stewardship-checks/schema leftover #233 /
+    # NOT wiki-badge leftover #227 / NOT stewardship-badge lint #208).
+    dispatch_concurrency = "  workflow_dispatch:\n\nconcurrency:"
+    name_on_headers = (
+        ("link-check.yml", "name: Link Check\n\non:"),
+        ("markdown-lint.yml", "name: Markdown Lint\n\non:"),
+        ("stewardship-checks.yml", "name: Stewardship Checks\n\non:"),
+    )
+    for wf_name, body in (
+        ("link-check.yml", link),
+        ("markdown-lint.yml", lint),
+        ("stewardship-checks.yml", stew),
+    ):
+        if dispatch_concurrency not in body:
+            fail(
+                f"{wf_name} must keep contiguous workflow_dispatch:/concurrency: "
+                "adjacency "
+                "(path-filter/path-order residual leftover deepen after #272)",
+                errors,
+            )
+        if "workflow_run:" in body:
+            fail(
+                f"{wf_name} must not invent workflow_run: "
+                "(path-filter/path-order residual leftover deepen after #272)",
+                errors,
+            )
+        if "repository_dispatch:" in body:
+            fail(
+                f"{wf_name} must not invent repository_dispatch: "
+                "(path-filter/path-order residual leftover deepen after #272)",
+                errors,
+            )
+        if "merge_group:" in body:
+            fail(
+                f"{wf_name} must not invent merge_group: "
+                "(path-filter/path-order residual leftover deepen after #272)",
+                errors,
+            )
+        # Reject bare tags: invent without matching tags-ignore: (already pinned).
+        if re.search(r"(?m)^  tags:\s*(?:$|#)", body):
+            fail(
+                f"{wf_name} must not invent tags: (bare tags: key; "
+                "path-filter/path-order residual leftover deepen after #272)",
+                errors,
+            )
+    for wf_name, header in name_on_headers:
+        body = {"link-check.yml": link, "markdown-lint.yml": lint, "stewardship-checks.yml": stew}[
+            wf_name
+        ]
+        if header not in body:
+            fail(
+                f"{wf_name} must keep contiguous name:/on: workflow header "
+                "(path-filter/path-order residual leftover deepen after #272)",
+                errors,
+            )
+    setup_name_272 = "name: Set up Python"
+    setup_idx_272 = stew.find(setup_name_272)
+    install_idx_272 = stew.find("name: Install PyYAML (schema parser)")
+    gates_name_272 = (
+        "name: Stewardship gates (badge / wiki / schema / relative links)"
+    )
+    gates_idx_272 = stew.find(gates_name_272)
+    self_tests_idx_272 = stew.find("name: Stewardship gate self-tests")
+    dl_idx_272 = stew.find("name: Download actionlint")
+    run_idx_272 = stew.find("name: actionlint existing workflow paths")
+    if (
+        setup_idx_272 < 0
+        or install_idx_272 < 0
+        or gates_idx_272 < 0
+        or self_tests_idx_272 < 0
+        or dl_idx_272 < 0
+        or run_idx_272 < 0
+        or not (
+            setup_idx_272
+            < install_idx_272
+            < gates_idx_272
+            < self_tests_idx_272
+            < dl_idx_272
+            < run_idx_272
+        )
+    ):
+        fail(
+            "stewardship-checks.yml must keep contiguous six-step "
+            "actionlint path-order "
+            "(Set up Python → Install PyYAML → gates → self-tests → "
+            "Download → actionlint run; "
+            "path-filter/path-order residual leftover deepen after #272)",
             errors,
         )
 
@@ -4780,7 +4916,8 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
     path-filter leftovers after #173; path-order leftover after #181;
     path-filter/path-order deepen after #203;
     path-filter/path-order residual deepen after #225;
-    path-filter/path-order residual leftover deepen after #258)."""
+    path-filter/path-order residual leftover deepen after #258;
+    path-filter/path-order residual leftover deepen after #272)."""
     text = Path(__file__).read_text(encoding="utf-8")
     # Fail-closed after #111: third-pass helper / constant / needle pins
     # (CI workflow reversible slice only; not badge/wiki/relative/schema/actionlint spam).
@@ -5544,6 +5681,179 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
         ),
     )
     for needle, label in path_leftover_258_pins:
+        if needle not in text:
+            fail(
+                "check_workflow_hardening must keep " + label,
+                errors,
+            )
+
+    # Path-filter/path-order residual leftover deepen after #272 (DISTINCT leftover).
+    path_leftover_272_doc = (
+        "Path-filter/path-order residual leftover deepen after " + "#272"
+    )
+    if path_leftover_272_doc not in text:
+        fail(
+            "check_workflow_hardening docstring must pin " + path_leftover_272_doc,
+            errors,
+        )
+    path_module_leftover_272 = (
+        "path-filter/path-order residual leftover deepen after " + "#272"
+    )
+    if path_module_leftover_272 not in text:
+        fail(
+            "check_badge_standard.py module docstring must pin "
+            + path_module_leftover_272,
+            errors,
+        )
+    not_pass2_leftover_272 = "NOT Pass-2 residual leftover " + "#272"
+    if not_pass2_leftover_272 not in text:
+        fail(
+            "path leftover-after-272 must keep "
+            + not_pass2_leftover_272
+            + " distinctness pin",
+            errors,
+        )
+    not_wiki_mdlink_293 = "NOT wiki/mdlink leftover residual " + "#293"
+    if not_wiki_mdlink_293 not in text:
+        fail(
+            "path leftover-after-272 must keep "
+            + not_wiki_mdlink_293
+            + " distinctness pin",
+            errors,
+        )
+    not_schema_residual_282 = "NOT stewardship-schema residual " + "#282"
+    if not_schema_residual_282 not in text:
+        fail(
+            "path leftover-after-272 must keep "
+            + not_schema_residual_282
+            + " distinctness pin",
+            errors,
+        )
+    not_blob503_278 = "NOT lychee/blob-503 harden " + "#278"
+    if not_blob503_278 not in text:
+        fail(
+            "path leftover-after-272 must keep "
+            + not_blob503_278
+            + " distinctness pin",
+            errors,
+        )
+    not_saturated_leftover_272 = "NOT saturated leftover " + "#262"
+    if not_saturated_leftover_272 not in text:
+        fail(
+            "path leftover-after-272 must keep "
+            + not_saturated_leftover_272
+            + " distinctness pin",
+            errors,
+        )
+    not_schema_leftover_258_272 = "NOT stewardship-schema leftover " + "#258"
+    if not_schema_leftover_258_272 not in text:
+        fail(
+            "path leftover-after-272 must keep "
+            + not_schema_leftover_258_272
+            + " distinctness pin",
+            errors,
+        )
+    not_wiki_mdlink_252_272 = "NOT wiki/mdlink leftover " + "#252"
+    if not_wiki_mdlink_252_272 not in text:
+        fail(
+            "path leftover-after-272 must keep "
+            + not_wiki_mdlink_252_272
+            + " distinctness pin",
+            errors,
+        )
+    not_saturated_residual_244_272 = "NOT saturated residual " + "#244"
+    if not_saturated_residual_244_272 not in text:
+        fail(
+            "path leftover-after-272 must keep "
+            + not_saturated_residual_244_272
+            + " distinctness pin",
+            errors,
+        )
+    not_wiki_publish_243_272 = "NOT wiki outline/PUBLISH leftover " + "#243"
+    if not_wiki_publish_243_272 not in text:
+        fail(
+            "path leftover-after-272 must keep "
+            + not_wiki_publish_243_272
+            + " distinctness pin",
+            errors,
+        )
+    not_mdlink_239_272 = "NOT md/link residual " + "#239"
+    if not_mdlink_239_272 not in text:
+        fail(
+            "path leftover-after-272 must keep "
+            + not_mdlink_239_272
+            + " distinctness pin",
+            errors,
+        )
+    not_stew_schema_233_272 = (
+        "NOT stewardship-checks/schema leftover " + "#233"
+    )
+    if not_stew_schema_233_272 not in text:
+        fail(
+            "path leftover-after-272 must keep "
+            + not_stew_schema_233_272
+            + " distinctness pin",
+            errors,
+        )
+    not_wiki_badge_227_272 = "NOT wiki-badge leftover " + "#227"
+    if not_wiki_badge_227_272 not in text:
+        fail(
+            "path leftover-after-272 must keep "
+            + not_wiki_badge_227_272
+            + " distinctness pin",
+            errors,
+        )
+    not_saturated_deepen_225_272 = "NOT saturated deepen " + "#225"
+    if not_saturated_deepen_225_272 not in text:
+        fail(
+            "path leftover-after-272 must keep "
+            + not_saturated_deepen_225_272
+            + " distinctness pin",
+            errors,
+        )
+    not_pass2_220_leftover_272 = "NOT Pass-2 leftover + " + "md/link #220"
+    if not_pass2_220_leftover_272 not in text:
+        fail(
+            "path leftover-after-272 must keep "
+            + not_pass2_220_leftover_272
+            + " distinctness pin",
+            errors,
+        )
+    path_leftover_272_pins = (
+        (
+            "contiguous workflow_dispatch:/concurrency: " + "adjacency",
+            "workflow_dispatch/concurrency adjacency fail needle",
+        ),
+        (
+            "contiguous name:/on: " + "workflow header",
+            "name/on workflow header fail needle",
+        ),
+        (
+            "must not invent workflow_" + "run:",
+            "workflow_run invent reject needle",
+        ),
+        (
+            "must not invent repository_" + "dispatch:",
+            "repository_dispatch invent reject needle",
+        ),
+        (
+            "must not invent merge_" + "group:",
+            "merge_group invent reject needle",
+        ),
+        (
+            "must not invent tags: " + "(bare tags: key",
+            "tags invent reject needle",
+        ),
+        (
+            "contiguous six-step " + "actionlint path-order",
+            "six-step actionlint path-order fail needle",
+        ),
+        (
+            "path-filter/path-order residual leftover deepen after " + "#272",
+            "path leftover-after-272 wording pin",
+        ),
+    )
+    for needle, label in path_leftover_272_pins:
         if needle not in text:
             fail(
                 "check_workflow_hardening must keep " + label,

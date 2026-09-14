@@ -633,3 +633,5 @@ _None yet._
 2026-09-14T05:35:00Z cursor: Local green — run_stewardship + self-tests 3402 + markdownlint ← ECO-065 actionlint path-order leftover after #181 (do not revive #182/#157/#143/#120/#183; distinct from path-filter #176 / run_stewardship #179 / wiki-index #181)
 
 2026-09-14T05:36:00Z cursor: Draft PR #186 opened (cursor/tokenmaxx-actionlint-path-order-after-181-1e40); awaiting CI ← ECO-065 actionlint path-order leftover after #181 (do not revive #182/#157)
+
+2026-09-14T05:33:00Z cursor: PR #186 CI green (lint + link-check + stewardship) ← complete ECO-065 actionlint path-order leftover after #181 (do not revive #182/#157/#143/#120/#183; distinct from path-filter #176 / run_stewardship #179 / wiki-index #181)

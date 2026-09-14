@@ -40560,15 +40560,15 @@ def test_actionlint_gate_requires_ubuntu_req_after_149() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'actionlint-style requires contents: read (membership)' in text
+        assert 'actionlint-style requires contents:read via membership' in text
         path.write_text(text.replace(
-            'actionlint-style requires contents: read (membership)',
-            'actionlint-style requires contents: read (memberx)',
+            'actionlint-style requires contents:read via membership',
+            'actionlint-style requires contents:read via memberx',
         ), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'actionlint-style requires contents: read (membership)',
+            'actionlint-style requires contents:read via membership',
         )
 
 
@@ -40578,15 +40578,15 @@ def test_actionlint_gate_requires_ubuntu_req_still_after_149() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'actionlint-style requires contents: read (membership)' in text
+        assert 'actionlint-style requires contents:read via membership' in text
         path.write_text(text.replace(
-            'actionlint-style requires contents: read (membership)',
-            'actionlint-style requires contents: read (memberx)',
+            'actionlint-style requires contents:read via membership',
+            'actionlint-style requires contents:read via memberx',
         ), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'actionlint-style requires contents: read (membership)',
+            'actionlint-style requires contents:read via membership',
         )
 
 

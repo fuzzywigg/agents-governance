@@ -605,7 +605,7 @@ def check_actionlint_style(errors: list[str]) -> None:
             fail(f"{name}: actionlint-style requires timeout-minutes on jobs", errors)
         # Leftover after #149: affirm contents: read via membership (complement #149 regex).
         if "contents: read" not in text:
-            fail(f"{name}: actionlint-style requires contents: read (membership)", errors)
+            fail(f"{name}: actionlint-style requires contents:read via membership", errors)
 
 
 def check_workflow_hardening(errors: list[str]) -> None:
@@ -2909,7 +2909,7 @@ def check_actionlint_style_gate_contract(errors: list[str]) -> None:
             "check_actionlint_style must require contents: read via membership",
             errors,
         )
-    fail_contents_mem = "actionlint-style requires contents: read (membership)"
+    fail_contents_mem = "actionlint-style requires contents:read via " + "membership"
     if fail_contents_mem not in text:
         fail(
             "check_actionlint_style must emit " + fail_contents_mem + " fail needle",

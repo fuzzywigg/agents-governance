@@ -548,3 +548,5 @@ _None yet._
 - Scope: EXISTING docs-lint/stewardship/actionlint leftover pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands #150/#154 leftover on post-#149 main; do not revive #150/#146/#154/#151
 - Branch: cursor/tokenmaxx-stewardship-docs-lint-actionlint-after-149-0704
 2026-09-14T03:40:00Z
+
+2026-09-14T03:55:00Z cursor: Local green — run_stewardship + self-tests 2885 + markdownlint ← ECO-059 leftover docs-lint/stewardship/actionlint after #149 (do not revive #150/#146/#154)

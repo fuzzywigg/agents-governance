@@ -190,10 +190,21 @@ def check_workflows_and_license(errors: list[str]) -> None:
                 ".markdownlint.json must set MD060: false for docs lint",
                 errors,
             )
+        # Fail-closed after #79 docs-lint pass: config path constant stays wired.
+        if MARKDOWNLINT_CONFIG.name != ".markdownlint.json":
+            fail(
+                "MARKDOWNLINT_CONFIG must resolve to .markdownlint.json",
+                errors,
+            )
 
 
 def check_lycheeignore(errors: list[str]) -> None:
-    """Keep flaky badge CDN out of lychee; license badge stays in stewardship."""
+    """Keep flaky badge CDN out of lychee; license badge stays in stewardship.
+
+    Docs-lint second-pass after #79 (orthogonal to schema / actionlint / CI
+    workflow / badge / wiki / relative / common): live host excludes +
+    License-badge stewardship comment pin.
+    """
     if not LYCHEEIGNORE.is_file():
         return
     text = LYCHEEIGNORE.read_text(encoding="utf-8")
@@ -209,6 +220,32 @@ def check_lycheeignore(errors: list[str]) -> None:
         fail(
             ".lycheeignore must not exclude all http(s) targets "
             "(https://* / http://* / bare *)",
+            errors,
+        )
+    # Fail-closed after #79 docs-lint pass: live MCP host exclude (308 FP).
+    if "modelcontextprotocol.io" not in text:
+        fail(
+            ".lycheeignore must exclude modelcontextprotocol.io "
+            "(live 308 false-positive host)",
+            errors,
+        )
+    # Fail-closed after #79 docs-lint pass: live LF host exclude (103 FP).
+    if "linuxfoundation.org" not in text:
+        fail(
+            ".lycheeignore must exclude linuxfoundation.org "
+            "(live 103 early-hints false-positive host)",
+            errors,
+        )
+    # Fail-closed: comment must keep License badge stewardship wording.
+    if "License badge" not in text and "license badge" not in text.lower():
+        fail(
+            ".lycheeignore must keep License badge stewardship comment pin",
+            errors,
+        )
+    # Fail-closed: comment must name check_badge_standard.py as enforcer.
+    if "check_badge_standard.py" not in text:
+        fail(
+            ".lycheeignore must name check_badge_standard.py in License badge comment",
             errors,
         )
 
@@ -2274,6 +2311,184 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
                 "badge → wiki → schema → relative",
                 errors,
             )
+        # Fail-closed after #79 docs-lint pass: bash strict mode.
+        if "set -euo pipefail" not in run_text:
+            fail(
+                "run_stewardship_checks.sh must set -euo pipefail",
+                errors,
+            )
+        # Fail-closed after #79 docs-lint pass: ROOT via dirname of script.
+        if 'dirname "$0"' not in run_text:
+            fail(
+                'run_stewardship_checks.sh must resolve ROOT via dirname "$0"',
+                errors,
+            )
+        # Fail-closed after #79 docs-lint pass: invoke gates via python3.
+        if "python3 scripts/check_badge_standard.py" not in run_text:
+            fail(
+                "run_stewardship_checks.sh must run python3 scripts/check_badge_standard.py",
+                errors,
+            )
+        if "python3 scripts/check_wiki_outline.py" not in run_text:
+            fail(
+                "run_stewardship_checks.sh must run python3 scripts/check_wiki_outline.py",
+                errors,
+            )
+        if "python3 scripts/check_stewardship_schema.py" not in run_text:
+            fail(
+                "run_stewardship_checks.sh must run python3 scripts/check_stewardship_schema.py",
+                errors,
+            )
+        if "python3 scripts/check_relative_links.py" not in run_text:
+            fail(
+                "run_stewardship_checks.sh must run python3 scripts/check_relative_links.py",
+                errors,
+            )
+
+
+def check_docs_lint_gate_contract(errors: list[str]) -> None:
+    """Fail-close docs-lint pins after #79 (markdownlint / lycheeignore / runner).
+
+    Orthogonal to schema second-pass, actionlint-style, CI workflow, badge,
+    wiki, relative, and stewardship_common slices.
+    """
+    if not BADGE_GATE.is_file():
+        fail("Missing scripts/check_badge_standard.py (docs-lint host)", errors)
+        return
+    text = BADGE_GATE.read_text(encoding="utf-8")
+    # Split pin literals so self-mutation of contiguous names cannot neutralize.
+    lychee_fn = "check_lychee" + "ignore"
+    if f"def {lychee_fn}(" not in text:
+        fail(
+            "check_badge_standard.py must provide " + lychee_fn + "()",
+            errors,
+        )
+    docs_fn = "check_docs_lint_" + "gate_contract"
+    if f"def {docs_fn}(" not in text:
+        fail(
+            "check_badge_standard.py must provide " + docs_fn + "()",
+            errors,
+        )
+    second_pass = "Docs-lint second-pass after " + "#79"
+    if second_pass not in text:
+        fail(
+            "check_lycheeignore must keep " + second_pass + " docstring pin",
+            errors,
+        )
+    mcp_pin = "modelcontextprotocol" + ".io"
+    if mcp_pin not in text:
+        fail(
+            "check_lycheeignore must pin " + mcp_pin,
+            errors,
+        )
+    lf_pin = "linuxfoundation" + ".org"
+    if lf_pin not in text:
+        fail(
+            "check_lycheeignore must pin " + lf_pin,
+            errors,
+        )
+    license_pin = "License badge" + " stewardship"
+    if license_pin not in text:
+        fail(
+            "check_lycheeignore must emit " + license_pin + " needle",
+            errors,
+        )
+    enforcer_pin = "check_badge_standard" + ".py in License badge comment"
+    if enforcer_pin not in text:
+        fail(
+            "check_lycheeignore must emit " + enforcer_pin + " needle",
+            errors,
+        )
+    md013_pin = "line_length: " + "200"
+    if md013_pin not in text:
+        fail(
+            "check_workflows_and_license must pin MD013 " + md013_pin,
+            errors,
+        )
+    md024_pin = "siblings_only: " + "true"
+    if md024_pin not in text:
+        fail(
+            "check_workflows_and_license must pin MD024 " + md024_pin,
+            errors,
+        )
+    default_pin = "default: " + "true"
+    if default_pin not in text:
+        fail(
+            "check_workflows_and_license must pin " + default_pin,
+            errors,
+        )
+    md033_pin = "MD033: " + "false"
+    if md033_pin not in text:
+        fail(
+            "check_workflows_and_license must pin " + md033_pin,
+            errors,
+        )
+    md041_pin = "MD041: " + "false"
+    if md041_pin not in text:
+        fail(
+            "check_workflows_and_license must pin " + md041_pin,
+            errors,
+        )
+    md060_pin = "MD060: " + "false"
+    if md060_pin not in text:
+        fail(
+            "check_workflows_and_license must pin " + md060_pin,
+            errors,
+        )
+    cfg_name_pin = 'MARKDOWNLINT_CONFIG.name != ".markdownlint' + '.json"'
+    if cfg_name_pin not in text:
+        fail(
+            "check_workflows_and_license must pin MARKDOWNLINT_CONFIG.name "
+            ".markdown" + "lint.json",
+            errors,
+        )
+    pipefail_pin = "set -euo " + "pipefail"
+    if pipefail_pin not in text:
+        fail(
+            "docs-lint contract must require run_stewardship " + pipefail_pin,
+            errors,
+        )
+    dirname_pin = "dirname " + '"$0"'
+    if dirname_pin not in text:
+        fail(
+            "docs-lint contract must require run_stewardship " + dirname_pin,
+            errors,
+        )
+    py_badge = "python3 scripts/check_badge_" + "standard.py"
+    if py_badge not in text:
+        fail(
+            "docs-lint contract must require " + py_badge,
+            errors,
+        )
+    py_wiki = "python3 scripts/check_wiki_" + "outline.py"
+    if py_wiki not in text:
+        fail(
+            "docs-lint contract must require " + py_wiki,
+            errors,
+        )
+    py_schema = "python3 scripts/check_stewardship_" + "schema.py"
+    if py_schema not in text:
+        fail(
+            "docs-lint contract must require " + py_schema,
+            errors,
+        )
+    py_rel = "python3 scripts/check_relative_" + "links.py"
+    if py_rel not in text:
+        fail(
+            "docs-lint contract must require " + py_rel,
+            errors,
+        )
+    # main() must call lycheeignore + this contract.
+    if lychee_fn + "(errors)" not in text:
+        fail(
+            "check_badge_standard.py main must call " + lychee_fn + "(errors)",
+            errors,
+        )
+    if docs_fn + "(errors)" not in text:
+        fail(
+            "check_badge_standard.py main must call " + docs_fn + "(errors)",
+            errors,
+        )
 
 
 def check_badges(badges: list[re.Match[str]], errors: list[str]) -> None:
@@ -2357,6 +2572,9 @@ def main() -> int:
     # Fail-closed after #75: actionlint-style contract early (same self-host file)
     # so style-helper renames / needle drift fail closed before NameError.
     check_actionlint_style_gate_contract(errors)
+    # Fail-closed after #79: docs-lint contract early (lycheeignore / markdownlint /
+    # run_stewardship pins) so docs-lint needle drift fails closed before NameError.
+    check_docs_lint_gate_contract(errors)
     if errors:
         print("Badge standard check FAILED:", file=sys.stderr)
         for err in errors:

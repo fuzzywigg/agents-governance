@@ -872,3 +872,19 @@ _None yet._
 2026-09-14T10:44:39Z cursor: Cherry-pick in progress on post-#272 tip; local verify next ← ECO-081 (do not revive #246/#273/#266/#261/#260/#256/#251/#250)
 
 2026-09-14T10:51:26Z cursor: Local green — run_stewardship + self-tests 5592 + markdownlint on post-#272 tip ← ECO-081 lychee/blob-503 leftover only (leave draft; do not revive #246/#273/#266/#261/#260/#256/#251/#250)
+
+### [ECO-082] TOKENMAXX deepen pass2 residual templates leftovers after tip — 2026-09-14T11:20:36Z
+- [x] cursor: Tip at post-#278 (lychee/blob-503); avoid open stewardship-schema #282/#284
+- [x] cursor: Fail-close Pass-2 residual / templates leftovers on existing modules only
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING pass2 residual template/lychee modules only; no invent templates; no AGENTS-ECOSYSTEM; no secrets; not schema open; not saturated #272/#278
+- Branch: cursor/tokenmaxx-pass2-residual-templates-leftover-97e0
+2026-09-14T11:20:36Z
+
+2026-09-14T11:20:36Z cursor: Local deepen in progress on post-#278 tip ← ECO-082 (do not revive #273/#266/#261; do not redo schema open)
+
+2026-09-14T11:27:46Z cursor: Local green — run_stewardship + self-tests 5840 + markdownlint ← ECO-082 pass2 residual templates leftovers after tip (leave draft; avoid schema #282/#284; do not revive #273/#266/#261)
+
+2026-09-14T11:29:32Z cursor: Rebased onto post-#282 tip; local gates green; full self-tests 6040 next ← ECO-082
+
+2026-09-14T11:36:36Z cursor: Local green — run_stewardship + self-tests 6040 + markdownlint on post-#282 tip ← ECO-082 pass2 residual templates leftovers (leave draft; distinct from schema #282; do not revive #273/#266/#261)

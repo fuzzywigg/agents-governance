@@ -245,6 +245,22 @@ lands closed #251/#250/#246/#245/#240 leftover on post-#262 tip; do not invent n
   version 1.0.0 / YYYY-MM-DD placeholder / §1–§6 / [CONFIG_FILE] /
   Never commit .env / agents-md/description / no invent badge.svg chrome
 
+Fail-closed Pass-2 residual / templates leftover after #278 tip
+(NOT saturated Pass-2 residual leftover #272 /
+NOT lychee/blob-503 leftover #278 /
+NOT stewardship-schema leftover residual #282 /
+NOT path-edges leftover #262 / NOT schema leftover #258 /
+NOT wiki/mdlink leftover #252; do not invent new templates):
+- soft-fail with || true / soft-fail with set +e / must not eval
+- existing templates/AGENTS-REPO.md leftover: Level [0/1/2] /
+  L0 Advisory / L1 Bounded / L2 Supervised /
+  Critical Files / Autonomy Level / End of Document /
+  SEV-1..SEV-4 / [test command] / [coverage requirements] /
+  .env Secrets Never commit row / governs AI agent behavior blurb
+- lychee residual: reject invent tree/main exclude /
+  reject bare https://github.com/ exclude /
+  keep Same-repo GitHub commentary (existing .lycheeignore module only)
+
 """
 
 from __future__ import annotations
@@ -766,6 +782,37 @@ def check_lycheeignore(errors: list[str]) -> None:
         fail(
             ".lycheeignore must note intermittently returns 503 "
             "(docs-lint " + _p4 + ")",
+            errors,
+        )
+    # Pass-2 residual / templates leftover after #278 tip (existing lychee
+    # module only; NOT saturated lychee/blob-503 leftover #278 /
+    # NOT saturated Pass-2 residual leftover #272 / do not invent templates).
+    if "tree/main" in text:
+        fail(
+            ".lycheeignore must not invent tree/main exclude "
+            "(Pass-2 residual / templates leftover after #278 tip; "
+            "blob/main HTML flake only)",
+            errors,
+        )
+    for _line in text.splitlines():
+        _stripped = _line.strip()
+        if _stripped in {
+            "https://github.com/",
+            "https://github.com",
+            r"https://github\.com/",
+            r"https://github\.com",
+        }:
+            fail(
+                ".lycheeignore must not exclude bare https://github.com/ "
+                "(Pass-2 residual / templates leftover after #278 tip; "
+                "blob/main path only)",
+                errors,
+            )
+            break
+    if "Same-repo GitHub" not in text:
+        fail(
+            ".lycheeignore must note Same-repo GitHub "
+            "(Pass-2 residual / templates leftover after #278 tip)",
             errors,
         )
 
@@ -2653,6 +2700,36 @@ def check_agents_repo_template(errors: list[str]) -> None:
             "(Pass-2 residual / template validation leftover after #233)",
             errors,
         )
+    # Pass-2 residual / templates leftover after #278 tip (existing
+    # templates/AGENTS-REPO.md only; NOT saturated leftover #272 /
+    # NOT lychee/blob-503 #278 / NOT stewardship-schema; do not invent).
+    leftover_278_required = (
+        ("Level [0/1/2]", "Level [0/1/2] autonomy"),
+        ("L0 Advisory", "L0 Advisory"),
+        ("L1 Bounded", "L1 Bounded"),
+        ("L2 Supervised", "L2 Supervised"),
+        ("### Critical Files", "Critical Files"),
+        ("### Autonomy Level", "Autonomy Level"),
+        ("End of Document", "End of Document"),
+        ("SEV-1:", "SEV-1"),
+        ("SEV-2:", "SEV-2"),
+        ("SEV-3:", "SEV-3"),
+        ("SEV-4:", "SEV-4"),
+        ("[test command]", "[test command] placeholder"),
+        ("[coverage requirements]", "[coverage requirements] placeholder"),
+        ("| `.env` | Secrets | Never commit |", ".env Secrets Never commit row"),
+        (
+            "This document governs AI agent behavior",
+            "governs AI agent behavior blurb",
+        ),
+    )
+    for needle, label in leftover_278_required:
+        if needle not in text:
+            fail(
+                f"templates/AGENTS-REPO.md must keep {label} "
+                "(Pass-2 residual / templates leftover after #278 tip)",
+                errors,
+            )
     scan_secrets(AGENTS_REPO, errors)
 
 
@@ -9160,6 +9237,27 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
                 "(Pass-2 residual / template validation leftover after #233)",
                 errors,
             )
+        # Pass-2 residual / templates leftover after #278 tip (soft-fail
+        # leftovers beyond saturated #272 || : / || return 0 / set +o * /
+        # NOT lychee/blob-503 leftover #278 / NOT stewardship-schema).
+        if "|| true" in run_text or "||true" in run_text:
+            fail(
+                "run_stewardship_checks.sh must not soft-fail with || true "
+                "(Pass-2 residual / templates leftover after #278 tip)",
+                errors,
+            )
+        if re.search(r"(?m)^\s*set \+e\b", run_text):
+            fail(
+                "run_stewardship_checks.sh must not soft-fail with set +e "
+                "(Pass-2 residual / templates leftover after #278 tip)",
+                errors,
+            )
+        if re.search(r"(?m)^\s*eval\s+", run_text):
+            fail(
+                "run_stewardship_checks.sh must not eval "
+                "(Pass-2 residual / templates leftover after #278 tip)",
+                errors,
+            )
         # Leftover after #149: exact live run_stewardship_checks.sh full layout.
         expected_run = (
             "#!/usr/bin/env bash\n"
@@ -9620,6 +9718,75 @@ def check_run_stewardship_gate_contract(errors: list[str]) -> None:
     if no_invent_tpl not in text:
         fail(
             "run_stewardship contract must keep " + no_invent_tpl + " pin",
+            errors,
+        )
+    # Pass-2 residual / templates leftover after #278 tip contract pins.
+    leftover_278 = (
+        "Pass-2 residual / templates leftover after " + "#278 tip"
+    )
+    if leftover_278 not in text:
+        fail(
+            "run_stewardship pins must keep " + leftover_278 + " marker",
+            errors,
+        )
+    not_sat_272 = "NOT saturated Pass-2 residual leftover " + "#272"
+    if not_sat_272 not in text:
+        fail(
+            "run_stewardship docstring must keep " + not_sat_272 + " distinctness",
+            errors,
+        )
+    not_lychee_278 = "NOT lychee/blob-503 leftover " + "#278"
+    if not_lychee_278 not in text:
+        fail(
+            "run_stewardship docstring must keep " + not_lychee_278 + " distinctness",
+            errors,
+        )
+    not_schema_open = "NOT stewardship-schema leftover residual " + "#282"
+    if not_schema_open not in text:
+        fail(
+            "run_stewardship docstring must keep " + not_schema_open + " distinctness",
+            errors,
+        )
+    or_true_pin = "soft-fail with || " + "true"
+    if or_true_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + or_true_pin + " pin",
+            errors,
+        )
+    set_e_pin = "soft-fail with set " + "+e"
+    if set_e_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + set_e_pin + " pin",
+            errors,
+        )
+    eval_pin = "must not " + "eval"
+    if eval_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + eval_pin + " pin",
+            errors,
+        )
+    level_pin = "Level " + "[0/1/2]"
+    if level_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + level_pin + " leftover",
+            errors,
+        )
+    end_doc_pin = "End of " + "Document"
+    if end_doc_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + end_doc_pin + " leftover",
+            errors,
+        )
+    tree_main_pin = "must not invent tree/main " + "exclude"
+    if tree_main_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + tree_main_pin + " pin",
+            errors,
+        )
+    same_repo_pin = "Same-repo " + "GitHub"
+    if same_repo_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + same_repo_pin + " pin",
             errors,
         )
 

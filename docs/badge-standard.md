@@ -353,6 +353,19 @@ not path-edges #225 / not Pass-2 leftover + md/link #220 /
 not Pass-2 residual #199/#203 / not badge-lint #208 / not schema #216;
 lands closed #251/#250/#246/#245/#240 leftover on post-#262 tip;
 do not revive #251/#250/#246/#245/#240/#235/#230;prior #251/#250 RED was transient GitHub 503; do not invent new templates).
+plus Pass-2 residual / templates leftovers after tip (post-#282):
+soft-fail with `|| true` / `set +e` / must not `eval` / existing
+`templates/AGENTS-REPO.md` Level `[0/1/2]` / L0 Advisory / L1 Bounded /
+L2 Supervised / Critical Files / Autonomy Level / End of Document /
+SEV-1..SEV-4 / `[test command]` / cov-req placeholder /
+`.env` Secrets Never commit row / governs AI agent behavior blurb /
+lychee reject invent `tree/main` exclude / reject bare
+`https://github.com/` exclude / Same-repo GitHub commentary — DISTINCT
+leftover edges only (not stewardship-schema leftover residual #282 /
+not saturated Pass-2 residual leftover #272 /
+not lychee/blob-503 leftover #278 /
+not path-edges leftover #262 / not schema leftover #258 /
+not wiki/mdlink leftover #252; do not invent new templates).
 plus stewardship-schema leftover residual deepen after #262 tip
 (rebased post-#278): leftover residual parse/load needles / leftover residual
 invalid status+surface stubs / `stewardship_common`

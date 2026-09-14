@@ -30,6 +30,16 @@ Fail-closed pins (live path after #46; second-pass after #65; third-pass after #
   NOT md/link residual #239 / NOT schema residual (pass-5) #233): leftover helper
   needles elif hint in text / for pattern in globs / found: set[Path] = set() /
   if not path.is_file(): (load_workflow) / leftover docstring
+- Residual leftover after #272 (common leftover residual; NOT Pass-2 residual leftover #272 /
+  NOT path-filter/path-order leftover #262 / NOT schema leftover #258 /
+  NOT wiki/mdlink leftover #252 / NOT path-edges residual #244 /
+  NOT wiki outline/PUBLISH #243 / NOT md/link residual #239 /
+  NOT schema residual (pass-5) #233): leftover residual helper
+  needles errors.append(msg) / lowered = target.strip().lower() /
+  for scheme in DANGEROUS_LINK_SCHEMES: / if lowered.startswith(scheme): /
+  found.update(ROOT.glob(pattern)) / return sorted(p for p in found if p.is_file()) /
+  path = ROOT / ".github" / "workflows" / name /
+  return path.read_text(encoding="utf-8") / leftover residual docstring
 """
 
 from __future__ import annotations

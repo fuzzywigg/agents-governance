@@ -186,6 +186,19 @@ NOT path-edges #225 / NOT wiki-index/badge leftover #227 / NOT stewardship-badge
 - exact contiguous markdown-lint with: globs|+config block
 - exact contiguous link-check with: token commentary block
 
+Fail-closed wiki/mdlink leftover after #243 (residual vs saturated #243 wiki
+outline/PUBLISH leftover + #239 md/link residual layouts;
+NOT path-filter/path-order leftover #244 /
+NOT stewardship-checks/schema #233 /
+NOT wiki-index/badge leftover #227):
+- wiki: PUBLISH YAML status+created+purpose / One-shot heading / exact clone dest /
+  contiguous cp list / cd wiki tmp / git commit #16 / git push origin master /
+  Acceptance+Fallback headings / Repository not found / Home (landing) /
+  Home operator PUBLISH.md omit-when-copying
+- md/link leftover layouts: exact contiguous link+lint concurrency blocks /
+  exact contiguous link-check + markdown-lint job headers /
+  exact "**/*.md" then fail: true adjacency
+
 
 """
 
@@ -2172,6 +2185,68 @@ def check_workflow_hardening(errors: list[str]) -> None:
             errors,
         )
 
+    # Wiki/mdlink leftover after #243: residual exact layouts beyond #239/#227.
+    link_concurrency_exact = (
+        "concurrency:\n"
+        "  group: link-check-${{ github.workflow }}-${{ github.ref }}\n"
+        "  cancel-in-progress: true"
+    )
+    if link_concurrency_exact not in link:
+        fail(
+            "link-check.yml must keep exact contiguous concurrency block "
+            "(wiki/mdlink leftover after #243)",
+            errors,
+        )
+    lint_concurrency_exact = (
+        "concurrency:\n"
+        "  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n"
+        "  cancel-in-progress: true"
+    )
+    if lint_concurrency_exact not in lint:
+        fail(
+            "markdown-lint.yml must keep exact contiguous concurrency block "
+            "(wiki/mdlink leftover after #243)",
+            errors,
+        )
+    link_job_header_exact = (
+        "jobs:\n"
+        "  link-check:\n"
+        "    runs-on: ubuntu-latest\n"
+        "    timeout-minutes: 20\n"
+        "    permissions:\n"
+        "      contents: read"
+    )
+    if link_job_header_exact not in link:
+        fail(
+            "link-check.yml must keep exact contiguous job header "
+            "(wiki/mdlink leftover after #243)",
+            errors,
+        )
+    lint_job_header_exact = (
+        "jobs:\n"
+        "  lint:\n"
+        "    runs-on: ubuntu-latest\n"
+        "    timeout-minutes: 10\n"
+        "    permissions:\n"
+        "      contents: read"
+    )
+    if lint_job_header_exact not in lint:
+        fail(
+            "markdown-lint.yml must keep exact contiguous job header "
+            "(wiki/mdlink leftover after #243)",
+            errors,
+        )
+    fail_true_after_md = (
+        '            "**/*.md"\n'
+        "          fail: true"
+    )
+    if fail_true_after_md not in link:
+        fail(
+            "link-check.yml must keep exact **/*.md then fail: true adjacency "
+            "(wiki/mdlink leftover after #243)",
+            errors,
+        )
+
 
 def check_badge_standard_doc(errors: list[str]) -> None:
     """Ensure docs/badge-standard.md still documents the same required order."""
@@ -3118,6 +3193,36 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
     if not_mdlink_220 not in text:
         fail(
             "check_badge_standard.py docstring must keep " + not_mdlink_220 + " distinctness pin",
+            errors,
+        )
+    leftover_243_doc = "wiki/mdlink leftover after " + "#243"
+    if leftover_243_doc not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + leftover_243_doc + " pin",
+            errors,
+        )
+    not_path_244 = "NOT path-filter/path-order leftover " + "#244"
+    if not_path_244 not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + not_path_244 + " distinctness pin",
+            errors,
+        )
+    mdlink_concurrency_pin = "exact contiguous link+lint concurrency " + "blocks"
+    if mdlink_concurrency_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + mdlink_concurrency_pin + " leftover pin",
+            errors,
+        )
+    mdlink_job_header_pin = "exact contiguous link-check + markdown-lint job " + "headers"
+    if mdlink_job_header_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + mdlink_job_header_pin + " leftover pin",
+            errors,
+        )
+    fail_true_adj_pin = 'exact "**/*.md" then fail: true ' + "adjacency"
+    if fail_true_adj_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + fail_true_adj_pin + " leftover pin",
             errors,
         )
 
@@ -7448,6 +7553,48 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
     if table_order not in wiki_text:
         fail(
             "check_wiki_outline.py must pin PUBLISH.md pages table order",
+            errors,
+        )
+    leftover_243_wiki = "Wiki/mdlink leftover after " + "#243"
+    if leftover_243_wiki not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + leftover_243_wiki + " pin",
+            errors,
+        )
+    not_mdlink_239 = "NOT md/link residual layouts " + "#239"
+    if not_mdlink_239 not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_mdlink_239 + " pin",
+            errors,
+        )
+    oneshot_heading = "## One-shot publish (after wiki " + "exists)"
+    if oneshot_heading not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin PUBLISH.md ## One-shot publish heading",
+            errors,
+        )
+    exact_clone_dest = "/tmp/agents-governance" + ".wiki"
+    if exact_clone_dest not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin one-shot clone dest /tmp/agents-governance.wiki",
+            errors,
+        )
+    git_commit_pin = "git commit -m " + '"docs: publish public wiki outline from docs/wiki (#16)"'
+    if git_commit_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin git commit wiki outline from docs/wiki (#16)",
+            errors,
+        )
+    landing_cell = "Home (landing)"
+    if landing_cell not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin PUBLISH.md Home (landing) cell",
+            errors,
+        )
+    home_omit = "omit when copying pages to GitHub " + "Wiki"
+    if home_omit not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Home omit-when-copying PUBLISH.md wording",
             errors,
         )
 

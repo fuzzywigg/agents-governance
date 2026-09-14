@@ -384,3 +384,5 @@ _None yet._
 - Scope: EXISTING lycheeignore + markdownlint.json integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-lychee-markdownlint-second-pass-01ba
 2026-09-14T00:44:59Z
+
+2026-09-14T00:48:32Z cursor: PR #92 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-048 TOKENMAXX lycheeignore + markdownlint.json second-pass pins

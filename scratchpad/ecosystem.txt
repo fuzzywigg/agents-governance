@@ -401,4 +401,6 @@ _None yet._
 ### [ECO-050] TOKENMAXX deepen wiki-outline third-pass pins after #94 — 2026-09-14T01:12:53Z
 - [x] cursor: Fail-close wiki-outline third-pass — WIKI+PUBLISHABLE_PAGES exact / STEWARDSHIP_CI_HINTS exact / README+badge hint extras / link RE / utf-8 / sys.exit / stewardship_common / removesuffix / glob / FAIL+OK / Link Check+Markdown Lint+No secrets / relative+actionlint / invent AND secrets / match.group(2).strip() / startswith //+http / pages+operator / intentional update
 - [x] cursor: Expand self-tests 1899 → 1971 (wiki-outline third-pass slice; not relative / schema / badge / common / CI workflow / actionlint / runner pin spam)
-- [ ] cursor: Draft PR + CI green (lint + link-check + stewardship/actionlint)
+- [x] cursor: Draft PR + CI green (lint + link-check + stewardship/actionlint)
+
+2026-09-14T01:20:00Z cursor: PR #102 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-050 TOKENMAXX wiki-outline third-pass pins

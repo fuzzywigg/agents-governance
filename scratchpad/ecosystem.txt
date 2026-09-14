@@ -382,7 +382,9 @@ _None yet._
 - [x] cursor: Read live tree post-#83/#86 (1755 cases; schema second-pass saturated; #88 closed clean-slate)
 - [x] cursor: Fail-close docs CI config — .lycheeignore escaped shields / modelcontextprotocol.io / linuxfoundation.org / stewardship license-badge note / https://* http://* reject / .markdownlint.json exact MD013+MD024 objects / MD033+MD041+MD060 false / default:true / gate contract
 - [x] cursor: Expand self-tests 1755 → 1852 (docs CI config slice + HEAVY exact URL/commentary/MD key pins; not schema / actionlint / badge / wiki / relative / common / CI workflow spam)
-- [ ] cursor: Green PR with CI
+- [x] cursor: Green PR with CI
 - Scope: EXISTING docs CI config integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-docs-ci-config-pins-5eb1
 2026-09-14T00:38:48Z
+
+2026-09-14T00:56:00Z cursor: PR #95 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-048 TOKENMAXX docs CI config pins

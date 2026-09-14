@@ -11,6 +11,15 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-checks + schema residual deepen leftovers after #227 tip: expand
+  self-tests to 4414 cases (was 4230) fail-closing unsaturated stewardship-checks contiguous
+  layout edges (exact Set up Python / Install PyYAML / checkout adjacency / full push paths /
+  schedule+cron / concurrency / jobs.stewardship header / reject strategy|matrix|services
+  invent) plus schema residual (pass-5) status/surface stubs + helper needles —
+  stewardship-checks/schema residual leftover slice only (not wiki-index/badge #227 /
+  path-filter/path-order #225 / Pass-2 leftover + md/link #220 / schema fourth-pass #216 /
+  stewardship-badge lint #208 / Pass-2 #199/#203); no invent-product; no fourth badge.
+  Lands closed #229 leftover on post-#227 tip (do **not** revive #229/#228/#230/#231).
 - TOKENMAXX wiki-index/badge leftover deepen after #225 tip: expand self-tests
   to 4230 cases (was 4116) fail-closing unsaturated wiki-index/badge leftover —
   exact PUBLISHABLE_PAGES contiguous order / Home TOC loop+skip+link forms /

@@ -11,6 +11,27 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #244
+  (rebased post-#258): expand self-tests to 5400 cases (was 5176) fail-closing
+  DISTINCT leftover Pass-2 residual soft-fail + existing concurrency group
+  templates + existing `templates/AGENTS-REPO.md` leftover — soft-fail with
+  `|| :` / `|| return 0` / `set +o errexit` / `set +o nounset` /
+  invent `python3 -m` for gates / must not source env files / must not dot-source
+  paths / reject any `continue-on-error:` on existing workflows / exact contiguous
+  concurrency group template on all three workflows (existing templates only; no
+  invent) / AGENTS-REPO.md H1 `[PROJECT_NAME]` / parent_governance / smtp.eth /
+  YYYY-MM-DD / §1–§6 / `[CONFIG_FILE]` / Never commit `.env` /
+  `agents-md/description` / no invent badge.svg chrome — Pass-2 residual and
+  existing-template leftover slice only (not stewardship-schema leftover #258 / not wiki/mdlink leftover #252 /
+  not actionlint path-filter/path-order residual #244 /
+  not wiki outline/PUBLISH leftover #243 / not md/link residual #239 /
+  not stewardship-checks/schema residual #233 / not wiki-index/badge #227 /
+  not path-edges #225 / not Pass-2 leftover and md/link #220 / not Pass-2 residual
+  #199/#203 / not badge-lint #208 / not schema #216); no invent-product; no fourth
+  badge; no new templates. Lands closed #251/#250/#246/#245/#240 leftover on
+  post-#258 tip (do **not** revive #251/#250/#246/#245/#240/#235/#230; prior
+  #251/#250 RED was transient GitHub 503 on existing wiki absolute same-repo
+  links). Distinct from merged #258/#252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
 - TOKENMAXX stewardship-schema leftover deepen after #252 tip: expand
   self-tests to 5176 cases (was 4976) fail-closing unsaturated schema +
   `stewardship_common` leftover helpers on existing modules only —

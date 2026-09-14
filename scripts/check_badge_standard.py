@@ -180,7 +180,6 @@ lands closed #222/#215/#196 leftover after #225 tip):
   exact actions/workflows/link-check.yml/badge.svg +
   markdown-lint.yml/badge.svg image pins / no Stewardship product badge
 
-
 Fail-closed markdown-lint/link-check residual exact layouts after #227 tip
 (lands closed #221 leftover residual; NOT Pass-2 leftover + md/link #220 core /
 NOT path-edges #225 / NOT wiki-index/badge leftover #227 / NOT stewardship-badge lint #208):
@@ -203,6 +202,27 @@ NOT wiki-index/badge leftover #227):
   exact contiguous link-check + markdown-lint job headers /
   exact "**/*.md" then fail: true adjacency
 
+Fail-closed Pass-2 residual + existing templates/AGENTS-REPO.md leftover
+validation after #233 (NOT stewardship-schema leftover #258 /
+NOT wiki/mdlink leftover #252 /
+NOT stewardship-checks/schema residual #233 /
+NOT wiki-index/badge #227 / NOT path-edges #225 / NOT Pass-2 leftover+md/link #220 /
+NOT Pass-2 residual #199/#203 / NOT badge-lint #208 / NOT schema #216 /
+NOT path-order #189 / NOT md/link residual #239 /
+NOT wiki outline/PUBLISH leftover #243 /
+NOT actionlint path-filter/path-order residual #244;
+lands closed #251/#250/#246/#245/#240 leftover on post-#258 tip; do not invent new templates):
+- soft-fail with || : / soft-fail with || return 0 on run_stewardship_checks.sh
+- set +o errexit / set +o nounset soft-fail refuse
+- invent python3 -m for gates refuse
+- must not source env files / must not dot-source paths
+- reject any continue-on-error: on all three existing workflows
+- exact contiguous concurrency group template on all three workflows
+  (group + cancel-in-progress: true block; existing templates only)
+- existing templates/AGENTS-REPO.md leftover: H1 [PROJECT_NAME] /
+  parent_governance / maintainer smtp.eth / scope repository-specific /
+  version 1.0.0 / YYYY-MM-DD placeholder / §1–§6 / [CONFIG_FILE] /
+  Never commit .env / agents-md/description / no invent badge.svg chrome
 
 """
 
@@ -231,6 +251,7 @@ LICENSE = ROOT / "LICENSE"
 BADGE_STANDARD = ROOT / "docs" / "badge-standard.md"
 CONTRIBUTING = ROOT / "CONTRIBUTING.md"
 AGENTS = ROOT / "AGENTS.md"
+AGENTS_REPO = ROOT / "templates" / "AGENTS-REPO.md"
 LYCHEEIGNORE = ROOT / ".lycheeignore"
 MARKDOWNLINT_CONFIG = ROOT / ".markdownlint.json"
 WORKFLOWS = ROOT / ".github" / "workflows"
@@ -810,6 +831,18 @@ def check_workflow_hardening(errors: list[str]) -> None:
     exact Set up Python block / exact Install PyYAML block / checkout→Set up Python /
     exact full push paths list / exact schedule+cron block / exact concurrency block /
     exact jobs.stewardship header / reject strategy|matrix|services invent.
+    Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #233
+    (NOT stewardship-checks/schema residual #233 / NOT wiki-index/badge #227 /
+    NOT path-edges #225 / NOT Pass-2 leftover+md/link #220 / NOT Pass-2 residual #199/#203 /
+    NOT badge-lint #208 / NOT schema #216 / NOT md/link residual #239 /
+    NOT wiki outline/PUBLISH leftover #243 /
+    NOT actionlint path-filter/path-order residual #244 /
+    NOT wiki/mdlink leftover #252 / NOT stewardship-schema leftover #258; do not invent new templates):
+    soft-fail with || : / soft-fail with || return 0 /
+    set +o errexit / set +o nounset / invent python3 -m for gates /
+    must not source env files / must not dot-source paths /
+    reject any continue-on-error: on existing workflows /
+    exact contiguous concurrency group template (existing templates only).
     """
     for name in REQUIRED_WORKFLOWS:
         text = load_workflow_text(name)
@@ -854,6 +887,27 @@ def check_workflow_hardening(errors: list[str]) -> None:
         if not re.search(r"(?m)^\s*cancel-in-progress:\s*true\s*$", text):
             fail(
                 f"{name} concurrency must set cancel-in-progress: true",
+                errors,
+            )
+        # Exact contiguous concurrency group template leftover after #233
+        # (existing templates only; NOT invent new templates /
+        # NOT stewardship-checks/schema residual #233 / NOT wiki-index/badge #227).
+        prefix = name.removesuffix(".yml")
+        exact_concurrency = (
+            "concurrency:\n"
+            f"  group: {prefix}-${{{{ github.workflow }}}}-${{{{ github.ref }}}}\n"
+            "  cancel-in-progress: true"
+        )
+        if exact_concurrency not in text:
+            fail(
+                f"{name} must keep exact contiguous concurrency group template "
+                "(Pass-2 residual / template validation leftover after #233)",
+                errors,
+            )
+        if "continue-on-error:" in text:
+            fail(
+                f"{name} must not set continue-on-error "
+                "(Pass-2 residual / template validation leftover after #233)",
                 errors,
             )
         if "timeout-minutes:" not in text:
@@ -2358,6 +2412,62 @@ def check_contributing_and_agents(errors: list[str]) -> None:
         scan_secrets(AGENTS, errors)
     else:
         fail("Missing AGENTS.md", errors)
+
+    check_agents_repo_template(errors)
+
+
+def check_agents_repo_template(errors: list[str]) -> None:
+    """Fail-close existing templates/AGENTS-REPO.md leftover after #233.
+
+    Existing template only — do not invent new templates / do not rewrite
+    AGENTS-ECOSYSTEM.md. Distinct from stewardship-checks/schema residual #233.
+    """
+    if not AGENTS_REPO.is_file():
+        fail(
+            "Missing templates/AGENTS-REPO.md "
+            "(Pass-2 residual / template validation leftover after #233)",
+            errors,
+        )
+        return
+    text = AGENTS_REPO.read_text(encoding="utf-8")
+    if not text.startswith("# AGENTS.md — [PROJECT_NAME]"):
+        fail(
+            "templates/AGENTS-REPO.md must keep H1 AGENTS.md — [PROJECT_NAME] "
+            "(Pass-2 residual / template validation leftover after #233)",
+            errors,
+        )
+    required = (
+        ('parent_governance: "github.com/fuzzywigg/agents-governance"', "parent_governance"),
+        ('maintainer: "smtp.eth"', "maintainer smtp.eth"),
+        ('scope: "repository-specific"', "scope repository-specific"),
+        ('version: "1.0.0"', "version 1.0.0"),
+        ('last_updated: "YYYY-MM-DD"', "YYYY-MM-DD placeholder"),
+        ("## 1. Quick Reference", "section 1 Quick Reference"),
+        ("## 2. Project-Specific Rules", "section 2 Project-Specific Rules"),
+        ("## 3. Testing Requirements", "section 3 Testing Requirements"),
+        ("## 4. Deployment", "section 4 Deployment"),
+        ("## 5. Incident Response", "section 5 Incident Response"),
+        ("## 6. Amendment Process", "section 6 Amendment Process"),
+        ("[CONFIG_FILE]", "[CONFIG_FILE] placeholder"),
+        ("Never commit", "Never commit .env"),
+        ("agents-md/description", "agents-md/description branch"),
+        ("smtp.eth approval required", "smtp.eth approval required"),
+    )
+    for needle, label in required:
+        if needle not in text:
+            fail(
+                f"templates/AGENTS-REPO.md must keep {label} "
+                "(Pass-2 residual / template validation leftover after #233)",
+                errors,
+            )
+    lowered = text.lower()
+    if "badge.svg" in lowered or "[![" in text or "img.shields.io" in lowered:
+        fail(
+            "templates/AGENTS-REPO.md must not invent badge.svg chrome "
+            "(Pass-2 residual / template validation leftover after #233)",
+            errors,
+        )
+    scan_secrets(AGENTS_REPO, errors)
 
 
 def check_badge_standard_gate_contract(errors: list[str]) -> None:
@@ -8424,6 +8534,52 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
                 "run_stewardship_checks.sh must keep shebang as first line",
                 errors,
             )
+        # Pass-2 residual leftover after #233 (soft-fail leftovers beyond
+        # #199/#203 residual + #220 || exit 0 / shebang-first;
+        # NOT stewardship-checks/schema residual #233 / NOT wiki-index/badge #227 /
+        # NOT path-edges #225 / NOT Pass-2 leftover+md/link #220).
+        if "|| :" in run_text or "||:" in run_text:
+            fail(
+                "run_stewardship_checks.sh must not soft-fail with || : "
+                "(Pass-2 residual / template validation leftover after #233)",
+                errors,
+            )
+        if "|| return 0" in run_text or "||return 0" in run_text:
+            fail(
+                "run_stewardship_checks.sh must not soft-fail with || return 0 "
+                "(Pass-2 residual / template validation leftover after #233)",
+                errors,
+            )
+        if "set +o errexit" in run_text:
+            fail(
+                "run_stewardship_checks.sh must not soft-fail with set +o errexit "
+                "(Pass-2 residual / template validation leftover after #233)",
+                errors,
+            )
+        if "set +o nounset" in run_text:
+            fail(
+                "run_stewardship_checks.sh must not soft-fail with set +o nounset "
+                "(Pass-2 residual / template validation leftover after #233)",
+                errors,
+            )
+        if "python3 -m " in run_text:
+            fail(
+                "run_stewardship_checks.sh must not invent python3 -m for gates "
+                "(Pass-2 residual / template validation leftover after #233)",
+                errors,
+            )
+        if re.search(r"(?m)^\s*source\s+", run_text):
+            fail(
+                "run_stewardship_checks.sh must not source env files "
+                "(Pass-2 residual / template validation leftover after #233)",
+                errors,
+            )
+        if re.search(r"(?m)^\s*\.\s+\S", run_text):
+            fail(
+                "run_stewardship_checks.sh must not dot-source paths "
+                "(Pass-2 residual / template validation leftover after #233)",
+                errors,
+            )
         # Leftover after #149: exact live run_stewardship_checks.sh full layout.
         expected_run = (
             "#!/usr/bin/env bash\n"
@@ -8818,6 +8974,72 @@ def check_run_stewardship_gate_contract(errors: list[str]) -> None:
     if shebang_first not in text:
         fail(
             "run_stewardship contract must keep " + shebang_first + " pin",
+            errors,
+        )
+    leftover_233 = "Pass-2 residual / template validation leftover after " + "#233"
+    if leftover_233 not in text:
+        fail(
+            "run_stewardship pins must keep " + leftover_233 + " marker",
+            errors,
+        )
+    not_schema_233 = "NOT stewardship-checks/schema residual " + "#233"
+    if not_schema_233 not in text:
+        fail(
+            "run_stewardship docstring must keep " + not_schema_233 + " distinctness",
+            errors,
+        )
+    or_colon_pin = "soft-fail with || " + ":"
+    if or_colon_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + or_colon_pin + " pin",
+            errors,
+        )
+    or_return_pin = "soft-fail with || return " + "0"
+    if or_return_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + or_return_pin + " pin",
+            errors,
+        )
+    errexit_pin = "set +o " + "errexit"
+    if errexit_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + errexit_pin + " pin",
+            errors,
+        )
+    nounset_pin = "set +o " + "nounset"
+    if nounset_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + nounset_pin + " pin",
+            errors,
+        )
+    py_m_pin = "invent python3 " + "-m"
+    if py_m_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + py_m_pin + " pin",
+            errors,
+        )
+    source_pin = "must not source env " + "files"
+    if source_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + source_pin + " pin",
+            errors,
+        )
+    dot_pin = "must not dot-source " + "paths"
+    if dot_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + dot_pin + " pin",
+            errors,
+        )
+    agents_repo_pin = "templates/" + "AGENTS-REPO.md"
+    if agents_repo_pin not in text:
+        fail(
+            "run_stewardship contract must keep existing " + agents_repo_pin + " leftover",
+            errors,
+        )
+    no_invent_tpl = "do not invent new " + "templates"
+    if no_invent_tpl not in text:
+        fail(
+            "run_stewardship contract must keep " + no_invent_tpl + " pin",
             errors,
         )
 

@@ -745,3 +745,5 @@ _None yet._
 2026-09-14T07:35:50Z
 
 2026-09-14T07:40:37Z cursor: Local green — run_stewardship + self-tests 4300 + markdownlint ← ECO-073 stewardship-checks + schema residual after #225 (leave draft; do not redo #225/#220/#216)
+
+2026-09-14T07:41:30Z cursor: Draft PR #229 opened (cursor/tokenmaxx-stewardship-schema-residual-after-225-39ed); leave draft / do-not-merge; awaiting CI ← ECO-073 stewardship-checks + schema residual after #225 (do not redo #225/#220/#216)

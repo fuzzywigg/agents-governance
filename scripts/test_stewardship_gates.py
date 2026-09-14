@@ -70,6 +70,14 @@ unexpected+forbidden+secret+FAILED+OK needles / endswith+/./LICENSE /
 load_workflow_text / invent-product doc / intentionally / quiet stewardship /
 selftest+relative AGENTS pins / img https startswith / http link reject
 (not wiki / relative / schema / common / CI workflow pin spam).
+Deepened after #65: stewardship_common second-pass helper/constant pins
+(not badge / wiki / relative / schema / CI workflow pin spam).
+Deepened after #72: CI workflow second-pass — workflow names / branches ["**"] /
+concurrency prefixes+github.workflow+github.ref / job ids /
+self path filters / scripts+docs+README paths / secrets.GITHUB_TOKEN /
+python-version "3.12" / pip --quiet pyyaml / bash run + python3 selftest /
+markdownlint config+bang excludes / actionlint three-path list + 1.7.7
+download arg (not badge / wiki / relative / schema / common spam).
 """
 
 from __future__ import annotations
@@ -125,12 +133,16 @@ def _write(path: Path, text: str) -> None:
 def _minimal_workflows(tmp: Path) -> None:
     wf = tmp / ".github" / "workflows"
     wf.mkdir(parents=True, exist_ok=True)
+    # Keep aligned with live CI second-pass pins after #72 (branches / concurrency /
+    # job ids / path filters / action pins). Not invent-product workflows.
     link = """name: Link Check
 on:
   push:
+    branches: ["**"]
     paths:
       - "**/*.md"
       - ".lycheeignore"
+      - ".github/workflows/link-check.yml"
   pull_request:
   schedule:
     - cron: "0 6 * * 1"
@@ -138,25 +150,34 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: link-check-test
+  group: link-check-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   link-check:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v7
       - uses: lycheeverse/lychee-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: >-
-            lychee --verbose --no-progress --max-concurrency 8 --timeout 20
+            --verbose --no-progress --max-concurrency 8 --timeout 20
             --max-retries 3 --exclude-loopback --exclude-path .github/agents
-            --github-token GITHUB_TOKEN
+            --github-token ${{ secrets.GITHUB_TOKEN }}
+            "**/*.md"
           fail: true
 """
     lint = """name: Markdown Lint
 on:
+  push:
+    branches: ["**"]
+    paths:
+      - "**/*.md"
+      - ".markdownlint.json"
+      - ".github/workflows/markdown-lint.yml"
   pull_request:
   schedule:
     - cron: "30 6 * * 1"
@@ -164,19 +185,39 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: markdown-lint-test
+  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   lint:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v7
       - uses: DavidAnson/markdownlint-cli2-action@v24
-      - run: echo markdownlint "**/*.md" OWASP-AGENTIC.md .github/agents .markdownlint.json
+        with:
+          globs: |
+            **/*.md
+            !.github/agents/**
+            !OWASP-AGENTIC.md
+          config: ".markdownlint.json"
 """
     stew = """name: Stewardship Checks
 on:
+  push:
+    branches: ["**"]
+    paths:
+      - "README.md"
+      - "AGENTS.md"
+      - "CLAUDE.md"
+      - "LICENSE"
+      - "CONTRIBUTING.md"
+      - "docs/**"
+      - "scripts/**"
+      - ".github/workflows/**"
+      - ".lycheeignore"
+      - ".markdownlint.json"
   pull_request:
   schedule:
     - cron: "15 6 * * 1"
@@ -184,12 +225,14 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: stewardship-test
+  group: stewardship-checks-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   stewardship:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v5
@@ -4015,8 +4058,11 @@ def test_workflow_rejects_missing_permissions_on_link_check() -> None:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        # Remove every permissions.contents: read block (top-level + job-level).
         text = path.read_text(encoding="utf-8").replace(
             "permissions:\n  contents: read\n", ""
+        ).replace(
+            "    permissions:\n      contents: read\n", ""
         )
         path.write_text(text, encoding="utf-8")
         assert_fail_script(
@@ -23280,6 +23326,985 @@ def test_common_has_dangerous_file_still_after_65() -> None:
         raise AssertionError("has_dangerous_scheme must match file: after #65")
 
 
+
+# --- TOKENMAXX deepen after #72: CI workflow second-pass pins ---
+
+
+def test_link_check_requires_name_link_check_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace('name: Link Check', 'name: URL Check')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'name: Link Check',
+        )
+
+def test_markdown_lint_requires_name_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace('name: Markdown Lint', 'name: MD Lint')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'name: Markdown Lint',
+        )
+
+def test_stewardship_requires_name_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('name: Stewardship Checks', 'name: Stewardship Gate')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'name: Stewardship Checks',
+        )
+
+def test_link_check_requires_branches_glob_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace('branches: ["**"]', 'branches: ["main"]')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'branches: ["**"]',
+        )
+
+def test_markdown_lint_requires_branches_glob_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace('branches: ["**"]', 'branches: ["main"]')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'branches: ["**"]',
+        )
+
+def test_stewardship_requires_branches_glob_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('branches: ["**"]', 'branches: ["main"]')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'branches: ["**"]',
+        )
+
+def test_link_check_requires_concurrency_prefix_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace('link-check-', 'lnk-check-')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check-',
+        )
+
+def test_markdown_lint_requires_concurrency_prefix_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace('markdown-lint-', 'md-lint-')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'markdown-lint-',
+        )
+
+def test_stewardship_requires_concurrency_prefix_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('stewardship-checks-', 'stew-checks-')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship-checks-',
+        )
+
+def test_link_check_requires_github_workflow_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace('github.workflow', 'github.job')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'github.workflow',
+        )
+
+def test_link_check_requires_github_ref_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace('github.ref', 'github.sha')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'github.ref',
+        )
+
+def test_markdown_lint_requires_github_workflow_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace('github.workflow', 'github.job')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'github.workflow',
+        )
+
+def test_stewardship_requires_github_ref_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('github.ref', 'github.sha')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'github.ref',
+        )
+
+def test_link_check_requires_job_id_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace('\n  link-check:\n', '\n  links:\n')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'link-check:',
+        )
+
+def test_markdown_lint_requires_job_id_lint_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace('\n  lint:\n', '\n  markdown:\n')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'lint:',
+        )
+
+def test_stewardship_requires_job_id_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('\n  stewardship:\n', '\n  gates:\n')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship:',
+        )
+
+def test_link_check_requires_self_path_filter_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace('.github/workflows/link-check.yml', '.github/workflows/other.yml')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '.github/workflows/link-check.yml',
+        )
+
+def test_markdown_lint_requires_self_path_filter_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace('.github/workflows/markdown-lint.yml', '.github/workflows/other.yml')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '.github/workflows/markdown-lint.yml',
+        )
+
+def test_stewardship_requires_scripts_path_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('scripts/**', 'script/**')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'scripts/**',
+        )
+
+def test_stewardship_requires_docs_path_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('docs/**', 'doc/**')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'docs/**',
+        )
+
+def test_stewardship_requires_readme_path_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('"README.md"', '"READMEX.md"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'README.md',
+        )
+
+def test_link_check_requires_secrets_github_token_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace('secrets.GITHUB_TOKEN', 'secrets.TOKEN')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'secrets.GITHUB_TOKEN',
+        )
+
+def test_stewardship_requires_python_312_exact_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('python-version: "3.12"', 'python-version: "3.11"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'python-version: "3.12"',
+        )
+
+def test_stewardship_requires_pip_quiet_pyyaml_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('pip install --quiet pyyaml', 'pip install pyyaml')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'pip install --quiet pyyaml',
+        )
+
+def test_stewardship_requires_bash_run_script_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('bash scripts/run_stewardship_checks.sh', 'sh scripts/run_stewardship_checks.sh')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'bash scripts/run_stewardship_checks.sh',
+        )
+
+def test_stewardship_requires_python3_selftest_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('python3 scripts/test_stewardship_gates.py', 'python scripts/test_stewardship_gates.py')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'python3 scripts/test_stewardship_gates.py',
+        )
+
+def test_markdown_lint_requires_config_key_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace('config: ".markdownlint.json"', 'config_path: ".markdownlint.json"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'config: ".markdownlint.json"',
+        )
+
+def test_markdown_lint_requires_agents_glob_bang_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace('!.github/agents/**', '!.github/agent/**')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '!.github/agents/**',
+        )
+
+def test_markdown_lint_requires_owasp_bang_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace('!OWASP-AGENTIC.md', '!OWASP.md')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '!OWASP-AGENTIC.md',
+        )
+
+def test_stewardship_actionlint_lists_link_check_path_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace(
+            ".github/workflows/link-check.yml",
+            ".github/workflows/lnk-check.yml",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "workflow path link-check.yml",
+        )
+
+def test_stewardship_actionlint_lists_markdown_path_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace(
+            ".github/workflows/markdown-lint.yml",
+            ".github/workflows/md-lint.yml",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "workflow path markdown-lint.yml",
+        )
+
+def test_stewardship_download_passes_177_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('download-actionlint.bash) 1.7.7', 'download-actionlint.bash) 1.7.8')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '1.7.7 to download script',
+        )
+
+def test_link_check_requires_checkout_v7_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace('actions/checkout@v7', 'actions/checkout@v4')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'checkout@v7',
+        )
+
+def test_markdown_lint_requires_checkout_v7_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace('actions/checkout@v7', 'actions/checkout@v4')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'checkout@v7',
+        )
+
+def test_stewardship_requires_checkout_v7_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('actions/checkout@v7', 'actions/checkout@v4')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'checkout@v7',
+        )
+
+def test_link_check_requires_lychee_v2_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace('lycheeverse/lychee-action@v2', 'lycheeverse/lychee-action@v1')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'lychee-action@v2',
+        )
+
+def test_link_check_requires_timeout_20_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace('timeout-minutes: 20', 'timeout-minutes: 30')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'timeout-minutes: 20',
+        )
+
+def test_markdown_lint_requires_timeout_10_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace('timeout-minutes: 10', 'timeout-minutes: 20')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'timeout-minutes: 10',
+        )
+
+def test_stewardship_requires_timeout_15_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('timeout-minutes: 15', 'timeout-minutes: 20')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'timeout-minutes: 15',
+        )
+
+def test_link_check_requires_cron_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace('cron: "0 6 * * 1"', 'cron: "0 7 * * 1"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'cron: "0 6 * * 1"',
+        )
+
+def test_markdown_lint_requires_cron_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace('cron: "30 6 * * 1"', 'cron: "30 7 * * 1"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'cron: "30 6 * * 1"',
+        )
+
+def test_stewardship_requires_cron_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('cron: "15 6 * * 1"', 'cron: "15 7 * * 1"')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'cron: "15 6 * * 1"',
+        )
+
+def test_link_check_requires_ubuntu_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace('ubuntu-latest', 'ubuntu-22.04')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ubuntu-latest',
+        )
+
+def test_markdown_lint_requires_ubuntu_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace('ubuntu-latest', 'ubuntu-22.04')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ubuntu-latest',
+        )
+
+def test_stewardship_requires_ubuntu_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('ubuntu-latest', 'ubuntu-22.04')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'ubuntu-latest',
+        )
+
+def test_stewardship_requires_setup_python_v5_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('actions/setup-python@v5', 'actions/setup-python@v4')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'setup-python@v5',
+        )
+
+def test_stewardship_requires_actionlint_color_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace(' -color ', ' -plain ')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '-color',
+        )
+
+def test_stewardship_requires_shell_bash_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('shell: bash', 'shell: sh')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'shell: bash',
+        )
+
+def test_link_check_requires_fail_true_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace('fail: true', 'fail: false')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'fail: true',
+        )
+
+def test_link_check_requires_verbose_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace('--verbose', '--debug')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '--verbose',
+        )
+
+def test_link_check_requires_no_progress_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace('--no-progress', '--progress')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '--no-progress',
+        )
+
+def test_markdown_lint_requires_cli2_v24_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
+        text = path.read_text(encoding="utf-8").replace('DavidAnson/markdownlint-cli2-action@v24', 'DavidAnson/markdownlint-cli2-action@v20')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'markdownlint-cli2-action@v24',
+        )
+
+def test_stewardship_requires_get_actionlint_id_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('id: get_actionlint', 'id: actionlint')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'get_actionlint',
+        )
+
+def test_stewardship_requires_pyyaml_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('pyyaml', 'ruamel')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'pyyaml',
+        )
+
+def test_link_check_requires_exclude_loopback_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace('--exclude-loopback', '--exclude-localhost')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'exclude loopback',
+        )
+
+def test_link_check_requires_max_concurrency_8_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'link-check.yml'
+        text = path.read_text(encoding="utf-8").replace('--max-concurrency 8', '--max-concurrency 4')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '--max-concurrency 8',
+        )
+
+def test_stewardship_requires_actionlint_177_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8").replace('1.7.7', '1.7.8')
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '1.7.7',
+        )
+
+def test_stewardship_rejects_cancel_in_progress_false_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace(
+            "cancel-in-progress: true", "cancel-in-progress: false"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "cancel-in-progress: true",
+        )
+
+def test_link_check_rejects_missing_pull_request_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace("pull_request:\n", "")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "pull_request",
+        )
+
+def test_markdown_lint_rejects_missing_workflow_dispatch_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace("workflow_dispatch:\n", "")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "workflow_dispatch",
+        )
+
+def test_stewardship_rejects_missing_contents_read_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace(
+            "contents: read", "contents: write"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "contents: read",
+        )
+
+def test_link_check_rejects_missing_schedule_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8")
+        text = text.replace("  schedule:\n", "")
+        text = text.replace(
+            "    # Run weekly to catch externally broken links\n", ""
+        )
+        text = text.replace('    - cron: "0 6 * * 1"\n', "")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "schedule",
+        )
+
+def test_stewardship_rejects_missing_concurrency_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        text = text.replace("concurrency:\n", "")
+        text = text.replace(
+            "  group: stewardship-checks-${{ github.workflow }}-${{ github.ref }}\n",
+            "",
+        )
+        text = text.replace("  cancel-in-progress: true\n", "")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "concurrency",
+        )
+
+def test_markdown_lint_rejects_missing_owasp_exclude_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace("!OWASP-AGENTIC.md\n", "")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "OWASP-AGENTIC.md",
+        )
+
+def test_link_check_requires_lycheeignore_path_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace(".lycheeignore", ".lychee-ignore")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            ".lycheeignore",
+        )
+
+
+def test_markdown_lint_requires_markdownlint_json_path_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace(
+            ".markdownlint.json", ".markdown-lint.json"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            ".markdownlint.json",
+        )
+
+
+def test_link_check_requires_max_retries_3_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace(
+            "--max-retries 3", "--max-retries 5"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "--max-retries 3",
+        )
+
+
+def test_link_check_requires_timeout_arg_20_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace("--timeout 20", "--timeout 30")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "--timeout 20",
+        )
+
+
+def test_stewardship_requires_raw_githubusercontent_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace(
+            "raw.githubusercontent.com", "githubusercontent.com"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "raw.githubusercontent.com",
+        )
+
+
+def test_stewardship_requires_curl_fssl_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8").replace("curl -fsSL", "curl -sL")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "fsSL",
+        )
+
+
+def test_markdown_lint_requires_davidanson_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
+        text = path.read_text(encoding="utf-8").replace(
+            "DavidAnson/markdownlint-cli2-action",
+            "Other/markdownlint-cli2-action",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "DavidAnson/markdownlint-cli2-action",
+        )
+
+
+def test_link_check_requires_lycheeverse_still_after_72() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "link-check.yml"
+        text = path.read_text(encoding="utf-8").replace(
+            "lycheeverse/lychee-action", "other/lychee-action"
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "lycheeverse/lychee-action",
+        )
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -24858,6 +25883,80 @@ def main() -> int:
         test_common_secret_patterns_xox_still_after_65,
         test_common_has_dangerous_vbscript_still_after_65,
         test_common_has_dangerous_file_still_after_65,
+
+        # TOKENMAXX deepen after #72 (+72 CI workflow second-pass)
+        test_link_check_requires_name_link_check_after_72,
+        test_markdown_lint_requires_name_after_72,
+        test_stewardship_requires_name_after_72,
+        test_link_check_requires_branches_glob_after_72,
+        test_markdown_lint_requires_branches_glob_after_72,
+        test_stewardship_requires_branches_glob_after_72,
+        test_link_check_requires_concurrency_prefix_after_72,
+        test_markdown_lint_requires_concurrency_prefix_after_72,
+        test_stewardship_requires_concurrency_prefix_after_72,
+        test_link_check_requires_github_workflow_after_72,
+        test_link_check_requires_github_ref_after_72,
+        test_markdown_lint_requires_github_workflow_after_72,
+        test_stewardship_requires_github_ref_after_72,
+        test_link_check_requires_job_id_after_72,
+        test_markdown_lint_requires_job_id_lint_after_72,
+        test_stewardship_requires_job_id_after_72,
+        test_link_check_requires_self_path_filter_after_72,
+        test_markdown_lint_requires_self_path_filter_after_72,
+        test_stewardship_requires_scripts_path_after_72,
+        test_stewardship_requires_docs_path_after_72,
+        test_stewardship_requires_readme_path_after_72,
+        test_link_check_requires_secrets_github_token_after_72,
+        test_stewardship_requires_python_312_exact_after_72,
+        test_stewardship_requires_pip_quiet_pyyaml_after_72,
+        test_stewardship_requires_bash_run_script_after_72,
+        test_stewardship_requires_python3_selftest_after_72,
+        test_markdown_lint_requires_config_key_after_72,
+        test_markdown_lint_requires_agents_glob_bang_after_72,
+        test_markdown_lint_requires_owasp_bang_after_72,
+        test_stewardship_actionlint_lists_link_check_path_after_72,
+        test_stewardship_actionlint_lists_markdown_path_after_72,
+        test_stewardship_download_passes_177_after_72,
+        test_link_check_requires_checkout_v7_still_after_72,
+        test_markdown_lint_requires_checkout_v7_still_after_72,
+        test_stewardship_requires_checkout_v7_still_after_72,
+        test_link_check_requires_lychee_v2_still_after_72,
+        test_link_check_requires_timeout_20_still_after_72,
+        test_markdown_lint_requires_timeout_10_still_after_72,
+        test_stewardship_requires_timeout_15_still_after_72,
+        test_link_check_requires_cron_still_after_72,
+        test_markdown_lint_requires_cron_still_after_72,
+        test_stewardship_requires_cron_still_after_72,
+        test_link_check_requires_ubuntu_still_after_72,
+        test_markdown_lint_requires_ubuntu_still_after_72,
+        test_stewardship_requires_ubuntu_still_after_72,
+        test_stewardship_requires_setup_python_v5_still_after_72,
+        test_stewardship_requires_actionlint_color_still_after_72,
+        test_stewardship_requires_shell_bash_still_after_72,
+        test_link_check_requires_fail_true_still_after_72,
+        test_link_check_requires_verbose_still_after_72,
+        test_link_check_requires_no_progress_still_after_72,
+        test_markdown_lint_requires_cli2_v24_still_after_72,
+        test_stewardship_requires_get_actionlint_id_still_after_72,
+        test_stewardship_requires_pyyaml_still_after_72,
+        test_link_check_requires_exclude_loopback_still_after_72,
+        test_link_check_requires_max_concurrency_8_still_after_72,
+        test_stewardship_requires_actionlint_177_still_after_72,
+        test_stewardship_rejects_cancel_in_progress_false_after_72,
+        test_link_check_rejects_missing_pull_request_after_72,
+        test_markdown_lint_rejects_missing_workflow_dispatch_after_72,
+        test_stewardship_rejects_missing_contents_read_after_72,
+        test_link_check_rejects_missing_schedule_after_72,
+        test_stewardship_rejects_missing_concurrency_after_72,
+        test_markdown_lint_rejects_missing_owasp_exclude_still_after_72,
+        test_link_check_requires_lycheeignore_path_after_72,
+        test_markdown_lint_requires_markdownlint_json_path_after_72,
+        test_link_check_requires_max_retries_3_still_after_72,
+        test_link_check_requires_timeout_arg_20_still_after_72,
+        test_stewardship_requires_raw_githubusercontent_still_after_72,
+        test_stewardship_requires_curl_fssl_still_after_72,
+        test_markdown_lint_requires_davidanson_still_after_72,
+        test_link_check_requires_lycheeverse_still_after_72,
 
     ]
     try:

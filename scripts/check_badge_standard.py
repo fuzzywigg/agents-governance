@@ -608,6 +608,168 @@ def check_workflow_hardening(errors: list[str]) -> None:
             "so shields CDN excludes stay wired",
             errors,
         )
+    # Fail-closed after #72: CI workflow second-pass helper / constant / needle pins
+    # (CI workflow slice only; not badge / wiki / relative / schema / common spam).
+    if "name: Link Check" not in link:
+        fail(
+            'link-check.yml must keep workflow name: Link Check',
+            errors,
+        )
+    if "name: Markdown Lint" not in lint:
+        fail(
+            'markdown-lint.yml must keep workflow name: Markdown Lint',
+            errors,
+        )
+    if "name: Stewardship Checks" not in stew:
+        fail(
+            'stewardship-checks.yml must keep workflow name: Stewardship Checks',
+            errors,
+        )
+    if 'branches: ["**"]' not in link and "branches: ['**']" not in link:
+        fail(
+            'link-check.yml must push on branches: ["**"]',
+            errors,
+        )
+    if 'branches: ["**"]' not in lint and "branches: ['**']" not in lint:
+        fail(
+            'markdown-lint.yml must push on branches: ["**"]',
+            errors,
+        )
+    if 'branches: ["**"]' not in stew and "branches: ['**']" not in stew:
+        fail(
+            'stewardship-checks.yml must push on branches: ["**"]',
+            errors,
+        )
+    if "link-check-" not in link:
+        fail(
+            "link-check.yml concurrency group must be prefixed link-check-",
+            errors,
+        )
+    if "markdown-lint-" not in lint:
+        fail(
+            "markdown-lint.yml concurrency group must be prefixed markdown-lint-",
+            errors,
+        )
+    if "stewardship-checks-" not in stew:
+        fail(
+            "stewardship-checks.yml concurrency group must be prefixed "
+            "stewardship-checks-",
+            errors,
+        )
+    if "github.workflow" not in link or "github.ref" not in link:
+        fail(
+            "link-check.yml concurrency must include github.workflow and github.ref",
+            errors,
+        )
+    if "github.workflow" not in lint or "github.ref" not in lint:
+        fail(
+            "markdown-lint.yml concurrency must include github.workflow and github.ref",
+            errors,
+        )
+    if "github.workflow" not in stew or "github.ref" not in stew:
+        fail(
+            "stewardship-checks.yml concurrency must include github.workflow "
+            "and github.ref",
+            errors,
+        )
+    if not re.search(r"(?m)^\s*link-check:\s*$", link):
+        fail(
+            "link-check.yml must declare job id link-check:",
+            errors,
+        )
+    if not re.search(r"(?m)^\s*lint:\s*$", lint):
+        fail(
+            "markdown-lint.yml must declare job id lint:",
+            errors,
+        )
+    if not re.search(r"(?m)^\s*stewardship:\s*$", stew):
+        fail(
+            "stewardship-checks.yml must declare job id stewardship:",
+            errors,
+        )
+    if ".github/workflows/link-check.yml" not in link:
+        fail(
+            "link-check.yml paths filter must include "
+            ".github/workflows/link-check.yml",
+            errors,
+        )
+    if ".github/workflows/markdown-lint.yml" not in lint:
+        fail(
+            "markdown-lint.yml paths filter must include "
+            ".github/workflows/markdown-lint.yml",
+            errors,
+        )
+    if "scripts/**" not in stew:
+        fail(
+            "stewardship-checks.yml paths filter must include scripts/**",
+            errors,
+        )
+    if "docs/**" not in stew:
+        fail(
+            "stewardship-checks.yml paths filter must include docs/**",
+            errors,
+        )
+    if '"README.md"' not in stew and "'README.md'" not in stew:
+        fail(
+            "stewardship-checks.yml paths filter must include README.md",
+            errors,
+        )
+    if "secrets.GITHUB_TOKEN" not in link:
+        fail(
+            "link-check.yml must reference secrets.GITHUB_TOKEN",
+            errors,
+        )
+    if 'python-version: "3.12"' not in stew and "python-version: '3.12'" not in stew:
+        fail(
+            'stewardship-checks.yml must pin python-version: "3.12"',
+            errors,
+        )
+    if "pip install --quiet pyyaml" not in stew.lower():
+        fail(
+            "stewardship-checks.yml must pip install --quiet pyyaml",
+            errors,
+        )
+    if "bash scripts/run_stewardship_checks.sh" not in stew:
+        fail(
+            "stewardship-checks.yml must run bash scripts/run_stewardship_checks.sh",
+            errors,
+        )
+    if "python3 scripts/test_stewardship_gates.py" not in stew:
+        fail(
+            "stewardship-checks.yml must run python3 scripts/test_stewardship_gates.py",
+            errors,
+        )
+    if 'config: ".markdownlint.json"' not in lint and "config: '.markdownlint.json'" not in lint:
+        fail(
+            'markdown-lint.yml must set config: ".markdownlint.json"',
+            errors,
+        )
+    if "!.github/agents/**" not in lint:
+        fail(
+            "markdown-lint.yml globs must exclude !.github/agents/**",
+            errors,
+        )
+    if "!OWASP-AGENTIC.md" not in lint:
+        fail(
+            "markdown-lint.yml globs must exclude !OWASP-AGENTIC.md",
+            errors,
+        )
+    # actionlint must list all three workflow paths in one run step.
+    if (
+        ".github/workflows/link-check.yml" not in stew
+        or ".github/workflows/markdown-lint.yml" not in stew
+        or ".github/workflows/stewardship-checks.yml" not in stew
+    ):
+        fail(
+            "stewardship-checks.yml actionlint must list all three "
+            ".github/workflows/*.yml paths",
+            errors,
+        )
+    if "download-actionlint.bash) 1.7.7" not in stew and "download-actionlint.bash ) 1.7.7" not in stew:
+        fail(
+            "stewardship-checks.yml must pass actionlint version 1.7.7 to download script",
+            errors,
+        )
 
 
 def check_badge_standard_doc(errors: list[str]) -> None:

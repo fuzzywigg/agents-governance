@@ -2498,7 +2498,7 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
 
 
 def check_relative_link_gate_contract(errors: list[str]) -> None:
-    """Fail-close live relative-link gate wiring (after #55; deepen after #41)."""
+    """Fail-close live relative-link gate wiring (after #90; deepen after #55/#41)."""
     if not RELATIVE_LINK_GATE.is_file():
         fail("Missing scripts/check_relative_links.py (relative-link gate)", errors)
         return
@@ -2683,6 +2683,239 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
             "check_relative_links.py must fail closed when no markdown files found",
             errors,
         )
+    # Fail-closed after #83: third-pass helper / constant / needle pins
+    # (relative-link slice only; not schema / badge / wiki / common / CI
+    # workflow / actionlint pin spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    md_link_exact = (
+        "MD_LINK_RE = re.compile(r\"!?\\[([^\\]]*)\\]\\(\\s*([^)\\s]*)"
+        "(?:\\s+\\\"[^\\\"]*\\\")?\\s*\\)\")"
+    )
+    if md_link_exact not in text:
+        fail(
+            "check_relative_links.py must set MD_LINK_RE exact link/image pattern",
+            errors,
+        )
+    atx_exact = (
+        'ATX_HEADING_RE = re.compile(r"^(#{1,6})\\s+(.+?)\\s*$", re.MULTILINE)'
+    )
+    if atx_exact not in text:
+        fail(
+            "check_relative_links.py must set ATX_HEADING_RE exact #{1,6} MULTILINE",
+            errors,
+        )
+    skip_parts_exact = 'SKIP_PARTS = {".git", "node_modules"}'
+    skip_parts_sq = "SKIP_PARTS = {'.git', 'node_modules'}"
+    skip_parts_alt = 'SKIP_PARTS = {"node_modules", ".git"}'
+    if (
+        skip_parts_exact not in text
+        and skip_parts_sq not in text
+        and skip_parts_alt not in text
+    ):
+        fail(
+            'check_relative_links.py must set SKIP_PARTS = {".git", "node_modules"}',
+            errors,
+        )
+    skip_files_exact = 'SKIP_FILES = {\n    "OWASP-AGENTIC.md",\n}'
+    skip_files_one = 'SKIP_FILES = {"OWASP-AGENTIC.md"}'
+    if skip_files_exact not in text and skip_files_one not in text:
+        fail(
+            'check_relative_links.py must set SKIP_FILES = {"OWASP-AGENTIC.md"}',
+            errors,
+        )
+    skip_prefix_pin = 'Path(".github") / "agents"'
+    skip_prefix_sq = "Path('.github') / 'agents'"
+    if skip_prefix_pin not in text and skip_prefix_sq not in text:
+        fail(
+            'check_relative_links.py SKIP_PREFIXES must pin Path(".github") / "agents"',
+            errors,
+        )
+    ok_banner = "OK: relative markdown links " + "resolve"
+    if ok_banner not in text:
+        fail(
+            "check_relative_links.py must keep OK: relative markdown links resolve banner",
+            errors,
+        )
+    failed_banner = "Relative link check " + "FAILED"
+    if failed_banner not in text:
+        fail(
+            "check_relative_links.py must keep Relative link check FAILED banner",
+            errors,
+        )
+    empty_needle = "empty relative link " + "target"
+    if empty_needle not in text:
+        fail(
+            "check_relative_links.py must emit empty relative link target needle",
+            errors,
+        )
+    http_needle = "insecure http:// link " + "(use https://)"
+    if http_needle not in text:
+        fail(
+            "check_relative_links.py must emit insecure http:// link (use https://) needle",
+            errors,
+        )
+    proto_needle = "protocol-relative link not " + "allowed"
+    if proto_needle not in text:
+        fail(
+            "check_relative_links.py must emit protocol-relative link not allowed needle",
+            errors,
+        )
+    dangerous_needle = "dangerous link " + "scheme"
+    if dangerous_needle not in text:
+        fail(
+            "check_relative_links.py must emit dangerous link scheme needle",
+            errors,
+        )
+    if 'encoding="utf-8"' not in text and "encoding='utf-8'" not in text:
+        fail(
+            "check_relative_links.py must read markdown as utf-8",
+            errors,
+        )
+    if "as_posix()" not in text:
+        fail(
+            "check_relative_links.py should_skip must use as_posix()",
+            errors,
+        )
+    md_suffix = 'dest.suffix.lower() == ".md"'
+    md_suffix_sq = "dest.suffix.lower() == '.md'"
+    if md_suffix not in text and md_suffix_sq not in text:
+        fail(
+            'check_relative_links.py must gate fragment checks on .md suffix',
+            errors,
+        )
+    if "ValueError" not in text:
+        fail(
+            "check_relative_links.py must catch ValueError for repo escapes",
+            errors,
+        )
+    if "sorted(" not in text:
+        fail(
+            "check_relative_links.py iter_markdown must sorted() results",
+            errors,
+        )
+    if "re.UNICODE" not in text:
+        fail(
+            "check_relative_links.py github_slug must use re.UNICODE",
+            errors,
+        )
+    space_dash = '.replace(" ", "-")'
+    space_dash_sq = ".replace(' ', '-')"
+    if space_dash not in text and space_dash_sq not in text:
+        fail(
+            'check_relative_links.py github_slug must replace spaces with "-"',
+            errors,
+        )
+    percent_stable = "Percent-decode until " + "stable"
+    if percent_stable not in text:
+        fail(
+            "check_relative_links.py fully_unquote must keep Percent-decode until stable pin",
+            errors,
+        )
+    cap_nested = "Cap nested percent-" + "decoding"
+    if cap_nested not in text and "%252e" not in text:
+        fail(
+            "check_relative_links.py must keep Cap nested percent-decoding / %252e pin",
+            errors,
+        )
+    empty_parens = "Allow empty () so missing targets fail " + "closed"
+    if empty_parens not in text and "missing targets fail closed" not in text:
+        fail(
+            "check_relative_links.py MD_LINK_RE must keep empty () fail-closed pin",
+            errors,
+        )
+    if "sys.exit(main())" not in text:
+        fail(
+            "check_relative_links.py must invoke sys.exit(main())",
+            errors,
+        )
+    if "from urllib.parse import unquote" not in text:
+        fail(
+            "check_relative_links.py must import unquote from urllib.parse",
+            errors,
+        )
+    if "match.group(2)" not in text:
+        fail(
+            "check_relative_links.py must read link targets via match.group(2)",
+            errors,
+        )
+    if 'startswith("#")' not in text and "startswith('#')" not in text:
+        fail(
+            "check_relative_links.py must handle same-file anchors via startswith('#')",
+            errors,
+        )
+    if 'split("#", 1)' not in text and "split('#', 1)" not in text:
+        fail(
+            "check_relative_links.py must split fragments via split('#', 1)",
+            errors,
+        )
+    if "files scanned" not in text:
+        fail(
+            "check_relative_links.py OK banner must report files scanned",
+            errors,
+        )
+    if "from stewardship_common import" not in text:
+        fail(
+            "check_relative_links.py must import from stewardship_common",
+            errors,
+        )
+    if r'\"[^\"]*\"' not in text and '"[^"]*"' not in text:
+        fail(
+            "check_relative_links.py MD_LINK_RE must allow title attributes",
+            errors,
+        )
+    if "#{1,6}" not in text:
+        fail(
+            "check_relative_links.py ATX_HEADING_RE must pin #{1,6}",
+            errors,
+        )
+    if r"[`*_~]" not in text and "[`*_~]" not in text:
+        fail(
+            "check_relative_links.py github_slug must strip punctuation [`*_~]",
+            errors,
+        )
+    offline_doc = "Offline relative markdown link " + "integrity"
+    if offline_doc not in text:
+        fail(
+            "check_relative_links.py module doc must keep Offline relative markdown link integrity",
+            errors,
+        )
+    if "complements lychee" not in text:
+        fail(
+            "check_relative_links.py module doc must keep complements lychee pin",
+            errors,
+        )
+    if "path.parent / target" not in text:
+        fail(
+            "check_relative_links.py must resolve via path.parent / target",
+            errors,
+        )
+    if "fully_unquote(raw)" not in text:
+        fail(
+            "check_relative_links.py check_file must call fully_unquote(raw)",
+            errors,
+        )
+    if "has_dangerous_scheme(raw)" not in text:
+        fail(
+            "check_relative_links.py check_file must call has_dangerous_scheme(raw)",
+            errors,
+        )
+    third_pass_doc = "Third-pass: MD_LINK_RE+ATX_HEADING_RE " + "exact"
+    if third_pass_doc not in text:
+        fail(
+            "check_relative_links.py docstring must keep Third-pass MD_LINK_RE+ATX exact pin",
+            errors,
+        )
+    if "def main" not in text:
+        fail(
+            "check_relative_links.py must expose def main",
+            errors,
+        )
+    if "relative_to(ROOT.resolve())" not in text and "relative_to(ROOT" not in text:
+        fail(
+            "check_relative_links.py must use relative_to(ROOT) for escape checks",
+            errors,
+        )
+
 
     if not RUN_STEWARDSHIP.is_file():
         fail("Missing scripts/run_stewardship_checks.sh", errors)

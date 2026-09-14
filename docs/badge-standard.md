@@ -152,7 +152,11 @@ plus docs-lint pins after #100: `.lycheeignore` escaped `img\.shields\.io` /
 commentary / reject `https://*`+`http://*`+`*` / exact MD013+MD024 objects /
 MD033+MD041+MD060 false / `default: true` / ROOT path assigns /
 `check_workflows_and_license` + CDN-exclude needle /
-`check_docs_lint_gate_contract`).
+`check_docs_lint_gate_contract`,
+plus actionlint-style third-pass after #100/#104: `concurrency:` +
+`cancel-in-progress:` / `permissions:` present / reject
+`actions|packages|pull-requests: write` / `re.finditer` / docker continue /
+`rsplit[-1]` / third-pass docstring).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

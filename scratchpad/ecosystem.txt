@@ -414,7 +414,18 @@ _None yet._
 - [x] cursor: Read live tree post-#100 (1971 cases; wiki-outline third-pass saturated; closed #101 docs-lint leftover)
 - [x] cursor: Fail-close docs-lint — lycheeignore escaped shields + MCP/LF + stewardship/308/103 / reject https://*+http://*+* / exact MD013+MD024 objects / MD033+041+060 false / default true / ROOT assigns / workflows helper + CDN needle / check_docs_lint_gate_contract
 - [x] cursor: Expand self-tests 1971 → 2079 (docs-lint slice + deepen; not wiki / relative / actionlint / schema / badge / common / CI workflow pin spam)
-- [ ] cursor: Green PR with CI
+- [x] cursor: Green PR with CI
 - Scope: EXISTING docs-lint (.lycheeignore + .markdownlint.json) integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #101 leftover
 - Branch: cursor/tokenmaxx-docs-lint-after-100-d867
 2026-09-14T01:25:00Z
+
+2026-09-14T01:40:00Z cursor: PR #104 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-051 TOKENMAXX docs-lint pins
+
+### [ECO-052] TOKENMAXX deepen actionlint-style third-pass pins after #100/#104 — 2026-09-14T01:45:00Z
+- [x] cursor: Read live tree post-#104 (2079 cases; #85/#105 closed/superseded — do not revive; #104 docs-lint merged)
+- [x] cursor: Fail-close actionlint third-pass — concurrency:+cancel-in-progress: / permissions: / reject actions|packages|pull-requests write / finditer / docker continue / rsplit[-1] / third-pass docstring
+- [x] cursor: Expand self-tests 2079 → 2151 (actionlint third-pass reversible CI slice; not lychee/mdlint/relative/schema/wiki spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING actionlint-style reversible CI pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-actionlint-third-pass-v2-88a9
+2026-09-14T01:45:00Z

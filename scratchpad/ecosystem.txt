@@ -867,3 +867,5 @@ _None yet._
 2026-09-14T10:24:28Z
 
 2026-09-14T10:24:28Z cursor: Rebased onto post-#262 tip; local verify next ← ECO-080
+
+2026-09-14T10:30:54Z cursor: Local green — run_stewardship + self-tests 5592 + markdownlint on post-#262 tip ← ECO-080 (leave draft; do not revive #267/#266/#261/#260/#256)

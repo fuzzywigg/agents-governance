@@ -522,3 +522,13 @@ _None yet._
 2026-09-14T02:55:00Z
 
 2026-09-14T03:05:00Z cursor: PR #141 CI green (lint + link-check + stewardship/actionlint) MERGEABLE ← complete ECO-057 TOKENMAXX wiki-badge pins after #132/#135 (replaces closed #131/#136)
+
+### [ECO-059] TOKENMAXX deepen leftover docs-lint/stewardship/actionlint pins after #141 — 2026-09-14T03:30:01Z
+- [x] cursor: Abandoned CONFLICTING #146 after sibling #141 wiki-badge merge
+- [x] cursor: Read live tree post-#141 (2689 cases; wiki-badge saturated; #144/#145 CONFLICTING — do not revive)
+- [x] cursor: Fail-close leftovers — docs-lint third-pass exact .lycheeignore layout+commentary / actionlint contents:read+cancel-in-progress:true+ubuntu-latest+workflow_dispatch:+reject security-events|attestations|statuses|deployments write / stewardship exact run_stewardship_checks.sh layout
+- [x] cursor: Expand self-tests 2689 → 2837 (leftover docs-lint/stewardship/actionlint slice; not wiki-badge/CI workflow/relative/schema spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING docs-lint/stewardship/actionlint leftover pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; distinct from abandoned #146 and CONFLICTING #144/#145
+- Branch: cursor/tokenmaxx-docs-stew-actionlint-after-141-c48a
+2026-09-14T03:30:01Z

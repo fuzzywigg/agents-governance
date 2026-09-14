@@ -371,7 +371,9 @@ _None yet._
 - [x] cursor: Read live tree post-#79 (1683 cases; actionlint-style saturated; #81 CI workflow sibling closed CONFLICTING; #83 schema second-pass open)
 - [x] cursor: Fail-close docs-lint second-pass — .markdownlint.json MD013/MD024/default/MD033/MD041/MD060 + MARKDOWNLINT_CONFIG.name / .lycheeignore modelcontextprotocol.io+linuxfoundation.org+License badge+check_badge_standard.py / run_stewardship set -euo pipefail+dirname+python3 / check_docs_lint_gate_contract
 - [x] cursor: Expand self-tests 1683 → 1755 (docs-lint second-pass slice; not schema / actionlint / CI workflow / badge / wiki / relative / common spam)
-- [ ] cursor: Green PR with CI
+- [x] cursor: Green PR with CI
 - Scope: EXISTING docs-lint integrity / markdownlint+lycheeignore+runner pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
 - Branch: cursor/tokenmaxx-docs-lint-pins-387a
 2026-09-14T00:30:00Z
+
+2026-09-14T00:42:00Z cursor: PR #89 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-047 TOKENMAXX docs-lint second-pass pins

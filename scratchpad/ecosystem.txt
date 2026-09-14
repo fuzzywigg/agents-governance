@@ -898,3 +898,5 @@ _None yet._
 2026-09-14T11:10:23Z cursor: Rebased ECO-078 onto post-#278 tip (c1fc1f4); self-tests 5592 → 5744; #280 CLOSED CONFLICTING after #278 tip move — open fresh draft; do not revive #280/#274/#270/#264; do not redo #278 blob/503 / #272 Pass-2 / #262 path leftover
 
 2026-09-14T11:16:47Z cursor: Local green — run_stewardship + self-tests 5744 + markdownlint ← ECO-078 path-filter/path-order leftover after #278 (leave draft; do not revive #280/#274/#270/#264)
+
+2026-09-14T11:17:10Z cursor: Draft PR #286 opened (cursor/tokenmaxx-path-edges-leftover-after-272-9af1) on post-#278 tip; leave draft / do-not-merge; awaiting CI ← ECO-078 path-filter/path-order leftover (do not revive #280/#274/#270/#264; do not redo #278/#272/#262/#258)

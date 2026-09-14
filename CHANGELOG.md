@@ -22,6 +22,16 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   no invent-product; no fourth badge. Lands closed #171/#209/#204/#200 leftover
   on post-#208 tip (do **not** revive #171/#209/#204/#200/#194/#190/#188/#187/#183).
   Distinct from merged #208/#203/#199/#191.
+- TOKENMAXX wiki-index/badge leftover deepen after #208 tip: expand self-tests
+  to 4020 cases (was 3906) fail-closing unsaturated wiki-index/badge leftover —
+  exact PUBLISHABLE_PAGES contiguous order / Home TOC loop+skip+link forms /
+  empty-index comment / relative broken-link+empty-index+duplicate-slug needles /
+  README invent stewardship-checks badge refuse leftover framing / exact
+  link-check+markdown-lint badge.svg pins — wiki-index/badge leftover slice
+  only (not schema fourth-pass #216 / stewardship-badge lint #208 / path-edges #213 / md/link #214 /
+  Pass-2 #199/#203 / schema #191 / path-order #189); no invent-product; no
+  fourth badge. Lands closed #196 leftover on post-#208 tip (do **not** revive
+  #196/#185/#172). Distinct from merged #216/#208 and open #213/#214.
 
 - TOKENMAXX register Pass-2 residual after_191 self-tests after #199: wire
   orphaned +70 `*_after_191` defs into `main()` so the suite reports 3660

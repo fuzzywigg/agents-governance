@@ -11,6 +11,15 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki-index validators after #161: expand self-tests to 2957 cases
+  (was 2885) fail-closing live wiki-index integrity — Home TOC empty-index /
+  publishable page index stubs / broken internal stub links / empty markdown
+  index / duplicate slug `headings_in` set collapse, plus
+  `check_wiki_outline_gate_contract` + `check_relative_link_gate_contract`
+  wiki-index pins — wiki-index slice only (not wiki-badge #141 / leftover
+  #161 / actionlint / docs-lint / common spam); no invent-product; no fourth
+  badge. Branch `overnight-wiki-index-validators`.
+
 - TOKENMAXX leftover docs-lint/stewardship/actionlint pins after #149: expand
   self-tests to 2885 cases (was 2761) fail-closing live leftover integrity —
   docs-lint third-pass exact `.lycheeignore` full layout + commentary lines /

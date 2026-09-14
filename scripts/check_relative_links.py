@@ -17,6 +17,9 @@ Fail-closed pins (live path after #55; deepen after #41; third-pass after #90):
   sys.exit / urllib.unquote / group(2) / startswith# / split# /
   files scanned / stewardship_common import / title attr / #{1,6} /
   slug punctuation strip / Offline+lychee docstring / path.parent
+- Wiki-index after #161: broken internal stub links / empty markdown index /
+  no markdown files found / duplicate slug headings_in set collapse via
+  {github_slug(match.group(2))} (not wiki-badge spam)
 """
 
 from __future__ import annotations
@@ -92,7 +95,9 @@ def github_slug(heading: str) -> str:
 
 
 def headings_in(path: Path) -> set[str]:
+    """Collect ATX heading slugs; duplicate headings collapse to one slug."""
     text = path.read_text(encoding="utf-8")
+    # Duplicate slug edge: set collapse — two "## Section" → {"section"}.
     return {github_slug(match.group(2)) for match in ATX_HEADING_RE.finditer(text)}
 
 

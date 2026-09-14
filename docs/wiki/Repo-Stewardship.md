@@ -169,7 +169,10 @@ plus actionlint-style deepen after #135/#141: `cancel-in-progress: true` /
 plus leftover docs-lint/stewardship/actionlint pins after #149: docs-lint
 third-pass exact `.lycheeignore` full layout + commentary lines /
 actionlint leftover `contents: read` membership affirm (complement #149
-regex) / stewardship leftover exact `run_stewardship_checks.sh` full layout).
+regex) / stewardship leftover exact `run_stewardship_checks.sh` full layout,
+plus wiki-index validators after #161: Home TOC empty-index / publishable
+page index stubs / broken internal stub links / empty markdown index /
+duplicate slug `headings_in` set collapse).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

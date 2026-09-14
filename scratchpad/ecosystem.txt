@@ -429,3 +429,5 @@ _None yet._
 - Scope: EXISTING badge-standard integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #103 leftover on post-#104 main
 - Branch: cursor/tokenmaxx-badge-third-pass-after-104-d2eb
 2026-09-14T01:39:03Z
+
+2026-09-14T01:44:00Z cursor: PR #108 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-052 TOKENMAXX badge-standard third-pass pins

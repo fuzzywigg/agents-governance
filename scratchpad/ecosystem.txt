@@ -397,3 +397,13 @@ _None yet._
 2026-09-14T00:51:09Z
 
 2026-09-14T00:55:30Z cursor: PR #94 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-049 TOKENMAXX relative-link third-pass pins
+
+### [ECO-050] TOKENMAXX deepen wiki-outline third-pass pins after #90/#94 — 2026-09-14T01:10:00Z
+- [x] cursor: Read live tree post-#94 (1899 cases; relative third-pass saturated; #99 wiki sibling closed as conflicting)
+- [x] cursor: Fail-close wiki-outline third-pass — WIKI exact / removesuffix / glob *.md / sorted(unexpected) / Link Check+Markdown Lint+No secrets / Home invent+secrets+kill / Repo-Stewardship relative+invent+actionlint+run_script / startswith //+http / group(2) / utf-8 / sys.exit / stewardship_common / invent-chrome social special-cases / shields host / markdown-badge open / badge-in-lowered / README+badge hints / pages+operator OK / intentional / PAGE_TOPIC_HINTS.get / strip_fenced_code(text) / has_dangerous_scheme(target) / scan_secrets calls
+- [x] cursor: Expand self-tests 1899 → 1971 (wiki-outline third-pass slice; not relative / actionlint / markdownlint+lycheeignore / schema / badge / common / CI workflow pin spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING wiki-outline integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-wiki-third-pass-v2-d216
+2026-09-14T01:10:00Z
+

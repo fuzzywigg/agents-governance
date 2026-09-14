@@ -42,6 +42,15 @@ Fail-closed pins (live path after #59; deepen after #43; third-pass after #90):
   NOT path-filter/path-order #225 / NOT Pass-2 leftover + md/link #220;
   existing pages only — do not invent extra wiki files)
 - Lands closed #238 leftover after #239 tip (NOT md/link residual #239)
+- Wiki/mdlink leftover after #243: PUBLISH YAML status+created+purpose block /
+  ## One-shot publish (after wiki exists) / exact wiki.git clone dest /
+  contiguous six-page cp list / cd /tmp/agents-governance.wiki /
+  git commit #16 / git push origin master / ## Acceptance checks /
+  ## Fallback / Repository not found / Home (landing) table cell /
+  Home operator PUBLISH.md omit-when-copying
+  (NOT wiki outline/PUBLISH leftover #243 saturated pins / NOT md/link residual layouts #239 /
+  NOT path-filter/path-order leftover #244 / NOT stewardship-checks/schema #233 /
+  NOT wiki-index/badge leftover #227; existing pages only — do not invent extra wiki files)
 """
 
 from __future__ import annotations
@@ -241,6 +250,77 @@ def main() -> int:
                 "PUBLISH.md must say drop the in-repo PUBLISH.md bullet from Home",
                 errors,
             )
+        # Wiki/mdlink leftover after #243 (existing pages only; residual vs #243).
+        yaml_purpose_block = (
+            "status: ACTIVE\n"
+            'created: "2026-09-13"\n'
+            'purpose: "Reversible publish path for docs/wiki → GitHub Wiki"'
+        )
+        if yaml_purpose_block not in publish_text:
+            fail(
+                "PUBLISH.md YAML must keep contiguous status/created/purpose block",
+                errors,
+            )
+        if "## One-shot publish (after wiki exists)" not in publish_text:
+            fail(
+                "PUBLISH.md must keep ## One-shot publish (after wiki exists) heading",
+                errors,
+            )
+        exact_clone = (
+            "git clone https://github.com/fuzzywigg/agents-governance.wiki.git "
+            "/tmp/agents-governance.wiki"
+        )
+        if exact_clone not in publish_text:
+            fail(
+                "PUBLISH.md one-shot must clone to /tmp/agents-governance.wiki",
+                errors,
+            )
+        cp_six = (
+            "cp docs/wiki/Home.md \\\n"
+            "   docs/wiki/Overview.md \\\n"
+            "   docs/wiki/Autonomy-Levels.md \\\n"
+            "   docs/wiki/Repo-Stewardship.md \\\n"
+            "   docs/wiki/Agent-Routing.md \\\n"
+            "   docs/wiki/Security-Boundaries.md \\\n"
+            "   /tmp/agents-governance.wiki/"
+        )
+        if cp_six not in publish_text:
+            fail(
+                "PUBLISH.md one-shot must keep contiguous six-page cp list",
+                errors,
+            )
+        if "cd /tmp/agents-governance.wiki" not in publish_text:
+            fail(
+                "PUBLISH.md one-shot must cd /tmp/agents-governance.wiki",
+                errors,
+            )
+        git_commit_16 = (
+            'git commit -m "docs: publish public wiki outline from docs/wiki (#16)"'
+        )
+        if git_commit_16 not in publish_text:
+            fail(
+                "PUBLISH.md one-shot must git commit wiki outline from docs/wiki (#16)",
+                errors,
+            )
+        if "git push origin master" not in publish_text:
+            fail(
+                "PUBLISH.md one-shot must git push origin master",
+                errors,
+            )
+        if "## Acceptance checks" not in publish_text:
+            fail("PUBLISH.md must keep ## Acceptance checks heading", errors)
+        if "## Fallback\n" not in publish_text and "## Fallback\r\n" not in publish_text:
+            fail("PUBLISH.md must keep ## Fallback heading", errors)
+        if "Repository not found" not in publish_text:
+            fail(
+                "PUBLISH.md fallback must mention Repository not found",
+                errors,
+            )
+        if "| `Home.md` | Home (landing) |" not in publish_text:
+            fail(
+                "PUBLISH.md pages table must keep Home (landing) cell",
+                errors,
+            )
 
     home = WIKI / "Home.md"
     if home.is_file():
@@ -280,6 +360,15 @@ def main() -> int:
         if "[![" in home_text:
             fail(
                 "Home.md must not embed markdown badge images",
+                errors,
+            )
+        # Wiki/mdlink leftover after #243: operator publish path stays in-repo.
+        if "](PUBLISH.md)" not in home_text or (
+            "omit when copying pages to GitHub Wiki" not in home_text
+        ):
+            fail(
+                "Home.md must keep operator PUBLISH.md link "
+                "(omit when copying pages to GitHub Wiki)",
                 errors,
             )
 

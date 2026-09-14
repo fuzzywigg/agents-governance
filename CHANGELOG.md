@@ -11,6 +11,24 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki/mdlink leftover deepen after #243 tip: expand self-tests to
+  4830 cases (was 4646) fail-closing unsaturated wiki outline / PUBLISH.md
+  leftover plus markdown-lint / link-check residual layouts on existing
+  modules only — PUBLISH YAML status+created+purpose block / One-shot heading /
+  exact `wiki.git` clone dest / contiguous six-page `cp` list /
+  `cd /tmp/agents-governance.wiki` / git commit `#16` /
+  `git push origin master` / Acceptance+Fallback headings /
+  `Repository not found` / Home (landing) table cell / Home operator
+  `PUBLISH.md` omit-when-copying / exact contiguous link+lint concurrency
+  blocks / exact contiguous link-check + markdown-lint job headers /
+  exact `**/*.md` then `fail: true` adjacency — wiki/mdlink leftover slice
+  only (not wiki outline/PUBLISH leftover #243 saturated pins / not md/link
+  residual layouts #239 / not path-filter/path-order leftover #244 / not
+  stewardship-checks/schema residual #233 / not wiki-index/badge leftover
+  #227 / not path-filter/path-order #225 / not Pass-2 leftover + md/link
+  #220); no invent-product; no fourth badge; no extra wiki files. Distinct
+  from merged #243/#239/#233/#227/#225/#220/#216/#208. Do **not** revive
+  #238/#234/#231/#221.
 - TOKENMAXX wiki outline/PUBLISH leftover deepen after #239 tip: expand
   self-tests to 4646 cases (was 4462) fail-closing unsaturated wiki outline /
   PUBLISH.md leftover on existing `docs/wiki` pages only — Pages to publish

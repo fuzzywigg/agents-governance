@@ -17,6 +17,13 @@ Deepened after #176: wiki-index validators — Home TOC empty-index /
 publishable page index stubs / broken internal stub links / empty markdown
 index / duplicate slug headings_in set collapse (not wiki-badge #141 /
 fixtures #173 / path-filter #176 / run_stewardship #179 spam).
+Deepened after #243 tip: wiki/mdlink leftover — PUBLISH YAML status+created+purpose /
+One-shot heading / exact clone dest / contiguous cp / cd wiki tmp / git commit #16 /
+git push origin master / Acceptance+Fallback / Repository not found / Home (landing) /
+Home operator PUBLISH.md omit-when-copying plus md/link residual concurrency /
+job-header / fail:true adjacency leftover layouts (wiki/mdlink leftover slice only;
+not wiki outline/PUBLISH leftover #243 saturated pins / not md/link residual #239 /
+not path-filter/path-order leftover #244 / not stewardship-checks/schema #233).
 Deepened after #239 tip: wiki outline/PUBLISH leftover re-land — lands closed #238
 leftover on post-#239 tip (do not revive #238); existing docs/wiki pages only
 (not md/link residual #239 / not stewardship-checks/schema #233).
@@ -556,7 +563,8 @@ def _seed_wiki_tree(tmp: Path, *, extra_pages: tuple[str, ...] = (), mutate=None
             "[Autonomy-Levels](Autonomy-Levels.md)\n"
             "[Repo-Stewardship](Repo-Stewardship.md)\n"
             "[Agent-Routing](Agent-Routing.md)\n"
-            "[Security-Boundaries](Security-Boundaries.md)\n\n"
+            "[Security-Boundaries](Security-Boundaries.md)\n"
+            "[Wiki publish path](PUBLISH.md) omit when copying pages to GitHub Wiki\n\n"
             "## Out of scope\n\nSecrets and invent product frameworks.\n"
             "Kill switch blocks agent writes.\n"
         ),
@@ -568,18 +576,34 @@ def _seed_wiki_tree(tmp: Path, *, extra_pages: tuple[str, ...] = (), mutate=None
             "| `Autonomy-Levels.md` | Autonomy-Levels |\n"
             "| `Repo-Stewardship.md` | Repo-Stewardship |\n"
             "| `Agent-Routing.md` | Agent-Routing |\n"
-            "| `Security-Boundaries.md` | Security-Boundaries |\n\n"
+            "| `Security-Boundaries.md` | Security-Boundaries |\n"
+            "| `Home.md` | Home (landing) |\n\n"
             "Do **not** push `PUBLISH.md`.\n"
             "drop the in-repo `PUBLISH.md` bullet from Home\n"
             "https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge-standard.md\n"
             "git clone https://github.com/fuzzywigg/agents-governance.wiki.git /tmp/wiki\n"
+            "git clone https://github.com/fuzzywigg/agents-governance.wiki.git "
+            "/tmp/agents-governance.wiki\n"
             "cp docs/wiki/Home.md docs/wiki/Overview.md docs/wiki/Autonomy-Levels.md "
             "docs/wiki/Repo-Stewardship.md docs/wiki/Agent-Routing.md "
             "docs/wiki/Security-Boundaries.md /tmp/wiki/\n"
+            "cp docs/wiki/Home.md \\\n"
+            "   docs/wiki/Overview.md \\\n"
+            "   docs/wiki/Autonomy-Levels.md \\\n"
+            "   docs/wiki/Repo-Stewardship.md \\\n"
+            "   docs/wiki/Agent-Routing.md \\\n"
+            "   docs/wiki/Security-Boundaries.md \\\n"
+            "   /tmp/agents-governance.wiki/\n"
+            "cd /tmp/agents-governance.wiki\n"
             "git add Home.md Overview.md Autonomy-Levels.md "
             "Repo-Stewardship.md Agent-Routing.md Security-Boundaries.md\n"
+            'git commit -m "docs: publish public wiki outline from docs/wiki (#16)"\n'
             "git push origin master\n"
+            "## One-shot publish (after wiki exists)\n"
+            "## Acceptance checks\n"
+            "## Fallback\n"
             "Until the `.wiki.git` remote exists\n"
+            "Repository not found\n"
             "Link Check and Markdown Lint. No secrets.\n"
         ),
         "Repo-Stewardship.md": (
@@ -64988,6 +65012,1849 @@ def test_wiki_publish_gate_table_order_pin_after_233() -> None:
         path.write_text(text.replace('pages table must keep publishable page order', 'pages table must keep publishable page list'), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'PUBLISH.md pages table order')
 
+
+# --- TOKENMAXX deepen after #243: wiki/mdlink leftover ---
+
+def test_wiki_mdlink_rejects_yaml_block_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('created: "2026-09-13"', 'created: "2026-09-12"', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'contiguous status/created/purpose block')
+
+def test_wiki_mdlink_rejects_yaml_block_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('created: "2026-09-13"', 'created: "2026-09-12"', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'contiguous status/created/purpose block')
+
+def test_wiki_mdlink_rejects_yaml_block_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('created: "2026-09-13"', 'created: "2026-09-12"', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'contiguous status/created/purpose block')
+
+def test_wiki_mdlink_rejects_yaml_block_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('created: "2026-09-13"', 'created: "2026-09-12"', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'contiguous status/created/purpose block')
+
+def test_wiki_mdlink_rejects_yaml_block_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('created: "2026-09-13"', 'created: "2026-09-12"', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'contiguous status/created/purpose block')
+
+def test_wiki_mdlink_rejects_yaml_block_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('created: "2026-09-13"', 'created: "2026-09-12"', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'contiguous status/created/purpose block')
+
+def test_wiki_mdlink_rejects_yaml_block_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('created: "2026-09-13"', 'created: "2026-09-12"', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'contiguous status/created/purpose block')
+
+def test_wiki_mdlink_rejects_yaml_block_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('created: "2026-09-13"', 'created: "2026-09-12"', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'contiguous status/created/purpose block')
+
+def test_wiki_mdlink_rejects_oneshot_heading_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## One-shot publish (after wiki exists)', '## One-shot publish (after wiki ready)', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## One-shot publish (after wiki exists)')
+
+def test_wiki_mdlink_rejects_oneshot_heading_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## One-shot publish (after wiki exists)', '## One-shot publish (after wiki ready)', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## One-shot publish (after wiki exists)')
+
+def test_wiki_mdlink_rejects_oneshot_heading_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## One-shot publish (after wiki exists)', '## One-shot publish (after wiki ready)', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## One-shot publish (after wiki exists)')
+
+def test_wiki_mdlink_rejects_oneshot_heading_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## One-shot publish (after wiki exists)', '## One-shot publish (after wiki ready)', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## One-shot publish (after wiki exists)')
+
+def test_wiki_mdlink_rejects_oneshot_heading_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## One-shot publish (after wiki exists)', '## One-shot publish (after wiki ready)', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## One-shot publish (after wiki exists)')
+
+def test_wiki_mdlink_rejects_oneshot_heading_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## One-shot publish (after wiki exists)', '## One-shot publish (after wiki ready)', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## One-shot publish (after wiki exists)')
+
+def test_wiki_mdlink_rejects_oneshot_heading_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## One-shot publish (after wiki exists)', '## One-shot publish (after wiki ready)', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## One-shot publish (after wiki exists)')
+
+def test_wiki_mdlink_rejects_oneshot_heading_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## One-shot publish (after wiki exists)', '## One-shot publish (after wiki ready)', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## One-shot publish (after wiki exists)')
+
+def test_wiki_mdlink_rejects_exact_clone_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git clone https://github.com/fuzzywigg/agents-governance.wiki.git /tmp/agents-governance.wiki', 'git clone https://github.com/fuzzywigg/agents-governance.wiki.git /tmp/wiki-publish', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'clone to /tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_rejects_exact_clone_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git clone https://github.com/fuzzywigg/agents-governance.wiki.git /tmp/agents-governance.wiki', 'git clone https://github.com/fuzzywigg/agents-governance.wiki.git /tmp/wiki-publish', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'clone to /tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_rejects_exact_clone_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git clone https://github.com/fuzzywigg/agents-governance.wiki.git /tmp/agents-governance.wiki', 'git clone https://github.com/fuzzywigg/agents-governance.wiki.git /tmp/wiki-publish', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'clone to /tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_rejects_exact_clone_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git clone https://github.com/fuzzywigg/agents-governance.wiki.git /tmp/agents-governance.wiki', 'git clone https://github.com/fuzzywigg/agents-governance.wiki.git /tmp/wiki-publish', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'clone to /tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_rejects_exact_clone_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git clone https://github.com/fuzzywigg/agents-governance.wiki.git /tmp/agents-governance.wiki', 'git clone https://github.com/fuzzywigg/agents-governance.wiki.git /tmp/wiki-publish', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'clone to /tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_rejects_exact_clone_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git clone https://github.com/fuzzywigg/agents-governance.wiki.git /tmp/agents-governance.wiki', 'git clone https://github.com/fuzzywigg/agents-governance.wiki.git /tmp/wiki-publish', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'clone to /tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_rejects_exact_clone_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git clone https://github.com/fuzzywigg/agents-governance.wiki.git /tmp/agents-governance.wiki', 'git clone https://github.com/fuzzywigg/agents-governance.wiki.git /tmp/wiki-publish', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'clone to /tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_rejects_exact_clone_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git clone https://github.com/fuzzywigg/agents-governance.wiki.git /tmp/agents-governance.wiki', 'git clone https://github.com/fuzzywigg/agents-governance.wiki.git /tmp/wiki-publish', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'clone to /tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_rejects_cp_six_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('   /tmp/agents-governance.wiki/', '   /tmp/wiki-publish/', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'contiguous six-page cp list')
+
+def test_wiki_mdlink_rejects_cp_six_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('   /tmp/agents-governance.wiki/', '   /tmp/wiki-publish/', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'contiguous six-page cp list')
+
+def test_wiki_mdlink_rejects_cp_six_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('   /tmp/agents-governance.wiki/', '   /tmp/wiki-publish/', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'contiguous six-page cp list')
+
+def test_wiki_mdlink_rejects_cp_six_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('   /tmp/agents-governance.wiki/', '   /tmp/wiki-publish/', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'contiguous six-page cp list')
+
+def test_wiki_mdlink_rejects_cp_six_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('   /tmp/agents-governance.wiki/', '   /tmp/wiki-publish/', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'contiguous six-page cp list')
+
+def test_wiki_mdlink_rejects_cp_six_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('   /tmp/agents-governance.wiki/', '   /tmp/wiki-publish/', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'contiguous six-page cp list')
+
+def test_wiki_mdlink_rejects_cp_six_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('   /tmp/agents-governance.wiki/', '   /tmp/wiki-publish/', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'contiguous six-page cp list')
+
+def test_wiki_mdlink_rejects_cp_six_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('   /tmp/agents-governance.wiki/', '   /tmp/wiki-publish/', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'contiguous six-page cp list')
+
+def test_wiki_mdlink_rejects_cd_dest_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('cd /tmp/agents-governance.wiki', 'cd /tmp/wiki-publish', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'cd /tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_rejects_cd_dest_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('cd /tmp/agents-governance.wiki', 'cd /tmp/wiki-publish', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'cd /tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_rejects_cd_dest_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('cd /tmp/agents-governance.wiki', 'cd /tmp/wiki-publish', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'cd /tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_rejects_cd_dest_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('cd /tmp/agents-governance.wiki', 'cd /tmp/wiki-publish', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'cd /tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_rejects_cd_dest_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('cd /tmp/agents-governance.wiki', 'cd /tmp/wiki-publish', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'cd /tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_rejects_cd_dest_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('cd /tmp/agents-governance.wiki', 'cd /tmp/wiki-publish', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'cd /tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_rejects_cd_dest_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('cd /tmp/agents-governance.wiki', 'cd /tmp/wiki-publish', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'cd /tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_rejects_cd_dest_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('cd /tmp/agents-governance.wiki', 'cd /tmp/wiki-publish', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'cd /tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_rejects_git_commit_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git commit -m "docs: publish public wiki outline from docs/wiki (#16)"', 'git commit -m "docs: publish public wiki outline from docs/wiki (#00)"', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git commit wiki outline from docs/wiki (#16)')
+
+def test_wiki_mdlink_rejects_git_commit_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git commit -m "docs: publish public wiki outline from docs/wiki (#16)"', 'git commit -m "docs: publish public wiki outline from docs/wiki (#00)"', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git commit wiki outline from docs/wiki (#16)')
+
+def test_wiki_mdlink_rejects_git_commit_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git commit -m "docs: publish public wiki outline from docs/wiki (#16)"', 'git commit -m "docs: publish public wiki outline from docs/wiki (#00)"', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git commit wiki outline from docs/wiki (#16)')
+
+def test_wiki_mdlink_rejects_git_commit_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git commit -m "docs: publish public wiki outline from docs/wiki (#16)"', 'git commit -m "docs: publish public wiki outline from docs/wiki (#00)"', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git commit wiki outline from docs/wiki (#16)')
+
+def test_wiki_mdlink_rejects_git_commit_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git commit -m "docs: publish public wiki outline from docs/wiki (#16)"', 'git commit -m "docs: publish public wiki outline from docs/wiki (#00)"', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git commit wiki outline from docs/wiki (#16)')
+
+def test_wiki_mdlink_rejects_git_commit_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git commit -m "docs: publish public wiki outline from docs/wiki (#16)"', 'git commit -m "docs: publish public wiki outline from docs/wiki (#00)"', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git commit wiki outline from docs/wiki (#16)')
+
+def test_wiki_mdlink_rejects_git_commit_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git commit -m "docs: publish public wiki outline from docs/wiki (#16)"', 'git commit -m "docs: publish public wiki outline from docs/wiki (#00)"', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git commit wiki outline from docs/wiki (#16)')
+
+def test_wiki_mdlink_rejects_git_commit_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git commit -m "docs: publish public wiki outline from docs/wiki (#16)"', 'git commit -m "docs: publish public wiki outline from docs/wiki (#00)"', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git commit wiki outline from docs/wiki (#16)')
+
+def test_wiki_mdlink_rejects_git_push_master_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git push origin master', 'git push origin HEAD', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git push origin master')
+
+def test_wiki_mdlink_rejects_git_push_master_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git push origin master', 'git push origin HEAD', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git push origin master')
+
+def test_wiki_mdlink_rejects_git_push_master_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git push origin master', 'git push origin HEAD', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git push origin master')
+
+def test_wiki_mdlink_rejects_git_push_master_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git push origin master', 'git push origin HEAD', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git push origin master')
+
+def test_wiki_mdlink_rejects_git_push_master_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git push origin master', 'git push origin HEAD', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git push origin master')
+
+def test_wiki_mdlink_rejects_git_push_master_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git push origin master', 'git push origin HEAD', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git push origin master')
+
+def test_wiki_mdlink_rejects_git_push_master_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git push origin master', 'git push origin HEAD', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git push origin master')
+
+def test_wiki_mdlink_rejects_git_push_master_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('git push origin master', 'git push origin HEAD', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'git push origin master')
+
+def test_wiki_mdlink_rejects_acceptance_heading_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## Acceptance checks', '## Acceptance notes', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Acceptance checks')
+
+def test_wiki_mdlink_rejects_acceptance_heading_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## Acceptance checks', '## Acceptance notes', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Acceptance checks')
+
+def test_wiki_mdlink_rejects_acceptance_heading_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## Acceptance checks', '## Acceptance notes', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Acceptance checks')
+
+def test_wiki_mdlink_rejects_acceptance_heading_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## Acceptance checks', '## Acceptance notes', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Acceptance checks')
+
+def test_wiki_mdlink_rejects_acceptance_heading_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## Acceptance checks', '## Acceptance notes', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Acceptance checks')
+
+def test_wiki_mdlink_rejects_acceptance_heading_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## Acceptance checks', '## Acceptance notes', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Acceptance checks')
+
+def test_wiki_mdlink_rejects_acceptance_heading_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## Acceptance checks', '## Acceptance notes', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Acceptance checks')
+
+def test_wiki_mdlink_rejects_acceptance_heading_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## Acceptance checks', '## Acceptance notes', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Acceptance checks')
+
+def test_wiki_mdlink_rejects_fallback_heading_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## Fallback\n', '## Fallbacks\n', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Fallback heading')
+
+def test_wiki_mdlink_rejects_fallback_heading_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## Fallback\n', '## Fallbacks\n', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Fallback heading')
+
+def test_wiki_mdlink_rejects_fallback_heading_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## Fallback\n', '## Fallbacks\n', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Fallback heading')
+
+def test_wiki_mdlink_rejects_fallback_heading_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## Fallback\n', '## Fallbacks\n', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Fallback heading')
+
+def test_wiki_mdlink_rejects_fallback_heading_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## Fallback\n', '## Fallbacks\n', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Fallback heading')
+
+def test_wiki_mdlink_rejects_fallback_heading_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## Fallback\n', '## Fallbacks\n', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Fallback heading')
+
+def test_wiki_mdlink_rejects_fallback_heading_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## Fallback\n', '## Fallbacks\n', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Fallback heading')
+
+def test_wiki_mdlink_rejects_fallback_heading_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('## Fallback\n', '## Fallbacks\n', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, '## Fallback heading')
+
+def test_wiki_mdlink_rejects_repo_not_found_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('Repository not found', 'repository missing', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Repository not found')
+
+def test_wiki_mdlink_rejects_repo_not_found_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('Repository not found', 'repository missing', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Repository not found')
+
+def test_wiki_mdlink_rejects_repo_not_found_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('Repository not found', 'repository missing', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Repository not found')
+
+def test_wiki_mdlink_rejects_repo_not_found_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('Repository not found', 'repository missing', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Repository not found')
+
+def test_wiki_mdlink_rejects_repo_not_found_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('Repository not found', 'repository missing', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Repository not found')
+
+def test_wiki_mdlink_rejects_repo_not_found_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('Repository not found', 'repository missing', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Repository not found')
+
+def test_wiki_mdlink_rejects_repo_not_found_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('Repository not found', 'repository missing', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Repository not found')
+
+def test_wiki_mdlink_rejects_repo_not_found_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('Repository not found', 'repository missing', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Repository not found')
+
+def test_wiki_mdlink_rejects_landing_cell_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('| `Home.md` | Home (landing) |', '| `Home.md` | Home (index) |', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Home (landing) cell')
+
+def test_wiki_mdlink_rejects_landing_cell_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('| `Home.md` | Home (landing) |', '| `Home.md` | Home (index) |', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Home (landing) cell')
+
+def test_wiki_mdlink_rejects_landing_cell_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('| `Home.md` | Home (landing) |', '| `Home.md` | Home (index) |', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Home (landing) cell')
+
+def test_wiki_mdlink_rejects_landing_cell_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('| `Home.md` | Home (landing) |', '| `Home.md` | Home (index) |', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Home (landing) cell')
+
+def test_wiki_mdlink_rejects_landing_cell_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('| `Home.md` | Home (landing) |', '| `Home.md` | Home (index) |', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Home (landing) cell')
+
+def test_wiki_mdlink_rejects_landing_cell_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('| `Home.md` | Home (landing) |', '| `Home.md` | Home (index) |', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Home (landing) cell')
+
+def test_wiki_mdlink_rejects_landing_cell_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('| `Home.md` | Home (landing) |', '| `Home.md` | Home (index) |', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Home (landing) cell')
+
+def test_wiki_mdlink_rejects_landing_cell_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['PUBLISH.md'] = pages['PUBLISH.md'].replace('| `Home.md` | Home (landing) |', '| `Home.md` | Home (index) |', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'Home (landing) cell')
+
+def test_wiki_mdlink_rejects_home_operator_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['Home.md'] = pages['Home.md'].replace('](PUBLISH.md)', '](PUBLISH.txt)', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'operator PUBLISH.md link')
+
+def test_wiki_mdlink_rejects_home_operator_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['Home.md'] = pages['Home.md'].replace('](PUBLISH.md)', '](PUBLISH.txt)', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'operator PUBLISH.md link')
+
+def test_wiki_mdlink_rejects_home_operator_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['Home.md'] = pages['Home.md'].replace('](PUBLISH.md)', '](PUBLISH.txt)', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'operator PUBLISH.md link')
+
+def test_wiki_mdlink_rejects_home_operator_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['Home.md'] = pages['Home.md'].replace('](PUBLISH.md)', '](PUBLISH.txt)', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'operator PUBLISH.md link')
+
+def test_wiki_mdlink_rejects_home_operator_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['Home.md'] = pages['Home.md'].replace('](PUBLISH.md)', '](PUBLISH.txt)', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'operator PUBLISH.md link')
+
+def test_wiki_mdlink_rejects_home_operator_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['Home.md'] = pages['Home.md'].replace('](PUBLISH.md)', '](PUBLISH.txt)', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'operator PUBLISH.md link')
+
+def test_wiki_mdlink_rejects_home_operator_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['Home.md'] = pages['Home.md'].replace('](PUBLISH.md)', '](PUBLISH.txt)', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'operator PUBLISH.md link')
+
+def test_wiki_mdlink_rejects_home_operator_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages: dict[str, str]) -> None:
+            pages['Home.md'] = pages['Home.md'].replace('](PUBLISH.md)', '](PUBLISH.txt)', 1)
+
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(scripts / "check_wiki_outline.py", tmp_path, 'operator PUBLISH.md link')
+
+def test_wiki_mdlink_gate_leftover_doc_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'Wiki/mdlink leftover after #243' in text
+        path.write_text(text.replace('Wiki/mdlink leftover after #243', 'Wiki/mdlink leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover after #243')
+
+def test_wiki_mdlink_gate_leftover_doc_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'Wiki/mdlink leftover after #243' in text
+        path.write_text(text.replace('Wiki/mdlink leftover after #243', 'Wiki/mdlink leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover after #243')
+
+def test_wiki_mdlink_gate_leftover_doc_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'Wiki/mdlink leftover after #243' in text
+        path.write_text(text.replace('Wiki/mdlink leftover after #243', 'Wiki/mdlink leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover after #243')
+
+def test_wiki_mdlink_gate_leftover_doc_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'Wiki/mdlink leftover after #243' in text
+        path.write_text(text.replace('Wiki/mdlink leftover after #243', 'Wiki/mdlink leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover after #243')
+
+def test_wiki_mdlink_gate_leftover_doc_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'Wiki/mdlink leftover after #243' in text
+        path.write_text(text.replace('Wiki/mdlink leftover after #243', 'Wiki/mdlink leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover after #243')
+
+def test_wiki_mdlink_gate_leftover_doc_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'Wiki/mdlink leftover after #243' in text
+        path.write_text(text.replace('Wiki/mdlink leftover after #243', 'Wiki/mdlink leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover after #243')
+
+def test_wiki_mdlink_gate_leftover_doc_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'Wiki/mdlink leftover after #243' in text
+        path.write_text(text.replace('Wiki/mdlink leftover after #243', 'Wiki/mdlink leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover after #243')
+
+def test_wiki_mdlink_gate_leftover_doc_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'Wiki/mdlink leftover after #243' in text
+        path.write_text(text.replace('Wiki/mdlink leftover after #243', 'Wiki/mdlink leftover after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Wiki/mdlink leftover after #243')
+
+def test_wiki_mdlink_gate_not_mdlink_239_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT md/link residual layouts #239' in text
+        path.write_text(text.replace('NOT md/link residual layouts #239', 'NOT md/link residual layouts #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT md/link residual layouts #239')
+
+def test_wiki_mdlink_gate_not_mdlink_239_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT md/link residual layouts #239' in text
+        path.write_text(text.replace('NOT md/link residual layouts #239', 'NOT md/link residual layouts #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT md/link residual layouts #239')
+
+def test_wiki_mdlink_gate_not_mdlink_239_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT md/link residual layouts #239' in text
+        path.write_text(text.replace('NOT md/link residual layouts #239', 'NOT md/link residual layouts #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT md/link residual layouts #239')
+
+def test_wiki_mdlink_gate_not_mdlink_239_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT md/link residual layouts #239' in text
+        path.write_text(text.replace('NOT md/link residual layouts #239', 'NOT md/link residual layouts #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT md/link residual layouts #239')
+
+def test_wiki_mdlink_gate_not_mdlink_239_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT md/link residual layouts #239' in text
+        path.write_text(text.replace('NOT md/link residual layouts #239', 'NOT md/link residual layouts #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT md/link residual layouts #239')
+
+def test_wiki_mdlink_gate_not_mdlink_239_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT md/link residual layouts #239' in text
+        path.write_text(text.replace('NOT md/link residual layouts #239', 'NOT md/link residual layouts #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT md/link residual layouts #239')
+
+def test_wiki_mdlink_gate_not_mdlink_239_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT md/link residual layouts #239' in text
+        path.write_text(text.replace('NOT md/link residual layouts #239', 'NOT md/link residual layouts #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT md/link residual layouts #239')
+
+def test_wiki_mdlink_gate_not_mdlink_239_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT md/link residual layouts #239' in text
+        path.write_text(text.replace('NOT md/link residual layouts #239', 'NOT md/link residual layouts #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT md/link residual layouts #239')
+
+def test_wiki_mdlink_gate_oneshot_pin_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert '## One-shot publish (after wiki exists)' in text
+        path.write_text(text.replace('## One-shot publish (after wiki exists)', '## One-shot publish (after wiki ready)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '## One-shot publish heading')
+
+def test_wiki_mdlink_gate_oneshot_pin_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert '## One-shot publish (after wiki exists)' in text
+        path.write_text(text.replace('## One-shot publish (after wiki exists)', '## One-shot publish (after wiki ready)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '## One-shot publish heading')
+
+def test_wiki_mdlink_gate_oneshot_pin_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert '## One-shot publish (after wiki exists)' in text
+        path.write_text(text.replace('## One-shot publish (after wiki exists)', '## One-shot publish (after wiki ready)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '## One-shot publish heading')
+
+def test_wiki_mdlink_gate_oneshot_pin_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert '## One-shot publish (after wiki exists)' in text
+        path.write_text(text.replace('## One-shot publish (after wiki exists)', '## One-shot publish (after wiki ready)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '## One-shot publish heading')
+
+def test_wiki_mdlink_gate_oneshot_pin_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert '## One-shot publish (after wiki exists)' in text
+        path.write_text(text.replace('## One-shot publish (after wiki exists)', '## One-shot publish (after wiki ready)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '## One-shot publish heading')
+
+def test_wiki_mdlink_gate_oneshot_pin_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert '## One-shot publish (after wiki exists)' in text
+        path.write_text(text.replace('## One-shot publish (after wiki exists)', '## One-shot publish (after wiki ready)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '## One-shot publish heading')
+
+def test_wiki_mdlink_gate_oneshot_pin_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert '## One-shot publish (after wiki exists)' in text
+        path.write_text(text.replace('## One-shot publish (after wiki exists)', '## One-shot publish (after wiki ready)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '## One-shot publish heading')
+
+def test_wiki_mdlink_gate_oneshot_pin_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert '## One-shot publish (after wiki exists)' in text
+        path.write_text(text.replace('## One-shot publish (after wiki exists)', '## One-shot publish (after wiki ready)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '## One-shot publish heading')
+
+def test_wiki_mdlink_gate_clone_dest_pin_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert '/tmp/agents-governance.wiki' in text
+        path.write_text(text.replace('/tmp/agents-governance.wiki', '/tmp/wiki-publish'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '/tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_gate_clone_dest_pin_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert '/tmp/agents-governance.wiki' in text
+        path.write_text(text.replace('/tmp/agents-governance.wiki', '/tmp/wiki-publish'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '/tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_gate_clone_dest_pin_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert '/tmp/agents-governance.wiki' in text
+        path.write_text(text.replace('/tmp/agents-governance.wiki', '/tmp/wiki-publish'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '/tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_gate_clone_dest_pin_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert '/tmp/agents-governance.wiki' in text
+        path.write_text(text.replace('/tmp/agents-governance.wiki', '/tmp/wiki-publish'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '/tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_gate_clone_dest_pin_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert '/tmp/agents-governance.wiki' in text
+        path.write_text(text.replace('/tmp/agents-governance.wiki', '/tmp/wiki-publish'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '/tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_gate_clone_dest_pin_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert '/tmp/agents-governance.wiki' in text
+        path.write_text(text.replace('/tmp/agents-governance.wiki', '/tmp/wiki-publish'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '/tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_gate_clone_dest_pin_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert '/tmp/agents-governance.wiki' in text
+        path.write_text(text.replace('/tmp/agents-governance.wiki', '/tmp/wiki-publish'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '/tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_gate_clone_dest_pin_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert '/tmp/agents-governance.wiki' in text
+        path.write_text(text.replace('/tmp/agents-governance.wiki', '/tmp/wiki-publish'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '/tmp/agents-governance.wiki')
+
+def test_wiki_mdlink_gate_git_commit_pin_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'git commit -m "docs: publish public wiki outline from docs/wiki (#16)"' in text
+        path.write_text(text.replace('git commit -m "docs: publish public wiki outline from docs/wiki (#16)"', 'git commit -m "docs: publish public wiki outline from docs/wiki (#00)"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'git commit wiki outline from docs/wiki (#16)')
+
+def test_wiki_mdlink_gate_git_commit_pin_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'git commit -m "docs: publish public wiki outline from docs/wiki (#16)"' in text
+        path.write_text(text.replace('git commit -m "docs: publish public wiki outline from docs/wiki (#16)"', 'git commit -m "docs: publish public wiki outline from docs/wiki (#00)"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'git commit wiki outline from docs/wiki (#16)')
+
+def test_wiki_mdlink_gate_git_commit_pin_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'git commit -m "docs: publish public wiki outline from docs/wiki (#16)"' in text
+        path.write_text(text.replace('git commit -m "docs: publish public wiki outline from docs/wiki (#16)"', 'git commit -m "docs: publish public wiki outline from docs/wiki (#00)"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'git commit wiki outline from docs/wiki (#16)')
+
+def test_wiki_mdlink_gate_git_commit_pin_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'git commit -m "docs: publish public wiki outline from docs/wiki (#16)"' in text
+        path.write_text(text.replace('git commit -m "docs: publish public wiki outline from docs/wiki (#16)"', 'git commit -m "docs: publish public wiki outline from docs/wiki (#00)"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'git commit wiki outline from docs/wiki (#16)')
+
+def test_wiki_mdlink_gate_git_commit_pin_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'git commit -m "docs: publish public wiki outline from docs/wiki (#16)"' in text
+        path.write_text(text.replace('git commit -m "docs: publish public wiki outline from docs/wiki (#16)"', 'git commit -m "docs: publish public wiki outline from docs/wiki (#00)"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'git commit wiki outline from docs/wiki (#16)')
+
+def test_wiki_mdlink_gate_git_commit_pin_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'git commit -m "docs: publish public wiki outline from docs/wiki (#16)"' in text
+        path.write_text(text.replace('git commit -m "docs: publish public wiki outline from docs/wiki (#16)"', 'git commit -m "docs: publish public wiki outline from docs/wiki (#00)"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'git commit wiki outline from docs/wiki (#16)')
+
+def test_wiki_mdlink_gate_git_commit_pin_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'git commit -m "docs: publish public wiki outline from docs/wiki (#16)"' in text
+        path.write_text(text.replace('git commit -m "docs: publish public wiki outline from docs/wiki (#16)"', 'git commit -m "docs: publish public wiki outline from docs/wiki (#00)"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'git commit wiki outline from docs/wiki (#16)')
+
+def test_wiki_mdlink_gate_git_commit_pin_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'git commit -m "docs: publish public wiki outline from docs/wiki (#16)"' in text
+        path.write_text(text.replace('git commit -m "docs: publish public wiki outline from docs/wiki (#16)"', 'git commit -m "docs: publish public wiki outline from docs/wiki (#00)"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'git commit wiki outline from docs/wiki (#16)')
+
+def test_wiki_mdlink_gate_landing_pin_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'Home (landing)' in text
+        path.write_text(text.replace('Home (landing)', 'Home (index)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Home (landing) cell')
+
+def test_wiki_mdlink_gate_landing_pin_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'Home (landing)' in text
+        path.write_text(text.replace('Home (landing)', 'Home (index)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Home (landing) cell')
+
+def test_wiki_mdlink_gate_landing_pin_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'Home (landing)' in text
+        path.write_text(text.replace('Home (landing)', 'Home (index)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Home (landing) cell')
+
+def test_wiki_mdlink_gate_landing_pin_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'Home (landing)' in text
+        path.write_text(text.replace('Home (landing)', 'Home (index)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Home (landing) cell')
+
+def test_wiki_mdlink_gate_landing_pin_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'Home (landing)' in text
+        path.write_text(text.replace('Home (landing)', 'Home (index)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Home (landing) cell')
+
+def test_wiki_mdlink_gate_landing_pin_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'Home (landing)' in text
+        path.write_text(text.replace('Home (landing)', 'Home (index)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Home (landing) cell')
+
+def test_wiki_mdlink_gate_landing_pin_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'Home (landing)' in text
+        path.write_text(text.replace('Home (landing)', 'Home (index)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Home (landing) cell')
+
+def test_wiki_mdlink_gate_landing_pin_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / 'scripts/check_wiki_outline.py'
+        text = path.read_text(encoding="utf-8")
+        assert 'Home (landing)' in text
+        path.write_text(text.replace('Home (landing)', 'Home (index)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Home (landing) cell')
+
+def test_wiki_mdlink_rejects_link_concurrency_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n\n  cancel-in-progress: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency block')
+
+def test_wiki_mdlink_rejects_link_concurrency_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n\n  cancel-in-progress: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency block')
+
+def test_wiki_mdlink_rejects_link_concurrency_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n\n  cancel-in-progress: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency block')
+
+def test_wiki_mdlink_rejects_link_concurrency_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n\n  cancel-in-progress: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency block')
+
+def test_wiki_mdlink_rejects_link_concurrency_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n\n  cancel-in-progress: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency block')
+
+def test_wiki_mdlink_rejects_link_concurrency_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n\n  cancel-in-progress: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency block')
+
+def test_wiki_mdlink_rejects_link_concurrency_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n\n  cancel-in-progress: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency block')
+
+def test_wiki_mdlink_rejects_link_concurrency_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: link-check-${{ github.workflow }}-${{ github.ref }}\n\n  cancel-in-progress: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency block')
+
+def test_wiki_mdlink_rejects_lint_concurrency_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n\n  cancel-in-progress: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency block')
+
+def test_wiki_mdlink_rejects_lint_concurrency_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n\n  cancel-in-progress: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency block')
+
+def test_wiki_mdlink_rejects_lint_concurrency_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n\n  cancel-in-progress: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency block')
+
+def test_wiki_mdlink_rejects_lint_concurrency_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n\n  cancel-in-progress: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency block')
+
+def test_wiki_mdlink_rejects_lint_concurrency_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n\n  cancel-in-progress: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency block')
+
+def test_wiki_mdlink_rejects_lint_concurrency_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n\n  cancel-in-progress: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency block')
+
+def test_wiki_mdlink_rejects_lint_concurrency_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n\n  cancel-in-progress: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency block')
+
+def test_wiki_mdlink_rejects_lint_concurrency_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true' in text
+        path.write_text(text.replace('concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true', 'concurrency:\n  group: markdown-lint-${{ github.workflow }}-${{ github.ref }}\n\n  cancel-in-progress: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous concurrency block')
+
+def test_wiki_mdlink_rejects_link_job_header_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'jobs:\n  link-check:\n    runs-on: ubuntu-latest\n    timeout-minutes: 20\n    permissions:\n      contents: read' in text
+        path.write_text(text.replace('jobs:\n  link-check:\n    runs-on: ubuntu-latest\n    timeout-minutes: 20\n    permissions:\n      contents: read', 'jobs:\n  link-check:\n    runs-on: ubuntu-latest\n\n    timeout-minutes: 20\n    permissions:\n      contents: read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous job header')
+
+def test_wiki_mdlink_rejects_link_job_header_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'jobs:\n  link-check:\n    runs-on: ubuntu-latest\n    timeout-minutes: 20\n    permissions:\n      contents: read' in text
+        path.write_text(text.replace('jobs:\n  link-check:\n    runs-on: ubuntu-latest\n    timeout-minutes: 20\n    permissions:\n      contents: read', 'jobs:\n  link-check:\n    runs-on: ubuntu-latest\n\n    timeout-minutes: 20\n    permissions:\n      contents: read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous job header')
+
+def test_wiki_mdlink_rejects_link_job_header_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'jobs:\n  link-check:\n    runs-on: ubuntu-latest\n    timeout-minutes: 20\n    permissions:\n      contents: read' in text
+        path.write_text(text.replace('jobs:\n  link-check:\n    runs-on: ubuntu-latest\n    timeout-minutes: 20\n    permissions:\n      contents: read', 'jobs:\n  link-check:\n    runs-on: ubuntu-latest\n\n    timeout-minutes: 20\n    permissions:\n      contents: read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous job header')
+
+def test_wiki_mdlink_rejects_link_job_header_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'jobs:\n  link-check:\n    runs-on: ubuntu-latest\n    timeout-minutes: 20\n    permissions:\n      contents: read' in text
+        path.write_text(text.replace('jobs:\n  link-check:\n    runs-on: ubuntu-latest\n    timeout-minutes: 20\n    permissions:\n      contents: read', 'jobs:\n  link-check:\n    runs-on: ubuntu-latest\n\n    timeout-minutes: 20\n    permissions:\n      contents: read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous job header')
+
+def test_wiki_mdlink_rejects_link_job_header_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'jobs:\n  link-check:\n    runs-on: ubuntu-latest\n    timeout-minutes: 20\n    permissions:\n      contents: read' in text
+        path.write_text(text.replace('jobs:\n  link-check:\n    runs-on: ubuntu-latest\n    timeout-minutes: 20\n    permissions:\n      contents: read', 'jobs:\n  link-check:\n    runs-on: ubuntu-latest\n\n    timeout-minutes: 20\n    permissions:\n      contents: read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous job header')
+
+def test_wiki_mdlink_rejects_link_job_header_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'jobs:\n  link-check:\n    runs-on: ubuntu-latest\n    timeout-minutes: 20\n    permissions:\n      contents: read' in text
+        path.write_text(text.replace('jobs:\n  link-check:\n    runs-on: ubuntu-latest\n    timeout-minutes: 20\n    permissions:\n      contents: read', 'jobs:\n  link-check:\n    runs-on: ubuntu-latest\n\n    timeout-minutes: 20\n    permissions:\n      contents: read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous job header')
+
+def test_wiki_mdlink_rejects_link_job_header_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'jobs:\n  link-check:\n    runs-on: ubuntu-latest\n    timeout-minutes: 20\n    permissions:\n      contents: read' in text
+        path.write_text(text.replace('jobs:\n  link-check:\n    runs-on: ubuntu-latest\n    timeout-minutes: 20\n    permissions:\n      contents: read', 'jobs:\n  link-check:\n    runs-on: ubuntu-latest\n\n    timeout-minutes: 20\n    permissions:\n      contents: read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous job header')
+
+def test_wiki_mdlink_rejects_link_job_header_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'jobs:\n  link-check:\n    runs-on: ubuntu-latest\n    timeout-minutes: 20\n    permissions:\n      contents: read' in text
+        path.write_text(text.replace('jobs:\n  link-check:\n    runs-on: ubuntu-latest\n    timeout-minutes: 20\n    permissions:\n      contents: read', 'jobs:\n  link-check:\n    runs-on: ubuntu-latest\n\n    timeout-minutes: 20\n    permissions:\n      contents: read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous job header')
+
+def test_wiki_mdlink_rejects_lint_job_header_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'jobs:\n  lint:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    permissions:\n      contents: read' in text
+        path.write_text(text.replace('jobs:\n  lint:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    permissions:\n      contents: read', 'jobs:\n  lint:\n    runs-on: ubuntu-latest\n\n    timeout-minutes: 10\n    permissions:\n      contents: read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous job header')
+
+def test_wiki_mdlink_rejects_lint_job_header_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'jobs:\n  lint:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    permissions:\n      contents: read' in text
+        path.write_text(text.replace('jobs:\n  lint:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    permissions:\n      contents: read', 'jobs:\n  lint:\n    runs-on: ubuntu-latest\n\n    timeout-minutes: 10\n    permissions:\n      contents: read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous job header')
+
+def test_wiki_mdlink_rejects_lint_job_header_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'jobs:\n  lint:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    permissions:\n      contents: read' in text
+        path.write_text(text.replace('jobs:\n  lint:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    permissions:\n      contents: read', 'jobs:\n  lint:\n    runs-on: ubuntu-latest\n\n    timeout-minutes: 10\n    permissions:\n      contents: read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous job header')
+
+def test_wiki_mdlink_rejects_lint_job_header_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'jobs:\n  lint:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    permissions:\n      contents: read' in text
+        path.write_text(text.replace('jobs:\n  lint:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    permissions:\n      contents: read', 'jobs:\n  lint:\n    runs-on: ubuntu-latest\n\n    timeout-minutes: 10\n    permissions:\n      contents: read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous job header')
+
+def test_wiki_mdlink_rejects_lint_job_header_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'jobs:\n  lint:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    permissions:\n      contents: read' in text
+        path.write_text(text.replace('jobs:\n  lint:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    permissions:\n      contents: read', 'jobs:\n  lint:\n    runs-on: ubuntu-latest\n\n    timeout-minutes: 10\n    permissions:\n      contents: read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous job header')
+
+def test_wiki_mdlink_rejects_lint_job_header_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'jobs:\n  lint:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    permissions:\n      contents: read' in text
+        path.write_text(text.replace('jobs:\n  lint:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    permissions:\n      contents: read', 'jobs:\n  lint:\n    runs-on: ubuntu-latest\n\n    timeout-minutes: 10\n    permissions:\n      contents: read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous job header')
+
+def test_wiki_mdlink_rejects_lint_job_header_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'jobs:\n  lint:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    permissions:\n      contents: read' in text
+        path.write_text(text.replace('jobs:\n  lint:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    permissions:\n      contents: read', 'jobs:\n  lint:\n    runs-on: ubuntu-latest\n\n    timeout-minutes: 10\n    permissions:\n      contents: read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous job header')
+
+def test_wiki_mdlink_rejects_lint_job_header_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'jobs:\n  lint:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    permissions:\n      contents: read' in text
+        path.write_text(text.replace('jobs:\n  lint:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    permissions:\n      contents: read', 'jobs:\n  lint:\n    runs-on: ubuntu-latest\n\n    timeout-minutes: 10\n    permissions:\n      contents: read', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous job header')
+
+def test_wiki_mdlink_rejects_fail_true_adj_pad0_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '            "**/*.md"\n          fail: true' in text
+        path.write_text(text.replace('            "**/*.md"\n          fail: true', '            "**/*.md"\n\n          fail: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact **/*.md then fail: true adjacency')
+
+def test_wiki_mdlink_rejects_fail_true_adj_pad1_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '            "**/*.md"\n          fail: true' in text
+        path.write_text(text.replace('            "**/*.md"\n          fail: true', '            "**/*.md"\n\n          fail: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact **/*.md then fail: true adjacency')
+
+def test_wiki_mdlink_rejects_fail_true_adj_pad2_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '            "**/*.md"\n          fail: true' in text
+        path.write_text(text.replace('            "**/*.md"\n          fail: true', '            "**/*.md"\n\n          fail: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact **/*.md then fail: true adjacency')
+
+def test_wiki_mdlink_rejects_fail_true_adj_pad3_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '            "**/*.md"\n          fail: true' in text
+        path.write_text(text.replace('            "**/*.md"\n          fail: true', '            "**/*.md"\n\n          fail: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact **/*.md then fail: true adjacency')
+
+def test_wiki_mdlink_rejects_fail_true_adj_pad4_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '            "**/*.md"\n          fail: true' in text
+        path.write_text(text.replace('            "**/*.md"\n          fail: true', '            "**/*.md"\n\n          fail: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact **/*.md then fail: true adjacency')
+
+def test_wiki_mdlink_rejects_fail_true_adj_pad5_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '            "**/*.md"\n          fail: true' in text
+        path.write_text(text.replace('            "**/*.md"\n          fail: true', '            "**/*.md"\n\n          fail: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact **/*.md then fail: true adjacency')
+
+def test_wiki_mdlink_rejects_fail_true_adj_still_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '            "**/*.md"\n          fail: true' in text
+        path.write_text(text.replace('            "**/*.md"\n          fail: true', '            "**/*.md"\n\n          fail: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact **/*.md then fail: true adjacency')
+
+def test_wiki_mdlink_rejects_fail_true_adj_after_243() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '            "**/*.md"\n          fail: true' in text
+        path.write_text(text.replace('            "**/*.md"\n          fail: true', '            "**/*.md"\n\n          fail: true', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact **/*.md then fail: true adjacency')
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -69892,6 +71759,190 @@ def main() -> int:
         test_wiki_publish_gate_table_order_pin_pad5_after_233,
         test_wiki_publish_gate_table_order_pin_still_after_233,
         test_wiki_publish_gate_table_order_pin_after_233,
+        test_wiki_mdlink_rejects_yaml_block_pad0_after_243,
+        test_wiki_mdlink_rejects_yaml_block_pad1_after_243,
+        test_wiki_mdlink_rejects_yaml_block_pad2_after_243,
+        test_wiki_mdlink_rejects_yaml_block_pad3_after_243,
+        test_wiki_mdlink_rejects_yaml_block_pad4_after_243,
+        test_wiki_mdlink_rejects_yaml_block_pad5_after_243,
+        test_wiki_mdlink_rejects_yaml_block_still_after_243,
+        test_wiki_mdlink_rejects_yaml_block_after_243,
+        test_wiki_mdlink_rejects_oneshot_heading_pad0_after_243,
+        test_wiki_mdlink_rejects_oneshot_heading_pad1_after_243,
+        test_wiki_mdlink_rejects_oneshot_heading_pad2_after_243,
+        test_wiki_mdlink_rejects_oneshot_heading_pad3_after_243,
+        test_wiki_mdlink_rejects_oneshot_heading_pad4_after_243,
+        test_wiki_mdlink_rejects_oneshot_heading_pad5_after_243,
+        test_wiki_mdlink_rejects_oneshot_heading_still_after_243,
+        test_wiki_mdlink_rejects_oneshot_heading_after_243,
+        test_wiki_mdlink_rejects_exact_clone_pad0_after_243,
+        test_wiki_mdlink_rejects_exact_clone_pad1_after_243,
+        test_wiki_mdlink_rejects_exact_clone_pad2_after_243,
+        test_wiki_mdlink_rejects_exact_clone_pad3_after_243,
+        test_wiki_mdlink_rejects_exact_clone_pad4_after_243,
+        test_wiki_mdlink_rejects_exact_clone_pad5_after_243,
+        test_wiki_mdlink_rejects_exact_clone_still_after_243,
+        test_wiki_mdlink_rejects_exact_clone_after_243,
+        test_wiki_mdlink_rejects_cp_six_pad0_after_243,
+        test_wiki_mdlink_rejects_cp_six_pad1_after_243,
+        test_wiki_mdlink_rejects_cp_six_pad2_after_243,
+        test_wiki_mdlink_rejects_cp_six_pad3_after_243,
+        test_wiki_mdlink_rejects_cp_six_pad4_after_243,
+        test_wiki_mdlink_rejects_cp_six_pad5_after_243,
+        test_wiki_mdlink_rejects_cp_six_still_after_243,
+        test_wiki_mdlink_rejects_cp_six_after_243,
+        test_wiki_mdlink_rejects_cd_dest_pad0_after_243,
+        test_wiki_mdlink_rejects_cd_dest_pad1_after_243,
+        test_wiki_mdlink_rejects_cd_dest_pad2_after_243,
+        test_wiki_mdlink_rejects_cd_dest_pad3_after_243,
+        test_wiki_mdlink_rejects_cd_dest_pad4_after_243,
+        test_wiki_mdlink_rejects_cd_dest_pad5_after_243,
+        test_wiki_mdlink_rejects_cd_dest_still_after_243,
+        test_wiki_mdlink_rejects_cd_dest_after_243,
+        test_wiki_mdlink_rejects_git_commit_pad0_after_243,
+        test_wiki_mdlink_rejects_git_commit_pad1_after_243,
+        test_wiki_mdlink_rejects_git_commit_pad2_after_243,
+        test_wiki_mdlink_rejects_git_commit_pad3_after_243,
+        test_wiki_mdlink_rejects_git_commit_pad4_after_243,
+        test_wiki_mdlink_rejects_git_commit_pad5_after_243,
+        test_wiki_mdlink_rejects_git_commit_still_after_243,
+        test_wiki_mdlink_rejects_git_commit_after_243,
+        test_wiki_mdlink_rejects_git_push_master_pad0_after_243,
+        test_wiki_mdlink_rejects_git_push_master_pad1_after_243,
+        test_wiki_mdlink_rejects_git_push_master_pad2_after_243,
+        test_wiki_mdlink_rejects_git_push_master_pad3_after_243,
+        test_wiki_mdlink_rejects_git_push_master_pad4_after_243,
+        test_wiki_mdlink_rejects_git_push_master_pad5_after_243,
+        test_wiki_mdlink_rejects_git_push_master_still_after_243,
+        test_wiki_mdlink_rejects_git_push_master_after_243,
+        test_wiki_mdlink_rejects_acceptance_heading_pad0_after_243,
+        test_wiki_mdlink_rejects_acceptance_heading_pad1_after_243,
+        test_wiki_mdlink_rejects_acceptance_heading_pad2_after_243,
+        test_wiki_mdlink_rejects_acceptance_heading_pad3_after_243,
+        test_wiki_mdlink_rejects_acceptance_heading_pad4_after_243,
+        test_wiki_mdlink_rejects_acceptance_heading_pad5_after_243,
+        test_wiki_mdlink_rejects_acceptance_heading_still_after_243,
+        test_wiki_mdlink_rejects_acceptance_heading_after_243,
+        test_wiki_mdlink_rejects_fallback_heading_pad0_after_243,
+        test_wiki_mdlink_rejects_fallback_heading_pad1_after_243,
+        test_wiki_mdlink_rejects_fallback_heading_pad2_after_243,
+        test_wiki_mdlink_rejects_fallback_heading_pad3_after_243,
+        test_wiki_mdlink_rejects_fallback_heading_pad4_after_243,
+        test_wiki_mdlink_rejects_fallback_heading_pad5_after_243,
+        test_wiki_mdlink_rejects_fallback_heading_still_after_243,
+        test_wiki_mdlink_rejects_fallback_heading_after_243,
+        test_wiki_mdlink_rejects_repo_not_found_pad0_after_243,
+        test_wiki_mdlink_rejects_repo_not_found_pad1_after_243,
+        test_wiki_mdlink_rejects_repo_not_found_pad2_after_243,
+        test_wiki_mdlink_rejects_repo_not_found_pad3_after_243,
+        test_wiki_mdlink_rejects_repo_not_found_pad4_after_243,
+        test_wiki_mdlink_rejects_repo_not_found_pad5_after_243,
+        test_wiki_mdlink_rejects_repo_not_found_still_after_243,
+        test_wiki_mdlink_rejects_repo_not_found_after_243,
+        test_wiki_mdlink_rejects_landing_cell_pad0_after_243,
+        test_wiki_mdlink_rejects_landing_cell_pad1_after_243,
+        test_wiki_mdlink_rejects_landing_cell_pad2_after_243,
+        test_wiki_mdlink_rejects_landing_cell_pad3_after_243,
+        test_wiki_mdlink_rejects_landing_cell_pad4_after_243,
+        test_wiki_mdlink_rejects_landing_cell_pad5_after_243,
+        test_wiki_mdlink_rejects_landing_cell_still_after_243,
+        test_wiki_mdlink_rejects_landing_cell_after_243,
+        test_wiki_mdlink_rejects_home_operator_pad0_after_243,
+        test_wiki_mdlink_rejects_home_operator_pad1_after_243,
+        test_wiki_mdlink_rejects_home_operator_pad2_after_243,
+        test_wiki_mdlink_rejects_home_operator_pad3_after_243,
+        test_wiki_mdlink_rejects_home_operator_pad4_after_243,
+        test_wiki_mdlink_rejects_home_operator_pad5_after_243,
+        test_wiki_mdlink_rejects_home_operator_still_after_243,
+        test_wiki_mdlink_rejects_home_operator_after_243,
+        test_wiki_mdlink_gate_leftover_doc_pad0_after_243,
+        test_wiki_mdlink_gate_leftover_doc_pad1_after_243,
+        test_wiki_mdlink_gate_leftover_doc_pad2_after_243,
+        test_wiki_mdlink_gate_leftover_doc_pad3_after_243,
+        test_wiki_mdlink_gate_leftover_doc_pad4_after_243,
+        test_wiki_mdlink_gate_leftover_doc_pad5_after_243,
+        test_wiki_mdlink_gate_leftover_doc_still_after_243,
+        test_wiki_mdlink_gate_leftover_doc_after_243,
+        test_wiki_mdlink_gate_not_mdlink_239_pad0_after_243,
+        test_wiki_mdlink_gate_not_mdlink_239_pad1_after_243,
+        test_wiki_mdlink_gate_not_mdlink_239_pad2_after_243,
+        test_wiki_mdlink_gate_not_mdlink_239_pad3_after_243,
+        test_wiki_mdlink_gate_not_mdlink_239_pad4_after_243,
+        test_wiki_mdlink_gate_not_mdlink_239_pad5_after_243,
+        test_wiki_mdlink_gate_not_mdlink_239_still_after_243,
+        test_wiki_mdlink_gate_not_mdlink_239_after_243,
+        test_wiki_mdlink_gate_oneshot_pin_pad0_after_243,
+        test_wiki_mdlink_gate_oneshot_pin_pad1_after_243,
+        test_wiki_mdlink_gate_oneshot_pin_pad2_after_243,
+        test_wiki_mdlink_gate_oneshot_pin_pad3_after_243,
+        test_wiki_mdlink_gate_oneshot_pin_pad4_after_243,
+        test_wiki_mdlink_gate_oneshot_pin_pad5_after_243,
+        test_wiki_mdlink_gate_oneshot_pin_still_after_243,
+        test_wiki_mdlink_gate_oneshot_pin_after_243,
+        test_wiki_mdlink_gate_clone_dest_pin_pad0_after_243,
+        test_wiki_mdlink_gate_clone_dest_pin_pad1_after_243,
+        test_wiki_mdlink_gate_clone_dest_pin_pad2_after_243,
+        test_wiki_mdlink_gate_clone_dest_pin_pad3_after_243,
+        test_wiki_mdlink_gate_clone_dest_pin_pad4_after_243,
+        test_wiki_mdlink_gate_clone_dest_pin_pad5_after_243,
+        test_wiki_mdlink_gate_clone_dest_pin_still_after_243,
+        test_wiki_mdlink_gate_clone_dest_pin_after_243,
+        test_wiki_mdlink_gate_git_commit_pin_pad0_after_243,
+        test_wiki_mdlink_gate_git_commit_pin_pad1_after_243,
+        test_wiki_mdlink_gate_git_commit_pin_pad2_after_243,
+        test_wiki_mdlink_gate_git_commit_pin_pad3_after_243,
+        test_wiki_mdlink_gate_git_commit_pin_pad4_after_243,
+        test_wiki_mdlink_gate_git_commit_pin_pad5_after_243,
+        test_wiki_mdlink_gate_git_commit_pin_still_after_243,
+        test_wiki_mdlink_gate_git_commit_pin_after_243,
+        test_wiki_mdlink_gate_landing_pin_pad0_after_243,
+        test_wiki_mdlink_gate_landing_pin_pad1_after_243,
+        test_wiki_mdlink_gate_landing_pin_pad2_after_243,
+        test_wiki_mdlink_gate_landing_pin_pad3_after_243,
+        test_wiki_mdlink_gate_landing_pin_pad4_after_243,
+        test_wiki_mdlink_gate_landing_pin_pad5_after_243,
+        test_wiki_mdlink_gate_landing_pin_still_after_243,
+        test_wiki_mdlink_gate_landing_pin_after_243,
+        test_wiki_mdlink_rejects_link_concurrency_pad0_after_243,
+        test_wiki_mdlink_rejects_link_concurrency_pad1_after_243,
+        test_wiki_mdlink_rejects_link_concurrency_pad2_after_243,
+        test_wiki_mdlink_rejects_link_concurrency_pad3_after_243,
+        test_wiki_mdlink_rejects_link_concurrency_pad4_after_243,
+        test_wiki_mdlink_rejects_link_concurrency_pad5_after_243,
+        test_wiki_mdlink_rejects_link_concurrency_still_after_243,
+        test_wiki_mdlink_rejects_link_concurrency_after_243,
+        test_wiki_mdlink_rejects_lint_concurrency_pad0_after_243,
+        test_wiki_mdlink_rejects_lint_concurrency_pad1_after_243,
+        test_wiki_mdlink_rejects_lint_concurrency_pad2_after_243,
+        test_wiki_mdlink_rejects_lint_concurrency_pad3_after_243,
+        test_wiki_mdlink_rejects_lint_concurrency_pad4_after_243,
+        test_wiki_mdlink_rejects_lint_concurrency_pad5_after_243,
+        test_wiki_mdlink_rejects_lint_concurrency_still_after_243,
+        test_wiki_mdlink_rejects_lint_concurrency_after_243,
+        test_wiki_mdlink_rejects_link_job_header_pad0_after_243,
+        test_wiki_mdlink_rejects_link_job_header_pad1_after_243,
+        test_wiki_mdlink_rejects_link_job_header_pad2_after_243,
+        test_wiki_mdlink_rejects_link_job_header_pad3_after_243,
+        test_wiki_mdlink_rejects_link_job_header_pad4_after_243,
+        test_wiki_mdlink_rejects_link_job_header_pad5_after_243,
+        test_wiki_mdlink_rejects_link_job_header_still_after_243,
+        test_wiki_mdlink_rejects_link_job_header_after_243,
+        test_wiki_mdlink_rejects_lint_job_header_pad0_after_243,
+        test_wiki_mdlink_rejects_lint_job_header_pad1_after_243,
+        test_wiki_mdlink_rejects_lint_job_header_pad2_after_243,
+        test_wiki_mdlink_rejects_lint_job_header_pad3_after_243,
+        test_wiki_mdlink_rejects_lint_job_header_pad4_after_243,
+        test_wiki_mdlink_rejects_lint_job_header_pad5_after_243,
+        test_wiki_mdlink_rejects_lint_job_header_still_after_243,
+        test_wiki_mdlink_rejects_lint_job_header_after_243,
+        test_wiki_mdlink_rejects_fail_true_adj_pad0_after_243,
+        test_wiki_mdlink_rejects_fail_true_adj_pad1_after_243,
+        test_wiki_mdlink_rejects_fail_true_adj_pad2_after_243,
+        test_wiki_mdlink_rejects_fail_true_adj_pad3_after_243,
+        test_wiki_mdlink_rejects_fail_true_adj_pad4_after_243,
+        test_wiki_mdlink_rejects_fail_true_adj_pad5_after_243,
+        test_wiki_mdlink_rejects_fail_true_adj_still_after_243,
+        test_wiki_mdlink_rejects_fail_true_adj_after_243,
 ]
 
 

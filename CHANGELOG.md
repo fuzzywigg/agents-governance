@@ -11,6 +11,25 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki/mdlink leftover residual deepen after #278 tip: expand
+  self-tests to 5792 cases (was 5592) fail-closing unsaturated wiki outline /
+  PUBLISH.md leftover plus markdown-lint / link-check residual harden plus
+  markdown-link residual needles on existing modules only — contiguous YAML
+  status+created+purpose+closes / `| Source file | Wiki page |` header /
+  sibling table cells / full operator push prose / clean worktree /
+  or main default branch / stay-green acceptance / Home.md `./Home.md` fallback /
+  Settings→Features→Wikis / create-any-page-once / Check links→lychee@v2 /
+  Run markdownlint→DavidAnson@v24 / name→on adjacency / empty-fragment /
+  query-string / escapes-repo / missing-heading / OK banner /
+  `raw.startswith("#")` — wiki/mdlink leftover residual slice only
+  (not lychee/blob-503 leftover #278 / not Pass-2 residual + templates #272 /
+  not path-edges leftover #262 / not wiki/mdlink leftover #252 /
+  not stewardship-schema leftover #258 / not path-edges residual #244 /
+  not wiki outline/PUBLISH leftover #243 / not md/link residual layouts #239);
+  no invent-product; no fourth badge; no extra wiki files; no new templates;
+  no secrets. Lands closed #281/#277 leftover on post-#278 tip (do **not**
+  revive #281/#277). Distinct from open stewardship-schema residual after #278
+  and merged #278/#272/#262/#258/#252/#244/#243/#239.
 - TOKENMAXX docs-lint pass-4 lychee/blob-503 harden after #272 tip: expand
   self-tests to 5592 cases (was 5550) fail-closing remaining same-repo GitHub
   `blob/main` HTML 503 flake leftovers on existing docs-lint / `.lycheeignore`

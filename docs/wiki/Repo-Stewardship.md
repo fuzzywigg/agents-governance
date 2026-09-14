@@ -134,7 +134,13 @@ exact / `REQUIRED_WORKFLOWS` exact / `group(label|img|link)` / `sys.exit` /
 stewardship_common / `BADGE_GATE` / utf-8 / Strict row / H1 startswith /
 FAIL README / https image+link needles / absolute workflow URL / License
 point / Unexpected label / extract+check_badges / `contract(errors)` /
-IGNORECASE / `blob.lower` / `EXPECTED_REPO.lower`).
+IGNORECASE / `blob.lower` / `EXPECTED_REPO.lower`,
+plus stewardship_common third-pass after #108: `SECRET_PATTERNS` typed /
+exact pattern labels / `SECRET_URL_HINTS`+`FORBIDDEN_BADGE_HINTS`+
+`DANGEROUS_LINK_SCHEMES` exact tuples / `FENCED_BLOCK_RE` exact / ROOT
+`parents[1]` / def signatures / encoding=utf-8 / `re.escape` /
+`FENCED_BLOCK_RE.sub` / workflows join / `ROOT.glob` / `is_file`+sorted /
+`errors.append(msg)` / future annotations).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

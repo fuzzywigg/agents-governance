@@ -94,6 +94,13 @@ regexes / write-all+contents+id-token regexes / docker startswith /
 @ not in uses / rsplit / group(1).strip() / fail needles /
 least-privilege+OIDC+majors comments / REQUIRED_WORKFLOWS loop
 (not schema / badge / wiki / relative / common / CI workflow pin spam).
+Deepened after #90: wiki-outline third-pass — WIKI+PUBLISHABLE_PAGES+HINTS
+exact / removesuffix+glob / sys.exit / utf-8 / group(2) / startswith
+//+http / Link Check+Markdown Lint+No secrets / shields.io+[![ /
+stewardship_common / len(pages) / Missing operator / invent+secrets+Out
+of scope+kill-switch needles / relative coverage / sorted(unexpected) /
+fail needles / discord+twitter+downloads / present-set arithmetic
+(not relative / schema / badge / common / CI workflow / actionlint pin spam).
 """
 
 from __future__ import annotations
@@ -27177,6 +27184,1178 @@ def test_actionlint_rejects_unpinned_setup_python_still_after_86() -> None:
             'unpinned',
         )
 
+
+# --- TOKENMAXX wiki-outline third-pass after #90 (ECO-050) ---
+
+
+def test_wiki_gate_requires_wiki_exact_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'WIKI = ROOT / "docs" / "wiki"',
+            'WIKI = ROOT / "docs" / "pages"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'WIKI = ROOT / "docs" / "wiki"',
+        )
+
+
+def test_wiki_gate_requires_publishable_assign_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'PUBLISHABLE_PAGES = (',
+            'PUBLISH_PAGES = (',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'PUBLISHABLE_PAGES = (',
+        )
+
+
+def test_wiki_gate_requires_readme_hints_assign_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'README_LINK_HINTS = (',
+            'README_HINTS = (',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'README_LINK_HINTS = (',
+        )
+
+
+def test_wiki_gate_requires_readme_up_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '"../../README.md"',
+            '"../../../README.md"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '"../../README.md"',
+        )
+
+
+def test_wiki_gate_requires_readme_rel_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '"../README.md"',
+            '"../Readme.md"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '"../README.md"',
+        )
+
+
+def test_wiki_gate_requires_badge_hints_assign_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'BADGE_STANDARD_HINTS = (',
+            'BADGE_HINTS = (',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'BADGE_STANDARD_HINTS = (',
+        )
+
+
+def test_wiki_gate_requires_badge_docs_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '"docs/badge-standard.md"',
+            '"docs/badges.md"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'docs/badge-standard.md',
+        )
+
+
+def test_wiki_gate_requires_badge_blob_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'https://github.com/fuzzywigg/agents-governance/blob/main/docs/badge-standard.md',
+            'https://example.com/badge-standard.md',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'badge-standard blob URL',
+        )
+
+
+def test_wiki_gate_requires_ci_hints_assign_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'STEWARDSHIP_CI_HINTS = (',
+            'STEWARDSHIP_HINTS = (',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'STEWARDSHIP_CI_HINTS = (',
+        )
+
+
+def test_wiki_gate_requires_topic_type_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'PAGE_TOPIC_HINTS: dict[str, tuple[str, ...]] = {',
+            'PAGE_TOPIC_HINTS = {',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'dict[str, tuple]',
+        )
+
+
+def test_wiki_gate_requires_removesuffix_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'removesuffix(".md")',
+            'removesuffix(".markdown")',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'removesuffix(".md")',
+        )
+
+
+def test_wiki_gate_requires_glob_md_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'WIKI.glob("*.md")',
+            'WIKI.glob("*.markdown")',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '"*.md"',
+        )
+
+
+def test_wiki_gate_requires_sys_exit_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'sys.exit(main())',
+            'raise SystemExit(main())',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'sys.exit(main())',
+        )
+
+
+def test_wiki_gate_requires_utf8_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'encoding="utf-8"',
+            'encoding="latin-1"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'utf-8',
+        )
+
+
+def test_wiki_gate_requires_group2_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'match.group(2)',
+            'match.group(1)',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'match.group(2)',
+        )
+
+
+def test_wiki_gate_requires_startswith_proto_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'startswith("//")',
+            'startswith("/./")',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'startswith("//")',
+        )
+
+
+def test_wiki_gate_requires_startswith_http_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '.startswith("http://")',
+            '.startswith("http:")',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'startswith("http://")',
+        )
+
+
+def test_wiki_gate_requires_link_check_wording_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'Link Check',
+            'LinkVerify',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Link Check',
+        )
+
+
+def test_wiki_gate_requires_markdown_lint_wording_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'Markdown Lint',
+            'MarkdownCheck',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Markdown Lint',
+        )
+
+
+def test_wiki_gate_requires_no_secrets_wording_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'No secrets',
+            'No credentials',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'No secrets',
+        )
+
+
+def test_wiki_gate_requires_shields_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'shields.io',
+            'shieldsio.example',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'shields.io',
+        )
+
+
+def test_wiki_gate_requires_img_md_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '"[!["',
+            '"[[]"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '[![',
+        )
+
+
+def test_wiki_gate_requires_common_import_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'from stewardship_common import',
+            'from stewardship_shared import',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship_common',
+        )
+
+
+def test_wiki_gate_requires_def_main_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'def main() -> int:',
+            'def run() -> int:',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'def main',
+        )
+
+
+def test_wiki_gate_requires_len_pages_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'len(PUBLISHABLE_PAGES)',
+            'len(PUBLISHABLE)',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'len(PUBLISHABLE_PAGES)',
+        )
+
+
+def test_wiki_gate_requires_pages_op_banner_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'pages + operator PUBLISH.md',
+            'pages + operator only',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'pages + operator PUBLISH.md',
+        )
+
+
+def test_wiki_gate_requires_missing_op_needle_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'Missing operator page',
+            'Missing operator file',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Missing operator page',
+        )
+
+
+def test_wiki_gate_requires_invent_oos_needle_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'invent-product out-of-scope wording',
+            'invent-product out-of-scope text',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'invent-product out-of-scope wording',
+        )
+
+
+def test_wiki_gate_requires_secrets_oos_needle_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'secrets out-of-scope wording',
+            'secrets out-of-scope text',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'secrets out-of-scope wording',
+        )
+
+
+def test_wiki_gate_requires_oos_section_needle_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'Out of scope section',
+            'Out of scope heading',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Out of scope section',
+        )
+
+
+def test_wiki_gate_requires_kill_callout_needle_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'kill-switch security callout',
+            'kill-switch security notice',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'kill-switch security callout',
+        )
+
+
+def test_wiki_gate_requires_relative_cov_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'relative-link gate coverage',
+            'relative-link gate mention',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'relative-link gate coverage',
+        )
+
+
+def test_wiki_gate_requires_sorted_unexpected_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'sorted(unexpected)',
+            'list(unexpected)',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'sorted(unexpected)',
+        )
+
+
+def test_wiki_gate_requires_proto_needle_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'protocol-relative link',
+            'protocol-relative URL',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'protocol-relative link',
+        )
+
+
+def test_wiki_gate_requires_http_needle_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'insecure http:// link (use https://)',
+            'insecure http:// link (prefer https://)',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'insecure http:// link (use https://)',
+        )
+
+
+def test_wiki_gate_requires_dangerous_needle_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'dangerous link scheme',
+            'unsafe link scheme',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'dangerous link scheme',
+        )
+
+
+def test_wiki_gate_requires_text_lower_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'text.lower()',
+            'text.casefold()',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'text.lower()',
+        )
+
+
+def test_wiki_gate_requires_present_set_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'present - set(PUBLISHABLE_PAGES)',
+            'present - frozenset(PUBLISHABLE_PAGES)',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'present - set(PUBLISHABLE_PAGES)',
+        )
+
+
+def test_wiki_gate_requires_discord_special_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '"discord"',
+            '"DiscordApp"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'discord',
+        )
+
+
+def test_wiki_gate_requires_twitter_special_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '"twitter"',
+            '"TwitterX"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'twitter',
+        )
+
+
+def test_wiki_gate_requires_downloads_special_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '"downloads"',
+            '"DownloadsCount"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'downloads',
+        )
+
+
+def test_wiki_gate_requires_third_pass_doc_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'Third-pass: WIKI+PUBLISHABLE_PAGES+HINTS exact',
+            'Third-pass: WIKI hints',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Third-pass WIKI+HINTS exact',
+        )
+
+
+def test_wiki_gate_requires_reject_def_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'def _reject_invent_badge_chrome',
+            'def _reject_invent_chrome',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'def _reject_invent_badge_chrome',
+        )
+
+
+def test_wiki_gate_requires_dangerous_call_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'has_dangerous_scheme(target)',
+            'has_dangerous_scheme(raw)',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'has_dangerous_scheme(target)',
+        )
+
+
+def test_wiki_gate_requires_strip_fenced_call_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'strip_fenced_code(text)',
+            'strip_fenced_code(body)',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'strip_fenced_code(text)',
+        )
+
+
+def test_wiki_gate_requires_operator_only_still_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'OPERATOR_ONLY',
+            'OPERATOR_PAGE',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'OPERATOR_ONLY',
+        )
+
+
+def test_wiki_gate_requires_reject_helper_still_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '_reject_invent_badge_chrome',
+            '_reject_product_chrome',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '_reject_invent_badge_chrome',
+        )
+
+
+def test_wiki_gate_requires_home_backlink_still_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '](Home.md)',
+            '](Index.md)',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '](Home.md)',
+        )
+
+
+def test_wiki_gate_requires_failed_banner_still_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'Wiki outline check FAILED',
+            'Wiki outline check ERROR',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Wiki outline check FAILED',
+        )
+
+
+def test_wiki_gate_requires_ok_match_still_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'docs/wiki matches PUBLISH.md',
+            'docs/wiki aligns PUBLISH.md',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'docs/wiki matches PUBLISH.md',
+        )
+
+
+def test_wiki_gate_requires_angle_still_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'strip("<>")',
+            'strip("[]")',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'angle brackets',
+        )
+
+
+def test_wiki_gate_requires_do_not_push_still_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8")
+        text = text.replace("Do **not** push", "Never push")
+        text = text.replace("Do not push", "Never push")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Do not push',
+        )
+
+
+def test_wiki_gate_requires_readme_blob_still_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'https://github.com/fuzzywigg/agents-governance/blob/main/README.md',
+            'https://example.com/README.md',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'README blob URL',
+        )
+
+
+def test_wiki_gate_requires_badge_rel_still_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_wiki_outline.py"
+        text = path.read_text(encoding="utf-8").replace(
+            '../badge-standard.md',
+            '../badges.md',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            '../badge-standard.md',
+        )
+
+
+def test_wiki_rejects_protocol_rel_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages):
+            pages["Overview.md"] += "\n[x](//evil.example/x)\n"
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            'protocol-relative',
+        )
+
+
+def test_wiki_rejects_http_uppercase_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages):
+            pages["Overview.md"] += "\n[x](HTTP://evil.example/x)\n"
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            'http://',
+        )
+
+
+def test_wiki_rejects_js_scheme_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages):
+            pages["Overview.md"] += "\n[x](javascript:alert(1))\n"
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            'dangerous',
+        )
+
+
+def test_wiki_rejects_data_scheme_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages):
+            pages["Overview.md"] += "\n[x](data:text/html,hi)\n"
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            'dangerous',
+        )
+
+
+def test_wiki_rejects_vbscript_scheme_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages):
+            pages["Overview.md"] += "\n[x](vbscript:msgbox(1))\n"
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            'dangerous',
+        )
+
+
+def test_wiki_rejects_file_scheme_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages):
+            pages["Overview.md"] += "\n[x](file:///etc/passwd)\n"
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            'dangerous',
+        )
+
+
+def test_wiki_rejects_image_http_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages):
+            pages["Overview.md"] += "\n![x](http://evil.example/x.png)\n"
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            'http://',
+        )
+
+
+def test_wiki_rejects_twitter_chrome_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages):
+            pages["Overview.md"] += "\nSee twitter badge chrome\n"
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            'twitter',
+        )
+
+
+def test_wiki_rejects_discord_chrome_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages):
+            pages["Overview.md"] += "\nSee discord badge chrome\n"
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            'discord',
+        )
+
+
+def test_wiki_rejects_downloads_chrome_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages):
+            pages["Overview.md"] += "\nSee downloads badge chrome\n"
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            'downloads',
+        )
+
+
+def test_wiki_rejects_missing_l0_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages):
+            pages["Autonomy-Levels.md"] = "# A\n\n[Home](Home.md)\n\nL1 L2 L3 autonomy\n"
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            'L0',
+        )
+
+
+def test_wiki_rejects_missing_l2_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages):
+            pages["Autonomy-Levels.md"] = "# A\n\n[Home](Home.md)\n\nL0 L1 L3 autonomy\n"
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            'L2',
+        )
+
+
+def test_wiki_rejects_missing_l3_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages):
+            pages["Autonomy-Levels.md"] = "# A\n\n[Home](Home.md)\n\nL0 L1 L2 autonomy\n"
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            'L3',
+        )
+
+
+def test_wiki_rejects_missing_credential_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages):
+            pages["Security-Boundaries.md"] = "# S\n\n[Home](Home.md)\n\nkill switch secret\n"
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            'credential',
+        )
+
+
+def test_wiki_rejects_missing_copilot_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages):
+            pages["Agent-Routing.md"] = "# R\n\n[Home](Home.md)\n\nsurface routing\n"
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            'copilot',
+        )
+
+
+def test_wiki_rejects_missing_public_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages):
+            pages["Overview.md"] = "# O\n\n[Home](Home.md)\n\ngovernance\n"
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            'public',
+        )
+
+
+def test_wiki_rejects_missing_surface_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages):
+            pages["Agent-Routing.md"] = "# R\n\n[Home](Home.md)\n\nrouting copilot\n"
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            'surface',
+        )
+
+
+def test_wiki_rejects_angle_http_after_90() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+
+        def mutate(pages):
+            pages["Overview.md"] += "\n[x](<http://evil.example/x>)\n"
+        scripts = _seed_wiki_tree(tmp_path, mutate=mutate)
+        assert_fail_script(
+            scripts / "check_wiki_outline.py",
+            tmp_path,
+            'http://',
+        )
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -29051,6 +30230,80 @@ def main() -> int:
         test_actionlint_rejects_float_master_setup_python_after_86,
         test_actionlint_rejects_float_latest_setup_python_still_after_86,
         test_actionlint_rejects_unpinned_setup_python_still_after_86,
+
+        # TOKENMAXX deepen after #90 (+72 wiki-outline third-pass)
+        test_wiki_gate_requires_wiki_exact_after_90,
+        test_wiki_gate_requires_publishable_assign_after_90,
+        test_wiki_gate_requires_readme_hints_assign_after_90,
+        test_wiki_gate_requires_readme_up_after_90,
+        test_wiki_gate_requires_readme_rel_after_90,
+        test_wiki_gate_requires_badge_hints_assign_after_90,
+        test_wiki_gate_requires_badge_docs_after_90,
+        test_wiki_gate_requires_badge_blob_after_90,
+        test_wiki_gate_requires_ci_hints_assign_after_90,
+        test_wiki_gate_requires_topic_type_after_90,
+        test_wiki_gate_requires_removesuffix_after_90,
+        test_wiki_gate_requires_glob_md_after_90,
+        test_wiki_gate_requires_sys_exit_after_90,
+        test_wiki_gate_requires_utf8_after_90,
+        test_wiki_gate_requires_group2_after_90,
+        test_wiki_gate_requires_startswith_proto_after_90,
+        test_wiki_gate_requires_startswith_http_after_90,
+        test_wiki_gate_requires_link_check_wording_after_90,
+        test_wiki_gate_requires_markdown_lint_wording_after_90,
+        test_wiki_gate_requires_no_secrets_wording_after_90,
+        test_wiki_gate_requires_shields_after_90,
+        test_wiki_gate_requires_img_md_after_90,
+        test_wiki_gate_requires_common_import_after_90,
+        test_wiki_gate_requires_def_main_after_90,
+        test_wiki_gate_requires_len_pages_after_90,
+        test_wiki_gate_requires_pages_op_banner_after_90,
+        test_wiki_gate_requires_missing_op_needle_after_90,
+        test_wiki_gate_requires_invent_oos_needle_after_90,
+        test_wiki_gate_requires_secrets_oos_needle_after_90,
+        test_wiki_gate_requires_oos_section_needle_after_90,
+        test_wiki_gate_requires_kill_callout_needle_after_90,
+        test_wiki_gate_requires_relative_cov_after_90,
+        test_wiki_gate_requires_sorted_unexpected_after_90,
+        test_wiki_gate_requires_proto_needle_after_90,
+        test_wiki_gate_requires_http_needle_after_90,
+        test_wiki_gate_requires_dangerous_needle_after_90,
+        test_wiki_gate_requires_text_lower_after_90,
+        test_wiki_gate_requires_present_set_after_90,
+        test_wiki_gate_requires_discord_special_after_90,
+        test_wiki_gate_requires_twitter_special_after_90,
+        test_wiki_gate_requires_downloads_special_after_90,
+        test_wiki_gate_requires_third_pass_doc_after_90,
+        test_wiki_gate_requires_reject_def_after_90,
+        test_wiki_gate_requires_dangerous_call_after_90,
+        test_wiki_gate_requires_strip_fenced_call_after_90,
+        test_wiki_gate_requires_operator_only_still_after_90,
+        test_wiki_gate_requires_reject_helper_still_after_90,
+        test_wiki_gate_requires_home_backlink_still_after_90,
+        test_wiki_gate_requires_failed_banner_still_after_90,
+        test_wiki_gate_requires_ok_match_still_after_90,
+        test_wiki_gate_requires_angle_still_after_90,
+        test_wiki_gate_requires_do_not_push_still_after_90,
+        test_wiki_gate_requires_readme_blob_still_after_90,
+        test_wiki_gate_requires_badge_rel_still_after_90,
+        test_wiki_rejects_protocol_rel_after_90,
+        test_wiki_rejects_http_uppercase_after_90,
+        test_wiki_rejects_js_scheme_after_90,
+        test_wiki_rejects_data_scheme_after_90,
+        test_wiki_rejects_vbscript_scheme_after_90,
+        test_wiki_rejects_file_scheme_after_90,
+        test_wiki_rejects_image_http_after_90,
+        test_wiki_rejects_twitter_chrome_after_90,
+        test_wiki_rejects_discord_chrome_after_90,
+        test_wiki_rejects_downloads_chrome_after_90,
+        test_wiki_rejects_missing_l0_after_90,
+        test_wiki_rejects_missing_l2_after_90,
+        test_wiki_rejects_missing_l3_after_90,
+        test_wiki_rejects_missing_credential_after_90,
+        test_wiki_rejects_missing_copilot_after_90,
+        test_wiki_rejects_missing_public_after_90,
+        test_wiki_rejects_missing_surface_after_90,
+        test_wiki_rejects_angle_http_after_90,
     ]
     try:
         for script in GATE_SCRIPTS:

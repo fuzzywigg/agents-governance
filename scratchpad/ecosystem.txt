@@ -387,3 +387,12 @@ _None yet._
 - Branch: cursor/tokenmaxx-actionlint-second-pass-fc10
 2026-09-14T00:34:00Z
 
+
+### [ECO-050] TOKENMAXX deepen wiki-outline third-pass pins after #90 — 2026-09-14T00:54:11Z
+- [x] cursor: Read live tree post-#90 (1827 cases; actionlint second-pass saturated; open #94 is relative third-pass — different slice)
+- [x] cursor: Fail-close wiki-outline third-pass — WIKI+PUBLISHABLE_PAGES+HINTS exact / removesuffix+glob / sys.exit / utf-8 / group(2) / startswith //+http / Link Check+Markdown Lint+No secrets / shields.io+[![ / stewardship_common / len(pages) / Missing operator / invent+secrets+Out of scope+kill-switch / relative coverage / sorted(unexpected) / fail needles / discord+twitter+downloads / present-set arithmetic
+- [x] cursor: Expand self-tests 1827 → 1899 (wiki-outline third-pass slice; not relative / schema / badge / common / CI workflow / actionlint pin spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING wiki-outline integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history
+- Branch: cursor/tokenmaxx-wiki-third-pass-e351
+2026-09-14T00:54:11Z

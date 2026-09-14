@@ -11,6 +11,15 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX leftover docs-lint/stewardship/actionlint pins after #135: expand
+  self-tests to 2717 cases (was 2593) fail-closing live leftover integrity —
+  docs-lint third-pass exact `.lycheeignore` full layout + commentary lines /
+  actionlint leftover `contents: read` + `cancel-in-progress: true` +
+  `ubuntu-latest` / stewardship leftover exact `run_stewardship_checks.sh`
+  full layout — leftover docs-lint/stewardship/actionlint slice only (not wiki /
+  badge / CI workflow / relative / schema spam); no invent-product; no fourth
+  badge. Distinct from docs-lint second-pass (#135) and closed #136 wiki-badge.
+
 - TOKENMAXX CI workflow third-pass pins after #111/#117/#127: expand self-tests to
   2491 cases (was 2419) fail-closing live reversible CI workflow integrity —
   exact concurrency group templates / markdown-lint+stewardship cron+timeout /

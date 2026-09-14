@@ -175,6 +175,11 @@ plus run_stewardship runner pins after #117: `#!/usr/bin/env bash` /
 CI / `python3 scripts/<gate>` ×4 / badge→wiki→schema→relative order /
 `check_run_stewardship_gate_contract` (lands closed #122/#96 leftover; do not
 revive #119)).
+plus run_stewardship Pass-2 pins after #132: exact ROOT assign / exactly four
+`python3 scripts/` / no `|| true` soft-fail / `dirname "$0")/..` fragment /
+doc gates locally / CI runner before self-tests /
+`check_run_stewardship_gate_contract` Pass-2 (lands closed #122 leftover; do not
+revive #122)).
 plus CI workflow third-pass after #111/#117/#127: concurrency templates /
 cron+timeout / DavidAnson@v24 / setup-python@v5 / lychee verbose+
 concurrency+timeout+retries / fail:true / get_actionlint / curl -fsSL).

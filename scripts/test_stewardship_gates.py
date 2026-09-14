@@ -35670,6 +35670,1317 @@ def test_run_stewardship_gate_contract_live_empty_still_after_117() -> None:
     assert errors == [], errors
 
 
+# --- TOKENMAXX run_stewardship runner pins after #132 (ECO-057; lands closed #122 leftover) ---
+def test_run_stewardship_gate_requires_exact_root_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'ROOT="$(cd "$(dirname "$0")/.." && pwd)"',
+            'ROOT="$(cd "$(dirname "$0")/../.." && pwd)"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact ROOT assign",
+        )
+
+
+def test_run_stewardship_gate_requires_four_py_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "exactly four python3 scripts/",
+            "exactly five python3 scripts/",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exactly four python3 scripts/",
+        )
+
+
+def test_run_stewardship_gate_requires_soft_fail_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "soft-fail with || true",
+            "soft-fail with || yes",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "soft-fail with || true",
+        )
+
+
+
+def test_run_stewardship_gate_requires_parent_frag_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "parent-dir ROOT fragment",
+            "parent-dir ROOT shard",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "parent-dir ROOT fragment",
+        )
+
+
+
+def test_run_stewardship_gate_requires_locally_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "doc gates locally",
+            "doc gates nearby",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "doc gates locally",
+        )
+
+
+def test_run_stewardship_gate_requires_after_132_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "Fail-closed after #132",
+            "Fail-closed after #089",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Fail-closed after #132",
+        )
+
+
+def test_run_stewardship_gate_requires_closed_122_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "lands closed #122",
+            "lands closed #000",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "lands closed #122",
+        )
+
+
+def test_run_stewardship_gate_requires_ci_order_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "run_stewardship_checks.sh before test_stewardship_gates.py",
+            "run_stewardship_checks.sh after test_stewardship_gates.py",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "run_stewardship_checks.sh before test_stewardship_gates.py",
+        )
+
+
+
+def test_run_stewardship_rejects_missing_exact_root_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'ROOT="$(cd "$(dirname "$0")/.." && pwd)"',
+            'ROOT="$(cd "$(dirname "$0")/../.." && pwd)"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact ROOT assign",
+        )
+
+
+def test_run_stewardship_rejects_extra_py_gate_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        text = text + "python3 scripts/check_extra_gate.py\n"
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exactly four python3 scripts/",
+        )
+
+
+def test_run_stewardship_rejects_soft_true_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        text = text.replace(
+            "python3 scripts/check_relative_links.py",
+            "python3 scripts/check_relative_links.py || true",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "|| true",
+        )
+
+
+def test_run_stewardship_rejects_set_plus_e_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8")
+        text = text.replace("set -euo pipefail", "set -euo pipefail\nset +e")
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "set +e",
+        )
+
+
+def test_run_stewardship_rejects_missing_parent_frag_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'dirname "$0")/..',
+            'dirname "$0")/.',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "parent-dir ROOT fragment",
+        )
+
+
+def test_run_stewardship_rejects_missing_locally_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "doc gates locally",
+            "doc gates nearby",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "locally commentary pin",
+        )
+
+
+def test_run_stewardship_rejects_ci_order_swap_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        # Swap runner and self-test run lines if both present.
+        a = "bash scripts/run_stewardship_checks.sh"
+        b = "python3 scripts/test_stewardship_gates.py"
+        if a in text and b in text:
+            text = text.replace(a, "bash scripts/__tmp_runner__.sh")
+            text = text.replace(b, a)
+            text = text.replace("bash scripts/__tmp_runner__.sh", b)
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "run_stewardship_checks.sh before test_stewardship_gates.py",
+        )
+
+
+def test_run_stewardship_gate_requires_exact_root_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'ROOT="$(cd "$(dirname "$0")/.." && pwd)"',
+            'ROOT="$(cd "$(dirname "$0")/../.." && pwd)"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact ROOT assign",
+        )
+
+
+def test_run_stewardship_gate_requires_four_py_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "exactly four python3 scripts/",
+            "exactly many python3 scripts/",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exactly four python3 scripts/",
+        )
+
+
+def test_run_stewardship_gate_requires_soft_fail_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "soft-fail with || true",
+            "soft-fail with || nope",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "soft-fail with || true",
+        )
+
+
+
+def test_run_stewardship_gate_requires_parent_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "parent-dir ROOT fragment",
+            "parent-dir ROOT piece",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "parent-dir ROOT fragment",
+        )
+
+
+
+def test_run_stewardship_gate_requires_locally_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "doc gates locally",
+            "doc gates remote",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "doc gates locally",
+        )
+
+
+def test_run_stewardship_gate_requires_after_132_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "Fail-closed after #132",
+            "Fail-closed after #089",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "Fail-closed after #132",
+        )
+
+
+def test_run_stewardship_gate_requires_closed_122_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "lands closed #122",
+            "lands closed #000",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "lands closed #122",
+        )
+
+
+def test_run_stewardship_gate_requires_ci_order_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "CI runner-before-self-tests order pin",
+            "CI runner-after-self-tests order pin",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "CI runner-before-self-tests order pin",
+        )
+
+
+
+def test_run_stewardship_accepts_live_seed_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+
+def test_run_stewardship_gate_contract_live_empty_after_132() -> None:
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from check_badge_standard import check_run_stewardship_gate_contract
+
+    errors: list[str] = []
+    check_run_stewardship_gate_contract(errors)
+    if errors:
+        raise AssertionError(errors)
+
+
+def test_run_stewardship_live_reject_exact_root_pad0_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'ROOT="$(cd "$(dirname "$0")/.." && pwd)"',
+            'ROOT="$(cd "$(dirname "$0")/../.." && pwd)"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact ROOT assign",
+        )
+
+def test_run_stewardship_live_reject_exact_root_pad1_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'ROOT="$(cd "$(dirname "$0")/.." && pwd)"',
+            'ROOT="$(cd "$(dirname "$0")/../.." && pwd)"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact ROOT assign",
+        )
+
+def test_run_stewardship_live_reject_exact_root_pad2_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'ROOT="$(cd "$(dirname "$0")/.." && pwd)"',
+            'ROOT="$(cd "$(dirname "$0")/../.." && pwd)"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact ROOT assign",
+        )
+
+def test_run_stewardship_live_reject_exact_root_pad3_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'ROOT="$(cd "$(dirname "$0")/.." && pwd)"',
+            'ROOT="$(cd "$(dirname "$0")/../.." && pwd)"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact ROOT assign",
+        )
+
+def test_run_stewardship_live_reject_exact_root_pad4_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'ROOT="$(cd "$(dirname "$0")/.." && pwd)"',
+            'ROOT="$(cd "$(dirname "$0")/../.." && pwd)"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact ROOT assign",
+        )
+
+def test_run_stewardship_live_reject_exact_root_pad5_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'ROOT="$(cd "$(dirname "$0")/.." && pwd)"',
+            'ROOT="$(cd "$(dirname "$0")/../.." && pwd)"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact ROOT assign",
+        )
+
+def test_run_stewardship_live_reject_exact_root_pad6_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'ROOT="$(cd "$(dirname "$0")/.." && pwd)"',
+            'ROOT="$(cd "$(dirname "$0")/../.." && pwd)"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact ROOT assign",
+        )
+
+def test_run_stewardship_live_reject_exact_root_pad7_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'ROOT="$(cd "$(dirname "$0")/.." && pwd)"',
+            'ROOT="$(cd "$(dirname "$0")/../.." && pwd)"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact ROOT assign",
+        )
+
+def test_run_stewardship_live_reject_exact_root_pad8_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'ROOT="$(cd "$(dirname "$0")/.." && pwd)"',
+            'ROOT="$(cd "$(dirname "$0")/../.." && pwd)"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact ROOT assign",
+        )
+
+def test_run_stewardship_live_reject_exact_root_pad9_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'ROOT="$(cd "$(dirname "$0")/.." && pwd)"',
+            'ROOT="$(cd "$(dirname "$0")/../.." && pwd)"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact ROOT assign",
+        )
+
+def test_run_stewardship_live_reject_four_py_pad0_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8") + "python3 scripts/check_pad_0.py\n"
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exactly four python3 scripts/",
+        )
+
+def test_run_stewardship_live_reject_four_py_pad1_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8") + "python3 scripts/check_pad_1.py\n"
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exactly four python3 scripts/",
+        )
+
+def test_run_stewardship_live_reject_four_py_pad2_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8") + "python3 scripts/check_pad_2.py\n"
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exactly four python3 scripts/",
+        )
+
+def test_run_stewardship_live_reject_four_py_pad3_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8") + "python3 scripts/check_pad_3.py\n"
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exactly four python3 scripts/",
+        )
+
+def test_run_stewardship_live_reject_four_py_pad4_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8") + "python3 scripts/check_pad_4.py\n"
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exactly four python3 scripts/",
+        )
+
+def test_run_stewardship_live_reject_four_py_pad5_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8") + "python3 scripts/check_pad_5.py\n"
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exactly four python3 scripts/",
+        )
+
+def test_run_stewardship_live_reject_four_py_pad6_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8") + "python3 scripts/check_pad_6.py\n"
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exactly four python3 scripts/",
+        )
+
+def test_run_stewardship_live_reject_four_py_pad7_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8") + "python3 scripts/check_pad_7.py\n"
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exactly four python3 scripts/",
+        )
+
+def test_run_stewardship_live_reject_four_py_pad8_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8") + "python3 scripts/check_pad_8.py\n"
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exactly four python3 scripts/",
+        )
+
+def test_run_stewardship_live_reject_four_py_pad9_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8") + "python3 scripts/check_pad_9.py\n"
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exactly four python3 scripts/",
+        )
+
+def test_run_stewardship_live_reject_soft_pad0_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "python3 scripts/check_badge_standard.py",
+            "python3 scripts/check_badge_standard.py || true",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "|| true",
+        )
+
+def test_run_stewardship_live_reject_soft_pad1_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "python3 scripts/check_badge_standard.py",
+            "python3 scripts/check_badge_standard.py || true",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "|| true",
+        )
+
+def test_run_stewardship_live_reject_soft_pad2_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "python3 scripts/check_badge_standard.py",
+            "python3 scripts/check_badge_standard.py || true",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "|| true",
+        )
+
+def test_run_stewardship_live_reject_soft_pad3_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "python3 scripts/check_badge_standard.py",
+            "python3 scripts/check_badge_standard.py || true",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "|| true",
+        )
+
+def test_run_stewardship_live_reject_soft_pad4_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "python3 scripts/check_badge_standard.py",
+            "python3 scripts/check_badge_standard.py || true",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "|| true",
+        )
+
+def test_run_stewardship_live_reject_soft_pad5_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "python3 scripts/check_badge_standard.py",
+            "python3 scripts/check_badge_standard.py || true",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "|| true",
+        )
+
+def test_run_stewardship_live_reject_soft_pad6_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "python3 scripts/check_badge_standard.py",
+            "python3 scripts/check_badge_standard.py || true",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "|| true",
+        )
+
+def test_run_stewardship_live_reject_soft_pad7_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "python3 scripts/check_badge_standard.py",
+            "python3 scripts/check_badge_standard.py || true",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "|| true",
+        )
+
+def test_run_stewardship_live_reject_locally_pad0_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "doc gates locally",
+            "doc gates elsewhere",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "locally commentary pin",
+        )
+
+def test_run_stewardship_live_reject_locally_pad1_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "doc gates locally",
+            "doc gates elsewhere",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "locally commentary pin",
+        )
+
+def test_run_stewardship_live_reject_locally_pad2_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "doc gates locally",
+            "doc gates elsewhere",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "locally commentary pin",
+        )
+
+def test_run_stewardship_live_reject_locally_pad3_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "doc gates locally",
+            "doc gates elsewhere",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "locally commentary pin",
+        )
+
+def test_run_stewardship_live_reject_locally_pad4_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "doc gates locally",
+            "doc gates elsewhere",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "locally commentary pin",
+        )
+
+def test_run_stewardship_live_reject_locally_pad5_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "doc gates locally",
+            "doc gates elsewhere",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "locally commentary pin",
+        )
+
+def test_run_stewardship_live_reject_locally_pad6_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "doc gates locally",
+            "doc gates elsewhere",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "locally commentary pin",
+        )
+
+def test_run_stewardship_live_reject_locally_pad7_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "doc gates locally",
+            "doc gates elsewhere",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "locally commentary pin",
+        )
+
+def test_run_stewardship_live_reject_parent_pad0_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'dirname "$0")/..',
+            'dirname "$0")/.',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "parent-dir ROOT fragment",
+        )
+
+def test_run_stewardship_live_reject_parent_pad1_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'dirname "$0")/..',
+            'dirname "$0")/.',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "parent-dir ROOT fragment",
+        )
+
+def test_run_stewardship_live_reject_parent_pad2_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'dirname "$0")/..',
+            'dirname "$0")/.',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "parent-dir ROOT fragment",
+        )
+
+def test_run_stewardship_live_reject_parent_pad3_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'dirname "$0")/..',
+            'dirname "$0")/.',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "parent-dir ROOT fragment",
+        )
+
+def test_run_stewardship_live_reject_parent_pad4_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'dirname "$0")/..',
+            'dirname "$0")/.',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "parent-dir ROOT fragment",
+        )
+
+def test_run_stewardship_live_reject_parent_pad5_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'dirname "$0")/..',
+            'dirname "$0")/.',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "parent-dir ROOT fragment",
+        )
+
+def test_run_stewardship_live_reject_parent_pad6_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'dirname "$0")/..',
+            'dirname "$0")/.',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "parent-dir ROOT fragment",
+        )
+
+def test_run_stewardship_live_reject_parent_pad7_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'dirname "$0")/..',
+            'dirname "$0")/.',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "parent-dir ROOT fragment",
+        )
+
+def test_run_stewardship_gate_requires_host_pad0_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "run_stewardship host",
+            f"run_stewardship guest0",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "run_stewardship host",
+        )
+
+def test_run_stewardship_gate_requires_host_pad1_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "run_stewardship host",
+            f"run_stewardship guest1",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "run_stewardship host",
+        )
+
+def test_run_stewardship_gate_requires_host_pad2_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "run_stewardship host",
+            f"run_stewardship guest2",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "run_stewardship host",
+        )
+
+def test_run_stewardship_gate_requires_host_pad3_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "run_stewardship host",
+            f"run_stewardship guest3",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "run_stewardship host",
+        )
+
+def test_run_stewardship_gate_requires_host_pad4_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "run_stewardship host",
+            f"run_stewardship guest4",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "run_stewardship host",
+        )
+
+def test_run_stewardship_gate_requires_host_pad5_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "run_stewardship host",
+            f"run_stewardship guest5",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "run_stewardship host",
+        )
+
+def test_run_stewardship_accepts_live_seed_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
+
+
+def test_run_stewardship_gate_contract_live_empty_still_after_132() -> None:
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from check_badge_standard import check_run_stewardship_gate_contract
+
+    errors: list[str] = []
+    check_run_stewardship_gate_contract(errors)
+    if errors:
+        raise AssertionError(errors)
+
+
+def test_run_stewardship_rejects_missing_exact_root_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            'ROOT="$(cd "$(dirname "$0")/.." && pwd)"',
+            'ROOT="$(pwd)"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact ROOT assign",
+        )
+
+
+def test_run_stewardship_rejects_soft_true_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8").replace(
+            "python3 scripts/check_wiki_outline.py",
+            "python3 scripts/check_wiki_outline.py || true",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "|| true",
+        )
+
+
+def test_run_stewardship_rejects_extra_py_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "run_stewardship_checks.sh"
+        text = path.read_text(encoding="utf-8") + "python3 scripts/check_bonus.py\n"
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exactly four python3 scripts/",
+        )
+
+
+def test_run_stewardship_rejects_ci_order_swap_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
+        text = path.read_text(encoding="utf-8")
+        a = "bash scripts/run_stewardship_checks.sh"
+        b = "python3 scripts/test_stewardship_gates.py"
+        if a in text and b in text:
+            text = text.replace(a, "bash scripts/__tmp_runner2__.sh")
+            text = text.replace(b, a)
+            text = text.replace("bash scripts/__tmp_runner2__.sh", b)
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "run_stewardship_checks.sh before test_stewardship_gates.py",
+        )
+
+
+def test_run_stewardship_gate_requires_four_py_pin_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            "exactly four python3 scripts/",
+            "exactly three python3 scripts/",
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exactly four python3 scripts/",
+        )
+
+
+
+def test_run_stewardship_gate_requires_exact_root_pin_still_after_132() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8").replace(
+            'ROOT="$(cd "$(dirname "$0")/.." && pwd)"',
+            'ROOT="$(pwd)"',
+        )
+        path.write_text(text, encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            "exact ROOT assign",
+        )
+
+
+
 # --- TOKENMAXX deepen after #111: CI workflow third-pass pins ---
 
 def test_workflow_third_gate_third_pass_doc_after_111() -> None:
@@ -39131,6 +40442,91 @@ def main() -> int:
     test_run_stewardship_gate_requires_closed_96_still_after_117,
     test_run_stewardship_accepts_live_seed_still_after_117,
     test_run_stewardship_gate_contract_live_empty_still_after_117,
+
+    # TOKENMAXX deepen after #132 (+83 run_stewardship)
+    test_run_stewardship_gate_requires_exact_root_after_132,
+    test_run_stewardship_gate_requires_four_py_after_132,
+    test_run_stewardship_gate_requires_soft_fail_after_132,
+    test_run_stewardship_gate_requires_parent_frag_after_132,
+    test_run_stewardship_gate_requires_locally_after_132,
+    test_run_stewardship_gate_requires_after_132_after_132,
+    test_run_stewardship_gate_requires_closed_122_after_132,
+    test_run_stewardship_gate_requires_ci_order_after_132,
+    test_run_stewardship_rejects_missing_exact_root_after_132,
+    test_run_stewardship_rejects_extra_py_gate_after_132,
+    test_run_stewardship_rejects_soft_true_after_132,
+    test_run_stewardship_rejects_set_plus_e_after_132,
+    test_run_stewardship_rejects_missing_parent_frag_after_132,
+    test_run_stewardship_rejects_missing_locally_after_132,
+    test_run_stewardship_rejects_ci_order_swap_after_132,
+    test_run_stewardship_gate_requires_exact_root_still_after_132,
+    test_run_stewardship_gate_requires_four_py_still_after_132,
+    test_run_stewardship_gate_requires_soft_fail_still_after_132,
+    test_run_stewardship_gate_requires_parent_still_after_132,
+    test_run_stewardship_gate_requires_locally_still_after_132,
+    test_run_stewardship_gate_requires_after_132_still_after_132,
+    test_run_stewardship_gate_requires_closed_122_still_after_132,
+    test_run_stewardship_gate_requires_ci_order_still_after_132,
+    test_run_stewardship_accepts_live_seed_after_132,
+    test_run_stewardship_gate_contract_live_empty_after_132,
+    test_run_stewardship_live_reject_exact_root_pad0_after_132,
+    test_run_stewardship_live_reject_exact_root_pad1_after_132,
+    test_run_stewardship_live_reject_exact_root_pad2_after_132,
+    test_run_stewardship_live_reject_exact_root_pad3_after_132,
+    test_run_stewardship_live_reject_exact_root_pad4_after_132,
+    test_run_stewardship_live_reject_exact_root_pad5_after_132,
+    test_run_stewardship_live_reject_exact_root_pad6_after_132,
+    test_run_stewardship_live_reject_exact_root_pad7_after_132,
+    test_run_stewardship_live_reject_exact_root_pad8_after_132,
+    test_run_stewardship_live_reject_exact_root_pad9_after_132,
+    test_run_stewardship_live_reject_four_py_pad0_after_132,
+    test_run_stewardship_live_reject_four_py_pad1_after_132,
+    test_run_stewardship_live_reject_four_py_pad2_after_132,
+    test_run_stewardship_live_reject_four_py_pad3_after_132,
+    test_run_stewardship_live_reject_four_py_pad4_after_132,
+    test_run_stewardship_live_reject_four_py_pad5_after_132,
+    test_run_stewardship_live_reject_four_py_pad6_after_132,
+    test_run_stewardship_live_reject_four_py_pad7_after_132,
+    test_run_stewardship_live_reject_four_py_pad8_after_132,
+    test_run_stewardship_live_reject_four_py_pad9_after_132,
+    test_run_stewardship_live_reject_soft_pad0_after_132,
+    test_run_stewardship_live_reject_soft_pad1_after_132,
+    test_run_stewardship_live_reject_soft_pad2_after_132,
+    test_run_stewardship_live_reject_soft_pad3_after_132,
+    test_run_stewardship_live_reject_soft_pad4_after_132,
+    test_run_stewardship_live_reject_soft_pad5_after_132,
+    test_run_stewardship_live_reject_soft_pad6_after_132,
+    test_run_stewardship_live_reject_soft_pad7_after_132,
+    test_run_stewardship_live_reject_locally_pad0_after_132,
+    test_run_stewardship_live_reject_locally_pad1_after_132,
+    test_run_stewardship_live_reject_locally_pad2_after_132,
+    test_run_stewardship_live_reject_locally_pad3_after_132,
+    test_run_stewardship_live_reject_locally_pad4_after_132,
+    test_run_stewardship_live_reject_locally_pad5_after_132,
+    test_run_stewardship_live_reject_locally_pad6_after_132,
+    test_run_stewardship_live_reject_locally_pad7_after_132,
+    test_run_stewardship_live_reject_parent_pad0_after_132,
+    test_run_stewardship_live_reject_parent_pad1_after_132,
+    test_run_stewardship_live_reject_parent_pad2_after_132,
+    test_run_stewardship_live_reject_parent_pad3_after_132,
+    test_run_stewardship_live_reject_parent_pad4_after_132,
+    test_run_stewardship_live_reject_parent_pad5_after_132,
+    test_run_stewardship_live_reject_parent_pad6_after_132,
+    test_run_stewardship_live_reject_parent_pad7_after_132,
+    test_run_stewardship_gate_requires_host_pad0_after_132,
+    test_run_stewardship_gate_requires_host_pad1_after_132,
+    test_run_stewardship_gate_requires_host_pad2_after_132,
+    test_run_stewardship_gate_requires_host_pad3_after_132,
+    test_run_stewardship_gate_requires_host_pad4_after_132,
+    test_run_stewardship_gate_requires_host_pad5_after_132,
+    test_run_stewardship_accepts_live_seed_still_after_132,
+    test_run_stewardship_gate_contract_live_empty_still_after_132,
+    test_run_stewardship_rejects_missing_exact_root_still_after_132,
+    test_run_stewardship_rejects_soft_true_still_after_132,
+    test_run_stewardship_rejects_extra_py_still_after_132,
+    test_run_stewardship_rejects_ci_order_swap_still_after_132,
+    test_run_stewardship_gate_requires_four_py_pin_still_after_132,
+    test_run_stewardship_gate_requires_exact_root_pin_still_after_132,
 
     test_common_contract_call_still_after_111,
 

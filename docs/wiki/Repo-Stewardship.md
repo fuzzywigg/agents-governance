@@ -188,7 +188,14 @@ plus run_stewardship Pass-2 after #176: exact ROOT assign / exactly four
 `python3 scripts/` / no `|| true` soft-fail / `dirname "$0")/..` fragment /
 doc gates locally / CI runner before self-tests /
 `check_run_stewardship_gate_contract` Pass-2 (lands closed #175/#140 leftover;
-do not revive #175/#140/#122)).
+do not revive #175/#140/#122),
+plus stewardship-schema third-pass + deepen after #179: future annotations /
+Path parent / yaml=None / five live docs / true+false / null+~ / fullmatch /
+split+strip quotes / FENCED search / nested reject / ACTIVE / EXPECTED get /
+closes scope / path.is_file / block.strip / Exception as exc / STRING_KEYS /
+engine PyYAML / BLE001 / got != want / DATE_KEYS / deepen docstring
+(schema leftover slice only; lands closed #164/#163/#142 leftover; do not
+revive #164/#163/#142/#147/#153/#171; leave open wiki-index #180 alone)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

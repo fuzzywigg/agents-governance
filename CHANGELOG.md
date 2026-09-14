@@ -11,6 +11,19 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-schema third-pass + deepen pins after #179: expand
+  self-tests to 3446 cases (was 3258) fail-closing live schema integrity —
+  future annotations / Path parent / yaml=None / five live docs / true+false /
+  null+~ / fullmatch / split+strip quotes / FENCED search / nested reject /
+  ACTIVE / EXPECTED get / closes scope / path.is_file / block.strip /
+  Exception as exc / STRING_KEYS / engine PyYAML / BLE001 / got != want /
+  DATE_KEYS / deepen docstring — schema leftover slice only (not
+  run_stewardship Pass-2 #179 / path-filter #176 / fixtures #173 /
+  stewardship-CI #165 / wiki-index / badge spam); no invent-product; no
+  fourth badge. Lands closed #164/#163/#142 leftover on post-#179 main (do
+  **not** revive #164/#163/#142/#147/#153/#171). Distinct from open
+  wiki-index validators (#180).
+
 - TOKENMAXX run_stewardship Pass-2 pins after #176: expand self-tests to
   3258 cases (was 3175) fail-closing live local runner / CI reliability leftovers —
   exact `ROOT="$(cd "$(dirname "$0")/.." && pwd)"` / exactly four `python3 scripts/`

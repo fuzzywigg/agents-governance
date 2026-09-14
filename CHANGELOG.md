@@ -11,6 +11,26 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki/mdlink leftover residual deepen after #272 tip: expand
+  self-tests to 5750 cases (was 5550) fail-closing unsaturated wiki outline /
+  PUBLISH.md residual plus markdown-lint / link-check residual harden plus
+  markdown-link residual needles on existing modules only — contiguous YAML
+  status+created+purpose+closes / `| Source file | Wiki page |` header /
+  sibling table cells Overview..Security-Boundaries / full operator push
+  prose / clean worktree commentary / `or main — match the wiki default
+  branch` / stay-green acceptance / Home.md `./Home.md` fallback /
+  Settings → Features → Wikis / create any page once in the GitHub UI /
+  Check links->lychee-action@v2 adjacency / Run markdownlint->DavidAnson@v24
+  adjacency / name->on adjacency / exact empty fragment / query-string /
+  escapes-repo / missing heading # / OK banner / `raw.startswith("#")` —
+  wiki/mdlink leftover residual slice only (lands open #277 leftover; not
+  Pass-2 residual + templates #272 / not path-edges leftover #262 /
+  not wiki/mdlink leftover #252 / not stewardship-schema leftover #258 /
+  not path-filter/path-order leftover #244 / not wiki outline/PUBLISH leftover
+  #243 / not md/link residual layouts #239 / not stewardship-checks/schema
+  residual #233); no invent-product; no fourth badge; no extra wiki files;
+  no scratchpad notes. Distinct from merged
+  #272/#262/#258/#252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
 - TOKENMAXX Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #244
   (rebased post-#262): expand self-tests to 5550 cases (was 5326) fail-closing
   DISTINCT leftover Pass-2 residual soft-fail + existing concurrency group

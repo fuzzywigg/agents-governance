@@ -51,6 +51,23 @@ Fail-closed pins (live path after #59; deepen after #43; third-pass after #90):
   (NOT wiki outline/PUBLISH leftover #243 saturated pins / NOT md/link residual layouts #239 /
   NOT path-filter/path-order leftover #244 / NOT stewardship-checks/schema #233 /
   NOT wiki-index/badge leftover #227; existing pages only — do not invent extra wiki files)
+- Wiki/mdlink leftover residual after #272 tip (beyond #252 saturated after_243 pins;
+  lands open #277 leftover on post-#272 tip; NOT Pass-2 residual + templates #272 /
+  NOT path-edges leftover #262 / NOT wiki/mdlink leftover #252 /
+  NOT stewardship-schema leftover #258 / NOT path-filter/path-order leftover #244 /
+  NOT wiki outline/PUBLISH leftover #243 / NOT md/link residual layouts #239 /
+  NOT stewardship-checks/schema residual #233;
+  existing pages only — do not invent extra wiki files):
+  contiguous YAML status+created+purpose+closes block /
+  | Source file | Wiki page | table header /
+  ordered sibling table cells Overview..Security-Boundaries /
+  Do **not** push `PUBLISH.md` to the wiki (operator instructions only). /
+  # From a clean worktree of agents-governance /
+  or main — match the wiki default branch /
+  Link Check and Markdown Lint stay green on the PR that updates sources /
+  [Home.md](./Home.md) fallback link /
+  Settings Features Wikis init path /
+  create any page once in the GitHub UI, then re-run the clone
 """
 
 from __future__ import annotations
@@ -319,6 +336,80 @@ def main() -> int:
         if "| `Home.md` | Home (landing) |" not in publish_text:
             fail(
                 "PUBLISH.md pages table must keep Home (landing) cell",
+                errors,
+            )
+        # Wiki/mdlink leftover residual after #272 tip (beyond #252 saturated pins; lands #277).
+        yaml_closes_block = (
+            "status: ACTIVE\n"
+            'created: "2026-09-13"\n'
+            'purpose: "Reversible publish path for docs/wiki → GitHub Wiki"\n'
+            'closes: "#16"'
+        )
+        if yaml_closes_block not in publish_text:
+            fail(
+                "PUBLISH.md YAML must keep contiguous status/created/purpose/closes block",
+                errors,
+            )
+        if "| Source file | Wiki page |" not in publish_text:
+            fail(
+                "PUBLISH.md pages table must keep | Source file | Wiki page | header",
+                errors,
+            )
+        for sibling_row in (
+            "| `Overview.md` | Overview |",
+            "| `Autonomy-Levels.md` | Autonomy-Levels |",
+            "| `Repo-Stewardship.md` | Repo-Stewardship |",
+            "| `Agent-Routing.md` | Agent-Routing |",
+            "| `Security-Boundaries.md` | Security-Boundaries |",
+        ):
+            if sibling_row not in publish_text:
+                fail(
+                    f"PUBLISH.md pages table must keep sibling cell {sibling_row}",
+                    errors,
+                )
+        if (
+            "Do **not** push `PUBLISH.md` to the wiki (operator instructions only)."
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md must keep full operator push prose "
+                "(to the wiki / operator instructions only)",
+                errors,
+            )
+        if "# From a clean worktree of agents-governance" not in publish_text:
+            fail(
+                "PUBLISH.md one-shot must keep clean worktree commentary",
+                errors,
+            )
+        if "or main — match the wiki default branch" not in publish_text:
+            fail(
+                "PUBLISH.md one-shot must keep or main — match the wiki default branch",
+                errors,
+            )
+        if (
+            "Link Check and Markdown Lint stay green on the PR that updates sources"
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md acceptance must keep Link Check and Markdown Lint stay green",
+                errors,
+            )
+        if "[Home.md](./Home.md)" not in publish_text:
+            fail(
+                "PUBLISH.md fallback must keep [Home.md](./Home.md) relative link",
+                errors,
+            )
+        if "Settings → Features → Wikis" not in publish_text:
+            fail(
+                "PUBLISH.md must keep Settings → Features → Wikis init path",
+                errors,
+            )
+        if (
+            "create any page once in the GitHub UI, then re-run the clone"
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md fallback must keep create any page once in the GitHub UI",
                 errors,
             )
 

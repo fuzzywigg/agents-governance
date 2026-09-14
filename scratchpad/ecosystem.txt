@@ -453,3 +453,14 @@ _None yet._
 2026-09-14T02:00:00Z
 
 2026-09-14T02:10:00Z cursor: PR #117 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-054 TOKENMAXX stewardship_common third-pass pins
+
+### [ECO-055] TOKENMAXX deepen run_stewardship runner pins after #117 — 2026-09-14T02:25:00Z
+- [x] cursor: Read live tree post-#117 (2331 cases; stewardship_common third-pass saturated; closed #122/#96 run_stewardship leftover)
+- [x] cursor: Fail-close run_stewardship runner — shebang / set -euo pipefail / dirname+cd ROOT / same-set-as-CI / python3 scripts/<gate> / badge→wiki→schema→relative / pwd + Run-all / check_run_stewardship_gate_contract
+- [x] cursor: Expand self-tests 2331 → 2419 (run_stewardship runner slice; not badge / common / actionlint / docs-lint / wiki / relative / schema pin spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING run_stewardship_checks.sh integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #122/#96 leftover on post-#117 main
+- Branch: cursor/tokenmaxx-run-stewardship-after-117-f041
+2026-09-14T02:25:00Z
+
+2026-09-14T02:25:30Z cursor: PR #121 closed CONFLICTING — stewardship_common third-pass already merged via #117; retarget to run_stewardship runner pins (ECO-055 / closed #122/#96 leftover)

@@ -40560,18 +40560,19 @@ def test_actionlint_gate_requires_contents_mem_fail_after_149() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'actionlint-style requires contents: read (membership)' in text
+        assert 'actionlint-style requires contents:read (membership)' in text
         # Mutate only the live fail() needle (count=1); contract concat still
-        # requires the original membership fail needle (fix CI-red #156).
+        # requires the original membership fail needle. Needle uses contents:read
+        # (no space) so it does not superstring the deepen contents/read fail.
         path.write_text(text.replace(
-            'actionlint-style requires contents: read (membership)',
-            'actionlint-style requires contents: read (memberx)',
+            'actionlint-style requires contents:read (membership)',
+            'actionlint-style requires contents:read (memberx)',
             1,
         ), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'actionlint-style requires contents: read (membership)',
+            'actionlint-style requires contents:read (membership)',
         )
 
 
@@ -40581,16 +40582,16 @@ def test_actionlint_gate_requires_contents_mem_fail_still_after_149() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'actionlint-style requires contents: read (membership)' in text
+        assert 'actionlint-style requires contents:read (membership)' in text
         path.write_text(text.replace(
-            'actionlint-style requires contents: read (membership)',
-            'actionlint-style requires contents: read (memberx)',
+            'actionlint-style requires contents:read (membership)',
+            'actionlint-style requires contents:read (memberx)',
             1,
         ), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'actionlint-style requires contents: read (membership)',
+            'actionlint-style requires contents:read (membership)',
         )
 
 

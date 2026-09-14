@@ -604,8 +604,13 @@ def check_actionlint_style(errors: list[str]) -> None:
         if "timeout-minutes:" not in text:
             fail(f"{name}: actionlint-style requires timeout-minutes on jobs", errors)
         # Leftover after #149: affirm contents: read via membership (complement #149 regex).
+        # Needle uses contents:read (no space after colon) so it does not superstring
+        # the deepen-pass contents/read fail needle; otherwise older mutate tests no-op.
         if "contents: read" not in text:
-            fail(f"{name}: actionlint-style requires contents: read (membership)", errors)
+            fail(
+                f"{name}: actionlint-style requires contents:read (membership)",
+                errors,
+            )
 
 
 def check_workflow_hardening(errors: list[str]) -> None:
@@ -2911,8 +2916,10 @@ def check_actionlint_style_gate_contract(errors: list[str]) -> None:
         )
     # Concatenate so mutating the live fail() needle alone fails this contract
     # (same pattern as fail_cancel_true / fail_contents_read after #135).
+    # Use contents:read (no space) so this is NOT a superstring of the deepen
+    # contents/read fail needle (space after colon).
     fail_contents_mem = (
-        "actionlint-style requires contents: read " + "(membership)"
+        "actionlint-style requires contents:read " + "(membership)"
     )
     if fail_contents_mem not in text:
         fail(

@@ -648,3 +648,5 @@ _None yet._
 2026-09-14T05:40:00Z
 
 2026-09-14T05:45:00Z cursor: Local green — run_stewardship + self-tests 3590 + markdownlint ← ECO-066 stewardship-schema third-pass after #189 tip (do not revive #190/#188/#187/#183; distinct from path-order #189 / wiki-index #181 / run_stewardship #179)
+
+2026-09-14T05:48:00Z cursor: Draft PR #194 opened (cursor/tokenmaxx-schema-third-pass-after-189-57e2); awaiting CI ← ECO-066 stewardship-schema third-pass after #189 tip (do not revive #190/#188/#187/#183)

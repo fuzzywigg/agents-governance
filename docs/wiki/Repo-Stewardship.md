@@ -162,7 +162,12 @@ exact `.markdownlint.json` layout+key-set+`json.loads` pins /
 plus wiki-badge posture after #132/#135: status badges cover Link Check+Markdown
 Lint / product badge refusal / reject stewardship-checks workflow badge invent /
 reject embedded markdown badge images / PUBLISH Link Check+Markdown Lint
-exactly / Home no badge-row embeds).
+exactly / Home no badge-row embeds,
+plus leftover docs-lint/stewardship/actionlint pins after #141: docs-lint
+third-pass exact `.lycheeignore` full layout + commentary lines /
+actionlint leftover `contents: read` + `cancel-in-progress: true` +
+`ubuntu-latest` / stewardship leftover exact `run_stewardship_checks.sh`
+full layout).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

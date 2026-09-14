@@ -772,3 +772,12 @@ _None yet._
 2026-09-14T08:12:29Z cursor: Rebased ECO-074 onto post-#233 tip (82b7d98); self-tests 4414 → 4462; local green (gates + 4462 + markdownlint); leave draft / do-not-merge; do not revive #231/#221; do not redo #233 schema / #227 wiki / #225 path-edges
 
 2026-09-14T08:13:45Z cursor: Draft PR #239 opened (cursor/tokenmaxx-mdlink-wiki-leftover-after-225-9959) replacing closed CONFLICTING #234; leave draft / do-not-merge; awaiting CI ← ECO-074 md/link residual after #233 (do not revive #234/#231/#221; do not redo #233/#227/#225)
+
+### [ECO-076] TOKENMAXX deepen stewardship-schema leftovers after #243 — 2026-09-14T08:40:00Z
+- [x] cursor: Read live tree post-#243 (4646 cases; wiki outline/PUBLISH saturated via #243; pick unsaturated schema leftover + stewardship_common residual helpers)
+- [x] cursor: Fail-close leftover schema parse/load needles + leftover status/surface stubs + common glob/hint/is_file leftovers
+- [x] cursor: Expand self-tests 4646 → 4830 (schema leftover slice only; not wiki #243 / md/link #239 / schema residual #233 spam)
+- [ ] cursor: Green draft PR with CI — leave draft
+- Scope: EXISTING check_stewardship_schema.py + stewardship_common.py leftover pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; leftover after #243 tip; do not redo #243 wiki / #239 md/link / #233 schema residual
+- Branch: cursor/tokenmaxx-schema-leftover-after-243-811f
+2026-09-14T08:40:00Z

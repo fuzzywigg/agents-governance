@@ -25,6 +25,10 @@ Fail-closed pins (live path after #46; second-pass after #65; third-pass after #
   set[Path] / workflows path join / for-loops over schemes+patterns+hints /
   Shared helpers doc / hint.endswith(=) / MEMORY dumps / str|None+list[Path] /
   FORBIDDEN_BADGE_HINTS head / SECRET_URL_HINTS ghp_+gho_+github_pat_ members
+- Residual leftover after #243 (common leftover; NOT wiki outline/PUBLISH #243 /
+  NOT md/link residual #239 / NOT schema residual (pass-5) #233): leftover helper
+  needles elif hint in text / for pattern in globs / found: set[Path] = set() /
+  if not path.is_file(): (load_workflow) / leftover docstring
 """
 
 from __future__ import annotations

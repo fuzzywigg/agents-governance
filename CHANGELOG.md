@@ -11,6 +11,21 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-schema leftover deepen after #243 tip: expand
+  self-tests to 4830 cases (was 4646) fail-closing unsaturated schema +
+  `stewardship_common` leftover helpers on existing modules only —
+  leftover parse/load needles (`if ":" not in line` / `if yaml is not None:` /
+  `if not match:` / `value is None or` / `status is not None` /
+  `raw = str(data[date_key])` / `ver = str(data["version"])` /
+  `closes = str(data["closes"])`) / leftover invalid status stubs
+  DRAFT|EXPERIMENTAL|OBSOLETE|DISABLED|INACTIVE|STAGED / leftover invalid
+  surface stubs cursor|linear|notion|discord|zapier / common leftover
+  `elif hint in text` / `for pattern in globs` / `found: set[Path] = set()` /
+  `if not path.is_file():` — schema leftover slice only (not wiki
+  outline/PUBLISH leftover #243 / not md/link residual #239 / not
+  stewardship-checks/schema residual #233 / not wiki-index/badge #227);
+  no invent-product; no fourth badge. Lands leftover after #243 tip.
+  Distinct from merged #243/#239/#233/#227/#225/#220/#216.
 - TOKENMAXX wiki outline/PUBLISH leftover deepen after #239 tip: expand
   self-tests to 4646 cases (was 4462) fail-closing unsaturated wiki outline /
   PUBLISH.md leftover on existing `docs/wiki` pages only — Pages to publish

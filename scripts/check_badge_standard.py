@@ -133,6 +133,10 @@ lands closed #229 leftover on post-#227 tip — do not revive #229):
 - exact jobs.stewardship runs-on/timeout/permissions header
 - reject strategy: / matrix: / services: invent on stewardship-checks.yml
 - schema residual (pass-5) invalid status+surface stubs + residual helper needles
+- schema leftover after #243: leftover helper needles + leftover status/surface stubs
+  (NOT wiki outline/PUBLISH #243 / NOT md/link residual #239 / NOT schema residual (pass-5) #233)
+- common leftover after #243: elif hint in text / for pattern in globs /
+  found: set[Path] = set() / if not path.is_file(): (load_workflow)
 - Wiki outline/PUBLISH leftover after #233: existing docs/wiki pages only —
   PUBLISH.md pages-table order / Pages to publish / wiki.git clone /
   cp docs/wiki/{page} (no operator PUBLISH.md) / git add six pages /
@@ -4743,7 +4747,7 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
         )
 
 def check_stewardship_common_contract(errors: list[str]) -> None:
-    """Fail-close live stewardship_common wiring (after #111; deepen after #65/#46)."""
+    """Fail-close live stewardship_common wiring (after #111; deepen after #65/#46; leftover after #243)."""
     if not COMMON_GATE.is_file():
         fail("Missing scripts/stewardship_common.py (shared gate helpers)", errors)
         return
@@ -5347,6 +5351,48 @@ def check_stewardship_common_contract(errors: list[str]) -> None:
             errors,
         )
 
+    # Fail-closed after #243: common leftover helper / constant / needle pins
+    # (common leftover slice only; not wiki outline/PUBLISH #243 / not md/link
+    # residual #239 / not schema residual (pass-5) #233 spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    common_leftover_doc = "Residual leftover after " + "#243 (common leftover"
+    if common_leftover_doc not in text:
+        fail(
+            "stewardship_common.py docstring must pin " + common_leftover_doc,
+            errors,
+        )
+    elif_hint = "elif hint in " + "text"
+    if elif_hint not in text:
+        fail(
+            "stewardship_common.py scan_secrets must keep elif hint in text",
+            errors,
+        )
+    for_globs = "for pattern in " + "globs"
+    if for_globs not in text:
+        fail(
+            "stewardship_common.py markdown_files must iterate for pattern in globs",
+            errors,
+        )
+    found_init = "found: set[Path] = " + "set()"
+    if found_init not in text:
+        fail(
+            "stewardship_common.py markdown_files must init found: set[Path] = set()",
+            errors,
+        )
+    missing_wf = "if not path.is_" + "file():"
+    if missing_wf not in text:
+        fail(
+            "stewardship_common.py load_workflow_text must keep if not path.is_file():",
+            errors,
+        )
+    common_host = "common leftover after " + "#243"
+    self_text_common_left = BADGE_GATE.read_text(encoding="utf-8")
+    if common_host not in self_text_common_left:
+        fail(
+            "check_badge_standard.py must keep " + common_host + " host pin",
+            errors,
+        )
+
     contract_fn = "check_stewardship_common_" + "contract"
     # Self-pin: this contract helper name must remain reachable from main.
     self_text = BADGE_GATE.read_text(encoding="utf-8")
@@ -5363,7 +5409,7 @@ def check_stewardship_common_contract(errors: list[str]) -> None:
 
 
 def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
-    """Fail-close live stewardship-schema gate wiring (after #72/#75; third-pass after #132; deepen after #189; policy-schema pass-4 after #208; schema residual after #225)."""
+    """Fail-close live stewardship-schema gate wiring (after #72/#75; third-pass after #132; deepen after #189; policy-schema pass-4 after #208; schema residual after #225; leftover after #243)."""
     if not SCHEMA_GATE.is_file():
         fail("Missing scripts/check_stewardship_schema.py (schema gate)", errors)
         return
@@ -6340,6 +6386,125 @@ def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
         fail(
             "check_stewardship_schema_gate_contract docstring must pin "
             + contract_residual,
+            errors,
+        )
+
+    # Fail-closed after #243: schema leftover helper / constant / needle pins
+    # (schema leftover slice only; not wiki outline/PUBLISH #243 / not md/link
+    # residual #239 / not schema residual (pass-5) #233 spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    leftover_243_doc = "Residual leftover after " + "#243 (schema leftover"
+    if leftover_243_doc not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + leftover_243_doc,
+            errors,
+        )
+    not_wiki_243 = "NOT wiki outline/PUBLISH " + "#243"
+    if not_wiki_243 not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + not_wiki_243,
+            errors,
+        )
+    not_mdlink_239 = "NOT md/link residual " + "#239"
+    if not_mdlink_239 not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + not_mdlink_239,
+            errors,
+        )
+    not_pass5_233 = "NOT schema residual (pass-5) " + "#233"
+    if not_pass5_233 not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + not_pass5_233,
+            errors,
+        )
+    colon_line = 'if ":" not in ' + "line"
+    if colon_line not in text and "if ':' not in line" not in text:
+        fail(
+            'check_stewardship_schema.py parse_simple_yaml must keep if ":" not in line',
+            errors,
+        )
+    yaml_present = "if yaml is not " + "None:"
+    if yaml_present not in text:
+        fail(
+            "check_stewardship_schema.py load_yaml must keep if yaml is not None:",
+            errors,
+        )
+    no_match = "if not " + "match:"
+    if no_match not in text:
+        fail(
+            "check_stewardship_schema.py first_yaml_block must keep if not match:",
+            errors,
+        )
+    value_none = "value is None " + "or"
+    if value_none not in text:
+        fail(
+            "check_stewardship_schema.py must reject empty scalars via value is None or",
+            errors,
+        )
+    status_none = "status is not " + "None"
+    if status_none not in text:
+        fail(
+            "check_stewardship_schema.py ACTIVE gate must keep status is not None",
+            errors,
+        )
+    raw_date = "raw = str(data[date_" + "key])"
+    if raw_date not in text:
+        fail(
+            "check_stewardship_schema.py DATE_KEYS loop must keep raw = str(data[date_key])",
+            errors,
+        )
+    ver_version = 'ver = str(data["version"])'
+    if ver_version not in text and "ver = str(data['version'])" not in text:
+        fail(
+            'check_stewardship_schema.py semver gate must keep ver = str(data["version"])',
+            errors,
+        )
+    closes_str = 'closes = str(data["closes"])'
+    if closes_str not in text and "closes = str(data['closes'])" not in text:
+        fail(
+            'check_stewardship_schema.py issue-ref gate must keep closes = str(data["closes"])',
+            errors,
+        )
+    for stub in (
+        "DRAFT",
+        "EXPERIMENTAL",
+        "OBSOLETE",
+        "DISABLED",
+        "INACTIVE",
+        "STAGED",
+    ):
+        if stub not in text:
+            fail(
+                "check_stewardship_schema.py docstring must pin leftover status "
+                f"enum stub {stub}",
+                errors,
+            )
+    for stub in (
+        "cursor",
+        "linear",
+        "notion",
+        "discord",
+        "zapier",
+    ):
+        if stub not in text:
+            fail(
+                "check_stewardship_schema.py docstring must pin leftover surface "
+                f"enum stub {stub}",
+                errors,
+            )
+    leftover_host = "schema leftover after " + "#243"
+    self_text5 = BADGE_GATE.read_text(encoding="utf-8")
+    if leftover_host not in self_text5:
+        fail(
+            "check_badge_standard.py must keep " + leftover_host + " host pin",
+            errors,
+        )
+    leftover_slice = "schema leftover " + "slice"
+    if leftover_slice not in self_text5:
+        fail(
+            "check_badge_standard.py schema leftover must keep "
+            + leftover_slice
+            + " pin",
             errors,
         )
 

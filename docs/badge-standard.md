@@ -276,6 +276,19 @@ status+surface stubs + helper needles — DISTINCT leftover only
 not Pass-2 leftover + md/link #220 / not schema fourth-pass #216 /
 not stewardship-badge lint #208; lands closed #229 leftover on post-#227
 tip; do not revive closed #229/#228/#230/#231)).
+plus Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #233:
+soft-fail with `|| :` / `|| return 0` / `set +o errexit` / `set +o nounset` /
+invent `python3 -m` for gates / must not source env files / must not dot-source paths /
+reject any `continue-on-error:` on existing workflows / exact contiguous concurrency
+group template on all three workflows (existing templates only; no invent) /
+existing `templates/AGENTS-REPO.md` H1 `[PROJECT_NAME]` / parent_governance /
+maintainer smtp.eth / YYYY-MM-DD placeholder / §1–§6 / `[CONFIG_FILE]` /
+Never commit `.env` / `agents-md/description` / no invent badge.svg chrome —
+DISTINCT leftover edges only (not stewardship-checks/schema residual #233 /
+not wiki-index/badge #227 / not path-edges #225 / not Pass-2 leftover + md/link #220 /
+not Pass-2 residual #199/#203 / not badge-lint #208 / not schema #216;
+lands closed #235/#230 leftover on post-#233 tip; do not revive #235/#230;
+do not invent new templates).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

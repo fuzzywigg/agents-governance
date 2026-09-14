@@ -462,3 +462,5 @@ _None yet._
 - Scope: EXISTING run_stewardship_checks.sh integrity / helper+constant pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #122/#96 leftover on post-#117 main; do not revive #119
 - Branch: cursor/tokenmaxx-run-stewardship-after-117-287a
 2026-09-14T02:20:00Z
+
+2026-09-14T02:28:00Z cursor: PR #127 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-055 TOKENMAXX run_stewardship runner pins after #117

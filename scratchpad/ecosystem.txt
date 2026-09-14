@@ -750,3 +750,16 @@ _None yet._
 2026-09-14T07:35:00Z cursor: Draft PR #227 opened (cursor/tokenmaxx-wiki-badge-leftover-after-225-5367); leave draft / do-not-merge; awaiting CI ← ECO-073 wiki-index/badge leftover after #225 (do not revive #222/#215/#196)
 
 2026-09-14T07:40:00Z cursor: PR #227 CI green (lint + link-check + stewardship) + MERGEABLE on tip ← ECO-073 wiki-index/badge leftover after #225 (leave draft / do-not-merge; do not revive #222/#215/#196)
+
+2026-09-14T08:03:01Z cursor: PR #233 MERGED (stewardship-checks + schema residual leftover after #227) ← tip; ECO leftover complete via #233
+
+### [ECO-075] TOKENMAXX deepen schema+common leftover after #233 — 2026-09-14T08:10:00Z
+- [x] cursor: Read live tree post-#233 (4414 cases; stewardship-checks + schema pass-5 saturated via #233)
+- [x] cursor: Fail-close schema leftover (pass-6) + stewardship_common leftover helper/signature pins on post-#233 tip
+- [x] cursor: Expand self-tests 4414 → 4542 (+128; schema+common leftover slice only; not #233 workflow residual / #227 / #225 / #220 / #216 / pass-5 spam; do not revive #229)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING check_stewardship_schema.py + stewardship_common.py leftover edge pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; leftover deepen on post-#233 tip; do not revive #229/#228/#230/#231; do not redo #233 stewardship-checks workflow residual
+- Branch: cursor/tokenmaxx-schema-common-leftover-after-233-fc08
+2026-09-14T08:10:00Z
+
+2026-09-14T08:25:00Z cursor: Local green — run_stewardship + self-tests 4542 + markdownlint ← ECO-075 schema+common leftover after #233 (leave draft; do not revive #229)

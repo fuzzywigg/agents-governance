@@ -11,6 +11,18 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX schema+common leftover deepen after #233 tip: expand self-tests to
+  4542 cases (was 4414) fail-closing residual schema (pass-6) leftover status/surface
+  stubs (DRAFT|EXPERIMENTAL|OBSOLETE|INACTIVE|DISABLED|STALE /
+  human|notion|linear|cursor|vscode) plus leftover parse/helper needles and
+  stewardship_common leftover signature pins (`elif hint in text` / `*globs: str` /
+  `label: str | None = None` / `found: set[Path] = set()` / optional language tag /
+  `return scheme` / fail+scan_secrets signatures) — schema+common leftover slice
+  only (not stewardship-checks workflow residual #233 / wiki-index/badge #227 /
+  path-filter/path-order #225 / Pass-2 leftover + md/link #220 / schema
+  fourth-pass #216 / schema residual pass-5 after #225); no invent-product; no
+  fourth badge. Lands leftover deepen on post-#233 tip (do **not** revive
+  #229/#228/#230/#231). Distinct from merged #233/#227/#225/#220/#216.
 - TOKENMAXX stewardship-checks + schema residual deepen leftovers after #227 tip: expand
   self-tests to 4414 cases (was 4230) fail-closing unsaturated stewardship-checks contiguous
   layout edges (exact Set up Python / Install PyYAML / checkout adjacency / full push paths /

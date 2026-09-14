@@ -46,6 +46,20 @@ Fail-closed pins (live path after #53; second-pass after #72/#75):
   stubs WIP|BETA|LEGACY|FROZEN|CANCELLED|PROTOTYPE / residual invalid surface stubs
   openai|anthropic|slack|auto|agents / "status" in required_keys / loaded is None /
   value.lower() == "true" / int(value) / if not text.strip() / residual docstring
+- Residual after #233 (schema pass-6 leftover; NOT pass-5 #233 / NOT wiki-index/badge
+  #227 / NOT path-edges #225 / NOT Pass-2 leftover+md/link #220 / NOT schema
+  fourth-pass #216): leftover invalid status stubs DRAFT|EXPERIMENTAL|OBSOLETE|
+  INACTIVE|DISABLED|STALE / leftover invalid surface stubs human|notion|linear|
+  cursor|vscode / if not line or line.startswith("#") / key = key.strip() /
+  value = value.strip() / if not key: / if str(_SCRIPTS) not in sys.path /
+  except ImportError / yaml.safe_load(text) / status is not None /
+  isinstance(level, bool) or not isinstance(level, int) /
+  isinstance(tier, bool) or not isinstance(tier, int) /
+  raw = str(data[date_key]) / if rel == "AGENTS.md" and "version" in data /
+  for key, want in expected.items() / got = data.get(key) /
+  engine = "PyYAML" if yaml is not None else "stdlib-subset" / noqa: E402 /
+  value is None or / for raw in text.splitlines() / data[key] = value /
+  leftover docstring (distinct from schema residual pass-5 after-225)
 """
 
 from __future__ import annotations

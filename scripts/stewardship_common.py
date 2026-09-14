@@ -25,6 +25,13 @@ Fail-closed pins (live path after #46; second-pass after #65; third-pass after #
   set[Path] / workflows path join / for-loops over schemes+patterns+hints /
   Shared helpers doc / hint.endswith(=) / MEMORY dumps / str|None+list[Path] /
   FORBIDDEN_BADGE_HINTS head / SECRET_URL_HINTS ghp_+gho_+github_pat_ members
+- Residual after #233 (common leftover; NOT schema pass-5 #233 / NOT wiki-index/badge
+  #227 / NOT path-edges #225 / NOT Pass-2 leftover+md/link #220 / NOT schema
+  fourth-pass #216): elif hint in text / *globs: str / label: str | None = None /
+  found: set[Path] = set() / for pattern in globs / optional language tag /
+  return scheme / fail(msg: str, errors: list[str]) -> None / *, label /
+  has_dangerous_scheme(target: str) / load_workflow_text(name: str) /
+  Only flag URL-ish secret hints / leftover docstring
 """
 
 from __future__ import annotations

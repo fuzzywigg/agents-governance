@@ -252,6 +252,13 @@ status+surface stubs + helper needles — DISTINCT leftover only
 not Pass-2 leftover + md/link #220 / not schema fourth-pass #216 /
 not stewardship-badge lint #208; lands closed #229 leftover on post-#227
 tip; do not revive closed #229/#228/#230/#231)).
+plus schema+common leftover deepen after #233 tip: leftover schema residual
+(pass-6) status+surface stubs + parse/helper needles / stewardship_common
+leftover signature pins — DISTINCT leftover only
+(not stewardship-checks workflow residual #233 / not wiki-index/badge #227 /
+not path-filter/path-order #225 / not Pass-2 leftover + md/link #220 /
+not schema fourth-pass #216 / not schema residual pass-5 after #225;
+do not revive closed #229/#228/#230/#231)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

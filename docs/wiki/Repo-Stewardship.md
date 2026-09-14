@@ -353,6 +353,25 @@ not path-edges leftover #262 / not wiki/mdlink leftover #252 /
 not stewardship-schema leftover #258 / not path-filter residual #244 /
 not wiki outline/PUBLISH leftover #243 / not md/link residual layouts #239;
 no extra wiki files)).
+plus stewardship-schema residual CI leftover residual deepen after #314 tip
+(lands closed #316 leftover on post-#314 path-order tip):
+residual CI leftover residual helper needles (`if missing:` /
+`fail(f"missing file: {rel}"` / `if value is None or` / `must be non-empty` /
+`must be a string` / `"status" in required_keys` / `status is not None` /
+`status must be ACTIVE` / `(expected {want!r})` / `not isinstance(level, int)` /
+`isinstance(tier, bool)` / `not isinstance(tier, int)` / `or tier < 1` /
+`if rel == "AGENTS.md"` / `"version" in data` / `yaml.safe_load` /
+`isinstance(loaded, dict)`) / residual CI leftover residual status stubs
+ABANDONED|EXPIRED|REVOKED|HIDDEN|OFFLINE|ZOMBIE / residual CI leftover residual
+surface stubs huggingface|replicate|cohere|bedrock|sagemaker — DISTINCT schema
+residual CI leftover residual only (tip-relaunch leftover residual on post-#314 tip;
+not schema residual CI leftover #309 / not schema residual CI #299 /
+not wiki/mdlink leftover residual #293 / not schema leftover residual #282 /
+not lychee/blob-503 leftover #278 / not Pass-2 residual leftover #272 /
+not path-filter/path-order leftover #314/#262 / not schema leftover #258 /
+not wiki/mdlink leftover #252 / not path-edges residual #244 /
+not stewardship-checks/schema residual #233; no stewardship_common invent;
+do not revive closed PR #316/#295/#290/#268/#259/#257/#253/#248/#241)).
 plus stewardship-schema residual CI leftover deepen after #299 tip: residual CI
 leftover helper needles (`missing = sorted(...)` / `if key not in data:` /
 `value = data[key]` / `if reject_non_scalar(...)` / `status = data.get("status")` /

@@ -520,3 +520,5 @@ _None yet._
 - Scope: EXISTING actionlint-style reversible CI reliability pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands after #135; do not revive #139/#113
 - Branch: cursor/tokenmaxx-actionlint-pins-after-135-114e
 2026-09-14T03:10:00Z
+
+2026-09-14T03:20:00Z cursor: Local gates green — run_stewardship + self-tests 2665 + markdownlint ← ECO-058 actionlint deepen after #135 (do not revive #139)

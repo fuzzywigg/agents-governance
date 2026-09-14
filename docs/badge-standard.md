@@ -330,7 +330,7 @@ do not revive #266/#265/#256/#254/#251/#250/#246/#245/#240/#235/#230;
 do not invent new templates).
 plus docs-lint pass-4 lychee harden: exclude same-repo GitHub `blob/main` HTML
 (intermittent 503) via `.lycheeignore` while wiki-outline keeps absolute blob pins
-(do not revive #266/#265/#256/#251/#250; no invent templates; no DNS sprawl).
+(do not revive #266/#265/#256/#251/#250; no invent templates; no DNS sprawl; ECO-080).
 plus stewardship-schema leftover deepen after #252 tip: leftover parse/load
 needles / leftover invalid status+surface stubs / `stewardship_common`
 glob+hint+is_file leftovers — DISTINCT leftover only (not wiki/mdlink

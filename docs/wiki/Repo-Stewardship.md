@@ -329,6 +329,20 @@ not path-edges #225 / not Pass-2 leftover + md/link #220 /
 not Pass-2 residual #199/#203 / not badge-lint #208 / not schema #216;
 lands closed #251/#250/#246/#245/#240 leftover on post-#262 tip;
 do not revive #251/#250/#246/#245/#240/#235/#230;prior #251/#250 RED was transient GitHub 503; do not invent new templates).
+plus actionlint path-filter/path-order residual leftover deepen after #282 tip
+(pins after #272 wording; lands closed #286/#280 leftover):
+contiguous workflow_dispatch:/concurrency: adjacency / contiguous name:/on:
+workflow header / reject workflow_run: / reject repository_dispatch: /
+reject merge_group: / reject tags: (bare) / contiguous six-step actionlint
+path-order — DISTINCT residual leftover edges only (not stewardship-schema
+residual #282 / not lychee/blob-503 harden #278 / not Pass-2 residual leftover #272 /
+not saturated leftover #262 / not stewardship-schema
+leftover #258 / not wiki/mdlink leftover #252 / not saturated residual #244 /
+not saturated deepen #225/#203 / not wiki outline/PUBLISH leftover #243 /
+not md/link residual #239 / not stewardship-checks/schema leftover #233 /
+not wiki-badge leftover #227 / not #189 / not #176 / not schema #191/#216 /
+not Pass-2 residual #199/#203 / not Pass-2 leftover + md/link #220 /
+not stewardship-badge lint #208; do not revive closed #286/#280/#274/#270/#264/#255/#247/#244/#236/#232/#228/#226/#223/#217/#213/#198/#186/#166/#157)).
 plus stewardship-schema leftover residual deepen after #262 tip
 (rebased post-#278): leftover residual parse/load needles / leftover residual
 invalid status+surface stubs / `stewardship_common`

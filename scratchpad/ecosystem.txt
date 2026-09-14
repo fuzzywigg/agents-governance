@@ -832,3 +832,7 @@ _None yet._
 2026-09-14T09:50:00Z
 
 2026-09-14T09:55:00Z cursor: Local green — run_stewardship + self-tests 5122 + markdownlint ← ECO-078 path-filter/path-order residual leftover after #244 on tip #252 (leave draft; do not revive #255/#247/#244/#236/#232/#228)
+
+2026-09-14T09:56:00Z cursor: Draft PR #264 opened (cursor/tokenmaxx-path-edges-leftover-after-252-2a53); leave draft / do-not-merge; awaiting CI ← ECO-078 residual leftover after #244 on tip #252 (do not revive #255/#247/#244/#236/#232/#228)
+
+2026-09-14T09:56:05Z cursor: ECO-078 draft PR #264 — CI pending (lint + link-check + stewardship/actionlint)

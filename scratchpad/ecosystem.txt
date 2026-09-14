@@ -568,3 +568,5 @@ _None yet._
 2026-09-14T04:31:02Z cursor: PR #171 CI green (lint + link-check + stewardship/actionlint) DRAFT ← complete ECO-060 TOKENMAXX policy-schema fourth-pass after #161 (do not revive #163/#142/#147/#153; leave #164/#166/#170 alone; do not merge)
 
 2026-09-14T04:31:25Z cursor: [x] ECO-060 Green PR with CI — PR #171 DRAFT CI green; do not merge
+
+2026-09-14T04:31:48Z cursor: PR #171 CLOSED by fuzzywigg while CI green (lint+link-check+stewardship) DRAFT — ECO-060 policy-schema fourth-pass delivered; do not reopen unless smtp.eth asks; leave #164/#173/#174 alone

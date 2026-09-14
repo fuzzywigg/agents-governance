@@ -168,6 +168,11 @@ plus actionlint-style deepen after #135/#141: `cancel-in-progress: true` /
 `security-events|attestations|statuses|deployments: write` / deepen docstring,
 plus leftover docs-lint/stewardship/actionlint pins after #149: docs-lint
 third-pass exact `.lycheeignore` full layout + commentary lines /
+plus docs-lint pass-4 after #251 tip: `.lycheeignore` excludes flaky
+same-repo `blob/main` GitHub HTML (503) while wiki-outline keeps absolute
+blob pins; exact layout + commentary + contract needles (do not revive
+closed #251/#250; distinct from Pass-2 residual/template leftover).
+
 actionlint leftover `contents: read` membership affirm (complement #149
 regex) / stewardship leftover exact `run_stewardship_checks.sh` full layout,
 plus stewardship CI deepen after #161: Check links / Run markdownlint /

@@ -186,3 +186,9 @@ Link to living policy and README instead of inventing frameworks.
 - Working branches only — never commit stewardship directly to `main`
 
 [← Autonomy Levels](Autonomy-Levels.md) · [Agent Routing →](Agent-Routing.md)
+
+plus actionlint path-order + badge CI leftovers after #135: contiguous
+three-path actionlint order / `bash <(curl -fsSL)` form / no
+`continue-on-error: true` / step names / no `stewardship-checks.yml/badge.svg`
+invent / exact `badge.svg` paths — distinct from closed #120/#138 and from
+PR #135 docs-lint / #111 concurrency / #132 workflow third-pass).

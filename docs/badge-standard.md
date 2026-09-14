@@ -183,6 +183,12 @@ Connection-reset+RST+false-positive+early-hints+valid-site commentary /
 `check_badge_standard.py` reference / License badge presence remains enforced /
 exact `.markdownlint.json` layout+key-set+`json.loads` pins /
 `check_docs_lint_gate_contract` second-pass).
+plus actionlint path-order + badge CI leftovers after #135: contiguous
+three-path actionlint order / `bash <(curl -fsSL)` form / no
+`continue-on-error: true` / step names / no `stewardship-checks.yml/badge.svg`
+invent / exact `badge.svg` paths — distinct from closed #120/#138 and from
+PR #135 docs-lint / #111 concurrency / #132 workflow third-pass).
+
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

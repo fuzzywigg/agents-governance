@@ -511,3 +511,12 @@ _None yet._
 - Scope: EXISTING docs-lint integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; rebased onto post-#132 main; distinct from closed #116
 - Branch: cursor/tokenmaxx-docs-lint-second-pass-after-111-ca9a
 2026-09-14T02:40:36Z
+
+### [ECO-058] TOKENMAXX deepen actionlint/badge CI pins after #135 — 2026-09-14T03:05:00Z
+- [x] cursor: Read live tree post-#135 (2593 cases; docs-lint second-pass saturated; #138 CLOSED CONFLICTING_after_135 — do not revive)
+- [x] cursor: Fail-close actionlint path-order + badge CI leftovers (distinct from #135 docs-lint / #132 workflow / #111 concurrency)
+- [x] cursor: Expand self-tests 2593 → 2623
+- [ ] cursor: Green draft PR with CI
+- Scope: EXISTING actionlint-path + badge-CI integrity only; no invent-product; no fourth badge; no secrets; no DNS/history; NOT closed #120/#138 revive
+- Branch: cursor/tokenmaxx-actionlint-badge-docs-after-135-4a67
+2026-09-14T03:05:00Z

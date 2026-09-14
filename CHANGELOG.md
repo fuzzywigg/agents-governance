@@ -11,6 +11,23 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-schema leftover deepen after #252 tip: expand
+  self-tests to 5176 cases (was 4976) fail-closing unsaturated schema +
+  `stewardship_common` leftover helpers on existing modules only —
+  leftover parse/load needles (`if ":" not in line` / `if yaml is not None:` /
+  `if not match:` / `value is None or` / `status is not None` /
+  `raw = str(data[date_key])` / `ver = str(data["version"])` /
+  `closes = str(data["closes"])`) / leftover invalid status stubs
+  DRAFT|EXPERIMENTAL|OBSOLETE|DISABLED|INACTIVE|STAGED / leftover invalid
+  surface stubs cursor|linear|notion|discord|zapier / common leftover
+  `elif hint in text` / `for pattern in globs` / `found: set[Path] = set()` /
+  `if not path.is_file():` — schema leftover slice only (not wiki/mdlink
+  leftover #252 / not path-edges residual #244 / not wiki outline/PUBLISH
+  leftover #243 / not md/link residual #239 / not stewardship-checks/schema
+  residual #233 / not wiki-index/badge #227); no invent-product; no fourth
+  badge. Lands closed #253/#248 leftover on post-#252 tip (do **not** revive
+  #253/#248/#241). Distinct from merged
+  #252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
 - TOKENMAXX wiki/mdlink leftover deepen after #243 tip (post-#244 rebase): expand
   self-tests to 4976 cases (was 4792) fail-closing unsaturated wiki outline /
   PUBLISH.md leftover plus markdown-lint / link-check residual layouts on

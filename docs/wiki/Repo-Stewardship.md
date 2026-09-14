@@ -287,6 +287,13 @@ omit-when-copying plus exact contiguous link+lint concurrency / job headers /
 `**/*.md` then `fail: true` adjacency — DISTINCT leftover only (not #243
 wiki/PUBLISH saturated pins / not md/link residual #239 / not path-filter
 residual #244 / not schema #233; no extra wiki files)).
+plus stewardship-schema leftover deepen after #252 tip: leftover parse/load
+needles / leftover invalid status+surface stubs / `stewardship_common`
+glob+hint+is_file leftovers — DISTINCT leftover only (not wiki/mdlink
+leftover #252 / not path-edges residual #244 / not wiki outline/PUBLISH
+leftover #243 / not md/link residual #239 / not stewardship-checks/schema
+residual #233 / not wiki-index/badge leftover #227; do not revive
+closed #253/#248/#241)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

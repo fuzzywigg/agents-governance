@@ -11,6 +11,20 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX relative-link third-pass pins after #90: expand self-tests
+  to 1899 cases (was 1827) fail-closing live relative-link integrity —
+  `MD_LINK_RE`+`ATX_HEADING_RE` exact / `SKIP_*` exact assigns /
+  OK+FAILED banners / empty+http+protocol-relative+dangerous needles /
+  utf-8 / `as_posix` / `.md` suffix / `ValueError` / `sorted` / UNICODE /
+  space-to-dash slug / Percent-decode+Cap nested / empty () fail-closed /
+  `sys.exit` / `urllib.unquote` / `group(2)` / `startswith#` / `split#` /
+  files scanned / stewardship_common import / title attr / `#{1,6}` /
+  slug punctuation / Offline+lychee docstring / `path.parent`, plus
+  relative-link gate contract pins in `check_badge_standard.py` —
+  relative-link third-pass slice only (not schema / badge / wiki /
+  common / CI workflow / actionlint pin spam); no invent-product; no
+  fourth badge
+
 - TOKENMAXX actionlint-style second-pass pins after #83/#86: expand self-tests
   to 1827 cases (was 1755) fail-closing live actionlint-style integrity —
   exact `name:` / `uses:` regexes / write-all+contents+id-token regexes /

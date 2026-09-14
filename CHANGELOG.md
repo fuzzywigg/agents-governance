@@ -11,6 +11,22 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX overnight stewardship/CI/schema/wiki fixture deepen after #165:
+  expand self-tests to 3081 cases (was 2957) covering residual policy/
+  stewardship edge fixtures — schema bool/nested/list/string/edit_policy/
+  DRAFT/parent/surface/closes/semver/ISO/empty/autonomy/tier/maintainer/
+  scope/backlog-owner/claude-repo / wiki unexpected/kill/invent/producthunt/
+  buymeacoffee/credential/stewardship svg/badge-embed/http/javascript/
+  Home-backlink/PUBLISH-table / relative NUL/query/empty-frag/vbscript/file/
+  javascript/nested-escape/protocol-relative/broken/missing-heading /
+  common ghr_/AIza/npm_/aws/OPENSSH/client_secret URL + forbidden/dangerous
+  membership / badge fourth/coverage/order/stars/http-image/secret-token —
+  stewardship/CI/schema/wiki fixture slice only (not actionlint / docs-lint /
+  stewardship-CI pin / path-filter / schema-third-pass pin spam); no
+  invent-product; no fourth badge on live tree. Lands closed #167 leftover on
+  post-#165 main (do **not** revive #167/#168/#169). Distinct from open
+  schema-third-pass (#164) and actionlint path-filter (#166).
+
 - TOKENMAXX stewardship CI deepen pins after #161: expand self-tests to
   2957 cases (was 2885) fail-closing live stewardship CI reliability leftovers —
   Check links / Run markdownlint / Set up Python / Install PyYAML (schema parser) /

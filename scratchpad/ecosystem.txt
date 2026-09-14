@@ -511,3 +511,14 @@ _None yet._
 - Scope: EXISTING docs-lint integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; rebased onto post-#132 main; distinct from closed #116
 - Branch: cursor/tokenmaxx-docs-lint-second-pass-after-111-ca9a
 2026-09-14T02:40:36Z
+
+### [ECO-057] TOKENMAXX deepen wiki-badge pins after #132/#135 — 2026-09-14T02:55:00Z
+- [x] cursor: Read live tree post-#135 (2593 cases; docs-lint second-pass saturated via #135; #131/#134 CLOSED)
+- [x] cursor: Fail-close wiki-badge posture — status badges cover Link Check+Markdown Lint / product badge refusal / reject stewardship-checks.yml/badge.svg invent / reject embedded markdown badge images / PUBLISH Link Check+Markdown Lint exactly / Home no badge-row embeds
+- [x] cursor: Expand self-tests 2593 → 2689 (wiki-badge slice only; not docs-lint / common / run_stewardship / actionlint / relative / CI workflow spam)
+- [ ] cursor: Green PR with CI
+- Scope: EXISTING wiki-badge posture integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #120/#131 leftover on post-#135 main
+- Branch: cursor/tokenmaxx-wiki-badge-after-132-cdb2
+2026-09-14T02:55:00Z
+
+2026-09-14T03:05:00Z cursor: PR #141 CI green (lint + link-check + stewardship/actionlint) MERGEABLE ← complete ECO-057 TOKENMAXX wiki-badge pins after #132/#135 (replaces closed #131/#136)

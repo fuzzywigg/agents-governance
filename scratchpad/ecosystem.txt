@@ -464,3 +464,5 @@ _None yet._
 2026-09-14T02:25:00Z
 
 2026-09-14T02:25:30Z cursor: PR #121 closed CONFLICTING — stewardship_common third-pass already merged via #117; retarget to run_stewardship runner pins (ECO-055 / closed #122/#96 leftover)
+
+2026-09-14T02:26:00Z cursor: PR #128 CI green (lint + link-check + stewardship/actionlint) ← complete ECO-055 TOKENMAXX run_stewardship runner pins

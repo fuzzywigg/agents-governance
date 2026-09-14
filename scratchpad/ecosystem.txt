@@ -859,3 +859,4 @@ _None yet._
 2026-09-14T11:01:50Z
 
 2026-09-14T11:01:50Z cursor: Local implementation — stewardship-schema leftover residual after #272 tip; self-tests 5550 → 5750; lint-safe doc wraps (no MD018 #N at column 1); leave draft / do-not-merge; do not revive #276/#275/#269; do not redo #272/#262/#258/#252
+2026-09-14T11:10:03Z cursor: Draft PR #283 opened (cursor/tokenmaxx-schema-residual-after-272-5b47); leave draft / do-not-merge; awaiting CI ← ECO-078 stewardship-schema leftover residual after #272 (do not revive #276/#275/#269; do not redo #272/#262/#258/#252)

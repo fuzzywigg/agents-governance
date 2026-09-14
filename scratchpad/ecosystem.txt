@@ -783,3 +783,7 @@ _None yet._
 2026-09-14T08:35:00Z
 
 2026-09-14T08:35:00Z cursor: Local green pending — Pass-2 residual leftover + existing templates/AGENTS-REPO.md after #243 (leave draft; do not revive #240/#235/#230)
+
+2026-09-14T08:46:22Z cursor: Local green — run_stewardship + self-tests 4870 + markdownlint ← ECO-076 Pass-2 residual leftover + existing templates/AGENTS-REPO.md after #243 (leave draft; do not revive #240/#235/#230)
+
+2026-09-14T08:46:30Z cursor: Draft PR #245 opened (cursor/tokenmaxx-pass2-residual-templates-after-243-f040); leave draft / do-not-merge; awaiting CI ← ECO-076 Pass-2 residual leftover after #243 (do not revive #240/#235/#230)

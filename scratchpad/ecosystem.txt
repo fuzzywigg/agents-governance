@@ -772,3 +772,14 @@ _None yet._
 2026-09-14T08:12:29Z cursor: Rebased ECO-074 onto post-#233 tip (82b7d98); self-tests 4414 → 4462; local green (gates + 4462 + markdownlint); leave draft / do-not-merge; do not revive #231/#221; do not redo #233 schema / #227 wiki / #225 path-edges
 
 2026-09-14T08:13:45Z cursor: Draft PR #239 opened (cursor/tokenmaxx-mdlink-wiki-leftover-after-225-9959) replacing closed CONFLICTING #234; leave draft / do-not-merge; awaiting CI ← ECO-074 md/link residual after #233 (do not revive #234/#231/#221; do not redo #233/#227/#225)
+
+### [ECO-076] TOKENMAXX deepen Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #243 — 2026-09-14T08:35:00Z
+- [x] cursor: Read live tree post-#243 (4646 cases; wiki outline/PUBLISH leftover saturated via #243; #240 CLOSED CONFLICTING Pass-2 residual leftover)
+- [x] cursor: Fail-close Pass-2 residual leftover + existing templates/AGENTS-REPO.md validation (no invent templates)
+- [x] cursor: Expand self-tests 4646 → 4870 (Pass-2 residual + existing-template leftover slice only; not #243/#239/#233/#227 spam)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING run_stewardship Pass-2 residual + existing templates/AGENTS-REPO.md leftover only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates invent; do not revive #240/#235/#230; do not redo #243 wiki outline / #239 md/link / #233 schema leftover
+- Branch: cursor/tokenmaxx-pass2-residual-templates-after-243-f040
+2026-09-14T08:35:00Z
+
+2026-09-14T08:35:00Z cursor: Local green pending — Pass-2 residual leftover + existing templates/AGENTS-REPO.md after #243 (leave draft; do not revive #240/#235/#230)

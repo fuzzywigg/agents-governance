@@ -292,6 +292,20 @@ rewrite / OPERATOR_ONLY not in PUBLISHABLE_PAGES — DISTINCT leftover only
 (not md/link residual #239 / not stewardship-checks/schema #233 /
 not wiki-index/badge #227 / not path-filter/path-order #225;
 lands closed #238 leftover on post-#239 tip; do not revive #238)).
+plus Pass-2 residual + existing templates/AGENTS-REPO.md leftover after #243:
+soft-fail with `|| :` / `|| return 0` / `set +o errexit` / `set +o nounset` /
+invent `python3 -m` for gates / must not source env files / must not dot-source paths /
+reject any `continue-on-error:` on existing workflows / exact contiguous concurrency
+group template on all three workflows (existing templates only; no invent) /
+existing `templates/AGENTS-REPO.md` H1 `[PROJECT_NAME]` / parent_governance /
+maintainer smtp.eth / YYYY-MM-DD placeholder / §1–§6 / `[CONFIG_FILE]` /
+Never commit `.env` / `agents-md/description` / no invent badge.svg chrome —
+DISTINCT leftover edges only (not wiki outline/PUBLISH leftover #243 /
+not md/link residual #239 / not stewardship-checks/schema residual #233 /
+not wiki-index/badge #227 / not path-edges #225 / not Pass-2 leftover + md/link #220 /
+not Pass-2 residual #199/#203 / not badge-lint #208 / not schema #216;
+lands closed #240/#235/#230 leftover on post-#243 tip; do not revive #240/#235/#230;
+do not invent new templates).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

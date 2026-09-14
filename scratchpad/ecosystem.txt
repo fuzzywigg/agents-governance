@@ -589,3 +589,5 @@ _None yet._
 2026-09-14T04:45:00Z cursor: Local green — run_stewardship + self-tests 3175 + markdownlint ← ECO-062 actionlint path-filter leftovers after #173 (do not revive #166/#157; leave #172/#175/#164/#170/#174 alone)
 
 2026-09-14T04:46:00Z cursor: Draft PR #176 opened (cursor/tokenmaxx-path-filter-leftovers-after-173-d040); awaiting CI ← ECO-062 actionlint path-filter leftovers after #173 (do not revive #166/#157)
+
+2026-09-14T04:47:00Z cursor: PR #176 CI green (lint + link-check + stewardship/actionlint) MERGEABLE ← complete ECO-062 TOKENMAXX actionlint path-filter leftovers after #173 (does not revive #166/#157)

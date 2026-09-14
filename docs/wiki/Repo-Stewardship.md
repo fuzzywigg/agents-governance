@@ -343,8 +343,7 @@ not wiki outline/PUBLISH leftover #243 / not md/link residual #239 /
 not stewardship-checks/schema leftover #233 / not wiki-badge leftover #227 /
 not #189 / not #176 / not schema #191/#216 / not Pass-2 residual #199/#203 /
 not Pass-2 leftover + md/link #220 / not stewardship-badge lint #208;
-do not revive closed
-#292/#286/#280/#274/#270/#264/#255/#247/#244/#236/#232/#228/#226/#223/#217/#213/#198/#186/#166/#157)).
+do not revive closed #292/#286/#280/#274/#270/#264/#255/#247/#244/#236/#232/#228/#226/#223/#217/#213/#198/#186/#166/#157)).
 plus stewardship-schema leftover residual deepen after #262 tip
 (rebased post-#278): leftover residual parse/load needles / leftover residual
 invalid status+surface stubs / `stewardship_common`

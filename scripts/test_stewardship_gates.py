@@ -342,6 +342,7 @@ jobs:
             --exclude-path .github/agents
             "**/*.md"
           fail: true
+
 """
     lint = """name: Markdown Lint
 

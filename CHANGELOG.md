@@ -11,6 +11,21 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki-outline third-pass pins after #90/#94: expand self-tests to 1971
+  cases (was 1899) fail-closing live wiki-outline integrity — WIKI exact /
+  `removesuffix` / `glob("*.md")` / `sorted(unexpected)` / Link Check+
+  Markdown Lint+No secrets / Home invent+secrets+kill needles /
+  Repo-Stewardship relative+invent+actionlint+run_script needles /
+  `startswith("//")`+`http://` / `group(2)` / utf-8 / `sys.exit` /
+  stewardship_common / invent-chrome social special-cases / shields host /
+  markdown-badge open / badge-in-lowered gate / README+badge hint paths /
+  pages+operator OK / intentional PUBLISH pin / `PAGE_TOPIC_HINTS.get` /
+  `strip_fenced_code(text)` / `has_dangerous_scheme(target)` /
+  `scan_secrets` calls, plus wiki-outline gate contract pins in
+  `check_badge_standard.py` — wiki-outline third-pass slice only (not
+  relative / actionlint / markdownlint+lycheeignore / schema / badge /
+  common / CI workflow pin spam); no invent-product; no fourth badge
+
 - TOKENMAXX relative-link third-pass pins after #90: expand self-tests
   to 1899 cases (was 1827) fail-closing live relative-link integrity —
   `MD_LINK_RE`+`ATX_HEADING_RE` exact / `SKIP_*` exact assigns /

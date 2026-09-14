@@ -600,3 +600,5 @@ _None yet._
 2026-09-14T04:55:00Z
 
 2026-09-14T05:00:00Z cursor: Local green — run_stewardship + self-tests 3247 + markdownlint ← ECO-063 wiki-index validators after #176 (do not revive #177/#168/#170/#178; leave path-filter #176 alone)
+
+2026-09-14T05:02:00Z cursor: Draft PR #180 opened (cursor/tokenmaxx-wiki-index-validators-after-176-2041); awaiting CI ← ECO-063 wiki-index validators after #176 (do not revive #177/#168/#170/#178)

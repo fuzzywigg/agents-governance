@@ -688,3 +688,5 @@ _None yet._
 - Scope: EXISTING link-check.yml / markdown-lint.yml edge integrity only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; no DNS/history; lands closed #201/#192 leftover on post-#203 tip; do not revive #201/#192/#197; leave open CONFLICTING #204/#205 alone; do not redo #199/#191/#189/#203
 - Branch: cursor/tokenmaxx-mdlink-ci-edges-after-199-f76b
 2026-09-14T06:16:28Z
+
+2026-09-14T06:26:57Z cursor: Local green — run_stewardship + self-tests 3724 + markdownlint ← ECO-069 md/link CI edges after #199 (do not revive #201/#192; leave CONFLICTING/MERGEABLE schema/badge siblings alone)

@@ -704,3 +704,5 @@ _None yet._
 2026-09-14T06:35:00Z cursor: Local green — run_stewardship + self-tests 3906 + markdownlint ← ECO-070 schema fourth-pass after #208 tip
 
 2026-09-14T06:36:00Z cursor: Draft PR #216 opened (cursor/tokenmaxx-schema-fourth-pass-after-208-57e2); awaiting CI ← ECO-070 schema fourth-pass after #208 tip (do not revive #171/#209/#204/#200)
+
+2026-09-14T06:40:00Z cursor: PR #216 CI green (lint + link-check + stewardship) + MERGEABLE on tip ← ECO-070 schema fourth-pass after #208 tip (do not revive #171/#209/#204/#200)

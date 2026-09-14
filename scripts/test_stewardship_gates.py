@@ -412,7 +412,12 @@ jobs:
         "— not a broken URL.\n"
         "# License badge presence remains enforced by stewardship "
         "(check_badge_standard.py).\n"
-        r"https://img\.shields\.io" + "\n",
+        r"https://img\.shields\.io" + "\n"
+        "# Same-repo GitHub blob/main HTML intermittently returns 503 "
+        "— not a broken URL.\n"
+        "# Absolute blob/main pins remain enforced by wiki-outline "
+        "(check_wiki_outline.py).\n"
+        r"https://github\.com/fuzzywigg/agents-governance/blob/main/" + "\n",
     )
     _write(
         tmp / ".markdownlint.json",
@@ -38494,7 +38499,7 @@ def test_docs_lint_accepts_live_lychee_after_111() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
-        _write(tmp_path / ".lycheeignore", '# modelcontextprotocol.io returns 308 redirect — valid site, lychee false-positive\nhttps://modelcontextprotocol.io/\n# linuxfoundation.org returns 103 early hints — valid site\nhttps://www.linuxfoundation.org/\n# img.shields.io badge CDN is flaky (Connection reset by peer / RST) — not a broken URL.\n# License badge presence remains enforced by stewardship (check_badge_standard.py).\nhttps://img\\.shields\\.io\n')
+        _write(tmp_path / ".lycheeignore", _lychee_good_after_251())
         assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
 
 

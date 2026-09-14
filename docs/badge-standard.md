@@ -130,7 +130,14 @@ semver / closes #N / FAILED+OK / stdlib-subset+PyYAML / bool subclass /
 plus actionlint-style second-pass after #83/#86: exact `name:`/`uses:`
 regexes / write-all+contents+id-token regexes / `docker://` startswith /
 `@` not in uses / `rsplit` / `group(1).strip()` / fail needles /
-least-privilege+OIDC+majors comments / `REQUIRED_WORKFLOWS` loop).
+least-privilege+OIDC+majors comments / `REQUIRED_WORKFLOWS` loop,
+plus relative-link third-pass after #90: exact `MD_LINK_RE` /
+`ATX_HEADING_RE` / `SKIP_*` assigns / `relative_to.as_posix` /
+`urllib.unquote` / `range(_MAX_UNQUOTE_PASSES)` / slug
+strip+UNICODE+space-dash / `rglob`+`sorted` / `group(2).strip` /
+allowlist tuple / `//` membership / `split("#",1)` / `?` in target /
+`ROOT.resolve` / `exists` / `.md` suffix / FAILED+OK banners /
+empty+http+protocol-relative+fragment+query fail needles).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

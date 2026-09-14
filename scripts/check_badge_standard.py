@@ -2498,7 +2498,7 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
 
 
 def check_relative_link_gate_contract(errors: list[str]) -> None:
-    """Fail-close live relative-link gate wiring (after #55; deepen after #41)."""
+    """Fail-close live relative-link gate wiring (after #55; third-pass after #90)."""
     if not RELATIVE_LINK_GATE.is_file():
         fail("Missing scripts/check_relative_links.py (relative-link gate)", errors)
         return
@@ -2681,6 +2681,307 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
     if "no markdown files found" not in text:
         fail(
             "check_relative_links.py must fail closed when no markdown files found",
+            errors,
+        )
+    # Fail-closed after #90: third-pass helper / constant / needle pins
+    # (relative-link slice only; not actionlint / docs-lint / schema / badge /
+    # wiki / common / CI workflow pin spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    md_link_exact = (
+        'r"!?' + r'\[([^\]]*)\]\(\s*([^)\s]*)(?:\s+\"[^\"]*\")?\s*\)"'
+    )
+    md_link_exact_sq = (
+        "r'!?" + r"\[([^\]]*)\]\(\s*([^)\s]*)(?:\s+\"[^\"]*\")?\s*\)'"
+    )
+    if md_link_exact not in text and md_link_exact_sq not in text:
+        fail(
+            "check_relative_links.py must keep exact MD_LINK_RE pattern",
+            errors,
+        )
+    atx_exact = 'r"^(#{1,6})\\s+(.+?)\\s*$"'
+    atx_exact_sq = "r'^(#{1,6})\\s+(.+?)\\s*$'"
+    if atx_exact not in text and atx_exact_sq not in text:
+        fail(
+            "check_relative_links.py must keep exact ATX_HEADING_RE pattern",
+            errors,
+        )
+    multiline_pin = "re.MULTI" + "LINE"
+    if multiline_pin not in text:
+        fail(
+            "check_relative_links.py ATX_HEADING_RE must use re.MULTILINE",
+            errors,
+        )
+    skip_parts_exact = '{".git", ' + '"node_modules"}'
+    skip_parts_exact_sq = "{'.git', " + "'node_modules'}"
+    if skip_parts_exact not in text and skip_parts_exact_sq not in text:
+        fail(
+            "check_relative_links.py must set SKIP_PARTS = "
+            '{".git", "node_modules"}',
+            errors,
+        )
+    skip_files_exact = '{"OWASP-AGENTIC.md"}'
+    skip_files_exact_sq = "{'OWASP-AGENTIC.md'}"
+    skip_files_multiline = '"OWASP-AGENTIC.md"'
+    skip_files_multiline_sq = "'OWASP-AGENTIC.md'"
+    if (
+        skip_files_exact not in text
+        and skip_files_exact_sq not in text
+        and not (
+            "SKIP_FILES" in text
+            and (
+                skip_files_multiline in text
+                or skip_files_multiline_sq in text
+            )
+        )
+    ):
+        fail(
+            "check_relative_links.py must set SKIP_FILES = "
+            '{"OWASP-AGENTIC.md"}',
+            errors,
+        )
+    github_agents = 'Path(".github")' + ' / "agents"'
+    github_agents_sq = "Path('.github')" + " / 'agents'"
+    if github_agents not in text and github_agents_sq not in text:
+        fail(
+            "check_relative_links.py SKIP_PREFIXES must use "
+            'Path(".github") / "agents"',
+            errors,
+        )
+    as_posix = "relative_to(ROOT)" + ".as_posix()"
+    if as_posix not in text:
+        fail(
+            "check_relative_links.py should_skip must use "
+            "relative_to(ROOT).as_posix()",
+            errors,
+        )
+    name_in_skip = "path.name in " + "SKIP_FILES"
+    if name_in_skip not in text:
+        fail(
+            "check_relative_links.py should_skip must test "
+            "path.name in SKIP_FILES",
+            errors,
+        )
+    parts_loop = "part in SKIP_PARTS for part in " + "path.parts"
+    if parts_loop not in text:
+        fail(
+            "check_relative_links.py should_skip must scan path.parts "
+            "against SKIP_PARTS",
+            errors,
+        )
+    slash_norm = 'prefix.replace("\\\\", ' + '"/")'
+    slash_norm_alt = 'prefix.replace("\\", ' + '"/")'
+    slash_norm_sq = "prefix.replace('\\\\', " + "'/')"
+    slash_norm_sq_alt = "prefix.replace('\\\\', '/')"
+    # Live source uses prefix.replace("\\", "/") — one escaped backslash in file.
+    slash_live = 'prefix.replace("\\", "/")'
+    slash_live_sq = "prefix.replace('\\\\', '/')"
+    if (
+        slash_live not in text
+        and 'prefix.replace("\\\\", "/")' not in text
+        and "prefix.replace('\\\\', '/')" not in text
+        and slash_norm not in text
+        and slash_norm_alt not in text
+        and slash_norm_sq not in text
+        and slash_norm_sq_alt not in text
+        and slash_live_sq not in text
+    ):
+        fail(
+            "check_relative_links.py should_skip must normalize "
+            'prefix.replace("\\\\", "/")',
+            errors,
+        )
+    urllib_unquote = "from urllib.parse import " + "unquote"
+    if urllib_unquote not in text:
+        fail(
+            "check_relative_links.py must import unquote from urllib.parse",
+            errors,
+        )
+    range_max = "range(_MAX_UNQUOTE_" + "PASSES)"
+    if range_max not in text:
+        fail(
+            "check_relative_links.py fully_unquote must "
+            "range(_MAX_UNQUOTE_PASSES)",
+            errors,
+        )
+    strip_lower = "heading.strip()" + ".lower()"
+    if strip_lower not in text:
+        fail(
+            "check_relative_links.py github_slug must heading.strip().lower()",
+            errors,
+        )
+    md_ticks = 'r"[`*_~]"'
+    md_ticks_sq = "r'[`*_~]'"
+    if md_ticks not in text and md_ticks_sq not in text:
+        fail(
+            "check_relative_links.py github_slug must strip markdown ticks "
+            "via [`*_~]",
+            errors,
+        )
+    slug_link = r'r"\[([^\]]+)\]\([^)]+\)"'
+    slug_link_sq = r"r'\[([^\]]+)\]\([^)]+\)'"
+    if slug_link not in text and slug_link_sq not in text:
+        fail(
+            "check_relative_links.py github_slug must strip inline md links",
+            errors,
+        )
+    unicode_pin = "re.UNI" + "CODE"
+    if unicode_pin not in text:
+        fail(
+            "check_relative_links.py github_slug must use flags=re.UNICODE",
+            errors,
+        )
+    space_dash = '.replace(" ", ' + '"-")'
+    space_dash_sq = ".replace(' ', " + "'-')"
+    if space_dash not in text and space_dash_sq not in text:
+        fail(
+            "check_relative_links.py github_slug must map spaces to '-'",
+            errors,
+        )
+    rglob_md = 'ROOT.rglob("*.md")'
+    rglob_md_sq = "ROOT.rglob('*.md')"
+    if rglob_md not in text and rglob_md_sq not in text:
+        fail(
+            "check_relative_links.py iter_markdown must ROOT.rglob(\"*.md\")",
+            errors,
+        )
+    sorted_pin = "sorted(p for p in"
+    if sorted_pin not in text:
+        fail(
+            "check_relative_links.py iter_markdown must sorted(...) markdown",
+            errors,
+        )
+    group2_strip = "match.group(2)" + ".strip()"
+    if group2_strip not in text:
+        fail(
+            "check_relative_links.py check_file must take target via "
+            "match.group(2).strip()",
+            errors,
+        )
+    allow_tuple = '("http://", "https://", "mailto:", ' + '"tel:")'
+    allow_tuple_sq = "('http://', 'https://', 'mailto:', " + "'tel:')"
+    if allow_tuple not in text and allow_tuple_sq not in text:
+        fail(
+            "check_relative_links.py must allowlist "
+            "http/https/mailto/tel startswith tuple",
+            errors,
+        )
+    proto_rel = 'startswith("//")'
+    proto_rel_sq = "startswith('//')"
+    if proto_rel not in text and proto_rel_sq not in text:
+        fail(
+            "check_relative_links.py must reject protocol-relative "
+            'via startswith("//")',
+            errors,
+        )
+    split_hash = 'split("#", ' + "1)"
+    split_hash_sq = "split('#', " + "1)"
+    if split_hash not in text and split_hash_sq not in text:
+        fail(
+            "check_relative_links.py must split fragments via split(\"#\", 1)",
+            errors,
+        )
+    query_in = '"?" in ' + "target"
+    query_in_sq = "'?' in " + "target"
+    if query_in not in text and query_in_sq not in text:
+        fail(
+            "check_relative_links.py must reject query via \"?\" in target",
+            errors,
+        )
+    root_resolve = "ROOT.resolve" + "()"
+    if root_resolve not in text:
+        fail(
+            "check_relative_links.py must bound resolves via ROOT.resolve()",
+            errors,
+        )
+    dest_exists = "dest.exists" + "()"
+    if dest_exists not in text:
+        fail(
+            "check_relative_links.py must require dest.exists() for relative targets",
+            errors,
+        )
+    md_suffix = 'dest.suffix.lower() == ' + '".md"'
+    md_suffix_sq = "dest.suffix.lower() == " + "'.md'"
+    if md_suffix not in text and md_suffix_sq not in text:
+        fail(
+            "check_relative_links.py fragment checks must require .md suffix",
+            errors,
+        )
+    failed_banner = "Relative link check " + "FAILED"
+    if failed_banner not in text:
+        fail(
+            "check_relative_links.py must print Relative link check FAILED",
+            errors,
+        )
+    ok_banner = "OK: relative markdown links " + "resolve"
+    if ok_banner not in text:
+        fail(
+            "check_relative_links.py must OK when relative markdown links resolve",
+            errors,
+        )
+    empty_needle = "empty relative link " + "target"
+    if empty_needle not in text:
+        fail(
+            "check_relative_links.py must emit empty relative link target needle",
+            errors,
+        )
+    http_needle = "insecure http:// " + "link"
+    if http_needle not in text:
+        fail(
+            "check_relative_links.py must emit insecure http:// link needle",
+            errors,
+        )
+    proto_needle = "protocol-relative link not " + "allowed"
+    if proto_needle not in text:
+        fail(
+            "check_relative_links.py must emit protocol-relative link not "
+            "allowed needle",
+            errors,
+        )
+    frag_needle = "empty fragment in relative " + "link"
+    if frag_needle not in text:
+        fail(
+            "check_relative_links.py must emit empty fragment in relative "
+            "link needle",
+            errors,
+        )
+    query_needle = "relative link must not include query " + "string"
+    if query_needle not in text:
+        fail(
+            "check_relative_links.py must emit relative link must not include "
+            "query string needle",
+            errors,
+        )
+    third_pass_doc = "Third-pass after " + "#90"
+    if third_pass_doc not in text:
+        fail(
+            "check_relative_links.py docstring must pin " + third_pass_doc,
+            errors,
+        )
+    utf8_pin = 'encoding="utf-8"'
+    utf8_pin_sq = "encoding='utf-8'"
+    if utf8_pin not in text and utf8_pin_sq not in text:
+        fail(
+            "check_relative_links.py must read markdown as utf-8",
+            errors,
+        )
+    is_file_skip = "p.is_file() and not " + "should_skip"
+    if is_file_skip not in text:
+        fail(
+            "check_relative_links.py iter_markdown must filter "
+            "is_file and not should_skip",
+            errors,
+        )
+    slug_frag = "github_slug(" + "frag)"
+    if slug_frag not in text:
+        fail(
+            "check_relative_links.py must resolve fragments via github_slug(frag)",
+            errors,
+        )
+    frag_norm = "frag.strip()" + ".lower()"
+    if frag_norm not in text:
+        fail(
+            "check_relative_links.py must normalize fragments via "
+            "frag.strip().lower()",
             errors,
         )
 

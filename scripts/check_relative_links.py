@@ -10,6 +10,12 @@ Fail-closed pins (live path after #55; deepen after #41):
 - Allow https:// / mailto: / tel:; reject empty targets, bare `#`, empty
   path# fragments, query strings, protocol-relative `//`, insecure http://,
   dangerous schemes, NUL, repo escapes; angle-bracket targets supported
+- Third-pass after #90: exact MD_LINK_RE / ATX_HEADING_RE / SKIP_* assigns /
+  relative_to.as_posix / urllib.unquote / range(_MAX_UNQUOTE_PASSES) /
+  slug strip+UNICODE+space-dash / rglob+sorted / group(2).strip /
+  allowlist startswith tuple / // membership / split("#",1) / ? in target /
+  ROOT.resolve / exists / .md suffix / FAILED+OK banners / empty+http+
+  protocol-relative+fragment+query fail needles
 """
 
 from __future__ import annotations

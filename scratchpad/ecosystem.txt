@@ -732,3 +732,17 @@ _None yet._
 2026-09-14T07:10:00Z cursor: Local green — run_stewardship + self-tests 4116 + markdownlint ← ECO-072 path-filter/path-order leftovers after #220 (leave draft; do not revive #223/#222/#221)
 
 2026-09-14T07:12:00Z cursor: Draft PR #225 opened (cursor/tokenmaxx-path-edges-leftover-after-220-74ac); leave draft / do-not-merge; awaiting CI ← ECO-072 path-filter/path-order leftovers after #220 (do not revive #223/#222/#221)
+
+### [ECO-073] TOKENMAXX deepen path-filter/path-order residuals after #225 — 2026-09-14T07:30:00Z
+- [x] cursor: Read live tree post-#225 (4116 cases; path-edges deepen saturated via #225; closed sibling #226 CONFLICTING — pick DISTINCT residual path-filter/path-order edges)
+- [x] cursor: Fail-close residual path-edges on post-#225 tip — PR/schedule adjacency / reject branches-ignore / PR type-unfiltered / reject changed-files / four-step actionlint path-order / schedule before dispatch / shell-less actionlint run step
+- [x] cursor: Expand self-tests 4116 → 4262 (path-edges residual slice only; not #225/#220/#216/#208/#203/#199/#191/#189 spam; do not revive #226/#223/#217/#213/#198)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING actionlint path-filter/path-order residual edge pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; do not revive #226/#223/#217/#213/#198/#186/#166/#157; do not redo #225 deepen
+- Branch: cursor/tokenmaxx-path-edges-residual-after-225-7fba
+2026-09-14T07:30:00Z
+
+2026-09-14T07:19:47Z cursor: PR #225 MERGED (path-filter/path-order leftovers after #220) ← tip; ECO-072 complete via #225
+2026-09-14T07:24:09Z cursor: CONFLICTING sibling #226 CLOSED after #225 tip move
+
+2026-09-14T07:35:00Z cursor: Local green pending — run_stewardship + self-tests 4262 + markdownlint ← ECO-073 path-filter/path-order residuals after #225 (leave draft; do not revive #226/#223/#217)

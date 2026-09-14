@@ -165,7 +165,11 @@ reject embedded markdown badge images / PUBLISH Link Check+Markdown Lint
 exactly / Home no badge-row embeds,
 plus actionlint-style deepen after #135/#141: `cancel-in-progress: true` /
 `contents: read` / `ubuntu-latest` / `workflow_dispatch:` / reject
-`security-events|attestations|statuses|deployments: write` / deepen docstring).
+`security-events|attestations|statuses|deployments: write` / deepen docstring,
+plus leftover docs-lint/stewardship/actionlint after #149: exact live
+`.lycheeignore` third-pass layout+commentary / exact
+`run_stewardship_checks.sh` layout / actionlint least-privilege
+affirmations).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

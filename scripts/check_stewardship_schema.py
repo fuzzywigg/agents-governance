@@ -55,6 +55,20 @@ Fail-closed pins (live path after #53; second-pass after #72/#75):
   leftover invalid status stubs DRAFT|EXPERIMENTAL|OBSOLETE|DISABLED|INACTIVE|STAGED /
   leftover invalid surface stubs cursor|linear|notion|discord|zapier /
   leftover docstring
+- Residual leftover after #272 (schema leftover residual; NOT Pass-2 residual + template leftover #272 /
+  NOT path-filter/path-order leftover #262 /
+  NOT schema leftover #258 / NOT wiki/mdlink leftover #252 / NOT path-edges residual #244 /
+  NOT wiki outline/PUBLISH #243 / NOT md/link residual #239 /
+  NOT schema residual (pass-5) #233): leftover residual helper
+  needles if not key: / data[key] = value /
+  raise ValueError("metadata YAML must be a mapping") /
+  return match.group(1) / block = first_yaml_block(path) /
+  data = load_yaml(block) / if missing: / got = data.get(key) /
+  policy = str(data["edit_policy"]).lower() /
+  print("Stewardship schema check FAILED:" /
+  leftover residual invalid status stubs REJECTED|UNKNOWN|ORPHANED|QUARANTINE|SHADOW|PREVIEW /
+  leftover residual invalid surface stubs telegram|matrix|irc|email|webhook /
+  leftover residual docstring
 """
 
 from __future__ import annotations

@@ -848,3 +848,14 @@ _None yet._
 2026-09-14T10:30:00Z cursor: Draft PR #272 opened (cursor/tokenmaxx-pass2-residual-templates-after-244-1979) on post-#262 tip; leave draft / do-not-merge; awaiting CI ← ECO-077 Pass-2 residual + existing templates/AGENTS-REPO.md (do not revive #265/#254/#251/#250/#246/#245/#240)
 
 2026-09-14T10:41:00Z cursor: PR #272 CI green (lint + link-check + stewardship) + MERGEABLE on tip ← ECO-077 Pass-2 residual leftover + existing templates/AGENTS-REPO.md after #262 (leave draft / do-not-merge; do not revive #265/#254/#251/#250/#246/#245/#240)
+
+### [ECO-078] TOKENMAXX deepen stewardship-schema leftover residual after #272 — 2026-09-14T11:01:50Z
+- [x] cursor: Read live tree post-#272 (5550 cases; Pass-2 residual + templates saturated via #272; closed CONFLICTING #276/#275/#269 schema residual)
+- [x] cursor: Fail-close leftover residual schema parse/load + common helper needles + residual status/surface stubs on existing modules only
+- [x] cursor: Expand self-tests 5550 → 5750 (schema leftover residual slice only; not #272/#262/#258/#252 spam; do not revive #276/#275/#269/#263/#257/#253/#248/#241)
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Scope: EXISTING stewardship-schema + stewardship_common leftover residual edge pin wiring only; no invent-product; no fourth badge; no AGENTS-ECOSYSTEM/templates; no secrets; do not revive #276/#275/#269/#263/#257/#253/#248/#241; do not redo #272 Pass-2/templates / #262 path-edges / #258 schema leftover / #252 wiki/mdlink
+- Branch: cursor/tokenmaxx-schema-residual-after-272-5b47
+2026-09-14T11:01:50Z
+
+2026-09-14T11:01:50Z cursor: Local implementation — stewardship-schema leftover residual after #272 tip; self-tests 5550 → 5750; lint-safe doc wraps (no MD018 #N at column 1); leave draft / do-not-merge; do not revive #276/#275/#269; do not redo #272/#262/#258/#252

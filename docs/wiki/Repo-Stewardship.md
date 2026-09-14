@@ -353,6 +353,18 @@ not path-edges leftover #262 / not wiki/mdlink leftover #252 /
 not stewardship-schema leftover #258 / not path-filter residual #244 /
 not wiki outline/PUBLISH leftover #243 / not md/link residual layouts #239;
 no extra wiki files)).
+plus Pass-2 residual / templates leftovers after #293 tip: soft-fail with
+`|| true` / `set +e` / must not `eval` / existing `templates/AGENTS-REPO.md`
+`Level [0/1/2]` / L0–L2 / Critical Files / Autonomy Level / End of Document /
+SEV-1..SEV-4 / `[test command]` / cov-req placeholder / `.env` Secrets row /
+governs blurb / lychee reject invent `tree/main` + bare `https://github.com/` /
+keep Same-repo GitHub — DISTINCT leftover only (lands closed #291 leftover;
+not wiki/mdlink leftover residual #293 /
+not stewardship-schema leftover residual #282 /
+not saturated Pass-2 residual leftover #272 /
+not lychee/blob-503 leftover #278 / not path-edges leftover #262 /
+not schema leftover #258 / not wiki/mdlink leftover #252; do not invent new
+templates; no secrets)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

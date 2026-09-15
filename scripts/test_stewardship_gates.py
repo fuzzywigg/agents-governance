@@ -89249,56 +89249,6 @@ def test_path_filter_rejects_stew_on_exact_pad0_after_348() -> None:
         path.write_text(text.replace('on:\n  push:\n    branches: ["**"]\n    paths:\n', 'on:\n  push:\n    branches: ["main"]\n    paths:\n', 1), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous on:')
 
-def test_path_filter_rejects_stew_on_exact_pad1_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert 'on:\n  push:\n    branches: ["**"]\n    paths:\n' in text
-        path.write_text(text.replace('on:\n  push:\n    branches: ["**"]\n    paths:\n', 'on:\n  push:\n    branches: ["main"]\n    paths:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous on:')
-
-def test_path_filter_rejects_stew_on_exact_pad2_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert 'on:\n  push:\n    branches: ["**"]\n    paths:\n' in text
-        path.write_text(text.replace('on:\n  push:\n    branches: ["**"]\n    paths:\n', 'on:\n  push:\n    branches: ["main"]\n    paths:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous on:')
-
-def test_path_filter_rejects_stew_on_exact_pad3_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert 'on:\n  push:\n    branches: ["**"]\n    paths:\n' in text
-        path.write_text(text.replace('on:\n  push:\n    branches: ["**"]\n    paths:\n', 'on:\n  push:\n    branches: ["main"]\n    paths:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous on:')
-
-def test_path_filter_rejects_stew_on_exact_pad4_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert 'on:\n  push:\n    branches: ["**"]\n    paths:\n' in text
-        path.write_text(text.replace('on:\n  push:\n    branches: ["**"]\n    paths:\n', 'on:\n  push:\n    branches: ["main"]\n    paths:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous on:')
-
-def test_path_filter_rejects_stew_on_exact_pad5_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert 'on:\n  push:\n    branches: ["**"]\n    paths:\n' in text
-        path.write_text(text.replace('on:\n  push:\n    branches: ["**"]\n    paths:\n', 'on:\n  push:\n    branches: ["main"]\n    paths:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous on:')
-
 def test_path_filter_rejects_stew_on_exact_still_after_348() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
@@ -89320,56 +89270,6 @@ def test_path_filter_rejects_stew_on_exact_after_348() -> None:
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous on:')
 
 def test_path_filter_rejects_link_release_pad0_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/link-check.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
-
-def test_path_filter_rejects_link_release_pad1_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/link-check.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
-
-def test_path_filter_rejects_link_release_pad2_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/link-check.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
-
-def test_path_filter_rejects_link_release_pad3_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/link-check.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
-
-def test_path_filter_rejects_link_release_pad4_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/link-check.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
-
-def test_path_filter_rejects_link_release_pad5_after_348() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
@@ -89409,56 +89309,6 @@ def test_path_filter_rejects_lint_release_pad0_after_348() -> None:
         path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
 
-def test_path_filter_rejects_lint_release_pad1_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/markdown-lint.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
-
-def test_path_filter_rejects_lint_release_pad2_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/markdown-lint.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
-
-def test_path_filter_rejects_lint_release_pad3_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/markdown-lint.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
-
-def test_path_filter_rejects_lint_release_pad4_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/markdown-lint.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
-
-def test_path_filter_rejects_lint_release_pad5_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/markdown-lint.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
-
 def test_path_filter_rejects_lint_release_still_after_348() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
@@ -89480,56 +89330,6 @@ def test_path_filter_rejects_lint_release_after_348() -> None:
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
 
 def test_path_filter_rejects_stew_release_pad0_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
-
-def test_path_filter_rejects_stew_release_pad1_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
-
-def test_path_filter_rejects_stew_release_pad2_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
-
-def test_path_filter_rejects_stew_release_pad3_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
-
-def test_path_filter_rejects_stew_release_pad4_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
-
-def test_path_filter_rejects_stew_release_pad5_after_348() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
@@ -89569,56 +89369,6 @@ def test_path_filter_rejects_link_issues_pad0_after_348() -> None:
         path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
 
-def test_path_filter_rejects_link_issues_pad1_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/link-check.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
-
-def test_path_filter_rejects_link_issues_pad2_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/link-check.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
-
-def test_path_filter_rejects_link_issues_pad3_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/link-check.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
-
-def test_path_filter_rejects_link_issues_pad4_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/link-check.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
-
-def test_path_filter_rejects_link_issues_pad5_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/link-check.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
-
 def test_path_filter_rejects_link_issues_still_after_348() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
@@ -89640,56 +89390,6 @@ def test_path_filter_rejects_link_issues_after_348() -> None:
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
 
 def test_path_filter_rejects_lint_issues_pad0_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/markdown-lint.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
-
-def test_path_filter_rejects_lint_issues_pad1_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/markdown-lint.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
-
-def test_path_filter_rejects_lint_issues_pad2_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/markdown-lint.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
-
-def test_path_filter_rejects_lint_issues_pad3_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/markdown-lint.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
-
-def test_path_filter_rejects_lint_issues_pad4_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/markdown-lint.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
-
-def test_path_filter_rejects_lint_issues_pad5_after_348() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
@@ -89729,56 +89429,6 @@ def test_path_filter_rejects_stew_issues_pad0_after_348() -> None:
         path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
 
-def test_path_filter_rejects_stew_issues_pad1_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
-
-def test_path_filter_rejects_stew_issues_pad2_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
-
-def test_path_filter_rejects_stew_issues_pad3_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
-
-def test_path_filter_rejects_stew_issues_pad4_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
-
-def test_path_filter_rejects_stew_issues_pad5_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
-
 def test_path_filter_rejects_stew_issues_still_after_348() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
@@ -89800,56 +89450,6 @@ def test_path_filter_rejects_stew_issues_after_348() -> None:
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
 
 def test_path_filter_rejects_stew_discussion_pad0_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  discussion:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent discussion:')
-
-def test_path_filter_rejects_stew_discussion_pad1_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  discussion:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent discussion:')
-
-def test_path_filter_rejects_stew_discussion_pad2_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  discussion:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent discussion:')
-
-def test_path_filter_rejects_stew_discussion_pad3_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  discussion:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent discussion:')
-
-def test_path_filter_rejects_stew_discussion_pad4_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  discussion:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent discussion:')
-
-def test_path_filter_rejects_stew_discussion_pad5_after_348() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
@@ -89889,56 +89489,6 @@ def test_path_filter_rejects_stew_deployment_pad0_after_348() -> None:
         path.write_text(text.replace('  workflow_dispatch:\n', '  deployment:\n  workflow_dispatch:\n', 1), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent deployment:')
 
-def test_path_filter_rejects_stew_deployment_pad1_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  deployment:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent deployment:')
-
-def test_path_filter_rejects_stew_deployment_pad2_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  deployment:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent deployment:')
-
-def test_path_filter_rejects_stew_deployment_pad3_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  deployment:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent deployment:')
-
-def test_path_filter_rejects_stew_deployment_pad4_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  deployment:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent deployment:')
-
-def test_path_filter_rejects_stew_deployment_pad5_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  deployment:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent deployment:')
-
 def test_path_filter_rejects_stew_deployment_still_after_348() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
@@ -89969,56 +89519,6 @@ def test_path_filter_rejects_stew_check_run_pad0_after_348() -> None:
         path.write_text(text.replace('  workflow_dispatch:\n', '  check_run:\n  workflow_dispatch:\n', 1), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent check_run:')
 
-def test_path_filter_rejects_stew_check_run_pad1_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  check_run:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent check_run:')
-
-def test_path_filter_rejects_stew_check_run_pad2_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  check_run:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent check_run:')
-
-def test_path_filter_rejects_stew_check_run_pad3_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  check_run:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent check_run:')
-
-def test_path_filter_rejects_stew_check_run_pad4_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  check_run:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent check_run:')
-
-def test_path_filter_rejects_stew_check_run_pad5_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  check_run:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent check_run:')
-
 def test_path_filter_rejects_stew_check_run_still_after_348() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
@@ -90040,56 +89540,6 @@ def test_path_filter_rejects_stew_check_run_after_348() -> None:
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent check_run:')
 
 def test_path_filter_rejects_stew_create_pad0_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  create:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent create:')
-
-def test_path_filter_rejects_stew_create_pad1_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  create:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent create:')
-
-def test_path_filter_rejects_stew_create_pad2_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  create:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent create:')
-
-def test_path_filter_rejects_stew_create_pad3_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  create:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent create:')
-
-def test_path_filter_rejects_stew_create_pad4_after_348() -> None:
-    with tempfile.TemporaryDirectory() as tmp:
-        tmp_path = Path(tmp)
-        scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8")
-        assert '  workflow_dispatch:\n' in text
-        path.write_text(text.replace('  workflow_dispatch:\n', '  create:\n  workflow_dispatch:\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent create:')
-
-def test_path_filter_rejects_stew_create_pad5_after_348() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
@@ -106763,91 +106213,36 @@ def main() -> int:
         test_path_filter_gate_wording_still_after_348,
         test_path_filter_gate_wording_after_348,
         test_path_filter_rejects_stew_on_exact_pad0_after_348,
-        test_path_filter_rejects_stew_on_exact_pad1_after_348,
-        test_path_filter_rejects_stew_on_exact_pad2_after_348,
-        test_path_filter_rejects_stew_on_exact_pad3_after_348,
-        test_path_filter_rejects_stew_on_exact_pad4_after_348,
-        test_path_filter_rejects_stew_on_exact_pad5_after_348,
         test_path_filter_rejects_stew_on_exact_still_after_348,
         test_path_filter_rejects_stew_on_exact_after_348,
         test_path_filter_rejects_link_release_pad0_after_348,
-        test_path_filter_rejects_link_release_pad1_after_348,
-        test_path_filter_rejects_link_release_pad2_after_348,
-        test_path_filter_rejects_link_release_pad3_after_348,
-        test_path_filter_rejects_link_release_pad4_after_348,
-        test_path_filter_rejects_link_release_pad5_after_348,
         test_path_filter_rejects_link_release_still_after_348,
         test_path_filter_rejects_link_release_after_348,
         test_path_filter_rejects_lint_release_pad0_after_348,
-        test_path_filter_rejects_lint_release_pad1_after_348,
-        test_path_filter_rejects_lint_release_pad2_after_348,
-        test_path_filter_rejects_lint_release_pad3_after_348,
-        test_path_filter_rejects_lint_release_pad4_after_348,
-        test_path_filter_rejects_lint_release_pad5_after_348,
         test_path_filter_rejects_lint_release_still_after_348,
         test_path_filter_rejects_lint_release_after_348,
         test_path_filter_rejects_stew_release_pad0_after_348,
-        test_path_filter_rejects_stew_release_pad1_after_348,
-        test_path_filter_rejects_stew_release_pad2_after_348,
-        test_path_filter_rejects_stew_release_pad3_after_348,
-        test_path_filter_rejects_stew_release_pad4_after_348,
-        test_path_filter_rejects_stew_release_pad5_after_348,
         test_path_filter_rejects_stew_release_still_after_348,
         test_path_filter_rejects_stew_release_after_348,
         test_path_filter_rejects_link_issues_pad0_after_348,
-        test_path_filter_rejects_link_issues_pad1_after_348,
-        test_path_filter_rejects_link_issues_pad2_after_348,
-        test_path_filter_rejects_link_issues_pad3_after_348,
-        test_path_filter_rejects_link_issues_pad4_after_348,
-        test_path_filter_rejects_link_issues_pad5_after_348,
         test_path_filter_rejects_link_issues_still_after_348,
         test_path_filter_rejects_link_issues_after_348,
         test_path_filter_rejects_lint_issues_pad0_after_348,
-        test_path_filter_rejects_lint_issues_pad1_after_348,
-        test_path_filter_rejects_lint_issues_pad2_after_348,
-        test_path_filter_rejects_lint_issues_pad3_after_348,
-        test_path_filter_rejects_lint_issues_pad4_after_348,
-        test_path_filter_rejects_lint_issues_pad5_after_348,
         test_path_filter_rejects_lint_issues_still_after_348,
         test_path_filter_rejects_lint_issues_after_348,
         test_path_filter_rejects_stew_issues_pad0_after_348,
-        test_path_filter_rejects_stew_issues_pad1_after_348,
-        test_path_filter_rejects_stew_issues_pad2_after_348,
-        test_path_filter_rejects_stew_issues_pad3_after_348,
-        test_path_filter_rejects_stew_issues_pad4_after_348,
-        test_path_filter_rejects_stew_issues_pad5_after_348,
         test_path_filter_rejects_stew_issues_still_after_348,
         test_path_filter_rejects_stew_issues_after_348,
         test_path_filter_rejects_stew_discussion_pad0_after_348,
-        test_path_filter_rejects_stew_discussion_pad1_after_348,
-        test_path_filter_rejects_stew_discussion_pad2_after_348,
-        test_path_filter_rejects_stew_discussion_pad3_after_348,
-        test_path_filter_rejects_stew_discussion_pad4_after_348,
-        test_path_filter_rejects_stew_discussion_pad5_after_348,
         test_path_filter_rejects_stew_discussion_still_after_348,
         test_path_filter_rejects_stew_discussion_after_348,
         test_path_filter_rejects_stew_deployment_pad0_after_348,
-        test_path_filter_rejects_stew_deployment_pad1_after_348,
-        test_path_filter_rejects_stew_deployment_pad2_after_348,
-        test_path_filter_rejects_stew_deployment_pad3_after_348,
-        test_path_filter_rejects_stew_deployment_pad4_after_348,
-        test_path_filter_rejects_stew_deployment_pad5_after_348,
         test_path_filter_rejects_stew_deployment_still_after_348,
         test_path_filter_rejects_stew_deployment_after_348,
         test_path_filter_rejects_stew_check_run_pad0_after_348,
-        test_path_filter_rejects_stew_check_run_pad1_after_348,
-        test_path_filter_rejects_stew_check_run_pad2_after_348,
-        test_path_filter_rejects_stew_check_run_pad3_after_348,
-        test_path_filter_rejects_stew_check_run_pad4_after_348,
-        test_path_filter_rejects_stew_check_run_pad5_after_348,
         test_path_filter_rejects_stew_check_run_still_after_348,
         test_path_filter_rejects_stew_check_run_after_348,
         test_path_filter_rejects_stew_create_pad0_after_348,
-        test_path_filter_rejects_stew_create_pad1_after_348,
-        test_path_filter_rejects_stew_create_pad2_after_348,
-        test_path_filter_rejects_stew_create_pad3_after_348,
-        test_path_filter_rejects_stew_create_pad4_after_348,
-        test_path_filter_rejects_stew_create_pad5_after_348,
         test_path_filter_rejects_stew_create_still_after_348,
         test_path_filter_rejects_stew_create_after_348,
         test_schema_residual_ci_leftover_residual_doc_pad0_after_309,

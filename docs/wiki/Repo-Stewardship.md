@@ -459,7 +459,7 @@ not saturated Pass-2 residual leftover #272 /
 not lychee/blob-503 leftover #278 / not path-edges leftover #262 /
 not schema leftover #258 / not wiki/mdlink leftover #252; do not invent new
 templates; no secrets; do not revive PR #333/#331/#324/#315/#313/#312/#305/#298/#291)).
-plus Pass-2 residual / templates leftovers after #337 tip: soft-fail with
+plus Pass-2 residual / templates leftovers after #348 tip: soft-fail with
 `|| /bin/true` / `|| /usr/bin/true` / `set +E` / existing
 `templates/AGENTS-REPO.md` `[Section Title]` / Add project-specific rules /
 Environments table + Dev/Staging/Production rows / Human confirms /
@@ -467,7 +467,7 @@ Auto-approve + budget / Human approval required / Immediate response /
 `< 1 hour` / `< 24 hours` / Next sprint / Version History /
 ecosystem-wide governance / See `[agents-governance]` / lychee reject invent
 `blob/master` + `tree/master` + `raw.githubusercontent.com` — DISTINCT leftover
-residual only (leftover residual on post-#337 tip; not Pass-2 residual /
+residual only (leftover residual on post-#348 tip; not Pass-2 residual /
 templates leftover after #326 / not wiki/mdlink leftover residual #326 /
 not stewardship-schema residual CI leftover residual #320 /
 not path-filter/path-order residual leftover #314 /
@@ -479,6 +479,28 @@ not saturated Pass-2 residual leftover #272 /
 not lychee/blob-503 leftover #278 / not path-edges leftover #262 /
 not schema leftover #258 / not wiki/mdlink leftover #252; do not invent new
 templates; no secrets; do not revive PR #333/#331/#324/#315/#313/#312/#305/#298/#291)).
+plus actionlint path-order residual leftover deepen after #348 tip
+(lands closed #353/#351/#347/#344/#340/#339/#338/#334/#332/#330/#323/#319/#317 leftover):
+contiguous seven-step actionlint path-order / contiguous Set up Python ->
+Install PyYAML adjacency / contiguous Install PyYAML -> gates adjacency /
+contiguous gates -> self-tests adjacency / contiguous self-tests -> Download
+adjacency / contiguous Download -> actionlint run adjacency / contiguous
+permissions:/steps: adjacency / contiguous steps:/checkout adjacency on
+stewardship — DISTINCT path-order residual leftover edges only (not Pass-2
+residual templates leftovers #348 / not Pass-2 residual templates
+leftovers #337 / not wiki/mdlink leftover residual #326 /
+not schema residual CI leftover residual #320 / not saturated leftover #314 /
+not schema residual CI leftover #309 / not schema residual CI #299 /
+not wiki/mdlink leftover residual #293 / not stewardship-schema residual #282 /
+not lychee/blob-503 harden #278 / not Pass-2 residual leftover #272 /
+not saturated leftover #262 / not stewardship-schema leftover #258 /
+not wiki/mdlink leftover #252 / not saturated residual #244 /
+not saturated deepen #225/#203 / not wiki outline/PUBLISH leftover #243 /
+not md/link residual #239 / not stewardship-checks/schema leftover #233 /
+not wiki-badge leftover #227 / not #189 / not #176 / not schema #191/#216 /
+not Pass-2 residual #199/#203 / not Pass-2 leftover + md/link #220 /
+not stewardship-badge lint #208; do not revive closed PRs
+(#353/#351/#347/#344/#340/#339/#338/#334/#332/#330/#323/#319/#317/#310/#304/#303/#300/#294/#292/#286/#280/#274/#270/#264/#255/#247/#244/#236/#232/#228/#226/#223/#217/#213/#198/#186/#166/#157)).
 
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 

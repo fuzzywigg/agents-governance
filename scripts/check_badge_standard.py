@@ -273,6 +273,30 @@ lands closed #251/#250/#246/#245/#240 leftover on post-#262 tip; do not invent n
   version 1.0.0 / YYYY-MM-DD placeholder / §1–§6 / [CONFIG_FILE] /
   Never commit .env / agents-md/description / no invent badge.svg chrome
 
+
+Fail-closed Pass-2 residual / templates leftover after #326 tip
+(NOT wiki/mdlink leftover residual #326 /
+NOT stewardship-schema residual CI leftover residual #320 /
+NOT path-filter/path-order residual leftover #314 /
+NOT stewardship-schema residual CI leftover #309 /
+NOT stewardship-schema residual CI #299 /
+NOT wiki/mdlink leftover residual #293 /
+NOT stewardship-schema leftover residual #282 /
+NOT saturated Pass-2 residual leftover #272 /
+NOT lychee/blob-503 leftover #278 /
+NOT path-edges leftover #262 / NOT schema leftover #258 /
+NOT wiki/mdlink leftover #252; do not invent new templates;
+lands closed #333/#331/#324/#315/#313/#312/#305/#298/#291 leftover on post-#326 tip — do not revive #333/#331/#324/#315/#313/#312/#305/#298/#291):
+- soft-fail with || true / soft-fail with set +e / must not eval
+- existing templates/AGENTS-REPO.md leftover: Level [0/1/2] /
+  L0 Advisory / L1 Bounded / L2 Supervised /
+  Critical Files / Autonomy Level / End of Document /
+  SEV-1..SEV-4 / [test command] / [coverage requirements] /
+  .env Secrets Never commit row / governs AI agent behavior blurb
+- lychee residual: reject invent tree/main exclude /
+  reject bare https://github.com/ exclude /
+  keep Same-repo GitHub commentary (existing .lycheeignore module only)
+
 Fail-closed wiki/mdlink leftover residual after #282 tip (beyond #252 saturated
 after_243 pins; lands closed #281/#277 leftover; NOT stewardship-schema residual #282 /
 NOT lychee/blob-503 leftover #278 / NOT Pass-2 residual + templates #272 /
@@ -843,6 +867,47 @@ def check_lycheeignore(errors: list[str]) -> None:
         fail(
             ".lycheeignore must note intermittently returns 503 "
             "(docs-lint " + _p4 + ")",
+            errors,
+        )
+
+
+
+
+    # Pass-2 residual / templates leftover after #326 tip (existing lychee
+    # module only; NOT saturated lychee/blob-503 leftover #278 /
+    # NOT saturated Pass-2 residual leftover #272 /
+    # NOT wiki/mdlink leftover residual #326 /
+    # NOT wiki/mdlink leftover residual #293 /
+    # NOT path-filter/path-order residual leftover #314 /
+    # NOT stewardship-schema residual CI leftover residual #320 /
+    # NOT stewardship-schema residual CI leftover #309 /
+    # NOT stewardship-schema residual CI #299 / do not invent templates).
+    if "tree/main" in text:
+        fail(
+            ".lycheeignore must not invent tree/main exclude "
+            "(Pass-2 residual / templates leftover after #326 tip; "
+            "blob/main HTML flake only)",
+            errors,
+        )
+    for _line in text.splitlines():
+        _stripped = _line.strip()
+        if _stripped in {
+            "https://github.com/",
+            "https://github.com",
+            r"https://github\.com/",
+            r"https://github\.com",
+        }:
+            fail(
+                ".lycheeignore must not exclude bare https://github.com/ "
+                "(Pass-2 residual / templates leftover after #326 tip; "
+                "blob/main path only)",
+                errors,
+            )
+            break
+    if "Same-repo GitHub" not in text:
+        fail(
+            ".lycheeignore must note Same-repo GitHub "
+            "(Pass-2 residual / templates leftover after #326 tip)",
             errors,
         )
 
@@ -2918,6 +2983,45 @@ def check_agents_repo_template(errors: list[str]) -> None:
             "(Pass-2 residual / template validation leftover after #233)",
             errors,
         )
+
+    # Pass-2 residual / templates leftover after #326 tip (existing
+    # templates/AGENTS-REPO.md only; NOT saturated leftover #272 /
+    # NOT lychee/blob-503 #278 / NOT wiki/mdlink leftover residual #326 /
+    # NOT wiki/mdlink leftover residual #293 /
+    # NOT path-filter/path-order residual leftover #314 /
+    # NOT stewardship-schema residual CI leftover residual #320 /
+    # NOT stewardship-schema residual CI leftover #309 /
+    # NOT stewardship-schema residual CI #299; do not invent).
+    leftover_326_required = (
+        ("Level [0/1/2]", "Level [0/1/2] autonomy"),
+        ("L0 Advisory", "L0 Advisory"),
+        ("L1 Bounded", "L1 Bounded"),
+        ("L2 Supervised", "L2 Supervised"),
+        ("### Critical Files", "Critical Files"),
+        ("### Autonomy Level", "Autonomy Level"),
+        ("End of Document", "End of Document"),
+        ("SEV-1:", "SEV-1"),
+        ("SEV-2:", "SEV-2"),
+        ("SEV-3:", "SEV-3"),
+        ("SEV-4:", "SEV-4"),
+        ("[test command]", "[test command] placeholder"),
+        ("[coverage requirements]", "[coverage requirements] placeholder"),
+        ("| `.env` | Secrets | Never commit |", ".env Secrets Never commit row"),
+        (
+            "This document governs AI agent behavior",
+            "governs AI agent behavior blurb",
+        ),
+    )
+    for needle, label in leftover_326_required:
+        if needle not in text:
+            fail(
+                f"templates/AGENTS-REPO.md must keep {label} "
+                "(Pass-2 residual / templates leftover after #326 tip)",
+                errors,
+            )
+
+
+
     scan_secrets(AGENTS_REPO, errors)
 
 
@@ -10527,6 +10631,34 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
                 "run_stewardship_checks.sh must not disable errexit with set +e",
                 errors,
             )
+
+        # Pass-2 residual / templates leftover after #326 tip (soft-fail
+        # leftovers beyond saturated #272 || : / || return 0 / set +o * /
+        # NOT lychee/blob-503 leftover #278 / NOT wiki/mdlink leftover residual #326 /
+        # NOT wiki/mdlink leftover residual #293 /
+        # NOT path-filter/path-order residual leftover #314 /
+        # NOT stewardship-schema residual CI leftover residual #320 /
+        # NOT stewardship-schema residual CI leftover #309 /
+        # NOT stewardship-schema residual CI #299).
+        if "|| true" in run_text or "||true" in run_text:
+            fail(
+                "run_stewardship_checks.sh must not soft-fail with || true "
+                "(Pass-2 residual / templates leftover after #326 tip)",
+                errors,
+            )
+        if re.search(r"(?m)^\s*set \+e\b", run_text):
+            fail(
+                "run_stewardship_checks.sh must not soft-fail with set +e "
+                "(Pass-2 residual / templates leftover after #326 tip)",
+                errors,
+            )
+        if re.search(r"(?m)^\s*eval\s+", run_text):
+            fail(
+                "run_stewardship_checks.sh must not eval "
+                "(Pass-2 residual / templates leftover after #326 tip)",
+                errors,
+            )
+
         # Fail-closed after #176: parent-dir fragment from live ROOT assign.
         # Checked before exact-ROOT leftover so parent-frag mutations get this needle.
         parent_frag = 'dirname "$0")/..'
@@ -11167,6 +11299,116 @@ def check_run_stewardship_gate_contract(errors: list[str]) -> None:
             "run_stewardship contract must keep " + no_invent_tpl + " pin",
             errors,
         )
+
+
+    # Pass-2 residual / templates leftover after #326 tip contract pins.
+    leftover_326 = (
+        "Pass-2 residual / templates leftover after " + "#326 tip"
+    )
+    if leftover_326 not in text:
+        fail(
+            "run_stewardship pins must keep " + leftover_326 + " marker",
+            errors,
+        )
+
+    not_wiki_326 = "NOT wiki/mdlink leftover residual " + "#326"
+    if not_wiki_326 not in text:
+        fail(
+            "run_stewardship docstring must keep " + not_wiki_326 + " distinctness",
+            errors,
+        )
+    not_schema_320 = "NOT stewardship-schema residual CI leftover residual " + "#320"
+    if not_schema_320 not in text:
+        fail(
+            "run_stewardship docstring must keep " + not_schema_320 + " distinctness",
+            errors,
+        )
+    not_path_314 = "NOT path-filter/path-order residual leftover " + "#314"
+    if not_path_314 not in text:
+        fail(
+            "run_stewardship docstring must keep " + not_path_314 + " distinctness",
+            errors,
+        )
+    not_schema_309 = "NOT stewardship-schema residual CI leftover " + "#309"
+    if not_schema_309 not in text:
+        fail(
+            "run_stewardship docstring must keep " + not_schema_309 + " distinctness",
+            errors,
+        )
+    not_schema_299 = "NOT stewardship-schema residual CI " + "#299"
+    if not_schema_299 not in text:
+        fail(
+            "run_stewardship docstring must keep " + not_schema_299 + " distinctness",
+            errors,
+        )
+    not_wiki_293 = "NOT wiki/mdlink leftover residual " + "#293"
+    if not_wiki_293 not in text:
+        fail(
+            "run_stewardship docstring must keep " + not_wiki_293 + " distinctness",
+            errors,
+        )
+    not_sat_272 = "NOT saturated Pass-2 residual leftover " + "#272"
+    if not_sat_272 not in text:
+        fail(
+            "run_stewardship docstring must keep " + not_sat_272 + " distinctness",
+            errors,
+        )
+    not_lychee_278 = "NOT lychee/blob-503 leftover " + "#278"
+    if not_lychee_278 not in text:
+        fail(
+            "run_stewardship docstring must keep " + not_lychee_278 + " distinctness",
+            errors,
+        )
+    not_schema_open = "NOT stewardship-schema leftover residual " + "#282"
+    if not_schema_open not in text:
+        fail(
+            "run_stewardship docstring must keep " + not_schema_open + " distinctness",
+            errors,
+        )
+    or_true_pin = "soft-fail with || " + "true"
+    if or_true_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + or_true_pin + " pin",
+            errors,
+        )
+    set_e_pin = "soft-fail with set " + "+e"
+    if set_e_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + set_e_pin + " pin",
+            errors,
+        )
+    eval_pin = "must not " + "eval"
+    if eval_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + eval_pin + " pin",
+            errors,
+        )
+    level_pin = "Level " + "[0/1/2]"
+    if level_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + level_pin + " leftover",
+            errors,
+        )
+    end_doc_pin = "End of " + "Document"
+    if end_doc_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + end_doc_pin + " leftover",
+            errors,
+        )
+    tree_main_pin = "must not invent tree/main " + "exclude"
+    if tree_main_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + tree_main_pin + " pin",
+            errors,
+        )
+    same_repo_pin = "Same-repo " + "GitHub"
+    if same_repo_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + same_repo_pin + " pin",
+            errors,
+        )
+
+
 
 
 def check_badges(badges: list[re.Match[str]], errors: list[str]) -> None:

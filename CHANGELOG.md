@@ -18,8 +18,10 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   workflow modules only — exact contiguous stewardship on: push/PR/schedule/
   workflow_dispatch block / reject release: / reject issues: /
   reject discussion: / reject deployment: / reject check_run: /
-  reject create: / leftover docstring + gate-contract needles — path-filter
-  residual leftover slice only (not Pass-2 residual templates leftovers #348 /
+  reject create: / leftover docstring + gate-contract needles; bump
+  stewardship-checks.yml job `timeout-minutes` 15→20 (fail-closed pin +
+  fixtures + self-tests aligned) so the deepened suite stays CI-green under
+  the path-filter residual leftover slice only (not Pass-2 residual templates leftovers #348 /
   not Pass-2 residual templates leftovers #337 /
   not wiki/mdlink leftover residual #326 /
   not schema residual CI leftover residual #320 /

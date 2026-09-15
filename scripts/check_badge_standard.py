@@ -175,7 +175,8 @@ NOT wiki-badge leftover #227 / NOT stewardship-badge lint #208):
 
 
 Fail-closed actionlint path-order residual leftover deepen after #320
-(NOT wiki/mdlink leftover #326 / NOT schema residual CI leftover residual #320 / NOT saturated leftover #314 / NOT schema residual CI leftover #309 /
+(NOT Pass-2 residual templates leftover #337 / NOT wiki/mdlink leftover #326 /
+NOT schema residual CI leftover residual #320 / NOT saturated leftover #314 / NOT schema residual CI leftover #309 /
 NOT schema residual CI #299 / NOT wiki/mdlink leftover residual #293 /
 NOT stewardship-schema residual #282 /
 NOT lychee/blob-503 harden #278 / NOT Pass-2 residual leftover #272 /
@@ -1157,7 +1158,8 @@ def check_workflow_hardening(errors: list[str]) -> None:
     contiguous name:/on: workflow header / reject workflow_run: /
     reject repository_dispatch: / reject merge_group: / reject tags: /
     contiguous six-step actionlint path-order.
-    Path-order residual leftover deepen after #320 (NOT wiki/mdlink leftover #326 /
+    Path-order residual leftover deepen after #320 (NOT Pass-2 residual templates leftover #337 /
+    NOT wiki/mdlink leftover #326 /
     NOT schema residual CI leftover residual #320 /
     NOT saturated leftover #314 / NOT schema residual CI leftover #309 / NOT schema residual CI #299 /
     NOT wiki/mdlink leftover residual #293 / NOT stewardship-schema residual #282 /
@@ -2521,6 +2523,7 @@ def check_workflow_hardening(errors: list[str]) -> None:
         )
 
     # Path-order residual leftover deepen after #320 (DISTINCT leftover;
+    # NOT Pass-2 residual templates leftover #337 /
     # NOT wiki/mdlink leftover #326 /
     # NOT schema residual CI leftover residual #320 /
     # NOT saturated leftover #314 / NOT schema residual CI leftover #309 /
@@ -6414,6 +6417,14 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
         fail(
             "path leftover-after-320 must keep "
             + not_wiki_326_320
+            + " distinctness pin",
+            errors,
+        )
+    not_pass2_337_320 = "NOT Pass-2 residual templates leftover " + "#337"
+    if not_pass2_337_320 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_pass2_337_320
             + " distinctness pin",
             errors,
         )

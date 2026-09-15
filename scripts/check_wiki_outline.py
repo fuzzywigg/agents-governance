@@ -69,6 +69,33 @@ Fail-closed pins (live path after #59; deepen after #43; third-pass after #90):
   [Home.md](./Home.md) fallback link /
   Settings Features Wikis init path /
   create any page once in the GitHub UI, then re-run the clone
+- Wiki/mdlink leftover residual after #309 tip (beyond #293 saturated after_293 pins;
+  lands #308/#307/#311/#302 leftover; NOT stewardship-schema residual CI leftover #309 / NOT stewardship-schema residual CI #299 /
+  NOT stewardship-schema residual CI #297 /
+  NOT wiki/mdlink leftover residual #293 / NOT stewardship-schema residual #282 /
+  NOT lychee/blob-503 leftover #278 / NOT Pass-2 residual + templates #272 /
+  NOT path-edges leftover #262 / NOT wiki/mdlink leftover #252 /
+  NOT stewardship-schema leftover #258 / NOT path-filter/path-order leftover #244 /
+  NOT wiki outline/PUBLISH leftover #243 / NOT md/link residual layouts #239;
+  existing pages only — do not invent extra wiki files):
+  # Publishing this wiki outline to GitHub Wiki /
+  The Markdown under `docs/wiki/` is the **in-repo source** for the public wiki /
+  GitHub Wiki is a separate git repo /
+  |-------------|-----------| table separator /
+  When copying `Home.md` / `Repo-Stewardship.md` to the wiki, rewrite relative /
+  `../badge-standard.md` links to: /
+  Wiki Home links back to the repository README acceptance /
+  No secrets, private MEMORY, or private-template internals /
+  In-repo `docs/wiki/` remains the editable source; wiki push is a copy /
+  Until the `.wiki.git` remote exists, treat /
+  as the public landing page linked from the README /
+  If clone fails with "Repository not found", the wiki has never been initialized: /
+  push `Home.md`) init path /
+  full git push origin master   # or main line /
+  Home ## Start here / | Page | What it covers | /
+  ## Source of truth (repository) / Canonical public governance front door /
+  This wiki is the **public narrative layer** /
+  Repo-Stewardship ## Front-door duties / ## Docs quality CI
 """
 
 from __future__ import annotations
@@ -415,6 +442,109 @@ def main() -> int:
                 errors,
             )
 
+        # Wiki/mdlink leftover residual after #309 tip (beyond #293 saturated pins; lands #308/#307/#311/#302).
+        if "# Publishing this wiki outline to GitHub Wiki" not in publish_text:
+            fail(
+                "PUBLISH.md must keep # Publishing this wiki outline to GitHub Wiki H1",
+                errors,
+            )
+        if (
+            "The Markdown under `docs/wiki/` is the **in-repo source** for the public wiki"
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md must keep in-repo source for the public wiki wording",
+                errors,
+            )
+        if "GitHub Wiki is a separate git repo" not in publish_text:
+            fail(
+                "PUBLISH.md must keep GitHub Wiki is a separate git repo wording",
+                errors,
+            )
+        if "|-------------|-----------|" not in publish_text:
+            fail(
+                "PUBLISH.md pages table must keep |-------------|-----------| separator",
+                errors,
+            )
+        if (
+            "When copying `Home.md` / `Repo-Stewardship.md` to the wiki, rewrite relative"
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md must keep When copying Home.md / Repo-Stewardship.md "
+                "rewrite relative wording",
+                errors,
+            )
+        if "`../badge-standard.md` links to:" not in publish_text:
+            fail(
+                "PUBLISH.md must keep `../badge-standard.md` links to: rewrite hint",
+                errors,
+            )
+        if (
+            "Wiki Home links back to the repository [README]("
+            "https://github.com/fuzzywigg/agents-governance/blob/main/README.md)"
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md acceptance must keep Wiki Home links back to the "
+                "repository README checkbox",
+                errors,
+            )
+        if (
+            "No secrets, private MEMORY, or private-template internals in published pages"
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md acceptance must keep No secrets, private MEMORY, "
+                "or private-template internals wording",
+                errors,
+            )
+        if (
+            "In-repo `docs/wiki/` remains the editable source; wiki push is a copy"
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md acceptance must keep editable source; wiki push is a copy",
+                errors,
+            )
+        if "Until the `.wiki.git` remote exists, treat" not in publish_text:
+            fail(
+                "PUBLISH.md fallback must keep Until the `.wiki.git` remote exists, treat",
+                errors,
+            )
+        if (
+            "as the public landing page linked from the README"
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md fallback must keep as the public landing page "
+                "linked from the README",
+                errors,
+            )
+        if (
+            'If clone fails with "Repository not found", the wiki has never been initialized:'
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md fallback must keep If clone fails with Repository not found "
+                "initialized wording",
+                errors,
+            )
+        if "push `Home.md`)" not in publish_text:
+            fail(
+                "PUBLISH.md must keep push `Home.md`) wiki init path wording",
+                errors,
+            )
+        full_push_line = (
+            "git push origin master   # or main — match the wiki default branch"
+        )
+        if full_push_line not in publish_text:
+            fail(
+                "PUBLISH.md one-shot must keep full git push origin master "
+                "# or main line",
+                errors,
+            )
+
     home = WIKI / "Home.md"
     if home.is_file():
         home_text = home.read_text(encoding="utf-8")
@@ -464,6 +594,29 @@ def main() -> int:
                 "(omit when copying pages to GitHub Wiki)",
                 errors,
             )
+        # Wiki/mdlink leftover residual after #309 tip (existing Home.md only; lands #308/#307/#311/#302).
+        if "## Start here" not in home_text:
+            fail("Home.md must keep ## Start here heading", errors)
+        if "| Page | What it covers |" not in home_text:
+            fail(
+                "Home.md must keep | Page | What it covers | TOC header",
+                errors,
+            )
+        if "## Source of truth (repository)" not in home_text:
+            fail(
+                "Home.md must keep ## Source of truth (repository) heading",
+                errors,
+            )
+        if "Canonical public governance front door" not in home_text:
+            fail(
+                "Home.md must keep Canonical public governance front door wording",
+                errors,
+            )
+        if "This wiki is the **public narrative layer**" not in home_text:
+            fail(
+                "Home.md must keep This wiki is the **public narrative layer** wording",
+                errors,
+            )
 
     stewardship = WIKI / "Repo-Stewardship.md"
     if stewardship.is_file():
@@ -501,6 +654,17 @@ def main() -> int:
         if "product badge" not in ste_text.lower():
             fail(
                 "Repo-Stewardship.md must refuse stewardship as a product badge",
+                errors,
+            )
+        # Wiki/mdlink leftover residual after #309 tip (existing Repo-Stewardship only; lands #308/#307/#311/#302).
+        if "## Front-door duties" not in ste_text:
+            fail(
+                "Repo-Stewardship.md must keep ## Front-door duties heading",
+                errors,
+            )
+        if "## Docs quality CI" not in ste_text:
+            fail(
+                "Repo-Stewardship.md must keep ## Docs quality CI heading",
                 errors,
             )
 

@@ -412,6 +412,22 @@ not path-filter/path-order leftover #262 / not schema leftover #258 /
 not wiki/mdlink leftover #252 / not path-edges residual #244 /
 not stewardship-checks/schema residual #233; no stewardship_common invent;
 do not revive closed PR #290/#268/#259/#257/#253/#248/#241)).
+plus wiki/mdlink leftover residual deepen after #309 tip: PUBLISH H1 /
+in-repo source / separate git repo / table separator / rewrite relative /
+badge-standard.md links to: / Wiki Home README acceptance / private MEMORY /
+editable source copy / Until `.wiki.git` treat / landing from README /
+clone fails initialized / push Home.md / full push # or main line /
+Home Start here TOC / Source of truth / Canonical front door /
+public narrative layer / Front-door duties / Docs quality CI /
+token->args adjacency / checkout->Check links->lychee triple /
+checkout->Run markdownlint->DavidAnson triple — DISTINCT leftover only
+(lands #308/#307/#311/#302 leftover; not stewardship-schema residual CI
+leftover #309 / not stewardship-schema residual CI #299 /
+  not stewardship-schema residual CI #297 /
+not wiki/mdlink leftover residual #293 / not stewardship-schema residual #282 /
+not lychee/blob-503 leftover #278 / not Pass-2 residual + templates #272 /
+not path-edges leftover #262 / not wiki/mdlink leftover #252;
+no extra wiki files)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

@@ -512,9 +512,10 @@ contiguous gates → self-tests adjacency / contiguous self-tests →
 Download adjacency / contiguous Download → actionlint run adjacency /
 contiguous permissions:/steps: adjacency / contiguous steps:/checkout
 adjacency on stewardship — DISTINCT path-order residual leftover edges
-only (not Pass-2 residual templates leftover #348 / not Pass-2 residual templates leftover #337 / not wiki/mdlink leftover
-#326 / not schema residual CI leftover residual #320 / not saturated leftover
-#314 / not schema residual CI leftover #309 / not schema residual CI #299 /
+only (not Pass-2 residual templates leftover #348 / not Pass-2
+residual templates leftover #337 / not wiki/mdlink leftover #326 / not
+schema residual CI leftover residual #320 / not saturated leftover #314 /
+not schema residual CI leftover #309 / not schema residual CI #299 /
 not wiki/mdlink leftover residual #293 / not stewardship-schema residual #282 /
 not lychee/blob-503 harden #278 / not Pass-2 residual leftover #272 /
 not saturated leftover #262 / not stewardship-schema leftover #258 /

@@ -136,6 +136,33 @@ not wiki/mdlink leftover residual #293 /
 not stewardship-schema leftover residual #282 /
 not lychee/blob-503 leftover #278 /
 not saturated Pass-2 residual leftover #272).
+Deepened after #348 tip: Pass-2 residual / templates leftovers —
+soft-fail || /usr/bin/env true / set +eu / set +o errtrace /
+AGENTS-REPO File|Purpose|Edit Restrictions header /
+[CONFIG_FILE] Main configuration row /
+L1 Bounded: Auto-approve within policy / Severity levels: /
+Follow ecosystem incident protocol /
+Create branch agents-md/description / Edit this file /
+Submit PR with rationale / Version|Date|Changes header /
+1.0.0 Initial version row / ### 2.1 + ### 2.2 Section Title /
+# Run tests / cov-req / for ecosystem rules. /
+This project operates at / within this repository /
+lychee reject invent gist.github.com + api.github.com + raw.github.com /
+plus parallel subprocess self-tests + script-byte seed cache so the suite
+stays under the live stewardship 15m job budget
+(Pass-2 residual templates leftovers slice only;
+leftover residual on post-#348 tip;
+not Pass-2 residual / templates leftover after #337 /
+not Pass-2 residual / templates leftover after #326 /
+not wiki/mdlink leftover residual #326 /
+not stewardship-schema residual CI leftover residual #320 /
+not path-filter/path-order residual leftover #314 /
+not stewardship-schema residual CI leftover #309 /
+not stewardship-schema residual CI #299 /
+not wiki/mdlink leftover residual #293 /
+not stewardship-schema leftover residual #282 /
+not lychee/blob-503 leftover #278 /
+not saturated Pass-2 residual leftover #272).
 Deepened after #225 tip: wiki-index/badge leftover — exact PUBLISHABLE_PAGES /
 TOC loop+skip+link forms / empty-index / relative broken-link needles /
 invent refuse leftover framing (wiki-index/badge leftover slice only;
@@ -306,10 +333,12 @@ badge-lint #208 spam). Do not revive
 
 from __future__ import annotations
 
+import os
 import shutil
 import subprocess
 import sys
 import tempfile
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -341,11 +370,19 @@ def assert_pass_live(script: str) -> None:
         raise AssertionError(f"{script} failed on live tree\n{proc.stdout}{proc.stderr}")
 
 
+_SCRIPT_BYTES: dict[str, bytes] = {}
+
+
 def _seed_scripts(tmp: Path, *names: str) -> Path:
     scripts_dir = tmp / "scripts"
     scripts_dir.mkdir(parents=True, exist_ok=True)
     for name in (*SHARED_SCRIPTS, *names):
-        shutil.copy2(SCRIPTS / name, scripts_dir / name)
+        # Cache live script bytes once — Pass-2 residual / templates leftover
+        # after #348 tip CI deepen so 7k+ fixture seeds stay under the live
+        # stewardship 15m job budget (existing modules only; not invent-product).
+        if name not in _SCRIPT_BYTES:
+            _SCRIPT_BYTES[name] = (SCRIPTS / name).read_bytes()
+        (scripts_dir / name).write_bytes(_SCRIPT_BYTES[name])
     return scripts_dir
 
 
@@ -109810,8 +109847,15 @@ def main() -> int:
     try:
         for script in GATE_SCRIPTS:
             assert_pass_live(script)
-        for test in tests:
-            test()
+        # Pass-2 residual / templates leftover after #348 tip: run
+        # subprocess-bound fixtures concurrently so the suite stays under the
+        # live stewardship-checks.yml 15m job budget (CI deepen only; keep
+        # for-test-in-tests registration + case count; not invent-product).
+        workers = min(4, max(1, (os.cpu_count() or 2)))
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            futures = [pool.submit(test) for test in tests]
+            for fut in as_completed(futures):
+                fut.result()
     except AssertionError as exc:
         print(f"Stewardship self-test FAILED: {exc}", file=sys.stderr)
         return 1

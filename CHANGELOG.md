@@ -43,6 +43,9 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   scratchpad notes. Distinct from merged
   #348/#337/#326/#320/#314/#309/#299/#297/#293/#282/#278/#272/#262/#258/#252/#244.
   Do **not** revive #333/#331/#324/#315/#313/#312/#305/#298/#291.
+  Also parallelize subprocess-bound self-tests + cache script-byte seeds so the
+  suite stays under the live stewardship-checks.yml 15m job budget (CI deepen;
+  no workflow edits).
 
 - TOKENMAXX Pass-2 residual / templates leftovers after #337 tip: expand
   self-tests to 7558 cases (was 7302) fail-closing DISTINCT leftover residual

@@ -377,6 +377,26 @@ not path-edges leftover #262 / not wiki/mdlink leftover #252 /
 not stewardship-schema leftover #258 / not path-filter residual #244 /
 not wiki outline/PUBLISH leftover #243 / not md/link residual layouts #239;
 no extra wiki files)).
+plus stewardship-schema residual deepen after #320 tip: residual helper
+needles (`fail(f"{rel}: {exc}"` / `missing metadata keys` /
+`FENCED_YAML_RE.search` / `got nested/list` / `type(value).__name__` /
+`autonomy_level must be int in 0..3` / `tier must be a positive int` /
+`must be ISO-8601 date-prefixed` / `no-invent-product wording` /
+`must be semver X.Y.Z` / `must reference an issue like #N` /
+`OK: stewardship metadata schemas valid` / `len(DOC_SCHEMAS)` /
+`empty yaml metadata block` / `parse_simple_yaml` / `first_yaml_block` /
+`unsupported YAML line`) / residual status stubs
+VOID|TOMBSTONED|PURGED|SEALED|BURIED|NULLIFIED / residual surface stubs
+langsmith|langfuse|helicone|braintrust|phoenix — DISTINCT schema residual only
+(tip-relaunch residual on post-#320 tip;
+not schema residual CI leftover residual #320 /
+not schema residual CI leftover #309 / not schema residual CI #299 /
+not wiki/mdlink leftover residual #293 / not schema leftover residual #282 /
+not lychee/blob-503 leftover #278 / not Pass-2 residual leftover #272 /
+not path-filter/path-order leftover #314/#262 / not schema leftover #258 /
+not wiki/mdlink leftover #252 / not path-edges residual #244 /
+not stewardship-checks/schema residual #233; no stewardship_common invent;
+do not revive closed PR #316/#295/#290/#268/#259/#257/#253/#248/#241)).
 plus stewardship-schema residual CI leftover residual deepen after #314 tip
 (lands closed #316 leftover on post-#314 path-order tip):
 residual CI leftover residual helper needles (`if missing:` /

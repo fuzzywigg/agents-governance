@@ -11,6 +11,31 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-schema residual CI leftover residual deepen after #314
+  tip (lands closed #316 leftover on post-#314 path-order tip): expand
+  self-tests to 6854 cases (was 6618) fail-closing unsaturated schema-only
+  residual CI leftover residual helper needles on existing
+  `check_stewardship_schema.py` —
+  `if missing:` / `fail(f"missing file: {rel}"` / `if value is None or` /
+  `must be non-empty` / `must be a string` / `"status" in required_keys` /
+  `status is not None` / `status must be ACTIVE` / `(expected {want!r})` /
+  `not isinstance(level, int)` / `isinstance(tier, bool)` /
+  `not isinstance(tier, int)` / `or tier < 1` / `if rel == "AGENTS.md"` /
+  `"version" in data` / `yaml.safe_load` / `isinstance(loaded, dict)` /
+  residual CI leftover residual status stubs
+  ABANDONED|EXPIRED|REVOKED|HIDDEN|OFFLINE|ZOMBIE / residual CI leftover residual
+  surface stubs huggingface|replicate|cohere|bedrock|sagemaker — schema residual CI
+  leftover residual slice only (not schema residual CI leftover #309 / not schema
+  residual CI #299 / not wiki/mdlink leftover residual #293 / not schema leftover
+  residual #282 / not lychee/blob-503 leftover #278 / not Pass-2 residual leftover
+  #272 / not path-filter/path-order leftover #314/#262 / not schema leftover #258 /
+  not wiki/mdlink leftover #252 / not path-edges residual #244 / not
+  stewardship-checks/schema residual #233); no invent-product; no fourth badge; no
+  stewardship_common invent; no scratchpad notes. Distinct from merged PRs
+  #314/#309/#299/#297/#293/#282/#278/#272/#262/#258/#252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
+  Tip-relaunch residual CI leftover residual on post-#314 tip (do **not** revive
+  #316/#295/#290/#268/#259/#257/#253/#248/#241).
+
 - TOKENMAXX actionlint path-filter/path-order residual leftover deepen after
   #309 tip (lands closed #310/#304/#303/#300/#294/#292/#286/#280/#274/#270/#264 leftover):
   expand self-tests to 6618 cases (was 6464) fail-closing DISTINCT

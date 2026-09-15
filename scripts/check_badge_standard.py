@@ -173,6 +173,30 @@ NOT wiki-badge leftover #227 / NOT stewardship-badge lint #208):
 - contiguous six-step actionlint path-order
   (Set up Python → Install PyYAML → gates → self-tests → Download → actionlint run)
 
+
+Fail-closed actionlint path-order residual leftover deepen after #320
+(NOT wiki/mdlink leftover #326 / NOT schema residual CI leftover residual #320 / NOT saturated leftover #314 / NOT schema residual CI leftover #309 /
+NOT schema residual CI #299 / NOT wiki/mdlink leftover residual #293 /
+NOT stewardship-schema residual #282 /
+NOT lychee/blob-503 harden #278 / NOT Pass-2 residual leftover #272 /
+NOT saturated leftover #262 /
+NOT stewardship-schema leftover #258 /
+NOT wiki/mdlink leftover #252 / NOT saturated residual #244 /
+NOT saturated deepen #225/#203 / NOT #189 path-order / NOT #176 layouts /
+NOT schema #191/#216 / NOT Pass-2 residual #199/#203 /
+NOT Pass-2 leftover + md/link #220 / NOT wiki outline/PUBLISH leftover #243 /
+NOT md/link residual #239 / NOT stewardship-checks/schema leftover #233 /
+NOT wiki-badge leftover #227 / NOT stewardship-badge lint #208):
+- contiguous seven-step actionlint path-order
+  (checkout → Set up Python → Install PyYAML → gates → self-tests → Download → actionlint run)
+- contiguous Set up Python → Install PyYAML adjacency
+- contiguous Install PyYAML → gates adjacency
+- contiguous gates → self-tests adjacency
+- contiguous self-tests → Download adjacency
+- contiguous Download → actionlint run adjacency
+- contiguous permissions:/steps: adjacency on all three
+- contiguous steps:/checkout adjacency on all three
+
 Fail-closed stewardship-checks + schema residual deepen after #225 (NOT wiki-index/badge
 #227 / NOT path-edges #225 / NOT Pass-2 leftover+md/link #220 / NOT schema fourth-pass #216 /
 NOT badge-lint #208 / NOT Pass-2 residual #199/#203 / NOT path-order #189;
@@ -1006,6 +1030,27 @@ def check_workflow_hardening(errors: list[str]) -> None:
     contiguous name:/on: workflow header / reject workflow_run: /
     reject repository_dispatch: / reject merge_group: / reject tags: /
     contiguous six-step actionlint path-order.
+    Path-order residual leftover deepen after #320 (NOT wiki/mdlink leftover #326 /
+    NOT schema residual CI leftover residual #320 /
+    NOT saturated leftover #314 / NOT schema residual CI leftover #309 / NOT schema residual CI #299 /
+    NOT wiki/mdlink leftover residual #293 / NOT stewardship-schema residual #282 /
+    NOT lychee/blob-503 harden #278 / NOT Pass-2 residual leftover #272 /
+    NOT saturated leftover #262 /
+    NOT stewardship-schema leftover #258 /
+    NOT wiki/mdlink leftover #252 / NOT saturated residual #244 /
+    NOT saturated deepen #225/#203 / NOT #189 / NOT #176 /
+    NOT schema #191/#216 / NOT Pass-2 residual #199/#203 /
+    NOT Pass-2 leftover + md/link #220 / NOT wiki outline/PUBLISH leftover #243 /
+    NOT md/link residual #239 / NOT stewardship-checks/schema leftover #233 /
+    NOT wiki-badge leftover #227 / NOT stewardship-badge lint #208):
+    contiguous seven-step actionlint path-order /
+    contiguous Set up Python → Install PyYAML adjacency /
+    contiguous Install PyYAML → gates adjacency /
+    contiguous gates → self-tests adjacency /
+    contiguous self-tests → Download adjacency /
+    contiguous Download → actionlint run adjacency /
+    contiguous permissions:/steps: adjacency /
+    contiguous steps:/checkout adjacency.
     Markdown-lint/link-check workflow edges after #203 tip (lands closed #202/#192 leftover;
     NOT path-filter / Pass-2 / path-order / schema / badge-lint spam):
     args: >- / externally broken links commentary / without-it private-404 commentary /
@@ -2347,6 +2392,145 @@ def check_workflow_hardening(errors: list[str]) -> None:
             "path-filter/path-order residual leftover deepen after #309)",
             errors,
         )
+
+    # Path-order residual leftover deepen after #320 (DISTINCT leftover;
+    # NOT wiki/mdlink leftover #326 /
+    # NOT schema residual CI leftover residual #320 /
+    # NOT saturated leftover #314 / NOT schema residual CI leftover #309 /
+    # NOT schema residual CI #299 / NOT wiki/mdlink leftover residual #293 /
+    # NOT stewardship-schema residual #282 /
+    # NOT lychee/blob-503 harden #278 / NOT Pass-2 residual leftover #272 /
+    # NOT saturated leftover #262 /
+    # NOT stewardship-schema leftover #258 /
+    # NOT wiki/mdlink leftover #252 / NOT saturated residual #244 /
+    # NOT saturated deepen #225/#203 / NOT #189 path-order / NOT #176 layouts /
+    # NOT schema #191/#216 / NOT Pass-2 residual #199/#203 /
+    # NOT Pass-2 leftover + md/link #220 / NOT wiki outline/PUBLISH leftover #243 /
+    # NOT md/link residual #239 / NOT stewardship-checks/schema leftover #233 /
+    # NOT wiki-badge leftover #227 / NOT stewardship-badge lint #208).
+    checkout_idx_320 = stew.find("uses: actions/checkout@v7")
+    setup_idx_320 = stew.find("name: Set up Python")
+    install_idx_320 = stew.find("name: Install PyYAML (schema parser)")
+    gates_name_320 = (
+        "name: Stewardship gates (badge / wiki / schema / relative links)"
+    )
+    gates_idx_320 = stew.find(gates_name_320)
+    self_tests_idx_320 = stew.find("name: Stewardship gate self-tests")
+    dl_idx_320 = stew.find("name: Download actionlint")
+    run_idx_320 = stew.find("name: actionlint existing workflow paths")
+    if (
+        checkout_idx_320 < 0
+        or setup_idx_320 < 0
+        or install_idx_320 < 0
+        or gates_idx_320 < 0
+        or self_tests_idx_320 < 0
+        or dl_idx_320 < 0
+        or run_idx_320 < 0
+        or not (
+            checkout_idx_320
+            < setup_idx_320
+            < install_idx_320
+            < gates_idx_320
+            < self_tests_idx_320
+            < dl_idx_320
+            < run_idx_320
+        )
+    ):
+        fail(
+            "stewardship-checks.yml must keep contiguous seven-step "
+            "actionlint path-order "
+            "(checkout → Set up Python → Install PyYAML → gates → "
+            "self-tests → Download → actionlint run; "
+            "path-order residual leftover deepen after #320)",
+            errors,
+        )
+    setup_install_320 = (
+        '          python-version: "3.12"\n'
+        "      - name: Install PyYAML (schema parser)"
+    )
+    if setup_install_320 not in stew:
+        fail(
+            "stewardship-checks.yml must keep contiguous Set up Python → "
+            "Install PyYAML adjacency "
+            "(path-order residual leftover deepen after #320)",
+            errors,
+        )
+    install_gates_320 = (
+        "      - name: Install PyYAML (schema parser)\n"
+        "        run: pip install --quiet pyyaml\n"
+        "      - name: Stewardship gates (badge / wiki / schema / relative links)"
+    )
+    if install_gates_320 not in stew:
+        fail(
+            "stewardship-checks.yml must keep contiguous Install PyYAML → "
+            "gates adjacency "
+            "(path-order residual leftover deepen after #320)",
+            errors,
+        )
+    gates_self_320 = (
+        "      - name: Stewardship gates (badge / wiki / schema / relative links)\n"
+        "        run: bash scripts/run_stewardship_checks.sh\n"
+        "      - name: Stewardship gate self-tests"
+    )
+    if gates_self_320 not in stew:
+        fail(
+            "stewardship-checks.yml must keep contiguous gates → "
+            "self-tests adjacency "
+            "(path-order residual leftover deepen after #320)",
+            errors,
+        )
+    self_dl_320 = (
+        "      - name: Stewardship gate self-tests\n"
+        "        run: python3 scripts/test_stewardship_gates.py\n"
+        "      - name: Download actionlint"
+    )
+    if self_dl_320 not in stew:
+        fail(
+            "stewardship-checks.yml must keep contiguous self-tests → "
+            "Download adjacency "
+            "(path-order residual leftover deepen after #320)",
+            errors,
+        )
+
+    dl_run_320 = (
+        "        shell: bash\n"
+        "      - name: actionlint existing workflow paths"
+    )
+    if dl_run_320 not in stew:
+        fail(
+            "stewardship-checks.yml must keep contiguous Download → "
+            "actionlint run adjacency "
+            "(path-order residual leftover deepen after #320)",
+            errors,
+        )
+    perm_steps_320 = (
+        "    permissions:\n"
+        "      contents: read\n"
+        "    steps:"
+    )
+    for wf_name, body in (
+        ("link-check.yml", link),
+        ("markdown-lint.yml", lint),
+        ("stewardship-checks.yml", stew),
+    ):
+        if perm_steps_320 not in body:
+            fail(
+                f"{wf_name} must keep contiguous permissions:/steps: "
+                "adjacency "
+                "(path-order residual leftover deepen after #320)",
+                errors,
+            )
+        steps_co_320 = (
+            "    steps:\n"
+            "      - uses: actions/checkout@v7"
+        )
+        if steps_co_320 not in body:
+            fail(
+                f"{wf_name} must keep contiguous steps:/checkout "
+                "adjacency "
+                "(path-order residual leftover deepen after #320)",
+                errors,
+            )
 
     # Stewardship-checks + schema residual deepen after #225 (DISTINCT leftover;
     # NOT path-edges #225 / NOT Pass-2 leftover+md/link #220 / NOT schema fourth #216 /
@@ -5023,7 +5207,8 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
     path-filter/path-order deepen after #203;
     path-filter/path-order residual deepen after #225;
     path-filter/path-order residual leftover deepen after #258;
-    path-filter/path-order residual leftover deepen after #309)."""
+    path-filter/path-order residual leftover deepen after #309;
+    path-order residual leftover deepen after #320)."""
     text = Path(__file__).read_text(encoding="utf-8")
     # Fail-closed after #111: third-pass helper / constant / needle pins
     # (CI workflow reversible slice only; not badge/wiki/relative/schema/actionlint spam).
@@ -5977,6 +6162,233 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
         ),
     )
     for needle, label in path_leftover_309_pins:
+        if needle not in text:
+            fail(
+                "check_workflow_hardening must keep " + label,
+                errors,
+            )
+
+    # Path-order residual leftover deepen after #320 (DISTINCT leftover).
+    path_leftover_320_doc = (
+        "Path-order residual leftover deepen after " + "#320"
+    )
+    if path_leftover_320_doc not in text:
+        fail(
+            "check_workflow_hardening docstring must pin " + path_leftover_320_doc,
+            errors,
+        )
+    path_module_leftover_320 = (
+        "path-order residual leftover deepen after " + "#320"
+    )
+    if path_module_leftover_320 not in text:
+        fail(
+            "check_badge_standard.py module docstring must pin "
+            + path_module_leftover_320,
+            errors,
+        )
+    not_wiki_326_320 = "NOT wiki/mdlink leftover " + "#326"
+    if not_wiki_326_320 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_wiki_326_320
+            + " distinctness pin",
+            errors,
+        )
+    not_schema_320_320 = (
+        "NOT schema residual CI leftover residual " + "#320"
+    )
+    if not_schema_320_320 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_schema_320_320
+            + " distinctness pin",
+            errors,
+        )
+    not_saturated_leftover_314 = "NOT saturated leftover " + "#314"
+    if not_saturated_leftover_314 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_saturated_leftover_314
+            + " distinctness pin",
+            errors,
+        )
+    not_schema_residual_ci_leftover_314 = "NOT schema residual CI leftover " + "#309"
+    if not_schema_residual_ci_leftover_314 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_schema_residual_ci_leftover_314
+            + " distinctness pin",
+            errors,
+        )
+    not_schema_residual_ci_299_314 = "NOT schema residual CI " + "#299"
+    if not_schema_residual_ci_299_314 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_schema_residual_ci_299_314
+            + " distinctness pin",
+            errors,
+        )
+    not_wiki_mdlink_293_314 = "NOT wiki/mdlink leftover residual " + "#293"
+    if not_wiki_mdlink_293_314 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_wiki_mdlink_293_314
+            + " distinctness pin",
+            errors,
+        )
+    not_pass2_leftover_272_314 = "NOT Pass-2 residual leftover " + "#272"
+    if not_pass2_leftover_272_314 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_pass2_leftover_272_314
+            + " distinctness pin",
+            errors,
+        )
+    not_schema_residual_282_314 = "NOT stewardship-schema residual " + "#282"
+    if not_schema_residual_282_314 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_schema_residual_282_314
+            + " distinctness pin",
+            errors,
+        )
+    not_blob503_278_314 = "NOT lychee/blob-503 harden " + "#278"
+    if not_blob503_278_314 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_blob503_278_314
+            + " distinctness pin",
+            errors,
+        )
+    not_saturated_leftover_262_314 = "NOT saturated leftover " + "#262"
+    if not_saturated_leftover_262_314 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_saturated_leftover_262_314
+            + " distinctness pin",
+            errors,
+        )
+    not_schema_leftover_258_314 = "NOT stewardship-schema leftover " + "#258"
+    if not_schema_leftover_258_314 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_schema_leftover_258_314
+            + " distinctness pin",
+            errors,
+        )
+    not_wiki_mdlink_252_314 = "NOT wiki/mdlink leftover " + "#252"
+    if not_wiki_mdlink_252_314 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_wiki_mdlink_252_314
+            + " distinctness pin",
+            errors,
+        )
+    not_saturated_residual_244_314 = "NOT saturated residual " + "#244"
+    if not_saturated_residual_244_314 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_saturated_residual_244_314
+            + " distinctness pin",
+            errors,
+        )
+    not_wiki_publish_243_314 = "NOT wiki outline/PUBLISH leftover " + "#243"
+    if not_wiki_publish_243_314 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_wiki_publish_243_314
+            + " distinctness pin",
+            errors,
+        )
+    not_mdlink_239_314 = "NOT md/link residual " + "#239"
+    if not_mdlink_239_314 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_mdlink_239_314
+            + " distinctness pin",
+            errors,
+        )
+    not_stew_schema_233_314 = (
+        "NOT stewardship-checks/schema leftover " + "#233"
+    )
+    if not_stew_schema_233_314 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_stew_schema_233_314
+            + " distinctness pin",
+            errors,
+        )
+    not_wiki_badge_227_314 = "NOT wiki-badge leftover " + "#227"
+    if not_wiki_badge_227_314 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_wiki_badge_227_314
+            + " distinctness pin",
+            errors,
+        )
+    not_saturated_deepen_225_314 = "NOT saturated deepen " + "#225"
+    if not_saturated_deepen_225_314 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_saturated_deepen_225_314
+            + " distinctness pin",
+            errors,
+        )
+    not_pass2_220_leftover_314 = "NOT Pass-2 leftover + " + "md/link #220"
+    if not_pass2_220_leftover_314 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_pass2_220_leftover_314
+            + " distinctness pin",
+            errors,
+        )
+    not_badge_lint_208_314 = "NOT stewardship-badge lint " + "#208"
+    if not_badge_lint_208_314 not in text:
+        fail(
+            "path leftover-after-320 must keep "
+            + not_badge_lint_208_314
+            + " distinctness pin",
+            errors,
+        )
+    path_leftover_320_pins = (
+        (
+            "contiguous seven-step " + "actionlint path-order",
+            "seven-step actionlint path-order fail needle",
+        ),
+        (
+            "contiguous Set up Python → " + "Install PyYAML adjacency",
+            "setup/install adjacency fail needle",
+        ),
+        (
+            "contiguous Install PyYAML → " + "gates adjacency",
+            "install/gates adjacency fail needle",
+        ),
+        (
+            "contiguous gates → " + "self-tests adjacency",
+            "gates/self-tests adjacency fail needle",
+        ),
+        (
+            "contiguous self-tests → " + "Download adjacency",
+            "self-tests/Download adjacency fail needle",
+        ),
+        (
+            "contiguous Download → " + "actionlint run adjacency",
+            "Download/run adjacency fail needle",
+        ),
+        (
+            "contiguous permissions:/steps: " + "adjacency",
+            "permissions/steps adjacency fail needle",
+        ),
+        (
+            "contiguous steps:/checkout " + "adjacency",
+            "steps/checkout adjacency fail needle",
+        ),
+        (
+            "path-order residual leftover deepen after " + "#320",
+            "path leftover-after-320 wording pin",
+        ),
+    )
+    for needle, label in path_leftover_320_pins:
         if needle not in text:
             fail(
                 "check_workflow_hardening must keep " + label,

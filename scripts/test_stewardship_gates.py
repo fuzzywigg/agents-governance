@@ -89202,7 +89202,7 @@ def test_path_filter_gate_wording_still_after_337() -> None:
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'path leftover-after-314 wording pin',
+            'path leftover-after-337 wording pin',
         )
 
 def test_path_filter_gate_wording_after_337() -> None:
@@ -89216,7 +89216,7 @@ def test_path_filter_gate_wording_after_337() -> None:
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'path leftover-after-314 wording pin',
+            'path leftover-after-337 wording pin',
         )
 
 def test_path_filter_rejects_stew_on_exact_pad0_after_337() -> None:

@@ -99,6 +99,38 @@ Fail-closed pins (live path after #59; deepen after #43; third-pass after #90):
   ## Source of truth (repository) / Canonical public governance front door /
   This wiki is the **public narrative layer** /
   Repo-Stewardship ## Front-door duties / ## Docs quality CI
+- Wiki/mdlink leftover residual after #326 tip (beyond #320 saturated after_320 pins;
+  NOT wiki/mdlink leftover residual #320 /
+  NOT stewardship-schema residual CI leftover residual #320 /
+  NOT path-filter/path-order leftover #314 /
+  NOT stewardship-schema residual CI leftover #309 /
+  NOT stewardship-schema residual CI #299 /
+  NOT stewardship-schema residual CI #297 /
+  NOT wiki/mdlink leftover residual #293 / NOT stewardship-schema residual #282 /
+  NOT lychee/blob-503 leftover #278 / NOT Pass-2 residual + templates #272 /
+  NOT path-edges leftover #262 / NOT wiki/mdlink leftover #252 /
+  NOT stewardship-schema leftover #258 / NOT path-filter/path-order leftover #244 /
+  NOT wiki outline/PUBLISH leftover #243 / NOT md/link residual layouts #239;
+  existing pages only — do not invent extra wiki files):
+  and drop the in-repo PUBLISH.md bullet from Home /
+  initialized once (Settings → Features → Wikis, then create the first page or /
+  parenthesized agents-governance.wiki.git URL /
+  in this directory as the public landing page /
+  Home H1 agents-governance public wiki /
+  Home TOC separator |------|----------------| /
+  ## Out of scope heading /
+  Private MCP/server implementation details /
+  Praetor/Aesop-style process stays quiet /
+  Maintained by smtp.eth /
+  project-template internals or flavor-branch how-tos /
+  Repo-Stewardship | Workflow | What it enforces | /
+  Prefer reversible docs/stewardship PRs /
+  Never delete scratchpad history /
+  ## Quiet stewardship /
+  ## What agents may edit (this repo, L1) /
+  ## What requires smtp.eth (Andrew) approval /
+  ## Issue / PR hygiene /
+  Working branches only — never commit stewardship directly to main
 """
 
 from __future__ import annotations
@@ -547,6 +579,36 @@ def main() -> int:
                 "# or main line",
                 errors,
             )
+        # Wiki/mdlink leftover residual after #326 tip (beyond #320 saturated pins; NOT wiki/mdlink leftover residual #320).
+        if (
+            "and drop the in-repo `PUBLISH.md` bullet from Home"
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md must keep and drop the in-repo PUBLISH.md bullet from Home",
+                errors,
+            )
+        if (
+            "initialized once (Settings → Features → Wikis, then create the first page or"
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md must keep initialized once Settings Wikis create the first page or",
+                errors,
+            )
+        if (
+            "(`https://github.com/fuzzywigg/agents-governance.wiki.git`)"
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md must keep parenthesized agents-governance.wiki.git URL",
+                errors,
+            )
+        if "in this directory as the public landing page" not in publish_text:
+            fail(
+                "PUBLISH.md fallback must keep in this directory as the public landing page",
+                errors,
+            )
 
     home = WIKI / "Home.md"
     if home.is_file():
@@ -620,6 +682,42 @@ def main() -> int:
                 "Home.md must keep This wiki is the **public narrative layer** wording",
                 errors,
             )
+        # Wiki/mdlink leftover residual after #326 tip (existing Home.md only; NOT wiki/mdlink leftover residual #320).
+        if "# Home — agents-governance public wiki" not in home_text:
+            fail(
+                "Home.md must keep # Home — agents-governance public wiki H1",
+                errors,
+            )
+        if "|------|----------------|" not in home_text:
+            fail(
+                "Home.md must keep |------|----------------| TOC separator",
+                errors,
+            )
+        if "## Out of scope" not in home_text:
+            fail("Home.md must keep ## Out of scope heading", errors)
+        if "Private MCP/server implementation details" not in home_text:
+            fail(
+                "Home.md must keep Private MCP/server implementation details wording",
+                errors,
+            )
+        if (
+            "Stewardship tooling (Praetor/Aesop-style process) stays quiet"
+            not in home_text
+        ):
+            fail(
+                "Home.md must keep Praetor/Aesop-style process stays quiet wording",
+                errors,
+            )
+        if "Maintained by smtp.eth" not in home_text:
+            fail("Home.md must keep Maintained by smtp.eth wording", errors)
+        if (
+            "Private `project-template` internals or flavor-branch how-tos"
+            not in home_text
+        ):
+            fail(
+                "Home.md must keep project-template internals or flavor-branch how-tos",
+                errors,
+            )
 
     stewardship = WIKI / "Repo-Stewardship.md"
     if stewardship.is_file():
@@ -668,6 +766,53 @@ def main() -> int:
         if "## Docs quality CI" not in ste_text:
             fail(
                 "Repo-Stewardship.md must keep ## Docs quality CI heading",
+                errors,
+            )
+        # Wiki/mdlink leftover residual after #326 tip (existing Repo-Stewardship only; NOT wiki/mdlink leftover residual #320).
+        if "| Workflow | What it enforces |" not in ste_text:
+            fail(
+                "Repo-Stewardship.md must keep | Workflow | What it enforces | header",
+                errors,
+            )
+        if (
+            "Prefer reversible docs/stewardship PRs; no invent-product work."
+            not in ste_text
+        ):
+            fail(
+                "Repo-Stewardship.md must keep Prefer reversible docs/stewardship PRs wording",
+                errors,
+            )
+        if "Never delete scratchpad history" not in ste_text:
+            fail(
+                "Repo-Stewardship.md must keep Never delete scratchpad history wording",
+                errors,
+            )
+        if "## Quiet stewardship" not in ste_text:
+            fail(
+                "Repo-Stewardship.md must keep ## Quiet stewardship heading",
+                errors,
+            )
+        if "## What agents may edit (this repo, L1)" not in ste_text:
+            fail(
+                "Repo-Stewardship.md must keep ## What agents may edit (this repo, L1)",
+                errors,
+            )
+        if "## What requires smtp.eth (Andrew) approval" not in ste_text:
+            fail(
+                "Repo-Stewardship.md must keep ## What requires smtp.eth (Andrew) approval",
+                errors,
+            )
+        if "## Issue / PR hygiene" not in ste_text:
+            fail(
+                "Repo-Stewardship.md must keep ## Issue / PR hygiene heading",
+                errors,
+            )
+        if (
+            "Working branches only — never commit stewardship directly to `main`"
+            not in ste_text
+        ):
+            fail(
+                "Repo-Stewardship.md must keep Working branches only never commit to main",
                 errors,
             )
 

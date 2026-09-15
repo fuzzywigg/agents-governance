@@ -465,6 +465,24 @@ not wiki/mdlink leftover residual #293 / not stewardship-schema residual #282 /
 not lychee/blob-503 leftover #278 / not Pass-2 residual + templates #272 /
 not path-edges leftover #262 / not wiki/mdlink leftover #252;
 no extra wiki files)).
+plus wiki/mdlink leftover residual deepen after #326 tip: PUBLISH
+drop-from-Home / initialized once first-page / parenthesized wiki.git URL /
+in this directory landing page / Home H1 public wiki / TOC separator /
+Home Out of scope heading / Private MCP/server details / Praetor/Aesop quiet /
+Maintained by smtp.eth / project-template flavor-branch how-tos /
+Repo-Stewardship Workflow header / Prefer reversible /
+Never delete scratchpad / Quiet stewardship / agents may edit /
+smtp.eth approval / Issue PR hygiene / Working branches only /
+timeout-permissions / uses-with / permissions-then-steps adjacency — DISTINCT
+leftover only (not wiki/mdlink leftover residual #320 /
+not stewardship-schema residual CI leftover residual #320 /
+not path-filter/path-order leftover #314 / not stewardship-schema residual CI
+leftover #309 / not stewardship-schema residual CI #299 /
+not stewardship-schema residual CI #297 /
+not wiki/mdlink leftover residual #293 / not stewardship-schema residual #282 /
+not lychee/blob-503 leftover #278 / not Pass-2 residual + templates #272 /
+not path-edges leftover #262 / not wiki/mdlink leftover #252;
+no extra wiki files)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

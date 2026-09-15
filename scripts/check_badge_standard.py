@@ -322,6 +322,43 @@ NOT md/link residual layouts #239):
   checkout->Check links->lychee@v2 triple adjacency /
   checkout->Run markdownlint->DavidAnson@v24 triple adjacency
 
+Fail-closed wiki/mdlink leftover residual after #326 tip (beyond #320 saturated
+after_320 pins; NOT wiki/mdlink leftover residual #320 /
+NOT stewardship-schema residual CI leftover residual #320 /
+  NOT path-filter/path-order leftover #314 /
+  NOT stewardship-schema residual CI leftover #309 /
+  NOT stewardship-schema residual CI #299 /
+  NOT stewardship-schema residual CI #297 /
+NOT wiki/mdlink leftover residual #293 /
+NOT stewardship-schema residual #282 / NOT lychee/blob-503 leftover #278 /
+NOT Pass-2 residual + templates #272 / NOT path-edges leftover #262 /
+NOT wiki/mdlink leftover #252 / NOT stewardship-schema leftover #258 /
+NOT path-filter/path-order leftover #244 / NOT wiki outline/PUBLISH leftover #243 /
+NOT md/link residual layouts #239):
+- wiki residual: and drop the in-repo PUBLISH.md bullet from Home /
+  initialized once Settings Wikis create the first page or /
+  parenthesized agents-governance.wiki.git URL /
+  in this directory as the public landing page /
+  Home H1 agents-governance public wiki /
+  Home TOC separator / ## Out of scope /
+  Private MCP/server implementation details /
+  Praetor/Aesop-style process stays quiet /
+  Maintained by smtp.eth /
+  project-template internals or flavor-branch how-tos /
+  Repo-Stewardship Workflow table header /
+  Prefer reversible docs/stewardship PRs /
+  Never delete scratchpad history /
+  ## Quiet stewardship /
+  ## What agents may edit (this repo, L1) /
+  ## What requires smtp.eth (Andrew) approval /
+  ## Issue / PR hygiene /
+  Working branches only never commit to main
+- md/link residual harden: link timeout-minutes:20 then permissions adjacency /
+  lint timeout-minutes:10 then permissions adjacency /
+  lychee@v2 then with: adjacency /
+  DavidAnson@v24 then with: adjacency /
+  permissions contents: read then steps: adjacency
+
 """
 
 from __future__ import annotations
@@ -2756,6 +2793,60 @@ def check_workflow_hardening(errors: list[str]) -> None:
             errors,
         )
 
+    # Wiki/mdlink leftover residual after #326 tip: md/link residual harden beyond #320 (NOT wiki/mdlink leftover residual #320).
+    link_timeout_perms = (
+        "    timeout-minutes: 20\n"
+        "    permissions:\n"
+        "      contents: read"
+    )
+    if link_timeout_perms not in link:
+        fail(
+            "link-check.yml must keep timeout-minutes: 20 then permissions adjacency "
+            "(wiki/mdlink leftover residual after #326)",
+            errors,
+        )
+    lint_timeout_perms = (
+        "    timeout-minutes: 10\n"
+        "    permissions:\n"
+        "      contents: read"
+    )
+    if lint_timeout_perms not in lint:
+        fail(
+            "markdown-lint.yml must keep timeout-minutes: 10 then permissions adjacency "
+            "(wiki/mdlink leftover residual after #326)",
+            errors,
+        )
+    link_uses_with = (
+        "        uses: lycheeverse/lychee-action@v2\n"
+        "        with:"
+    )
+    if link_uses_with not in link:
+        fail(
+            "link-check.yml must keep lychee@v2 then with: adjacency "
+            "(wiki/mdlink leftover residual after #326)",
+            errors,
+        )
+    lint_uses_with = (
+        "        uses: DavidAnson/markdownlint-cli2-action@v24\n"
+        "        with:"
+    )
+    if lint_uses_with not in lint:
+        fail(
+            "markdown-lint.yml must keep DavidAnson@v24 then with: adjacency "
+            "(wiki/mdlink leftover residual after #326)",
+            errors,
+        )
+    link_perms_steps = (
+        "      contents: read\n"
+        "    steps:"
+    )
+    if link_perms_steps not in link:
+        fail(
+            "link-check.yml must keep permissions contents: read then steps: adjacency "
+            "(wiki/mdlink leftover residual after #326)",
+            errors,
+        )
+
 
 def check_badge_standard_doc(errors: list[str]) -> None:
     """Ensure docs/badge-standard.md still documents the same required order."""
@@ -3895,6 +3986,50 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
     if lint_triple_pin not in text:
         fail(
             "check_badge_standard.py must keep " + lint_triple_pin + " leftover pin",
+            errors,
+        )
+
+    leftover_326_doc = "wiki/mdlink leftover residual after " + "#326"
+    if leftover_326_doc not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + leftover_326_doc + " pin",
+            errors,
+        )
+    not_wiki_mdlink_320 = "NOT wiki/mdlink leftover residual " + "#320"
+    if not_wiki_mdlink_320 not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + not_wiki_mdlink_320
+            + " distinctness pin",
+            errors,
+        )
+    link_timeout_perms_pin = "timeout-minutes: 20 then permissions " + "adjacency"
+    if link_timeout_perms_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + link_timeout_perms_pin + " leftover pin",
+            errors,
+        )
+    lint_timeout_perms_pin = "timeout-minutes: 10 then permissions " + "adjacency"
+    if lint_timeout_perms_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + lint_timeout_perms_pin + " leftover pin",
+            errors,
+        )
+    link_uses_with_pin = "lychee@v2 then with: " + "adjacency"
+    if link_uses_with_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + link_uses_with_pin + " leftover pin",
+            errors,
+        )
+    lint_uses_with_pin = "DavidAnson@v24 then with: " + "adjacency"
+    if lint_uses_with_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + lint_uses_with_pin + " leftover pin",
+            errors,
+        )
+    link_perms_steps_pin = "permissions contents: read then steps: " + "adjacency"
+    if link_perms_steps_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + link_perms_steps_pin + " leftover pin",
             errors,
         )
 
@@ -9952,6 +10087,133 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
     if stew_docs_ci_pin not in wiki_text:
         fail(
             "check_wiki_outline.py must pin Repo-Stewardship ## Docs quality CI",
+            errors,
+        )
+
+    leftover_326_wiki = "Wiki/mdlink leftover residual after " + "#326"
+    if leftover_326_wiki not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + leftover_326_wiki + " pin",
+            errors,
+        )
+    not_wiki_mdlink_320_w = "NOT wiki/mdlink leftover residual " + "#320"
+    if not_wiki_mdlink_320_w not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_wiki_mdlink_320_w + " pin",
+            errors,
+        )
+    drop_from_home_pin = "and drop the in-repo PUBLISH.md bullet from " + "Home"
+    if drop_from_home_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin and drop the in-repo PUBLISH.md bullet from Home",
+            errors,
+        )
+    init_once_pin = "initialized once Settings Wikis create the first page " + "or"
+    if init_once_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin initialized once Settings Wikis create the first page or",
+            errors,
+        )
+    wiki_git_paren_pin = "parenthesized agents-governance.wiki.git " + "URL"
+    if wiki_git_paren_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin parenthesized agents-governance.wiki.git URL",
+            errors,
+        )
+    landing_dir_pin = "in this directory as the public landing " + "page"
+    if landing_dir_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin in this directory as the public landing page",
+            errors,
+        )
+    home_h1_pin = "Home — agents-governance public " + "wiki"
+    if home_h1_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Home.md agents-governance public wiki H1",
+            errors,
+        )
+    home_toc_sep_pin = "|------|----------------|"
+    if home_toc_sep_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Home.md TOC separator",
+            errors,
+        )
+    home_oos_pin = "## Out of " + "scope"
+    if home_oos_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Home.md ## Out of scope heading",
+            errors,
+        )
+    home_mcp_pin = "Private MCP/server implementation " + "details"
+    if home_mcp_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Private MCP/server implementation details",
+            errors,
+        )
+    home_praetor_pin = "Praetor/Aesop-style process stays " + "quiet"
+    if home_praetor_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Praetor/Aesop-style process stays quiet",
+            errors,
+        )
+    home_maintained_pin = "Maintained by " + "smtp.eth"
+    if home_maintained_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Maintained by smtp.eth",
+            errors,
+        )
+    home_project_template_pin = "project-template internals or flavor-branch " + "how-tos"
+    if home_project_template_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin project-template internals flavor-branch how-tos",
+            errors,
+        )
+    stew_workflow_pin = "| Workflow | What it enforces |"
+    if stew_workflow_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Repo-Stewardship Workflow table header",
+            errors,
+        )
+    stew_reversible_pin = "Prefer reversible docs/stewardship " + "PRs"
+    if stew_reversible_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Prefer reversible docs/stewardship PRs",
+            errors,
+        )
+    stew_scratch_pin = "Never delete scratchpad " + "history"
+    if stew_scratch_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Never delete scratchpad history",
+            errors,
+        )
+    stew_quiet_pin = "## Quiet " + "stewardship"
+    if stew_quiet_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin ## Quiet stewardship",
+            errors,
+        )
+    stew_agents_edit_pin = "What agents may edit (this repo, " + "L1)"
+    if stew_agents_edit_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin What agents may edit (this repo, L1)",
+            errors,
+        )
+    stew_andrew_pin = "What requires smtp.eth (Andrew) " + "approval"
+    if stew_andrew_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin What requires smtp.eth (Andrew) approval",
+            errors,
+        )
+    stew_issue_pin = "## Issue / PR " + "hygiene"
+    if stew_issue_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin ## Issue / PR hygiene",
+            errors,
+        )
+    stew_branches_pin = "Working branches only never commit to " + "main"
+    if stew_branches_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Working branches only never commit to main",
             errors,
         )
 

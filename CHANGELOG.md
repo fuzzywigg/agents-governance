@@ -11,6 +11,37 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX wiki/mdlink leftover residual deepen after #326 tip: expand
+  self-tests to 7254 cases (was 7054) fail-closing unsaturated wiki outline /
+  PUBLISH.md residual plus Home/Repo-Stewardship residual plus markdown-lint /
+  link-check residual harden on existing modules only — and drop the in-repo
+  PUBLISH.md bullet from Home / initialized once Settings Wikis create the
+  first page or / parenthesized agents-governance.wiki.git URL / in this
+  directory as the public landing page / Home H1 agents-governance public wiki /
+  TOC separator / Home Out of scope heading / Private MCP/server details /
+  Praetor/Aesop-style process stays quiet / Maintained by smtp.eth /
+  project-template internals or flavor-branch how-tos /
+  Repo-Stewardship | Workflow | What it enforces | / Prefer reversible
+  docs/stewardship PRs / Never delete scratchpad history /
+  Quiet stewardship heading / What agents may edit (this repo, L1) /
+  What requires smtp.eth (Andrew) approval / Issue / PR hygiene /
+  Working branches only never commit to main /
+  timeout-minutes:20 then permissions adjacency /
+  timeout-minutes:10 then permissions adjacency /
+  lychee@v2 then with: adjacency / DavidAnson@v24 then with: adjacency /
+  permissions contents: read then steps: adjacency — wiki/mdlink leftover residual slice only
+  (not wiki/mdlink leftover residual #320 /
+  not stewardship-schema residual CI leftover residual #320 /
+  not path-filter/path-order leftover #314 / not stewardship-schema residual CI
+  leftover #309 / not stewardship-schema residual CI #299 /
+  not stewardship-schema residual CI #297 / not wiki/mdlink leftover residual
+  #293 / not stewardship-schema residual #282 / not lychee/blob-503 leftover
+  #278 / not Pass-2 residual + templates #272 / not path-edges leftover #262 /
+  not wiki/mdlink leftover #252); no invent-product; no fourth badge; no
+  scratchpad notes. Distinct from merged PRs
+  #326/#320/#314/#309/#299/#297/#293/#282/#278/#272/#262/#258/#252/#244/#243/#239.
+  Do **not** revive closed #328/#325/#322/#321/#318/#311/#308/#307/#302/#301/#296/#289/#281/#277.
+
 - TOKENMAXX stewardship-schema residual CI leftover residual deepen after #314
   tip (lands closed #316 leftover on post-#314 path-order tip): expand
   self-tests to 6854 cases (was 6618) fail-closing unsaturated schema-only

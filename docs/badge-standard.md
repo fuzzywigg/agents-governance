@@ -435,18 +435,20 @@ path-order / contiguous Set up Python → Install PyYAML adjacency /
 contiguous Install PyYAML → gates adjacency / contiguous gates →
 self-tests adjacency / contiguous self-tests → Download adjacency /
 contiguous Download → actionlint run adjacency / contiguous
-permissions:/steps: adjacency / contiguous steps:/checkout adjacency —
-DISTINCT path-order residual leftover edges only (not saturated leftover
-#314 / not schema residual CI leftover #309 / not schema residual CI #299 /
-not wiki/mdlink leftover residual #293 / not stewardship-schema residual
-#282 / not lychee/blob-503 harden #278 / not Pass-2 residual leftover #272 /
-not saturated leftover #262 / not stewardship-schema leftover #258 /
-not wiki/mdlink leftover #252 / not saturated residual #244 /
-not saturated deepen #225/#203 / not wiki outline/PUBLISH leftover #243 /
-not md/link residual #239 / not stewardship-checks/schema leftover #233 /
-not wiki-badge leftover #227 / not #189 / not #176 / not schema #191/#216 /
-not Pass-2 residual #199/#203 / not Pass-2 leftover + md/link #220 /
-not stewardship-badge lint #208; do not revive closed PRs
+permissions:/steps: adjacency / Check links + Run markdownlint +
+actionlint run as last steps — DISTINCT path-order residual leftover
+edges only (not saturated leftover #314 / not schema residual CI
+leftover #309 / not schema residual CI #299 / not wiki/mdlink leftover
+residual #293 / not stewardship-schema residual #282 / not
+lychee/blob-503 harden #278 / not Pass-2 residual leftover #272 / not
+saturated leftover #262 / not stewardship-schema leftover #258 / not
+wiki/mdlink leftover #252 / not saturated residual #244 / not
+saturated deepen #225/#203 / not wiki outline/PUBLISH leftover #243 /
+not md/link residual #239 / not stewardship-checks/schema
+leftover #233 / not wiki-badge leftover #227 / not #189 / not #176 /
+not schema #191/#216 / not Pass-2 residual #199/#203 / not Pass-2
+leftover + md/link #220 / not stewardship-badge lint #208; do not
+revive closed PRs
 (#319/#317/#310/#304/#303/#300/#294/#292/#286/#280/#274/#270/#264/#255/#247/#244/#236/#232/#228/#226/#223/#217/#213/#198/#186/#166/#157)).
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.

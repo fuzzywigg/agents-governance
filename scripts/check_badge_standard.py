@@ -188,14 +188,16 @@ NOT Pass-2 leftover + md/link #220 / NOT wiki outline/PUBLISH leftover #243 /
 NOT md/link residual #239 / NOT stewardship-checks/schema leftover #233 /
 NOT wiki-badge leftover #227 / NOT stewardship-badge lint #208):
 - contiguous seven-step actionlint path-order
-  (checkout → Set up Python → Install PyYAML → gates → self-tests → Download → actionlint run)
-- contiguous Set up Python → Install PyYAML adjacency
-- contiguous Install PyYAML → gates adjacency
-- contiguous gates → self-tests adjacency
-- contiguous self-tests → Download adjacency
-- contiguous Download → actionlint run adjacency
+  (checkout -> Set up Python -> Install PyYAML -> gates -> self-tests -> Download -> actionlint run)
+- contiguous Set up Python -> Install PyYAML adjacency
+- contiguous Install PyYAML -> gates adjacency
+- contiguous gates -> self-tests adjacency
+- contiguous self-tests -> Download adjacency
+- contiguous Download -> actionlint run adjacency
 - contiguous permissions:/steps: adjacency on all three
-- contiguous steps:/checkout adjacency on all three
+- Check links as last step (link-check.yml)
+- Run markdownlint as last step (markdown-lint.yml)
+- actionlint run as last step (stewardship-checks.yml)
 
 Fail-closed stewardship-checks + schema residual deepen after #225 (NOT wiki-index/badge
 #227 / NOT path-edges #225 / NOT Pass-2 leftover+md/link #220 / NOT schema fourth-pass #216 /
@@ -1010,13 +1012,14 @@ def check_workflow_hardening(errors: list[str]) -> None:
     NOT md/link residual #239 / NOT stewardship-checks/schema leftover #233 /
     NOT wiki-badge leftover #227 / NOT stewardship-badge lint #208):
     contiguous seven-step actionlint path-order /
-    contiguous Set up Python → Install PyYAML adjacency /
-    contiguous Install PyYAML → gates adjacency /
-    contiguous gates → self-tests adjacency /
-    contiguous self-tests → Download adjacency /
-    contiguous Download → actionlint run adjacency /
+    contiguous Set up Python -> Install PyYAML adjacency /
+    contiguous Install PyYAML -> gates adjacency /
+    contiguous gates -> self-tests adjacency /
+    contiguous self-tests -> Download adjacency /
+    contiguous Download -> actionlint run adjacency /
     contiguous permissions:/steps: adjacency /
-    contiguous steps:/checkout adjacency.
+    Check links as last step / Run markdownlint as last step /
+    actionlint run as last step.
     Markdown-lint/link-check workflow edges after #203 tip (lands closed #202/#192 leftover;
     NOT path-filter / Pass-2 / path-order / schema / badge-lint spam):
     args: >- / externally broken links commentary / without-it private-404 commentary /
@@ -2404,8 +2407,8 @@ def check_workflow_hardening(errors: list[str]) -> None:
         fail(
             "stewardship-checks.yml must keep contiguous seven-step "
             "actionlint path-order "
-            "(checkout → Set up Python → Install PyYAML → gates → "
-            "self-tests → Download → actionlint run; "
+            "(checkout -> Set up Python -> Install PyYAML -> gates -> "
+            "self-tests -> Download -> actionlint run; "
             "path-order residual leftover deepen after #314)",
             errors,
         )
@@ -2415,7 +2418,7 @@ def check_workflow_hardening(errors: list[str]) -> None:
     )
     if setup_install_314 not in stew:
         fail(
-            "stewardship-checks.yml must keep contiguous Set up Python → "
+            "stewardship-checks.yml must keep contiguous Set up Python -> "
             "Install PyYAML adjacency "
             "(path-order residual leftover deepen after #314)",
             errors,
@@ -2427,7 +2430,7 @@ def check_workflow_hardening(errors: list[str]) -> None:
     )
     if install_gates_314 not in stew:
         fail(
-            "stewardship-checks.yml must keep contiguous Install PyYAML → "
+            "stewardship-checks.yml must keep contiguous Install PyYAML -> "
             "gates adjacency "
             "(path-order residual leftover deepen after #314)",
             errors,
@@ -2439,7 +2442,7 @@ def check_workflow_hardening(errors: list[str]) -> None:
     )
     if gates_self_314 not in stew:
         fail(
-            "stewardship-checks.yml must keep contiguous gates → "
+            "stewardship-checks.yml must keep contiguous gates -> "
             "self-tests adjacency "
             "(path-order residual leftover deepen after #314)",
             errors,
@@ -2451,7 +2454,7 @@ def check_workflow_hardening(errors: list[str]) -> None:
     )
     if self_dl_314 not in stew:
         fail(
-            "stewardship-checks.yml must keep contiguous self-tests → "
+            "stewardship-checks.yml must keep contiguous self-tests -> "
             "Download adjacency "
             "(path-order residual leftover deepen after #314)",
             errors,
@@ -2463,7 +2466,7 @@ def check_workflow_hardening(errors: list[str]) -> None:
     )
     if dl_run_314 not in stew:
         fail(
-            "stewardship-checks.yml must keep contiguous Download → "
+            "stewardship-checks.yml must keep contiguous Download -> "
             "actionlint run adjacency "
             "(path-order residual leftover deepen after #314)",
             errors,
@@ -2485,17 +2488,41 @@ def check_workflow_hardening(errors: list[str]) -> None:
                 "(path-order residual leftover deepen after #314)",
                 errors,
             )
-        steps_co_314 = (
-            "    steps:\n"
-            "      - uses: actions/checkout@v7"
+    # Last-step path-order (allows docker:// before checkout; DISTINCT from
+    # steps:/checkout-first adjacency which breaks actionlint docker allow).
+    link_last_marker = "      - name: Check links"
+    link_last_idx = link.rfind(link_last_marker)
+    if link_last_idx < 0 or (
+        "\n      - name: " in link[link_last_idx + len(link_last_marker) :]
+        or "\n      - uses: " in link[link_last_idx + len(link_last_marker) :]
+    ):
+        fail(
+            "link-check.yml must keep Check links as last step "
+            "(path-order residual leftover deepen after #314)",
+            errors,
         )
-        if steps_co_314 not in body:
-            fail(
-                f"{wf_name} must keep contiguous steps:/checkout "
-                "adjacency "
-                "(path-order residual leftover deepen after #314)",
-                errors,
-            )
+    lint_last_marker = "      - name: Run markdownlint"
+    lint_last_idx = lint.rfind(lint_last_marker)
+    if lint_last_idx < 0 or (
+        "\n      - name: " in lint[lint_last_idx + len(lint_last_marker) :]
+        or "\n      - uses: " in lint[lint_last_idx + len(lint_last_marker) :]
+    ):
+        fail(
+            "markdown-lint.yml must keep Run markdownlint as last step "
+            "(path-order residual leftover deepen after #314)",
+            errors,
+        )
+    stew_last_marker = "      - name: actionlint existing workflow paths"
+    stew_last_idx = stew.rfind(stew_last_marker)
+    if stew_last_idx < 0 or (
+        "\n      - name: " in stew[stew_last_idx + len(stew_last_marker) :]
+        or "\n      - uses: " in stew[stew_last_idx + len(stew_last_marker) :]
+    ):
+        fail(
+            "stewardship-checks.yml must keep actionlint run as last step "
+            "(path-order residual leftover deepen after #314)",
+            errors,
+        )
 
     # Stewardship-checks + schema residual deepen after #225 (DISTINCT leftover;
     # NOT path-edges #225 / NOT Pass-2 leftover+md/link #220 / NOT schema fourth #216 /
@@ -6237,23 +6264,23 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
             "seven-step actionlint path-order fail needle",
         ),
         (
-            "contiguous Set up Python → " + "Install PyYAML adjacency",
+            "contiguous Set up Python -> " + "Install PyYAML adjacency",
             "setup/install adjacency fail needle",
         ),
         (
-            "contiguous Install PyYAML → " + "gates adjacency",
+            "contiguous Install PyYAML -> " + "gates adjacency",
             "install/gates adjacency fail needle",
         ),
         (
-            "contiguous gates → " + "self-tests adjacency",
+            "contiguous gates -> " + "self-tests adjacency",
             "gates/self-tests adjacency fail needle",
         ),
         (
-            "contiguous self-tests → " + "Download adjacency",
+            "contiguous self-tests -> " + "Download adjacency",
             "self-tests/Download adjacency fail needle",
         ),
         (
-            "contiguous Download → " + "actionlint run adjacency",
+            "contiguous Download -> " + "actionlint run adjacency",
             "Download/run adjacency fail needle",
         ),
         (
@@ -6261,8 +6288,16 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
             "permissions/steps adjacency fail needle",
         ),
         (
-            "contiguous steps:/checkout " + "adjacency",
-            "steps/checkout adjacency fail needle",
+            "Check links as last " + "step",
+            "Check links last-step fail needle",
+        ),
+        (
+            "Run markdownlint as last " + "step",
+            "Run markdownlint last-step fail needle",
+        ),
+        (
+            "actionlint run as last " + "step",
+            "actionlint run last-step fail needle",
         ),
         (
             "path-order residual leftover deepen after " + "#314",

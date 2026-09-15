@@ -86292,6 +86292,8 @@ def test_path_edges_rejects_stew_merge_group_after_309() -> None:
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'merge_group:')
 
 
+
+
 # --- TOKENMAXX path-order residual leftover deepen after #314 (+154) -----
 
 def test_path_order_gate_leftover_doc_after_314() -> None:
@@ -86905,7 +86907,7 @@ def test_path_order_gate_seven_step_needle_after_314() -> None:
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'contiguous seven-step actionlint path-order',
+            'seven-step actionlint path-order fail needle',
         )
 
 
@@ -86920,7 +86922,7 @@ def test_path_order_gate_seven_step_needle_still_after_314() -> None:
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'contiguous seven-step actionlint path-order',
+            'seven-step actionlint path-order fail needle',
         )
 
 
@@ -86930,12 +86932,12 @@ def test_path_order_gate_setup_install_needle_after_314() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'contiguous Set up Python → Install PyYAML adjacency' in text
-        path.write_text(text.replace('contiguous Set up Python → Install PyYAML adjacency', 'contiguous Set up Python → Install PyYAML noise'), encoding="utf-8")
+        assert 'contiguous Set up Python -> Install PyYAML adjacency' in text
+        path.write_text(text.replace('contiguous Set up Python -> Install PyYAML adjacency', 'contiguous Set up Python -> Install PyYAML noise'), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'contiguous Set up Python → Install PyYAML adjacency',
+            'setup/install adjacency fail needle',
         )
 
 
@@ -86945,12 +86947,12 @@ def test_path_order_gate_setup_install_needle_still_after_314() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'contiguous Set up Python → Install PyYAML adjacency' in text
-        path.write_text(text.replace('contiguous Set up Python → Install PyYAML adjacency', 'contiguous Set up Python → Install PyYAML noise'), encoding="utf-8")
+        assert 'contiguous Set up Python -> Install PyYAML adjacency' in text
+        path.write_text(text.replace('contiguous Set up Python -> Install PyYAML adjacency', 'contiguous Set up Python -> Install PyYAML noise'), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'contiguous Set up Python → Install PyYAML adjacency',
+            'setup/install adjacency fail needle',
         )
 
 
@@ -86960,12 +86962,12 @@ def test_path_order_gate_install_gates_needle_after_314() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'contiguous Install PyYAML → gates adjacency' in text
-        path.write_text(text.replace('contiguous Install PyYAML → gates adjacency', 'contiguous Install PyYAML → gates noise'), encoding="utf-8")
+        assert 'contiguous Install PyYAML -> gates adjacency' in text
+        path.write_text(text.replace('contiguous Install PyYAML -> gates adjacency', 'contiguous Install PyYAML -> gates noise'), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'contiguous Install PyYAML → gates adjacency',
+            'install/gates adjacency fail needle',
         )
 
 
@@ -86975,12 +86977,12 @@ def test_path_order_gate_install_gates_needle_still_after_314() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'contiguous Install PyYAML → gates adjacency' in text
-        path.write_text(text.replace('contiguous Install PyYAML → gates adjacency', 'contiguous Install PyYAML → gates noise'), encoding="utf-8")
+        assert 'contiguous Install PyYAML -> gates adjacency' in text
+        path.write_text(text.replace('contiguous Install PyYAML -> gates adjacency', 'contiguous Install PyYAML -> gates noise'), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'contiguous Install PyYAML → gates adjacency',
+            'install/gates adjacency fail needle',
         )
 
 
@@ -86990,12 +86992,12 @@ def test_path_order_gate_gates_self_needle_after_314() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'contiguous gates → self-tests adjacency' in text
-        path.write_text(text.replace('contiguous gates → self-tests adjacency', 'contiguous gates → self-tests noise'), encoding="utf-8")
+        assert 'contiguous gates -> self-tests adjacency' in text
+        path.write_text(text.replace('contiguous gates -> self-tests adjacency', 'contiguous gates -> self-tests noise'), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'contiguous gates → self-tests adjacency',
+            'gates/self-tests adjacency fail needle',
         )
 
 
@@ -87005,12 +87007,12 @@ def test_path_order_gate_gates_self_needle_still_after_314() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'contiguous gates → self-tests adjacency' in text
-        path.write_text(text.replace('contiguous gates → self-tests adjacency', 'contiguous gates → self-tests noise'), encoding="utf-8")
+        assert 'contiguous gates -> self-tests adjacency' in text
+        path.write_text(text.replace('contiguous gates -> self-tests adjacency', 'contiguous gates -> self-tests noise'), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'contiguous gates → self-tests adjacency',
+            'gates/self-tests adjacency fail needle',
         )
 
 
@@ -87020,12 +87022,12 @@ def test_path_order_gate_self_dl_needle_after_314() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'contiguous self-tests → Download adjacency' in text
-        path.write_text(text.replace('contiguous self-tests → Download adjacency', 'contiguous self-tests → Download noise'), encoding="utf-8")
+        assert 'contiguous self-tests -> Download adjacency' in text
+        path.write_text(text.replace('contiguous self-tests -> Download adjacency', 'contiguous self-tests -> Download noise'), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'contiguous self-tests → Download adjacency',
+            'self-tests/Download adjacency fail needle',
         )
 
 
@@ -87035,12 +87037,12 @@ def test_path_order_gate_self_dl_needle_still_after_314() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'contiguous self-tests → Download adjacency' in text
-        path.write_text(text.replace('contiguous self-tests → Download adjacency', 'contiguous self-tests → Download noise'), encoding="utf-8")
+        assert 'contiguous self-tests -> Download adjacency' in text
+        path.write_text(text.replace('contiguous self-tests -> Download adjacency', 'contiguous self-tests -> Download noise'), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'contiguous self-tests → Download adjacency',
+            'self-tests/Download adjacency fail needle',
         )
 
 
@@ -87050,12 +87052,12 @@ def test_path_order_gate_download_run_needle_after_314() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'contiguous Download → actionlint run adjacency' in text
-        path.write_text(text.replace('contiguous Download → actionlint run adjacency', 'contiguous Download → actionlint run noise'), encoding="utf-8")
+        assert 'contiguous Download -> actionlint run adjacency' in text
+        path.write_text(text.replace('contiguous Download -> actionlint run adjacency', 'contiguous Download -> actionlint run noise'), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'contiguous Download → actionlint run adjacency',
+            'Download/run adjacency fail needle',
         )
 
 
@@ -87065,12 +87067,12 @@ def test_path_order_gate_download_run_needle_still_after_314() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'contiguous Download → actionlint run adjacency' in text
-        path.write_text(text.replace('contiguous Download → actionlint run adjacency', 'contiguous Download → actionlint run noise'), encoding="utf-8")
+        assert 'contiguous Download -> actionlint run adjacency' in text
+        path.write_text(text.replace('contiguous Download -> actionlint run adjacency', 'contiguous Download -> actionlint run noise'), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'contiguous Download → actionlint run adjacency',
+            'Download/run adjacency fail needle',
         )
 
 
@@ -87085,7 +87087,7 @@ def test_path_order_gate_perm_steps_needle_after_314() -> None:
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'contiguous permissions:/steps: adjacency',
+            'permissions/steps adjacency fail needle',
         )
 
 
@@ -87100,67 +87102,67 @@ def test_path_order_gate_perm_steps_needle_still_after_314() -> None:
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'contiguous permissions:/steps: adjacency',
+            'permissions/steps adjacency fail needle',
         )
 
 
-def test_path_order_gate_steps_checkout_needle_after_314() -> None:
+def test_path_order_gate_link_last_needle_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'contiguous steps:/checkout adjacency' in text
-        path.write_text(text.replace('contiguous steps:/checkout adjacency', 'contiguous steps:/checkout noise'), encoding="utf-8")
+        assert 'Check links as last step' in text
+        path.write_text(text.replace('Check links as last step', 'Check links as last noise'), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'contiguous steps:/checkout adjacency',
+            'Check links last-step fail needle',
         )
 
 
-def test_path_order_gate_steps_checkout_needle_still_after_314() -> None:
+def test_path_order_gate_link_last_needle_still_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'contiguous steps:/checkout adjacency' in text
-        path.write_text(text.replace('contiguous steps:/checkout adjacency', 'contiguous steps:/checkout noise'), encoding="utf-8")
+        assert 'Check links as last step' in text
+        path.write_text(text.replace('Check links as last step', 'Check links as last noise'), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'contiguous steps:/checkout adjacency',
+            'Check links last-step fail needle',
         )
 
 
-def test_path_order_gate_wording_after_314() -> None:
+def test_path_order_gate_lint_last_needle_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'path-order residual leftover deepen after #314' in text
-        path.write_text(text.replace('path-order residual leftover deepen after #314', 'path-order residual leftover deepen after #000'), encoding="utf-8")
+        assert 'Run markdownlint as last step' in text
+        path.write_text(text.replace('Run markdownlint as last step', 'Run markdownlint as last noise'), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'path-order residual leftover deepen after #314',
+            'Run markdownlint last-step fail needle',
         )
 
 
-def test_path_order_gate_wording_still_after_314() -> None:
+def test_path_order_gate_lint_last_needle_still_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'path-order residual leftover deepen after #314' in text
-        path.write_text(text.replace('path-order residual leftover deepen after #314', 'path-order residual leftover deepen after #000'), encoding="utf-8")
+        assert 'Run markdownlint as last step' in text
+        path.write_text(text.replace('Run markdownlint as last step', 'Run markdownlint as last noise'), encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'path-order residual leftover deepen after #314',
+            'Run markdownlint last-step fail needle',
         )
 
 
@@ -87260,7 +87262,7 @@ def test_path_order_rejects_stew_setup_install_pad0_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '          python-version: "3.12"\n      - name: Install PyYAML (schema parser)\n' in text
         path.write_text(text.replace('          python-version: "3.12"\n      - name: Install PyYAML (schema parser)\n', '          python-version: "3.12"\n      - name: Invent padding\n        run: "true"\n      - name: Install PyYAML (schema parser)\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Set up Python → Install PyYAML adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Set up Python -> Install PyYAML adjacency')
 
 
 def test_path_order_rejects_stew_setup_install_pad1_after_314() -> None:
@@ -87271,7 +87273,7 @@ def test_path_order_rejects_stew_setup_install_pad1_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '          python-version: "3.12"\n      - name: Install PyYAML (schema parser)\n' in text
         path.write_text(text.replace('          python-version: "3.12"\n      - name: Install PyYAML (schema parser)\n', '          python-version: "3.12"\n      - name: Invent padding\n        run: "true"\n      - name: Install PyYAML (schema parser)\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Set up Python → Install PyYAML adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Set up Python -> Install PyYAML adjacency')
 
 
 def test_path_order_rejects_stew_setup_install_pad2_after_314() -> None:
@@ -87282,7 +87284,7 @@ def test_path_order_rejects_stew_setup_install_pad2_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '          python-version: "3.12"\n      - name: Install PyYAML (schema parser)\n' in text
         path.write_text(text.replace('          python-version: "3.12"\n      - name: Install PyYAML (schema parser)\n', '          python-version: "3.12"\n      - name: Invent padding\n        run: "true"\n      - name: Install PyYAML (schema parser)\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Set up Python → Install PyYAML adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Set up Python -> Install PyYAML adjacency')
 
 
 def test_path_order_rejects_stew_setup_install_pad3_after_314() -> None:
@@ -87293,7 +87295,7 @@ def test_path_order_rejects_stew_setup_install_pad3_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '          python-version: "3.12"\n      - name: Install PyYAML (schema parser)\n' in text
         path.write_text(text.replace('          python-version: "3.12"\n      - name: Install PyYAML (schema parser)\n', '          python-version: "3.12"\n      - name: Invent padding\n        run: "true"\n      - name: Install PyYAML (schema parser)\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Set up Python → Install PyYAML adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Set up Python -> Install PyYAML adjacency')
 
 
 def test_path_order_rejects_stew_setup_install_pad4_after_314() -> None:
@@ -87304,7 +87306,7 @@ def test_path_order_rejects_stew_setup_install_pad4_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '          python-version: "3.12"\n      - name: Install PyYAML (schema parser)\n' in text
         path.write_text(text.replace('          python-version: "3.12"\n      - name: Install PyYAML (schema parser)\n', '          python-version: "3.12"\n      - name: Invent padding\n        run: "true"\n      - name: Install PyYAML (schema parser)\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Set up Python → Install PyYAML adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Set up Python -> Install PyYAML adjacency')
 
 
 def test_path_order_rejects_stew_setup_install_pad5_after_314() -> None:
@@ -87315,7 +87317,7 @@ def test_path_order_rejects_stew_setup_install_pad5_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '          python-version: "3.12"\n      - name: Install PyYAML (schema parser)\n' in text
         path.write_text(text.replace('          python-version: "3.12"\n      - name: Install PyYAML (schema parser)\n', '          python-version: "3.12"\n      - name: Invent padding\n        run: "true"\n      - name: Install PyYAML (schema parser)\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Set up Python → Install PyYAML adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Set up Python -> Install PyYAML adjacency')
 
 
 def test_path_order_rejects_stew_setup_install_still_after_314() -> None:
@@ -87326,7 +87328,7 @@ def test_path_order_rejects_stew_setup_install_still_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '          python-version: "3.12"\n      - name: Install PyYAML (schema parser)\n' in text
         path.write_text(text.replace('          python-version: "3.12"\n      - name: Install PyYAML (schema parser)\n', '          python-version: "3.12"\n      - name: Invent padding\n        run: "true"\n      - name: Install PyYAML (schema parser)\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Set up Python → Install PyYAML adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Set up Python -> Install PyYAML adjacency')
 
 
 def test_path_order_rejects_stew_setup_install_after_314() -> None:
@@ -87337,7 +87339,7 @@ def test_path_order_rejects_stew_setup_install_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '          python-version: "3.12"\n      - name: Install PyYAML (schema parser)\n' in text
         path.write_text(text.replace('          python-version: "3.12"\n      - name: Install PyYAML (schema parser)\n', '          python-version: "3.12"\n      - name: Invent padding\n        run: "true"\n      - name: Install PyYAML (schema parser)\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Set up Python → Install PyYAML adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Set up Python -> Install PyYAML adjacency')
 
 
 def test_path_order_rejects_stew_install_gates_pad0_after_314() -> None:
@@ -87348,7 +87350,7 @@ def test_path_order_rejects_stew_install_gates_pad0_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n' in text
         path.write_text(text.replace('      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n', '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Invent padding\n        run: "true"\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML → gates adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML -> gates adjacency')
 
 
 def test_path_order_rejects_stew_install_gates_pad1_after_314() -> None:
@@ -87359,7 +87361,7 @@ def test_path_order_rejects_stew_install_gates_pad1_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n' in text
         path.write_text(text.replace('      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n', '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Invent padding\n        run: "true"\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML → gates adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML -> gates adjacency')
 
 
 def test_path_order_rejects_stew_install_gates_pad2_after_314() -> None:
@@ -87370,7 +87372,7 @@ def test_path_order_rejects_stew_install_gates_pad2_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n' in text
         path.write_text(text.replace('      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n', '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Invent padding\n        run: "true"\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML → gates adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML -> gates adjacency')
 
 
 def test_path_order_rejects_stew_install_gates_pad3_after_314() -> None:
@@ -87381,7 +87383,7 @@ def test_path_order_rejects_stew_install_gates_pad3_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n' in text
         path.write_text(text.replace('      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n', '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Invent padding\n        run: "true"\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML → gates adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML -> gates adjacency')
 
 
 def test_path_order_rejects_stew_install_gates_pad4_after_314() -> None:
@@ -87392,7 +87394,7 @@ def test_path_order_rejects_stew_install_gates_pad4_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n' in text
         path.write_text(text.replace('      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n', '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Invent padding\n        run: "true"\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML → gates adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML -> gates adjacency')
 
 
 def test_path_order_rejects_stew_install_gates_pad5_after_314() -> None:
@@ -87403,7 +87405,7 @@ def test_path_order_rejects_stew_install_gates_pad5_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n' in text
         path.write_text(text.replace('      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n', '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Invent padding\n        run: "true"\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML → gates adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML -> gates adjacency')
 
 
 def test_path_order_rejects_stew_install_gates_still_after_314() -> None:
@@ -87414,7 +87416,7 @@ def test_path_order_rejects_stew_install_gates_still_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n' in text
         path.write_text(text.replace('      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n', '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Invent padding\n        run: "true"\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML → gates adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML -> gates adjacency')
 
 
 def test_path_order_rejects_stew_install_gates_after_314() -> None:
@@ -87425,7 +87427,7 @@ def test_path_order_rejects_stew_install_gates_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n' in text
         path.write_text(text.replace('      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n', '      - name: Install PyYAML (schema parser)\n        run: pip install --quiet pyyaml\n      - name: Invent padding\n        run: "true"\n      - name: Stewardship gates (badge / wiki / schema / relative links)\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML → gates adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Install PyYAML -> gates adjacency')
 
 
 def test_path_order_rejects_stew_gates_self_pad0_after_314() -> None:
@@ -87436,7 +87438,7 @@ def test_path_order_rejects_stew_gates_self_pad0_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Stewardship gate self-tests\n' in text
         path.write_text(text.replace('      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Stewardship gate self-tests\n', '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Invent padding\n        run: "true"\n      - name: Stewardship gate self-tests\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'gates → self-tests adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'gates -> self-tests adjacency')
 
 
 def test_path_order_rejects_stew_gates_self_pad1_after_314() -> None:
@@ -87447,7 +87449,7 @@ def test_path_order_rejects_stew_gates_self_pad1_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Stewardship gate self-tests\n' in text
         path.write_text(text.replace('      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Stewardship gate self-tests\n', '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Invent padding\n        run: "true"\n      - name: Stewardship gate self-tests\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'gates → self-tests adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'gates -> self-tests adjacency')
 
 
 def test_path_order_rejects_stew_gates_self_pad2_after_314() -> None:
@@ -87458,7 +87460,7 @@ def test_path_order_rejects_stew_gates_self_pad2_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Stewardship gate self-tests\n' in text
         path.write_text(text.replace('      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Stewardship gate self-tests\n', '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Invent padding\n        run: "true"\n      - name: Stewardship gate self-tests\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'gates → self-tests adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'gates -> self-tests adjacency')
 
 
 def test_path_order_rejects_stew_gates_self_pad3_after_314() -> None:
@@ -87469,7 +87471,7 @@ def test_path_order_rejects_stew_gates_self_pad3_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Stewardship gate self-tests\n' in text
         path.write_text(text.replace('      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Stewardship gate self-tests\n', '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Invent padding\n        run: "true"\n      - name: Stewardship gate self-tests\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'gates → self-tests adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'gates -> self-tests adjacency')
 
 
 def test_path_order_rejects_stew_gates_self_pad4_after_314() -> None:
@@ -87480,7 +87482,7 @@ def test_path_order_rejects_stew_gates_self_pad4_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Stewardship gate self-tests\n' in text
         path.write_text(text.replace('      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Stewardship gate self-tests\n', '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Invent padding\n        run: "true"\n      - name: Stewardship gate self-tests\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'gates → self-tests adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'gates -> self-tests adjacency')
 
 
 def test_path_order_rejects_stew_gates_self_pad5_after_314() -> None:
@@ -87491,7 +87493,7 @@ def test_path_order_rejects_stew_gates_self_pad5_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Stewardship gate self-tests\n' in text
         path.write_text(text.replace('      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Stewardship gate self-tests\n', '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Invent padding\n        run: "true"\n      - name: Stewardship gate self-tests\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'gates → self-tests adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'gates -> self-tests adjacency')
 
 
 def test_path_order_rejects_stew_gates_self_still_after_314() -> None:
@@ -87502,7 +87504,7 @@ def test_path_order_rejects_stew_gates_self_still_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Stewardship gate self-tests\n' in text
         path.write_text(text.replace('      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Stewardship gate self-tests\n', '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Invent padding\n        run: "true"\n      - name: Stewardship gate self-tests\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'gates → self-tests adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'gates -> self-tests adjacency')
 
 
 def test_path_order_rejects_stew_gates_self_after_314() -> None:
@@ -87513,7 +87515,7 @@ def test_path_order_rejects_stew_gates_self_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Stewardship gate self-tests\n' in text
         path.write_text(text.replace('      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Stewardship gate self-tests\n', '      - name: Stewardship gates (badge / wiki / schema / relative links)\n        run: bash scripts/run_stewardship_checks.sh\n      - name: Invent padding\n        run: "true"\n      - name: Stewardship gate self-tests\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'gates → self-tests adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'gates -> self-tests adjacency')
 
 
 def test_path_order_rejects_stew_self_dl_pad0_after_314() -> None:
@@ -87524,7 +87526,7 @@ def test_path_order_rejects_stew_self_dl_pad0_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Download actionlint\n' in text
         path.write_text(text.replace('      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Download actionlint\n', '      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Invent padding\n        run: "true"\n      - name: Download actionlint\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'self-tests → Download adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'self-tests -> Download adjacency')
 
 
 def test_path_order_rejects_stew_self_dl_pad1_after_314() -> None:
@@ -87535,7 +87537,7 @@ def test_path_order_rejects_stew_self_dl_pad1_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Download actionlint\n' in text
         path.write_text(text.replace('      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Download actionlint\n', '      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Invent padding\n        run: "true"\n      - name: Download actionlint\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'self-tests → Download adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'self-tests -> Download adjacency')
 
 
 def test_path_order_rejects_stew_self_dl_pad2_after_314() -> None:
@@ -87546,7 +87548,7 @@ def test_path_order_rejects_stew_self_dl_pad2_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Download actionlint\n' in text
         path.write_text(text.replace('      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Download actionlint\n', '      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Invent padding\n        run: "true"\n      - name: Download actionlint\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'self-tests → Download adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'self-tests -> Download adjacency')
 
 
 def test_path_order_rejects_stew_self_dl_pad3_after_314() -> None:
@@ -87557,7 +87559,7 @@ def test_path_order_rejects_stew_self_dl_pad3_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Download actionlint\n' in text
         path.write_text(text.replace('      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Download actionlint\n', '      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Invent padding\n        run: "true"\n      - name: Download actionlint\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'self-tests → Download adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'self-tests -> Download adjacency')
 
 
 def test_path_order_rejects_stew_self_dl_pad4_after_314() -> None:
@@ -87568,7 +87570,7 @@ def test_path_order_rejects_stew_self_dl_pad4_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Download actionlint\n' in text
         path.write_text(text.replace('      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Download actionlint\n', '      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Invent padding\n        run: "true"\n      - name: Download actionlint\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'self-tests → Download adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'self-tests -> Download adjacency')
 
 
 def test_path_order_rejects_stew_self_dl_pad5_after_314() -> None:
@@ -87579,7 +87581,7 @@ def test_path_order_rejects_stew_self_dl_pad5_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Download actionlint\n' in text
         path.write_text(text.replace('      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Download actionlint\n', '      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Invent padding\n        run: "true"\n      - name: Download actionlint\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'self-tests → Download adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'self-tests -> Download adjacency')
 
 
 def test_path_order_rejects_stew_self_dl_still_after_314() -> None:
@@ -87590,7 +87592,7 @@ def test_path_order_rejects_stew_self_dl_still_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Download actionlint\n' in text
         path.write_text(text.replace('      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Download actionlint\n', '      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Invent padding\n        run: "true"\n      - name: Download actionlint\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'self-tests → Download adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'self-tests -> Download adjacency')
 
 
 def test_path_order_rejects_stew_self_dl_after_314() -> None:
@@ -87601,7 +87603,7 @@ def test_path_order_rejects_stew_self_dl_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Download actionlint\n' in text
         path.write_text(text.replace('      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Download actionlint\n', '      - name: Stewardship gate self-tests\n        run: python3 scripts/test_stewardship_gates.py\n      - name: Invent padding\n        run: "true"\n      - name: Download actionlint\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'self-tests → Download adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'self-tests -> Download adjacency')
 
 
 def test_path_order_rejects_stew_download_run_pad0_after_314() -> None:
@@ -87612,7 +87614,7 @@ def test_path_order_rejects_stew_download_run_pad0_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '        shell: bash\n      - name: actionlint existing workflow paths\n' in text
         path.write_text(text.replace('        shell: bash\n      - name: actionlint existing workflow paths\n', '        shell: bash\n      - name: Invent padding\n        run: "true"\n      - name: actionlint existing workflow paths\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Download → actionlint run adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Download -> actionlint run adjacency')
 
 
 def test_path_order_rejects_stew_download_run_pad1_after_314() -> None:
@@ -87623,7 +87625,7 @@ def test_path_order_rejects_stew_download_run_pad1_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '        shell: bash\n      - name: actionlint existing workflow paths\n' in text
         path.write_text(text.replace('        shell: bash\n      - name: actionlint existing workflow paths\n', '        shell: bash\n      - name: Invent padding\n        run: "true"\n      - name: actionlint existing workflow paths\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Download → actionlint run adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Download -> actionlint run adjacency')
 
 
 def test_path_order_rejects_stew_download_run_pad2_after_314() -> None:
@@ -87634,7 +87636,7 @@ def test_path_order_rejects_stew_download_run_pad2_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '        shell: bash\n      - name: actionlint existing workflow paths\n' in text
         path.write_text(text.replace('        shell: bash\n      - name: actionlint existing workflow paths\n', '        shell: bash\n      - name: Invent padding\n        run: "true"\n      - name: actionlint existing workflow paths\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Download → actionlint run adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Download -> actionlint run adjacency')
 
 
 def test_path_order_rejects_stew_download_run_pad3_after_314() -> None:
@@ -87645,7 +87647,7 @@ def test_path_order_rejects_stew_download_run_pad3_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '        shell: bash\n      - name: actionlint existing workflow paths\n' in text
         path.write_text(text.replace('        shell: bash\n      - name: actionlint existing workflow paths\n', '        shell: bash\n      - name: Invent padding\n        run: "true"\n      - name: actionlint existing workflow paths\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Download → actionlint run adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Download -> actionlint run adjacency')
 
 
 def test_path_order_rejects_stew_download_run_pad4_after_314() -> None:
@@ -87656,7 +87658,7 @@ def test_path_order_rejects_stew_download_run_pad4_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '        shell: bash\n      - name: actionlint existing workflow paths\n' in text
         path.write_text(text.replace('        shell: bash\n      - name: actionlint existing workflow paths\n', '        shell: bash\n      - name: Invent padding\n        run: "true"\n      - name: actionlint existing workflow paths\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Download → actionlint run adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Download -> actionlint run adjacency')
 
 
 def test_path_order_rejects_stew_download_run_pad5_after_314() -> None:
@@ -87667,7 +87669,7 @@ def test_path_order_rejects_stew_download_run_pad5_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '        shell: bash\n      - name: actionlint existing workflow paths\n' in text
         path.write_text(text.replace('        shell: bash\n      - name: actionlint existing workflow paths\n', '        shell: bash\n      - name: Invent padding\n        run: "true"\n      - name: actionlint existing workflow paths\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Download → actionlint run adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Download -> actionlint run adjacency')
 
 
 def test_path_order_rejects_stew_download_run_still_after_314() -> None:
@@ -87678,7 +87680,7 @@ def test_path_order_rejects_stew_download_run_still_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '        shell: bash\n      - name: actionlint existing workflow paths\n' in text
         path.write_text(text.replace('        shell: bash\n      - name: actionlint existing workflow paths\n', '        shell: bash\n      - name: Invent padding\n        run: "true"\n      - name: actionlint existing workflow paths\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Download → actionlint run adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Download -> actionlint run adjacency')
 
 
 def test_path_order_rejects_stew_download_run_after_314() -> None:
@@ -87689,7 +87691,7 @@ def test_path_order_rejects_stew_download_run_after_314() -> None:
         text = path.read_text(encoding="utf-8")
         assert '        shell: bash\n      - name: actionlint existing workflow paths\n' in text
         path.write_text(text.replace('        shell: bash\n      - name: actionlint existing workflow paths\n', '        shell: bash\n      - name: Invent padding\n        run: "true"\n      - name: actionlint existing workflow paths\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Download → actionlint run adjacency')
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Download -> actionlint run adjacency')
 
 
 def test_path_order_rejects_link_perm_steps_pad0_after_314() -> None:
@@ -87956,268 +87958,268 @@ def test_path_order_rejects_stew_perm_steps_after_314() -> None:
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'permissions:/steps: adjacency')
 
 
-def test_path_order_rejects_link_steps_checkout_pad0_after_314() -> None:
+def test_path_order_rejects_link_last_step_pad0_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/link-check.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n' in text
+        path.write_text(text.replace('      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n', '      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Check links as last step')
 
 
-def test_path_order_rejects_link_steps_checkout_pad1_after_314() -> None:
+def test_path_order_rejects_link_last_step_pad1_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/link-check.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n' in text
+        path.write_text(text.replace('      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n', '      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Check links as last step')
 
 
-def test_path_order_rejects_link_steps_checkout_pad2_after_314() -> None:
+def test_path_order_rejects_link_last_step_pad2_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/link-check.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n' in text
+        path.write_text(text.replace('      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n', '      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Check links as last step')
 
 
-def test_path_order_rejects_link_steps_checkout_pad3_after_314() -> None:
+def test_path_order_rejects_link_last_step_pad3_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/link-check.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n' in text
+        path.write_text(text.replace('      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n', '      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Check links as last step')
 
 
-def test_path_order_rejects_link_steps_checkout_pad4_after_314() -> None:
+def test_path_order_rejects_link_last_step_pad4_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/link-check.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n' in text
+        path.write_text(text.replace('      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n', '      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Check links as last step')
 
 
-def test_path_order_rejects_link_steps_checkout_pad5_after_314() -> None:
+def test_path_order_rejects_link_last_step_pad5_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/link-check.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n' in text
+        path.write_text(text.replace('      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n', '      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Check links as last step')
 
 
-def test_path_order_rejects_link_steps_checkout_still_after_314() -> None:
+def test_path_order_rejects_link_last_step_still_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/link-check.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n' in text
+        path.write_text(text.replace('      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n', '      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Check links as last step')
 
 
-def test_path_order_rejects_link_steps_checkout_after_314() -> None:
+def test_path_order_rejects_link_last_step_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/link-check.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n' in text
+        path.write_text(text.replace('      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n', '      - name: Check links\n        uses: lycheeverse/lychee-action@v2\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Check links as last step')
 
 
-def test_path_order_rejects_lint_steps_checkout_pad0_after_314() -> None:
+def test_path_order_rejects_lint_last_step_pad0_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n' in text
+        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint as last step')
 
 
-def test_path_order_rejects_lint_steps_checkout_pad1_after_314() -> None:
+def test_path_order_rejects_lint_last_step_pad1_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n' in text
+        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint as last step')
 
 
-def test_path_order_rejects_lint_steps_checkout_pad2_after_314() -> None:
+def test_path_order_rejects_lint_last_step_pad2_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n' in text
+        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint as last step')
 
 
-def test_path_order_rejects_lint_steps_checkout_pad3_after_314() -> None:
+def test_path_order_rejects_lint_last_step_pad3_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n' in text
+        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint as last step')
 
 
-def test_path_order_rejects_lint_steps_checkout_pad4_after_314() -> None:
+def test_path_order_rejects_lint_last_step_pad4_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n' in text
+        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint as last step')
 
 
-def test_path_order_rejects_lint_steps_checkout_pad5_after_314() -> None:
+def test_path_order_rejects_lint_last_step_pad5_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n' in text
+        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint as last step')
 
 
-def test_path_order_rejects_lint_steps_checkout_still_after_314() -> None:
+def test_path_order_rejects_lint_last_step_still_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n' in text
+        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint as last step')
 
 
-def test_path_order_rejects_lint_steps_checkout_after_314() -> None:
+def test_path_order_rejects_lint_last_step_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n' in text
+        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint as last step')
 
 
-def test_path_order_rejects_stew_steps_checkout_pad0_after_314() -> None:
+def test_path_order_rejects_stew_last_step_pad0_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/stewardship-checks.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n' in text
+        path.write_text(text.replace('      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n', '      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'actionlint run as last step')
 
 
-def test_path_order_rejects_stew_steps_checkout_pad1_after_314() -> None:
+def test_path_order_rejects_stew_last_step_pad1_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/stewardship-checks.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n' in text
+        path.write_text(text.replace('      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n', '      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'actionlint run as last step')
 
 
-def test_path_order_rejects_stew_steps_checkout_pad2_after_314() -> None:
+def test_path_order_rejects_stew_last_step_pad2_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/stewardship-checks.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n' in text
+        path.write_text(text.replace('      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n', '      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'actionlint run as last step')
 
 
-def test_path_order_rejects_stew_steps_checkout_pad3_after_314() -> None:
+def test_path_order_rejects_stew_last_step_pad3_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/stewardship-checks.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n' in text
+        path.write_text(text.replace('      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n', '      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'actionlint run as last step')
 
 
-def test_path_order_rejects_stew_steps_checkout_pad4_after_314() -> None:
+def test_path_order_rejects_stew_last_step_pad4_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/stewardship-checks.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n' in text
+        path.write_text(text.replace('      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n', '      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'actionlint run as last step')
 
 
-def test_path_order_rejects_stew_steps_checkout_pad5_after_314() -> None:
+def test_path_order_rejects_stew_last_step_pad5_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/stewardship-checks.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n' in text
+        path.write_text(text.replace('      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n', '      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'actionlint run as last step')
 
 
-def test_path_order_rejects_stew_steps_checkout_still_after_314() -> None:
+def test_path_order_rejects_stew_last_step_still_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/stewardship-checks.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n' in text
+        path.write_text(text.replace('      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n', '      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'actionlint run as last step')
 
 
-def test_path_order_rejects_stew_steps_checkout_after_314() -> None:
+def test_path_order_rejects_stew_last_step_after_314() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/stewardship-checks.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    steps:\n      - uses: actions/checkout@v7\n' in text
-        path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'steps:/checkout adjacency')
+        assert '      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n' in text
+        path.write_text(text.replace('      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n', '      - name: actionlint existing workflow paths\n        run: ${{ steps.get_actionlint.outputs.executable }} -color .github/workflows/link-check.yml .github/workflows/markdown-lint.yml .github/workflows/stewardship-checks.yml\n      - name: Invent padding\n        run: "true"\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'actionlint run as last step')
 
 
 def main() -> int:
@@ -95154,10 +95156,10 @@ def main() -> int:
         test_path_order_gate_download_run_needle_still_after_314,
         test_path_order_gate_perm_steps_needle_after_314,
         test_path_order_gate_perm_steps_needle_still_after_314,
-        test_path_order_gate_steps_checkout_needle_after_314,
-        test_path_order_gate_steps_checkout_needle_still_after_314,
-        test_path_order_gate_wording_after_314,
-        test_path_order_gate_wording_still_after_314,
+        test_path_order_gate_link_last_needle_after_314,
+        test_path_order_gate_link_last_needle_still_after_314,
+        test_path_order_gate_lint_last_needle_after_314,
+        test_path_order_gate_lint_last_needle_still_after_314,
         test_path_order_rejects_stew_seven_step_pad0_after_314,
         test_path_order_rejects_stew_seven_step_pad1_after_314,
         test_path_order_rejects_stew_seven_step_pad2_after_314,
@@ -95230,30 +95232,30 @@ def main() -> int:
         test_path_order_rejects_stew_perm_steps_pad5_after_314,
         test_path_order_rejects_stew_perm_steps_still_after_314,
         test_path_order_rejects_stew_perm_steps_after_314,
-        test_path_order_rejects_link_steps_checkout_pad0_after_314,
-        test_path_order_rejects_link_steps_checkout_pad1_after_314,
-        test_path_order_rejects_link_steps_checkout_pad2_after_314,
-        test_path_order_rejects_link_steps_checkout_pad3_after_314,
-        test_path_order_rejects_link_steps_checkout_pad4_after_314,
-        test_path_order_rejects_link_steps_checkout_pad5_after_314,
-        test_path_order_rejects_link_steps_checkout_still_after_314,
-        test_path_order_rejects_link_steps_checkout_after_314,
-        test_path_order_rejects_lint_steps_checkout_pad0_after_314,
-        test_path_order_rejects_lint_steps_checkout_pad1_after_314,
-        test_path_order_rejects_lint_steps_checkout_pad2_after_314,
-        test_path_order_rejects_lint_steps_checkout_pad3_after_314,
-        test_path_order_rejects_lint_steps_checkout_pad4_after_314,
-        test_path_order_rejects_lint_steps_checkout_pad5_after_314,
-        test_path_order_rejects_lint_steps_checkout_still_after_314,
-        test_path_order_rejects_lint_steps_checkout_after_314,
-        test_path_order_rejects_stew_steps_checkout_pad0_after_314,
-        test_path_order_rejects_stew_steps_checkout_pad1_after_314,
-        test_path_order_rejects_stew_steps_checkout_pad2_after_314,
-        test_path_order_rejects_stew_steps_checkout_pad3_after_314,
-        test_path_order_rejects_stew_steps_checkout_pad4_after_314,
-        test_path_order_rejects_stew_steps_checkout_pad5_after_314,
-        test_path_order_rejects_stew_steps_checkout_still_after_314,
-        test_path_order_rejects_stew_steps_checkout_after_314,
+        test_path_order_rejects_link_last_step_pad0_after_314,
+        test_path_order_rejects_link_last_step_pad1_after_314,
+        test_path_order_rejects_link_last_step_pad2_after_314,
+        test_path_order_rejects_link_last_step_pad3_after_314,
+        test_path_order_rejects_link_last_step_pad4_after_314,
+        test_path_order_rejects_link_last_step_pad5_after_314,
+        test_path_order_rejects_link_last_step_still_after_314,
+        test_path_order_rejects_link_last_step_after_314,
+        test_path_order_rejects_lint_last_step_pad0_after_314,
+        test_path_order_rejects_lint_last_step_pad1_after_314,
+        test_path_order_rejects_lint_last_step_pad2_after_314,
+        test_path_order_rejects_lint_last_step_pad3_after_314,
+        test_path_order_rejects_lint_last_step_pad4_after_314,
+        test_path_order_rejects_lint_last_step_pad5_after_314,
+        test_path_order_rejects_lint_last_step_still_after_314,
+        test_path_order_rejects_lint_last_step_after_314,
+        test_path_order_rejects_stew_last_step_pad0_after_314,
+        test_path_order_rejects_stew_last_step_pad1_after_314,
+        test_path_order_rejects_stew_last_step_pad2_after_314,
+        test_path_order_rejects_stew_last_step_pad3_after_314,
+        test_path_order_rejects_stew_last_step_pad4_after_314,
+        test_path_order_rejects_stew_last_step_pad5_after_314,
+        test_path_order_rejects_stew_last_step_still_after_314,
+        test_path_order_rejects_stew_last_step_after_314,
 
 ]
 

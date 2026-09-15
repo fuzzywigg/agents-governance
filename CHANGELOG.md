@@ -21,14 +21,14 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   gates adjacency / contiguous gates → self-tests adjacency / contiguous
   self-tests → Download adjacency / contiguous Download → actionlint run
   adjacency / contiguous permissions:/steps: adjacency on all three /
-  contiguous steps:/checkout adjacency on all three / leftover docstring +
-  gate-contract needles — path-order residual leftover slice only (not
-  saturated leftover #314 / not schema residual CI leftover #309 / not
-  schema residual CI #299 / not wiki/mdlink leftover residual #293 / not
-  stewardship-schema residual #282 / not lychee/blob-503 harden #278 / not
-  Pass-2 residual leftover #272 / not saturated leftover #262 / not
-  stewardship-schema leftover #258 / not wiki/mdlink leftover #252 / not
-  saturated residual #244 / not saturated deepen #225/#203 / not wiki
+  Check links + Run markdownlint + actionlint run as last steps /
+  leftover docstring + gate-contract needles — path-order residual leftover
+  slice only (not saturated leftover #314 / not schema residual CI leftover
+  #309 / not schema residual CI #299 / not wiki/mdlink leftover residual
+  #293 / not stewardship-schema residual #282 / not lychee/blob-503 harden
+  #278 / not Pass-2 residual leftover #272 / not saturated leftover #262 /
+  not stewardship-schema leftover #258 / not wiki/mdlink leftover #252 /
+  not saturated residual #244 / not saturated deepen #225/#203 / not wiki
   outline/PUBLISH leftover #243 / not md/link residual #239 / not
   stewardship-checks/schema leftover #233 / not wiki-badge leftover #227 /
   not #189 path-order / not #176 layouts / not schema #191/#216 / not

@@ -465,6 +465,25 @@ not wiki/mdlink leftover residual #293 / not stewardship-schema residual #282 /
 not lychee/blob-503 leftover #278 / not Pass-2 residual + templates #272 /
 not path-edges leftover #262 / not wiki/mdlink leftover #252;
 no extra wiki files)).
+plus Pass-2 residual / templates leftovers after #326 tip: soft-fail with
+`|| true` / `set +e` / must not `eval` / existing `templates/AGENTS-REPO.md`
+`Level [0/1/2]` / L0–L2 / Critical Files / Autonomy Level / End of Document /
+SEV-1..SEV-4 / `[test command]` / cov-req placeholder / `.env` Secrets row /
+governs blurb / lychee reject invent `tree/main` + bare `https://github.com/` /
+keep Same-repo GitHub — DISTINCT leftover only (lands closed
+PR #333/#331/#324/#315/#313/#312/#305/#298/#291 leftover on post-#326 tip; not
+wiki/mdlink leftover residual #326 /
+not stewardship-schema residual CI leftover residual #320 /
+not path-filter/path-order residual leftover #314 /
+not stewardship-schema residual CI leftover #309 /
+not stewardship-schema residual CI #299 /
+not wiki/mdlink leftover residual #293 /
+not stewardship-schema leftover residual #282 /
+not saturated Pass-2 residual leftover #272 /
+not lychee/blob-503 leftover #278 / not path-edges leftover #262 /
+not schema leftover #258 / not wiki/mdlink leftover #252; do not invent new
+templates; no secrets; do not revive PR #333/#331/#324/#315/#313/#312/#305/#298/#291)).
+
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

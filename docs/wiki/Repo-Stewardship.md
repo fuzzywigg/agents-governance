@@ -459,6 +459,26 @@ not saturated Pass-2 residual leftover #272 /
 not lychee/blob-503 leftover #278 / not path-edges leftover #262 /
 not schema leftover #258 / not wiki/mdlink leftover #252; do not invent new
 templates; no secrets; do not revive PR #333/#331/#324/#315/#313/#312/#305/#298/#291)).
+plus Pass-2 residual / templates leftovers after #337 tip: soft-fail with
+`|| /bin/true` / `|| /usr/bin/true` / `set +E` / existing
+`templates/AGENTS-REPO.md` `[Section Title]` / Add project-specific rules /
+Environments table + Dev/Staging/Production rows / Human confirms /
+Auto-approve + budget / Human approval required / Immediate response /
+`< 1 hour` / `< 24 hours` / Next sprint / Version History /
+ecosystem-wide governance / See `[agents-governance]` / lychee reject invent
+`blob/master` + `tree/master` + `raw.githubusercontent.com` — DISTINCT leftover
+residual only (leftover residual on post-#337 tip; not Pass-2 residual /
+templates leftover after #326 / not wiki/mdlink leftover residual #326 /
+not stewardship-schema residual CI leftover residual #320 /
+not path-filter/path-order residual leftover #314 /
+not stewardship-schema residual CI leftover #309 /
+not stewardship-schema residual CI #299 /
+not wiki/mdlink leftover residual #293 /
+not stewardship-schema leftover residual #282 /
+not saturated Pass-2 residual leftover #272 /
+not lychee/blob-503 leftover #278 / not path-edges leftover #262 /
+not schema leftover #258 / not wiki/mdlink leftover #252; do not invent new
+templates; no secrets; do not revive PR #333/#331/#324/#315/#313/#312/#305/#298/#291)).
 
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 

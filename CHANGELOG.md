@@ -11,6 +11,36 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX Pass-2 residual / templates leftovers after #337 tip: expand
+  self-tests to 7558 cases (was 7302) fail-closing DISTINCT leftover residual
+  soft-fail + existing `templates/AGENTS-REPO.md` + lychee residual edges on
+  existing modules only — soft-fail with `|| /bin/true` / `|| /usr/bin/true` /
+  `set +E` / AGENTS-REPO `[Section Title]` /
+  `[Add project-specific governance rules here]` / `### Environments` /
+  Environment|Platform|Status header / Development Local row /
+  Staging+Production `[Platform]` `[Status]` rows /
+  Human confirms every action / Auto-approve within policy + budget /
+  Human approval required / Immediate response / `< 1 hour` / `< 24 hours` /
+  Next sprint / `### Version History` / For ecosystem-wide governance /
+  See `[agents-governance]` footer / lychee reject invent `blob/master` /
+  `tree/master` / `raw.githubusercontent.com` excludes — Pass-2 residual
+  templates leftovers slice only (leftover residual on post-#337 tip; not
+  Pass-2 residual / templates leftover after #326 /
+  not wiki/mdlink leftover residual #326 /
+  not stewardship-schema residual CI leftover residual #320 /
+  not path-filter/path-order residual leftover #314 /
+  not stewardship-schema residual CI leftover #309 /
+  not stewardship-schema residual CI #299 /
+  not wiki/mdlink leftover residual #293 /
+  not stewardship-schema leftover residual #282 /
+  not saturated Pass-2 residual leftover #272 /
+  not lychee/blob-503 leftover #278 / not path-edges leftover #262 /
+  not schema leftover #258 / not wiki/mdlink leftover #252); no
+  invent-product; no fourth badge; no new templates; no secrets; no
+  scratchpad notes. Distinct from merged
+  #337/#326/#320/#314/#309/#299/#297/#293/#282/#278/#272/#262/#258/#252/#244.
+  Do **not** revive #333/#331/#324/#315/#313/#312/#305/#298/#291.
+
 - TOKENMAXX Pass-2 residual / templates leftovers after #326 tip: expand
   self-tests to 7302 cases (was 7054) fail-closing DISTINCT leftover soft-fail +
   existing `templates/AGENTS-REPO.md` + lychee residual edges on existing

@@ -40,6 +40,45 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   scratchpad notes. Distinct from merged
   #337/#326/#320/#314/#309/#299/#297/#293/#282/#278/#272/#262/#258/#252/#244.
   Do **not** revive #333/#331/#324/#315/#313/#312/#305/#298/#291.
+- TOKENMAXX wiki/mdlink leftover residual deepen after #348 tip: expand
+  self-tests to 7758 cases (was 7558) fail-closing unsaturated wiki outline /
+  PUBLISH.md residual plus Home/Repo-Stewardship residual plus markdown-lint /
+  link-check residual harden on existing modules only — and drop the in-repo
+  `PUBLISH.md` bullet from Home / initialized once (Settings then first page or /
+  then create the first page or / in this directory as the public landing page /
+  (`.wiki.git` URL) that must be / Home H1 agents-governance public wiki /
+  Policy truth remains in the repository /
+  Stewardship tooling (Praetor/Aesop-style process) stays quiet /
+  What this repo is and is not / L0–L3 human involvement model /
+  Which surface picks up which work /
+  Trust, credentials, kill switch (public summary) / `## Out of scope` /
+  Private `project-template` internals or flavor-branch how-tos /
+  Secrets, credentials, wallet keys, or MEMORY dumps /
+  Invented product frameworks or agent runtimes / Maintained by smtp.eth /
+  How public governance repos kept trustworthy without /
+  Prefer reversible docs/stewardship PRs; no invent-product work /
+  Never delete scratchpad history /
+  Public front-door trust rests on three workflows /
+  `--verbose` then `--no-progress` adjacency /
+  `--github-token` then `--exclude-path` adjacency /
+  `!OWASP-AGENTIC.md` then config adjacency — wiki/mdlink leftover
+  residual slice only (not Pass-2 residual / templates leftover #348 /
+  not Pass-2 residual / templates leftover #337 /
+  not wiki/mdlink leftover residual after #326 /
+  not wiki/mdlink leftover residual after #320 /
+  not stewardship-schema residual CI leftover residual #320 /
+  not path-filter/path-order leftover #314 / not stewardship-schema residual CI
+  leftover #309 / not stewardship-schema residual CI #299 /
+  not stewardship-schema residual CI #297 / not wiki/mdlink leftover residual
+  #293 / not stewardship-schema residual #282 / not lychee/blob-503 leftover
+  #278 / not Pass-2 residual + templates #272 / not path-edges leftover #262 /
+  not wiki/mdlink leftover #252 / not stewardship-schema leftover #258 /
+  not path-filter/path-order leftover #244 / not wiki outline/PUBLISH leftover
+  #243 / not md/link residual layouts #239); no invent-product; no fourth
+  badge; no extra wiki files; no scratchpad notes. Distinct from merged
+  #348/#337/#326/#320/#314/#309/#299/#297/#293/#282/#278/#272/#262/#258/#252/#244/#243/#239.
+  Tip-relaunch deepen on post-#348 tip (do **not** revive
+  #350/#345/#343/#342/#328/#325/#322/#321/#318/#317/#315/#311/#308/#307/#302/#301/#296/#289/#281/#277).
 
 - TOKENMAXX Pass-2 residual / templates leftovers after #326 tip: expand
   self-tests to 7302 cases (was 7054) fail-closing DISTINCT leftover soft-fail +

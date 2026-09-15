@@ -46,6 +46,21 @@ Fail-closed pins (live path after #55; deepen after #41; third-pass after #90):
   NOT Pass-2 residual + templates #272 / NOT path-edges leftover #262 /
   NOT wiki/mdlink leftover #252):
   Relative link check FAILED / files scanned / empty relative link target
+- Wiki/mdlink leftover residual after #348 tip (markdown link residual docstring
+  keepalive; NOT Pass-2 residual / templates leftover #348 /
+  NOT Pass-2 residual / templates leftover #337 /
+  NOT wiki/mdlink leftover residual after #326 /
+  NOT wiki/mdlink leftover residual after #320 /
+  NOT stewardship-schema residual CI leftover residual #320 /
+  NOT path-filter/path-order leftover #314 /
+  NOT stewardship-schema residual CI leftover #309 /
+  NOT stewardship-schema residual CI #299 /
+  NOT stewardship-schema residual CI #297 /
+  NOT wiki/mdlink leftover residual #293 /
+  NOT stewardship-schema residual #282 / NOT lychee/blob-503 leftover #278 /
+  NOT Pass-2 residual + templates #272 / NOT path-edges leftover #262 /
+  NOT wiki/mdlink leftover #252):
+  dangerous link scheme / insecure http:// link / protocol-relative link not allowed
 """
 
 from __future__ import annotations

@@ -504,6 +504,33 @@ not lychee/blob-503 leftover #278 / not path-edges leftover #262 /
 not schema leftover #258 / not wiki/mdlink leftover #252; do not invent new
 templates; no secrets; do not revive PR #333/#331/#324/#315/#313/#312/#305/#298/#291)).
 
+plus Pass-2 residual / templates leftovers after #348 tip: soft-fail with
+`|| /usr/bin/env true` / `set +eu` / `set +o errtrace` / existing
+`templates/AGENTS-REPO.md` File|Purpose|Edit Restrictions header /
+`[CONFIG_FILE]` Main configuration row /
+`L1 Bounded: Auto-approve within policy` / Severity levels: /
+Follow ecosystem incident protocol /
+Create branch: `agents-md/description` / Edit this file /
+Submit PR with rationale / Version|Date|Changes header /
+1.0.0 Initial version row / `### 2.1` + `### 2.2` Section Title /
+`# Run tests` / `# Required coverage` / for ecosystem rules. /
+This project operates at / within this repository /
+lychee reject invent `gist.github.com` + `api.github.com` +
+`raw.github.com` — DISTINCT leftover residual only (leftover residual on
+post-#348 tip; not Pass-2 residual / templates leftover after #337 /
+not Pass-2 residual / templates leftover after #326 /
+not wiki/mdlink leftover residual #326 /
+not stewardship-schema residual CI leftover residual #320 /
+not path-filter/path-order residual leftover #314 /
+not stewardship-schema residual CI leftover #309 /
+not stewardship-schema residual CI #299 /
+not wiki/mdlink leftover residual #293 /
+not stewardship-schema leftover residual #282 /
+not saturated Pass-2 residual leftover #272 /
+not lychee/blob-503 leftover #278 / not path-edges leftover #262 /
+not schema leftover #258 / not wiki/mdlink leftover #252; do not invent new
+templates; no secrets; do not revive PR #333/#331/#324/#315/#313/#312/#305/#298/#291)).
+
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

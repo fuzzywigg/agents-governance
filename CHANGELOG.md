@@ -11,6 +11,39 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX Pass-2 residual / templates leftovers after #348 tip: expand
+  self-tests to 7814 cases (was 7558) fail-closing DISTINCT leftover residual
+  soft-fail + existing `templates/AGENTS-REPO.md` + lychee residual edges on
+  existing modules only — soft-fail with `|| /usr/bin/env true` / `set +eu` /
+  `set +o errtrace` / AGENTS-REPO File|Purpose|Edit Restrictions header /
+  `[CONFIG_FILE]` Main configuration row /
+  `L1 Bounded: Auto-approve within policy` / Severity levels: /
+  Follow ecosystem incident protocol /
+  Create branch: `agents-md/description` / Edit this file /
+  Submit PR with rationale / Version|Date|Changes header /
+  1.0.0 YYYY-MM-DD Initial version row / `### 2.1 [Section Title]` /
+  `### 2.2 [Section Title]` / `# Run tests` / `# Required coverage` /
+  for ecosystem rules. / This project operates at /
+  within this repository blurb / lychee reject invent `gist.github.com` /
+  `api.github.com` / `raw.github.com` excludes — Pass-2 residual
+  templates leftovers slice only (leftover residual on post-#348 tip; not
+  Pass-2 residual / templates leftover after #337 /
+  not Pass-2 residual / templates leftover after #326 /
+  not wiki/mdlink leftover residual #326 /
+  not stewardship-schema residual CI leftover residual #320 /
+  not path-filter/path-order residual leftover #314 /
+  not stewardship-schema residual CI leftover #309 /
+  not stewardship-schema residual CI #299 /
+  not wiki/mdlink leftover residual #293 /
+  not stewardship-schema leftover residual #282 /
+  not saturated Pass-2 residual leftover #272 /
+  not lychee/blob-503 leftover #278 / not path-edges leftover #262 /
+  not schema leftover #258 / not wiki/mdlink leftover #252); no
+  invent-product; no fourth badge; no new templates; no secrets; no
+  scratchpad notes. Distinct from merged
+  #348/#337/#326/#320/#314/#309/#299/#297/#293/#282/#278/#272/#262/#258/#252/#244.
+  Do **not** revive #333/#331/#324/#315/#313/#312/#305/#298/#291.
+
 - TOKENMAXX Pass-2 residual / templates leftovers after #337 tip: expand
   self-tests to 7558 cases (was 7302) fail-closing DISTINCT leftover residual
   soft-fail + existing `templates/AGENTS-REPO.md` + lychee residual edges on

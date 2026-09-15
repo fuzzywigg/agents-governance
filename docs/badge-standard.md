@@ -504,6 +504,27 @@ not lychee/blob-503 leftover #278 / not path-edges leftover #262 /
 not schema leftover #258 / not wiki/mdlink leftover #252; do not invent new
 templates; no secrets; do not revive PR #333/#331/#324/#315/#313/#312/#305/#298/#291)).
 
+plus actionlint path-filter residual leftover deepen after #348 tip
+(lands closed #354/#349/#334 leftover): exact contiguous
+stewardship on: push/PR/schedule/workflow_dispatch block / reject release: /
+reject issues: / reject discussion: / reject deployment: / reject check_run: /
+reject create: — DISTINCT residual leftover path-filter edges only (not Pass-2
+residual templates leftovers #348 / not Pass-2 residual templates leftovers #337 /
+not wiki/mdlink leftover residual #326 /
+not schema residual CI leftover residual #320 / not saturated leftover #314 /
+not path-order residual leftover #344 / not schema residual CI leftover #309 /
+not schema residual CI #299 / not wiki/mdlink leftover residual #293 /
+not stewardship-schema residual #282 / not lychee/blob-503 harden #278 /
+not Pass-2 residual leftover #272 / not saturated leftover #262 /
+not stewardship-schema leftover #258 / not wiki/mdlink leftover #252 /
+not saturated residual #244 / not saturated deepen #225/#203 /
+not wiki outline/PUBLISH leftover #243 / not md/link residual #239 /
+not stewardship-checks/schema leftover #233 / not wiki-badge leftover #227 /
+not #189 / not #176 / not schema #191/#216 / not Pass-2 residual #199/#203 /
+not Pass-2 leftover + md/link #220 / not stewardship-badge lint #208; do not
+revive closed PRs
+(#358/#354/#349/#334/#344/#340/#339/#338/#323/#319/#317/#310/#304/#303/#300/#294/#292/#286/#280)).
+
 A fourth “Stewardship Checks” badge is intentionally **not** added — quiet
 stewardship stays in CI/docs, not as invent-product chrome.
 Flaky `img.shields.io` hosts stay out of lychee via `.lycheeignore`; license

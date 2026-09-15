@@ -1464,10 +1464,10 @@ NOT wiki/mdlink leftover residual #326 /
             "stewardship-checks.yml must pin actions/checkout@v7",
             errors,
         )
-    # Fail-closed after #39: live stewardship job timeout pin is 15.
-    if not re.search(r"(?m)^\s*timeout-minutes:\s*15\s*$", stew):
+    # Fail-closed after #39/#348 path-filter CI deepen: live stewardship job timeout pin is 20.
+    if not re.search(r"(?m)^\s*timeout-minutes:\s*20\s*$", stew):
         fail(
-            "stewardship-checks.yml must pin timeout-minutes: 15",
+            "stewardship-checks.yml must pin timeout-minutes: 20",
             errors,
         )
     # Fail-closed after #39: live weekly cron is 15 6 * * 1 (Monday 06:15 UTC).
@@ -2686,7 +2686,7 @@ NOT wiki/mdlink leftover residual #326 /
         "jobs:\n"
         "  stewardship:\n"
         "    runs-on: ubuntu-latest\n"
-        "    timeout-minutes: 15\n"
+        "    timeout-minutes: 20\n"
         "    permissions:\n"
         "      contents: read"
     )
@@ -5393,7 +5393,7 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
         ('cron: "30 6 * * ' + '1"', "markdown-lint weekly cron pin"),
         ('cron: "15 6 * * ' + '1"', "stewardship weekly cron pin"),
         ("timeout-minutes: " + "10", "markdown-lint job timeout pin"),
-        ("timeout-minutes: " + "15", "stewardship job timeout pin"),
+        ("timeout-minutes: " + "20", "stewardship job timeout pin"),
         ("DavidAnson/markdownlint-cli2-action@" + "v24", "markdownlint action major pin"),
         ("actions/setup-python@" + "v5", "setup-python major pin"),
         ("--verb" + "ose", "lychee verbose flag pin"),

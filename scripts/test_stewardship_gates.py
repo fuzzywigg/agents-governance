@@ -474,7 +474,7 @@ permissions:
 jobs:
   stewardship:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     permissions:
       contents: read
     steps:
@@ -4513,7 +4513,7 @@ def test_workflow_rejects_missing_timeout_on_stewardship() -> None:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
-        text = path.read_text(encoding="utf-8").replace("timeout-minutes: 15", "")
+        text = path.read_text(encoding="utf-8").replace("timeout-minutes: 20", "")
         path.write_text(text, encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
@@ -13109,20 +13109,20 @@ def test_markdown_lint_requires_timeout_minutes_10() -> None:
             'timeout-minutes: 10',
         )
 
-def test_stewardship_requires_timeout_minutes_15() -> None:
+def test_stewardship_requires_timeout_minutes_20() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / ".github" / "workflows" / "stewardship-checks.yml"
         text = path.read_text(encoding="utf-8").replace(
-            'timeout-minutes: 15',
+            'timeout-minutes: 20',
             'timeout-minutes: 10',
         )
         path.write_text(text, encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'timeout-minutes: 15',
+            'timeout-minutes: 20',
         )
 
 def test_link_check_requires_cron_0_6() -> None:
@@ -24181,17 +24181,17 @@ def test_markdown_lint_requires_timeout_10_still_after_72() -> None:
             'timeout-minutes: 10',
         )
 
-def test_stewardship_requires_timeout_15_still_after_72() -> None:
+def test_stewardship_requires_timeout_20_still_after_72() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8").replace('timeout-minutes: 15', 'timeout-minutes: 20')
+        text = path.read_text(encoding="utf-8").replace('timeout-minutes: 20', 'timeout-minutes: 25')
         path.write_text(text, encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'timeout-minutes: 15',
+            'timeout-minutes: 20',
         )
 
 def test_link_check_requires_cron_still_after_72() -> None:
@@ -25279,7 +25279,7 @@ def test_actionlint_rejects_missing_timeout_on_stewardship_after_75() -> None:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8").replace('timeout-minutes: 15', '# timeout removed')
+        text = path.read_text(encoding="utf-8").replace('timeout-minutes: 20', '# timeout removed')
         path.write_text(text, encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
@@ -27439,7 +27439,7 @@ def test_actionlint_rejects_missing_timeout_stewardship_still_after_86() -> None
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / ".github" / "workflows" / 'stewardship-checks.yml'
-        text = path.read_text(encoding="utf-8").replace('timeout-minutes: 15\n', '')
+        text = path.read_text(encoding="utf-8").replace('timeout-minutes: 20\n', '')
         path.write_text(text, encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
@@ -36840,8 +36840,8 @@ def test_workflow_third_gate_timeout_stew_after_111() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'timeout-minutes: 15' in text
-        path.write_text(text.replace('timeout-minutes: 15', 'timeout-minutes: 16'), encoding="utf-8")
+        assert 'timeout-minutes: 20' in text
+        path.write_text(text.replace('timeout-minutes: 20', 'timeout-minutes: 21'), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep stewardship job timeout pin')
 
 
@@ -36851,8 +36851,8 @@ def test_workflow_third_gate_timeout_stew_still_after_111() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'timeout-minutes: 15' in text
-        path.write_text(text.replace('timeout-minutes: 15', 'timeout-minutes: 16'), encoding="utf-8")
+        assert 'timeout-minutes: 20' in text
+        path.write_text(text.replace('timeout-minutes: 20', 'timeout-minutes: 21'), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep stewardship job timeout pin')
 
 
@@ -61209,8 +61209,8 @@ def test_stew_residual_rejects_job_header_pad0_after_225() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/stewardship-checks.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    timeout-minutes: 15' in text
-        path.write_text(text.replace('    timeout-minutes: 15', '    timeout-minutes: 20', 1), encoding="utf-8")
+        assert '    timeout-minutes: 20' in text
+        path.write_text(text.replace('    timeout-minutes: 20', '    timeout-minutes: 25', 1), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact jobs.stewardship')
 def test_stew_residual_rejects_job_header_pad1_after_225() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -61218,8 +61218,8 @@ def test_stew_residual_rejects_job_header_pad1_after_225() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/stewardship-checks.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    timeout-minutes: 15' in text
-        path.write_text(text.replace('    timeout-minutes: 15', '    timeout-minutes: 20', 1), encoding="utf-8")
+        assert '    timeout-minutes: 20' in text
+        path.write_text(text.replace('    timeout-minutes: 20', '    timeout-minutes: 25', 1), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact jobs.stewardship')
 def test_stew_residual_rejects_job_header_pad2_after_225() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -61227,8 +61227,8 @@ def test_stew_residual_rejects_job_header_pad2_after_225() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/stewardship-checks.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    timeout-minutes: 15' in text
-        path.write_text(text.replace('    timeout-minutes: 15', '    timeout-minutes: 20', 1), encoding="utf-8")
+        assert '    timeout-minutes: 20' in text
+        path.write_text(text.replace('    timeout-minutes: 20', '    timeout-minutes: 25', 1), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact jobs.stewardship')
 def test_stew_residual_rejects_job_header_pad3_after_225() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -61236,8 +61236,8 @@ def test_stew_residual_rejects_job_header_pad3_after_225() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/stewardship-checks.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    timeout-minutes: 15' in text
-        path.write_text(text.replace('    timeout-minutes: 15', '    timeout-minutes: 20', 1), encoding="utf-8")
+        assert '    timeout-minutes: 20' in text
+        path.write_text(text.replace('    timeout-minutes: 20', '    timeout-minutes: 25', 1), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact jobs.stewardship')
 def test_stew_residual_rejects_job_header_pad4_after_225() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -61245,8 +61245,8 @@ def test_stew_residual_rejects_job_header_pad4_after_225() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/stewardship-checks.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    timeout-minutes: 15' in text
-        path.write_text(text.replace('    timeout-minutes: 15', '    timeout-minutes: 20', 1), encoding="utf-8")
+        assert '    timeout-minutes: 20' in text
+        path.write_text(text.replace('    timeout-minutes: 20', '    timeout-minutes: 25', 1), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact jobs.stewardship')
 def test_stew_residual_rejects_job_header_pad5_after_225() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -61254,8 +61254,8 @@ def test_stew_residual_rejects_job_header_pad5_after_225() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/stewardship-checks.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    timeout-minutes: 15' in text
-        path.write_text(text.replace('    timeout-minutes: 15', '    timeout-minutes: 20', 1), encoding="utf-8")
+        assert '    timeout-minutes: 20' in text
+        path.write_text(text.replace('    timeout-minutes: 20', '    timeout-minutes: 25', 1), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact jobs.stewardship')
 def test_stew_residual_rejects_job_header_still_after_225() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -61263,8 +61263,8 @@ def test_stew_residual_rejects_job_header_still_after_225() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/stewardship-checks.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    timeout-minutes: 15' in text
-        path.write_text(text.replace('    timeout-minutes: 15', '    timeout-minutes: 20', 1), encoding="utf-8")
+        assert '    timeout-minutes: 20' in text
+        path.write_text(text.replace('    timeout-minutes: 20', '    timeout-minutes: 25', 1), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact jobs.stewardship')
 def test_stew_residual_rejects_job_header_after_225() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -61272,8 +61272,8 @@ def test_stew_residual_rejects_job_header_after_225() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/stewardship-checks.yml'
         text = path.read_text(encoding="utf-8")
-        assert '    timeout-minutes: 15' in text
-        path.write_text(text.replace('    timeout-minutes: 15', '    timeout-minutes: 20', 1), encoding="utf-8")
+        assert '    timeout-minutes: 20' in text
+        path.write_text(text.replace('    timeout-minutes: 20', '    timeout-minutes: 25', 1), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact jobs.stewardship')
 def test_stew_residual_rejects_strategy_invent_pad0_after_225() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -100647,7 +100647,7 @@ def main() -> int:
         test_link_check_requires_lychee_action_v2,
         test_link_check_requires_timeout_minutes_20,
         test_markdown_lint_requires_timeout_minutes_10,
-        test_stewardship_requires_timeout_minutes_15,
+        test_stewardship_requires_timeout_minutes_20,
         test_link_check_requires_cron_0_6,
         test_markdown_lint_requires_cron_30_6,
         test_stewardship_requires_cron_15_6,
@@ -101464,7 +101464,7 @@ def main() -> int:
         test_link_check_requires_lychee_v2_still_after_72,
         test_link_check_requires_timeout_20_still_after_72,
         test_markdown_lint_requires_timeout_10_still_after_72,
-        test_stewardship_requires_timeout_15_still_after_72,
+        test_stewardship_requires_timeout_20_still_after_72,
         test_link_check_requires_cron_still_after_72,
         test_markdown_lint_requires_cron_still_after_72,
         test_stewardship_requires_cron_still_after_72,

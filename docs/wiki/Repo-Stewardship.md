@@ -405,6 +405,23 @@ not wiki-badge leftover #227 / not #189 / not #176 / not schema #191/#216 /
 not Pass-2 residual #199/#203 / not Pass-2 leftover + md/link #220 /
 not stewardship-badge lint #208; do not revive closed PRs
 (#310/#304/#303/#300/#294/#292/#286/#280/#274/#270/#264/#255/#247/#244/#236/#232/#228/#226/#223/#217/#213/#198/#186/#166/#157)).
+plus Pass-2 residual / templates leftovers after #314 tip: soft-fail with
+`|| true` / `set +e` / must not `eval` / existing `templates/AGENTS-REPO.md`
+`Level [0/1/2]` / L0–L2 / Critical Files / Autonomy Level / End of Document /
+SEV-1..SEV-4 / `[test command]` / cov-req placeholder / `.env` Secrets row /
+governs blurb / lychee reject invent `tree/main` + bare `https://github.com/` /
+keep Same-repo GitHub — DISTINCT leftover only (lands closed
+PR #315/#313/#312/#305/#298/#291 leftover on post-#314 tip; not
+path-filter/path-order residual leftover #314 /
+not stewardship-schema residual CI leftover #309 /
+not stewardship-schema residual CI #299 /
+not wiki/mdlink leftover residual #293 /
+not stewardship-schema leftover residual #282 /
+not saturated Pass-2 residual leftover #272 /
+not lychee/blob-503 leftover #278 / not path-edges leftover #262 /
+not schema leftover #258 / not wiki/mdlink leftover #252; do not invent new
+templates; no secrets; do not revive PR #315/#313/#312/#305/#298/#291)).
+
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

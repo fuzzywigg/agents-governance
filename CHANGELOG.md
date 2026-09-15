@@ -11,6 +11,36 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX actionlint path-filter residual leftover deepen after #348 tip
+  (lands closed #354/#349/#334/#344/#340/#339/#338/#323/#319/#317 leftover on
+  post-#348 tip): expand self-tests to 7710 cases (was 7558) fail-closing
+  DISTINCT unsaturated residual leftover path-filter CI edges on existing
+  workflow modules only — exact contiguous stewardship on: push/PR/schedule/
+  workflow_dispatch block / reject release: / reject issues: /
+  reject discussion: / reject deployment: / reject check_run: /
+  reject create: / leftover docstring + gate-contract needles — path-filter
+  residual leftover slice only (not Pass-2 residual templates leftovers #348 /
+  not Pass-2 residual templates leftovers #337 /
+  not wiki/mdlink leftover residual #326 /
+  not schema residual CI leftover residual #320 /
+  not saturated leftover #314 / not path-order residual leftover #344 /
+  not schema residual CI leftover #309 / not schema residual CI #299 /
+  not wiki/mdlink leftover residual #293 / not stewardship-schema residual #282 /
+  not lychee/blob-503 harden #278 / not Pass-2 residual leftover #272 /
+  not saturated leftover #262 / not stewardship-schema leftover #258 /
+  not wiki/mdlink leftover #252 / not saturated residual #244 /
+  not saturated deepen #225/#203 / not wiki outline/PUBLISH leftover #243 /
+  not md/link residual #239 / not stewardship-checks/schema leftover #233 /
+  not wiki-badge leftover #227 / not #189 path-order / not #176 layouts /
+  not schema #191/#216 / not Pass-2 residual #199/#203 /
+  not Pass-2 leftover + md/link #220 / not stewardship-badge lint #208);
+  no invent-product; no fourth badge; no scratchpad notes. Lands closed
+  #354/#349/#334 leftover on post-#348 tip (do **not** revive closed PRs
+  #358/#354/#349/#334/#344/#340/#339/#338/#323/#319/#317/#310/#304/#303/#300/#294/#292/#286/#280).
+  Distinct from merged
+  #348/#337/#326/#320/#314/#309/#299/#297/#293/#282/#278/#272/#262/#258/#252/#244
+  and from open path-order leftover after #348.
+
 - TOKENMAXX Pass-2 residual / templates leftovers after #337 tip: expand
   self-tests to 7558 cases (was 7302) fail-closing DISTINCT leftover residual
   soft-fail + existing `templates/AGENTS-REPO.md` + lychee residual edges on

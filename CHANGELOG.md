@@ -11,6 +11,32 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-schema residual deepen after #326 tip (lands closed
+  #327 leftover on post-#326 wiki/mdlink tip): expand self-tests to 7298 cases
+  (was 7054) fail-closing unsaturated schema-only residual helper needles on
+  existing `check_stewardship_schema.py` —
+  `fail(f"{rel}: {exc}"` / `missing metadata keys` / `FENCED_YAML_RE.search` /
+  `got nested/list` / `type(value).__name__` /
+  `autonomy_level must be int in 0..3` / `tier must be a positive int` /
+  `must be ISO-8601 date-prefixed` / `no-invent-product wording` /
+  `must be semver X.Y.Z` / `must reference an issue like #N` /
+  `OK: stewardship metadata schemas valid` / `len(DOC_SCHEMAS)` /
+  `empty yaml metadata block` / `parse_simple_yaml` / `first_yaml_block` /
+  `unsupported YAML line` / residual status stubs
+  VOID|TOMBSTONED|PURGED|SEALED|BURIED|NULLIFIED / residual surface stubs
+  langsmith|langfuse|helicone|braintrust|phoenix — schema residual slice only
+  (not wiki/mdlink leftover residual #326 / not schema residual CI leftover
+  residual #320 / not schema residual CI leftover #309 / not schema residual CI
+  #299 / not wiki/mdlink leftover residual #293 / not schema leftover residual
+  #282 / not lychee/blob-503 leftover #278 / not Pass-2 residual leftover #272 /
+  not path-filter/path-order leftover #314/#262 / not schema leftover #258 /
+  not wiki/mdlink leftover #252 / not path-edges residual #244 / not
+  stewardship-checks/schema residual #233); no invent-product; no fourth badge; no
+  stewardship_common invent; no scratchpad notes. Distinct from merged PRs
+  #326/#320/#314/#309/#299/#297/#293/#282/#278/#272/#262/#258/#252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
+  Tip-relaunch schema residual on post-#326 tip (do **not** revive
+  #327/#316/#295/#290/#268/#259/#257/#253/#248/#241).
+
 - TOKENMAXX stewardship-schema residual CI leftover residual deepen after #314
   tip (lands closed #316 leftover on post-#314 path-order tip): expand
   self-tests to 6854 cases (was 6618) fail-closing unsaturated schema-only

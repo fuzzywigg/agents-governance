@@ -480,7 +480,7 @@ not lychee/blob-503 leftover #278 / not path-edges leftover #262 /
 not schema leftover #258 / not wiki/mdlink leftover #252; do not invent new
 templates; no secrets; do not revive PR #333/#331/#324/#315/#313/#312/#305/#298/#291)).
 
-plus Pass-2 residual / templates leftovers after #348 tip: soft-fail with
+plus Pass-2 residual / templates leftovers after #348 tip (CI deepen): soft-fail with
 `|| /usr/bin/env true` / `set +eu` / `set +o errtrace` / existing
 `templates/AGENTS-REPO.md` File|Purpose|Edit Restrictions header /
 `[CONFIG_FILE]` Main configuration row /

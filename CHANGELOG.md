@@ -13,7 +13,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - TOKENMAXX actionlint path-order residual leftover deepen after #320 tip
   (lands closed #330/#323/#319/#317 leftover on post-#326 tip): expand
-  self-tests to 7210 cases (was 7054) fail-closing DISTINCT unsaturated
+  self-tests to 7212 cases (was 7054) fail-closing DISTINCT unsaturated
   residual leftover path-order CI edges on existing workflow modules only —
   contiguous seven-step actionlint path-order (checkout → Set up Python →
   Install PyYAML → gates → self-tests → Download → actionlint run) /

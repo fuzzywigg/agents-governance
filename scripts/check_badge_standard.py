@@ -130,7 +130,7 @@ leftover #233 / NOT stewardship-badge lint #208):
 - pull_request stays type-unfiltered (no nested types:)
 - reject tj-actions/changed-files invent
 - contiguous four-step actionlint path-order
-  (gates → self-tests → Download → actionlint run)
+  (gates -> self-tests -> Download -> actionlint run)
 - schedule: precedes workflow_dispatch: on all three
 - contiguous shell-less actionlint run step (no invent shell: on run step)
 
@@ -148,7 +148,7 @@ NOT stewardship-badge lint #208):
 - reject tags-ignore: invent
 - reject workflow_call: invent
 - contiguous five-step actionlint path-order
-  (Install PyYAML → gates → self-tests → Download → actionlint run)
+  (Install PyYAML -> gates -> self-tests -> Download -> actionlint run)
 - contiguous on:/push: header on all three
 
 
@@ -171,7 +171,7 @@ NOT wiki-badge leftover #227 / NOT stewardship-badge lint #208):
 - reject merge_group: invent
 - reject tags: invent (not tags-ignore:)
 - contiguous six-step actionlint path-order
-  (Set up Python → Install PyYAML → gates → self-tests → Download → actionlint run)
+  (Set up Python -> Install PyYAML -> gates -> self-tests -> Download -> actionlint run)
 
 
 Fail-closed actionlint path-order residual leftover deepen after #320
@@ -188,14 +188,14 @@ NOT Pass-2 leftover + md/link #220 / NOT wiki outline/PUBLISH leftover #243 /
 NOT md/link residual #239 / NOT stewardship-checks/schema leftover #233 /
 NOT wiki-badge leftover #227 / NOT stewardship-badge lint #208):
 - contiguous seven-step actionlint path-order
-  (checkout → Set up Python → Install PyYAML → gates → self-tests → Download → actionlint run)
-- contiguous Set up Python → Install PyYAML adjacency
-- contiguous Install PyYAML → gates adjacency
-- contiguous gates → self-tests adjacency
-- contiguous self-tests → Download adjacency
-- contiguous Download → actionlint run adjacency
+  (checkout -> Set up Python -> Install PyYAML -> gates -> self-tests -> Download -> actionlint run)
+- contiguous Set up Python -> Install PyYAML adjacency
+- contiguous Install PyYAML -> gates adjacency
+- contiguous gates -> self-tests adjacency
+- contiguous self-tests -> Download adjacency
+- contiguous Download -> actionlint run adjacency
 - contiguous permissions:/steps: adjacency on all three
-- contiguous steps:/checkout adjacency on all three
+- contiguous steps:/checkout adjacency on stewardship
 
 Fail-closed stewardship-checks + schema residual deepen after #225 (NOT wiki-index/badge
 #227 / NOT path-edges #225 / NOT Pass-2 leftover+md/link #220 / NOT schema fourth-pass #216 /
@@ -1171,13 +1171,13 @@ def check_workflow_hardening(errors: list[str]) -> None:
     NOT md/link residual #239 / NOT stewardship-checks/schema leftover #233 /
     NOT wiki-badge leftover #227 / NOT stewardship-badge lint #208):
     contiguous seven-step actionlint path-order /
-    contiguous Set up Python → Install PyYAML adjacency /
-    contiguous Install PyYAML → gates adjacency /
-    contiguous gates → self-tests adjacency /
-    contiguous self-tests → Download adjacency /
-    contiguous Download → actionlint run adjacency /
+    contiguous Set up Python -> Install PyYAML adjacency /
+    contiguous Install PyYAML -> gates adjacency /
+    contiguous gates -> self-tests adjacency /
+    contiguous self-tests -> Download adjacency /
+    contiguous Download -> actionlint run adjacency /
     contiguous permissions:/steps: adjacency /
-    contiguous steps:/checkout adjacency.
+    contiguous steps:/checkout adjacency on stewardship.
     Markdown-lint/link-check workflow edges after #203 tip (lands closed #202/#192 leftover;
     NOT path-filter / Pass-2 / path-order / schema / badge-lint spam):
     args: >- / externally broken links commentary / without-it private-404 commentary /
@@ -2308,7 +2308,7 @@ def check_workflow_hardening(errors: list[str]) -> None:
         fail(
             "stewardship-checks.yml must keep contiguous four-step "
             "actionlint path-order "
-            "(gates → self-tests → Download → actionlint run; "
+            "(gates -> self-tests -> Download -> actionlint run; "
             "path-filter/path-order residual deepen after #225)",
             errors,
         )
@@ -2414,7 +2414,7 @@ def check_workflow_hardening(errors: list[str]) -> None:
         fail(
             "stewardship-checks.yml must keep contiguous five-step "
             "actionlint path-order "
-            "(Install PyYAML → gates → self-tests → Download → actionlint run; "
+            "(Install PyYAML -> gates -> self-tests -> Download -> actionlint run; "
             "path-filter/path-order residual leftover deepen after #258)",
             errors,
         )
@@ -2514,8 +2514,8 @@ def check_workflow_hardening(errors: list[str]) -> None:
         fail(
             "stewardship-checks.yml must keep contiguous six-step "
             "actionlint path-order "
-            "(Set up Python → Install PyYAML → gates → self-tests → "
-            "Download → actionlint run; "
+            "(Set up Python -> Install PyYAML -> gates -> self-tests -> "
+            "Download -> actionlint run; "
             "path-filter/path-order residual leftover deepen after #309)",
             errors,
         )
@@ -2566,8 +2566,8 @@ def check_workflow_hardening(errors: list[str]) -> None:
         fail(
             "stewardship-checks.yml must keep contiguous seven-step "
             "actionlint path-order "
-            "(checkout → Set up Python → Install PyYAML → gates → "
-            "self-tests → Download → actionlint run; "
+            "(checkout -> Set up Python -> Install PyYAML -> gates -> "
+            "self-tests -> Download -> actionlint run; "
             "path-order residual leftover deepen after #320)",
             errors,
         )
@@ -2577,7 +2577,7 @@ def check_workflow_hardening(errors: list[str]) -> None:
     )
     if setup_install_320 not in stew:
         fail(
-            "stewardship-checks.yml must keep contiguous Set up Python → "
+            "stewardship-checks.yml must keep contiguous Set up Python -> "
             "Install PyYAML adjacency "
             "(path-order residual leftover deepen after #320)",
             errors,
@@ -2589,7 +2589,7 @@ def check_workflow_hardening(errors: list[str]) -> None:
     )
     if install_gates_320 not in stew:
         fail(
-            "stewardship-checks.yml must keep contiguous Install PyYAML → "
+            "stewardship-checks.yml must keep contiguous Install PyYAML -> "
             "gates adjacency "
             "(path-order residual leftover deepen after #320)",
             errors,
@@ -2601,7 +2601,7 @@ def check_workflow_hardening(errors: list[str]) -> None:
     )
     if gates_self_320 not in stew:
         fail(
-            "stewardship-checks.yml must keep contiguous gates → "
+            "stewardship-checks.yml must keep contiguous gates -> "
             "self-tests adjacency "
             "(path-order residual leftover deepen after #320)",
             errors,
@@ -2613,7 +2613,7 @@ def check_workflow_hardening(errors: list[str]) -> None:
     )
     if self_dl_320 not in stew:
         fail(
-            "stewardship-checks.yml must keep contiguous self-tests → "
+            "stewardship-checks.yml must keep contiguous self-tests -> "
             "Download adjacency "
             "(path-order residual leftover deepen after #320)",
             errors,
@@ -2625,7 +2625,7 @@ def check_workflow_hardening(errors: list[str]) -> None:
     )
     if dl_run_320 not in stew:
         fail(
-            "stewardship-checks.yml must keep contiguous Download → "
+            "stewardship-checks.yml must keep contiguous Download -> "
             "actionlint run adjacency "
             "(path-order residual leftover deepen after #320)",
             errors,
@@ -2647,17 +2647,19 @@ def check_workflow_hardening(errors: list[str]) -> None:
                 "(path-order residual leftover deepen after #320)",
                 errors,
             )
-        steps_co_320 = (
-            "    steps:\n"
-            "      - uses: actions/checkout@v7"
+    # steps:/checkout adjacency on stewardship only (link/lint may insert
+    # docker:// uses before checkout; actionlint-style allow-test retains that).
+    steps_co_320 = (
+        "    steps:\n"
+        "      - uses: actions/checkout@v7"
+    )
+    if steps_co_320 not in stew:
+        fail(
+            "stewardship-checks.yml must keep contiguous steps:/checkout "
+            "adjacency "
+            "(path-order residual leftover deepen after #320)",
+            errors,
         )
-        if steps_co_320 not in body:
-            fail(
-                f"{wf_name} must keep contiguous steps:/checkout "
-                "adjacency "
-                "(path-order residual leftover deepen after #320)",
-                errors,
-            )
 
     # Stewardship-checks + schema residual deepen after #225 (DISTINCT leftover;
     # NOT path-edges #225 / NOT Pass-2 leftover+md/link #220 / NOT schema fourth #216 /
@@ -6577,23 +6579,23 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
             "seven-step actionlint path-order fail needle",
         ),
         (
-            "contiguous Set up Python → " + "Install PyYAML adjacency",
+            "contiguous Set up Python -> " + "Install PyYAML adjacency",
             "setup/install adjacency fail needle",
         ),
         (
-            "contiguous Install PyYAML → " + "gates adjacency",
+            "contiguous Install PyYAML -> " + "gates adjacency",
             "install/gates adjacency fail needle",
         ),
         (
-            "contiguous gates → " + "self-tests adjacency",
+            "contiguous gates -> " + "self-tests adjacency",
             "gates/self-tests adjacency fail needle",
         ),
         (
-            "contiguous self-tests → " + "Download adjacency",
+            "contiguous self-tests -> " + "Download adjacency",
             "self-tests/Download adjacency fail needle",
         ),
         (
-            "contiguous Download → " + "actionlint run adjacency",
+            "contiguous Download -> " + "actionlint run adjacency",
             "Download/run adjacency fail needle",
         ),
         (

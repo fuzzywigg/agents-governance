@@ -13,7 +13,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - TOKENMAXX actionlint path-filter residual leftover deepen after #348 tip
   (lands closed #349/#334/#344/#340/#339/#338/#323/#319/#317 leftover on post-#348
-  tip): expand self-tests to 7653 cases (was 7558) fail-closing DISTINCT
+  tip): expand self-tests to 7611 cases (was 7558) fail-closing DISTINCT
   unsaturated residual leftover path-filter CI edges on existing workflow
   modules only — exact contiguous stewardship on: push/PR/schedule/
   workflow_dispatch block / reject release: / reject issues: /

@@ -12,7 +12,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Added
 
 - TOKENMAXX actionlint path-order residual leftover deepen after #320 tip
-  (lands closed #330/#323/#319/#317 leftover on post-#326 tip): expand
+  (lands closed #332/#330/#323/#319/#317 leftover on post-#326 tip): expand
   self-tests to 7212 cases (was 7054) fail-closing DISTINCT unsaturated
   residual leftover path-order CI edges on existing workflow modules only —
   contiguous seven-step actionlint path-order (checkout → Set up Python →
@@ -35,13 +35,11 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   not #189 path-order / not #176 layouts / not schema #191/#216 / not Pass-2
   residual #199/#203 / not Pass-2 leftover + md/link #220 / not
   stewardship-badge lint #208); no invent-product; no fourth badge; no
-  scratchpad notes. Lands closed #330/#323/#319/#317 leftover on post-#326 tip
-  (do **not** revive closed PRs
-  #330/#323/#319/#317/#310/#304/#303/#300/#294/#292/#286/#280/#274/#270/#264/#255/#247/#244/#236/#232/#228/#226/#223/#217/#213/#198/#186/#166/#157).
+  scratchpad notes. Lands closed #332/#330/#323/#319/#317 leftover on
+  post-#326 tip (do **not** revive closed PRs
+  #332/#330/#323/#319/#317/#310/#304/#303/#300/#294/#292/#286/#280/#274/#270/#264/#255/#247/#244/#236/#232/#228/#226/#223/#217/#213/#198/#186/#166/#157).
   Distinct from merged
   #326/#320/#314/#309/#299/#297/#293/#282/#278/#272/#262/#258/#252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
-
-258/#252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
 
 - TOKENMAXX stewardship-schema residual CI leftover residual deepen after #314
   tip (lands closed #316 leftover on post-#314 path-order tip): expand

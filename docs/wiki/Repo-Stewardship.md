@@ -442,7 +442,7 @@ not lychee/blob-503 leftover #278 / not Pass-2 residual + templates #272 /
 not path-edges leftover #262 / not wiki/mdlink leftover #252;
 no extra wiki files)).
 plus actionlint path-order residual leftover deepen after #320 tip
-(lands closed #330/#323/#319/#317 leftover on post-#326 tip): contiguous
+(lands closed #332/#330/#323/#319/#317 leftover on post-#326 tip): contiguous
 seven-step actionlint path-order / contiguous Set up Python → Install
 PyYAML adjacency / contiguous Install PyYAML → gates adjacency /
 contiguous gates → self-tests adjacency / contiguous self-tests →
@@ -461,7 +461,7 @@ not md/link residual #239 / not stewardship-checks/schema leftover #233 /
 not wiki-badge leftover #227 / not #189 / not #176 / not schema #191/#216 /
 not Pass-2 residual #199/#203 / not Pass-2 leftover + md/link #220 /
 not stewardship-badge lint #208; do not revive closed PRs
-(#330/#323/#319/#317/#310/#304/#303/#300/#294/#292/#286/#280/#274/#270/#264/#255/#247/#244/#236/#232/#228/#226/#223/#217/#213/#198/#186/#166/#157)).
+(#332/#330/#323/#319/#317/#310/#304/#303/#300/#294/#292/#286/#280/#274/#270/#264/#255/#247/#244/#236/#232/#228/#226/#223/#217/#213/#198/#186/#166/#157)).
 Stewardship CI also runs `actionlint` on the three existing workflow paths.
 
 ## What agents may edit (this repo, L1)

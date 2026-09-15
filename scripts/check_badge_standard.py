@@ -329,6 +329,41 @@ leftover residual on post-#337 tip — do not revive #333/#331/#324/#315/#313/#3
   reject invent raw.githubusercontent.com exclude
   (existing .lycheeignore module only)
 
+
+Fail-closed Pass-2 residual / templates leftover after #348 tip
+(beyond #337 saturated after_337 pins; NOT Pass-2 residual / templates leftover after #337 /
+NOT Pass-2 residual / templates leftover after #326 /
+NOT wiki/mdlink leftover residual #326 /
+NOT stewardship-schema residual CI leftover residual #320 /
+NOT path-filter/path-order residual leftover #314 /
+NOT stewardship-schema residual CI leftover #309 /
+NOT stewardship-schema residual CI #299 /
+NOT wiki/mdlink leftover residual #293 /
+NOT stewardship-schema leftover residual #282 /
+NOT saturated Pass-2 residual leftover #272 /
+NOT lychee/blob-503 leftover #278 /
+NOT path-edges leftover #262 / NOT schema leftover #258 /
+NOT wiki/mdlink leftover #252; do not invent new templates;
+leftover residual on post-#348 tip — do not revive #333/#331/#324/#315/#313/#312/#305/#298/#291):
+- soft-fail with || /usr/bin/env true / soft-fail with set +eu /
+  soft-fail with set +o errtrace
+- existing templates/AGENTS-REPO.md leftover residual:
+  File|Purpose|Edit Restrictions header /
+  `[CONFIG_FILE]` Main configuration row /
+  L1 Bounded: Auto-approve within policy /
+  Severity levels: / Follow ecosystem incident protocol /
+  Create branch: `agents-md/description` /
+  Edit this file / Submit PR with rationale /
+  Version|Date|Changes header /
+  1.0.0 YYYY-MM-DD Initial version row /
+  ### 2.1 [Section Title] / ### 2.2 [Section Title] /
+  # Run tests / # Required coverage /
+  for ecosystem rules. / This project operates at
+- lychee residual: reject invent gist.github.com exclude /
+  reject invent api.github.com exclude /
+  reject invent raw.github.com exclude
+  (existing .lycheeignore module only)
+
 Fail-closed wiki/mdlink leftover residual after #282 tip (beyond #252 saturated
 after_243 pins; lands closed #281/#277 leftover; NOT stewardship-schema residual #282 /
 NOT lychee/blob-503 leftover #278 / NOT Pass-2 residual + templates #272 /
@@ -972,6 +1007,40 @@ def check_lycheeignore(errors: list[str]) -> None:
             "blob/main HTML flake only)",
             errors,
         )
+
+    # Pass-2 residual / templates leftover after #348 tip (existing lychee
+    # module only; beyond #337 saturated blob/master + tree/master +
+    # raw.githubusercontent.com;
+    # NOT Pass-2 residual / templates leftover after #337 /
+    # NOT Pass-2 residual / templates leftover after #326 /
+    # NOT saturated lychee/blob-503 leftover #278 /
+    # NOT saturated Pass-2 residual leftover #272 /
+    # NOT wiki/mdlink leftover residual #326 /
+    # NOT path-filter/path-order residual leftover #314 /
+    # NOT stewardship-schema residual CI leftover residual #320; do not invent).
+    if "gist.github.com" in text:
+        fail(
+            ".lycheeignore must not invent gist.github.com exclude "
+            "(Pass-2 residual / templates leftover after #348 tip; "
+            "blob/main HTML flake only)",
+            errors,
+        )
+    if "api.github.com" in text:
+        fail(
+            ".lycheeignore must not invent api.github.com exclude "
+            "(Pass-2 residual / templates leftover after #348 tip; "
+            "blob/main HTML flake only)",
+            errors,
+        )
+    stripped_raw = text.replace("raw.githubusercontent.com", "")
+    if "raw.github.com" in stripped_raw:
+        fail(
+            ".lycheeignore must not invent raw.github.com exclude "
+            "(Pass-2 residual / templates leftover after #348 tip; "
+            "blob/main HTML flake only)",
+            errors,
+        )
+
 
 
 
@@ -3137,6 +3206,66 @@ def check_agents_repo_template(errors: list[str]) -> None:
                 errors,
             )
 
+
+
+    # Pass-2 residual / templates leftover after #348 tip (existing
+    # templates/AGENTS-REPO.md only; beyond #337 saturated Environments/SEV prose;
+    # NOT Pass-2 residual / templates leftover after #337 /
+    # NOT Pass-2 residual / templates leftover after #326 /
+    # NOT saturated leftover #272 / NOT lychee/blob-503 #278 /
+    # NOT wiki/mdlink leftover residual #326 /
+    # NOT path-filter/path-order residual leftover #314 /
+    # NOT stewardship-schema residual CI leftover residual #320; do not invent).
+    leftover_348_required = (
+        (
+            "| File | Purpose | Edit Restrictions |",
+            "File Purpose Edit Restrictions header",
+        ),
+        (
+            "| `[CONFIG_FILE]` | Main configuration | Human approval required |",
+            "[CONFIG_FILE] Main configuration row",
+        ),
+        (
+            "L1 Bounded: Auto-approve within policy",
+            "L1 Bounded: Auto-approve within policy",
+        ),
+        ("Severity levels:", "Severity levels:"),
+        (
+            "Follow ecosystem incident protocol",
+            "Follow ecosystem incident protocol",
+        ),
+        (
+            "Create branch: `agents-md/description`",
+            "Create branch: agents-md/description",
+        ),
+        ("Edit this file", "Edit this file"),
+        ("Submit PR with rationale", "Submit PR with rationale"),
+        (
+            "| Version | Date | Changes |",
+            "Version Date Changes header",
+        ),
+        (
+            "| 1.0.0 | YYYY-MM-DD | Initial version |",
+            "1.0.0 YYYY-MM-DD Initial version row",
+        ),
+        ("### 2.1 [Section Title]", "### 2.1 [Section Title]"),
+        ("### 2.2 [Section Title]", "### 2.2 [Section Title]"),
+        ("# Run tests", "# Run tests"),
+        ("# Required coverage", "# Required coverage"),
+        ("for ecosystem rules.", "for ecosystem rules."),
+        ("This project operates at", "This project operates at"),
+        (
+            "within this repository",
+            "within this repository blurb",
+        ),
+    )
+    for needle, label in leftover_348_required:
+        if needle not in text:
+            fail(
+                f"templates/AGENTS-REPO.md must keep {label} "
+                "(Pass-2 residual / templates leftover after #348 tip)",
+                errors,
+            )
 
 
     scan_secrets(AGENTS_REPO, errors)
@@ -10802,6 +10931,40 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
                 errors,
             )
 
+
+        # Pass-2 residual / templates leftover after #348 tip (soft-fail
+        # leftovers beyond saturated #337 || /bin/true / || /usr/bin/true /
+        # set +E /
+        # NOT Pass-2 residual / templates leftover after #337 /
+        # NOT Pass-2 residual / templates leftover after #326 /
+        # NOT lychee/blob-503 leftover #278 /
+        # NOT wiki/mdlink leftover residual #326 /
+        # NOT path-filter/path-order residual leftover #314 /
+        # NOT stewardship-schema residual CI leftover residual #320).
+        if (
+            "|| /usr/bin/env true" in run_text
+            or "||/usr/bin/env true" in run_text
+        ):
+            fail(
+                "run_stewardship_checks.sh must not soft-fail with "
+                "|| /usr/bin/env true "
+                "(Pass-2 residual / templates leftover after #348 tip)",
+                errors,
+            )
+        if re.search(r"(?m)^\s*set \+eu\b", run_text):
+            fail(
+                "run_stewardship_checks.sh must not soft-fail with set +eu "
+                "(Pass-2 residual / templates leftover after #348 tip)",
+                errors,
+            )
+        if re.search(r"(?m)^\s*set \+o errtrace\b", run_text):
+            fail(
+                "run_stewardship_checks.sh must not soft-fail with "
+                "set +o errtrace "
+                "(Pass-2 residual / templates leftover after #348 tip)",
+                errors,
+            )
+
         # Fail-closed after #176: parent-dir fragment from live ROOT assign.
         # Checked before exact-ROOT leftover so parent-frag mutations get this needle.
         parent_frag = 'dirname "$0")/..'
@@ -11614,6 +11777,71 @@ def check_run_stewardship_gate_contract(errors: list[str]) -> None:
             "run_stewardship contract must keep " + raw_gh_pin + " pin",
             errors,
         )
+
+    # Pass-2 residual / templates leftover after #348 tip contract pins.
+    leftover_348 = (
+        "Pass-2 residual / templates leftover after " + "#348 tip"
+    )
+    if leftover_348 not in text:
+        fail(
+            "run_stewardship pins must keep " + leftover_348 + " marker",
+            errors,
+        )
+    not_pass2_337 = "NOT Pass-2 residual / templates leftover after " + "#337"
+    if not_pass2_337 not in text:
+        fail(
+            "run_stewardship docstring must keep " + not_pass2_337 + " distinctness",
+            errors,
+        )
+    env_true_pin = "soft-fail with || /usr/bin/env " + "true"
+    if env_true_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + env_true_pin + " pin",
+            errors,
+        )
+    set_eu_pin = "soft-fail with set " + "+eu"
+    if set_eu_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + set_eu_pin + " pin",
+            errors,
+        )
+    errtrace_pin = "soft-fail with set +o " + "errtrace"
+    if errtrace_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + errtrace_pin + " pin",
+            errors,
+        )
+    file_hdr_pin = "| File | Purpose | Edit " + "Restrictions |"
+    if file_hdr_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + file_hdr_pin + " leftover",
+            errors,
+        )
+    severity_pin = "Severity " + "levels:"
+    if severity_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + severity_pin + " leftover",
+            errors,
+        )
+    gist_pin = "must not invent gist.github.com " + "exclude"
+    if gist_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + gist_pin + " pin",
+            errors,
+        )
+    api_gh_pin = "must not invent api.github.com " + "exclude"
+    if api_gh_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + api_gh_pin + " pin",
+            errors,
+        )
+    raw_legacy_pin = "must not invent raw.github.com " + "exclude"
+    if raw_legacy_pin not in text:
+        fail(
+            "run_stewardship contract must keep " + raw_legacy_pin + " pin",
+            errors,
+        )
+
 
 
 

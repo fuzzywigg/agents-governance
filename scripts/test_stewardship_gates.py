@@ -355,7 +355,7 @@ def _write(path: Path, text: str) -> None:
 
 
 def _minimal_workflows(tmp: Path) -> None:
-    # Align with live path-filter leftover after #309: name:/on: + workflow_dispatch:/concurrency:; keep top-level permissions after concurrency for older pins; keep link fixture even-byte via trailing newline pad for utf-16 BOM UnicodeError parity.
+    # Align with live path-filter leftover after #348: name:/on: + workflow_dispatch:/concurrency: + exact stew on: block; keep top-level permissions after concurrency for older pins; keep link fixture even-byte via trailing newline pad for utf-16 BOM UnicodeError parity.
     wf = tmp / ".github" / "workflows"
     wf.mkdir(parents=True, exist_ok=True)
     # Keep aligned with live CI second-pass pins after #72 (branches / concurrency /
@@ -88376,6 +88376,1749 @@ def test_path_edges_rejects_stew_merge_group_after_309() -> None:
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'merge_group:')
 
 
+# --- TOKENMAXX path-filter residual leftover deepen after #348 (+146; tip-relaunch on post-#348; lands closed #349/#334/#344/#340/#339/#338/#323/#319/#317 leftover; NOT Pass-2 residual templates leftovers #348 / NOT wiki/mdlink leftover residual #326 / NOT saturated leftover #314 / NOT path-order residual leftover #344) -----
+
+def test_path_filter_gate_leftover_doc_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Path-filter residual leftover deepen after #348' in text
+        path.write_text(text.replace('Path-filter residual leftover deepen after #348', 'Path-filter residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Path-filter residual leftover deepen after #348',
+        )
+
+def test_path_filter_gate_leftover_doc_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Path-filter residual leftover deepen after #348' in text
+        path.write_text(text.replace('Path-filter residual leftover deepen after #348', 'Path-filter residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'Path-filter residual leftover deepen after #348',
+        )
+
+def test_path_filter_gate_module_leftover_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'path-filter residual leftover deepen after #348' in text
+        path.write_text(text.replace('path-filter residual leftover deepen after #348', 'path-filter residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'path-filter residual leftover deepen after #348',
+        )
+
+def test_path_filter_gate_module_leftover_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'path-filter residual leftover deepen after #348' in text
+        path.write_text(text.replace('path-filter residual leftover deepen after #348', 'path-filter residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'path-filter residual leftover deepen after #348',
+        )
+
+
+def test_path_filter_gate_not_pass2_templates_348_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT Pass-2 residual templates leftovers #348' in text
+        path.write_text(text.replace('NOT Pass-2 residual templates leftovers #348', 'NOT Pass-2 residual templates leftovers #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path,
+            'NOT Pass-2 residual templates leftovers #348',
+        )
+
+def test_path_filter_gate_not_pass2_templates_348_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT Pass-2 residual templates leftovers #348' in text
+        path.write_text(text.replace('NOT Pass-2 residual templates leftovers #348', 'NOT Pass-2 residual templates leftovers #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path,
+            'NOT Pass-2 residual templates leftovers #348',
+        )
+
+def test_path_filter_gate_not_wiki_326_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki/mdlink leftover residual #326' in text
+        path.write_text(text.replace('NOT wiki/mdlink leftover residual #326', 'NOT wiki/mdlink leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path,
+            'NOT wiki/mdlink leftover residual #326',
+        )
+
+def test_path_filter_gate_not_wiki_326_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki/mdlink leftover residual #326' in text
+        path.write_text(text.replace('NOT wiki/mdlink leftover residual #326', 'NOT wiki/mdlink leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path,
+            'NOT wiki/mdlink leftover residual #326',
+        )
+
+def test_path_filter_gate_not_saturated_314_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT saturated leftover #314' in text
+        path.write_text(text.replace('NOT saturated leftover #314', 'NOT saturated leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT saturated leftover #314',
+        )
+
+def test_path_filter_gate_not_saturated_314_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT saturated leftover #314' in text
+        path.write_text(text.replace('NOT saturated leftover #314', 'NOT saturated leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT saturated leftover #314',
+        )
+
+def test_path_filter_gate_not_path_order_344_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT path-order residual leftover #344' in text
+        path.write_text(text.replace('NOT path-order residual leftover #344', 'NOT path-order residual leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT path-order residual leftover #344',
+        )
+
+def test_path_filter_gate_not_path_order_344_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT path-order residual leftover #344' in text
+        path.write_text(text.replace('NOT path-order residual leftover #344', 'NOT path-order residual leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT path-order residual leftover #344',
+        )
+
+def test_path_filter_gate_not_schema_320_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover residual #320' in text
+        path.write_text(text.replace('NOT schema residual CI leftover residual #320', 'NOT schema residual CI leftover residual #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT schema residual CI leftover residual #320',
+        )
+
+def test_path_filter_gate_not_schema_320_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover residual #320' in text
+        path.write_text(text.replace('NOT schema residual CI leftover residual #320', 'NOT schema residual CI leftover residual #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT schema residual CI leftover residual #320',
+        )
+
+def test_path_filter_gate_not_schema_leftover_309_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover #309' in text
+        path.write_text(text.replace('NOT schema residual CI leftover #309', 'NOT schema residual CI leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT schema residual CI leftover #309',
+        )
+
+def test_path_filter_gate_not_schema_leftover_309_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover #309' in text
+        path.write_text(text.replace('NOT schema residual CI leftover #309', 'NOT schema residual CI leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT schema residual CI leftover #309',
+        )
+
+def test_path_filter_gate_not_schema_299_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI #299' in text
+        path.write_text(text.replace('NOT schema residual CI #299', 'NOT schema residual CI #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT schema residual CI #299',
+        )
+
+def test_path_filter_gate_not_schema_299_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI #299' in text
+        path.write_text(text.replace('NOT schema residual CI #299', 'NOT schema residual CI #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT schema residual CI #299',
+        )
+
+def test_path_filter_gate_not_wiki_293_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki/mdlink leftover residual #293' in text
+        path.write_text(text.replace('NOT wiki/mdlink leftover residual #293', 'NOT wiki/mdlink leftover residual #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT wiki/mdlink leftover residual #293',
+        )
+
+def test_path_filter_gate_not_wiki_293_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki/mdlink leftover residual #293' in text
+        path.write_text(text.replace('NOT wiki/mdlink leftover residual #293', 'NOT wiki/mdlink leftover residual #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT wiki/mdlink leftover residual #293',
+        )
+
+def test_path_filter_gate_not_pass2_272_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT Pass-2 residual leftover #272' in text
+        path.write_text(text.replace('NOT Pass-2 residual leftover #272', 'NOT Pass-2 residual leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT Pass-2 residual leftover #272',
+        )
+
+def test_path_filter_gate_not_pass2_272_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT Pass-2 residual leftover #272' in text
+        path.write_text(text.replace('NOT Pass-2 residual leftover #272', 'NOT Pass-2 residual leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT Pass-2 residual leftover #272',
+        )
+
+def test_path_filter_gate_not_schema_282_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-schema residual #282' in text
+        path.write_text(text.replace('NOT stewardship-schema residual #282', 'NOT stewardship-schema residual #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT stewardship-schema residual #282',
+        )
+
+def test_path_filter_gate_not_schema_282_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-schema residual #282' in text
+        path.write_text(text.replace('NOT stewardship-schema residual #282', 'NOT stewardship-schema residual #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT stewardship-schema residual #282',
+        )
+
+def test_path_filter_gate_not_blob503_278_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT lychee/blob-503 harden #278' in text
+        path.write_text(text.replace('NOT lychee/blob-503 harden #278', 'NOT lychee/blob-503 harden #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT lychee/blob-503 harden #278',
+        )
+
+def test_path_filter_gate_not_blob503_278_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT lychee/blob-503 harden #278' in text
+        path.write_text(text.replace('NOT lychee/blob-503 harden #278', 'NOT lychee/blob-503 harden #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT lychee/blob-503 harden #278',
+        )
+
+def test_path_filter_gate_not_saturated_262_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT saturated leftover #262' in text
+        path.write_text(text.replace('NOT saturated leftover #262', 'NOT saturated leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT saturated leftover #262',
+        )
+
+def test_path_filter_gate_not_saturated_262_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT saturated leftover #262' in text
+        path.write_text(text.replace('NOT saturated leftover #262', 'NOT saturated leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT saturated leftover #262',
+        )
+
+def test_path_filter_gate_not_schema_258_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-schema leftover #258' in text
+        path.write_text(text.replace('NOT stewardship-schema leftover #258', 'NOT stewardship-schema leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT stewardship-schema leftover #258',
+        )
+
+def test_path_filter_gate_not_schema_258_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-schema leftover #258' in text
+        path.write_text(text.replace('NOT stewardship-schema leftover #258', 'NOT stewardship-schema leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT stewardship-schema leftover #258',
+        )
+
+def test_path_filter_gate_not_wiki_252_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki/mdlink leftover #252' in text
+        path.write_text(text.replace('NOT wiki/mdlink leftover #252', 'NOT wiki/mdlink leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT wiki/mdlink leftover #252',
+        )
+
+def test_path_filter_gate_not_wiki_252_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki/mdlink leftover #252' in text
+        path.write_text(text.replace('NOT wiki/mdlink leftover #252', 'NOT wiki/mdlink leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT wiki/mdlink leftover #252',
+        )
+
+def test_path_filter_gate_not_saturated_244_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT saturated residual #244' in text
+        path.write_text(text.replace('NOT saturated residual #244', 'NOT saturated residual #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT saturated residual #244',
+        )
+
+def test_path_filter_gate_not_saturated_244_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT saturated residual #244' in text
+        path.write_text(text.replace('NOT saturated residual #244', 'NOT saturated residual #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT saturated residual #244',
+        )
+
+def test_path_filter_gate_not_wiki_243_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki outline/PUBLISH leftover #243' in text
+        path.write_text(text.replace('NOT wiki outline/PUBLISH leftover #243', 'NOT wiki outline/PUBLISH leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT wiki outline/PUBLISH leftover #243',
+        )
+
+def test_path_filter_gate_not_wiki_243_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki outline/PUBLISH leftover #243' in text
+        path.write_text(text.replace('NOT wiki outline/PUBLISH leftover #243', 'NOT wiki outline/PUBLISH leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT wiki outline/PUBLISH leftover #243',
+        )
+
+def test_path_filter_gate_not_mdlink_239_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT md/link residual #239' in text
+        path.write_text(text.replace('NOT md/link residual #239', 'NOT md/link residual #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT md/link residual #239',
+        )
+
+def test_path_filter_gate_not_mdlink_239_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT md/link residual #239' in text
+        path.write_text(text.replace('NOT md/link residual #239', 'NOT md/link residual #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT md/link residual #239',
+        )
+
+def test_path_filter_gate_not_stew_233_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema leftover #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema leftover #233', 'NOT stewardship-checks/schema leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT stewardship-checks/schema leftover #233',
+        )
+
+def test_path_filter_gate_not_stew_233_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT stewardship-checks/schema leftover #233' in text
+        path.write_text(text.replace('NOT stewardship-checks/schema leftover #233', 'NOT stewardship-checks/schema leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT stewardship-checks/schema leftover #233',
+        )
+
+def test_path_filter_gate_not_wiki_227_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki-badge leftover #227' in text
+        path.write_text(text.replace('NOT wiki-badge leftover #227', 'NOT wiki-badge leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT wiki-badge leftover #227',
+        )
+
+def test_path_filter_gate_not_wiki_227_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki-badge leftover #227' in text
+        path.write_text(text.replace('NOT wiki-badge leftover #227', 'NOT wiki-badge leftover #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT wiki-badge leftover #227',
+        )
+
+def test_path_filter_gate_not_saturated_225_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT saturated deepen #225' in text
+        path.write_text(text.replace('NOT saturated deepen #225', 'NOT saturated deepen #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT saturated deepen #225',
+        )
+
+def test_path_filter_gate_not_saturated_225_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT saturated deepen #225' in text
+        path.write_text(text.replace('NOT saturated deepen #225', 'NOT saturated deepen #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT saturated deepen #225',
+        )
+
+def test_path_filter_gate_not_pass2_220_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT Pass-2 leftover + md/link #220' in text
+        path.write_text(text.replace('NOT Pass-2 leftover + md/link #220', 'NOT Pass-2 leftover + md/link #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT Pass-2 leftover + md/link #220',
+        )
+
+def test_path_filter_gate_not_pass2_220_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT Pass-2 leftover + md/link #220' in text
+        path.write_text(text.replace('NOT Pass-2 leftover + md/link #220', 'NOT Pass-2 leftover + md/link #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'NOT Pass-2 leftover + md/link #220',
+        )
+
+def test_path_filter_gate_stew_on_needle_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact contiguous stewardship on: push/PR/schedule/workflow_dispatch block' in text
+        path.write_text(text.replace('exact contiguous stewardship on: push/PR/schedule/workflow_dispatch block', 'exact contiguous stewardship on: push/PR/schedule/workflow_dispatch drift'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship on: block fail needle',
+        )
+
+def test_path_filter_gate_stew_on_needle_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'exact contiguous stewardship on: push/PR/schedule/workflow_dispatch block' in text
+        path.write_text(text.replace('exact contiguous stewardship on: push/PR/schedule/workflow_dispatch block', 'exact contiguous stewardship on: push/PR/schedule/workflow_dispatch drift'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'stewardship on: block fail needle',
+        )
+
+def test_path_filter_gate_release_needle_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must not invent release:' in text
+        path.write_text(text.replace('must not invent release:', 'must not invent release_event:'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'release invent reject needle',
+        )
+
+def test_path_filter_gate_release_needle_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must not invent release:' in text
+        path.write_text(text.replace('must not invent release:', 'must not invent release_event:'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'release invent reject needle',
+        )
+
+def test_path_filter_gate_issues_needle_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must not invent issues:' in text
+        path.write_text(text.replace('must not invent issues:', 'must not invent issues_event:'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'issues invent reject needle',
+        )
+
+def test_path_filter_gate_issues_needle_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must not invent issues:' in text
+        path.write_text(text.replace('must not invent issues:', 'must not invent issues_event:'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'issues invent reject needle',
+        )
+
+def test_path_filter_gate_discussion_needle_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must not invent discussion:' in text
+        path.write_text(text.replace('must not invent discussion:', 'must not invent discussion_event:'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'discussion invent reject needle',
+        )
+
+def test_path_filter_gate_discussion_needle_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must not invent discussion:' in text
+        path.write_text(text.replace('must not invent discussion:', 'must not invent discussion_event:'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'discussion invent reject needle',
+        )
+
+def test_path_filter_gate_deployment_needle_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must not invent deployment:' in text
+        path.write_text(text.replace('must not invent deployment:', 'must not invent deployment_event:'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'deployment invent reject needle',
+        )
+
+def test_path_filter_gate_deployment_needle_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must not invent deployment:' in text
+        path.write_text(text.replace('must not invent deployment:', 'must not invent deployment_event:'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'deployment invent reject needle',
+        )
+
+def test_path_filter_gate_check_run_needle_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must not invent check_run:' in text
+        path.write_text(text.replace('must not invent check_run:', 'must not invent check_run_event:'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'check_run invent reject needle',
+        )
+
+def test_path_filter_gate_check_run_needle_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must not invent check_run:' in text
+        path.write_text(text.replace('must not invent check_run:', 'must not invent check_run_event:'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'check_run invent reject needle',
+        )
+
+def test_path_filter_gate_create_needle_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must not invent create:' in text
+        path.write_text(text.replace('must not invent create:', 'must not invent create_event:'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'create invent reject needle',
+        )
+
+def test_path_filter_gate_create_needle_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must not invent create:' in text
+        path.write_text(text.replace('must not invent create:', 'must not invent create_event:'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'create invent reject needle',
+        )
+
+def test_path_filter_gate_wording_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'path-filter residual leftover deepen after #348' in text
+        path.write_text(text.replace('path-filter residual leftover deepen after #348', 'path-filter residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'path leftover-after-314 wording pin',
+        )
+
+def test_path_filter_gate_wording_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'path-filter residual leftover deepen after #348' in text
+        path.write_text(text.replace('path-filter residual leftover deepen after #348', 'path-filter residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(
+            scripts / "check_badge_standard.py",
+            tmp_path,
+            'path leftover-after-314 wording pin',
+        )
+
+def test_path_filter_rejects_stew_on_exact_pad0_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'on:\n  push:\n    branches: ["**"]\n    paths:\n' in text
+        path.write_text(text.replace('on:\n  push:\n    branches: ["**"]\n    paths:\n', 'on:\n  push:\n    branches: ["main"]\n    paths:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous on:')
+
+def test_path_filter_rejects_stew_on_exact_pad1_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'on:\n  push:\n    branches: ["**"]\n    paths:\n' in text
+        path.write_text(text.replace('on:\n  push:\n    branches: ["**"]\n    paths:\n', 'on:\n  push:\n    branches: ["main"]\n    paths:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous on:')
+
+def test_path_filter_rejects_stew_on_exact_pad2_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'on:\n  push:\n    branches: ["**"]\n    paths:\n' in text
+        path.write_text(text.replace('on:\n  push:\n    branches: ["**"]\n    paths:\n', 'on:\n  push:\n    branches: ["main"]\n    paths:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous on:')
+
+def test_path_filter_rejects_stew_on_exact_pad3_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'on:\n  push:\n    branches: ["**"]\n    paths:\n' in text
+        path.write_text(text.replace('on:\n  push:\n    branches: ["**"]\n    paths:\n', 'on:\n  push:\n    branches: ["main"]\n    paths:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous on:')
+
+def test_path_filter_rejects_stew_on_exact_pad4_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'on:\n  push:\n    branches: ["**"]\n    paths:\n' in text
+        path.write_text(text.replace('on:\n  push:\n    branches: ["**"]\n    paths:\n', 'on:\n  push:\n    branches: ["main"]\n    paths:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous on:')
+
+def test_path_filter_rejects_stew_on_exact_pad5_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'on:\n  push:\n    branches: ["**"]\n    paths:\n' in text
+        path.write_text(text.replace('on:\n  push:\n    branches: ["**"]\n    paths:\n', 'on:\n  push:\n    branches: ["main"]\n    paths:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous on:')
+
+def test_path_filter_rejects_stew_on_exact_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'on:\n  push:\n    branches: ["**"]\n    paths:\n' in text
+        path.write_text(text.replace('on:\n  push:\n    branches: ["**"]\n    paths:\n', 'on:\n  push:\n    branches: ["main"]\n    paths:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous on:')
+
+def test_path_filter_rejects_stew_on_exact_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert 'on:\n  push:\n    branches: ["**"]\n    paths:\n' in text
+        path.write_text(text.replace('on:\n  push:\n    branches: ["**"]\n    paths:\n', 'on:\n  push:\n    branches: ["main"]\n    paths:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'exact contiguous on:')
+
+def test_path_filter_rejects_link_release_pad0_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_link_release_pad1_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_link_release_pad2_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_link_release_pad3_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_link_release_pad4_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_link_release_pad5_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_link_release_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_link_release_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_lint_release_pad0_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_lint_release_pad1_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_lint_release_pad2_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_lint_release_pad3_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_lint_release_pad4_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_lint_release_pad5_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_lint_release_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_lint_release_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_stew_release_pad0_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_stew_release_pad1_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_stew_release_pad2_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_stew_release_pad3_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_stew_release_pad4_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_stew_release_pad5_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_stew_release_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_stew_release_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  release:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent release:')
+
+def test_path_filter_rejects_link_issues_pad0_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_link_issues_pad1_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_link_issues_pad2_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_link_issues_pad3_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_link_issues_pad4_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_link_issues_pad5_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_link_issues_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_link_issues_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/link-check.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_lint_issues_pad0_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_lint_issues_pad1_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_lint_issues_pad2_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_lint_issues_pad3_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_lint_issues_pad4_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_lint_issues_pad5_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_lint_issues_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_lint_issues_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_stew_issues_pad0_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_stew_issues_pad1_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_stew_issues_pad2_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_stew_issues_pad3_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_stew_issues_pad4_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_stew_issues_pad5_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_stew_issues_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_stew_issues_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  issues:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent issues:')
+
+def test_path_filter_rejects_stew_discussion_pad0_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  discussion:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent discussion:')
+
+def test_path_filter_rejects_stew_discussion_pad1_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  discussion:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent discussion:')
+
+def test_path_filter_rejects_stew_discussion_pad2_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  discussion:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent discussion:')
+
+def test_path_filter_rejects_stew_discussion_pad3_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  discussion:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent discussion:')
+
+def test_path_filter_rejects_stew_discussion_pad4_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  discussion:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent discussion:')
+
+def test_path_filter_rejects_stew_discussion_pad5_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  discussion:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent discussion:')
+
+def test_path_filter_rejects_stew_discussion_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  discussion:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent discussion:')
+
+def test_path_filter_rejects_stew_discussion_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  discussion:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent discussion:')
+
+def test_path_filter_rejects_stew_deployment_pad0_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  deployment:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent deployment:')
+
+def test_path_filter_rejects_stew_deployment_pad1_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  deployment:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent deployment:')
+
+def test_path_filter_rejects_stew_deployment_pad2_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  deployment:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent deployment:')
+
+def test_path_filter_rejects_stew_deployment_pad3_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  deployment:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent deployment:')
+
+def test_path_filter_rejects_stew_deployment_pad4_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  deployment:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent deployment:')
+
+def test_path_filter_rejects_stew_deployment_pad5_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  deployment:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent deployment:')
+
+def test_path_filter_rejects_stew_deployment_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  deployment:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent deployment:')
+
+def test_path_filter_rejects_stew_deployment_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  deployment:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent deployment:')
+
+def test_path_filter_rejects_stew_check_run_pad0_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  check_run:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent check_run:')
+
+def test_path_filter_rejects_stew_check_run_pad1_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  check_run:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent check_run:')
+
+def test_path_filter_rejects_stew_check_run_pad2_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  check_run:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent check_run:')
+
+def test_path_filter_rejects_stew_check_run_pad3_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  check_run:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent check_run:')
+
+def test_path_filter_rejects_stew_check_run_pad4_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  check_run:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent check_run:')
+
+def test_path_filter_rejects_stew_check_run_pad5_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  check_run:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent check_run:')
+
+def test_path_filter_rejects_stew_check_run_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  check_run:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent check_run:')
+
+def test_path_filter_rejects_stew_check_run_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  check_run:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent check_run:')
+
+def test_path_filter_rejects_stew_create_pad0_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  create:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent create:')
+
+def test_path_filter_rejects_stew_create_pad1_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  create:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent create:')
+
+def test_path_filter_rejects_stew_create_pad2_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  create:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent create:')
+
+def test_path_filter_rejects_stew_create_pad3_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  create:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent create:')
+
+def test_path_filter_rejects_stew_create_pad4_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  create:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent create:')
+
+def test_path_filter_rejects_stew_create_pad5_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  create:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent create:')
+
+def test_path_filter_rejects_stew_create_still_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  create:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent create:')
+
+def test_path_filter_rejects_stew_create_after_348() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
+        text = path.read_text(encoding="utf-8")
+        assert '  workflow_dispatch:\n' in text
+        path.write_text(text.replace('  workflow_dispatch:\n', '  create:\n  workflow_dispatch:\n', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must not invent create:')
+
 # --- TOKENMAXX stewardship-schema residual CI leftover residual deepen after #309 (+236; tip-relaunch on post-#314; lands closed #316 leftover) -----
 
 def test_schema_residual_ci_leftover_residual_doc_pad0_after_309() -> None:
@@ -104957,6 +106700,156 @@ def main() -> int:
         test_path_edges_rejects_stew_merge_group_pad5_after_309,
         test_path_edges_rejects_stew_merge_group_still_after_309,
         test_path_edges_rejects_stew_merge_group_after_309,
+        test_path_filter_gate_leftover_doc_still_after_348,
+        test_path_filter_gate_leftover_doc_after_348,
+        test_path_filter_gate_module_leftover_still_after_348,
+        test_path_filter_gate_module_leftover_after_348,
+        test_path_filter_gate_not_pass2_templates_348_still_after_348,
+        test_path_filter_gate_not_pass2_templates_348_after_348,
+        test_path_filter_gate_not_wiki_326_still_after_348,
+        test_path_filter_gate_not_wiki_326_after_348,
+        test_path_filter_gate_not_saturated_314_still_after_348,
+        test_path_filter_gate_not_saturated_314_after_348,
+        test_path_filter_gate_not_path_order_344_still_after_348,
+        test_path_filter_gate_not_path_order_344_after_348,
+        test_path_filter_gate_not_schema_320_still_after_348,
+        test_path_filter_gate_not_schema_320_after_348,
+        test_path_filter_gate_not_schema_leftover_309_still_after_348,
+        test_path_filter_gate_not_schema_leftover_309_after_348,
+        test_path_filter_gate_not_schema_299_still_after_348,
+        test_path_filter_gate_not_schema_299_after_348,
+        test_path_filter_gate_not_wiki_293_still_after_348,
+        test_path_filter_gate_not_wiki_293_after_348,
+        test_path_filter_gate_not_pass2_272_still_after_348,
+        test_path_filter_gate_not_pass2_272_after_348,
+        test_path_filter_gate_not_schema_282_still_after_348,
+        test_path_filter_gate_not_schema_282_after_348,
+        test_path_filter_gate_not_blob503_278_still_after_348,
+        test_path_filter_gate_not_blob503_278_after_348,
+        test_path_filter_gate_not_saturated_262_still_after_348,
+        test_path_filter_gate_not_saturated_262_after_348,
+        test_path_filter_gate_not_schema_258_still_after_348,
+        test_path_filter_gate_not_schema_258_after_348,
+        test_path_filter_gate_not_wiki_252_still_after_348,
+        test_path_filter_gate_not_wiki_252_after_348,
+        test_path_filter_gate_not_saturated_244_still_after_348,
+        test_path_filter_gate_not_saturated_244_after_348,
+        test_path_filter_gate_not_wiki_243_still_after_348,
+        test_path_filter_gate_not_wiki_243_after_348,
+        test_path_filter_gate_not_mdlink_239_still_after_348,
+        test_path_filter_gate_not_mdlink_239_after_348,
+        test_path_filter_gate_not_stew_233_still_after_348,
+        test_path_filter_gate_not_stew_233_after_348,
+        test_path_filter_gate_not_wiki_227_still_after_348,
+        test_path_filter_gate_not_wiki_227_after_348,
+        test_path_filter_gate_not_saturated_225_still_after_348,
+        test_path_filter_gate_not_saturated_225_after_348,
+        test_path_filter_gate_not_pass2_220_still_after_348,
+        test_path_filter_gate_not_pass2_220_after_348,
+        test_path_filter_gate_stew_on_needle_still_after_348,
+        test_path_filter_gate_stew_on_needle_after_348,
+        test_path_filter_gate_release_needle_still_after_348,
+        test_path_filter_gate_release_needle_after_348,
+        test_path_filter_gate_issues_needle_still_after_348,
+        test_path_filter_gate_issues_needle_after_348,
+        test_path_filter_gate_discussion_needle_still_after_348,
+        test_path_filter_gate_discussion_needle_after_348,
+        test_path_filter_gate_deployment_needle_still_after_348,
+        test_path_filter_gate_deployment_needle_after_348,
+        test_path_filter_gate_check_run_needle_still_after_348,
+        test_path_filter_gate_check_run_needle_after_348,
+        test_path_filter_gate_create_needle_still_after_348,
+        test_path_filter_gate_create_needle_after_348,
+        test_path_filter_gate_wording_still_after_348,
+        test_path_filter_gate_wording_after_348,
+        test_path_filter_rejects_stew_on_exact_pad0_after_348,
+        test_path_filter_rejects_stew_on_exact_pad1_after_348,
+        test_path_filter_rejects_stew_on_exact_pad2_after_348,
+        test_path_filter_rejects_stew_on_exact_pad3_after_348,
+        test_path_filter_rejects_stew_on_exact_pad4_after_348,
+        test_path_filter_rejects_stew_on_exact_pad5_after_348,
+        test_path_filter_rejects_stew_on_exact_still_after_348,
+        test_path_filter_rejects_stew_on_exact_after_348,
+        test_path_filter_rejects_link_release_pad0_after_348,
+        test_path_filter_rejects_link_release_pad1_after_348,
+        test_path_filter_rejects_link_release_pad2_after_348,
+        test_path_filter_rejects_link_release_pad3_after_348,
+        test_path_filter_rejects_link_release_pad4_after_348,
+        test_path_filter_rejects_link_release_pad5_after_348,
+        test_path_filter_rejects_link_release_still_after_348,
+        test_path_filter_rejects_link_release_after_348,
+        test_path_filter_rejects_lint_release_pad0_after_348,
+        test_path_filter_rejects_lint_release_pad1_after_348,
+        test_path_filter_rejects_lint_release_pad2_after_348,
+        test_path_filter_rejects_lint_release_pad3_after_348,
+        test_path_filter_rejects_lint_release_pad4_after_348,
+        test_path_filter_rejects_lint_release_pad5_after_348,
+        test_path_filter_rejects_lint_release_still_after_348,
+        test_path_filter_rejects_lint_release_after_348,
+        test_path_filter_rejects_stew_release_pad0_after_348,
+        test_path_filter_rejects_stew_release_pad1_after_348,
+        test_path_filter_rejects_stew_release_pad2_after_348,
+        test_path_filter_rejects_stew_release_pad3_after_348,
+        test_path_filter_rejects_stew_release_pad4_after_348,
+        test_path_filter_rejects_stew_release_pad5_after_348,
+        test_path_filter_rejects_stew_release_still_after_348,
+        test_path_filter_rejects_stew_release_after_348,
+        test_path_filter_rejects_link_issues_pad0_after_348,
+        test_path_filter_rejects_link_issues_pad1_after_348,
+        test_path_filter_rejects_link_issues_pad2_after_348,
+        test_path_filter_rejects_link_issues_pad3_after_348,
+        test_path_filter_rejects_link_issues_pad4_after_348,
+        test_path_filter_rejects_link_issues_pad5_after_348,
+        test_path_filter_rejects_link_issues_still_after_348,
+        test_path_filter_rejects_link_issues_after_348,
+        test_path_filter_rejects_lint_issues_pad0_after_348,
+        test_path_filter_rejects_lint_issues_pad1_after_348,
+        test_path_filter_rejects_lint_issues_pad2_after_348,
+        test_path_filter_rejects_lint_issues_pad3_after_348,
+        test_path_filter_rejects_lint_issues_pad4_after_348,
+        test_path_filter_rejects_lint_issues_pad5_after_348,
+        test_path_filter_rejects_lint_issues_still_after_348,
+        test_path_filter_rejects_lint_issues_after_348,
+        test_path_filter_rejects_stew_issues_pad0_after_348,
+        test_path_filter_rejects_stew_issues_pad1_after_348,
+        test_path_filter_rejects_stew_issues_pad2_after_348,
+        test_path_filter_rejects_stew_issues_pad3_after_348,
+        test_path_filter_rejects_stew_issues_pad4_after_348,
+        test_path_filter_rejects_stew_issues_pad5_after_348,
+        test_path_filter_rejects_stew_issues_still_after_348,
+        test_path_filter_rejects_stew_issues_after_348,
+        test_path_filter_rejects_stew_discussion_pad0_after_348,
+        test_path_filter_rejects_stew_discussion_pad1_after_348,
+        test_path_filter_rejects_stew_discussion_pad2_after_348,
+        test_path_filter_rejects_stew_discussion_pad3_after_348,
+        test_path_filter_rejects_stew_discussion_pad4_after_348,
+        test_path_filter_rejects_stew_discussion_pad5_after_348,
+        test_path_filter_rejects_stew_discussion_still_after_348,
+        test_path_filter_rejects_stew_discussion_after_348,
+        test_path_filter_rejects_stew_deployment_pad0_after_348,
+        test_path_filter_rejects_stew_deployment_pad1_after_348,
+        test_path_filter_rejects_stew_deployment_pad2_after_348,
+        test_path_filter_rejects_stew_deployment_pad3_after_348,
+        test_path_filter_rejects_stew_deployment_pad4_after_348,
+        test_path_filter_rejects_stew_deployment_pad5_after_348,
+        test_path_filter_rejects_stew_deployment_still_after_348,
+        test_path_filter_rejects_stew_deployment_after_348,
+        test_path_filter_rejects_stew_check_run_pad0_after_348,
+        test_path_filter_rejects_stew_check_run_pad1_after_348,
+        test_path_filter_rejects_stew_check_run_pad2_after_348,
+        test_path_filter_rejects_stew_check_run_pad3_after_348,
+        test_path_filter_rejects_stew_check_run_pad4_after_348,
+        test_path_filter_rejects_stew_check_run_pad5_after_348,
+        test_path_filter_rejects_stew_check_run_still_after_348,
+        test_path_filter_rejects_stew_check_run_after_348,
+        test_path_filter_rejects_stew_create_pad0_after_348,
+        test_path_filter_rejects_stew_create_pad1_after_348,
+        test_path_filter_rejects_stew_create_pad2_after_348,
+        test_path_filter_rejects_stew_create_pad3_after_348,
+        test_path_filter_rejects_stew_create_pad4_after_348,
+        test_path_filter_rejects_stew_create_pad5_after_348,
+        test_path_filter_rejects_stew_create_still_after_348,
+        test_path_filter_rejects_stew_create_after_348,
         test_schema_residual_ci_leftover_residual_doc_pad0_after_309,
         test_schema_residual_ci_leftover_residual_doc_pad1_after_309,
         test_schema_residual_ci_leftover_residual_doc_pad2_after_309,

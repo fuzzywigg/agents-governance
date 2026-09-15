@@ -442,7 +442,8 @@ not lychee/blob-503 leftover #278 / not Pass-2 residual + templates #272 /
 not path-edges leftover #262 / not wiki/mdlink leftover #252;
 no extra wiki files)).
 plus stewardship-schema residual deepen after #337 tip
-(lands closed #341/#335/#327 leftover on post-#337 Pass-2 residual templates tip): residual helper
+(lands closed #346/#341/#335/#327 leftover on post-#337 tip `8e84576`):
+residual helper
 needles (`fail(f"{rel}: {exc}"` / `missing metadata keys` /
 `FENCED_YAML_RE.search` / `got nested/list` / `type(value).__name__` /
 `autonomy_level must be int in 0..3` / `tier must be a positive int` /
@@ -453,7 +454,7 @@ needles (`fail(f"{rel}: {exc}"` / `missing metadata keys` /
 `unsupported YAML line`) / residual status stubs
 VOID|TOMBSTONED|PURGED|SEALED|BURIED|NULLIFIED / residual surface stubs
 langsmith|langfuse|helicone|braintrust|phoenix — DISTINCT schema residual only
-(tip-relaunch residual on post-#337 tip;
+(tip-relaunch residual on tip `8e84576`;
 not Pass-2 residual templates leftovers #337 /
 not wiki/mdlink leftover residual #326 /
 not schema residual CI leftover residual #320 /
@@ -463,7 +464,7 @@ not lychee/blob-503 leftover #278 / not Pass-2 residual leftover #272 /
 not path-filter/path-order leftover #314/#262 / not schema leftover #258 /
 not wiki/mdlink leftover #252 / not path-edges residual #244 /
 not stewardship-checks/schema residual #233; no stewardship_common invent;
-do not revive closed PR #341/#335/#327/#316/#295/#290/#268/#259/#257/#253/#248/#241)).
+do not revive closed PR #346/#341/#335/#327/#316/#295/#290/#268/#259/#257/#253/#248/#241)).
 plus Pass-2 residual / templates leftovers after #326 tip: soft-fail with
 `|| true` / `set +e` / must not `eval` / existing `templates/AGENTS-REPO.md`
 `Level [0/1/2]` / L0–L2 / Critical Files / Autonomy Level / End of Document /

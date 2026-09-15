@@ -118,7 +118,7 @@ not lychee/blob-503 leftover #278 /
 not saturated Pass-2 residual leftover #272).
 Deepened after #337 tip: stewardship-schema residual — residual helper
 needles + residual status/surface stubs (schema residual slice only;
-lands closed #341/#335/#327 leftover on post-#337 tip;
+lands closed #346/#341/#335/#327 leftover on tip 8e84576;
 not Pass-2 residual templates leftovers #337 /
 not wiki/mdlink leftover residual #326 /
 not stewardship-schema residual CI leftover residual #320 /
@@ -94453,7 +94453,7 @@ def test_lychee_accepts_live_layout_after_326() -> None:
         assert_pass_script(scripts / "check_badge_standard.py", tmp_path)
 
 
-# --- TOKENMAXX stewardship-schema residual deepen after #337 tip (+244; lands closed #341/#335/#327 leftover on post-#337 tip; NOT Pass-2 residual templates leftovers #337 / NOT wiki/mdlink leftover residual #326 / NOT schema residual CI leftover residual #320 / NOT schema residual CI leftover #309 / NOT schema residual CI #299 / NOT wiki/mdlink leftover residual #293 / NOT schema leftover residual #282) ---
+# --- TOKENMAXX stewardship-schema residual deepen after #337 tip (+244; lands closed #346/#341/#335/#327 leftover on tip 8e84576; NOT Pass-2 residual templates leftovers #337 / NOT wiki/mdlink leftover residual #326 / NOT schema residual CI leftover residual #320 / NOT schema residual CI leftover #309 / NOT schema residual CI #299 / NOT wiki/mdlink leftover residual #293 / NOT schema leftover residual #282) ---
 
 def test_schema_residual_doc_pad0_after_326() -> None:
     with tempfile.TemporaryDirectory() as tmp:

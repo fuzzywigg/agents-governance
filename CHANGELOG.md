@@ -12,9 +12,10 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Added
 
 - TOKENMAXX stewardship-schema residual deepen after #337 tip (lands closed
-  #341/#335/#327 leftover on post-#337 Pass-2 residual templates tip): expand
-  self-tests to 7546 cases (was 7302) fail-closing unsaturated schema-only
-  residual helper needles on existing `check_stewardship_schema.py` —
+  #346/#341/#335/#327 leftover on post-#337 Pass-2 residual templates tip
+  `8e84576`): expand self-tests to 7546 cases (was 7302) fail-closing
+  unsaturated schema-only residual helper needles on existing
+  `check_stewardship_schema.py` —
   `fail(f"{rel}: {exc}"` / `missing metadata keys` / `FENCED_YAML_RE.search` /
   `got nested/list` / `type(value).__name__` /
   `autonomy_level must be int in 0..3` / `tier must be a positive int` /
@@ -35,8 +36,8 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   stewardship-checks/schema residual #233); no invent-product; no fourth badge; no
   stewardship_common invent; no scratchpad notes. Distinct from merged PRs
   #337/#326/#320/#314/#309/#299/#297/#293/#282/#278/#272/#262/#258/#252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
-  Tip-relaunch schema residual on post-#337 tip (do **not** revive
-  #341/#335/#327/#316/#295/#290/#268/#259/#257/#253/#248/#241).
+  Tip-relaunch schema residual on tip `8e84576` (do **not** revive
+  #346/#341/#335/#327/#316/#295/#290/#268/#259/#257/#253/#248/#241).
 
 - TOKENMAXX Pass-2 residual / templates leftovers after #326 tip: expand
   self-tests to 7302 cases (was 7054) fail-closing DISTINCT leftover soft-fail +

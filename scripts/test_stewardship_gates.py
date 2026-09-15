@@ -92722,7 +92722,7 @@ def test_path_order_rejects_link_steps_checkout_after_326() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/link-check.yml'
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
         text = path.read_text(encoding="utf-8")
         assert '    steps:\n      - uses: actions/checkout@v7\n' in text
         path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")
@@ -92810,7 +92810,7 @@ def test_path_order_rejects_lint_steps_checkout_after_326() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
-        path = tmp_path / '.github/workflows/markdown-lint.yml'
+        path = tmp_path / '.github/workflows/stewardship-checks.yml'
         text = path.read_text(encoding="utf-8")
         assert '    steps:\n      - uses: actions/checkout@v7\n' in text
         path.write_text(text.replace('    steps:\n      - uses: actions/checkout@v7\n', '    steps:\n      - name: Invent padding\n        run: "true"\n      - uses: actions/checkout@v7\n', 1), encoding="utf-8")

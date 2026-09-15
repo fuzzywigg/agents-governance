@@ -131,6 +131,25 @@ Fail-closed pins (live path after #53; second-pass after #72/#75):
   residual CI leftover residual invalid status stubs ABANDONED|EXPIRED|REVOKED|HIDDEN|OFFLINE|ZOMBIE /
   residual CI leftover residual invalid surface stubs huggingface|replicate|cohere|bedrock|sagemaker /
   residual CI leftover residual docstring
+- Residual deepen after #326 (schema residual; NOT wiki/mdlink leftover residual #326 /
+  NOT schema residual CI leftover residual #320 /
+  NOT schema residual CI leftover #309 / NOT schema residual CI #299 /
+  NOT wiki/mdlink leftover residual #293 / NOT schema leftover residual #282 /
+  NOT lychee/blob-503 leftover #278 / NOT Pass-2 residual leftover #272 /
+  NOT path-filter/path-order leftover #314/#262 / NOT schema leftover #258 /
+  NOT wiki/mdlink leftover #252 / NOT path-edges residual #244 /
+  NOT schema residual (pass-5) #233):
+  residual helper needles fail(f"{rel}: {exc}" / missing metadata keys /
+  FENCED_YAML_RE.search / got nested/list / type(value).__name__ /
+  autonomy_level must be int in 0..3 / tier must be a positive int /
+  must be ISO-8601 date-prefixed / no-invent-product wording /
+  must be semver X.Y.Z / must reference an issue like #N /
+  OK: stewardship metadata schemas valid / len(DOC_SCHEMAS) /
+  empty yaml metadata block / parse_simple_yaml / first_yaml_block /
+  unsupported YAML line /
+  residual invalid status stubs VOID|TOMBSTONED|PURGED|SEALED|BURIED|NULLIFIED /
+  residual invalid surface stubs langsmith|langfuse|helicone|braintrust|phoenix /
+  residual docstring
 """
 
 from __future__ import annotations

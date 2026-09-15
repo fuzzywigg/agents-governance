@@ -99,7 +99,36 @@ Fail-closed pins (live path after #59; deepen after #43; third-pass after #90):
   ## Source of truth (repository) / Canonical public governance front door /
   This wiki is the **public narrative layer** /
   Repo-Stewardship ## Front-door duties / ## Docs quality CI
+- Wiki/mdlink leftover residual after #326 tip (sibling-page residual beyond #320
+  saturated after_320 pins + concurrent PUBLISH/Home/Repo-Stewardship residual;
+  NOT wiki/mdlink leftover residual #320 /
+  NOT stewardship-schema residual CI leftover residual #320 /
+  NOT path-filter/path-order leftover #314 /
+  NOT stewardship-schema residual CI leftover #309 /
+  NOT stewardship-schema residual CI #299 /
+  NOT stewardship-schema residual CI #297 /
+  NOT wiki/mdlink leftover residual #293 / NOT stewardship-schema residual #282 /
+  NOT lychee/blob-503 leftover #278 / NOT Pass-2 residual + templates #272 /
+  NOT path-edges leftover #262 / NOT wiki/mdlink leftover #252 /
+  NOT stewardship-schema leftover #258 / NOT path-filter/path-order leftover #244 /
+  NOT wiki outline/PUBLISH leftover #243 / NOT md/link residual layouts #239;
+  existing pages only — do not invent extra wiki files):
+  Overview ## What this repository is / ## What this repository is not /
+  public source of truth /
+  parent_governance: "github.com/fuzzywigg/agents-governance" /
+  ## Public operating model (short) / ## Documents map /
+  Not an application runtime or agent framework /
+  Autonomy-Levels ## Levels / operates at **L1 Bounded** /
+  ## Escalation (public) / ## Kill switch /
+  the policy doc wins /
+  | Level | Name | Human involvement | Typical use | /
+  Agent-Routing ## Routing matrix / ## Conventions /
+  ## What not to route here / not installable frameworks /
+  Security-Boundaries ## Trust hierarchy (summary) /
+  ## Credentials (public rules) / ## Network routing (high level) /
+  ## Reporting / Do not publish hostnames, vault paths
 """
+
 
 from __future__ import annotations
 
@@ -670,6 +699,144 @@ def main() -> int:
                 "Repo-Stewardship.md must keep ## Docs quality CI heading",
                 errors,
             )
+
+
+    # Wiki/mdlink leftover residual after #326 tip (existing sibling pages only;
+    # Overview / Autonomy-Levels / Agent-Routing / Security-Boundaries;
+    # NOT wiki/mdlink leftover residual #320; NOT invent extra wiki files).
+    overview = WIKI / "Overview.md"
+    if overview.is_file():
+        overview_text = overview.read_text(encoding="utf-8")
+        # Exact H2 line (do not let "## What this repository is not" satisfy this pin).
+        if (
+            "## What this repository is\n" not in overview_text
+            and "## What this repository is\r\n" not in overview_text
+        ):
+            fail(
+                "Overview.md must keep ## What this repository is heading",
+                errors,
+            )
+        if "## What this repository is not" not in overview_text:
+            fail(
+                "Overview.md must keep ## What this repository is not heading",
+                errors,
+            )
+        if "public source of truth" not in overview_text:
+            fail(
+                "Overview.md must keep public source of truth wording",
+                errors,
+            )
+        if (
+            'parent_governance: "github.com/fuzzywigg/agents-governance"'
+            not in overview_text
+        ):
+            fail(
+                "Overview.md must keep parent_governance agents-governance YAML example",
+                errors,
+            )
+        if "## Public operating model (short)" not in overview_text:
+            fail(
+                "Overview.md must keep ## Public operating model (short) heading",
+                errors,
+            )
+        if "## Documents map" not in overview_text:
+            fail(
+                "Overview.md must keep ## Documents map heading",
+                errors,
+            )
+        if "Not an application runtime or agent framework" not in overview_text:
+            fail(
+                "Overview.md must keep Not an application runtime or agent framework",
+                errors,
+            )
+
+    autonomy = WIKI / "Autonomy-Levels.md"
+    if autonomy.is_file():
+        autonomy_text = autonomy.read_text(encoding="utf-8")
+        if "## Levels" not in autonomy_text:
+            fail("Autonomy-Levels.md must keep ## Levels heading", errors)
+        if "operates at **L1 Bounded**" not in autonomy_text:
+            fail(
+                "Autonomy-Levels.md must keep operates at **L1 Bounded** wording",
+                errors,
+            )
+        if "## Escalation (public)" not in autonomy_text:
+            fail(
+                "Autonomy-Levels.md must keep ## Escalation (public) heading",
+                errors,
+            )
+        if "## Kill switch" not in autonomy_text:
+            fail(
+                "Autonomy-Levels.md must keep ## Kill switch heading",
+                errors,
+            )
+        if "the policy doc wins" not in autonomy_text:
+            fail(
+                "Autonomy-Levels.md must keep the policy doc wins wording",
+                errors,
+            )
+        if (
+            "| Level | Name | Human involvement | Typical use |"
+            not in autonomy_text
+        ):
+            fail(
+                "Autonomy-Levels.md must keep | Level | Name | Human involvement | Typical use | header",
+                errors,
+            )
+
+    routing = WIKI / "Agent-Routing.md"
+    if routing.is_file():
+        routing_text = routing.read_text(encoding="utf-8")
+        if "## Routing matrix" not in routing_text:
+            fail(
+                "Agent-Routing.md must keep ## Routing matrix heading",
+                errors,
+            )
+        if "## Conventions" not in routing_text:
+            fail(
+                "Agent-Routing.md must keep ## Conventions heading",
+                errors,
+            )
+        if "## What not to route here" not in routing_text:
+            fail(
+                "Agent-Routing.md must keep ## What not to route here heading",
+                errors,
+            )
+        if "not installable frameworks" not in routing_text:
+            fail(
+                "Agent-Routing.md must keep not installable frameworks wording",
+                errors,
+            )
+
+    security = WIKI / "Security-Boundaries.md"
+    if security.is_file():
+        security_text = security.read_text(encoding="utf-8")
+        if "## Trust hierarchy (summary)" not in security_text:
+            fail(
+                "Security-Boundaries.md must keep ## Trust hierarchy (summary) heading",
+                errors,
+            )
+        if "## Credentials (public rules)" not in security_text:
+            fail(
+                "Security-Boundaries.md must keep ## Credentials (public rules) heading",
+                errors,
+            )
+        if "## Network routing (high level)" not in security_text:
+            fail(
+                "Security-Boundaries.md must keep ## Network routing (high level) heading",
+                errors,
+            )
+        if "## Reporting" not in security_text:
+            fail(
+                "Security-Boundaries.md must keep ## Reporting heading",
+                errors,
+            )
+        if "Do not publish hostnames, vault paths" not in security_text:
+            fail(
+                "Security-Boundaries.md must keep Do not publish hostnames, vault paths wording",
+                errors,
+            )
+
 
     for name in PUBLISHABLE_PAGES:
         path = WIKI / name

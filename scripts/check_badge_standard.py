@@ -322,7 +322,38 @@ NOT md/link residual layouts #239):
   checkout->Check links->lychee@v2 triple adjacency /
   checkout->Run markdownlint->DavidAnson@v24 triple adjacency
 
+Fail-closed wiki/mdlink leftover residual after #326 tip (sibling-page residual
+beyond #320 saturated after_320 pins + concurrent PUBLISH/Home/Repo-Stewardship
+residual; NOT wiki/mdlink leftover residual #320 /
+NOT stewardship-schema residual CI leftover residual #320 /
+  NOT path-filter/path-order leftover #314 /
+  NOT stewardship-schema residual CI leftover #309 /
+  NOT stewardship-schema residual CI #299 /
+  NOT stewardship-schema residual CI #297 /
+NOT wiki/mdlink leftover residual #293 /
+NOT stewardship-schema residual #282 / NOT lychee/blob-503 leftover #278 /
+NOT Pass-2 residual + templates #272 / NOT path-edges leftover #262 /
+NOT wiki/mdlink leftover #252 / NOT stewardship-schema leftover #258 /
+NOT path-filter/path-order leftover #244 / NOT wiki outline/PUBLISH leftover #243 /
+NOT md/link residual layouts #239):
+- wiki residual: Overview ## What this repository is /
+  ## What this repository is not / public source of truth /
+  parent_governance agents-governance YAML /
+  ## Public operating model (short) / ## Documents map /
+  Not an application runtime or agent framework /
+  Autonomy-Levels ## Levels / operates at **L1 Bounded** /
+  ## Escalation (public) / ## Kill switch / the policy doc wins /
+  Level | Name | Human involvement table /
+  Agent-Routing ## Routing matrix / ## Conventions /
+  ## What not to route here / not installable frameworks /
+  Security ## Trust hierarchy (summary) / ## Credentials (public rules) /
+  ## Network routing (high level) / ## Reporting /
+  Do not publish hostnames, vault paths
+- md/link residual harden: max-retries 3 then --github-token adjacency /
+  OWASP bang then config: ".markdownlint.json" adjacency
+
 """
+
 
 from __future__ import annotations
 
@@ -2756,6 +2787,30 @@ def check_workflow_hardening(errors: list[str]) -> None:
             errors,
         )
 
+    # Wiki/mdlink leftover residual after #326 tip: md/link residual harden beyond #320
+    # (sibling-page residual slice; NOT wiki/mdlink leftover residual #320).
+    link_retries_token_adj = (
+        "            --max-retries 3\n"
+        "            --github-token ${{ secrets.GITHUB_TOKEN }}"
+    )
+    if link_retries_token_adj not in link:
+        fail(
+            "link-check.yml must keep max-retries 3 then --github-token adjacency "
+            "(wiki/mdlink leftover residual after #326)",
+            errors,
+        )
+    lint_owasp_config_adj = (
+        "            !OWASP-AGENTIC.md\n"
+        '          config: ".markdownlint.json"'
+    )
+    if lint_owasp_config_adj not in lint:
+        fail(
+            "markdown-lint.yml must keep OWASP bang then config: "
+            '".markdownlint.json" adjacency '
+            "(wiki/mdlink leftover residual after #326)",
+            errors,
+        )
+
 
 def check_badge_standard_doc(errors: list[str]) -> None:
     """Ensure docs/badge-standard.md still documents the same required order."""
@@ -3897,6 +3952,32 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
             "check_badge_standard.py must keep " + lint_triple_pin + " leftover pin",
             errors,
         )
+    leftover_326_doc = "wiki/mdlink leftover residual after " + "#326"
+    if leftover_326_doc not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + leftover_326_doc + " pin",
+            errors,
+        )
+    not_wiki_mdlink_320 = "NOT wiki/mdlink leftover residual " + "#320"
+    if not_wiki_mdlink_320 not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + not_wiki_mdlink_320
+            + " distinctness pin",
+            errors,
+        )
+    retries_token_pin = "max-retries 3 then --github-token " + "adjacency"
+    if retries_token_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + retries_token_pin + " leftover pin",
+            errors,
+        )
+    owasp_config_pin = 'OWASP bang then config: ".markdownlint.json" ' + "adjacency"
+    if owasp_config_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + owasp_config_pin + " leftover pin",
+            errors,
+        )
+
 
 
 def check_docs_lint_gate_contract(errors: list[str]) -> None:
@@ -9954,6 +10035,151 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
             "check_wiki_outline.py must pin Repo-Stewardship ## Docs quality CI",
             errors,
         )
+    leftover_326_wiki = "Wiki/mdlink leftover residual after " + "#326"
+    if leftover_326_wiki not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + leftover_326_wiki + " pin",
+            errors,
+        )
+    not_wiki_mdlink_320_w = "NOT wiki/mdlink leftover residual " + "#320"
+    if not_wiki_mdlink_320_w not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_wiki_mdlink_320_w + " pin",
+            errors,
+        )
+    overview_what_pin = "## What this repository " + "is"
+    if overview_what_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Overview ## What this repository is",
+            errors,
+        )
+    overview_not_pin = "## What this repository is " + "not"
+    if overview_not_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Overview ## What this repository is not",
+            errors,
+        )
+    overview_source_pin = "public source of " + "truth"
+    if overview_source_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Overview public source of truth",
+            errors,
+        )
+    overview_parent_pin = 'parent_governance: "github.com/fuzzywigg/agents-governance"'
+    if overview_parent_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Overview parent_governance YAML example",
+            errors,
+        )
+    overview_ops_pin = "## Public operating model " + "(short)"
+    if overview_ops_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Overview ## Public operating model (short)",
+            errors,
+        )
+    overview_docs_pin = "## Documents " + "map"
+    if overview_docs_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Overview ## Documents map",
+            errors,
+        )
+    overview_runtime_pin = "Not an application runtime or agent " + "framework"
+    if overview_runtime_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Overview Not an application runtime wording",
+            errors,
+        )
+    autonomy_levels_pin = "Autonomy-Levels ## " + "Levels"
+    if autonomy_levels_pin not in wiki_text and "## Levels" not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Autonomy-Levels ## Levels",
+            errors,
+        )
+    autonomy_l1_pin = "operates at **L1 " + "Bounded**"
+    if autonomy_l1_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Autonomy-Levels operates at L1 Bounded",
+            errors,
+        )
+    autonomy_esc_pin = "## Escalation " + "(public)"
+    if autonomy_esc_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Autonomy-Levels ## Escalation (public)",
+            errors,
+        )
+    autonomy_kill_pin = "Autonomy-Levels ## Kill " + "switch"
+    if autonomy_kill_pin not in wiki_text and "## Kill switch" not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Autonomy-Levels ## Kill switch",
+            errors,
+        )
+    autonomy_policy_pin = "the policy doc " + "wins"
+    if autonomy_policy_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Autonomy-Levels the policy doc wins",
+            errors,
+        )
+    autonomy_table_pin = "| Level | Name | Human involvement | Typical use |"
+    if autonomy_table_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Autonomy-Levels Level/Name table header",
+            errors,
+        )
+    routing_matrix_pin = "## Routing " + "matrix"
+    if routing_matrix_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Agent-Routing ## Routing matrix",
+            errors,
+        )
+    routing_conv_pin = "Agent-Routing ## " + "Conventions"
+    if routing_conv_pin not in wiki_text and "## Conventions" not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Agent-Routing ## Conventions",
+            errors,
+        )
+    routing_not_pin = "## What not to route " + "here"
+    if routing_not_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Agent-Routing ## What not to route here",
+            errors,
+        )
+    routing_fw_pin = "not installable " + "frameworks"
+    if routing_fw_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Agent-Routing not installable frameworks",
+            errors,
+        )
+    security_trust_pin = "## Trust hierarchy " + "(summary)"
+    if security_trust_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Security ## Trust hierarchy (summary)",
+            errors,
+        )
+    security_creds_pin = "## Credentials (public " + "rules)"
+    if security_creds_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Security ## Credentials (public rules)",
+            errors,
+        )
+    security_net_pin = "## Network routing (high " + "level)"
+    if security_net_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Security ## Network routing (high level)",
+            errors,
+        )
+    security_rep_pin = "Security-Boundaries ## " + "Reporting"
+    if security_rep_pin not in wiki_text and "## Reporting" not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Security ## Reporting",
+            errors,
+        )
+    security_host_pin = "Do not publish hostnames, vault " + "paths"
+    if security_host_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Security Do not publish hostnames wording",
+            errors,
+        )
+
 
 
 def check_relative_link_gate_contract(errors: list[str]) -> None:

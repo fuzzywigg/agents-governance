@@ -36,6 +36,38 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   Tip-relaunch residual CI leftover residual on post-#314 tip (do **not** revive
   #316/#295/#290/#268/#259/#257/#253/#248/#241).
 
+- TOKENMAXX wiki/mdlink leftover residual deepen after #326 tip (sibling-page):
+  expand self-tests to 7254 cases (was 7054) fail-closing unsaturated wiki outline /
+  sibling-page residual plus markdown-lint / link-check residual harden on existing
+  modules only — Overview What this repository is / Overview What this repository
+  is not / public source of truth / parent_governance agents-governance YAML /
+  Overview Public operating model (short) / Overview Documents map /
+  Not an application runtime or agent framework /
+  Autonomy-Levels Levels / operates at **L1 Bounded** /
+  Autonomy Escalation (public) / Autonomy Kill switch / the policy doc wins /
+  `| Level | Name | Human involvement | Typical use |` /
+  Agent-Routing Routing matrix / Agent-Routing Conventions /
+  Agent-Routing What not to route here / not installable frameworks /
+  Security Trust hierarchy (summary) / Security Credentials (public rules) /
+  Security Network routing (high level) / Security Reporting /
+  Do not publish hostnames, vault paths /
+  max-retries 3 then --github-token adjacency /
+  OWASP bang then config markdownlint.json adjacency — wiki/mdlink leftover
+  residual sibling-page slice only (DISTINCT from concurrent PUBLISH/Home/
+  Repo-Stewardship residual; not wiki/mdlink leftover residual #320 /
+  not stewardship-schema residual CI leftover residual #320 /
+  not path-filter/path-order leftover #314 / not stewardship-schema residual CI
+  leftover #309 / not stewardship-schema residual CI #299 /
+  not stewardship-schema residual CI #297 / not wiki/mdlink leftover residual
+  #293 / not stewardship-schema residual #282 / not lychee/blob-503 leftover
+  #278 / not Pass-2 residual + templates #272 / not path-edges leftover #262 /
+  not wiki/mdlink leftover #252 / not stewardship-schema leftover #258 /
+  not path-filter/path-order leftover #244 / not wiki outline/PUBLISH leftover
+  #243 / not md/link residual layouts #239); no invent-product; no fourth
+  badge; no extra wiki files; no scratchpad notes. Distinct from merged
+  #326/#320/#314/#309/#299/#297/#293/#282/#278/#272/#262/#258/#252/#244/#243/#239/#233/#227/#225/#220/#216/#208.
+  Do **not** revive #328/#325/#322/#321/#318/#317/#315/#311/#308/#307/#302/#301/#296/#289/#281/#277.
+
 - TOKENMAXX wiki/mdlink leftover residual deepen after #320 tip: expand
   self-tests to 7054 cases (was 6854) fail-closing unsaturated wiki outline /
   PUBLISH.md residual plus Home/Repo-Stewardship residual plus markdown-lint /

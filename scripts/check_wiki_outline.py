@@ -99,6 +99,40 @@ Fail-closed pins (live path after #59; deepen after #43; third-pass after #90):
   ## Source of truth (repository) / Canonical public governance front door /
   This wiki is the **public narrative layer** /
   Repo-Stewardship ## Front-door duties / ## Docs quality CI
+- Wiki/mdlink leftover residual after #326 tip (beyond #320 saturated after_320 pins;
+  NOT wiki/mdlink leftover residual after #320 /
+  NOT stewardship-schema residual CI leftover residual #320 /
+  NOT path-filter/path-order leftover #314 /
+  NOT stewardship-schema residual CI leftover #309 /
+  NOT stewardship-schema residual CI #299 /
+  NOT stewardship-schema residual CI #297 /
+  NOT wiki/mdlink leftover residual #293 / NOT stewardship-schema residual #282 /
+  NOT lychee/blob-503 leftover #278 / NOT Pass-2 residual + templates #272 /
+  NOT path-edges leftover #262 / NOT wiki/mdlink leftover #252 /
+  NOT stewardship-schema leftover #258 / NOT path-filter/path-order leftover #244 /
+  NOT wiki outline/PUBLISH leftover #243 / NOT md/link residual layouts #239;
+  existing pages only — do not invent extra wiki files):
+  and drop the in-repo `PUBLISH.md` bullet from Home /
+  initialized once (Settings → Features → Wikis, then create the first page or /
+  then create the first page or /
+  in this directory as the public landing page /
+  (`https://github.com/fuzzywigg/agents-governance.wiki.git`) that must be /
+  Home H1 agents-governance public wiki /
+  Policy truth remains in the repository /
+  Stewardship tooling (Praetor/Aesop-style process) stays quiet /
+  What this repo is and is not /
+  L0–L3 human involvement model /
+  Which surface picks up which work /
+  Trust, credentials, kill switch (public summary) /
+  ## Out of scope /
+  Private `project-template` internals or flavor-branch how-tos /
+  Secrets, credentials, wallet keys, or MEMORY dumps /
+  Invented product frameworks or agent runtimes /
+  Maintained by smtp.eth /
+  How public governance repos in this ecosystem are kept trustworthy without /
+  Prefer reversible docs/stewardship PRs; no invent-product work /
+  Never delete scratchpad history; append and mark `[x]` when done /
+  Public front-door trust rests on three workflows
 """
 
 from __future__ import annotations
@@ -548,6 +582,45 @@ def main() -> int:
                 errors,
             )
 
+        # Wiki/mdlink leftover residual after #326 tip (beyond #320 saturated pins;
+        # NOT wiki/mdlink leftover residual after #320 / NOT schema residual CI leftover residual #320).
+        if (
+            "and drop the in-repo `PUBLISH.md` bullet from Home"
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md must keep and drop the in-repo PUBLISH.md bullet from Home",
+                errors,
+            )
+        if (
+            "initialized once (Settings → Features → Wikis, then create the first page or"
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md must keep initialized once (Settings → Features → Wikis, "
+                "then create the first page or wording",
+                errors,
+            )
+        if "then create the first page or" not in publish_text:
+            fail(
+                "PUBLISH.md must keep then create the first page or wording",
+                errors,
+            )
+        if "in this directory as the public landing page" not in publish_text:
+            fail(
+                "PUBLISH.md fallback must keep in this directory as the public "
+                "landing page wording",
+                errors,
+            )
+        if (
+            "(`https://github.com/fuzzywigg/agents-governance.wiki.git`) that must be"
+            not in publish_text
+        ):
+            fail(
+                "PUBLISH.md must keep (.wiki.git URL) that must be adjacency",
+                errors,
+            )
+
     home = WIKI / "Home.md"
     if home.is_file():
         home_text = home.read_text(encoding="utf-8")
@@ -620,6 +693,75 @@ def main() -> int:
                 "Home.md must keep This wiki is the **public narrative layer** wording",
                 errors,
             )
+        # Wiki/mdlink leftover residual after #326 tip (existing Home.md only;
+        # NOT wiki/mdlink leftover residual after #320 / NOT schema residual CI leftover residual #320).
+        if "# Home — agents-governance public wiki" not in home_text:
+            fail(
+                "Home.md must keep # Home — agents-governance public wiki H1",
+                errors,
+            )
+        if "Policy truth remains in the repository" not in home_text:
+            fail(
+                "Home.md must keep Policy truth remains in the repository wording",
+                errors,
+            )
+        if (
+            "Stewardship tooling (Praetor/Aesop-style process) stays quiet"
+            not in home_text
+        ):
+            fail(
+                "Home.md must keep Stewardship tooling (Praetor/Aesop-style process) "
+                "stays quiet wording",
+                errors,
+            )
+        if "What this repo is and is not" not in home_text:
+            fail(
+                "Home.md must keep What this repo is and is not TOC cell",
+                errors,
+            )
+        if "L0–L3 human involvement model" not in home_text:
+            fail(
+                "Home.md must keep L0–L3 human involvement model TOC cell",
+                errors,
+            )
+        if "Which surface picks up which work" not in home_text:
+            fail(
+                "Home.md must keep Which surface picks up which work TOC cell",
+                errors,
+            )
+        if "Trust, credentials, kill switch (public summary)" not in home_text:
+            fail(
+                "Home.md must keep Trust, credentials, kill switch (public summary) "
+                "TOC cell",
+                errors,
+            )
+        if "## Out of scope" not in home_text:
+            fail("Home.md must keep ## Out of scope heading", errors)
+        if (
+            "Private `project-template` internals or flavor-branch how-tos"
+            not in home_text
+        ):
+            fail(
+                "Home.md must keep Private project-template internals "
+                "or flavor-branch how-tos wording",
+                errors,
+            )
+        if (
+            "Secrets, credentials, wallet keys, or MEMORY dumps"
+            not in home_text
+        ):
+            fail(
+                "Home.md must keep Secrets, credentials, wallet keys, "
+                "or MEMORY dumps wording",
+                errors,
+            )
+        if "Invented product frameworks or agent runtimes" not in home_text:
+            fail(
+                "Home.md must keep Invented product frameworks or agent runtimes wording",
+                errors,
+            )
+        if "Maintained by smtp.eth" not in home_text:
+            fail("Home.md must keep Maintained by smtp.eth wording", errors)
 
     stewardship = WIKI / "Repo-Stewardship.md"
     if stewardship.is_file():
@@ -668,6 +810,40 @@ def main() -> int:
         if "## Docs quality CI" not in ste_text:
             fail(
                 "Repo-Stewardship.md must keep ## Docs quality CI heading",
+                errors,
+            )
+        # Wiki/mdlink leftover residual after #326 tip (existing Repo-Stewardship only;
+        # NOT wiki/mdlink leftover residual after #320 / NOT schema residual CI leftover residual #320).
+        if (
+            "How public governance repos in this ecosystem are kept trustworthy without"
+            not in ste_text
+        ):
+            fail(
+                "Repo-Stewardship.md must keep How public governance repos in this "
+                "ecosystem are kept trustworthy without wording",
+                errors,
+            )
+        if (
+            "Prefer reversible docs/stewardship PRs; no invent-product work"
+            not in ste_text
+        ):
+            fail(
+                "Repo-Stewardship.md must keep Prefer reversible docs/stewardship PRs; "
+                "no invent-product work wording",
+                errors,
+            )
+        if (
+            "Never delete scratchpad history; append and mark `[x]` when done"
+            not in ste_text
+        ):
+            fail(
+                "Repo-Stewardship.md must keep Never delete scratchpad history wording",
+                errors,
+            )
+        if "Public front-door trust rests on three workflows" not in ste_text:
+            fail(
+                "Repo-Stewardship.md must keep Public front-door trust rests on "
+                "three workflows wording",
                 errors,
             )
 

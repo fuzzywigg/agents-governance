@@ -378,6 +378,42 @@ NOT md/link residual layouts #239):
   checkout->Check links->lychee@v2 triple adjacency /
   checkout->Run markdownlint->DavidAnson@v24 triple adjacency
 
+Fail-closed wiki/mdlink leftover residual after #348 tip (beyond #326 saturated
+after_326 wiki pins; NOT Pass-2 residual / templates leftover #348 /
+NOT Pass-2 residual / templates leftover #337 /
+NOT wiki/mdlink leftover residual after #326 /
+NOT wiki/mdlink leftover residual after #320 /
+NOT stewardship-schema residual CI leftover residual #320 /
+  NOT path-filter/path-order leftover #314 /
+  NOT stewardship-schema residual CI leftover #309 /
+  NOT stewardship-schema residual CI #299 /
+  NOT stewardship-schema residual CI #297 /
+NOT wiki/mdlink leftover residual #293 /
+NOT stewardship-schema residual #282 / NOT lychee/blob-503 leftover #278 /
+NOT Pass-2 residual + templates #272 / NOT path-edges leftover #262 /
+NOT wiki/mdlink leftover #252 / NOT stewardship-schema leftover #258 /
+NOT path-filter/path-order leftover #244 / NOT wiki outline/PUBLISH leftover #243 /
+NOT md/link residual layouts #239):
+- wiki residual: and drop the in-repo PUBLISH.md bullet from Home /
+  initialized once (Settings → Features → Wikis, then create the first page or /
+  in this directory as the public landing page /
+  (.wiki.git URL) that must be /
+  Home H1 agents-governance public wiki /
+  Policy truth remains in the repository /
+  Stewardship tooling (Praetor/Aesop-style process) stays quiet /
+  What this repo is and is not / L0–L3 human involvement model /
+  Which surface picks up which work /
+  Trust, credentials, kill switch (public summary) /
+  ## Out of scope / project-template flavor-branch /
+  MEMORY dumps / product frameworks residual /
+  Maintained by smtp.eth /
+  trustworthy without / Prefer reversible docs/stewardship PRs /
+  Never delete scratchpad history /
+  Public front-door trust rests on three workflows
+- md/link residual harden: --verbose then --no-progress adjacency /
+  --github-token then --exclude-path adjacency /
+  !OWASP-AGENTIC.md then config: .markdownlint.json adjacency
+
 """
 
 from __future__ import annotations
@@ -2883,6 +2919,41 @@ def check_workflow_hardening(errors: list[str]) -> None:
             errors,
         )
 
+    # Wiki/mdlink leftover residual after #348 tip: md/link residual harden beyond #326
+    # (NOT Pass-2 residual / templates leftover #337 /
+    # NOT wiki/mdlink leftover residual after #326 /
+    # NOT wiki/mdlink leftover residual after #320 / NOT schema residual CI leftover residual #320).
+    link_verbose_noprogress = (
+        "            --verbose\n"
+        "            --no-progress"
+    )
+    if link_verbose_noprogress not in link:
+        fail(
+            "link-check.yml must keep --verbose then --no-progress adjacency "
+            "(wiki/mdlink leftover residual after #348)",
+            errors,
+        )
+    link_token_exclude = (
+        "            --github-token ${{ secrets.GITHUB_TOKEN }}\n"
+        "            --exclude-path .github/agents"
+    )
+    if link_token_exclude not in link:
+        fail(
+            "link-check.yml must keep --github-token then --exclude-path adjacency "
+            "(wiki/mdlink leftover residual after #348)",
+            errors,
+        )
+    lint_owasp_config = (
+        "            !OWASP-AGENTIC.md\n"
+        '          config: ".markdownlint.json"'
+    )
+    if lint_owasp_config not in lint:
+        fail(
+            "markdown-lint.yml must keep !OWASP-AGENTIC.md then config adjacency "
+            "(wiki/mdlink leftover residual after #348)",
+            errors,
+        )
+
 
 def check_badge_standard_doc(errors: list[str]) -> None:
     """Ensure docs/badge-standard.md still documents the same required order."""
@@ -4116,6 +4187,59 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
     if lint_triple_pin not in text:
         fail(
             "check_badge_standard.py must keep " + lint_triple_pin + " leftover pin",
+            errors,
+        )
+
+    leftover_348_doc = "wiki/mdlink leftover residual after " + "#348"
+    if leftover_348_doc not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + leftover_348_doc + " pin",
+            errors,
+        )
+    not_wiki_mdlink_320 = "NOT wiki/mdlink leftover residual after " + "#320"
+    if not_wiki_mdlink_320 not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + not_wiki_mdlink_320
+            + " distinctness pin",
+            errors,
+        )
+    not_wiki_mdlink_326 = "NOT wiki/mdlink leftover residual after " + "#326"
+    if not_wiki_mdlink_326 not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + not_wiki_mdlink_326
+            + " distinctness pin",
+            errors,
+        )
+    not_pass2_337 = "NOT Pass-2 residual / templates leftover " + "#337"
+    if not_pass2_337 not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + not_pass2_337
+            + " distinctness pin",
+            errors,
+        )
+    not_pass2_348 = "NOT Pass-2 residual / templates leftover " + "#348"
+    if not_pass2_348 not in text:
+        fail(
+            "check_badge_standard.py docstring must keep " + not_pass2_348
+            + " distinctness pin",
+            errors,
+        )
+    verbose_noprogress_pin = "--verbose then --no-progress " + "adjacency"
+    if verbose_noprogress_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + verbose_noprogress_pin + " leftover pin",
+            errors,
+        )
+    token_exclude_pin = "--github-token then --exclude-path " + "adjacency"
+    if token_exclude_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + token_exclude_pin + " leftover pin",
+            errors,
+        )
+    owasp_config_pin = "!OWASP-AGENTIC.md then config " + "adjacency"
+    if owasp_config_pin not in text:
+        fail(
+            "check_badge_standard.py must keep " + owasp_config_pin + " leftover pin",
             errors,
         )
 
@@ -10176,6 +10300,167 @@ def check_wiki_outline_gate_contract(errors: list[str]) -> None:
             errors,
         )
 
+    leftover_348_wiki = "Wiki/mdlink leftover residual after " + "#348"
+    if leftover_348_wiki not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + leftover_348_wiki + " pin",
+            errors,
+        )
+    not_wiki_mdlink_320_w = "NOT wiki/mdlink leftover residual after " + "#320"
+    if not_wiki_mdlink_320_w not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_wiki_mdlink_320_w + " pin",
+            errors,
+        )
+    not_wiki_mdlink_326_w = "NOT wiki/mdlink leftover residual after " + "#326"
+    if not_wiki_mdlink_326_w not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_wiki_mdlink_326_w + " pin",
+            errors,
+        )
+    not_pass2_337_w = "NOT Pass-2 residual / templates leftover " + "#337"
+    if not_pass2_337_w not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_pass2_337_w + " pin",
+            errors,
+        )
+    not_pass2_348_w = "NOT Pass-2 residual / templates leftover " + "#348"
+    if not_pass2_348_w not in wiki_text:
+        fail(
+            "check_wiki_outline.py docstring must keep " + not_pass2_348_w + " pin",
+            errors,
+        )
+    drop_and_bullet_pin = "and drop the in-repo `PUBLISH.md` bullet from " + "Home"
+    if drop_and_bullet_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin and drop the in-repo PUBLISH.md bullet from Home",
+            errors,
+        )
+    initialized_once_pin = (
+        "initialized once (Settings → Features → Wikis, then create the first page or"
+    )
+    if initialized_once_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin initialized once (Settings then first page or",
+            errors,
+        )
+    first_page_or_pin = "then create the first page " + "or"
+    if first_page_or_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin then create the first page or",
+            errors,
+        )
+    in_this_dir_pin = "in this directory as the public landing " + "page"
+    if in_this_dir_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin in this directory as the public landing page",
+            errors,
+        )
+    wiki_git_that_must_pin = (
+        "(`https://github.com/fuzzywigg/agents-governance.wiki.git`) that must be"
+    )
+    if wiki_git_that_must_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin (.wiki.git URL) that must be adjacency",
+            errors,
+        )
+    home_h1_pin = "# Home — agents-governance public " + "wiki"
+    if home_h1_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Home.md agents-governance public wiki H1",
+            errors,
+        )
+    policy_truth_pin = "Policy truth remains in the " + "repository"
+    if policy_truth_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Policy truth remains in the repository",
+            errors,
+        )
+    praetor_pin = "Praetor/Aesop-style process) stays " + "quiet"
+    if praetor_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Praetor/Aesop-style process stays quiet",
+            errors,
+        )
+    overview_cell_pin = "What this repo is and is " + "not"
+    if overview_cell_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin What this repo is and is not TOC cell",
+            errors,
+        )
+    autonomy_cell_pin = "L0–L3 human involvement " + "model"
+    if autonomy_cell_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin L0–L3 human involvement model TOC cell",
+            errors,
+        )
+    routing_cell_pin = "Which surface picks up which " + "work"
+    if routing_cell_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Which surface picks up which work TOC cell",
+            errors,
+        )
+    security_cell_pin = "kill switch (public " + "summary)"
+    if security_cell_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Trust, credentials, kill switch TOC cell",
+            errors,
+        )
+    out_of_scope_pin = "## Out of " + "scope"
+    if out_of_scope_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Home.md ## Out of scope heading",
+            errors,
+        )
+    project_template_pin = "project-template` internals or flavor-branch " + "how-tos"
+    if project_template_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Private project-template flavor-branch how-tos",
+            errors,
+        )
+    memory_dumps_pin = "wallet keys, or MEMORY " + "dumps"
+    if memory_dumps_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Secrets, credentials, wallet keys, or MEMORY dumps",
+            errors,
+        )
+    frameworks_pin = "Inven" + "ted product frameworks or agent " + "runtimes"
+    if frameworks_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin product frameworks or agent runtimes residual",
+            errors,
+        )
+    maintained_smtp_pin = "Maintained by " + "smtp.eth"
+    if maintained_smtp_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Maintained by smtp.eth",
+            errors,
+        )
+    trustworthy_pin = "kept trustworthy " + "without"
+    if trustworthy_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin kept trustworthy without wording",
+            errors,
+        )
+    reversible_pin = "Prefer reversible docs/stewardship " + "PRs"
+    if reversible_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Prefer reversible docs/stewardship PRs",
+            errors,
+        )
+    scratchpad_pin = "Never delete scratchpad " + "history"
+    if scratchpad_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Never delete scratchpad history",
+            errors,
+        )
+    three_workflows_pin = "trust rests on three " + "workflows"
+    if three_workflows_pin not in wiki_text:
+        fail(
+            "check_wiki_outline.py must pin Public front-door trust rests on three workflows",
+            errors,
+        )
+
 
 def check_relative_link_gate_contract(errors: list[str]) -> None:
     """Fail-close live relative-link gate wiring (after #90; deepen after #55/#41)."""
@@ -11008,6 +11293,12 @@ def check_relative_link_gate_contract(errors: list[str]) -> None:
     if leftover_320_rel not in text:
         fail(
             "check_relative_links.py docstring must keep " + leftover_320_rel + " pin",
+            errors,
+        )
+    leftover_348_rel = "Wiki/mdlink leftover residual after " + "#348"
+    if leftover_348_rel not in text:
+        fail(
+            "check_relative_links.py docstring must keep " + leftover_348_rel + " pin",
             errors,
         )
     empty_frag_exact = "empty fragment in relative " + "link"

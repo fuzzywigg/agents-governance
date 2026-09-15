@@ -131,6 +131,27 @@ Fail-closed pins (live path after #53; second-pass after #72/#75):
   residual CI leftover residual invalid status stubs ABANDONED|EXPIRED|REVOKED|HIDDEN|OFFLINE|ZOMBIE /
   residual CI leftover residual invalid surface stubs huggingface|replicate|cohere|bedrock|sagemaker /
   residual CI leftover residual docstring
+- Residual CI leftover residual leftover deepen after #320 (schema residual CI leftover residual leftover; NOT schema residual CI leftover residual #320 /
+  NOT schema residual CI leftover #309 / NOT schema residual CI #299 /
+  NOT wiki/mdlink leftover residual #293 / NOT schema leftover residual #282 /
+  NOT lychee/blob-503 leftover #278 / NOT Pass-2 residual leftover #272 /
+  NOT path-filter/path-order leftover #314/#262 / NOT schema leftover #258 /
+  NOT wiki/mdlink leftover #252 / NOT path-edges residual #244 /
+  NOT schema residual (pass-5) #233):
+  residual CI leftover residual leftover helper needles Stewardship schema check FAILED /
+  file=sys.stderr / print(f"  - {err}" / must be a scalar /
+  isinstance(value, (dict, list)) /
+  rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"} /
+  "closes" in data / value.lower() in {"null", "~"} /
+  elif re.fullmatch(r"-?DIGIT+", value) / Path(__file__).resolve().parent /
+  sys.path.insert / pragma no cover /
+  from stewardship_common import ROOT, fail, scan_secrets /
+  engine = "PyYAML" if yaml is not None else "stdlib-subset" /
+  value.startswith('"') and value.endswith('"') /
+  elif value.lower() in {"true", "false"} / noqa: BLE001 /
+  residual CI leftover residual leftover invalid status stubs LATCHED|PINNED|CLAMPED|GATED|VAULTED|CAGED /
+  residual CI leftover residual leftover invalid surface stubs openrouter|nebius|cerebras|sambanova|modal /
+  residual CI leftover residual leftover docstring
 """
 
 from __future__ import annotations

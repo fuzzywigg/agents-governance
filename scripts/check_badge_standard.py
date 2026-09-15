@@ -200,6 +200,8 @@ lands closed #229 leftover on post-#227 tip — do not revive #229):
   (NOT schema residual CI #299 / NOT wiki/mdlink leftover residual #293 / NOT schema leftover residual #282 / NOT lychee/blob-503 leftover #278 / NOT Pass-2 residual leftover #272 / NOT path-filter/path-order leftover #262 / NOT schema leftover #258 / NOT wiki/mdlink leftover #252 / NOT path-edges residual #244 / NOT schema residual (pass-5) #233)
 - schema residual CI leftover residual deepen after #309: residual CI leftover residual helper needles + residual CI leftover residual status/surface stubs (schema residual CI leftover residual slice)
   (NOT schema residual CI leftover #309 / NOT schema residual CI #299 / NOT wiki/mdlink leftover residual #293 / NOT schema leftover residual #282 / NOT lychee/blob-503 leftover #278 / NOT Pass-2 residual leftover #272 / NOT path-filter/path-order leftover #262 / NOT schema leftover #258 / NOT wiki/mdlink leftover #252 / NOT path-edges residual #244 / NOT schema residual (pass-5) #233)
+- schema residual CI leftover residual leftover deepen after #320: residual CI leftover residual leftover helper needles + residual CI leftover residual leftover status/surface stubs (schema residual CI leftover residual leftover slice)
+  (NOT schema residual CI leftover residual #320 / NOT schema residual CI leftover #309 / NOT schema residual CI #299 / NOT wiki/mdlink leftover residual #293 / NOT schema leftover residual #282 / NOT lychee/blob-503 leftover #278 / NOT Pass-2 residual leftover #272 / NOT path-filter/path-order leftover #314/#262 / NOT schema leftover #258 / NOT wiki/mdlink leftover #252 / NOT path-edges residual #244 / NOT schema residual (pass-5) #233)
 - Wiki outline/PUBLISH leftover after #233: existing docs/wiki pages only —
   PUBLISH.md pages-table order / Pages to publish / wiki.git clone /
   cp docs/wiki/{page} (no operator PUBLISH.md) / git add six pages /
@@ -6011,7 +6013,7 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
         )
 
 def check_stewardship_common_contract(errors: list[str]) -> None:
-    """Fail-close live stewardship_common wiring (after #111; deepen after #65/#46; leftover after #252; leftover residual after #262; residual CI deepen after #293; residual CI leftover deepen after #299; residual CI leftover residual deepen after #309)."""
+    """Fail-close live stewardship_common wiring (after #111; deepen after #65/#46; leftover after #252; leftover residual after #262; residual CI deepen after #293; residual CI leftover deepen after #299; residual CI leftover residual deepen after #309; residual CI leftover residual leftover deepen after #320)."""
     if not COMMON_GATE.is_file():
         fail("Missing scripts/stewardship_common.py (shared gate helpers)", errors)
         return
@@ -6719,7 +6721,7 @@ def check_stewardship_common_contract(errors: list[str]) -> None:
 
 
 def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
-    """Fail-close live stewardship-schema gate wiring (after #72/#75; third-pass after #132; deepen after #189; policy-schema pass-4 after #208; schema residual after #225; leftover after #252; leftover residual after #262; residual CI deepen after #293; residual CI leftover deepen after #299; residual CI leftover residual deepen after #309)."""
+    """Fail-close live stewardship-schema gate wiring (after #72/#75; third-pass after #132; deepen after #189; policy-schema pass-4 after #208; schema residual after #225; leftover after #252; leftover residual after #262; residual CI deepen after #293; residual CI leftover deepen after #299; residual CI leftover residual deepen after #309; residual CI leftover residual leftover deepen after #320)."""
     if not SCHEMA_GATE.is_file():
         fail("Missing scripts/check_stewardship_schema.py (schema gate)", errors)
         return
@@ -8667,6 +8669,204 @@ def check_stewardship_schema_gate_contract(errors: list[str]) -> None:
         fail(
             "check_stewardship_schema_gate_contract docstring must pin "
             + contract_residual_ci_leftover_residual,
+            errors,
+        )
+
+
+    # Fail-closed after #320: schema residual CI leftover residual leftover helper / constant / needle pins
+    # (schema residual CI leftover residual leftover slice only; not schema residual CI leftover residual #320 /
+    # not schema residual CI leftover #309 / not schema residual CI #299 /
+    # not wiki/mdlink leftover residual #293 / not schema leftover residual #282 /
+    # not lychee/blob-503 leftover #278 / not Pass-2 residual leftover #272 /
+    # not path-filter/path-order leftover #314/#262 / not schema leftover #258 /
+    # not wiki/mdlink leftover #252 / not path-edges residual #244 /
+    # not schema residual (pass-5) #233 spam).
+    # Split literals so self-mutation of contiguous names cannot neutralize checks.
+    residual_ci_leftover_residual_leftover_320_doc = "Residual CI leftover residual leftover deepen after " + "#320 (schema residual CI leftover residual leftover"
+    if residual_ci_leftover_residual_leftover_320_doc not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + residual_ci_leftover_residual_leftover_320_doc,
+            errors,
+        )
+    not_schema_residual_ci_leftover_residual_320 = "NOT schema residual CI leftover residual " + "#320"
+    if not_schema_residual_ci_leftover_residual_320 not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + not_schema_residual_ci_leftover_residual_320,
+            errors,
+        )
+    not_schema_residual_ci_leftover_309_c = "NOT schema residual CI leftover " + "#309"
+    if not_schema_residual_ci_leftover_309_c not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + not_schema_residual_ci_leftover_309_c,
+            errors,
+        )
+    not_schema_residual_ci_299_c = "NOT schema residual CI " + "#299"
+    if not_schema_residual_ci_299_c not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + not_schema_residual_ci_299_c,
+            errors,
+        )
+    not_wiki_293_leftover_c = "NOT wiki/mdlink leftover residual " + "#293"
+    if not_wiki_293_leftover_c not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + not_wiki_293_leftover_c,
+            errors,
+        )
+    not_schema_leftover_residual_282_c = "NOT schema leftover residual " + "#282"
+    if not_schema_leftover_residual_282_c not in text:
+        fail(
+            "check_stewardship_schema.py docstring must pin " + not_schema_leftover_residual_282_c,
+            errors,
+        )
+    failed_banner = "Stewardship schema check FAILED"
+    if failed_banner not in text:
+        fail(
+            "check_stewardship_schema.py must keep Stewardship schema check FAILED",
+            errors,
+        )
+    file_stderr = "file=sys.stderr"
+    if file_stderr not in text:
+        fail(
+            "check_stewardship_schema.py must keep file=sys.stderr",
+            errors,
+        )
+    print_err = 'print(f"  - {err}"'
+    if print_err not in text and "print(f'  - {err}'" not in text:
+        fail(
+            'check_stewardship_schema.py must keep print(f"  - {err}"',
+            errors,
+        )
+    must_scalar = "must be a scalar"
+    if must_scalar not in text:
+        fail(
+            "check_stewardship_schema.py must keep must be a scalar",
+            errors,
+        )
+    isinstance_dict_list = "isinstance(value, (dict, list))"
+    if isinstance_dict_list not in text:
+        fail(
+            "check_stewardship_schema.py must keep isinstance(value, (dict, list))",
+            errors,
+        )
+    rel_closes_docs = 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}'
+    if rel_closes_docs not in text and "rel in {'docs/badge-standard.md', 'docs/wiki/PUBLISH.md'}" not in text:
+        fail(
+            'check_stewardship_schema.py must keep rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}',
+            errors,
+        )
+    closes_in_data = '"closes" in data'
+    if closes_in_data not in text and "'closes' in data" not in text:
+        fail(
+            'check_stewardship_schema.py must keep "closes" in data',
+            errors,
+        )
+    null_tilde = 'value.lower() in {"null", "~"}'
+    if null_tilde not in text and "value.lower() in {'null', '~'}" not in text:
+        fail(
+            'check_stewardship_schema.py must keep value.lower() in {"null", "~"}',
+            errors,
+        )
+    re_fullmatch_digit = 'elif re.fullmatch(r"-?DIGIT+", value)'
+    if re_fullmatch_digit not in text:
+        fail(
+            'check_stewardship_schema.py must keep elif re.fullmatch(r"-?DIGIT+", value)',
+            errors,
+        )
+    path_resolve_parent = "Path(__file__).resolve().parent"
+    if path_resolve_parent not in text:
+        fail(
+            "check_stewardship_schema.py must keep Path(__file__).resolve().parent",
+            errors,
+        )
+    sys_path_insert = "sys.path.insert"
+    if sys_path_insert not in text:
+        fail(
+            "check_stewardship_schema.py must keep sys.path.insert",
+            errors,
+        )
+    pragma_no_cover = "pragma no cover"
+    if pragma_no_cover not in text:
+        fail(
+            "check_stewardship_schema.py must keep pragma no cover",
+            errors,
+        )
+    stewardship_common_import = "from stewardship_common import ROOT, fail, scan_secrets"
+    if stewardship_common_import not in text:
+        fail(
+            "check_stewardship_schema.py must keep from stewardship_common import ROOT, fail, scan_secrets",
+            errors,
+        )
+    engine_pyyaml_stdlib = 'engine = "PyYAML" if yaml is not None else "stdlib-subset"'
+    if engine_pyyaml_stdlib not in text and "engine = 'PyYAML' if yaml is not None else 'stdlib-subset'" not in text:
+        fail(
+            'check_stewardship_schema.py must keep engine = "PyYAML" if yaml is not None else "stdlib-subset"',
+            errors,
+        )
+    value_startswith_quote = 'value.startswith(\'"\') and value.endswith(\'"\')'
+    if value_startswith_quote not in text:
+        fail(
+            "check_stewardship_schema.py must keep " + value_startswith_quote,
+            errors,
+        )
+    elif_true_false = 'elif value.lower() in {"true", "false"}'
+    if elif_true_false not in text and "elif value.lower() in {'true', 'false'}" not in text:
+        fail(
+            'check_stewardship_schema.py must keep elif value.lower() in {"true", "false"}',
+            errors,
+        )
+    noqa_ble001 = "noqa: BLE001"
+    if noqa_ble001 not in text:
+        fail(
+            "check_stewardship_schema.py must keep noqa: BLE001",
+            errors,
+        )
+    for stub in (
+        "LATCHED",
+        "PINNED",
+        "CLAMPED",
+        "GATED",
+        "VAULTED",
+        "CAGED",
+    ):
+        if stub not in text:
+            fail(
+                "check_stewardship_schema.py docstring must pin residual CI leftover residual leftover status "
+                f"enum stub {stub}",
+                errors,
+            )
+    for stub in (
+        "openrouter",
+        "nebius",
+        "cerebras",
+        "sambanova",
+        "modal",
+    ):
+        if stub not in text:
+            fail(
+                "check_stewardship_schema.py docstring must pin residual CI leftover residual leftover surface "
+                f"enum stub {stub}",
+                errors,
+            )
+    residual_ci_leftover_residual_leftover_host = "schema residual CI leftover residual leftover deepen after " + "#320"
+    self_text10 = BADGE_GATE.read_text(encoding="utf-8")
+    if residual_ci_leftover_residual_leftover_host not in self_text10:
+        fail(
+            "check_badge_standard.py must keep " + residual_ci_leftover_residual_leftover_host + " host pin",
+            errors,
+        )
+    residual_ci_leftover_residual_leftover_slice = "schema residual CI leftover residual leftover " + "slice"
+    if residual_ci_leftover_residual_leftover_slice not in self_text10:
+        fail(
+            "check_badge_standard.py schema residual CI leftover residual leftover must keep "
+            + residual_ci_leftover_residual_leftover_slice
+            + " pin",
+            errors,
+        )
+    contract_residual_ci_leftover_residual_leftover = "residual CI leftover residual leftover deepen after " + "#320"
+    if contract_residual_ci_leftover_residual_leftover not in self_text10:
+        fail(
+            "check_stewardship_schema_gate_contract docstring must pin "
+            + contract_residual_ci_leftover_residual_leftover,
             errors,
         )
 

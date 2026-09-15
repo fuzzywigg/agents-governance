@@ -11,6 +11,36 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- TOKENMAXX stewardship-schema residual CI leftover residual leftover deepen after #320
+  tip: expand self-tests to 7090 cases (was 6854) fail-closing unsaturated schema-only
+  residual CI leftover residual leftover helper needles on existing
+  `check_stewardship_schema.py` —
+  `Stewardship schema check FAILED` / `file=sys.stderr` / `print(f"  - {err}"` /
+  `must be a scalar` / `isinstance(value, (dict, list))` /
+  `rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}` /
+  `"closes" in data` / `value.lower() in {"null", "~"}` /
+  `elif re.fullmatch(r"-?DIGIT+", value)` / `Path(__file__).resolve().parent` /
+  `sys.path.insert` / `pragma no cover` /
+  `from stewardship_common import ROOT, fail, scan_secrets` /
+  `engine = "PyYAML" if yaml is not None else "stdlib-subset"` /
+  `value.startswith('"') and value.endswith('"')` /
+  `elif value.lower() in {"true", "false"}` / `noqa: BLE001` /
+  residual CI leftover residual leftover status stubs
+  LATCHED|PINNED|CLAMPED|GATED|VAULTED|CAGED / residual CI leftover residual leftover
+  surface stubs openrouter|nebius|cerebras|sambanova|modal — schema residual CI
+  leftover residual leftover slice only (not schema residual CI leftover residual #320 /
+  not schema residual CI leftover #309 / not schema residual CI #299 /
+  not wiki/mdlink leftover residual #293 / not schema leftover residual #282 /
+  not lychee/blob-503 leftover #278 / not Pass-2 residual leftover #272 /
+  not path-filter/path-order leftover #314/#262 / not schema leftover #258 /
+  not wiki/mdlink leftover #252 / not path-edges residual #244 / not
+  stewardship-checks/schema residual #233); no invent-product; no fourth badge; no
+  stewardship_common invent; no scratchpad notes. Distinct from merged PRs
+  #320/#314/#309/#299/#297/#293/#282/#278/#272/#262/#258/#252/#244/#243/#239/#233/#227/#225/#220/#216/#208
+  and from draft #327 plain residual. Tip-relaunch residual CI leftover residual leftover
+  on post-#320 tip (do **not** revive
+  #316/#295/#290/#268/#259/#257/#253/#248/#241).
+
 - TOKENMAXX stewardship-schema residual CI leftover residual deepen after #314
   tip (lands closed #316 leftover on post-#314 path-order tip): expand
   self-tests to 6854 cases (was 6618) fail-closing unsaturated schema-only

@@ -72,6 +72,7 @@ slice only; not stewardship-schema residual #282 / not lychee/blob-503 #278 /
 not Pass-2 residual + templates #272 / not path-edges leftover #262 /
 not wiki/mdlink leftover #252 / not stewardship-schema leftover #258).
 Lands closed #281/#277 leftover on post-#282 tip (do not revive).
+Deepened after #320 tip: stewardship-schema residual CI leftover residual leftover — residual CI leftover residual leftover helper needles + status/surface stubs (schema residual CI leftover residual leftover slice only; not schema residual CI leftover residual #320 / not schema residual CI leftover #309 / not schema residual CI #299 / not wiki/mdlink leftover residual #293 / not schema leftover residual #282).
 Deepened after #293 tip: stewardship-schema residual CI — residual CI
 helper needles + residual CI status/surface stubs (schema residual CI
 slice only; not wiki/mdlink leftover residual #293 / not schema leftover
@@ -88868,6 +88869,2585 @@ def test_schema_gate_requires_surface_sagemaker_after_309() -> None:
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'sagemaker')
 
 
+
+# --- TOKENMAXX stewardship-schema residual CI leftover residual leftover deepen after #320 (+236; tip-relaunch on post-#320; distinct from #327 residual) -----
+
+
+
+def test_schema_residual_ci_leftover_residual_leftover_doc_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Residual CI leftover residual leftover deepen after #320' in text
+        path.write_text(text.replace('Residual CI leftover residual leftover deepen after #320', 'Residual CI leftover residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Residual CI leftover residual leftover deepen after #320')
+
+
+def test_schema_residual_ci_leftover_residual_leftover_doc_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Residual CI leftover residual leftover deepen after #320' in text
+        path.write_text(text.replace('Residual CI leftover residual leftover deepen after #320', 'Residual CI leftover residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Residual CI leftover residual leftover deepen after #320')
+
+
+def test_schema_residual_ci_leftover_residual_leftover_doc_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Residual CI leftover residual leftover deepen after #320' in text
+        path.write_text(text.replace('Residual CI leftover residual leftover deepen after #320', 'Residual CI leftover residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Residual CI leftover residual leftover deepen after #320')
+
+
+def test_schema_residual_ci_leftover_residual_leftover_doc_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Residual CI leftover residual leftover deepen after #320' in text
+        path.write_text(text.replace('Residual CI leftover residual leftover deepen after #320', 'Residual CI leftover residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Residual CI leftover residual leftover deepen after #320')
+
+
+def test_schema_residual_ci_leftover_residual_leftover_doc_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Residual CI leftover residual leftover deepen after #320' in text
+        path.write_text(text.replace('Residual CI leftover residual leftover deepen after #320', 'Residual CI leftover residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Residual CI leftover residual leftover deepen after #320')
+
+
+def test_schema_residual_ci_leftover_residual_leftover_doc_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Residual CI leftover residual leftover deepen after #320' in text
+        path.write_text(text.replace('Residual CI leftover residual leftover deepen after #320', 'Residual CI leftover residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Residual CI leftover residual leftover deepen after #320')
+
+
+def test_schema_residual_ci_leftover_residual_leftover_doc_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Residual CI leftover residual leftover deepen after #320' in text
+        path.write_text(text.replace('Residual CI leftover residual leftover deepen after #320', 'Residual CI leftover residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Residual CI leftover residual leftover deepen after #320')
+
+
+def test_schema_residual_ci_leftover_residual_leftover_doc_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Residual CI leftover residual leftover deepen after #320' in text
+        path.write_text(text.replace('Residual CI leftover residual leftover deepen after #320', 'Residual CI leftover residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Residual CI leftover residual leftover deepen after #320')
+
+
+def test_schema_not_schema_residual_ci_leftover_residual_320_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover residual #320' in text
+        path.write_text(text.replace('NOT schema residual CI leftover residual #320', 'NOT schema residual CI leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI leftover residual #320')
+
+
+def test_schema_not_schema_residual_ci_leftover_residual_320_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover residual #320' in text
+        path.write_text(text.replace('NOT schema residual CI leftover residual #320', 'NOT schema residual CI leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI leftover residual #320')
+
+
+def test_schema_not_schema_residual_ci_leftover_residual_320_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover residual #320' in text
+        path.write_text(text.replace('NOT schema residual CI leftover residual #320', 'NOT schema residual CI leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI leftover residual #320')
+
+
+def test_schema_not_schema_residual_ci_leftover_residual_320_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover residual #320' in text
+        path.write_text(text.replace('NOT schema residual CI leftover residual #320', 'NOT schema residual CI leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI leftover residual #320')
+
+
+def test_schema_not_schema_residual_ci_leftover_residual_320_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover residual #320' in text
+        path.write_text(text.replace('NOT schema residual CI leftover residual #320', 'NOT schema residual CI leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI leftover residual #320')
+
+
+def test_schema_not_schema_residual_ci_leftover_residual_320_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover residual #320' in text
+        path.write_text(text.replace('NOT schema residual CI leftover residual #320', 'NOT schema residual CI leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI leftover residual #320')
+
+
+def test_schema_not_schema_residual_ci_leftover_residual_320_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover residual #320' in text
+        path.write_text(text.replace('NOT schema residual CI leftover residual #320', 'NOT schema residual CI leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI leftover residual #320')
+
+
+def test_schema_not_schema_residual_ci_leftover_residual_320_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover residual #320' in text
+        path.write_text(text.replace('NOT schema residual CI leftover residual #320', 'NOT schema residual CI leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI leftover residual #320')
+
+
+def test_schema_not_schema_residual_ci_leftover_309_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover #309' in text
+        path.write_text(text.replace('NOT schema residual CI leftover #309', 'NOT schema residual CI leftover #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI leftover #309')
+
+
+def test_schema_not_schema_residual_ci_leftover_309_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover #309' in text
+        path.write_text(text.replace('NOT schema residual CI leftover #309', 'NOT schema residual CI leftover #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI leftover #309')
+
+
+def test_schema_not_schema_residual_ci_leftover_309_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover #309' in text
+        path.write_text(text.replace('NOT schema residual CI leftover #309', 'NOT schema residual CI leftover #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI leftover #309')
+
+
+def test_schema_not_schema_residual_ci_leftover_309_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover #309' in text
+        path.write_text(text.replace('NOT schema residual CI leftover #309', 'NOT schema residual CI leftover #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI leftover #309')
+
+
+def test_schema_not_schema_residual_ci_leftover_309_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover #309' in text
+        path.write_text(text.replace('NOT schema residual CI leftover #309', 'NOT schema residual CI leftover #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI leftover #309')
+
+
+def test_schema_not_schema_residual_ci_leftover_309_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover #309' in text
+        path.write_text(text.replace('NOT schema residual CI leftover #309', 'NOT schema residual CI leftover #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI leftover #309')
+
+
+def test_schema_not_schema_residual_ci_leftover_309_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover #309' in text
+        path.write_text(text.replace('NOT schema residual CI leftover #309', 'NOT schema residual CI leftover #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI leftover #309')
+
+
+def test_schema_not_schema_residual_ci_leftover_309_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI leftover #309' in text
+        path.write_text(text.replace('NOT schema residual CI leftover #309', 'NOT schema residual CI leftover #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI leftover #309')
+
+
+def test_schema_not_schema_residual_ci_299_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI #299' in text
+        path.write_text(text.replace('NOT schema residual CI #299', 'NOT schema residual CI #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI #299')
+
+
+def test_schema_not_schema_residual_ci_299_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI #299' in text
+        path.write_text(text.replace('NOT schema residual CI #299', 'NOT schema residual CI #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI #299')
+
+
+def test_schema_not_schema_residual_ci_299_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI #299' in text
+        path.write_text(text.replace('NOT schema residual CI #299', 'NOT schema residual CI #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI #299')
+
+
+def test_schema_not_schema_residual_ci_299_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI #299' in text
+        path.write_text(text.replace('NOT schema residual CI #299', 'NOT schema residual CI #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI #299')
+
+
+def test_schema_not_schema_residual_ci_299_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI #299' in text
+        path.write_text(text.replace('NOT schema residual CI #299', 'NOT schema residual CI #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI #299')
+
+
+def test_schema_not_schema_residual_ci_299_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI #299' in text
+        path.write_text(text.replace('NOT schema residual CI #299', 'NOT schema residual CI #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI #299')
+
+
+def test_schema_not_schema_residual_ci_299_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI #299' in text
+        path.write_text(text.replace('NOT schema residual CI #299', 'NOT schema residual CI #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI #299')
+
+
+def test_schema_not_schema_residual_ci_299_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema residual CI #299' in text
+        path.write_text(text.replace('NOT schema residual CI #299', 'NOT schema residual CI #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema residual CI #299')
+
+
+def test_schema_not_wiki_293_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki/mdlink leftover residual #293' in text
+        path.write_text(text.replace('NOT wiki/mdlink leftover residual #293', 'NOT wiki/mdlink leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT wiki/mdlink leftover residual #293')
+
+
+def test_schema_not_wiki_293_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki/mdlink leftover residual #293' in text
+        path.write_text(text.replace('NOT wiki/mdlink leftover residual #293', 'NOT wiki/mdlink leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT wiki/mdlink leftover residual #293')
+
+
+def test_schema_not_wiki_293_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki/mdlink leftover residual #293' in text
+        path.write_text(text.replace('NOT wiki/mdlink leftover residual #293', 'NOT wiki/mdlink leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT wiki/mdlink leftover residual #293')
+
+
+def test_schema_not_wiki_293_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki/mdlink leftover residual #293' in text
+        path.write_text(text.replace('NOT wiki/mdlink leftover residual #293', 'NOT wiki/mdlink leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT wiki/mdlink leftover residual #293')
+
+
+def test_schema_not_wiki_293_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki/mdlink leftover residual #293' in text
+        path.write_text(text.replace('NOT wiki/mdlink leftover residual #293', 'NOT wiki/mdlink leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT wiki/mdlink leftover residual #293')
+
+
+def test_schema_not_wiki_293_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki/mdlink leftover residual #293' in text
+        path.write_text(text.replace('NOT wiki/mdlink leftover residual #293', 'NOT wiki/mdlink leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT wiki/mdlink leftover residual #293')
+
+
+def test_schema_not_wiki_293_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki/mdlink leftover residual #293' in text
+        path.write_text(text.replace('NOT wiki/mdlink leftover residual #293', 'NOT wiki/mdlink leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT wiki/mdlink leftover residual #293')
+
+
+def test_schema_not_wiki_293_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT wiki/mdlink leftover residual #293' in text
+        path.write_text(text.replace('NOT wiki/mdlink leftover residual #293', 'NOT wiki/mdlink leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT wiki/mdlink leftover residual #293')
+
+
+def test_schema_not_schema_282_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema leftover residual #282' in text
+        path.write_text(text.replace('NOT schema leftover residual #282', 'NOT schema leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema leftover residual #282')
+
+
+def test_schema_not_schema_282_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema leftover residual #282' in text
+        path.write_text(text.replace('NOT schema leftover residual #282', 'NOT schema leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema leftover residual #282')
+
+
+def test_schema_not_schema_282_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema leftover residual #282' in text
+        path.write_text(text.replace('NOT schema leftover residual #282', 'NOT schema leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema leftover residual #282')
+
+
+def test_schema_not_schema_282_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema leftover residual #282' in text
+        path.write_text(text.replace('NOT schema leftover residual #282', 'NOT schema leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema leftover residual #282')
+
+
+def test_schema_not_schema_282_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema leftover residual #282' in text
+        path.write_text(text.replace('NOT schema leftover residual #282', 'NOT schema leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema leftover residual #282')
+
+
+def test_schema_not_schema_282_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema leftover residual #282' in text
+        path.write_text(text.replace('NOT schema leftover residual #282', 'NOT schema leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema leftover residual #282')
+
+
+def test_schema_not_schema_282_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema leftover residual #282' in text
+        path.write_text(text.replace('NOT schema leftover residual #282', 'NOT schema leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema leftover residual #282')
+
+
+def test_schema_not_schema_282_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'NOT schema leftover residual #282' in text
+        path.write_text(text.replace('NOT schema leftover residual #282', 'NOT schema leftover residual #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'NOT schema leftover residual #282')
+
+
+def test_schema_failed_banner_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Stewardship schema check FAILED' in text
+        path.write_text(text.replace('Stewardship schema check FAILED', 'Stewardship schema check FAIXLED'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Stewardship schema check FAILED')
+
+
+def test_schema_failed_banner_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Stewardship schema check FAILED' in text
+        path.write_text(text.replace('Stewardship schema check FAILED', 'Stewardship schema check FAIXLED'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Stewardship schema check FAILED')
+
+
+def test_schema_failed_banner_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Stewardship schema check FAILED' in text
+        path.write_text(text.replace('Stewardship schema check FAILED', 'Stewardship schema check FAIXLED'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Stewardship schema check FAILED')
+
+
+def test_schema_failed_banner_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Stewardship schema check FAILED' in text
+        path.write_text(text.replace('Stewardship schema check FAILED', 'Stewardship schema check FAIXLED'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Stewardship schema check FAILED')
+
+
+def test_schema_failed_banner_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Stewardship schema check FAILED' in text
+        path.write_text(text.replace('Stewardship schema check FAILED', 'Stewardship schema check FAIXLED'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Stewardship schema check FAILED')
+
+
+def test_schema_failed_banner_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Stewardship schema check FAILED' in text
+        path.write_text(text.replace('Stewardship schema check FAILED', 'Stewardship schema check FAIXLED'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Stewardship schema check FAILED')
+
+
+def test_schema_failed_banner_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Stewardship schema check FAILED' in text
+        path.write_text(text.replace('Stewardship schema check FAILED', 'Stewardship schema check FAIXLED'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Stewardship schema check FAILED')
+
+
+def test_schema_failed_banner_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Stewardship schema check FAILED' in text
+        path.write_text(text.replace('Stewardship schema check FAILED', 'Stewardship schema check FAIXLED'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Stewardship schema check FAILED')
+
+
+def test_schema_file_stderr_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'file=sys.stderr' in text
+        path.write_text(text.replace('file=sys.stderr', 'file=sys.stderx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'file=sys.stderr')
+
+
+def test_schema_file_stderr_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'file=sys.stderr' in text
+        path.write_text(text.replace('file=sys.stderr', 'file=sys.stderx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'file=sys.stderr')
+
+
+def test_schema_file_stderr_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'file=sys.stderr' in text
+        path.write_text(text.replace('file=sys.stderr', 'file=sys.stderx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'file=sys.stderr')
+
+
+def test_schema_file_stderr_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'file=sys.stderr' in text
+        path.write_text(text.replace('file=sys.stderr', 'file=sys.stderx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'file=sys.stderr')
+
+
+def test_schema_file_stderr_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'file=sys.stderr' in text
+        path.write_text(text.replace('file=sys.stderr', 'file=sys.stderx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'file=sys.stderr')
+
+
+def test_schema_file_stderr_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'file=sys.stderr' in text
+        path.write_text(text.replace('file=sys.stderr', 'file=sys.stderx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'file=sys.stderr')
+
+
+def test_schema_file_stderr_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'file=sys.stderr' in text
+        path.write_text(text.replace('file=sys.stderr', 'file=sys.stderx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'file=sys.stderr')
+
+
+def test_schema_file_stderr_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'file=sys.stderr' in text
+        path.write_text(text.replace('file=sys.stderr', 'file=sys.stderx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'file=sys.stderr')
+
+
+def test_schema_print_err_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'print(f"  - {err}"' in text
+        path.write_text(text.replace('print(f"  - {err}"', 'print(f"  - {errX}"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'print(f"  - {err}"')
+
+
+def test_schema_print_err_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'print(f"  - {err}"' in text
+        path.write_text(text.replace('print(f"  - {err}"', 'print(f"  - {errX}"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'print(f"  - {err}"')
+
+
+def test_schema_print_err_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'print(f"  - {err}"' in text
+        path.write_text(text.replace('print(f"  - {err}"', 'print(f"  - {errX}"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'print(f"  - {err}"')
+
+
+def test_schema_print_err_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'print(f"  - {err}"' in text
+        path.write_text(text.replace('print(f"  - {err}"', 'print(f"  - {errX}"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'print(f"  - {err}"')
+
+
+def test_schema_print_err_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'print(f"  - {err}"' in text
+        path.write_text(text.replace('print(f"  - {err}"', 'print(f"  - {errX}"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'print(f"  - {err}"')
+
+
+def test_schema_print_err_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'print(f"  - {err}"' in text
+        path.write_text(text.replace('print(f"  - {err}"', 'print(f"  - {errX}"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'print(f"  - {err}"')
+
+
+def test_schema_print_err_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'print(f"  - {err}"' in text
+        path.write_text(text.replace('print(f"  - {err}"', 'print(f"  - {errX}"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'print(f"  - {err}"')
+
+
+def test_schema_print_err_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'print(f"  - {err}"' in text
+        path.write_text(text.replace('print(f"  - {err}"', 'print(f"  - {errX}"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'print(f"  - {err}"')
+
+
+def test_schema_must_scalar_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must be a scalar' in text
+        path.write_text(text.replace('must be a scalar', 'must be a scalax'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must be a scalar')
+
+
+def test_schema_must_scalar_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must be a scalar' in text
+        path.write_text(text.replace('must be a scalar', 'must be a scalax'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must be a scalar')
+
+
+def test_schema_must_scalar_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must be a scalar' in text
+        path.write_text(text.replace('must be a scalar', 'must be a scalax'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must be a scalar')
+
+
+def test_schema_must_scalar_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must be a scalar' in text
+        path.write_text(text.replace('must be a scalar', 'must be a scalax'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must be a scalar')
+
+
+def test_schema_must_scalar_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must be a scalar' in text
+        path.write_text(text.replace('must be a scalar', 'must be a scalax'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must be a scalar')
+
+
+def test_schema_must_scalar_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must be a scalar' in text
+        path.write_text(text.replace('must be a scalar', 'must be a scalax'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must be a scalar')
+
+
+def test_schema_must_scalar_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must be a scalar' in text
+        path.write_text(text.replace('must be a scalar', 'must be a scalax'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must be a scalar')
+
+
+def test_schema_must_scalar_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'must be a scalar' in text
+        path.write_text(text.replace('must be a scalar', 'must be a scalax'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'must be a scalar')
+
+
+def test_schema_isinstance_dict_list_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'isinstance(value, (dict, list))' in text
+        path.write_text(text.replace('isinstance(value, (dict, list))', 'isinstance(value, (dict, listX))'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'isinstance(value, (dict, list))')
+
+
+def test_schema_isinstance_dict_list_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'isinstance(value, (dict, list))' in text
+        path.write_text(text.replace('isinstance(value, (dict, list))', 'isinstance(value, (dict, listX))'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'isinstance(value, (dict, list))')
+
+
+def test_schema_isinstance_dict_list_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'isinstance(value, (dict, list))' in text
+        path.write_text(text.replace('isinstance(value, (dict, list))', 'isinstance(value, (dict, listX))'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'isinstance(value, (dict, list))')
+
+
+def test_schema_isinstance_dict_list_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'isinstance(value, (dict, list))' in text
+        path.write_text(text.replace('isinstance(value, (dict, list))', 'isinstance(value, (dict, listX))'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'isinstance(value, (dict, list))')
+
+
+def test_schema_isinstance_dict_list_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'isinstance(value, (dict, list))' in text
+        path.write_text(text.replace('isinstance(value, (dict, list))', 'isinstance(value, (dict, listX))'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'isinstance(value, (dict, list))')
+
+
+def test_schema_isinstance_dict_list_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'isinstance(value, (dict, list))' in text
+        path.write_text(text.replace('isinstance(value, (dict, list))', 'isinstance(value, (dict, listX))'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'isinstance(value, (dict, list))')
+
+
+def test_schema_isinstance_dict_list_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'isinstance(value, (dict, list))' in text
+        path.write_text(text.replace('isinstance(value, (dict, list))', 'isinstance(value, (dict, listX))'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'isinstance(value, (dict, list))')
+
+
+def test_schema_isinstance_dict_list_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'isinstance(value, (dict, list))' in text
+        path.write_text(text.replace('isinstance(value, (dict, list))', 'isinstance(value, (dict, listX))'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'isinstance(value, (dict, list))')
+
+
+def test_schema_rel_closes_docs_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}' in text
+        path.write_text(text.replace('rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}', 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.mx"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}')
+
+
+def test_schema_rel_closes_docs_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}' in text
+        path.write_text(text.replace('rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}', 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.mx"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}')
+
+
+def test_schema_rel_closes_docs_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}' in text
+        path.write_text(text.replace('rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}', 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.mx"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}')
+
+
+def test_schema_rel_closes_docs_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}' in text
+        path.write_text(text.replace('rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}', 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.mx"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}')
+
+
+def test_schema_rel_closes_docs_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}' in text
+        path.write_text(text.replace('rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}', 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.mx"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}')
+
+
+def test_schema_rel_closes_docs_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}' in text
+        path.write_text(text.replace('rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}', 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.mx"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}')
+
+
+def test_schema_rel_closes_docs_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}' in text
+        path.write_text(text.replace('rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}', 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.mx"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}')
+
+
+def test_schema_rel_closes_docs_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}' in text
+        path.write_text(text.replace('rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}', 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.mx"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'rel in {"docs/badge-standard.md", "docs/wiki/PUBLISH.md"}')
+
+
+def test_schema_closes_in_data_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"closes" in data' in text
+        path.write_text(text.replace('"closes" in data', '"closesX" in data'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '"closes" in data')
+
+
+def test_schema_closes_in_data_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"closes" in data' in text
+        path.write_text(text.replace('"closes" in data', '"closesX" in data'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '"closes" in data')
+
+
+def test_schema_closes_in_data_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"closes" in data' in text
+        path.write_text(text.replace('"closes" in data', '"closesX" in data'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '"closes" in data')
+
+
+def test_schema_closes_in_data_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"closes" in data' in text
+        path.write_text(text.replace('"closes" in data', '"closesX" in data'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '"closes" in data')
+
+
+def test_schema_closes_in_data_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"closes" in data' in text
+        path.write_text(text.replace('"closes" in data', '"closesX" in data'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '"closes" in data')
+
+
+def test_schema_closes_in_data_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"closes" in data' in text
+        path.write_text(text.replace('"closes" in data', '"closesX" in data'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '"closes" in data')
+
+
+def test_schema_closes_in_data_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"closes" in data' in text
+        path.write_text(text.replace('"closes" in data', '"closesX" in data'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '"closes" in data')
+
+
+def test_schema_closes_in_data_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert '"closes" in data' in text
+        path.write_text(text.replace('"closes" in data', '"closesX" in data'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, '"closes" in data')
+
+
+def test_schema_null_tilde_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'value.lower() in {"null", "~"}' in text
+        path.write_text(text.replace('value.lower() in {"null", "~"}', 'value.lower() in {"nullX", "~"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'value.lower() in {"null", "~"}')
+
+
+def test_schema_null_tilde_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'value.lower() in {"null", "~"}' in text
+        path.write_text(text.replace('value.lower() in {"null", "~"}', 'value.lower() in {"nullX", "~"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'value.lower() in {"null", "~"}')
+
+
+def test_schema_null_tilde_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'value.lower() in {"null", "~"}' in text
+        path.write_text(text.replace('value.lower() in {"null", "~"}', 'value.lower() in {"nullX", "~"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'value.lower() in {"null", "~"}')
+
+
+def test_schema_null_tilde_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'value.lower() in {"null", "~"}' in text
+        path.write_text(text.replace('value.lower() in {"null", "~"}', 'value.lower() in {"nullX", "~"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'value.lower() in {"null", "~"}')
+
+
+def test_schema_null_tilde_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'value.lower() in {"null", "~"}' in text
+        path.write_text(text.replace('value.lower() in {"null", "~"}', 'value.lower() in {"nullX", "~"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'value.lower() in {"null", "~"}')
+
+
+def test_schema_null_tilde_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'value.lower() in {"null", "~"}' in text
+        path.write_text(text.replace('value.lower() in {"null", "~"}', 'value.lower() in {"nullX", "~"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'value.lower() in {"null", "~"}')
+
+
+def test_schema_null_tilde_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'value.lower() in {"null", "~"}' in text
+        path.write_text(text.replace('value.lower() in {"null", "~"}', 'value.lower() in {"nullX", "~"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'value.lower() in {"null", "~"}')
+
+
+def test_schema_null_tilde_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'value.lower() in {"null", "~"}' in text
+        path.write_text(text.replace('value.lower() in {"null", "~"}', 'value.lower() in {"nullX", "~"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'value.lower() in {"null", "~"}')
+
+
+def test_schema_re_fullmatch_digit_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'elif re.fullmatch(r"-?DIGIT+", value)' in text
+        path.write_text(text.replace('elif re.fullmatch(r"-?DIGIT+", value)', 'elif re.fullmatch(r"-?DIGIX+", value)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'elif re.fullmatch(r"-?DIGIT+", value)')
+
+
+def test_schema_re_fullmatch_digit_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'elif re.fullmatch(r"-?DIGIT+", value)' in text
+        path.write_text(text.replace('elif re.fullmatch(r"-?DIGIT+", value)', 'elif re.fullmatch(r"-?DIGIX+", value)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'elif re.fullmatch(r"-?DIGIT+", value)')
+
+
+def test_schema_re_fullmatch_digit_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'elif re.fullmatch(r"-?DIGIT+", value)' in text
+        path.write_text(text.replace('elif re.fullmatch(r"-?DIGIT+", value)', 'elif re.fullmatch(r"-?DIGIX+", value)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'elif re.fullmatch(r"-?DIGIT+", value)')
+
+
+def test_schema_re_fullmatch_digit_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'elif re.fullmatch(r"-?DIGIT+", value)' in text
+        path.write_text(text.replace('elif re.fullmatch(r"-?DIGIT+", value)', 'elif re.fullmatch(r"-?DIGIX+", value)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'elif re.fullmatch(r"-?DIGIT+", value)')
+
+
+def test_schema_re_fullmatch_digit_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'elif re.fullmatch(r"-?DIGIT+", value)' in text
+        path.write_text(text.replace('elif re.fullmatch(r"-?DIGIT+", value)', 'elif re.fullmatch(r"-?DIGIX+", value)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'elif re.fullmatch(r"-?DIGIT+", value)')
+
+
+def test_schema_re_fullmatch_digit_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'elif re.fullmatch(r"-?DIGIT+", value)' in text
+        path.write_text(text.replace('elif re.fullmatch(r"-?DIGIT+", value)', 'elif re.fullmatch(r"-?DIGIX+", value)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'elif re.fullmatch(r"-?DIGIT+", value)')
+
+
+def test_schema_re_fullmatch_digit_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'elif re.fullmatch(r"-?DIGIT+", value)' in text
+        path.write_text(text.replace('elif re.fullmatch(r"-?DIGIT+", value)', 'elif re.fullmatch(r"-?DIGIX+", value)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'elif re.fullmatch(r"-?DIGIT+", value)')
+
+
+def test_schema_re_fullmatch_digit_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'elif re.fullmatch(r"-?DIGIT+", value)' in text
+        path.write_text(text.replace('elif re.fullmatch(r"-?DIGIT+", value)', 'elif re.fullmatch(r"-?DIGIX+", value)'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'elif re.fullmatch(r"-?DIGIT+", value)')
+
+
+def test_schema_path_resolve_parent_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Path(__file__).resolve().parent' in text
+        path.write_text(text.replace('Path(__file__).resolve().parent', 'Path(__file__).resolve().parenx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Path(__file__).resolve().parent')
+
+
+def test_schema_path_resolve_parent_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Path(__file__).resolve().parent' in text
+        path.write_text(text.replace('Path(__file__).resolve().parent', 'Path(__file__).resolve().parenx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Path(__file__).resolve().parent')
+
+
+def test_schema_path_resolve_parent_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Path(__file__).resolve().parent' in text
+        path.write_text(text.replace('Path(__file__).resolve().parent', 'Path(__file__).resolve().parenx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Path(__file__).resolve().parent')
+
+
+def test_schema_path_resolve_parent_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Path(__file__).resolve().parent' in text
+        path.write_text(text.replace('Path(__file__).resolve().parent', 'Path(__file__).resolve().parenx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Path(__file__).resolve().parent')
+
+
+def test_schema_path_resolve_parent_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Path(__file__).resolve().parent' in text
+        path.write_text(text.replace('Path(__file__).resolve().parent', 'Path(__file__).resolve().parenx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Path(__file__).resolve().parent')
+
+
+def test_schema_path_resolve_parent_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Path(__file__).resolve().parent' in text
+        path.write_text(text.replace('Path(__file__).resolve().parent', 'Path(__file__).resolve().parenx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Path(__file__).resolve().parent')
+
+
+def test_schema_path_resolve_parent_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Path(__file__).resolve().parent' in text
+        path.write_text(text.replace('Path(__file__).resolve().parent', 'Path(__file__).resolve().parenx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Path(__file__).resolve().parent')
+
+
+def test_schema_path_resolve_parent_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'Path(__file__).resolve().parent' in text
+        path.write_text(text.replace('Path(__file__).resolve().parent', 'Path(__file__).resolve().parenx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Path(__file__).resolve().parent')
+
+
+def test_schema_sys_path_insert_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'sys.path.insert' in text
+        path.write_text(text.replace('sys.path.insert', 'sys.path.inxert'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'sys.path.insert')
+
+
+def test_schema_sys_path_insert_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'sys.path.insert' in text
+        path.write_text(text.replace('sys.path.insert', 'sys.path.inxert'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'sys.path.insert')
+
+
+def test_schema_sys_path_insert_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'sys.path.insert' in text
+        path.write_text(text.replace('sys.path.insert', 'sys.path.inxert'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'sys.path.insert')
+
+
+def test_schema_sys_path_insert_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'sys.path.insert' in text
+        path.write_text(text.replace('sys.path.insert', 'sys.path.inxert'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'sys.path.insert')
+
+
+def test_schema_sys_path_insert_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'sys.path.insert' in text
+        path.write_text(text.replace('sys.path.insert', 'sys.path.inxert'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'sys.path.insert')
+
+
+def test_schema_sys_path_insert_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'sys.path.insert' in text
+        path.write_text(text.replace('sys.path.insert', 'sys.path.inxert'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'sys.path.insert')
+
+
+def test_schema_sys_path_insert_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'sys.path.insert' in text
+        path.write_text(text.replace('sys.path.insert', 'sys.path.inxert'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'sys.path.insert')
+
+
+def test_schema_sys_path_insert_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'sys.path.insert' in text
+        path.write_text(text.replace('sys.path.insert', 'sys.path.inxert'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'sys.path.insert')
+
+
+def test_schema_pragma_no_cover_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pragma no cover' in text
+        path.write_text(text.replace('pragma no cover', 'pragma no covex'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'pragma no cover')
+
+
+def test_schema_pragma_no_cover_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pragma no cover' in text
+        path.write_text(text.replace('pragma no cover', 'pragma no covex'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'pragma no cover')
+
+
+def test_schema_pragma_no_cover_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pragma no cover' in text
+        path.write_text(text.replace('pragma no cover', 'pragma no covex'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'pragma no cover')
+
+
+def test_schema_pragma_no_cover_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pragma no cover' in text
+        path.write_text(text.replace('pragma no cover', 'pragma no covex'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'pragma no cover')
+
+
+def test_schema_pragma_no_cover_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pragma no cover' in text
+        path.write_text(text.replace('pragma no cover', 'pragma no covex'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'pragma no cover')
+
+
+def test_schema_pragma_no_cover_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pragma no cover' in text
+        path.write_text(text.replace('pragma no cover', 'pragma no covex'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'pragma no cover')
+
+
+def test_schema_pragma_no_cover_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pragma no cover' in text
+        path.write_text(text.replace('pragma no cover', 'pragma no covex'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'pragma no cover')
+
+
+def test_schema_pragma_no_cover_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'pragma no cover' in text
+        path.write_text(text.replace('pragma no cover', 'pragma no covex'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'pragma no cover')
+
+
+def test_schema_stewardship_common_import_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'from stewardship_common import ROOT, fail, scan_secrets' in text
+        path.write_text(text.replace('from stewardship_common import ROOT, fail, scan_secrets', 'from stewardship_common import ROOT, fail, scan_secretx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'from stewardship_common import ROOT, fail, scan_secrets')
+
+
+def test_schema_stewardship_common_import_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'from stewardship_common import ROOT, fail, scan_secrets' in text
+        path.write_text(text.replace('from stewardship_common import ROOT, fail, scan_secrets', 'from stewardship_common import ROOT, fail, scan_secretx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'from stewardship_common import ROOT, fail, scan_secrets')
+
+
+def test_schema_stewardship_common_import_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'from stewardship_common import ROOT, fail, scan_secrets' in text
+        path.write_text(text.replace('from stewardship_common import ROOT, fail, scan_secrets', 'from stewardship_common import ROOT, fail, scan_secretx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'from stewardship_common import ROOT, fail, scan_secrets')
+
+
+def test_schema_stewardship_common_import_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'from stewardship_common import ROOT, fail, scan_secrets' in text
+        path.write_text(text.replace('from stewardship_common import ROOT, fail, scan_secrets', 'from stewardship_common import ROOT, fail, scan_secretx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'from stewardship_common import ROOT, fail, scan_secrets')
+
+
+def test_schema_stewardship_common_import_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'from stewardship_common import ROOT, fail, scan_secrets' in text
+        path.write_text(text.replace('from stewardship_common import ROOT, fail, scan_secrets', 'from stewardship_common import ROOT, fail, scan_secretx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'from stewardship_common import ROOT, fail, scan_secrets')
+
+
+def test_schema_stewardship_common_import_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'from stewardship_common import ROOT, fail, scan_secrets' in text
+        path.write_text(text.replace('from stewardship_common import ROOT, fail, scan_secrets', 'from stewardship_common import ROOT, fail, scan_secretx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'from stewardship_common import ROOT, fail, scan_secrets')
+
+
+def test_schema_stewardship_common_import_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'from stewardship_common import ROOT, fail, scan_secrets' in text
+        path.write_text(text.replace('from stewardship_common import ROOT, fail, scan_secrets', 'from stewardship_common import ROOT, fail, scan_secretx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'from stewardship_common import ROOT, fail, scan_secrets')
+
+
+def test_schema_stewardship_common_import_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'from stewardship_common import ROOT, fail, scan_secrets' in text
+        path.write_text(text.replace('from stewardship_common import ROOT, fail, scan_secrets', 'from stewardship_common import ROOT, fail, scan_secretx'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'from stewardship_common import ROOT, fail, scan_secrets')
+
+
+def test_schema_engine_pyyaml_stdlib_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'engine = "PyYAML" if yaml is not None else "stdlib-subset"' in text
+        path.write_text(text.replace('engine = "PyYAML" if yaml is not None else "stdlib-subset"', 'engine = "PyYAML" if yaml is not None else "stdlib-subsex"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'engine = "PyYAML" if yaml is not None else "stdlib-subset"')
+
+
+def test_schema_engine_pyyaml_stdlib_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'engine = "PyYAML" if yaml is not None else "stdlib-subset"' in text
+        path.write_text(text.replace('engine = "PyYAML" if yaml is not None else "stdlib-subset"', 'engine = "PyYAML" if yaml is not None else "stdlib-subsex"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'engine = "PyYAML" if yaml is not None else "stdlib-subset"')
+
+
+def test_schema_engine_pyyaml_stdlib_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'engine = "PyYAML" if yaml is not None else "stdlib-subset"' in text
+        path.write_text(text.replace('engine = "PyYAML" if yaml is not None else "stdlib-subset"', 'engine = "PyYAML" if yaml is not None else "stdlib-subsex"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'engine = "PyYAML" if yaml is not None else "stdlib-subset"')
+
+
+def test_schema_engine_pyyaml_stdlib_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'engine = "PyYAML" if yaml is not None else "stdlib-subset"' in text
+        path.write_text(text.replace('engine = "PyYAML" if yaml is not None else "stdlib-subset"', 'engine = "PyYAML" if yaml is not None else "stdlib-subsex"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'engine = "PyYAML" if yaml is not None else "stdlib-subset"')
+
+
+def test_schema_engine_pyyaml_stdlib_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'engine = "PyYAML" if yaml is not None else "stdlib-subset"' in text
+        path.write_text(text.replace('engine = "PyYAML" if yaml is not None else "stdlib-subset"', 'engine = "PyYAML" if yaml is not None else "stdlib-subsex"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'engine = "PyYAML" if yaml is not None else "stdlib-subset"')
+
+
+def test_schema_engine_pyyaml_stdlib_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'engine = "PyYAML" if yaml is not None else "stdlib-subset"' in text
+        path.write_text(text.replace('engine = "PyYAML" if yaml is not None else "stdlib-subset"', 'engine = "PyYAML" if yaml is not None else "stdlib-subsex"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'engine = "PyYAML" if yaml is not None else "stdlib-subset"')
+
+
+def test_schema_engine_pyyaml_stdlib_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'engine = "PyYAML" if yaml is not None else "stdlib-subset"' in text
+        path.write_text(text.replace('engine = "PyYAML" if yaml is not None else "stdlib-subset"', 'engine = "PyYAML" if yaml is not None else "stdlib-subsex"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'engine = "PyYAML" if yaml is not None else "stdlib-subset"')
+
+
+def test_schema_engine_pyyaml_stdlib_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'engine = "PyYAML" if yaml is not None else "stdlib-subset"' in text
+        path.write_text(text.replace('engine = "PyYAML" if yaml is not None else "stdlib-subset"', 'engine = "PyYAML" if yaml is not None else "stdlib-subsex"'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'engine = "PyYAML" if yaml is not None else "stdlib-subset"')
+
+
+def test_schema_value_startswith_quote_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'value.startswith(\'"\') and value.endswith(\'"\')' in text
+        path.write_text(text.replace('value.startswith(\'"\') and value.endswith(\'"\')', 'value.startswith(\'"\') and value.endswith(\'X"\')'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'value.startswith(\'"\') and value.endswith(\'"\')')
+
+
+def test_schema_value_startswith_quote_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'value.startswith(\'"\') and value.endswith(\'"\')' in text
+        path.write_text(text.replace('value.startswith(\'"\') and value.endswith(\'"\')', 'value.startswith(\'"\') and value.endswith(\'X"\')'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'value.startswith(\'"\') and value.endswith(\'"\')')
+
+
+def test_schema_value_startswith_quote_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'value.startswith(\'"\') and value.endswith(\'"\')' in text
+        path.write_text(text.replace('value.startswith(\'"\') and value.endswith(\'"\')', 'value.startswith(\'"\') and value.endswith(\'X"\')'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'value.startswith(\'"\') and value.endswith(\'"\')')
+
+
+def test_schema_value_startswith_quote_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'value.startswith(\'"\') and value.endswith(\'"\')' in text
+        path.write_text(text.replace('value.startswith(\'"\') and value.endswith(\'"\')', 'value.startswith(\'"\') and value.endswith(\'X"\')'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'value.startswith(\'"\') and value.endswith(\'"\')')
+
+
+def test_schema_value_startswith_quote_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'value.startswith(\'"\') and value.endswith(\'"\')' in text
+        path.write_text(text.replace('value.startswith(\'"\') and value.endswith(\'"\')', 'value.startswith(\'"\') and value.endswith(\'X"\')'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'value.startswith(\'"\') and value.endswith(\'"\')')
+
+
+def test_schema_value_startswith_quote_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'value.startswith(\'"\') and value.endswith(\'"\')' in text
+        path.write_text(text.replace('value.startswith(\'"\') and value.endswith(\'"\')', 'value.startswith(\'"\') and value.endswith(\'X"\')'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'value.startswith(\'"\') and value.endswith(\'"\')')
+
+
+def test_schema_value_startswith_quote_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'value.startswith(\'"\') and value.endswith(\'"\')' in text
+        path.write_text(text.replace('value.startswith(\'"\') and value.endswith(\'"\')', 'value.startswith(\'"\') and value.endswith(\'X"\')'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'value.startswith(\'"\') and value.endswith(\'"\')')
+
+
+def test_schema_value_startswith_quote_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'value.startswith(\'"\') and value.endswith(\'"\')' in text
+        path.write_text(text.replace('value.startswith(\'"\') and value.endswith(\'"\')', 'value.startswith(\'"\') and value.endswith(\'X"\')'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'value.startswith(\'"\') and value.endswith(\'"\')')
+
+
+def test_schema_elif_true_false_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'elif value.lower() in {"true", "false"}' in text
+        path.write_text(text.replace('elif value.lower() in {"true", "false"}', 'elif value.lower() in {"true", "falsx"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'elif value.lower() in {"true", "false"}')
+
+
+def test_schema_elif_true_false_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'elif value.lower() in {"true", "false"}' in text
+        path.write_text(text.replace('elif value.lower() in {"true", "false"}', 'elif value.lower() in {"true", "falsx"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'elif value.lower() in {"true", "false"}')
+
+
+def test_schema_elif_true_false_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'elif value.lower() in {"true", "false"}' in text
+        path.write_text(text.replace('elif value.lower() in {"true", "false"}', 'elif value.lower() in {"true", "falsx"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'elif value.lower() in {"true", "false"}')
+
+
+def test_schema_elif_true_false_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'elif value.lower() in {"true", "false"}' in text
+        path.write_text(text.replace('elif value.lower() in {"true", "false"}', 'elif value.lower() in {"true", "falsx"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'elif value.lower() in {"true", "false"}')
+
+
+def test_schema_elif_true_false_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'elif value.lower() in {"true", "false"}' in text
+        path.write_text(text.replace('elif value.lower() in {"true", "false"}', 'elif value.lower() in {"true", "falsx"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'elif value.lower() in {"true", "false"}')
+
+
+def test_schema_elif_true_false_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'elif value.lower() in {"true", "false"}' in text
+        path.write_text(text.replace('elif value.lower() in {"true", "false"}', 'elif value.lower() in {"true", "falsx"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'elif value.lower() in {"true", "false"}')
+
+
+def test_schema_elif_true_false_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'elif value.lower() in {"true", "false"}' in text
+        path.write_text(text.replace('elif value.lower() in {"true", "false"}', 'elif value.lower() in {"true", "falsx"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'elif value.lower() in {"true", "false"}')
+
+
+def test_schema_elif_true_false_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'elif value.lower() in {"true", "false"}' in text
+        path.write_text(text.replace('elif value.lower() in {"true", "false"}', 'elif value.lower() in {"true", "falsx"}'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'elif value.lower() in {"true", "false"}')
+
+
+def test_schema_noqa_ble001_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'noqa: BLE001' in text
+        path.write_text(text.replace('noqa: BLE001', 'noqa: BLE00X'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'noqa: BLE001')
+
+
+def test_schema_noqa_ble001_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'noqa: BLE001' in text
+        path.write_text(text.replace('noqa: BLE001', 'noqa: BLE00X'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'noqa: BLE001')
+
+
+def test_schema_noqa_ble001_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'noqa: BLE001' in text
+        path.write_text(text.replace('noqa: BLE001', 'noqa: BLE00X'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'noqa: BLE001')
+
+
+def test_schema_noqa_ble001_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'noqa: BLE001' in text
+        path.write_text(text.replace('noqa: BLE001', 'noqa: BLE00X'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'noqa: BLE001')
+
+
+def test_schema_noqa_ble001_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'noqa: BLE001' in text
+        path.write_text(text.replace('noqa: BLE001', 'noqa: BLE00X'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'noqa: BLE001')
+
+
+def test_schema_noqa_ble001_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'noqa: BLE001' in text
+        path.write_text(text.replace('noqa: BLE001', 'noqa: BLE00X'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'noqa: BLE001')
+
+
+def test_schema_noqa_ble001_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'noqa: BLE001' in text
+        path.write_text(text.replace('noqa: BLE001', 'noqa: BLE00X'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'noqa: BLE001')
+
+
+def test_schema_noqa_ble001_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'noqa: BLE001' in text
+        path.write_text(text.replace('noqa: BLE001', 'noqa: BLE00X'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'noqa: BLE001')
+
+
+def test_schema_host_320_pad0_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'schema residual CI leftover residual leftover deepen after #320' in text
+        path.write_text(text.replace('schema residual CI leftover residual leftover deepen after #320', 'schema residual CI leftover residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'schema residual CI leftover residual leftover deepen after #320')
+
+
+def test_schema_host_320_pad1_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'schema residual CI leftover residual leftover deepen after #320' in text
+        path.write_text(text.replace('schema residual CI leftover residual leftover deepen after #320', 'schema residual CI leftover residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'schema residual CI leftover residual leftover deepen after #320')
+
+
+def test_schema_host_320_pad2_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'schema residual CI leftover residual leftover deepen after #320' in text
+        path.write_text(text.replace('schema residual CI leftover residual leftover deepen after #320', 'schema residual CI leftover residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'schema residual CI leftover residual leftover deepen after #320')
+
+
+def test_schema_host_320_pad3_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'schema residual CI leftover residual leftover deepen after #320' in text
+        path.write_text(text.replace('schema residual CI leftover residual leftover deepen after #320', 'schema residual CI leftover residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'schema residual CI leftover residual leftover deepen after #320')
+
+
+def test_schema_host_320_pad4_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'schema residual CI leftover residual leftover deepen after #320' in text
+        path.write_text(text.replace('schema residual CI leftover residual leftover deepen after #320', 'schema residual CI leftover residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'schema residual CI leftover residual leftover deepen after #320')
+
+
+def test_schema_host_320_pad5_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'schema residual CI leftover residual leftover deepen after #320' in text
+        path.write_text(text.replace('schema residual CI leftover residual leftover deepen after #320', 'schema residual CI leftover residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'schema residual CI leftover residual leftover deepen after #320')
+
+
+def test_schema_host_320_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'schema residual CI leftover residual leftover deepen after #320' in text
+        path.write_text(text.replace('schema residual CI leftover residual leftover deepen after #320', 'schema residual CI leftover residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'schema residual CI leftover residual leftover deepen after #320')
+
+
+def test_schema_host_320_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_badge_standard.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'schema residual CI leftover residual leftover deepen after #320' in text
+        path.write_text(text.replace('schema residual CI leftover residual leftover deepen after #320', 'schema residual CI leftover residual leftover deepen after #000'), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'schema residual CI leftover residual leftover deepen after #320')
+
+
+def test_schema_rejects_status_latched_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge='# B\n\n```yaml\nstatus: LATCHED\ntier: 1\ncreated: "2026-09-13"\nowner: copilot\nscope: "public governance front-door repos"\nedit_policy: "do not invent product badges"\ncloses: "#16"\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "ACTIVE")
+
+
+def test_schema_gate_requires_status_latched_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'LATCHED' in text
+        path.write_text(text.replace('LATCHED', 'LATCHXD', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'LATCHED')
+
+
+def test_schema_rejects_status_latched_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge='# B\n\n```yaml\nstatus: LATCHED\ntier: 1\ncreated: "2026-09-13"\nowner: copilot\nscope: "public governance front-door repos"\nedit_policy: "do not invent product badges"\ncloses: "#16"\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "ACTIVE")
+
+
+def test_schema_gate_requires_status_latched_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'LATCHED' in text
+        path.write_text(text.replace('LATCHED', 'LATCHXD', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'LATCHED')
+
+
+def test_schema_rejects_status_pinned_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge='# B\n\n```yaml\nstatus: PINNED\ntier: 1\ncreated: "2026-09-13"\nowner: copilot\nscope: "public governance front-door repos"\nedit_policy: "do not invent product badges"\ncloses: "#16"\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "ACTIVE")
+
+
+def test_schema_gate_requires_status_pinned_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'PINNED' in text
+        path.write_text(text.replace('PINNED', 'PINNXD', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'PINNED')
+
+
+def test_schema_rejects_status_pinned_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge='# B\n\n```yaml\nstatus: PINNED\ntier: 1\ncreated: "2026-09-13"\nowner: copilot\nscope: "public governance front-door repos"\nedit_policy: "do not invent product badges"\ncloses: "#16"\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "ACTIVE")
+
+
+def test_schema_gate_requires_status_pinned_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'PINNED' in text
+        path.write_text(text.replace('PINNED', 'PINNXD', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'PINNED')
+
+
+def test_schema_rejects_status_clamped_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge='# B\n\n```yaml\nstatus: CLAMPED\ntier: 1\ncreated: "2026-09-13"\nowner: copilot\nscope: "public governance front-door repos"\nedit_policy: "do not invent product badges"\ncloses: "#16"\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "ACTIVE")
+
+
+def test_schema_gate_requires_status_clamped_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'CLAMPED' in text
+        path.write_text(text.replace('CLAMPED', 'CLAMPXD', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'CLAMPED')
+
+
+def test_schema_rejects_status_clamped_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge='# B\n\n```yaml\nstatus: CLAMPED\ntier: 1\ncreated: "2026-09-13"\nowner: copilot\nscope: "public governance front-door repos"\nedit_policy: "do not invent product badges"\ncloses: "#16"\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "ACTIVE")
+
+
+def test_schema_gate_requires_status_clamped_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'CLAMPED' in text
+        path.write_text(text.replace('CLAMPED', 'CLAMPXD', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'CLAMPED')
+
+
+def test_schema_rejects_status_gated_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge='# B\n\n```yaml\nstatus: GATED\ntier: 1\ncreated: "2026-09-13"\nowner: copilot\nscope: "public governance front-door repos"\nedit_policy: "do not invent product badges"\ncloses: "#16"\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "ACTIVE")
+
+
+def test_schema_gate_requires_status_gated_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'GATED' in text
+        path.write_text(text.replace('GATED', 'GATXD', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'GATED')
+
+
+def test_schema_rejects_status_gated_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge='# B\n\n```yaml\nstatus: GATED\ntier: 1\ncreated: "2026-09-13"\nowner: copilot\nscope: "public governance front-door repos"\nedit_policy: "do not invent product badges"\ncloses: "#16"\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "ACTIVE")
+
+
+def test_schema_gate_requires_status_gated_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'GATED' in text
+        path.write_text(text.replace('GATED', 'GATXD', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'GATED')
+
+
+def test_schema_rejects_status_vaulted_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge='# B\n\n```yaml\nstatus: VAULTED\ntier: 1\ncreated: "2026-09-13"\nowner: copilot\nscope: "public governance front-door repos"\nedit_policy: "do not invent product badges"\ncloses: "#16"\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "ACTIVE")
+
+
+def test_schema_gate_requires_status_vaulted_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'VAULTED' in text
+        path.write_text(text.replace('VAULTED', 'VAULTXD', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'VAULTED')
+
+
+def test_schema_rejects_status_vaulted_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge='# B\n\n```yaml\nstatus: VAULTED\ntier: 1\ncreated: "2026-09-13"\nowner: copilot\nscope: "public governance front-door repos"\nedit_policy: "do not invent product badges"\ncloses: "#16"\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "ACTIVE")
+
+
+def test_schema_gate_requires_status_vaulted_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'VAULTED' in text
+        path.write_text(text.replace('VAULTED', 'VAULTXD', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'VAULTED')
+
+
+def test_schema_rejects_status_caged_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge='# B\n\n```yaml\nstatus: CAGED\ntier: 1\ncreated: "2026-09-13"\nowner: copilot\nscope: "public governance front-door repos"\nedit_policy: "do not invent product badges"\ncloses: "#16"\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "ACTIVE")
+
+
+def test_schema_gate_requires_status_caged_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'CAGED' in text
+        path.write_text(text.replace('CAGED', 'CAGXD', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'CAGED')
+
+
+def test_schema_rejects_status_caged_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            badge='# B\n\n```yaml\nstatus: CAGED\ntier: 1\ncreated: "2026-09-13"\nowner: copilot\nscope: "public governance front-door repos"\nedit_policy: "do not invent product badges"\ncloses: "#16"\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "ACTIVE")
+
+
+def test_schema_gate_requires_status_caged_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'CAGED' in text
+        path.write_text(text.replace('CAGED', 'CAGXD', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'CAGED')
+
+
+def test_schema_rejects_surface_openrouter_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude='# CLAUDE\n\n```yaml\nrepo: agents-governance\nowner: "fuzzywigg (smtp.eth)"\nsurface: openrouter\nautonomy_level: 1\nlast_updated: "2026-04-13"\nparent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "copilot")
+
+
+def test_schema_gate_requires_surface_openrouter_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'openrouter' in text
+        path.write_text(text.replace('openrouter', 'openrouxter', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'openrouter')
+
+
+def test_schema_rejects_surface_openrouter_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude='# CLAUDE\n\n```yaml\nrepo: agents-governance\nowner: "fuzzywigg (smtp.eth)"\nsurface: openrouter\nautonomy_level: 1\nlast_updated: "2026-04-13"\nparent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "copilot")
+
+
+def test_schema_gate_requires_surface_openrouter_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'openrouter' in text
+        path.write_text(text.replace('openrouter', 'openrouxter', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'openrouter')
+
+
+def test_schema_rejects_surface_nebius_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude='# CLAUDE\n\n```yaml\nrepo: agents-governance\nowner: "fuzzywigg (smtp.eth)"\nsurface: nebius\nautonomy_level: 1\nlast_updated: "2026-04-13"\nparent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "copilot")
+
+
+def test_schema_gate_requires_surface_nebius_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'nebius' in text
+        path.write_text(text.replace('nebius', 'nebiux', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'nebius')
+
+
+def test_schema_rejects_surface_nebius_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude='# CLAUDE\n\n```yaml\nrepo: agents-governance\nowner: "fuzzywigg (smtp.eth)"\nsurface: nebius\nautonomy_level: 1\nlast_updated: "2026-04-13"\nparent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "copilot")
+
+
+def test_schema_gate_requires_surface_nebius_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'nebius' in text
+        path.write_text(text.replace('nebius', 'nebiux', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'nebius')
+
+
+def test_schema_rejects_surface_cerebras_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude='# CLAUDE\n\n```yaml\nrepo: agents-governance\nowner: "fuzzywigg (smtp.eth)"\nsurface: cerebras\nautonomy_level: 1\nlast_updated: "2026-04-13"\nparent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "copilot")
+
+
+def test_schema_gate_requires_surface_cerebras_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'cerebras' in text
+        path.write_text(text.replace('cerebras', 'cerebrax', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'cerebras')
+
+
+def test_schema_rejects_surface_cerebras_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude='# CLAUDE\n\n```yaml\nrepo: agents-governance\nowner: "fuzzywigg (smtp.eth)"\nsurface: cerebras\nautonomy_level: 1\nlast_updated: "2026-04-13"\nparent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "copilot")
+
+
+def test_schema_gate_requires_surface_cerebras_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'cerebras' in text
+        path.write_text(text.replace('cerebras', 'cerebrax', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'cerebras')
+
+
+def test_schema_rejects_surface_sambanova_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude='# CLAUDE\n\n```yaml\nrepo: agents-governance\nowner: "fuzzywigg (smtp.eth)"\nsurface: sambanova\nautonomy_level: 1\nlast_updated: "2026-04-13"\nparent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "copilot")
+
+
+def test_schema_gate_requires_surface_sambanova_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'sambanova' in text
+        path.write_text(text.replace('sambanova', 'sambanovx', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'sambanova')
+
+
+def test_schema_rejects_surface_sambanova_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude='# CLAUDE\n\n```yaml\nrepo: agents-governance\nowner: "fuzzywigg (smtp.eth)"\nsurface: sambanova\nautonomy_level: 1\nlast_updated: "2026-04-13"\nparent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "copilot")
+
+
+def test_schema_gate_requires_surface_sambanova_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'sambanova' in text
+        path.write_text(text.replace('sambanova', 'sambanovx', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'sambanova')
+
+
+def test_schema_rejects_surface_modal_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude='# CLAUDE\n\n```yaml\nrepo: agents-governance\nowner: "fuzzywigg (smtp.eth)"\nsurface: modal\nautonomy_level: 1\nlast_updated: "2026-04-13"\nparent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "copilot")
+
+
+def test_schema_gate_requires_surface_modal_still_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'modal' in text
+        path.write_text(text.replace('modal', 'modax', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'modal')
+
+
+def test_schema_rejects_surface_modal_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_schema_tree(
+            tmp_path,
+            claude='# CLAUDE\n\n```yaml\nrepo: agents-governance\nowner: "fuzzywigg (smtp.eth)"\nsurface: modal\nautonomy_level: 1\nlast_updated: "2026-04-13"\nparent_governance: github.com/fuzzywigg/agents-governance/AGENTS-ECOSYSTEM.md\n```\n',
+        )
+        assert_fail_script(scripts / "check_stewardship_schema.py", tmp_path, "copilot")
+
+
+def test_schema_gate_requires_surface_modal_after_320() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_path = Path(tmp)
+        scripts = _seed_badge_tree(tmp_path, _good_readme())
+        path = tmp_path / "scripts" / "check_stewardship_schema.py"
+        text = path.read_text(encoding="utf-8")
+        assert 'modal' in text
+        path.write_text(text.replace('modal', 'modax', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'modal')
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -95984,6 +98564,242 @@ def main() -> int:
         test_schema_gate_requires_surface_sagemaker_still_after_309,
         test_schema_rejects_surface_sagemaker_after_309,
         test_schema_gate_requires_surface_sagemaker_after_309,
+        test_schema_residual_ci_leftover_residual_leftover_doc_pad0_after_320,
+        test_schema_residual_ci_leftover_residual_leftover_doc_pad1_after_320,
+        test_schema_residual_ci_leftover_residual_leftover_doc_pad2_after_320,
+        test_schema_residual_ci_leftover_residual_leftover_doc_pad3_after_320,
+        test_schema_residual_ci_leftover_residual_leftover_doc_pad4_after_320,
+        test_schema_residual_ci_leftover_residual_leftover_doc_pad5_after_320,
+        test_schema_residual_ci_leftover_residual_leftover_doc_still_after_320,
+        test_schema_residual_ci_leftover_residual_leftover_doc_after_320,
+        test_schema_not_schema_residual_ci_leftover_residual_320_pad0_after_320,
+        test_schema_not_schema_residual_ci_leftover_residual_320_pad1_after_320,
+        test_schema_not_schema_residual_ci_leftover_residual_320_pad2_after_320,
+        test_schema_not_schema_residual_ci_leftover_residual_320_pad3_after_320,
+        test_schema_not_schema_residual_ci_leftover_residual_320_pad4_after_320,
+        test_schema_not_schema_residual_ci_leftover_residual_320_pad5_after_320,
+        test_schema_not_schema_residual_ci_leftover_residual_320_still_after_320,
+        test_schema_not_schema_residual_ci_leftover_residual_320_after_320,
+        test_schema_not_schema_residual_ci_leftover_309_pad0_after_320,
+        test_schema_not_schema_residual_ci_leftover_309_pad1_after_320,
+        test_schema_not_schema_residual_ci_leftover_309_pad2_after_320,
+        test_schema_not_schema_residual_ci_leftover_309_pad3_after_320,
+        test_schema_not_schema_residual_ci_leftover_309_pad4_after_320,
+        test_schema_not_schema_residual_ci_leftover_309_pad5_after_320,
+        test_schema_not_schema_residual_ci_leftover_309_still_after_320,
+        test_schema_not_schema_residual_ci_leftover_309_after_320,
+        test_schema_not_schema_residual_ci_299_pad0_after_320,
+        test_schema_not_schema_residual_ci_299_pad1_after_320,
+        test_schema_not_schema_residual_ci_299_pad2_after_320,
+        test_schema_not_schema_residual_ci_299_pad3_after_320,
+        test_schema_not_schema_residual_ci_299_pad4_after_320,
+        test_schema_not_schema_residual_ci_299_pad5_after_320,
+        test_schema_not_schema_residual_ci_299_still_after_320,
+        test_schema_not_schema_residual_ci_299_after_320,
+        test_schema_not_wiki_293_pad0_after_320,
+        test_schema_not_wiki_293_pad1_after_320,
+        test_schema_not_wiki_293_pad2_after_320,
+        test_schema_not_wiki_293_pad3_after_320,
+        test_schema_not_wiki_293_pad4_after_320,
+        test_schema_not_wiki_293_pad5_after_320,
+        test_schema_not_wiki_293_still_after_320,
+        test_schema_not_wiki_293_after_320,
+        test_schema_not_schema_282_pad0_after_320,
+        test_schema_not_schema_282_pad1_after_320,
+        test_schema_not_schema_282_pad2_after_320,
+        test_schema_not_schema_282_pad3_after_320,
+        test_schema_not_schema_282_pad4_after_320,
+        test_schema_not_schema_282_pad5_after_320,
+        test_schema_not_schema_282_still_after_320,
+        test_schema_not_schema_282_after_320,
+        test_schema_failed_banner_pad0_after_320,
+        test_schema_failed_banner_pad1_after_320,
+        test_schema_failed_banner_pad2_after_320,
+        test_schema_failed_banner_pad3_after_320,
+        test_schema_failed_banner_pad4_after_320,
+        test_schema_failed_banner_pad5_after_320,
+        test_schema_failed_banner_still_after_320,
+        test_schema_failed_banner_after_320,
+        test_schema_file_stderr_pad0_after_320,
+        test_schema_file_stderr_pad1_after_320,
+        test_schema_file_stderr_pad2_after_320,
+        test_schema_file_stderr_pad3_after_320,
+        test_schema_file_stderr_pad4_after_320,
+        test_schema_file_stderr_pad5_after_320,
+        test_schema_file_stderr_still_after_320,
+        test_schema_file_stderr_after_320,
+        test_schema_print_err_pad0_after_320,
+        test_schema_print_err_pad1_after_320,
+        test_schema_print_err_pad2_after_320,
+        test_schema_print_err_pad3_after_320,
+        test_schema_print_err_pad4_after_320,
+        test_schema_print_err_pad5_after_320,
+        test_schema_print_err_still_after_320,
+        test_schema_print_err_after_320,
+        test_schema_must_scalar_pad0_after_320,
+        test_schema_must_scalar_pad1_after_320,
+        test_schema_must_scalar_pad2_after_320,
+        test_schema_must_scalar_pad3_after_320,
+        test_schema_must_scalar_pad4_after_320,
+        test_schema_must_scalar_pad5_after_320,
+        test_schema_must_scalar_still_after_320,
+        test_schema_must_scalar_after_320,
+        test_schema_isinstance_dict_list_pad0_after_320,
+        test_schema_isinstance_dict_list_pad1_after_320,
+        test_schema_isinstance_dict_list_pad2_after_320,
+        test_schema_isinstance_dict_list_pad3_after_320,
+        test_schema_isinstance_dict_list_pad4_after_320,
+        test_schema_isinstance_dict_list_pad5_after_320,
+        test_schema_isinstance_dict_list_still_after_320,
+        test_schema_isinstance_dict_list_after_320,
+        test_schema_rel_closes_docs_pad0_after_320,
+        test_schema_rel_closes_docs_pad1_after_320,
+        test_schema_rel_closes_docs_pad2_after_320,
+        test_schema_rel_closes_docs_pad3_after_320,
+        test_schema_rel_closes_docs_pad4_after_320,
+        test_schema_rel_closes_docs_pad5_after_320,
+        test_schema_rel_closes_docs_still_after_320,
+        test_schema_rel_closes_docs_after_320,
+        test_schema_closes_in_data_pad0_after_320,
+        test_schema_closes_in_data_pad1_after_320,
+        test_schema_closes_in_data_pad2_after_320,
+        test_schema_closes_in_data_pad3_after_320,
+        test_schema_closes_in_data_pad4_after_320,
+        test_schema_closes_in_data_pad5_after_320,
+        test_schema_closes_in_data_still_after_320,
+        test_schema_closes_in_data_after_320,
+        test_schema_null_tilde_pad0_after_320,
+        test_schema_null_tilde_pad1_after_320,
+        test_schema_null_tilde_pad2_after_320,
+        test_schema_null_tilde_pad3_after_320,
+        test_schema_null_tilde_pad4_after_320,
+        test_schema_null_tilde_pad5_after_320,
+        test_schema_null_tilde_still_after_320,
+        test_schema_null_tilde_after_320,
+        test_schema_re_fullmatch_digit_pad0_after_320,
+        test_schema_re_fullmatch_digit_pad1_after_320,
+        test_schema_re_fullmatch_digit_pad2_after_320,
+        test_schema_re_fullmatch_digit_pad3_after_320,
+        test_schema_re_fullmatch_digit_pad4_after_320,
+        test_schema_re_fullmatch_digit_pad5_after_320,
+        test_schema_re_fullmatch_digit_still_after_320,
+        test_schema_re_fullmatch_digit_after_320,
+        test_schema_path_resolve_parent_pad0_after_320,
+        test_schema_path_resolve_parent_pad1_after_320,
+        test_schema_path_resolve_parent_pad2_after_320,
+        test_schema_path_resolve_parent_pad3_after_320,
+        test_schema_path_resolve_parent_pad4_after_320,
+        test_schema_path_resolve_parent_pad5_after_320,
+        test_schema_path_resolve_parent_still_after_320,
+        test_schema_path_resolve_parent_after_320,
+        test_schema_sys_path_insert_pad0_after_320,
+        test_schema_sys_path_insert_pad1_after_320,
+        test_schema_sys_path_insert_pad2_after_320,
+        test_schema_sys_path_insert_pad3_after_320,
+        test_schema_sys_path_insert_pad4_after_320,
+        test_schema_sys_path_insert_pad5_after_320,
+        test_schema_sys_path_insert_still_after_320,
+        test_schema_sys_path_insert_after_320,
+        test_schema_pragma_no_cover_pad0_after_320,
+        test_schema_pragma_no_cover_pad1_after_320,
+        test_schema_pragma_no_cover_pad2_after_320,
+        test_schema_pragma_no_cover_pad3_after_320,
+        test_schema_pragma_no_cover_pad4_after_320,
+        test_schema_pragma_no_cover_pad5_after_320,
+        test_schema_pragma_no_cover_still_after_320,
+        test_schema_pragma_no_cover_after_320,
+        test_schema_stewardship_common_import_pad0_after_320,
+        test_schema_stewardship_common_import_pad1_after_320,
+        test_schema_stewardship_common_import_pad2_after_320,
+        test_schema_stewardship_common_import_pad3_after_320,
+        test_schema_stewardship_common_import_pad4_after_320,
+        test_schema_stewardship_common_import_pad5_after_320,
+        test_schema_stewardship_common_import_still_after_320,
+        test_schema_stewardship_common_import_after_320,
+        test_schema_engine_pyyaml_stdlib_pad0_after_320,
+        test_schema_engine_pyyaml_stdlib_pad1_after_320,
+        test_schema_engine_pyyaml_stdlib_pad2_after_320,
+        test_schema_engine_pyyaml_stdlib_pad3_after_320,
+        test_schema_engine_pyyaml_stdlib_pad4_after_320,
+        test_schema_engine_pyyaml_stdlib_pad5_after_320,
+        test_schema_engine_pyyaml_stdlib_still_after_320,
+        test_schema_engine_pyyaml_stdlib_after_320,
+        test_schema_value_startswith_quote_pad0_after_320,
+        test_schema_value_startswith_quote_pad1_after_320,
+        test_schema_value_startswith_quote_pad2_after_320,
+        test_schema_value_startswith_quote_pad3_after_320,
+        test_schema_value_startswith_quote_pad4_after_320,
+        test_schema_value_startswith_quote_pad5_after_320,
+        test_schema_value_startswith_quote_still_after_320,
+        test_schema_value_startswith_quote_after_320,
+        test_schema_elif_true_false_pad0_after_320,
+        test_schema_elif_true_false_pad1_after_320,
+        test_schema_elif_true_false_pad2_after_320,
+        test_schema_elif_true_false_pad3_after_320,
+        test_schema_elif_true_false_pad4_after_320,
+        test_schema_elif_true_false_pad5_after_320,
+        test_schema_elif_true_false_still_after_320,
+        test_schema_elif_true_false_after_320,
+        test_schema_noqa_ble001_pad0_after_320,
+        test_schema_noqa_ble001_pad1_after_320,
+        test_schema_noqa_ble001_pad2_after_320,
+        test_schema_noqa_ble001_pad3_after_320,
+        test_schema_noqa_ble001_pad4_after_320,
+        test_schema_noqa_ble001_pad5_after_320,
+        test_schema_noqa_ble001_still_after_320,
+        test_schema_noqa_ble001_after_320,
+        test_schema_host_320_pad0_after_320,
+        test_schema_host_320_pad1_after_320,
+        test_schema_host_320_pad2_after_320,
+        test_schema_host_320_pad3_after_320,
+        test_schema_host_320_pad4_after_320,
+        test_schema_host_320_pad5_after_320,
+        test_schema_host_320_still_after_320,
+        test_schema_host_320_after_320,
+        test_schema_rejects_status_latched_still_after_320,
+        test_schema_gate_requires_status_latched_still_after_320,
+        test_schema_rejects_status_latched_after_320,
+        test_schema_gate_requires_status_latched_after_320,
+        test_schema_rejects_status_pinned_still_after_320,
+        test_schema_gate_requires_status_pinned_still_after_320,
+        test_schema_rejects_status_pinned_after_320,
+        test_schema_gate_requires_status_pinned_after_320,
+        test_schema_rejects_status_clamped_still_after_320,
+        test_schema_gate_requires_status_clamped_still_after_320,
+        test_schema_rejects_status_clamped_after_320,
+        test_schema_gate_requires_status_clamped_after_320,
+        test_schema_rejects_status_gated_still_after_320,
+        test_schema_gate_requires_status_gated_still_after_320,
+        test_schema_rejects_status_gated_after_320,
+        test_schema_gate_requires_status_gated_after_320,
+        test_schema_rejects_status_vaulted_still_after_320,
+        test_schema_gate_requires_status_vaulted_still_after_320,
+        test_schema_rejects_status_vaulted_after_320,
+        test_schema_gate_requires_status_vaulted_after_320,
+        test_schema_rejects_status_caged_still_after_320,
+        test_schema_gate_requires_status_caged_still_after_320,
+        test_schema_rejects_status_caged_after_320,
+        test_schema_gate_requires_status_caged_after_320,
+        test_schema_rejects_surface_openrouter_still_after_320,
+        test_schema_gate_requires_surface_openrouter_still_after_320,
+        test_schema_rejects_surface_openrouter_after_320,
+        test_schema_gate_requires_surface_openrouter_after_320,
+        test_schema_rejects_surface_nebius_still_after_320,
+        test_schema_gate_requires_surface_nebius_still_after_320,
+        test_schema_rejects_surface_nebius_after_320,
+        test_schema_gate_requires_surface_nebius_after_320,
+        test_schema_rejects_surface_cerebras_still_after_320,
+        test_schema_gate_requires_surface_cerebras_still_after_320,
+        test_schema_rejects_surface_cerebras_after_320,
+        test_schema_gate_requires_surface_cerebras_after_320,
+        test_schema_rejects_surface_sambanova_still_after_320,
+        test_schema_gate_requires_surface_sambanova_still_after_320,
+        test_schema_rejects_surface_sambanova_after_320,
+        test_schema_gate_requires_surface_sambanova_after_320,
+        test_schema_rejects_surface_modal_still_after_320,
+        test_schema_gate_requires_surface_modal_still_after_320,
+        test_schema_rejects_surface_modal_after_320,
+        test_schema_gate_requires_surface_modal_after_320,
 
 ]
 

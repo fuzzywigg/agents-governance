@@ -2556,6 +2556,48 @@ def check_workflow_hardening(errors: list[str]) -> None:
             errors,
         )
 
+    dl_run_337 = (
+        "        shell: bash\n"
+        "      - name: actionlint existing workflow paths"
+    )
+    if dl_run_337 not in stew:
+        fail(
+            "stewardship-checks.yml must keep contiguous Download -> "
+            "actionlint run adjacency "
+            "(path-order residual leftover deepen after #337)",
+            errors,
+        )
+    perm_steps_337 = (
+        "    permissions:\n"
+        "      contents: read\n"
+        "    steps:"
+    )
+    for wf_name, body in (
+        ("link-check.yml", link),
+        ("markdown-lint.yml", lint),
+        ("stewardship-checks.yml", stew),
+    ):
+        if perm_steps_337 not in body:
+            fail(
+                f"{wf_name} must keep contiguous permissions:/steps: "
+                "adjacency "
+                "(path-order residual leftover deepen after #337)",
+                errors,
+            )
+    # steps:/checkout adjacency on stewardship only (link/lint may insert
+    # docker:// uses before checkout; actionlint-style allow-test retains that).
+    steps_co_337 = (
+        "    steps:\n"
+        "      - uses: actions/checkout@v7"
+    )
+    if steps_co_337 not in stew:
+        fail(
+            "stewardship-checks.yml must keep contiguous steps:/checkout "
+            "adjacency "
+            "(path-order residual leftover deepen after #337)",
+            errors,
+        )
+
     # Stewardship-checks + schema residual deepen after #225 (DISTINCT leftover;
     # NOT path-edges #225 / NOT Pass-2 leftover+md/link #220 / NOT schema fourth #216 /
     # NOT badge-lint #208 / NOT Pass-2 residual #199/#203 / NOT path-order #189).

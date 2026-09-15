@@ -512,7 +512,10 @@ MEMORY dumps / Invented frameworks / Maintained by smtp.eth /
 trustworthy without / Prefer reversible PRs / Never delete scratchpad /
 three workflows / --verbose->--no-progress /
 --github-token->--exclude-path / !OWASP->config adjacency —
-DISTINCT leftover only (not Pass-2 residual / templates leftover #348 / not Pass-2 residual / templates leftover #337 / not wiki/mdlink leftover residual after #326 / not wiki/mdlink leftover residual after #320 /
+DISTINCT leftover only (not Pass-2 residual / templates leftover #348 /
+not Pass-2 residual / templates leftover #337 /
+not wiki/mdlink leftover residual after #326 /
+not wiki/mdlink leftover residual after #320 /
 not stewardship-schema residual CI leftover residual #320 /
 not path-filter/path-order leftover #314 / not stewardship-schema residual CI leftover #309 /
 not stewardship-schema residual CI #299 /

@@ -34,7 +34,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   not wiki-badge leftover #227 / not #189 path-order / not #176 layouts /
   not schema #191/#216 / not Pass-2 residual #199/#203 /
   not Pass-2 leftover + md/link #220 / not stewardship-badge lint #208);
-  no invent-product; no fourth badge; no scratchpad notes. Lands closed
+  no invent-product; no fourth badge; no secrets; no scratchpad notes. Lands closed
   #349/#334/#344/#340/#339/#338/#323/#319/#317 leftover on post-#348 tip (do **not**
   revive closed PRs
   #349/#353/#347/#344/#340/#339/#338/#334/#323/#319/#317/#310/#304/#303/#300/#294/#292/#286/#280/#274/#270/#264/#255/#247).

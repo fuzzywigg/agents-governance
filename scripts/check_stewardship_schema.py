@@ -114,6 +114,23 @@ Fail-closed pins (live path after #53; second-pass after #72/#75):
   residual CI leftover invalid status stubs BLOCKED|PAUSED|DEFERRED|SKIPPED|MUTED|DORMANT /
   residual CI leftover invalid surface stubs gemini|perplexity|fireworks|deepseek|ollama /
   residual CI leftover docstring
+- Residual CI leftover residual deepen after #309 (schema residual CI leftover residual; NOT schema residual CI leftover #309 /
+  NOT schema residual CI #299 / NOT wiki/mdlink leftover residual #293 /
+  NOT schema leftover residual #282 / NOT lychee/blob-503 leftover #278 /
+  NOT Pass-2 residual leftover #272 / NOT path-filter/path-order leftover #262 /
+  NOT schema leftover #258 / NOT wiki/mdlink leftover #252 /
+  NOT path-edges residual #244 / NOT schema residual (pass-5) #233):
+  residual CI leftover residual helper needles if missing: / fail(f"missing file: {rel}" /
+  if value is None or / must be non-empty / must be a string /
+  "status" in required_keys / status is not None /
+  status must be ACTIVE / (expected {want!r}) /
+  not isinstance(level, int) / isinstance(tier, bool) /
+  not isinstance(tier, int) / or tier < 1 /
+  if rel == "AGENTS.md" / "version" in data /
+  yaml.safe_load / isinstance(loaded, dict) /
+  residual CI leftover residual invalid status stubs ABANDONED|EXPIRED|REVOKED|HIDDEN|OFFLINE|ZOMBIE /
+  residual CI leftover residual invalid surface stubs huggingface|replicate|cohere|bedrock|sagemaker /
+  residual CI leftover residual docstring
 """
 
 from __future__ import annotations

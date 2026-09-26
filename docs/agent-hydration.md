@@ -16,7 +16,7 @@ edit_policy: "Agent-editable; structural changes require Andrew approval"
 
 PHASE 1 below is a **2026-04-13 hydration snapshot**. It must not be read as current tip.
 
-Live tip (post-#365; envjson via #364; Dependabot #363 parked) has three stewardship CI
+Live tip (post-#366; envjson via #364; Dependabot #363 parked) has three stewardship CI
 workflows under `.github/workflows/`:
 
 | Workflow | Live pins / tool (stewardship CI contract) |
@@ -25,8 +25,10 @@ workflows under `.github/workflows/`:
 | `link-check.yml` | `actions/checkout@v7`, `lycheeverse/lychee-action@v2` (not `markdown-link-check`) |
 | `stewardship-checks.yml` | `actions/checkout@v7`, `actions/setup-python@v5` (intentional; gate fail-closes), actionlint `1.7.7` |
 
-Local gates: `bash scripts/run_stewardship_checks.sh` then
+Local gates live under existing `scripts/` (do not claim the directory absent):
+`bash scripts/run_stewardship_checks.sh` then
 `python3 scripts/test_stewardship_gates.py` (see [AGENTS.md](../AGENTS.md) §3).
+`scripts/validate_recipes.py` (Appendix B) remains a separate pending stub — not invented here.
 Do not invent a fourth status badge; stewardship stays quiet CI/docs.
 
 ---

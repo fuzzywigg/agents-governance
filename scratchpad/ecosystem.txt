@@ -907,3 +907,5 @@ _None yet._
 - Expiry: 2026-09-26 12:00 America/New_York
 - Scope: tip honesty docs only; no Dependabot merge; no force-push; no invent recipe validator
 2026-09-26T10:38:00Z
+
+2026-09-26T10:48:00Z cursor: Local green — markdownlint + run_stewardship + self-tests 7558; pushed cursor/tip-honesty-scripts-p3-3-b325 ← ON-20260926 tip honesty P3-3 scripts/ residual (leave draft; #363 parked)

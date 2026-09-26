@@ -892,3 +892,5 @@ _None yet._
 - Expiry: 2026-09-26 10:36 America/New_York
 - Scope: tip honesty docs only; no Dependabot merge; no force-push; no AGENTS-ECOSYSTEM/templates
 2026-09-26T09:50:00Z
+
+2026-09-26T09:55:00Z cursor: Local green — markdownlint + run_stewardship + self-tests 7558; pushed cursor/tip-honesty-hydration-ci-5cda ← ON-20260926 tip honesty residual (leave draft; #363 parked)

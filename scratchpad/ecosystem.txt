@@ -935,3 +935,5 @@ _None yet._
 2026-09-26T12:20:00Z
 
 2026-09-26T12:30:41Z cursor: Local green — markdownlint + run_stewardship + self-tests 7558; pushed cursor/tip-honesty-readme-tier-cd-30ea ← ON-20260926 tip honesty README C/D residual (leave draft; #363 parked)
+
+2026-09-26T12:45:00Z cursor: Draft PR #369 CI green (lint + link-check + stewardship) ← ON-20260926 tip honesty README C/D residual; leave draft / do-not-merge; #363 remains parked

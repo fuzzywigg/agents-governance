@@ -872,3 +872,14 @@ _None yet._
 2026-09-14T10:44:39Z cursor: Cherry-pick in progress on post-#272 tip; local verify next ← ECO-081 (do not revive #246/#273/#266/#261/#260/#256/#251/#250)
 
 2026-09-14T10:51:26Z cursor: Local green — run_stewardship + self-tests 5592 + markdownlint on post-#272 tip ← ECO-081 lychee/blob-503 leftover only (leave draft; do not revive #246/#273/#266/#261/#260/#256/#251/#250)
+
+### [ON-20260926] TOKENMAXX park red Dependabot #363 (setup-python 5→7) — 2026-09-26T08:45:00Z
+- [x] cursor: Inspect #363 — stewardship FAIL = intentional gate pin actions/setup-python@v5 (check_badge_standard after #38); setup-python@v7 itself installs OK; lint/link-check green
+- [x] cursor: Post triage comment on #363 — root cause + morning HITL (hold / coordinated pin-lift vs bare rebase) + explicit overnight do-not-merge Dependabot majors
+- [x] cursor: Tip honesty check — AGENTS.md / CONTRIBUTING / .github docs do not falsely conflict with tip @v5 pin → no tip honesty PR
+- [x] cursor: No merge of #363; no workflow mute; no force-push
+- Expiry: 2026-09-27 12:00 America/New_York
+- Scope: park/triage only; no Dependabot merge overnight
+2026-09-26T08:45:00Z
+
+2026-09-26T08:45:37Z cursor: Triage comment posted on #363 (id 5844707825); tip residual no-PR; #363 remains open/parked ← ON-20260926

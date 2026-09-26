@@ -1,0 +1,5 @@
+{
+  "name": "agents-governance",
+  "install": "npm install -g markdownlint-cli2 || true",
+  "start": "markdownlint-cli2 \"**/*.md\" || true"
+}

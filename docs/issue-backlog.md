@@ -64,23 +64,32 @@ stewardship gates (ECO-017+). Live workflows (do not claim absent):
 
 ### [P2-4] [claude-cowork] Populate projects registry and align downstream repos
 
-**Status:** 🔜 PENDING — Requires Andrew decision on project table (nft2.me, owl-visuals status).
+**Status:** 🔜 PENDING HITL — Requires Andrew decision on portfolio registry
+(nft2.me / owl-visuals naming if they should appear anywhere).
 
-**Problem:** `README.md` lists `nft2.me` as "Pending" and `owl-visuals` as "Planned" in the "Projects Using This Governance" table. Neither has an active AGENTS.md. The table is aspirational, not factual.
+**Problem:** Tip `README.md` does **not** have a "Projects Using This Governance"
+table claiming `nft2.me` "Pending" / `owl-visuals` "Planned" — do **not** reopen
+that claim. Tip README uses the Ecosystem Snapshot tiers instead (`nft2.me` appears
+only under Tier D dormant wording; `owl-visuals` is absent from tip README).
+Remaining work is HITL registry alignment (AGENTS-ECOSYSTEM §2.1 / downstream
+adoption), not inventing a README projects table overnight.
 
 **Proposed Solution:**
 
-1. Update README table to distinguish between repos with active AGENTS.md vs. planned ones
-2. Open tracking issues in each downstream repo to adopt the template
-3. Add `fuzzywigg-ai` AGENTS.md link to README (it's listed as Active with ✅)
+1. Andrew decides whether `nft2.me` / `owl-visuals` need registry or tracking updates
+   (ecosystem map vs. leave dormant / omit)
+2. If adoption tracking is wanted: open issues in the relevant downstream repos
+3. Optionally link live AGENTS.md URLs for Active Tier C surfaces (e.g. fuzzywigg-ai)
+   — only when a real public URL exists; do not invent rows
 
 **Acceptance Criteria:**
 
-- [ ] README table accurately reflects which repos have an active AGENTS.md
-- [ ] fuzzywigg-ai AGENTS.md URL linked
-- [ ] nft2.me and owl-visuals have tracking issues opened
+- [ ] Tip honesty: backlog never claims README has a Pending/Planned "Projects Using
+      This Governance" table
+- [ ] Andrew decision recorded for nft2.me / owl-visuals (keep dormant / omit / track)
+- [ ] Any README or ecosystem-map edits match live tip (no invented project rows)
 
-**Routing:** claude-cowork | P2 | Branch: amendment/update-projects-registry | Deps: none
+**Routing:** claude-cowork | P2 | Branch: amendment/update-projects-registry | Deps: Andrew HITL
 
 ---
 
@@ -187,7 +196,7 @@ file-not-found for `validate_recipes.py` only.
 | 2 | [P2-1] CI/CD workflows | copilot | ✅ Done |
 | 2 | [P2-2] CONTRIBUTING + SECURITY | copilot | ✅ Done |
 | 2 | [P2-3] CODEOWNERS | copilot | ✅ Done |
-| 2 | [P2-4] Projects registry | claude-cowork | 🔜 Pending |
+| 2 | [P2-4] Projects registry | claude-cowork | 🔜 HITL |
 | 2 | [P2-5] Branch protection | human | 🔜 HITL |
 | 3 | [P3-1] Notion sync | claude-cowork | 🔜 HITL |
 | 3 | [P3-2] CHANGELOG | copilot | ✅ Done |

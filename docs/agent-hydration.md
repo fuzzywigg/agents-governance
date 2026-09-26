@@ -16,7 +16,7 @@ edit_policy: "Agent-editable; structural changes require Andrew approval"
 
 PHASE 1 below is a **2026-04-13 hydration snapshot**. It must not be read as current tip.
 
-Live tip (post-#366; envjson via #364; Dependabot #363 parked) has three stewardship CI
+Live tip (post-#367; envjson via #364; Dependabot #363 parked) has three stewardship CI
 workflows under `.github/workflows/`:
 
 | Workflow | Live pins / tool (stewardship CI contract) |
@@ -29,6 +29,8 @@ Local gates live under existing `scripts/` (do not claim the directory absent):
 `bash scripts/run_stewardship_checks.sh` then
 `python3 scripts/test_stewardship_gates.py` (see [AGENTS.md](../AGENTS.md) §3).
 `scripts/validate_recipes.py` (Appendix B) remains a separate pending stub — not invented here.
+Tip README has no "Projects Using This Governance" Pending/Planned table — do not
+reclaim it; Ecosystem Snapshot tiers are the live surface (see backlog P2-4).
 Do not invent a fourth status badge; stewardship stays quiet CI/docs.
 
 ---
@@ -146,7 +148,9 @@ Do not invent a fourth status badge; stewardship stays quiet CI/docs.
 1. **Branch protection on `main`** — Should `main` be protected (PR-only merges)? Which surface should be permitted to merge (human-only vs. copilot)?
 2. **Notion Master Index** — Does a Notion page for this repo exist? What parent should new pages be created under? (Requires Notion credentials)
 3. **CODEOWNERS** — Should Andrew be CODEOWNER for `AGENTS-ECOSYSTEM.md` and `templates/`? Any additional co-owners?
-4. **Projects table** — Should `nft2.me` and `owl-visuals` remain as "Pending/Planned" or be removed until they have active AGENTS.md files?
+4. **Projects registry** — Tip README no longer has a Pending/Planned "Projects Using
+   This Governance" table. Should `nft2.me` / `owl-visuals` stay dormant/omitted, or
+   get tracking elsewhere (ecosystem map / downstream issues)?
 5. **Blockchain audit contract address** — AGENTS-ECOSYSTEM.md §10.2 shows `contract: "0x..."` as placeholder. Is there a deployed contract?
 
 ---
@@ -195,7 +199,7 @@ The following LIST B questions were not resolved and require Andrew's input:
 1. Branch protection rules for `main`
 2. Notion Master Index page location and credentials
 3. CODEOWNERS configuration
-4. Projects table cleanup (nft2.me, owl-visuals status)
+4. Projects registry HITL (nft2.me / owl-visuals — tip README has no Pending/Planned table)
 5. Blockchain audit contract address (0x... placeholder in AGENTS-ECOSYSTEM.md §10.2)
 
 ---
@@ -203,6 +207,7 @@ The following LIST B questions were not resolved and require Andrew's input:
 ## Recommended Next Action
 
 CI/CD hydration (Issue #4 / P2-1) is **done** on tip — see tip honesty table above.
-Do not reopen absent-workflows claims. Next useful work is HITL LIST B items (branch
-protection, Notion Master Index, projects table) or coordinated Dependabot pin lifts
+Do not reopen absent-workflows claims or a README "Projects Using This Governance"
+Pending/Planned table. Next useful work is HITL LIST B items (branch protection,
+Notion Master Index, projects registry) or coordinated Dependabot pin lifts
 (hold #363 `setup-python` 5→7 until workflow + stewardship gate needles move together).

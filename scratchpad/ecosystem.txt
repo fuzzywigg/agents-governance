@@ -909,3 +909,16 @@ _None yet._
 2026-09-26T10:38:00Z
 
 2026-09-26T10:48:00Z cursor: Local green — markdownlint + run_stewardship + self-tests 7558; pushed cursor/tip-honesty-scripts-p3-3-b325 ← ON-20260926 tip honesty P3-3 scripts/ residual (leave draft; #363 parked)
+
+2026-09-26T11:03:02Z cursor: PR #367 MERGED (tip honesty live scripts/ vs backlog P3-3 after #366) ← tip d734640; ON-20260926 tip honesty P3-3 residual complete; #363 remains parked
+
+### [ON-20260926] Tip honesty residual — backlog P2-4 README projects table after #367 — 2026-09-26T11:04:29Z
+- [x] cursor: Tip post-#367 (d734640); #363 stays parked; do not invent README projects table / owl-visuals rows; do not invent validate_recipes.py
+- [x] cursor: Found residual — docs/issue-backlog.md P2-4 claimed README "Projects Using This Governance" Pending/Planned (nft2.me/owl-visuals) while tip README has Ecosystem Snapshot only
+- [x] cursor: Fix tip honesty (P2-4 + hydration tip note / LIST B); leave #363 alone; no AGENTS-ECOSYSTEM/templates
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Expiry: 2026-09-26 14:00 America/New_York
+- Scope: tip honesty docs only; no Dependabot merge; no force-push; no invent project rows
+2026-09-26T11:04:29Z
+
+2026-09-26T11:19:29Z cursor: Local green — markdownlint + run_stewardship + self-tests 7558; pushed cursor/tip-honesty-p2-4-readme-table-62cc ← ON-20260926 tip honesty P2-4 README residual (leave draft; #363 parked)

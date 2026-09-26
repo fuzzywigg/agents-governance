@@ -12,7 +12,26 @@ edit_policy: "Agent-editable; structural changes require Andrew approval"
 
 ---
 
-## PHASE 1: FINDINGS REPORT
+## Tip honesty (live tree — ON-20260926)
+
+PHASE 1 below is a **2026-04-13 hydration snapshot**. It must not be read as current tip.
+
+Live tip (post-#365; envjson via #364; Dependabot #363 parked) has three stewardship CI
+workflows under `.github/workflows/`:
+
+| Workflow | Live pins / tool (stewardship CI contract) |
+|----------|--------------------------------------------|
+| `markdown-lint.yml` | `actions/checkout@v7`, `DavidAnson/markdownlint-cli2-action@v24` |
+| `link-check.yml` | `actions/checkout@v7`, `lycheeverse/lychee-action@v2` (not `markdown-link-check`) |
+| `stewardship-checks.yml` | `actions/checkout@v7`, `actions/setup-python@v5` (intentional; gate fail-closes), actionlint `1.7.7` |
+
+Local gates: `bash scripts/run_stewardship_checks.sh` then
+`python3 scripts/test_stewardship_gates.py` (see [AGENTS.md](../AGENTS.md) §3).
+Do not invent a fourth status badge; stewardship stays quiet CI/docs.
+
+---
+
+## PHASE 1: FINDINGS REPORT (historical — 2026-04-13)
 
 ### Identity
 
@@ -181,5 +200,7 @@ The following LIST B questions were not resolved and require Andrew's input:
 
 ## Recommended Next Action
 
-**Start with Issue #4 (CI/CD: markdown lint) on `copilot` surface.**
-It is the highest-leverage Phase 2 item and unblocks quality assurance for all future governance document edits.
+CI/CD hydration (Issue #4 / P2-1) is **done** on tip — see tip honesty table above.
+Do not reopen absent-workflows claims. Next useful work is HITL LIST B items (branch
+protection, Notion Master Index, projects table) or coordinated Dependabot pin lifts
+(hold #363 `setup-python` 5→7 until workflow + stewardship gate needles move together).

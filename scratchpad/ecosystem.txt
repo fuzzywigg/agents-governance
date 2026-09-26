@@ -896,3 +896,14 @@ _None yet._
 2026-09-26T09:55:00Z cursor: Local green — markdownlint + run_stewardship + self-tests 7558; pushed cursor/tip-honesty-hydration-ci-5cda ← ON-20260926 tip honesty residual (leave draft; #363 parked)
 
 2026-09-26T10:20:00Z cursor: Draft PR #366 CI green (lint + link-check + stewardship) ← ON-20260926 tip honesty residual; leave draft / do-not-merge; #363 remains parked
+
+2026-09-26T10:31:50Z cursor: PR #366 MERGED (tip honesty hydration docs vs live stewardship CI pins) ← tip 8e4fc31; ON-20260926 tip honesty residual complete; #363 remains parked
+
+### [ON-20260926] Tip honesty residual — issue-backlog P3-3 scripts/ claim after #366 — 2026-09-26T10:38:00Z
+- [x] cursor: Tip post-#366 (8e4fc31); #363 stays parked; do not invent validate_recipes.py; do not redo #366 workflows/pins
+- [x] cursor: Found residual — docs/issue-backlog.md P3-3 claimed `scripts/` directory does not exist while tip hosts live stewardship scripts/
+- [x] cursor: Fix tip honesty (P3-3 + hydration local-gates note); leave #363 alone; no AGENTS-ECOSYSTEM/templates
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Expiry: 2026-09-26 12:00 America/New_York
+- Scope: tip honesty docs only; no Dependabot merge; no force-push; no invent recipe validator
+2026-09-26T10:38:00Z

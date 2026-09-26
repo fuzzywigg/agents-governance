@@ -141,13 +141,16 @@ stewardship gates (ECO-017+). Live workflows (do not claim absent):
 
 **Status:** 🔜 PENDING — Low priority.
 
-**Problem:** `AGENTS-ECOSYSTEM.md` Appendix B references `python scripts/validate_recipes.py` but the
-`scripts/` directory and this script do not exist. Any agent following Appendix B instructions will
-encounter a file-not-found error.
+**Problem:** `AGENTS-ECOSYSTEM.md` Appendix B references `python scripts/validate_recipes.py`,
+but that script is **not** on tip. Do **not** claim `scripts/` is absent — tip already has a
+live stewardship `scripts/` tree (`run_stewardship_checks.sh`, `test_stewardship_gates.py`,
+`check_*.py`, etc.). Agents following Appendix B's recipe-validator command still hit
+file-not-found for `validate_recipes.py` only.
 
 **Proposed Solution:**
 
 1. Create `scripts/validate_recipes.py` as a stub that validates Goose recipe YAML format
+   (alongside existing stewardship scripts — do not invent a second `scripts/` tree)
 2. Validate: `name`, `recipe.version`, `recipe.settings.autonomy_level`, `recipe.settings.network_zone` fields
 3. Add usage to Appendix B in AGENTS-ECOSYSTEM.md
 
@@ -156,6 +159,7 @@ encounter a file-not-found error.
 - [ ] `python scripts/validate_recipes.py` exits 0 for valid YAML, non-zero for invalid
 - [ ] Script validates all required Goose recipe fields per §6.2
 - [ ] Appendix B command in AGENTS-ECOSYSTEM.md points to correct path
+- [ ] Tip honesty: backlog never claims the whole `scripts/` directory is missing
 
 **Routing:** copilot | P3 | Branch: copilot/add-recipe-validator | Deps: Andrew approval for AGENTS-ECOSYSTEM.md edit
 

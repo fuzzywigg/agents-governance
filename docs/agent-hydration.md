@@ -16,7 +16,7 @@ edit_policy: "Agent-editable; structural changes require Andrew approval"
 
 PHASE 1 below is a **2026-04-13 hydration snapshot**. It must not be read as current tip.
 
-Live tip (post-#367; envjson via #364; Dependabot #363 parked) has three stewardship CI
+Live tip (post-#368; envjson via #364; Dependabot #363 parked) has three stewardship CI
 workflows under `.github/workflows/`:
 
 | Workflow | Live pins / tool (stewardship CI contract) |
@@ -31,6 +31,9 @@ Local gates live under existing `scripts/` (do not claim the directory absent):
 `scripts/validate_recipes.py` (Appendix B) remains a separate pending stub — not invented here.
 Tip README has no "Projects Using This Governance" Pending/Planned table — do not
 reclaim it; Ecosystem Snapshot tiers are the live surface (see backlog P2-4).
+README Ecosystem Snapshot C/D counts and membership must match live
+[AGENTS-ECOSYSTEM.md §2.1](../AGENTS-ECOSYSTEM.md#21-project-portfolio)
+(C=5 incl. `fuzzywigg.com`; D=7) — do not reintroduce C=4/D=8 drift.
 Do not invent a fourth status badge; stewardship stays quiet CI/docs.
 
 ---

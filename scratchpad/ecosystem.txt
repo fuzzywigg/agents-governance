@@ -922,3 +922,14 @@ _None yet._
 2026-09-26T11:04:29Z
 
 2026-09-26T11:19:29Z cursor: Local green — markdownlint + run_stewardship + self-tests 7558; pushed cursor/tip-honesty-p2-4-readme-table-62cc ← ON-20260926 tip honesty P2-4 README residual (leave draft; #363 parked)
+
+2026-09-26T11:19:54Z cursor: PR #368 MERGED (tip honesty backlog P2-4 README projects table after #367) ← tip 22b0b52; ON-20260926 tip honesty P2-4 residual complete; #363 remains parked
+
+### [ON-20260926] Tip honesty residual — README Ecosystem Snapshot C/D vs §2.1 after #368 — 2026-09-26T12:20:00Z
+- [x] cursor: Tip post-#368 (22b0b52); #363 stays parked; do not invent projects table / validate_recipes.py; do not edit AGENTS-ECOSYSTEM/templates
+- [x] cursor: Found residual — README Ecosystem Snapshot claimed C=4 / D=8 (fuzzywigg.com in D) while live AGENTS-ECOSYSTEM.md §2.1 has C=5 / D=7 (fuzzywigg.com in C); README says snapshot is mapped from §2.1
+- [x] cursor: Fix tip honesty (README C/D + hydration tip note); leave #363 alone; no AGENTS-ECOSYSTEM/templates
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Expiry: 2026-09-26 18:00 America/New_York
+- Scope: tip honesty README/docs only; no Dependabot merge; no force-push; no invent product rows
+2026-09-26T12:20:00Z

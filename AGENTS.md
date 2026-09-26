@@ -89,6 +89,11 @@ python3 scripts/test_stewardship_gates.py
 
 CI workflows: `markdown-lint.yml`, `link-check.yml`, `stewardship-checks.yml`.
 
+Intentional action pins (stewardship CI contract / `check_badge_standard.py`):
+`actions/checkout@v7`, `actions/setup-python@v5`, `DavidAnson/markdownlint-cli2-action@v24`,
+`lycheeverse/lychee-action@v2`. Major Dependabot bumps need coordinated gate + docs updates
+(hold parked #363 `setup-python` 5→7; do not bare-rebase).
+
 ---
 
 ## 4. Deployment

@@ -883,3 +883,16 @@ _None yet._
 2026-09-26T08:45:00Z
 
 2026-09-26T08:45:37Z cursor: Triage comment posted on #363 (id 5844707825); tip residual no-PR; #363 remains open/parked ← ON-20260926
+
+### [ON-20260926] Tip honesty residual — hydration docs vs live stewardship CI — 2026-09-26T09:50:00Z
+- [x] cursor: Tip post-#365; #363 stays parked; do not redo envjson #364
+- [x] cursor: Found residual — docs/agent-hydration.md claimed `.github/workflows/` absent + markdown-link-check; issue-backlog P2-1 omitted stewardship-checks.yml / live pins
+- [x] cursor: Fix tip honesty (hydration + backlog + AGENTS.md pin contract note); leave #363 alone
+- [ ] cursor: Green draft PR with CI — leave draft / do-not-merge
+- Expiry: 2026-09-26 10:36 America/New_York
+- Scope: tip honesty docs only; no Dependabot merge; no force-push; no AGENTS-ECOSYSTEM/templates
+2026-09-26T09:50:00Z
+
+2026-09-26T09:55:00Z cursor: Local green — markdownlint + run_stewardship + self-tests 7558; pushed cursor/tip-honesty-hydration-ci-5cda ← ON-20260926 tip honesty residual (leave draft; #363 parked)
+
+2026-09-26T10:20:00Z cursor: Draft PR #366 CI green (lint + link-check + stewardship) ← ON-20260926 tip honesty residual; leave draft / do-not-merge; #363 remains parked

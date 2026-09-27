@@ -98077,6 +98077,261 @@ def test_gate_requires_blob_master_pin_after_337() -> None:
             'must not invent blob/master exclude',
         )
 
+
+# --- TOKENMAXX ON-20260927 W5: pure-helper unit tests (non-honesty; uncovered helpers) ---
+
+
+def test_schema_parse_simple_yaml_scalars_on_20260927_w5() -> None:
+    """Direct unit: parse_simple_yaml coerces quoted/bool/null/int scalars."""
+    sys.path.insert(0, str(SCRIPTS))
+    from check_stewardship_schema import parse_simple_yaml  # noqa: E402
+
+    data = parse_simple_yaml(
+        "# comment\n"
+        "\n"
+        'name: "agents-governance"\n'
+        "active: true\n"
+        "disabled: false\n"
+        "missing: null\n"
+        "tilde: ~\n"
+        "tier: 1\n"
+        "neg: -3\n"
+        "owner: 'smtp.eth'\n"
+    )
+    if data.get("name") != "agents-governance":
+        raise AssertionError(f"quoted string: {data!r}")
+    if data.get("active") is not True or data.get("disabled") is not False:
+        raise AssertionError(f"bool coerce: {data!r}")
+    if data.get("missing") is not None or data.get("tilde") is not None:
+        raise AssertionError(f"null coerce: {data!r}")
+    if data.get("tier") != 1 or data.get("neg") != -3:
+        raise AssertionError(f"int coerce: {data!r}")
+    if data.get("owner") != "smtp.eth":
+        raise AssertionError(f"single-quoted: {data!r}")
+
+
+def test_schema_parse_simple_yaml_rejects_bad_lines_on_20260927_w5() -> None:
+    """Direct unit: parse_simple_yaml fail-closes on unsupported / empty-key lines."""
+    sys.path.insert(0, str(SCRIPTS))
+    from check_stewardship_schema import parse_simple_yaml  # noqa: E402
+
+    try:
+        parse_simple_yaml("no-colon-here\n")
+    except ValueError as exc:
+        if "unsupported YAML line" not in str(exc):
+            raise AssertionError(f"unexpected unsupported msg: {exc}") from exc
+    else:
+        raise AssertionError("expected ValueError for unsupported line")
+
+    try:
+        parse_simple_yaml(": missing-key\n")
+    except ValueError as exc:
+        if "empty key" not in str(exc):
+            raise AssertionError(f"unexpected empty-key msg: {exc}") from exc
+    else:
+        raise AssertionError("expected ValueError for empty key")
+
+
+def test_schema_reject_non_scalar_helper_on_20260927_w5() -> None:
+    """Direct unit: reject_non_scalar flags nested/list and accepts scalars."""
+    sys.path.insert(0, str(SCRIPTS))
+    from check_stewardship_schema import reject_non_scalar  # noqa: E402
+
+    errors: list[str] = []
+    if reject_non_scalar("AGENTS.md", "scope", {"nested": True}, errors) is not True:
+        raise AssertionError("dict must reject")
+    if reject_non_scalar("AGENTS.md", "closes", ["#1"], errors) is not True:
+        raise AssertionError("list must reject")
+    if reject_non_scalar("AGENTS.md", "maintainer", "smtp.eth", errors) is not False:
+        raise AssertionError("string scalar must pass")
+    if reject_non_scalar("AGENTS.md", "tier", 1, errors) is not False:
+        raise AssertionError("int scalar must pass")
+    if reject_non_scalar("AGENTS.md", "flag", None, errors) is not False:
+        raise AssertionError("None scalar must pass (non-empty checked elsewhere)")
+    if len(errors) != 2:
+        raise AssertionError(f"expected 2 nested/list errors, got {errors!r}")
+    if not all("must be a scalar" in e for e in errors):
+        raise AssertionError(f"bad error wording: {errors!r}")
+
+
+def test_schema_first_yaml_block_helper_on_20260927_w5() -> None:
+    """Direct unit: first_yaml_block extracts fenced yaml / raises when absent."""
+    sys.path.insert(0, str(SCRIPTS))
+    from check_stewardship_schema import first_yaml_block  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        good = Path(tmp) / "good.md"
+        good.write_text(
+            "# Title\n\n```yaml\nstatus: ACTIVE\ntier: 1\n```\n\nbody\n",
+            encoding="utf-8",
+        )
+        block = first_yaml_block(good)
+        if "status: ACTIVE" not in block or "tier: 1" not in block:
+            raise AssertionError(f"block extract failed: {block!r}")
+
+        bad = Path(tmp) / "bad.md"
+        bad.write_text("# Title\n\nno yaml fence\n", encoding="utf-8")
+        try:
+            first_yaml_block(bad)
+        except ValueError as exc:
+            if "no fenced" not in str(exc):
+                raise AssertionError(f"unexpected missing-block msg: {exc}") from exc
+        else:
+            raise AssertionError("expected ValueError when yaml fence missing")
+
+
+def test_schema_load_yaml_empty_and_non_mapping_on_20260927_w5() -> None:
+    """Direct unit: load_yaml rejects empty / non-mapping metadata blocks."""
+    sys.path.insert(0, str(SCRIPTS))
+    from check_stewardship_schema import load_yaml  # noqa: E402
+
+    try:
+        load_yaml("")
+    except ValueError as exc:
+        if "empty" not in str(exc).lower():
+            raise AssertionError(f"unexpected empty msg: {exc}") from exc
+    else:
+        raise AssertionError("expected ValueError for empty yaml")
+
+    try:
+        load_yaml("- just\n- a\n- list\n")
+    except ValueError as exc:
+        if "mapping" not in str(exc).lower():
+            raise AssertionError(f"unexpected non-mapping msg: {exc}") from exc
+    else:
+        raise AssertionError("expected ValueError for non-mapping yaml")
+
+
+def test_relative_should_skip_helper_on_20260927_w5() -> None:
+    """Direct unit: should_skip covers OWASP / agents / VCS / node_modules."""
+    sys.path.insert(0, str(SCRIPTS))
+    from check_relative_links import should_skip  # noqa: E402
+    from stewardship_common import ROOT  # noqa: E402
+
+    if not should_skip(ROOT / "OWASP-AGENTIC.md"):
+        raise AssertionError("OWASP-AGENTIC.md must skip")
+    if should_skip(ROOT / "README.md"):
+        raise AssertionError("README.md must not skip")
+    agents = ROOT / ".github" / "agents" / "x.md"
+    if not should_skip(agents):
+        raise AssertionError(".github/agents paths must skip")
+    # Synthetic path under ROOT with skip parts (need not exist on disk).
+    if not should_skip(ROOT / "node_modules" / "pkg" / "README.md"):
+        raise AssertionError("node_modules paths must skip")
+    if not should_skip(ROOT / ".git" / "hooks" / "README.md"):
+        raise AssertionError(".git paths must skip")
+
+
+def test_relative_fully_unquote_cap_helper_on_20260927_w5() -> None:
+    """Direct unit: fully_unquote nests percent-decode up to the cap."""
+    sys.path.insert(0, str(SCRIPTS))
+    from check_relative_links import fully_unquote  # noqa: E402
+
+    if fully_unquote("%252e%252e") != "..":
+        raise AssertionError("double-encoded .. must decode")
+    if fully_unquote("plain") != "plain":
+        raise AssertionError("stable input must round-trip")
+    # Four nested encodings of '.' → still decodes within cap.
+    nested = "%2525252e"
+    out = fully_unquote(nested)
+    if out == nested:
+        raise AssertionError("cap must allow nested decode progress")
+    if fully_unquote("%2e%2e/%2e%2e") != "../..":
+        raise AssertionError("single-encoded traversal must decode")
+
+
+def test_wiki_reject_invent_badge_chrome_helper_on_20260927_w5() -> None:
+    """Direct unit: _reject_invent_badge_chrome needs badge/shields context."""
+    sys.path.insert(0, str(SCRIPTS))
+    from check_wiki_outline import _reject_invent_badge_chrome  # noqa: E402
+
+    errors: list[str] = []
+    _reject_invent_badge_chrome(
+        "Home.md",
+        "Narrative mentions stars in the night sky without chrome.",
+        errors,
+    )
+    if errors:
+        raise AssertionError(f"prose stars must not fail: {errors!r}")
+
+    _reject_invent_badge_chrome(
+        "Home.md",
+        "See the stars badge on the landing page.",
+        errors,
+    )
+    if not any("stars" in e for e in errors):
+        raise AssertionError(f"stars+badge must fail: {errors!r}")
+
+    errors2: list[str] = []
+    _reject_invent_badge_chrome(
+        "Repo-Stewardship.md",
+        "Do not invent codecov via https://img.shields.io/codecov/c/github/x/y",
+        errors2,
+    )
+    if not any("codecov" in e for e in errors2):
+        raise AssertionError(f"codecov+shields must fail: {errors2!r}")
+
+    errors3: list[str] = []
+    _reject_invent_badge_chrome(
+        "Overview.md",
+        "Coverage metrics discussion in narrative only.",
+        errors3,
+    )
+    if errors3:
+        raise AssertionError(f"coverage prose without badge must pass: {errors3!r}")
+
+
+def test_badge_extract_badge_row_edges_on_20260927_w5() -> None:
+    """Direct unit: extract_badge_row missing H1 / empty row / noncontiguous."""
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+
+    importlib.reload(cbs)
+
+    badges, errors = cbs.extract_badge_row("No heading\n\ntext\n")
+    if badges or not any("missing H1" in e for e in errors):
+        raise AssertionError(f"missing H1: badges={badges!r} errors={errors!r}")
+
+    badges, errors = cbs.extract_badge_row("# Title\n\n## Next\n")
+    if badges or not any("required badge row" in e for e in errors):
+        raise AssertionError(f"empty row: badges={badges!r} errors={errors!r}")
+
+    row = (
+        "# Title\n\n"
+        "[![Link Check](https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml/badge.svg)]"
+        "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+        "\n"
+        "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml/badge.svg)]"
+        "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+    )
+    badges, errors = cbs.extract_badge_row(row)
+    if not any("contiguous" in e.lower() for e in errors):
+        raise AssertionError(f"noncontiguous row must fail: {errors!r}")
+    if len(badges) != 1:
+        raise AssertionError(f"first contiguous badge only expected, got {len(badges)}")
+
+
+def test_common_scan_secrets_label_override_on_20260927_w5() -> None:
+    """Direct unit: scan_secrets uses optional label in error messages."""
+    sys.path.insert(0, str(SCRIPTS))
+    from stewardship_common import scan_secrets  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / "secret.md"
+        path.write_text(
+            "token = ghp_abcdefghijklmnopqrstuvwxyz0123456789\n",
+            encoding="utf-8",
+        )
+        # path is outside ROOT → relative_to would fail without label override.
+        errors: list[str] = []
+        scan_secrets(path, errors, label="fixture/secret.md")
+        if not errors:
+            raise AssertionError("expected secret pattern hit")
+        if not all(e.startswith("fixture/secret.md") for e in errors):
+            raise AssertionError(f"label override missing: {errors!r}")
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -105898,6 +106153,18 @@ def main() -> int:
         test_gate_requires_blob_master_pin_pad5_after_337,
         test_gate_requires_blob_master_pin_still_after_337,
         test_gate_requires_blob_master_pin_after_337,
+        # TOKENMAXX ON-20260927 W5 pure-helper unit tests
+        test_schema_parse_simple_yaml_scalars_on_20260927_w5,
+        test_schema_parse_simple_yaml_rejects_bad_lines_on_20260927_w5,
+        test_schema_reject_non_scalar_helper_on_20260927_w5,
+        test_schema_first_yaml_block_helper_on_20260927_w5,
+        test_schema_load_yaml_empty_and_non_mapping_on_20260927_w5,
+        test_relative_should_skip_helper_on_20260927_w5,
+        test_relative_fully_unquote_cap_helper_on_20260927_w5,
+        test_wiki_reject_invent_badge_chrome_helper_on_20260927_w5,
+        test_badge_extract_badge_row_edges_on_20260927_w5,
+        test_common_scan_secrets_label_override_on_20260927_w5,
+
 
 ]
 

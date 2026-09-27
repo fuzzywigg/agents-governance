@@ -956,3 +956,4 @@ _None yet._
 - [x] cursor: Add focused non-honesty unit tests for uncovered pure helpers (parse_simple_yaml, reject_non_scalar, first_yaml_block, load_yaml edges, should_skip, fully_unquote, _reject_invent_badge_chrome, extract_badge_row edges, scan_secrets label)
 - [ ] cursor: Full stewardship self-tests + live gates green; draft PR
 - Notes: tests only; no tip-honesty docs; no Dependabot pin policy change; avoid invent-product surface
+2026-09-27T08:34:36Z cursor: Local green — run_stewardship + self-tests 7568 + 10 W5 pure-helper unit tests ← ON-20260927 W5 (draft #371)

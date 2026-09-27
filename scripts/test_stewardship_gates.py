@@ -311,6 +311,7 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
+from unittest.mock import MagicMock, patch
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
@@ -98332,6 +98333,216 @@ def test_common_scan_secrets_label_override_on_20260927_w5() -> None:
             raise AssertionError(f"label override missing: {errors!r}")
 
 
+# --- TOKENMAXX ON-20260927 W8: helper unit tests (post-#371; mocks; non-honesty) ---
+
+
+def test_relative_check_file_helper_on_20260927_w8() -> None:
+    """Direct unit: check_file with mocked ROOT covers empty/query/broken/https."""
+    sys.path.insert(0, str(SCRIPTS))
+    import check_relative_links as crl  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        root = Path(tmp)
+        (root / "docs").mkdir()
+        (root / "docs" / "a.md").write_text("# Section\n\nbody\n", encoding="utf-8")
+        (root / "good.md").write_text(
+            "# Title\n\nSee [ok](./docs/a.md#section) and [web](https://example.com).\n",
+            encoding="utf-8",
+        )
+        (root / "bad.md").write_text(
+            "# B\n\n"
+            "[miss](./missing.md)\n"
+            "[q](./docs/a.md?x=1)\n"
+            "[emptyfrag](./docs/a.md#)\n"
+            "[]()\n",
+            encoding="utf-8",
+        )
+        with patch.object(crl, "ROOT", root):
+            errors_ok: list[str] = []
+            crl.check_file(root / "good.md", errors_ok)
+            if errors_ok:
+                raise AssertionError(f"good.md must pass: {errors_ok!r}")
+
+            errors: list[str] = []
+            crl.check_file(root / "bad.md", errors)
+            joined = "\n".join(errors)
+            if "broken relative link" not in joined:
+                raise AssertionError(f"missing broken link: {errors!r}")
+            if "query string" not in joined:
+                raise AssertionError(f"missing query reject: {errors!r}")
+            if "empty fragment" not in joined:
+                raise AssertionError(f"missing empty fragment: {errors!r}")
+            if "empty relative link target" not in joined:
+                raise AssertionError(f"missing empty target: {errors!r}")
+
+
+def test_relative_iter_markdown_helper_on_20260927_w8() -> None:
+    """Direct unit: iter_markdown with mocked ROOT skips OWASP / keeps README."""
+    sys.path.insert(0, str(SCRIPTS))
+    import check_relative_links as crl  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        root = Path(tmp)
+        (root / "README.md").write_text("# R\n", encoding="utf-8")
+        (root / "OWASP-AGENTIC.md").write_text("# O\n", encoding="utf-8")
+        agents = root / ".github" / "agents"
+        agents.mkdir(parents=True)
+        (agents / "notes.md").write_text("# N\n", encoding="utf-8")
+        with patch.object(crl, "ROOT", root):
+            names = {p.relative_to(root).as_posix() for p in crl.iter_markdown()}
+        if "README.md" not in names:
+            raise AssertionError(f"README.md must be included: {names!r}")
+        if "OWASP-AGENTIC.md" in names:
+            raise AssertionError(f"OWASP must skip: {names!r}")
+        if any(n.startswith(".github/agents/") for n in names):
+            raise AssertionError(f".github/agents must skip: {names!r}")
+
+
+def test_schema_load_yaml_stdlib_fallback_on_20260927_w8() -> None:
+    """Direct unit: load_yaml uses parse_simple_yaml when yaml is None."""
+    sys.path.insert(0, str(SCRIPTS))
+    import check_stewardship_schema as css  # noqa: E402
+
+    with patch.object(css, "yaml", None):
+        data = css.load_yaml('status: ACTIVE\ntier: 1\nname: "x"\n')
+        if data != {"status": "ACTIVE", "tier": 1, "name": "x"}:
+            raise AssertionError(f"stdlib mapping: {data!r}")
+        try:
+            css.load_yaml("   \n")
+        except ValueError as exc:
+            if "empty" not in str(exc).lower():
+                raise AssertionError(f"unexpected empty msg: {exc}") from exc
+        else:
+            raise AssertionError("expected ValueError for empty stdlib yaml")
+
+
+def test_schema_load_yaml_pyyaml_mock_edges_on_20260927_w8() -> None:
+    """Direct unit: load_yaml PyYAML path — None / non-mapping / mapping via mock."""
+    sys.path.insert(0, str(SCRIPTS))
+    import check_stewardship_schema as css  # noqa: E402
+
+    fake = MagicMock()
+    fake.safe_load.return_value = None
+    with patch.object(css, "yaml", fake):
+        try:
+            css.load_yaml("anything")
+        except ValueError as exc:
+            if "empty" not in str(exc).lower():
+                raise AssertionError(f"unexpected empty msg: {exc}") from exc
+        else:
+            raise AssertionError("expected ValueError when safe_load returns None")
+
+    fake.safe_load.return_value = ["not", "a", "mapping"]
+    with patch.object(css, "yaml", fake):
+        try:
+            css.load_yaml("anything")
+        except ValueError as exc:
+            if "mapping" not in str(exc).lower():
+                raise AssertionError(f"unexpected non-mapping msg: {exc}") from exc
+        else:
+            raise AssertionError("expected ValueError for list yaml")
+
+    fake.safe_load.return_value = {"status": "ACTIVE"}
+    with patch.object(css, "yaml", fake):
+        loaded = css.load_yaml("ignored-when-mocked")
+        if loaded != {"status": "ACTIVE"}:
+            raise AssertionError(f"mapping path: {loaded!r}")
+
+
+def test_common_scan_secrets_url_hint_vs_prose_on_20260927_w8() -> None:
+    """Direct unit: SECRET_URL_HINTS with '=' require https URL context."""
+    sys.path.insert(0, str(SCRIPTS))
+    from stewardship_common import scan_secrets  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / "notes.md"
+        path.write_text(
+            "Configure token=localdevvalue in operator notes.\n",
+            encoding="utf-8",
+        )
+        prose_errors: list[str] = []
+        scan_secrets(path, prose_errors, label="fixture/notes.md")
+        if prose_errors:
+            raise AssertionError(f"prose token= must not fail: {prose_errors!r}")
+
+        path.write_text(
+            "See https://example.com/cb?token=supersecretvalue99\n",
+            encoding="utf-8",
+        )
+        url_errors: list[str] = []
+        scan_secrets(path, url_errors, label="fixture/notes.md")
+        if not any("token=" in e for e in url_errors):
+            raise AssertionError(f"URL token= hint must fail: {url_errors!r}")
+
+
+def test_badge_extract_badge_row_contiguous_ok_on_20260927_w8() -> None:
+    """Direct unit: extract_badge_row accepts contiguous three-badge row."""
+    sys.path.insert(0, str(SCRIPTS))
+    import importlib
+    import check_badge_standard as cbs  # noqa: E402
+
+    importlib.reload(cbs)
+    row = (
+        "# Title\n\n"
+        "[![Link Check](https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml/badge.svg)]"
+        "(https://github.com/fuzzywigg/agents-governance/actions/workflows/link-check.yml)\n"
+        "[![Markdown Lint](https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml/badge.svg)]"
+        "(https://github.com/fuzzywigg/agents-governance/actions/workflows/markdown-lint.yml)\n"
+        "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]"
+        "(LICENSE)\n"
+        "\n## Next\n"
+    )
+    badges, errors = cbs.extract_badge_row(row)
+    if errors:
+        raise AssertionError(f"contiguous row must have no errors: {errors!r}")
+    if len(badges) != 3:
+        raise AssertionError(f"expected 3 badges, got {len(badges)}")
+
+
+def test_wiki_reject_invent_markdown_image_chrome_on_20260927_w8() -> None:
+    """Direct unit: _reject_invent_badge_chrome flags [![coverage without shields word."""
+    sys.path.insert(0, str(SCRIPTS))
+    from check_wiki_outline import _reject_invent_badge_chrome  # noqa: E402
+
+    errors: list[str] = []
+    _reject_invent_badge_chrome(
+        "Home.md",
+        "[![coverage](https://example.com/c.svg)](https://example.com)",
+        errors,
+    )
+    if not any("coverage" in e for e in errors):
+        raise AssertionError(f"[![coverage must fail: {errors!r}")
+
+    prose: list[str] = []
+    _reject_invent_badge_chrome(
+        "Home.md",
+        "Stars and forks in the night sky without chrome.",
+        prose,
+    )
+    if prose:
+        raise AssertionError(f"prose stars/forks must pass: {prose!r}")
+
+
+def test_schema_first_yaml_block_picks_first_on_20260927_w8() -> None:
+    """Direct unit: first_yaml_block returns the first fenced yaml block only."""
+    sys.path.insert(0, str(SCRIPTS))
+    from check_stewardship_schema import first_yaml_block  # noqa: E402
+
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / "multi.md"
+        path.write_text(
+            "# Title\n\n"
+            "```yaml\nstatus: ACTIVE\n```\n\n"
+            "```yaml\nstatus: DRAFT\n```\n",
+            encoding="utf-8",
+        )
+        block = first_yaml_block(path)
+        if "ACTIVE" not in block:
+            raise AssertionError(f"first block missing ACTIVE: {block!r}")
+        if "DRAFT" in block:
+            raise AssertionError(f"must not include second block: {block!r}")
+
+
 def main() -> int:
     tests = [
         # Badge (13)
@@ -106164,6 +106375,15 @@ def main() -> int:
         test_wiki_reject_invent_badge_chrome_helper_on_20260927_w5,
         test_badge_extract_badge_row_edges_on_20260927_w5,
         test_common_scan_secrets_label_override_on_20260927_w5,
+        # TOKENMAXX ON-20260927 W8 helper unit tests (post-#371; mocks)
+        test_relative_check_file_helper_on_20260927_w8,
+        test_relative_iter_markdown_helper_on_20260927_w8,
+        test_schema_load_yaml_stdlib_fallback_on_20260927_w8,
+        test_schema_load_yaml_pyyaml_mock_edges_on_20260927_w8,
+        test_common_scan_secrets_url_hint_vs_prose_on_20260927_w8,
+        test_badge_extract_badge_row_contiguous_ok_on_20260927_w8,
+        test_wiki_reject_invent_markdown_image_chrome_on_20260927_w8,
+        test_schema_first_yaml_block_picks_first_on_20260927_w8,
 
 
 ]

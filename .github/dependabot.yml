@@ -8,3 +8,9 @@ updates:
       github_actions:
         patterns:
           - "*"
+    # Tip stewardship fail-closes on actions/setup-python@v5 (check_badge_standard
+    # after #38). Ignore major bumps until a coordinated workflow + gate pin lift.
+    # See closed Dependabot #363 / AGENTS.md intentional action pins.
+    ignore:
+      - dependency-name: "actions/setup-python"
+        update-types: ["version-update:semver-major"]

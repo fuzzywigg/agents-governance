@@ -937,3 +937,16 @@ _None yet._
 2026-09-26T12:30:41Z cursor: Local green — markdownlint + run_stewardship + self-tests 7558; pushed cursor/tip-honesty-readme-tier-cd-30ea ← ON-20260926 tip honesty README C/D residual (leave draft; #363 parked)
 
 2026-09-26T12:45:00Z cursor: Draft PR #369 CI green (lint + link-check + stewardship) ← ON-20260926 tip honesty README C/D residual; leave draft / do-not-merge; #363 remains parked
+
+### [ON-20260927] TOKENMAXX useful-work writer — Dependabot #363 setup-python 5→7 — 2026-09-27T06:25:00Z
+- [x] cursor: Read live tip — check_badge_standard.py fail-closes on actions/setup-python@v5 (after #38); contiguous Set up Python block required; AGENTS.md + hydration hold #363
+- [x] cursor: Decision B — no tip evidence for @v7; do not weaken stewardship pin
+- [x] cursor: Verify tip green — bash scripts/run_stewardship_checks.sh OK; test_stewardship_gates.py 7558 OK
+- [x] cursor: Close #363 with tip-policy comment; @dependabot ignore actions/setup-python major version
+- [x] cursor: No code change; no force-push; no AGENTS-ECOSYSTEM/templates
+- Expiry: 2026-09-27 12:00 America/New_York
+- Scope: close parked Dependabot major; keep @v5 stewardship contract
+2026-09-27T06:25:00Z
+
+2026-09-27T06:25:00Z cursor: #363 CLOSED (B — tip keeps setup-python@v5); stewardship green on tip; Dependabot major ignore requested ← ON-20260927
+2026-09-27T06:26:30Z cursor: Dependabot @ignore command denied (no push access); add .github/dependabot.yml ignore major for actions/setup-python ← ON-20260927 tip pattern

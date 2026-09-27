@@ -949,3 +949,4 @@ _None yet._
 2026-09-27T06:25:00Z
 
 2026-09-27T06:25:00Z cursor: #363 CLOSED (B — tip keeps setup-python@v5); stewardship green on tip; Dependabot major ignore requested ← ON-20260927
+2026-09-27T06:26:30Z cursor: Dependabot @ignore command denied (no push access); add .github/dependabot.yml ignore major for actions/setup-python ← ON-20260927 tip pattern

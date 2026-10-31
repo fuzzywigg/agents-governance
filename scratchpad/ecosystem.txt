@@ -965,3 +965,9 @@ _None yet._
 - [ ] cursor: Full stewardship self-tests + live gates green; draft PR
 - Notes: tests only; no tip-honesty docs; no Dependabot pin policy change; avoid invent-product surface
 2026-09-27T09:56:10Z cursor: Local green — run_stewardship + self-tests 7576 + 8 W8 helper unit tests ← ON-20260927 W8 (draft #372)
+[2026-10-29T00:50:00Z] OVERNIGHT SWARM COMPLETE (Hermes + Geryon):
+- [x] Geryon Model Chain: Metered APIs (deepseek-v4-pro) removed from unattended chain. Codex OAuth (openai/gpt-5.6-sol) promoted to primary. Local qwen3:8b set as terminator.
+- [x] Repo Hygiene: 214 stale cursor/tokenmaxx-* branches pruned from agents-governance. 7 orphaned Cursor worktrees pruned from local fuzzywigg-ai.
+- [x] Geryon MCP: Ops-Read tools (host_preflight_status, cron_ledger_read, handoff_queue_read) injected into stdio_http.py for direct Hermes polling.
+- [x] GCP Security: ADC token reissued to strictly cloud-platform and drive.
+- [x] Wiki Init: GitHub Wiki initialized and populated via docs/wiki for agents-governance.

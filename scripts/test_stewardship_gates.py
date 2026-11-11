@@ -65,7 +65,7 @@ Deepened after #282 tip: wiki/mdlink leftover residual — PUBLISH YAML
 status+created+purpose+closes / table header / sibling cells / full operator
 push prose / clean worktree / or main default branch / stay-green acceptance /
 Home.md ./Home.md fallback / Settings→Wikis / create-any-page-once plus md/link
-Check links->lychee@v2 / Run markdownlint->DavidAnson@v24 / name->on adjacency
+Check links->lychee@v2 / Run markdownlint->DavidAnson@v25 / name->on adjacency
 plus markdown-link residual empty-fragment / query-string / escapes-repo /
 missing-heading / OK banner / raw.startswith("#") (wiki/mdlink leftover residual
 slice only; not stewardship-schema residual #282 / not lychee/blob-503 #278 /
@@ -177,7 +177,7 @@ raw.githubusercontent.com + curl -fsSL / deepen edges.
 Deepened after #37: markdownlint default:true / get_actionlint.outputs /
 actionlint /v1.7.7/ path / lychee --max-concurrency 8 --timeout 20
 --max-retries 3 / deepen edges.
-Deepened after #38: MD033/MD041/MD060 false / markdownlint-cli2-action@v24 /
+Deepened after #38: MD033/MD041/MD060 false / markdownlint-cli2-action@v25 /
 setup-python@v5 / id: get_actionlint / deepen edges.
 Deepened after #39: actions/checkout@v7 / lychee-action@v2 / job timeouts
 20/10/15 / weekly crons / ubuntu-latest / pip --quiet / shell: bash /
@@ -261,7 +261,7 @@ Deepened after #108: actionlint-style third-pass — concurrency/cancel/permissi
 Deepened after #111: stewardship_common third-pass
 Deepened after #117: run_stewardship runner pins — shebang / set -euo /
 Deepened after #111/#117/#127: CI workflow third-pass — concurrency templates / cron+timeout /
-DavidAnson@v24 / setup-python@v5 / lychee verbose+concurrency+timeout+retries /
+DavidAnson@v25 / setup-python@v5 / lychee verbose+concurrency+timeout+retries /
 fail:true / get_actionlint / curl -fsSL (not badge/wiki/relative/schema/actionlint/common/runner spam).
 dirname+pwd ROOT / cd ROOT / same-set-as-CI / python3 scripts/<gate> /
 badge→wiki→schema→relative order (lands closed #122/#96 leftover). — future annotations /
@@ -437,7 +437,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Run markdownlint
-        uses: DavidAnson/markdownlint-cli2-action@v24
+        uses: DavidAnson/markdownlint-cli2-action@v25
         with:
           globs: |
             **/*.md
@@ -12089,14 +12089,14 @@ def test_markdown_lint_requires_cli2_action_v24() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
         text = path.read_text(encoding="utf-8").replace(
-            "DavidAnson/markdownlint-cli2-action@v24",
+            "DavidAnson/markdownlint-cli2-action@v25",
             "DavidAnson/markdownlint-cli2-action@v20",
         )
         path.write_text(text, encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            "markdownlint-cli2-action@v24",
+            "markdownlint-cli2-action@v25",
         )
 
 
@@ -13670,14 +13670,14 @@ def test_markdown_lint_requires_cli2_action_v24_after_39() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
         text = path.read_text(encoding="utf-8").replace(
-            'DavidAnson/markdownlint-cli2-action@v24',
+            'DavidAnson/markdownlint-cli2-action@v25',
             'DavidAnson/markdownlint-cli2-action@v20',
         )
         path.write_text(text, encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'markdownlint-cli2-action@v24',
+            'markdownlint-cli2-action@v25',
         )
 
 def test_markdown_lint_requires_davidanson_after_39() -> None:
@@ -13686,8 +13686,8 @@ def test_markdown_lint_requires_davidanson_after_39() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / ".github" / "workflows" / "markdown-lint.yml"
         text = path.read_text(encoding="utf-8").replace(
-            'DavidAnson/markdownlint-cli2-action@v24',
-            'other/markdownlint-cli2-action@v24',
+            'DavidAnson/markdownlint-cli2-action@v25',
+            'other/markdownlint-cli2-action@v25',
         )
         path.write_text(text, encoding="utf-8")
         assert_fail_script(
@@ -24356,12 +24356,12 @@ def test_markdown_lint_requires_cli2_v24_still_after_72() -> None:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
-        text = path.read_text(encoding="utf-8").replace('DavidAnson/markdownlint-cli2-action@v24', 'DavidAnson/markdownlint-cli2-action@v20')
+        text = path.read_text(encoding="utf-8").replace('DavidAnson/markdownlint-cli2-action@v25', 'DavidAnson/markdownlint-cli2-action@v20')
         path.write_text(text, encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
             tmp_path,
-            'markdownlint-cli2-action@v24',
+            'markdownlint-cli2-action@v25',
         )
 
 def test_stewardship_requires_get_actionlint_id_still_after_72() -> None:
@@ -27167,7 +27167,7 @@ def test_actionlint_rejects_float_main_markdownlint_after_86() -> None:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
-        text = path.read_text(encoding="utf-8").replace('DavidAnson/markdownlint-cli2-action@v24', 'DavidAnson/markdownlint-cli2-action@main')
+        text = path.read_text(encoding="utf-8").replace('DavidAnson/markdownlint-cli2-action@v25', 'DavidAnson/markdownlint-cli2-action@main')
         path.write_text(text, encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
@@ -27180,7 +27180,7 @@ def test_actionlint_rejects_float_master_markdownlint_after_86() -> None:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
-        text = path.read_text(encoding="utf-8").replace('DavidAnson/markdownlint-cli2-action@v24', 'DavidAnson/markdownlint-cli2-action@master')
+        text = path.read_text(encoding="utf-8").replace('DavidAnson/markdownlint-cli2-action@v25', 'DavidAnson/markdownlint-cli2-action@master')
         path.write_text(text, encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
@@ -27193,7 +27193,7 @@ def test_actionlint_rejects_float_latest_markdownlint_after_86() -> None:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
-        text = path.read_text(encoding="utf-8").replace('DavidAnson/markdownlint-cli2-action@v24', 'DavidAnson/markdownlint-cli2-action@latest')
+        text = path.read_text(encoding="utf-8").replace('DavidAnson/markdownlint-cli2-action@v25', 'DavidAnson/markdownlint-cli2-action@latest')
         path.write_text(text, encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
@@ -27206,7 +27206,7 @@ def test_actionlint_rejects_unpinned_markdownlint_after_86() -> None:
         tmp_path = Path(tmp)
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / ".github" / "workflows" / 'markdown-lint.yml'
-        text = path.read_text(encoding="utf-8").replace('DavidAnson/markdownlint-cli2-action@v24', 'DavidAnson/markdownlint-cli2-action')
+        text = path.read_text(encoding="utf-8").replace('DavidAnson/markdownlint-cli2-action@v25', 'DavidAnson/markdownlint-cli2-action')
         path.write_text(text, encoding="utf-8")
         assert_fail_script(
             scripts / "check_badge_standard.py",
@@ -36863,8 +36863,8 @@ def test_workflow_third_gate_mdlint_action_after_111() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'DavidAnson/markdownlint-cli2-action@v24' in text
-        path.write_text(text.replace('DavidAnson/markdownlint-cli2-action@v24', 'DavidAnson/markdownlint-cli2-action@v23'), encoding="utf-8")
+        assert 'DavidAnson/markdownlint-cli2-action@v25' in text
+        path.write_text(text.replace('DavidAnson/markdownlint-cli2-action@v25', 'DavidAnson/markdownlint-cli2-action@v23'), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep markdownlint action major pin')
 
 
@@ -36874,8 +36874,8 @@ def test_workflow_third_gate_mdlint_action_still_after_111() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / "scripts" / "check_badge_standard.py"
         text = path.read_text(encoding="utf-8")
-        assert 'DavidAnson/markdownlint-cli2-action@v24' in text
-        path.write_text(text.replace('DavidAnson/markdownlint-cli2-action@v24', 'DavidAnson/markdownlint-cli2-action@v23'), encoding="utf-8")
+        assert 'DavidAnson/markdownlint-cli2-action@v25' in text
+        path.write_text(text.replace('DavidAnson/markdownlint-cli2-action@v25', 'DavidAnson/markdownlint-cli2-action@v23'), encoding="utf-8")
         assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'check_workflow_hardening must keep markdownlint action major pin')
 
 
@@ -78723,9 +78723,9 @@ def test_wiki_mdlink_rejects_lint_uses_adj_pad0_after_282() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
-        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint -> DavidAnson@v24 adjacency')
+        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25' in text
+        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint -> DavidAnson@v25 adjacency')
 
 
 def test_wiki_mdlink_rejects_lint_uses_adj_pad1_after_282() -> None:
@@ -78734,9 +78734,9 @@ def test_wiki_mdlink_rejects_lint_uses_adj_pad1_after_282() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
-        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint -> DavidAnson@v24 adjacency')
+        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25' in text
+        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint -> DavidAnson@v25 adjacency')
 
 
 def test_wiki_mdlink_rejects_lint_uses_adj_pad2_after_282() -> None:
@@ -78745,9 +78745,9 @@ def test_wiki_mdlink_rejects_lint_uses_adj_pad2_after_282() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
-        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint -> DavidAnson@v24 adjacency')
+        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25' in text
+        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint -> DavidAnson@v25 adjacency')
 
 
 def test_wiki_mdlink_rejects_lint_uses_adj_pad3_after_282() -> None:
@@ -78756,9 +78756,9 @@ def test_wiki_mdlink_rejects_lint_uses_adj_pad3_after_282() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
-        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint -> DavidAnson@v24 adjacency')
+        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25' in text
+        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint -> DavidAnson@v25 adjacency')
 
 
 def test_wiki_mdlink_rejects_lint_uses_adj_pad4_after_282() -> None:
@@ -78767,9 +78767,9 @@ def test_wiki_mdlink_rejects_lint_uses_adj_pad4_after_282() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
-        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint -> DavidAnson@v24 adjacency')
+        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25' in text
+        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint -> DavidAnson@v25 adjacency')
 
 
 def test_wiki_mdlink_rejects_lint_uses_adj_pad5_after_282() -> None:
@@ -78778,9 +78778,9 @@ def test_wiki_mdlink_rejects_lint_uses_adj_pad5_after_282() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
-        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint -> DavidAnson@v24 adjacency')
+        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25' in text
+        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint -> DavidAnson@v25 adjacency')
 
 
 def test_wiki_mdlink_rejects_lint_uses_adj_still_after_282() -> None:
@@ -78789,9 +78789,9 @@ def test_wiki_mdlink_rejects_lint_uses_adj_still_after_282() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
-        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint -> DavidAnson@v24 adjacency')
+        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25' in text
+        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint -> DavidAnson@v25 adjacency')
 
 
 def test_wiki_mdlink_rejects_lint_uses_adj_after_282() -> None:
@@ -78800,9 +78800,9 @@ def test_wiki_mdlink_rejects_lint_uses_adj_after_282() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
-        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint -> DavidAnson@v24 adjacency')
+        assert '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25' in text
+        path.write_text(text.replace('      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25', '      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'Run markdownlint -> DavidAnson@v25 adjacency')
 
 
 def test_wiki_mdlink_rejects_link_name_on_pad0_after_282() -> None:
@@ -86358,9 +86358,9 @@ def test_wiki_mdlink_rejects_lint_steps_triple_pad0_after_320() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
-        path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v24')
+        assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v25')
 
 def test_wiki_mdlink_rejects_lint_steps_triple_pad1_after_320() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -86368,9 +86368,9 @@ def test_wiki_mdlink_rejects_lint_steps_triple_pad1_after_320() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
-        path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v24')
+        assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v25')
 
 def test_wiki_mdlink_rejects_lint_steps_triple_pad2_after_320() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -86378,9 +86378,9 @@ def test_wiki_mdlink_rejects_lint_steps_triple_pad2_after_320() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
-        path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v24')
+        assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v25')
 
 def test_wiki_mdlink_rejects_lint_steps_triple_pad3_after_320() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -86388,9 +86388,9 @@ def test_wiki_mdlink_rejects_lint_steps_triple_pad3_after_320() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
-        path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v24')
+        assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v25')
 
 def test_wiki_mdlink_rejects_lint_steps_triple_pad4_after_320() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -86398,9 +86398,9 @@ def test_wiki_mdlink_rejects_lint_steps_triple_pad4_after_320() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
-        path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v24')
+        assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v25')
 
 def test_wiki_mdlink_rejects_lint_steps_triple_pad5_after_320() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -86408,9 +86408,9 @@ def test_wiki_mdlink_rejects_lint_steps_triple_pad5_after_320() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
-        path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v24')
+        assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v25')
 
 def test_wiki_mdlink_rejects_lint_steps_triple_still_after_320() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -86418,9 +86418,9 @@ def test_wiki_mdlink_rejects_lint_steps_triple_still_after_320() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
-        path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v24')
+        assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v25')
 
 def test_wiki_mdlink_rejects_lint_steps_triple_after_320() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -86428,9 +86428,9 @@ def test_wiki_mdlink_rejects_lint_steps_triple_after_320() -> None:
         scripts = _seed_badge_tree(tmp_path, _good_readme())
         path = tmp_path / '.github/workflows/markdown-lint.yml'
         text = path.read_text(encoding="utf-8")
-        assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24' in text
-        path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v24', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
-        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v24')
+        assert '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25' in text
+        path.write_text(text.replace('      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v25', '      - uses: actions/checkout@v7\n      - name: Run markdownlint\n        uses: DavidAnson/markdownlint-cli2-action@v23', 1), encoding="utf-8")
+        assert_fail_script(scripts / "check_badge_standard.py", tmp_path, 'checkout->Run markdownlint->DavidAnson@v25')
 
 def test_wiki_mdlink_rejects_gate_leftover_doc_pad0_after_320() -> None:
     with tempfile.TemporaryDirectory() as tmp:

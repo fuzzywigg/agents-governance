@@ -21,7 +21,7 @@ workflows under `.github/workflows/`:
 
 | Workflow | Live pins / tool (stewardship CI contract) |
 |----------|--------------------------------------------|
-| `markdown-lint.yml` | `actions/checkout@v7`, `DavidAnson/markdownlint-cli2-action@v24` |
+| `markdown-lint.yml` | `actions/checkout@v7`, `DavidAnson/markdownlint-cli2-action@v25` |
 | `link-check.yml` | `actions/checkout@v7`, `lycheeverse/lychee-action@v2` (not `markdown-link-check`) |
 | `stewardship-checks.yml` | `actions/checkout@v7`, `actions/setup-python@v5` (intentional; gate fail-closes), actionlint `1.7.7` |
 

@@ -66,7 +66,7 @@ lands closed #175 leftover; lands closed #140; lands closed #96):
 Fail-closed CI workflow pins (live path after #39/#72; third-pass after #111; deepen after #161;
 path-filter leftovers after #173):
 - Third-pass after #111: exact concurrency group templates /
-  markdown-lint+stewardship cron/timeout pins / DavidAnson@v24 /
+  markdown-lint+stewardship cron/timeout pins / DavidAnson@v25 /
   setup-python@v5 / lychee --verbose/--no-progress/--max-concurrency 8 /
   --timeout 20/--max-retries 3 / fail: true / get_actionlint id+outputs /
   curl -fsSL download / third-pass docstring
@@ -342,7 +342,7 @@ NOT md/link residual layouts #239 / NOT stewardship-checks/schema residual #233)
   stay-green acceptance / [Home.md](./Home.md) / Settings → Features → Wikis /
   create any page once in the GitHub UI
 - md/link residual harden: Check links->lychee-action@v2 adjacency /
-  Run markdownlint->DavidAnson@v24 adjacency /
+  Run markdownlint->DavidAnson@v25 adjacency /
   name: Link Check then on: adjacency / name: Markdown Lint then on: adjacency
 - markdown link residual harden: empty fragment / query string / escapes repo /
   missing heading # / OK banner / raw.startswith("#")
@@ -376,7 +376,7 @@ NOT md/link residual layouts #239):
   Repo-Stewardship ## Front-door duties / ## Docs quality CI
 - md/link residual harden: token then args: >- adjacency /
   checkout->Check links->lychee@v2 triple adjacency /
-  checkout->Run markdownlint->DavidAnson@v24 triple adjacency
+  checkout->Run markdownlint->DavidAnson@v25 triple adjacency
 
 """
 
@@ -1073,7 +1073,7 @@ def check_workflow_hardening(errors: list[str]) -> None:
 
     Third-pass after #111: reversible CI workflow exact pins —
     concurrency group templates / markdown-lint+stewardship cron+timeout /
-    DavidAnson@v24 / setup-python@v5 / lychee verbose+no-progress+
+    DavidAnson@v25 / setup-python@v5 / lychee verbose+no-progress+
     max-concurrency 8+timeout 20+max-retries 3 / fail: true /
     get_actionlint id+outputs / curl -fsSL / third-pass docstring.
     Deepen after #161: Check links / Run markdownlint / Set up Python /
@@ -1357,10 +1357,10 @@ def check_workflow_hardening(errors: list[str]) -> None:
             "on the existing path",
             errors,
         )
-    # Fail-closed after #38: live markdownlint-cli2-action pin is @v24.
-    if not re.search(r"(?i)davidanson/markdownlint-cli2-action@v24\b", lint):
+    # Fail-closed after #38: live markdownlint-cli2-action pin is @v25.
+    if not re.search(r"(?i)davidanson/markdownlint-cli2-action@v25\b", lint):
         fail(
-            "markdown-lint.yml must pin DavidAnson/markdownlint-cli2-action@v24",
+            "markdown-lint.yml must pin DavidAnson/markdownlint-cli2-action@v25",
             errors,
         )
     # Fail-closed: markdown-lint must checkout before lint (symmetric with stewardship).
@@ -2826,11 +2826,11 @@ def check_workflow_hardening(errors: list[str]) -> None:
         )
     lint_uses_adj = (
         "      - name: Run markdownlint\n"
-        "        uses: DavidAnson/markdownlint-cli2-action@v24"
+        "        uses: DavidAnson/markdownlint-cli2-action@v25"
     )
     if lint_uses_adj not in lint:
         fail(
-            "markdown-lint.yml must keep Run markdownlint -> DavidAnson@v24 adjacency "
+            "markdown-lint.yml must keep Run markdownlint -> DavidAnson@v25 adjacency "
             "(wiki/mdlink leftover residual after #282)",
             errors,
         )
@@ -2874,11 +2874,11 @@ def check_workflow_hardening(errors: list[str]) -> None:
     lint_steps_triple = (
         "      - uses: actions/checkout@v7\n"
         "      - name: Run markdownlint\n"
-        "        uses: DavidAnson/markdownlint-cli2-action@v24"
+        "        uses: DavidAnson/markdownlint-cli2-action@v25"
     )
     if lint_steps_triple not in lint:
         fail(
-            "markdown-lint.yml must keep checkout->Run markdownlint->DavidAnson@v24 "
+            "markdown-lint.yml must keep checkout->Run markdownlint->DavidAnson@v25 "
             "triple adjacency (wiki/mdlink leftover residual after #320)",
             errors,
         )
@@ -4068,7 +4068,7 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
             "check_badge_standard.py must keep " + link_uses_pin + " leftover pin",
             errors,
         )
-    lint_uses_pin = "Run markdownlint->DavidAnson@v24 " + "adjacency"
+    lint_uses_pin = "Run markdownlint->DavidAnson@v25 " + "adjacency"
     if lint_uses_pin not in text:
         fail(
             "check_badge_standard.py must keep " + lint_uses_pin + " leftover pin",
@@ -4112,7 +4112,7 @@ def check_badge_standard_gate_contract(errors: list[str]) -> None:
             "check_badge_standard.py must keep " + link_triple_pin + " leftover pin",
             errors,
         )
-    lint_triple_pin = "checkout->Run markdownlint->DavidAnson@v24 triple " + "adjacency"
+    lint_triple_pin = "checkout->Run markdownlint->DavidAnson@v25 triple " + "adjacency"
     if lint_triple_pin not in text:
         fail(
             "check_badge_standard.py must keep " + lint_triple_pin + " leftover pin",
@@ -5267,7 +5267,7 @@ def check_workflow_hardening_gate_contract(errors: list[str]) -> None:
         ('cron: "15 6 * * ' + '1"', "stewardship weekly cron pin"),
         ("timeout-minutes: " + "10", "markdown-lint job timeout pin"),
         ("timeout-minutes: " + "15", "stewardship job timeout pin"),
-        ("DavidAnson/markdownlint-cli2-action@" + "v24", "markdownlint action major pin"),
+        ("DavidAnson/markdownlint-cli2-action@" + "v25", "markdownlint action major pin"),
         ("actions/setup-python@" + "v5", "setup-python major pin"),
         ("--verb" + "ose", "lychee verbose flag pin"),
         ("--no-prog" + "ress", "lychee no-progress flag pin"),

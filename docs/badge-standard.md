@@ -69,7 +69,7 @@ plus MD013 `line_length: 200` + MD024 `siblings_only: true` +
 plus markdownlint `default: true` + `get_actionlint.outputs.executable` +
 actionlint `/v1.7.7/` path + lychee `--max-concurrency 8` / `--timeout 20` /
 `--max-retries 3` deepen after #37,
-plus MD033/MD041/MD060 `false` + `markdownlint-cli2-action@v24` +
+plus MD033/MD041/MD060 `false` + `markdownlint-cli2-action@v25` +
 `actions/setup-python@v5` + `id: get_actionlint` deepen after #38,
 plus `actions/checkout@v7` + `lychee-action@v2` + job timeouts 20/10/15 +
 weekly crons + `ubuntu-latest` + `pip --quiet` + `shell: bash` +
@@ -176,7 +176,7 @@ CI / `python3 scripts/<gate>` ×4 / badge→wiki→schema→relative order /
 `check_run_stewardship_gate_contract` (lands closed #122/#96 leftover; do not
 revive #119),
 plus CI workflow third-pass after #111/#117/#127: concurrency templates /
-cron+timeout / DavidAnson@v24 / setup-python@v5 / lychee verbose+
+cron+timeout / DavidAnson@v25 / setup-python@v5 / lychee verbose+
 concurrency+timeout+retries / fail:true / get_actionlint / curl -fsSL,
 plus docs-lint second-pass after #132: exact live exclude URLs /
 Connection-reset+RST+false-positive+early-hints+valid-site commentary /
@@ -368,7 +368,7 @@ plus wiki/mdlink leftover residual deepen after #282 tip: PUBLISH YAML
 status+created+purpose+closes / table header / sibling cells / full operator
 push prose / clean worktree / or main default branch / stay-green acceptance /
 Home.md `./Home.md` fallback / Settings→Wikis / create-any-page-once plus md/link
-Check links->lychee@v2 / Run markdownlint->DavidAnson@v24 / name->on adjacency
+Check links->lychee@v2 / Run markdownlint->DavidAnson@v25 / name->on adjacency
 plus markdown-link residual empty-fragment / query-string / escapes-repo /
 missing-heading / OK banner / `raw.startswith("#")` — DISTINCT leftover only
 (lands closed #281/#277 leftover; not stewardship-schema residual #282 /

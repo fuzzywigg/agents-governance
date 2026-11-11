@@ -43,7 +43,7 @@ note: "Issues below are ready to be created in GitHub. Agent surface: copilot ca
 **Status:** ✅ RESOLVED — Created during hydration on 2026-04-13; tip now also runs
 stewardship gates (ECO-017+). Live workflows (do not claim absent):
 
-- `.github/workflows/markdown-lint.yml` — `checkout@v7` + `markdownlint-cli2-action@v24`
+- `.github/workflows/markdown-lint.yml` — `checkout@v7` + `markdownlint-cli2-action@v25`
 - `.github/workflows/link-check.yml` — `checkout@v7` + `lychee-action@v2` (not markdown-link-check)
 - `.github/workflows/stewardship-checks.yml` — `checkout@v7` + `setup-python@v5` (intentional pin)
 - `.markdownlint.json`
